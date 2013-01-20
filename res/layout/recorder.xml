@@ -10,15 +10,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
             android:layout_gravity="center_horizontal|top"
-            android:src="@drawable/ic_launcher"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="100dp"/>
+            android:src="@drawable/ic_launcher"/>
 
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/start"
-            android:id="@+id/start_button"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="100dp"/>
+            android:id="@+id/start_button"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play"
+            android:id="@+id/play_button"/>
 </LinearLayout>

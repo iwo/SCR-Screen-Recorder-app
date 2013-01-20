@@ -4,4 +4,5 @@
     <string name="service_started">Service Started</string>
     <string name="service_stopped">Service Stopped</string>
     <string name="start">Start</string>
+    <string name="play">Play</string>
 </resources>

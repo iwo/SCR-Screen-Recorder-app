@@ -4,12 +4,15 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class RecorderService extends Service {
 
@@ -59,9 +62,26 @@ public class RecorderService extends Service {
                 }
             });
 
+            Button playButton = (Button) mRecorderView.findViewById(R.id.play_button);
+            playButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openVideoFile();
+                }
+            });
+
             WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
             windowManager.addView(mRecorderView, lp);
         }
+    }
+
+    private void openVideoFile() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        File file = new File("/sdcard/screenrec.mp4");
+        intent.setDataAndType(Uri.fromFile(file), "video/*");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override
