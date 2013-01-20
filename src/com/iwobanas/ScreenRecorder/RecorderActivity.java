@@ -1,6 +1,7 @@
 package com.iwobanas.ScreenRecorder;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class RecorderActivity extends Activity {
@@ -10,6 +11,8 @@ public class RecorderActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        Intent intent = new Intent(this, RecorderService.class);
+        startService(intent);
+        finish();
     }
 }

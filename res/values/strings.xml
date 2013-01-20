@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Screen Recorder</string>
+    <string name="service_started">Service Started</string>
+    <string name="service_stopped">Service Stopped</string>
 </resources>
