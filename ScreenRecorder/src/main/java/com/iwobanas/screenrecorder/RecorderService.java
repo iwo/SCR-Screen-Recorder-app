@@ -1,4 +1,4 @@
-package com.iwobanas.ScreenRecorder;
+package com.iwobanas.screenrecorder;
 
 import android.app.Service;
 import android.content.Context;

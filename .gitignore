@@ -1,5 +1,9 @@
 .idea/tasks.xml
 .idea/workspace.xml
+.idea/libraries/*
 gen
 out
 local.properties
+.gradle
+ScreenRecorder/build
+
