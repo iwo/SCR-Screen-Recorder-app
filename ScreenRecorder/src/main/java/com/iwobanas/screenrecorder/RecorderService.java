@@ -14,15 +14,20 @@ public class RecorderService extends Service implements IRecorderService {
 
     private IScreenOverlay mRecorderOverlay = new RecorderOverlay(this, this);
 
+    private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this);
+
     @Override
     public void startRecording() {
         mRecorderOverlay.hide();
         mWatermark.show();
+        mScreenOffReceiver.register(this);
     }
 
     @Override
     public void stopRecording() {
-
+        mWatermark.hide();
+        mRecorderOverlay.show();
+        mScreenOffReceiver.unregister(this);
     }
 
     @Override
