@@ -8,8 +8,13 @@ public class ScreenOffReceiver extends android.content.BroadcastReceiver {
 
     private IRecorderService mService;
 
-    public ScreenOffReceiver(IRecorderService service) {
+    private Context mContext;
+
+    private boolean mIsRegistered;
+
+    public ScreenOffReceiver(IRecorderService service, Context context) {
         mService = service;
+        mContext = context;
     }
 
     @Override
@@ -18,13 +23,21 @@ public class ScreenOffReceiver extends android.content.BroadcastReceiver {
     }
 
 
-    public void register(Context context) {
+    public void register() {
+        if (mIsRegistered) {
+            return;
+        }
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
-        context.registerReceiver(this, intentFilter);
+        mContext.registerReceiver(this, intentFilter);
+        mIsRegistered = true;
     }
 
-    public void unregister(Context context) {
-        context.unregisterReceiver(this);
+    public void unregister() {
+        if (!mIsRegistered) {
+            return;
+        }
+        mContext.unregisterReceiver(this);
+        mIsRegistered = false;
     }
 
 }
