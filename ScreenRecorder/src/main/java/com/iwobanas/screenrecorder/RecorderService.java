@@ -16,15 +16,19 @@ public class RecorderService extends Service implements IRecorderService {
 
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this);
 
+    private ShellRunner shellRunner = new ShellRunner();
+
     @Override
     public void startRecording() {
         mRecorderOverlay.hide();
         mWatermark.show();
         mScreenOffReceiver.register(this);
+        shellRunner.start();
     }
 
     @Override
     public void stopRecording() {
+        shellRunner.stop();
         mWatermark.hide();
         mRecorderOverlay.show();
         mScreenOffReceiver.unregister(this);
@@ -34,7 +38,7 @@ public class RecorderService extends Service implements IRecorderService {
     public void openLastFile() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        File file = new File("/sdcard/screenrec.mp4");
+        File file = new File("/sdcard/uitest.mp4");
         intent.setDataAndType(Uri.fromFile(file), "video/*");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
