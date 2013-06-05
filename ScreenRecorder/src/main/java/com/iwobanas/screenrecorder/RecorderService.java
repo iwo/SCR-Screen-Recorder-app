@@ -13,6 +13,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RecorderService extends Service implements IRecorderService {
 
@@ -66,7 +68,8 @@ public class RecorderService extends Service implements IRecorderService {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        return new File(dir, getString(R.string.file_name)); //TODO: add date or number at the end of file
+        SimpleDateFormat format = new SimpleDateFormat(getString(R.string.file_name_format));
+        return new File(dir, format.format(new Date()));
     }
 
     @Override

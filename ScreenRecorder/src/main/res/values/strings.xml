@@ -5,6 +5,6 @@
     <string name="start">Start</string>
     <string name="play">Play</string>
     <string name="output_dir">ScreenRecorder</string>
-    <string name="file_name">video.mp4</string>
+    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss"</string>
     <string name="su_required_message">Root access is required to record screen content</string>
 </resources>
