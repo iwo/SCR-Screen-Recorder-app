@@ -1,7 +1,6 @@
 package com.iwobanas.screenrecorder;
 
 import android.app.Service;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +36,7 @@ public class RecorderService extends Service implements IRecorderService {
     @Override
     public void onCreate() {
         mHandler = new Handler();
+        mWatermark.show();
         mRecorderOverlay.show();
         mNativeProcessRunner.initialize();
     }
@@ -44,7 +44,6 @@ public class RecorderService extends Service implements IRecorderService {
     @Override
     public void startRecording() {
         mRecorderOverlay.hide();
-        mWatermark.show();
         mScreenOffReceiver.register();
         outputFile = getOutputFile();
         isRecording = true;
@@ -95,7 +94,6 @@ public class RecorderService extends Service implements IRecorderService {
     }
 
     private void showRecorderOverlay() {
-        mWatermark.hide();
         mRecorderOverlay.show();
         mScreenOffReceiver.unregister();
 
