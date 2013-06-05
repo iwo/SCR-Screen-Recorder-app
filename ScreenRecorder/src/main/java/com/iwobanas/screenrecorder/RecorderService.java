@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
@@ -16,6 +17,11 @@ import java.io.File;
 public class RecorderService extends Service implements IRecorderService {
 
     private static final String TAG = "RecorderService";
+
+    public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
+
+    private static final String LAST_RECORDED_FILE_PREFERENCE = "lastRecordedFile";
+
 
     private IScreenOverlay mWatermark = new WatermarkOverlay(this);
 
@@ -33,9 +39,13 @@ public class RecorderService extends Service implements IRecorderService {
 
     private boolean isRecording;
 
+    // Preferences
+    private String mLastRecorderFile;
+
     @Override
     public void onCreate() {
         mHandler = new Handler();
+        readPreferences();
         mWatermark.show();
         mRecorderOverlay.show();
         mNativeProcessRunner.initialize();
@@ -67,14 +77,14 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void openLastFile() {
-        if (outputFile == null) {
+        if (mLastRecorderFile == null) {
             //TODO: Store last path, if it's not available disable play button
             Log.w(TAG, "Remove this message when fixed");
             return;
         }
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(outputFile), "video/*");
+        intent.setDataAndType(Uri.fromFile(new File(mLastRecorderFile)), "video/*");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -108,8 +118,8 @@ public class RecorderService extends Service implements IRecorderService {
                 String message = String.format(getString(R.string.recording_saved_toast), outputFile.getName());
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 scanFile(outputFile);
+                setLastRecorderFile(outputFile.getAbsolutePath());
 
-                //TODO: enable play button
                 showRecorderOverlay();
                 mNativeProcessRunner.initialize();
             }
@@ -181,6 +191,35 @@ public class RecorderService extends Service implements IRecorderService {
         mWatermark.hide();
         mRecorderOverlay.hide();
         mScreenOffReceiver.unregister();
+        savePreferences();
+    }
+
+    private void setLastRecorderFile(String path) {
+        if (path != null) {
+            File file = new File(path);
+            if (file.exists()) {
+                mLastRecorderFile = path;
+            } else {
+                mLastRecorderFile = null;
+            }
+        } else {
+            mLastRecorderFile = null;
+        }
+
+    }
+
+    private void readPreferences() {
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
+        setLastRecorderFile(preferences.getString(LAST_RECORDED_FILE_PREFERENCE, null));
+
+    }
+
+    private void savePreferences() {
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(LAST_RECORDED_FILE_PREFERENCE, mLastRecorderFile);
+        editor.commit();
+
     }
 
     @Override
