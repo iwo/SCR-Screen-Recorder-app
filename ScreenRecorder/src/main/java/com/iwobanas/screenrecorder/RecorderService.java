@@ -29,6 +29,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     private int suRetryCount = 0;
 
+    private boolean isRecording;
+
     @Override
     public void onCreate() {
         mHandler = new Handler();
@@ -42,6 +44,7 @@ public class RecorderService extends Service implements IRecorderService {
         mWatermark.show();
         mScreenOffReceiver.register();
         outputFile = getOutputFile();
+        isRecording = true;
         mNativeProcessRunner.start(outputFile.getAbsolutePath());
     }
 
@@ -56,6 +59,7 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void stopRecording() {
+        isRecording = false;
         mNativeProcessRunner.stop();
     }
 
@@ -149,6 +153,9 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (isRecording) {
+            stopRecording();
+        }
         return START_NOT_STICKY;
     }
 
