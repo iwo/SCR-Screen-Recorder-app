@@ -4,6 +4,7 @@ public interface IRecorderService {
     void startRecording();
     void stopRecording();
     void openLastFile();
+    void close();
 
     void setReady(boolean ready);
     void recordingFinished();

@@ -81,6 +81,11 @@ public class RecorderService extends Service implements IRecorderService {
     }
 
     @Override
+    public void close() {
+        stopSelf();
+    }
+
+    @Override
     public void setReady(boolean ready) {
         if (ready) {
             // enable "Record" button
