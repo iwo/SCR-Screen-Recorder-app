@@ -1,11 +1,14 @@
 package com.iwobanas.screenrecorder;
 
 import android.app.Service;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -101,11 +104,22 @@ public class RecorderService extends Service implements IRecorderService {
             public void run() {
                 String message = String.format(getString(R.string.recording_saved_toast), outputFile.getName());
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                scanFile(outputFile);
+
                 //TODO: enable play button
                 showRecorderOverlay();
                 mNativeProcessRunner.initialize();
             }
         });
+    }
+
+    private void scanFile(File file) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MediaStore.Video.Media.TITLE, file.getName());
+        contentValues.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4");
+        contentValues.put(MediaStore.Video.Media.DATA,file.getAbsolutePath());
+
+        getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
     }
 
     @Override
