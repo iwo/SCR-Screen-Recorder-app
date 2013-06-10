@@ -70,7 +70,7 @@ class RecorderProcess extends Thread {
         }
     }
 
-    public void startRecording(String fileName) {
+    public void startRecording(String fileName, String rotation) {
         if (state != ProcessState.READY) {
             Log.e(TAG, "Can't start recording in current state: " + state);
             //TODO: add error handling
@@ -78,6 +78,7 @@ class RecorderProcess extends Thread {
         }
         setState(ProcessState.RECORDING);
         runCommand(fileName);
+        runCommand(rotation);
     }
 
     public void stopRecording() {

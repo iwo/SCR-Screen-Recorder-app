@@ -5,11 +5,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Display;
+import android.view.Surface;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.io.File;
@@ -59,7 +63,7 @@ public class RecorderService extends Service implements IRecorderService {
         mScreenOffReceiver.register();
         outputFile = getOutputFile();
         isRecording = true;
-        mNativeProcessRunner.start(outputFile.getAbsolutePath());
+        mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
     }
 
     private File getOutputFile() {
@@ -71,6 +75,48 @@ public class RecorderService extends Service implements IRecorderService {
         SimpleDateFormat format = new SimpleDateFormat(getString(R.string.file_name_format));
         return new File(dir, format.format(new Date()));
     }
+
+    private String getRotation() {
+        Display display = ((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        Configuration config = getResources().getConfiguration();
+        int rotationDeg = getRotationDeg(display);
+
+        if (getDeviceDefaultOrientation(display, config) == Configuration.ORIENTATION_PORTRAIT) {
+            rotationDeg = ((360 - rotationDeg) + 90) % 360;
+        } else {
+            rotationDeg = (360 - rotationDeg) % 360; //TODO: test on horizontal device
+        }
+
+        return String.valueOf(rotationDeg);
+    }
+
+    private int getRotationDeg(Display display) {
+        switch (display.getRotation()) {
+            case Surface.ROTATION_0:
+                return 0;
+            case Surface.ROTATION_90:
+                return 90;
+            case Surface.ROTATION_180:
+                return 180;
+            case Surface.ROTATION_270:
+                return 270;
+        }
+        return 0;
+    }
+
+    public int getDeviceDefaultOrientation(Display display, Configuration config) {
+        int rotation = display.getRotation();
+
+        if (((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &&
+                config.orientation == Configuration.ORIENTATION_LANDSCAPE)
+                || ((rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) &&
+                config.orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            return Configuration.ORIENTATION_LANDSCAPE;
+        } else {
+            return Configuration.ORIENTATION_PORTRAIT;
+        }
+    }
+
 
     @Override
     public void stopRecording() {
