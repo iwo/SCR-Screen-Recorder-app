@@ -136,6 +136,7 @@ public class RecorderService extends Service implements IRecorderService {
         intent.setDataAndType(Uri.fromFile(new File(mLastRecorderFile)), "video/*");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        stopSelf();
     }
 
     @Override
