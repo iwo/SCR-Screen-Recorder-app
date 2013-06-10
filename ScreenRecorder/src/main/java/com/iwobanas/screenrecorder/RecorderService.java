@@ -237,6 +237,9 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void onDestroy() {
+        if (isRecording) {
+            stopRecording();
+        }
         mWatermark.hide();
         mRecorderOverlay.hide();
         mScreenOffReceiver.unregister();
