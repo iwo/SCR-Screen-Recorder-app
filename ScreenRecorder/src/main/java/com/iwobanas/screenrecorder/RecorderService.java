@@ -104,7 +104,9 @@ public class RecorderService extends Service implements IRecorderService {
         //TODO: check external storage state
         File dir = new File("/sdcard", getString(R.string.output_dir)); // there are some issues with Environment.getExternalStorageDirectory() on Nexus 4
         if (!dir.exists()) {
-            dir.mkdirs();
+            if (!dir.mkdirs()) {
+                Log.w(TAG, "mkdirs failed " + dir.getAbsolutePath());
+            }
         }
         SimpleDateFormat format = new SimpleDateFormat(getString(R.string.file_name_format));
         return new File(dir, format.format(new Date()));
@@ -180,11 +182,6 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void setReady(boolean ready) {
-        if (ready) {
-            // enable "Record" button
-        } else {
-            // disable "Record" button
-        }
     }
 
     private void showRecorderOverlay() {
