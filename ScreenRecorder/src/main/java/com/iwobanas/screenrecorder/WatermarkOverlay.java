@@ -16,13 +16,21 @@ public class WatermarkOverlay extends AbstractScreenOverlay {
         super(context);
     }
 
+    public void start() {
+        blinkAnimation.start();
+    }
+
+    public void stop() {
+        blinkAnimation.stop();
+        blinkAnimation.selectDrawable(0);
+    }
+
     @Override
     protected View createView() {
         View view = getLayoutInflater().inflate(R.layout.watermark, null);
         TextView textView = (TextView) view.findViewById(R.id.watermark_text);
         Drawable[] drawables = textView.getCompoundDrawables();
         blinkAnimation = (AnimationDrawable) drawables[0];
-        blinkAnimation.start();
         return view;
     }
 

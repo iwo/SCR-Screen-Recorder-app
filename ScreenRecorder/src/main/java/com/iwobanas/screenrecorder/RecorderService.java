@@ -32,7 +32,7 @@ public class RecorderService extends Service implements IRecorderService {
     private static final String LAST_RECORDED_FILE_PREFERENCE = "lastRecordedFile";
 
 
-    private IScreenOverlay mWatermark = new WatermarkOverlay(this);
+    private WatermarkOverlay mWatermark = new WatermarkOverlay(this);
 
     private IScreenOverlay mRecorderOverlay = new RecorderOverlay(this, this);
 
@@ -94,6 +94,7 @@ public class RecorderService extends Service implements IRecorderService {
     @Override
     public void startRecording() {
         mRecorderOverlay.hide();
+        mWatermark.start();
         mScreenOffReceiver.register();
         outputFile = getOutputFile();
         isRecording = true;
@@ -201,6 +202,7 @@ public class RecorderService extends Service implements IRecorderService {
                 scanFile(outputFile);
                 setLastRecorderFile(outputFile.getAbsolutePath());
 
+                mWatermark.stop();
                 showRecorderOverlay();
                 mNativeProcessRunner.initialize();
             }
@@ -230,6 +232,7 @@ public class RecorderService extends Service implements IRecorderService {
                     stopSelf();
                 }
                 //TODO: display dialog and reinitialize or quit
+                mWatermark.stop();
                 showRecorderOverlay();
             }
         });
@@ -241,6 +244,7 @@ public class RecorderService extends Service implements IRecorderService {
             @Override
             public void run() {
                 //TODO: display dialog and quit
+                mWatermark.stop();
                 showRecorderOverlay();
             }
         });
@@ -253,6 +257,7 @@ public class RecorderService extends Service implements IRecorderService {
             @Override
             public void run() {
                 //TODO: display dialog
+                mWatermark.stop();
                 showRecorderOverlay();
             }
         });
