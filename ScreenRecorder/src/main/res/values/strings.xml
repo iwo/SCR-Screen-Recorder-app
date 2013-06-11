@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Screen Recorder</string>
+    <string name="app_name">SCR Screen Recorder</string>
+    <string name="watermark_text">SCR</string>
     <string name="recording_saved_toast">Recording saved to %1$s</string>
     <string name="start">Start</string>
     <string name="play">Play</string>
