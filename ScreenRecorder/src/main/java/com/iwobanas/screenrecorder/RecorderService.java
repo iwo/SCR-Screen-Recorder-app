@@ -17,6 +17,9 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -51,10 +54,41 @@ public class RecorderService extends Service implements IRecorderService {
     @Override
     public void onCreate() {
         mHandler = new Handler();
+
         readPreferences();
+        installExecutable();
+
         mWatermark.show();
         mRecorderOverlay.show();
         mNativeProcessRunner.initialize();
+    }
+
+    private void installExecutable() {
+        File executable = new File(getFilesDir(), "screenrec");
+        try {
+            extractResource(R.raw.screenrec, executable);
+            if (!executable.setExecutable(true, false)) {
+                Log.w(TAG, "Can't set executable property on " + executable.getAbsolutePath());
+            }
+
+        } catch (IOException e) {
+            Log.e(TAG, "Can't install native executable", e);
+            //TODO: indicate installation error
+        }
+        mNativeProcessRunner.setExecutable(executable.getAbsolutePath());
+    }
+
+    private void extractResource(int resourceId, File outputFile) throws IOException {
+        InputStream inputStream = getResources().openRawResource(resourceId);
+        FileOutputStream outputStream = new FileOutputStream(outputFile);
+
+        int count;
+        byte[] buffer = new byte[1024];
+        while ((count = inputStream.read(buffer)) > 0) {
+            outputStream.write(buffer, 0, count);
+        }
+        inputStream.close();
+        outputStream.close();
     }
 
     @Override

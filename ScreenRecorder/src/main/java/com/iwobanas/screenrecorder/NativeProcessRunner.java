@@ -9,6 +9,8 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
 
     RecorderProcess process;
 
+    private String executable;
+
     public NativeProcessRunner(IRecorderService service) {
         this.service = service;
     }
@@ -23,9 +25,13 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
 
     public void initialize() {
         if (process == null || process.isStopped()) {
-            process = new RecorderProcess("/data/local/tmp/screenrec", this);
+            process = new RecorderProcess(executable, this);
             process.start();
         }
+    }
+
+    public void setExecutable(String executable) {
+        this.executable = executable;
     }
 
     @Override
