@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">SCR</string>
     <string name="watermark_text">SCR</string>
+    <string name="recording_saved_title">SCR Recording Saved</string>
+    <string name="recording_saved_message">Recording saved to %1$s</string>
     <string name="recording_saved_toast">Recording saved to %1$s</string>
     <string name="start">Start</string>
     <string name="play">Play</string>

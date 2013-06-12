@@ -1,5 +1,8 @@
 package com.iwobanas.screenrecorder;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Context;
@@ -168,12 +171,16 @@ public class RecorderService extends Service implements IRecorderService {
             Log.w(TAG, "Remove this message when fixed");
             return;
         }
+        startActivity(getPlayVideoIntent());
+        stopSelf();
+    }
+
+    private Intent getPlayVideoIntent() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(new File(mLastRecorderFile)), "video/*");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        stopSelf();
+        return intent;
     }
 
     @Override
@@ -201,6 +208,7 @@ public class RecorderService extends Service implements IRecorderService {
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 scanFile(outputFile);
                 setLastRecorderFile(outputFile.getAbsolutePath());
+                notificationSaved();
 
                 mWatermark.stop();
                 showRecorderOverlay();
@@ -216,6 +224,28 @@ public class RecorderService extends Service implements IRecorderService {
         contentValues.put(MediaStore.Video.Media.DATA,file.getAbsolutePath());
 
         getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
+    }
+
+    private void notificationSaved() {
+        String message = String.format(getString(R.string.recording_saved_message), outputFile.getName());
+        Notification.Builder mBuilder =
+                new Notification.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(getString(R.string.recording_saved_title))
+                        .setContentText(message);
+
+        Intent playVideoIntent = getPlayVideoIntent();
+        Intent recorderIntent = new Intent(this, RecorderActivity.class);
+
+        PendingIntent resultPendingIntent = PendingIntent.getActivities(this, 0, new Intent[]{recorderIntent, playVideoIntent}, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        mBuilder.setContentIntent(resultPendingIntent);
+        mBuilder.setAutoCancel(true);
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(0, mBuilder.build());
     }
 
     @Override
