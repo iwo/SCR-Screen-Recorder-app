@@ -24,12 +24,10 @@ android {
     productFlavors {
         free {
             packageName "com.iwobanas.screenrecorder.free"
-            //versionName "0.1-beta-free"
         }
 
         pro {
             packageName "com.iwobanas.screenrecorder.pro"
-            //versionName "0.1-beta-paid"
         }
     }
 
