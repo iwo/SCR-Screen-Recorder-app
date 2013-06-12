@@ -20,4 +20,32 @@ android {
         minSdkVersion 17
         targetSdkVersion 17
     }
+
+    productFlavors {
+        free {
+            packageName "com.iwobanas.screenrecorder.free"
+            //versionName "0.1-beta-free"
+        }
+
+        pro {
+            packageName "com.iwobanas.screenrecorder.pro"
+            //versionName "0.1-beta-paid"
+        }
+    }
+
+    signingConfigs {
+
+        release {
+            storeFile file("../../../.android/iwo-banas-release-key.keystore")
+            storePassword ""
+            keyAlias "iwo-banas-release"
+            keyPassword ""
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 }
