@@ -26,6 +26,7 @@
         <activity
                 android:name=".ErrorMessageActivity"
                 android:label="@string/error_activity_label"
+                android:excludeFromRecents="true"
                 android:theme="@style/Theme.Transparent">
         </activity>
     </application>
