@@ -204,12 +204,11 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void recordingFinished() {
-        final Context context = this;
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 String message = String.format(getString(R.string.recording_saved_toast), outputFile.getName());
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(RecorderService.this, message, Toast.LENGTH_LONG).show();
                 scanFile(outputFile);
                 setLastRecorderFile(outputFile.getAbsolutePath());
                 notificationSaved();
@@ -255,7 +254,6 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void suRequired() {
-        final Context context = this;
         mHandler.post(new Runnable() {
             @Override
             public void run() {
