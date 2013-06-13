@@ -47,7 +47,7 @@ public class RecorderService extends Service implements IRecorderService {
 
     private File outputFile;
 
-    private int suRetryCount = 0;
+    private static int suRetryCount = 0;
 
     private boolean isRecording;
 
@@ -254,16 +254,11 @@ public class RecorderService extends Service implements IRecorderService {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                String message = getString(R.string.su_required_message);
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                if (suRetryCount++ < 3) {
-                    mNativeProcessRunner.initialize();
+                if (suRetryCount++ < 2) {
+                    displayErrorMessage(getString(R.string.su_required_message), true);
                 } else {
-                    stopSelf();
+                    displayErrorMessage(getString(R.string.su_required_message), false);
                 }
-                //TODO: display dialog and reinitialize or quit
-                mWatermark.stop();
-                showRecorderOverlay();
             }
         });
     }
