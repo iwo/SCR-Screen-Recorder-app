@@ -27,6 +27,7 @@ public class ErrorMessageActivity extends Activity {
             AlertDialog.Builder builder = new AlertDialog.Builder(ErrorMessageActivity.this);
             Intent intent = getIntent();
             builder.setMessage(intent.getStringExtra(ERROR_MESSAGE_EXTRA));
+            builder.setTitle(R.string.error_dialog_title);
             restart = intent.getBooleanExtra(RESTART_EXTRA, false);
             return builder.create();
         }

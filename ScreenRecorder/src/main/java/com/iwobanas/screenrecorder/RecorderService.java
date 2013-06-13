@@ -278,13 +278,15 @@ public class RecorderService extends Service implements IRecorderService {
     }
 
     @Override
-    public void startupError() {
-        displayErrorMessage(getString(R.string.startup_error_message), false);
+    public void startupError(int exitValue) {
+        String message = String.format(getString(R.string.startup_error_message), exitValue);
+        displayErrorMessage(message, false);
     }
 
     @Override
-    public void recordingError() {
-        displayErrorMessage(getString(R.string.recording_error_message), true);
+    public void recordingError(int exitValue) {
+        String message = String.format(getString(R.string.recording_error_message), exitValue);
+        displayErrorMessage(message, true);
     }
 
     @Override

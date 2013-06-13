@@ -9,7 +9,7 @@ public interface IRecorderService {
     void setReady(boolean ready);
     void recordingFinished();
     void suRequired();
-    void startupError();
-    void recordingError();
+    void startupError(int exitValue);
+    void recordingError(int exitValue);
 
 }

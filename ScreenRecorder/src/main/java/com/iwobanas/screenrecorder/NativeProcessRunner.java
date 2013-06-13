@@ -65,16 +65,16 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         } else if (exitValue == 127) { // command not found
             //TODO: verify installation
             Log.e(TAG, "Error code 127. This may be an installation issue");
-            service.startupError();
+            service.startupError(exitValue);
         } else {
             logError(exitValue);
-            service.startupError();
+            service.startupError(exitValue);
         }
     }
 
     private void handleRecordingError(int exitValue) {
         logError(exitValue);
-        service.recordingError();
+        service.recordingError(exitValue);
     }
 
     private void logError(int exitValue) {
