@@ -43,6 +43,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this);
 
+    private RecordingTimeController mTimeController = new RecordingTimeController(this);
+
     private Handler mHandler;
 
     private File outputFile;
@@ -101,6 +103,7 @@ public class RecorderService extends Service implements IRecorderService {
         mScreenOffReceiver.register();
         outputFile = getOutputFile();
         isRecording = true;
+        mTimeController.start();
         mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
     }
 
@@ -162,6 +165,7 @@ public class RecorderService extends Service implements IRecorderService {
     public void stopRecording() {
         isRecording = false;
         mNativeProcessRunner.stop();
+        mTimeController.reset();
     }
 
     @Override
@@ -211,6 +215,7 @@ public class RecorderService extends Service implements IRecorderService {
                 notificationSaved();
 
                 mWatermark.stop();
+                mTimeController.reset();
                 showRecorderOverlay();
                 mNativeProcessRunner.initialize();
             }
