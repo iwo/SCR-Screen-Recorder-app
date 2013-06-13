@@ -268,30 +268,28 @@ public class RecorderService extends Service implements IRecorderService {
         });
     }
 
-    @Override
-    public void startupError() {
+    private void displayErrorMessage(final String message, final boolean restart) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                //TODO: display dialog and quit
-                mWatermark.stop();
-                showRecorderOverlay();
+                Intent intent = new Intent(RecorderService.this, ErrorMessageActivity.class);
+                intent.putExtra(ErrorMessageActivity.ERROR_MESSAGE_EXTRA, message);
+                intent.putExtra(ErrorMessageActivity.RESTART_EXTRA, restart);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                stopSelf();
             }
         });
+    }
 
+    @Override
+    public void startupError() {
+        displayErrorMessage(getString(R.string.startup_error_message), false);
     }
 
     @Override
     public void recordingError() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                //TODO: display dialog
-                mWatermark.stop();
-                showRecorderOverlay();
-            }
-        });
-
+        displayErrorMessage(getString(R.string.recording_error_message), true);
     }
 
     @Override

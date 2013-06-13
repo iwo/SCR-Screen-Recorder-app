@@ -22,5 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".ErrorMessageActivity"
+                android:label="@string/error_activity_label"
+                android:theme="@style/Theme.Transparent">
+        </activity>
     </application>
 </manifest>
