@@ -12,10 +12,8 @@
     <string name="su_required_message">Root access is required to record screen content</string>
 
     <string name="error_activity_label">SCR Error</string>
-    <string name="error_dialog_title">SCR Error</string>
-    <string name="startup_error_message">Something went seriously wrong :-(
-        Please report error S%1$d to help me fix this issue. Please send me the logcat if you can.</string>
-    <string name="recording_error_message">Something went seriously wrong :-(
-        Please report error R%1$d to help me fix this issue. Please send me the logcat if you can.</string>
+    <string name="error_dialog_title">Something went seriously wrong :-(</string>
+    <string name="startup_error_message">Please report error S%1$d to help me fix this issue. Please send me the logcat if you can.</string>
+    <string name="recording_error_message">Please report error R%1$d to help me fix this issue. Please send me the logcat if you can.</string>
 
 </resources>
