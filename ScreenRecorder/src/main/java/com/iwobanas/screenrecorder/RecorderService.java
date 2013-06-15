@@ -99,7 +99,11 @@ public class RecorderService extends Service implements IRecorderService {
     @Override
     public void startRecording() {
         mRecorderOverlay.hide();
-        mWatermark.start();
+        if (getResources().getBoolean(R.bool.taniosc)) {
+            mWatermark.start();
+        } else {
+            mWatermark.hide();
+        }
         mScreenOffReceiver.register();
         outputFile = getOutputFile();
         isRecording = true;
@@ -213,7 +217,11 @@ public class RecorderService extends Service implements IRecorderService {
                 setLastRecorderFile(outputFile.getAbsolutePath());
                 notificationSaved();
 
-                mWatermark.stop();
+                if (getResources().getBoolean(R.bool.taniosc)) {
+                    mWatermark.stop();
+                } else {
+                    mWatermark.show();
+                }
                 mTimeController.reset();
                 showRecorderOverlay();
                 mNativeProcessRunner.initialize();
