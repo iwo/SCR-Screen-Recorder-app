@@ -18,6 +18,7 @@ public class ErrorMessageActivity extends Activity {
         dialogFragment.show(getFragmentManager(), "errorDialog");
     }
 
+    //TODO: Make static and ensure that this fragment can be serialized / deserialized by the framework
     class DialogFragment extends android.app.DialogFragment {
 
         private boolean restart;
