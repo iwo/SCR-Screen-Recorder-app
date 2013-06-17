@@ -11,6 +11,8 @@ public class RecorderOverlay extends AbstractScreenOverlay {
 
     private IRecorderService mService;
 
+    private ImageButton mMicButton;
+
     public RecorderOverlay(Context context, IRecorderService service) {
         super(context);
         mService = service;
@@ -28,6 +30,17 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             }
         });
 
+        mMicButton = (ImageButton) view.findViewById(R.id.mic_button);
+        mMicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mService.setMicAudio(!mService.getMicAudio());
+                updateMicButton();
+            }
+        });
+        updateMicButton();
+
+
         /*ImageButton playButton = (ImageButton) view.findViewById(R.id.play_button);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +57,13 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             }
         });
         return view;
+    }
+
+    private void updateMicButton() {
+        if (mMicButton != null) {
+            int iconRes = mService.getMicAudio() ? R.drawable.ic_audio_vol : R.drawable.ic_audio_vol_mute;
+            mMicButton.setImageResource(iconRes);
+        }
     }
 
     @Override

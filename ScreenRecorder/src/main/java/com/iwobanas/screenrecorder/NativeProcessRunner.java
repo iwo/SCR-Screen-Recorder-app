@@ -15,8 +15,8 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         this.service = service;
     }
 
-    public void start(String fileName, String rotation) {
-        process.startRecording(fileName, rotation);
+    public void start(String fileName, String rotation, boolean micAudio) {
+        process.startRecording(fileName, rotation, micAudio);
     }
 
     public void stop() {

@@ -51,6 +51,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     private static int suRetryCount = 0;
 
+    private static boolean mMicAudio = true;
+
     private boolean isRecording;
 
     // Preferences
@@ -108,7 +110,7 @@ public class RecorderService extends Service implements IRecorderService {
         outputFile = getOutputFile();
         isRecording = true;
         mTimeController.start();
-        mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
+        mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation(), mMicAudio);
     }
 
     private File getOutputFile() {
@@ -298,6 +300,16 @@ public class RecorderService extends Service implements IRecorderService {
     public void recordingError(int exitValue) {
         String message = String.format(getString(R.string.recording_error_message), exitValue);
         displayErrorMessage(message, true);
+    }
+
+    @Override
+    public boolean getMicAudio() {
+        return mMicAudio;
+    }
+
+    @Override
+    public void setMicAudio(boolean micAudio) {
+        mMicAudio = micAudio;
     }
 
     @Override
