@@ -9,7 +9,10 @@
     <string name="play">Play</string>
     <string name="output_dir">ScreenRecorder</string>
     <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
-    <string name="su_required_message">Root access is required to record screen content</string>
+
+    <string name="su_required_title">Root access is required</string>
+    <string name="su_required_message">To run any screen recorder app your phone/tablet needs to be rooted.
+        There are plenty tutorials on the Internet explaining how to root different devices. Pleas come back when you are done!</string>
 
     <string name="error_activity_label">SCR Error</string>
     <string name="error_dialog_title">Something went seriously wrong :-(</string>

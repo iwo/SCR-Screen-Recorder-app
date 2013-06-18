@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 public class ErrorMessageActivity extends Activity {
     public static final String ERROR_MESSAGE_EXTRA = "ERROR_MESSAGE_EXTRA";
+    public static final String ERROR_TITLE_EXTRA = "ERROR_TITLE_EXTRA";
     public static final String RESTART_EXTRA = "RESTART_EXTRA";
 
     @Override
@@ -28,7 +29,7 @@ public class ErrorMessageActivity extends Activity {
             AlertDialog.Builder builder = new AlertDialog.Builder(ErrorMessageActivity.this);
             Intent intent = getIntent();
             builder.setMessage(intent.getStringExtra(ERROR_MESSAGE_EXTRA));
-            builder.setTitle(R.string.error_dialog_title);
+            builder.setTitle(intent.getStringExtra(ERROR_TITLE_EXTRA));
             builder.setIcon(R.drawable.ic_launcher);
             restart = intent.getBooleanExtra(RESTART_EXTRA, false);
             return builder.create();

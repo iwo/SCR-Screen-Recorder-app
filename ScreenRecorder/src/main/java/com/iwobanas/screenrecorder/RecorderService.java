@@ -49,8 +49,6 @@ public class RecorderService extends Service implements IRecorderService {
 
     private File outputFile;
 
-    private static int suRetryCount = 0;
-
     private static boolean mMicAudio = true;
 
     private boolean isRecording;
@@ -267,21 +265,20 @@ public class RecorderService extends Service implements IRecorderService {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                if (suRetryCount++ < 2) {
-                    displayErrorMessage(getString(R.string.su_required_message), true);
-                } else {
-                    displayErrorMessage(getString(R.string.su_required_message), false);
-                }
+                String message = getString(R.string.su_required_message);
+                String title = getString(R.string.su_required_title);
+                displayErrorMessage(message, title, false);
             }
         });
     }
 
-    private void displayErrorMessage(final String message, final boolean restart) {
+    private void displayErrorMessage(final String message, final String title, final boolean restart) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(RecorderService.this, ErrorMessageActivity.class);
                 intent.putExtra(ErrorMessageActivity.ERROR_MESSAGE_EXTRA, message);
+                intent.putExtra(ErrorMessageActivity.ERROR_TITLE_EXTRA, title);
                 intent.putExtra(ErrorMessageActivity.RESTART_EXTRA, restart);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -293,13 +290,13 @@ public class RecorderService extends Service implements IRecorderService {
     @Override
     public void startupError(int exitValue) {
         String message = String.format(getString(R.string.startup_error_message), exitValue);
-        displayErrorMessage(message, false);
+        displayErrorMessage(message, getString(R.string.error_dialog_title), false);
     }
 
     @Override
     public void recordingError(int exitValue) {
         String message = String.format(getString(R.string.recording_error_message), exitValue);
-        displayErrorMessage(message, true);
+        displayErrorMessage(message, getString(R.string.error_dialog_title), true);
     }
 
     @Override
