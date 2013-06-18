@@ -59,7 +59,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
     }
 
     private void handleStartupError(int exitValue) {
-        if (exitValue == 1) { // general error e.g. SuperSu Deny access
+        if (exitValue == -1 || exitValue == 1) { // general error e.g. SuperSu Deny access
             Log.e(TAG, "Error code 1. Assuming no super user access");
             service.suRequired();
         } else if (exitValue == 127) { // command not found

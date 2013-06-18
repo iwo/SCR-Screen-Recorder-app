@@ -19,7 +19,7 @@ class RecorderProcess extends Thread {
 
     private OnStateChangeListener onStateChangeListener;
 
-    private int exitValue;
+    private int exitValue = -1;
 
     public RecorderProcess(String executable, OnStateChangeListener onStateChangeListener) {
         this.executable = executable;
