@@ -19,15 +19,15 @@ public class ErrorMessageActivity extends Activity {
         dialogFragment.show(getFragmentManager(), "errorDialog");
     }
 
-    //TODO: Make static and ensure that this fragment can be serialized / deserialized by the framework
-    class DialogFragment extends android.app.DialogFragment {
+    static class DialogFragment extends android.app.DialogFragment {
 
         private boolean restart;
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ErrorMessageActivity.this);
-            Intent intent = getIntent();
+            Activity activity = getActivity();
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            Intent intent = activity.getIntent();
             builder.setMessage(intent.getStringExtra(ERROR_MESSAGE_EXTRA));
             builder.setTitle(intent.getStringExtra(ERROR_TITLE_EXTRA));
             builder.setIcon(R.drawable.ic_launcher);
@@ -37,11 +37,12 @@ public class ErrorMessageActivity extends Activity {
 
         @Override
         public void onDismiss(DialogInterface dialog) {
+            Activity activity = getActivity();
             if (restart) {
-                Intent intent = new Intent(ErrorMessageActivity.this, RecorderService.class);
-                startService(intent);
+                Intent intent = new Intent(activity, RecorderService.class);
+                activity.startService(intent);
             }
-            finish();
+            activity.finish();
         }
     }
 }
