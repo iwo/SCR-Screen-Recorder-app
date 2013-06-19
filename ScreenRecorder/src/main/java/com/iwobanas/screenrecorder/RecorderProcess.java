@@ -5,7 +5,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.OutputStream;
 
-class RecorderProcess extends Thread {
+class RecorderProcess implements Runnable{
 
     private static final String TAG = "RecorderProcess";
 
@@ -20,6 +20,8 @@ class RecorderProcess extends Thread {
     private OnStateChangeListener onStateChangeListener;
 
     private int exitValue = -1;
+
+    private boolean destroying = false;
 
     public RecorderProcess(String executable, OnStateChangeListener onStateChangeListener) {
         this.executable = executable;
@@ -63,6 +65,9 @@ class RecorderProcess extends Thread {
     }
 
     private void setState(ProcessState state) {
+        if (destroying) {
+            return;
+        }
         ProcessState previousState = this.state;
         this.state = state;
         if (onStateChangeListener != null) {
@@ -104,6 +109,18 @@ class RecorderProcess extends Thread {
 
     public boolean isStopped() {
         return state == ProcessState.FINISHED || state == ProcessState.ERROR;
+    }
+
+    public boolean isRecording() {
+        return state == ProcessState.RECORDING;
+    }
+
+    public void destroy() {
+        if (process != null) {
+            Log.d(TAG, "Destroying process");
+            destroying = true;
+            process.destroy();
+        }
     }
 
     public static interface OnStateChangeListener {

@@ -324,6 +324,7 @@ public class RecorderService extends Service implements IRecorderService {
         }
         mWatermark.hide();
         mRecorderOverlay.hide();
+        mNativeProcessRunner.destroy();
         mScreenOffReceiver.unregister();
         savePreferences();
     }

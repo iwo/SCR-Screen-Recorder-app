@@ -26,12 +26,24 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
     public void initialize() {
         if (process == null || process.isStopped()) {
             process = new RecorderProcess(executable, this);
-            process.start();
+            new Thread(process).start();
         }
     }
 
     public void setExecutable(String executable) {
         this.executable = executable;
+    }
+
+    public void destroy() {
+        if (process == null || process.isStopped()) {
+            return;
+        }
+
+        if (process.isRecording()) {
+            process.stopRecording();
+        } else {
+            process.destroy();
+        }
     }
 
     @Override
