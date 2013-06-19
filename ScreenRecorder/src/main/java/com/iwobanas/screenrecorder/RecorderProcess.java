@@ -4,6 +4,8 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 class RecorderProcess implements Runnable{
 
@@ -22,6 +24,8 @@ class RecorderProcess implements Runnable{
     private int exitValue = -1;
 
     private boolean destroying = false;
+
+    private Timer stopTimeoutTimer;
 
     public RecorderProcess(String executable, OnStateChangeListener onStateChangeListener) {
         this.executable = executable;
@@ -52,6 +56,7 @@ class RecorderProcess implements Runnable{
                 Log.e(TAG, "Native process interrupted", e);
             }
 
+            cancelStopTimeout();
             exitValue = process.exitValue();
         }
 
@@ -95,6 +100,26 @@ class RecorderProcess implements Runnable{
         }
         setState(ProcessState.STOPPING);
         runCommand("stop");
+        startStopTimeout();
+    }
+
+    private void startStopTimeout() {
+        stopTimeoutTimer = new Timer();
+        stopTimeoutTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (process != null) {
+                    Log.w(TAG, "Stop timeout, killing the native process");
+                    killProcess();
+                }
+            }
+        }, 10 * 1000); // wait 10s before force killing the process
+    }
+
+    private void cancelStopTimeout() {
+        if (stopTimeoutTimer != null) {
+            stopTimeoutTimer.cancel();
+        }
     }
 
     private void runCommand(String command) {
@@ -119,6 +144,12 @@ class RecorderProcess implements Runnable{
         if (process != null) {
             Log.d(TAG, "Destroying process");
             destroying = true;
+            killProcess();
+        }
+    }
+
+    private void killProcess() {
+        if (process != null) {
             process.destroy();
         }
     }
