@@ -149,8 +149,12 @@ class RecorderProcess implements Runnable{
     }
 
     private void killProcess() {
-        if (process != null) {
-            process.destroy();
+        if (process != null) try {
+            // process.destroy(); fails with "EPERM (Operation not permitted)"
+            // so we close streams to force SIGPIPE
+            process.getInputStream().close();
+            process.getOutputStream().close();
+        } catch (IOException ignored) {
         }
     }
 
