@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SCR Free</string>
+    <string name="help_stop_message">To stop recording lock the screen and wait 2 seconds. Alternatively you can simply reopen SCR Free app.</string>
 </resources>

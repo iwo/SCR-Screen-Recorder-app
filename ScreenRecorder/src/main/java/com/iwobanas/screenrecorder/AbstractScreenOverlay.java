@@ -53,7 +53,7 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
     @Override
     public void hide() {
         if (!visible) {
-            Log.e(TAG, "Trying to hide the view which is not displayed");
+            Log.w(TAG, "Trying to hide the view which is not displayed");
             return;
         }
         getWindowManager().removeView(mView);

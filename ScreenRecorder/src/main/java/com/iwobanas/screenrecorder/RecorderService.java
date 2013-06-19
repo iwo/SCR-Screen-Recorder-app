@@ -28,12 +28,15 @@ import java.util.Date;
 
 public class RecorderService extends Service implements IRecorderService {
 
+    public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
+
     private static final String TAG = "RecorderService";
 
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
 
     private static final String LAST_RECORDED_FILE_PREFERENCE = "lastRecordedFile";
 
+    private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
 
     private WatermarkOverlay mWatermark = new WatermarkOverlay(this);
 
@@ -55,6 +58,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     // Preferences
     private String mLastRecorderFile;
+
+    private boolean mStopHelpDisplayed;
 
     @Override
     public void onCreate() {
@@ -98,6 +103,11 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void startRecording() {
+        if (!mStopHelpDisplayed) {
+            mRecorderOverlay.hide();
+            displayStopHelp();
+            return;
+        }
         mRecorderOverlay.hide();
         if (getResources().getBoolean(R.bool.taniosc)) {
             mWatermark.start();
@@ -260,6 +270,18 @@ public class RecorderService extends Service implements IRecorderService {
         mNotificationManager.notify(0, mBuilder.build());
     }
 
+    private void displayStopHelp() {
+        Intent intent = new Intent(RecorderService.this, DialogActivity.class);
+        intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.help_stop_message));
+        intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.help_stop_title));
+        intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.help_stop_ok));
+        intent.putExtra(DialogActivity.RESTART_EXTRA, true);
+        intent.putExtra(DialogActivity.RESTART_EXTRA_EXTRA, STOP_HELP_DISPLAYED_EXTRA);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        mStopHelpDisplayed = true;
+    }
+
     @Override
     public void suRequired() {
         mHandler.post(new Runnable() {
@@ -276,10 +298,10 @@ public class RecorderService extends Service implements IRecorderService {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(RecorderService.this, ErrorMessageActivity.class);
-                intent.putExtra(ErrorMessageActivity.ERROR_MESSAGE_EXTRA, message);
-                intent.putExtra(ErrorMessageActivity.ERROR_TITLE_EXTRA, title);
-                intent.putExtra(ErrorMessageActivity.RESTART_EXTRA, restart);
+                Intent intent = new Intent(RecorderService.this, DialogActivity.class);
+                intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
+                intent.putExtra(DialogActivity.TITLE_EXTRA, title);
+                intent.putExtra(DialogActivity.RESTART_EXTRA, restart);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 stopSelf();
@@ -311,7 +333,9 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (isRecording) {
+        if (intent.getBooleanExtra(STOP_HELP_DISPLAYED_EXTRA, false)) {
+            startRecording();
+        } else if (isRecording) {
             stopRecording();
         }
         return START_NOT_STICKY;
@@ -346,13 +370,14 @@ public class RecorderService extends Service implements IRecorderService {
     private void readPreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
         setLastRecorderFile(preferences.getString(LAST_RECORDED_FILE_PREFERENCE, null));
-
+        mStopHelpDisplayed = preferences.getBoolean(STOP_HELP_DISPLAYED_PREFERENCE, false);
     }
 
     private void savePreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(LAST_RECORDED_FILE_PREFERENCE, mLastRecorderFile);
+        editor.putBoolean(STOP_HELP_DISPLAYED_PREFERENCE, mStopHelpDisplayed);
         editor.commit();
 
     }

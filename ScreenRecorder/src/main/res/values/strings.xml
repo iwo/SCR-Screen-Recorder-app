@@ -14,9 +14,10 @@
     <string name="su_required_message">To run any screen recorder app your phone/tablet needs to be rooted.
         There are plenty tutorials on the Internet explaining how to root different devices. Pleas come back when you are done!</string>
 
-    <string name="error_activity_label">SCR Error</string>
     <string name="error_dialog_title">Something went seriously wrong :-(</string>
-    <string name="startup_error_message">Please report error S%1$d to help me fix this issue. Please send me the logcat if you can.</string>
+    <string name="startup_error_message">Please report error S%1$d to help me fix this issue. Please send me the logcat command output if you can.</string>
     <string name="recording_error_message">Please report error R%1$d to help me fix this issue. Please send me the logcat if you can.</string>
 
+    <string name="help_stop_title">How to stop</string>
+    <string name="help_stop_ok">Got it!</string>
 </resources>

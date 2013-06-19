@@ -24,8 +24,8 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ErrorMessageActivity"
-                android:label="@string/error_activity_label"
+                android:name=".DialogActivity"
+                android:label="@string/app_name"
                 android:excludeFromRecents="true"
                 android:theme="@style/Theme.Transparent">
         </activity>
