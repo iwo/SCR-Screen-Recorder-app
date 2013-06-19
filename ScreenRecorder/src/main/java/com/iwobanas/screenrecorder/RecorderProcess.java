@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,6 +27,8 @@ class RecorderProcess implements Runnable{
     private int exitValue = -1;
 
     private boolean destroying = false;
+
+    private volatile boolean forceKilled = false;
 
     private Timer stopTimeoutTimer;
 
@@ -59,10 +62,14 @@ class RecorderProcess implements Runnable{
             }
 
             cancelStopTimeout();
+
             exitValue = process.exitValue();
         }
 
-        if (state == ProcessState.STOPPING) {
+        if (forceKilled) {
+            exitValue = 300;
+            setState(ProcessState.ERROR);
+        } else if (state == ProcessState.STOPPING) {
             setState(ProcessState.FINISHED);
         } else {
             setState(ProcessState.ERROR);
@@ -106,17 +113,17 @@ class RecorderProcess implements Runnable{
     }
 
     private void startStopTimeout() {
+        if (stopTimeoutTimer != null) {
+            Log.d(TAG, "Stop timeout already started");
+            return;
+        }
         stopTimeoutTimer = new Timer();
         stopTimeoutTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 if (process != null) {
                     Log.w(TAG, "Stop timeout, killing the native process");
-                    killProcess();
-                    //TODO: find a way to force kill if the process hangs
-                    //for now simply report error from this thread
-                    exitValue = 300;
-                    setState(ProcessState.ERROR);
+                    forceKill();
                 }
             }
         }, 10 * 1000); // wait 10s before force killing the process
@@ -125,6 +132,7 @@ class RecorderProcess implements Runnable{
     private void cancelStopTimeout() {
         if (stopTimeoutTimer != null) {
             stopTimeoutTimer.cancel();
+            stopTimeoutTimer = null;
         }
     }
 
@@ -150,6 +158,7 @@ class RecorderProcess implements Runnable{
         if (process != null) {
             Log.d(TAG, "Destroying process");
             destroying = true;
+            startStopTimeout();
             killProcess();
         }
     }
@@ -161,6 +170,20 @@ class RecorderProcess implements Runnable{
             process.getInputStream().close();
             process.getOutputStream().close();
         } catch (IOException ignored) {
+        }
+    }
+
+    private void forceKill() {
+        Log.d(TAG, "forceKill");
+        try {
+            Field f = process.getClass().getDeclaredField("pid");
+            f.setAccessible(true);
+            Integer pid = (Integer) f.get(process);
+            forceKilled = true;
+            Log.d(TAG, "killing pid " + pid);
+            Runtime.getRuntime().exec(new String[]{"su", "-c", "kill -9 "+ pid});
+        } catch (Exception e){
+            Log.e(TAG, "Error killing the process", e);
         }
     }
 
