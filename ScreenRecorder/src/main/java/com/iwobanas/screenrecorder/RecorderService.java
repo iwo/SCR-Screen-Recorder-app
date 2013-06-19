@@ -221,11 +221,7 @@ public class RecorderService extends Service implements IRecorderService {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                String message = String.format(getString(R.string.recording_saved_toast), outputFile.getName());
-                Toast.makeText(RecorderService.this, message, Toast.LENGTH_LONG).show();
-                scanFile(outputFile);
-                setLastRecorderFile(outputFile.getAbsolutePath());
-                notificationSaved();
+                scanOutputAndNotify();
 
                 if (getResources().getBoolean(R.bool.taniosc)) {
                     mWatermark.stop();
@@ -237,6 +233,14 @@ public class RecorderService extends Service implements IRecorderService {
                 mNativeProcessRunner.initialize();
             }
         });
+    }
+
+    public void scanOutputAndNotify() {
+        String message = String.format(getString(R.string.recording_saved_toast), outputFile.getName());
+        Toast.makeText(RecorderService.this, message, Toast.LENGTH_LONG).show();
+        scanFile(outputFile);
+        setLastRecorderFile(outputFile.getAbsolutePath());
+        notificationSaved();
     }
 
     private void scanFile(File file) {
@@ -295,30 +299,38 @@ public class RecorderService extends Service implements IRecorderService {
     }
 
     private void displayErrorMessage(final String message, final String title, final boolean restart) {
+        Intent intent = new Intent(RecorderService.this, DialogActivity.class);
+        intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
+        intent.putExtra(DialogActivity.TITLE_EXTRA, title);
+        intent.putExtra(DialogActivity.RESTART_EXTRA, restart);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        stopSelf();
+    }
+
+    @Override
+    public void startupError(final int exitValue) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(RecorderService.this, DialogActivity.class);
-                intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
-                intent.putExtra(DialogActivity.TITLE_EXTRA, title);
-                intent.putExtra(DialogActivity.RESTART_EXTRA, restart);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                stopSelf();
+                String message = String.format(getString(R.string.startup_error_message), exitValue);
+                displayErrorMessage(message, getString(R.string.error_dialog_title), false);
             }
         });
     }
 
     @Override
-    public void startupError(int exitValue) {
-        String message = String.format(getString(R.string.startup_error_message), exitValue);
-        displayErrorMessage(message, getString(R.string.error_dialog_title), false);
-    }
-
-    @Override
-    public void recordingError(int exitValue) {
-        String message = String.format(getString(R.string.recording_error_message), exitValue);
-        displayErrorMessage(message, getString(R.string.error_dialog_title), true);
+    public void recordingError(final int exitValue) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String message = String.format(getString(R.string.recording_error_message), exitValue);
+                displayErrorMessage(message, getString(R.string.error_dialog_title), true);
+                if (outputFile.exists() && outputFile.length() > 0) {
+                    scanOutputAndNotify();
+                }
+            }
+        });
     }
 
     @Override
