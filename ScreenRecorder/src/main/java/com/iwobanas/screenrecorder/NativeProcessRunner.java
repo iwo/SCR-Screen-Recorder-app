@@ -35,6 +35,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
     }
 
     public void destroy() {
+        Log.d(TAG, "destroy()");
         if (process == null || process.isStopped()) {
             return;
         }
@@ -47,7 +48,11 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
     }
 
     @Override
-    public void onStateChange(RecorderProcess.ProcessState state, RecorderProcess.ProcessState previousState, int exitValue) {
+    public void onStateChange(RecorderProcess target, RecorderProcess.ProcessState state, RecorderProcess.ProcessState previousState, int exitValue) {
+        if (target != process) {
+            Log.w(TAG, "received state update from old process");
+            return;
+        }
         switch (state) {
             case READY:
                 service.setReady(true);

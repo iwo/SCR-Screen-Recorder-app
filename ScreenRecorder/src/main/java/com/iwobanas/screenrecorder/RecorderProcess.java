@@ -9,7 +9,9 @@ import java.util.TimerTask;
 
 class RecorderProcess implements Runnable{
 
-    private static final String TAG = "RecorderProcess";
+    private static int instancesCount = 0;
+
+    private final String TAG = "RecorderProcess-" + instancesCount++;
 
     private Process process ;
 
@@ -70,17 +72,16 @@ class RecorderProcess implements Runnable{
     }
 
     private void setState(ProcessState state) {
-        if (destroying) {
-            return;
-        }
+        Log.d(TAG, "setState " + state);
         ProcessState previousState = this.state;
         this.state = state;
-        if (onStateChangeListener != null) {
-            onStateChangeListener.onStateChange(state, previousState, exitValue);
+        if (!destroying && onStateChangeListener != null) {
+            onStateChangeListener.onStateChange(this, state, previousState, exitValue);
         }
     }
 
     public void startRecording(String fileName, String rotation, boolean micAudio) {
+        Log.d(TAG, "startRecording");
         if (state != ProcessState.READY) {
             Log.e(TAG, "Can't start recording in current state: " + state);
             //TODO: add error handling
@@ -93,6 +94,7 @@ class RecorderProcess implements Runnable{
     }
 
     public void stopRecording() {
+        Log.d(TAG, "stopRecording");
         if (state != ProcessState.RECORDING) {
             Log.e(TAG, "Can't stop recording in current state: " + state);
             //TODO: add error handling
@@ -111,6 +113,10 @@ class RecorderProcess implements Runnable{
                 if (process != null) {
                     Log.w(TAG, "Stop timeout, killing the native process");
                     killProcess();
+                    //TODO: find a way to force kill if the process hangs
+                    //for now simply report error from this thread
+                    exitValue = 300;
+                    setState(ProcessState.ERROR);
                 }
             }
         }, 10 * 1000); // wait 10s before force killing the process
@@ -159,7 +165,7 @@ class RecorderProcess implements Runnable{
     }
 
     public static interface OnStateChangeListener {
-        void onStateChange(ProcessState state, ProcessState previousState, int exitValue);
+        void onStateChange(RecorderProcess target, ProcessState state, ProcessState previousState, int exitValue);
     }
 
     public static enum ProcessState {
