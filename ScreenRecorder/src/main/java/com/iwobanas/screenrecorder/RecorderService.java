@@ -306,7 +306,7 @@ public class RecorderService extends Service implements IRecorderService {
     private void startForeground() {
         Notification.Builder builder =
                 new Notification.Builder(this)
-                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(getString(R.string.app_full_name));
 
         PendingIntent intent = PendingIntent.getService(this, 0, new Intent(this, RecorderService.class), 0);
