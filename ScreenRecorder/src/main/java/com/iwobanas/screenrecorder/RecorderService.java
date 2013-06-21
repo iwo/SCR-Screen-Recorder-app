@@ -356,7 +356,22 @@ public class RecorderService extends Service implements IRecorderService {
             public void run() {
                 String message = String.format(getString(R.string.recording_error_message), exitValue);
                 displayErrorMessage(message, getString(R.string.error_dialog_title), true);
-                if (outputFile.exists() && outputFile.length() > 0) {
+                if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
+                    scanOutputAndNotify();
+                }
+            }
+        });
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
+    }
+
+    @Override
+    public void mediaRecorderError(final int exitValue) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String message = getString(R.string.media_recorder_error_message);
+                displayErrorMessage(message, getString(R.string.media_recorder_error_title), false);
+                if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
                     scanOutputAndNotify();
                 }
             }

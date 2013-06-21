@@ -11,6 +11,7 @@ public interface IRecorderService {
     void suRequired();
     void startupError(int exitValue);
     void recordingError(int exitValue);
+    void mediaRecorderError(int exitValue);
 
     boolean getMicAudio();
     void setMicAudio(boolean micAudio);

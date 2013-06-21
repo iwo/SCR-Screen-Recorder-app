@@ -15,8 +15,11 @@
         There are plenty tutorials on the Internet explaining how to root different devices. Pleas come back when you are done!</string>
 
     <string name="error_dialog_title">Something went seriously wrong :-(</string>
-    <string name="startup_error_message">Please report error S%1$d to help me fix this issue. Please send me the logcat command output if you can.</string>
-    <string name="recording_error_message">Please report error R%1$d to help me fix this issue. Please send me the logcat if you can.</string>
+    <string name="startup_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error S%1$d.</string>
+    <string name="recording_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error R%1$d.</string>
+
+    <string name="media_recorder_error_title">Recorder error</string>
+    <string name="media_recorder_error_message">Please uninstall other screencast applications and restart your device. If the problem persists please get in touch via support email.</string>
 
     <string name="help_stop_title">How to stop</string>
     <string name="help_stop_ok">Got it!</string>
