@@ -2,6 +2,10 @@ package com.iwobanas.screenrecorder;
 
 import android.util.Log;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
+import static com.iwobanas.screenrecorder.Tracker.*;
+
 public class NativeProcessRunner implements RecorderProcess.OnStateChangeListener {
     private static final String TAG = "NativeProcessRunner";
 
@@ -79,6 +83,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         if (exitValue == -1 || exitValue == 1) { // general error e.g. SuperSu Deny access
             Log.e(TAG, "Error code 1. Assuming no super user access");
             service.suRequired();
+            EasyTracker.getTracker().sendEvent(ERROR, SU_ERROR, exitValue == -1 ? NO_SU : SU_DENY, null);
         } else if (exitValue == 127) { // command not found
             //TODO: verify installation
             Log.e(TAG, "Error code 127. This may be an installation issue");

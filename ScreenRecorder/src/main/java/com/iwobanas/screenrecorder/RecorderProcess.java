@@ -2,11 +2,15 @@ package com.iwobanas.screenrecorder;
 
 import android.util.Log;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static com.iwobanas.screenrecorder.Tracker.*;
 
 class RecorderProcess implements Runnable{
 
@@ -123,6 +127,7 @@ class RecorderProcess implements Runnable{
             public void run() {
                 if (process != null) {
                     Log.w(TAG, "Stop timeout, killing the native process");
+                    EasyTracker.getTracker().sendEvent(ERROR, STOPPING_ERROR, STOP_TIMEOUT, null);
                     forceKill();
                 }
             }

@@ -28,6 +28,8 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.iwobanas.screenrecorder.Tracker.*;
+
 public class RecorderService extends Service implements IRecorderService {
 
     public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
@@ -123,6 +125,9 @@ public class RecorderService extends Service implements IRecorderService {
         isRecording = true;
         mTimeController.start();
         mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation(), mMicAudio);
+
+        EasyTracker.getTracker().sendEvent(ACTION, START, START, null);
+        EasyTracker.getTracker().sendEvent(SETTINGS, AUDIO, mMicAudio ? MIC : MUTE, null);
     }
 
     private File getOutputFile() {
@@ -245,6 +250,8 @@ public class RecorderService extends Service implements IRecorderService {
         scanFile(outputFile);
         setLastRecorderFile(outputFile.getAbsolutePath());
         notificationSaved();
+
+        EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, outputFile.length() / 1000000l);
     }
 
     private void scanFile(File file) {
@@ -321,6 +328,7 @@ public class RecorderService extends Service implements IRecorderService {
                 displayErrorMessage(message, getString(R.string.error_dialog_title), false);
             }
         });
+        EasyTracker.getTracker().sendEvent(ERROR, STARTUP_ERROR, ERROR_ + exitValue, null);
     }
 
     @Override
@@ -335,6 +343,7 @@ public class RecorderService extends Service implements IRecorderService {
                 }
             }
         });
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
     }
 
     @Override
@@ -353,6 +362,7 @@ public class RecorderService extends Service implements IRecorderService {
             startRecording();
         } else if (isRecording) {
             stopRecording();
+            EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
         }
         return START_NOT_STICKY;
     }
@@ -361,6 +371,7 @@ public class RecorderService extends Service implements IRecorderService {
     public void onDestroy() {
         if (isRecording) {
             stopRecording();
+            EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_DESTROY, null);
         }
         mWatermark.hide();
         mRecorderOverlay.hide();

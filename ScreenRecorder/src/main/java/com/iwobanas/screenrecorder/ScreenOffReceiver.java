@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
+import static com.iwobanas.screenrecorder.Tracker.*;
+
 public class ScreenOffReceiver extends android.content.BroadcastReceiver {
 
     private IRecorderService mService;
@@ -20,6 +24,7 @@ public class ScreenOffReceiver extends android.content.BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         mService.stopRecording();
+        EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_SCREEN, null);
     }
 
 

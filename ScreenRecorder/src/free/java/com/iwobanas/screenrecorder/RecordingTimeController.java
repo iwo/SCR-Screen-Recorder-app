@@ -2,8 +2,12 @@ package com.iwobanas.screenrecorder;
 
 import android.os.Handler;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static com.iwobanas.screenrecorder.Tracker.*;
 
 public class RecordingTimeController {
 
@@ -22,6 +26,7 @@ public class RecordingTimeController {
             @Override
             public void run() {
                 service.stopRecording();
+                EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_TIME, null);
             }
         }, 3*60*1000);
     }
