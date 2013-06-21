@@ -19,6 +19,8 @@ import android.view.Surface;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -64,11 +66,13 @@ public class RecorderService extends Service implements IRecorderService {
     @Override
     public void onCreate() {
         mHandler = new Handler();
+        mWatermark.show();
 
         readPreferences();
         installExecutable();
 
-        mWatermark.show();
+        EasyTracker.getInstance().setContext(getApplicationContext());
+
         mRecorderOverlay.show();
         mNativeProcessRunner.initialize();
     }
