@@ -116,7 +116,7 @@ class RecorderProcess implements Runnable{
         startStopTimeout();
     }
 
-    private void startStopTimeout() {
+    private synchronized void startStopTimeout() {
         if (stopTimeoutTimer != null) {
             Log.d(TAG, "Stop timeout already started");
             return;
@@ -134,7 +134,7 @@ class RecorderProcess implements Runnable{
         }, 10 * 1000); // wait 10s before force killing the process
     }
 
-    private void cancelStopTimeout() {
+    private synchronized void cancelStopTimeout() {
         if (stopTimeoutTimer != null) {
             stopTimeoutTimer.cancel();
             stopTimeoutTimer = null;
