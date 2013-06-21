@@ -1,6 +1,5 @@
 package com.iwobanas.screenrecorder;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -13,6 +12,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
@@ -271,8 +271,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     private void notificationSaved() {
         String message = String.format(getString(R.string.recording_saved_message), outputFile.getName());
-        Notification.Builder mBuilder =
-                new Notification.Builder(this)
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle(getString(R.string.recording_saved_title))
                         .setContentText(message);
@@ -304,8 +304,8 @@ public class RecorderService extends Service implements IRecorderService {
     }
 
     private void startForeground() {
-        Notification.Builder builder =
-                new Notification.Builder(this)
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(getString(R.string.app_full_name));
 
