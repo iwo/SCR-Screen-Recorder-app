@@ -42,6 +42,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
 
+    private static final int FOREGROUND_NOTIFICATION_ID = 1;
+
     private WatermarkOverlay mWatermark = new WatermarkOverlay(this);
 
     private IScreenOverlay mRecorderOverlay = new RecorderOverlay(this, this);
@@ -297,6 +299,18 @@ public class RecorderService extends Service implements IRecorderService {
         mStopHelpDisplayed = true;
     }
 
+    private void startForeground() {
+        Notification.Builder builder =
+                new Notification.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(getString(R.string.app_full_name));
+
+        PendingIntent intent = PendingIntent.getService(this, 0, new Intent(this, RecorderService.class), 0);
+        builder.setContentIntent(intent);
+
+        startForeground(FOREGROUND_NOTIFICATION_ID, builder.build());
+    }
+
     @Override
     public void suRequired() {
         mHandler.post(new Runnable() {
@@ -358,6 +372,7 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        startForeground();
         if (intent.getBooleanExtra(STOP_HELP_DISPLAYED_EXTRA, false)) {
             startRecording();
         } else if (isRecording) {
