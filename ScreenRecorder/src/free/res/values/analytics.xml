@@ -5,8 +5,6 @@
     <!--Replace placeholder ID with your tracking ID-->
     <string name="ga_trackingId">UA-41916238-1</string>
 
-    <string name="ga_debug">true</string>
-
     <!--Enable automatic exception tracking-->
     <bool name="ga_reportUncaughtExceptions">true</bool>
 </resources>
