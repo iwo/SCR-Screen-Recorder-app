@@ -62,6 +62,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     private boolean isRecording;
 
+    private long mRecordingStartTime;
+
     // Preferences
     private String mLastRecorderFile;
 
@@ -127,6 +129,7 @@ public class RecorderService extends Service implements IRecorderService {
         isRecording = true;
         mTimeController.start();
         mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation(), mMicAudio);
+        mRecordingStartTime = System.currentTimeMillis();
 
         EasyTracker.getTracker().sendEvent(ACTION, START, START, null);
         EasyTracker.getTracker().sendEvent(SETTINGS, AUDIO, mMicAudio ? MIC : MUTE, null);
@@ -254,6 +257,7 @@ public class RecorderService extends Service implements IRecorderService {
         notificationSaved();
 
         EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, outputFile.length() / 1000000l);
+        EasyTracker.getTracker().sendEvent(STATS, RECORDING, TIME, (System.currentTimeMillis() - mRecordingStartTime) / 1000l);
     }
 
     private void scanFile(File file) {

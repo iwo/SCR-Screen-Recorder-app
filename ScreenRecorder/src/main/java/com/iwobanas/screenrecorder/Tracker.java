@@ -32,5 +32,6 @@ public class Tracker {
 
     public final static String RECORDING = "recording";
     public final static String SIZE = "size";
+    public final static String TIME = "time";
 
 }
