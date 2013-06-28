@@ -34,6 +34,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
 
+    public static final String SETTINGS_CLOSED_EXTRA = "SETTINGS_CLOSED_EXTRA";
+
     private static final String TAG = "RecorderService";
 
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
@@ -390,10 +392,26 @@ public class RecorderService extends Service implements IRecorderService {
     }
 
     @Override
+    public void showSettings() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mRecorderOverlay.hide();
+                Intent intent = new Intent(RecorderService.this, SettingsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground();
         if (intent.getBooleanExtra(STOP_HELP_DISPLAYED_EXTRA, false)) {
             startRecording();
+        } else if (intent.getBooleanExtra(SETTINGS_CLOSED_EXTRA, false)) {
+            mRecorderOverlay.show();
+            //refresh settings if needed
         } else if (isRecording) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);

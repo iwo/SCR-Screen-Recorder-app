@@ -15,4 +15,6 @@ public interface IRecorderService {
 
     boolean getMicAudio();
     void setMicAudio(boolean micAudio);
+
+    void showSettings();
 }

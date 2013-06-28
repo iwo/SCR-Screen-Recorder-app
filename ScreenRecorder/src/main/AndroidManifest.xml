@@ -31,5 +31,11 @@
                 android:excludeFromRecents="true"
                 android:theme="@style/Theme.Transparent">
         </activity>
+        <activity
+                android:name=".SettingsActivity"
+                android:label="@string/settings_activity_label"
+                android:excludeFromRecents="true"
+                android:theme="@style/Theme.Transparent">
+        </activity>
     </application>
 </manifest>

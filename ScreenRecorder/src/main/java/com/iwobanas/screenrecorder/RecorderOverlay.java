@@ -13,6 +13,8 @@ public class RecorderOverlay extends AbstractScreenOverlay {
 
     private ImageButton mMicButton;
 
+    private ImageButton mSettingsButton;
+
     public RecorderOverlay(Context context, IRecorderService service) {
         super(context);
         mService = service;
@@ -39,6 +41,14 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             }
         });
         updateMicButton();
+
+        mSettingsButton = (ImageButton) view.findViewById(R.id.settings_button);
+        mSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mService.showSettings();
+            }
+        });
 
 
         /*ImageButton playButton = (ImageButton) view.findViewById(R.id.play_button);
