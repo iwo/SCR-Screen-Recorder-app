@@ -23,7 +23,7 @@ public class DialogActivity extends Activity {
         dialogFragment.show(getFragmentManager(), "errorDialog");
     }
 
-    static class DialogFragment extends android.app.DialogFragment {
+    public static class DialogFragment extends android.app.DialogFragment {
 
         private boolean restart;
 
