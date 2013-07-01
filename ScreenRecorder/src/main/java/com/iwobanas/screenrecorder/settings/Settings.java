@@ -8,7 +8,6 @@ import com.iwobanas.screenrecorder.ResolutionsManager;
 public class Settings {
     private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
     private static final String AUDIO_SOURCE = "AUDIO_SOURCE";
-    private static final String RESOLUTION_LABEL = "RESOLUTION_LABEL";
     private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
 
@@ -45,11 +44,10 @@ public class Settings {
         String audioSource = preferences.getString(AUDIO_SOURCE, AudioSource.MIC.name());
         this.audioSource = AudioSource.valueOf(audioSource);
 
-        String resolutionLabel = preferences.getString(RESOLUTION_LABEL, null);
-        if (resolutionLabel != null) {
-            int width = preferences.getInt(RESOLUTION_WIDTH, 0);
-            int height = preferences.getInt(RESOLUTION_HEIGHT, 0);
-            resolution = new Resolution(resolutionLabel, width, height);
+        int resolutionWidth = preferences.getInt(RESOLUTION_WIDTH, -1);
+        if (resolutionWidth != -1) {
+            int resolutionHeight = preferences.getInt(RESOLUTION_HEIGHT, 0);
+            resolution = resolutionsManager.getResolution(resolutionWidth, resolutionHeight);
         }
     }
 
@@ -75,7 +73,6 @@ public class Settings {
         this.resolution = resolution;
         if (resolution != null) {
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(RESOLUTION_LABEL, resolution.getLabel());
             editor.putInt(RESOLUTION_WIDTH, resolution.getWidth());
             editor.putInt(RESOLUTION_HEIGHT, resolution.getHeight());
             editor.commit();

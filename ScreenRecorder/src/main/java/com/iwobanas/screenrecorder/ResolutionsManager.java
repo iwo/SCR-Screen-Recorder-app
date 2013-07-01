@@ -111,4 +111,13 @@ public class ResolutionsManager {
     public Resolution[] getResolutions() {
         return resolutions;
     }
+
+    public Resolution getResolution(int width, int height) {
+        for (Resolution resolution : resolutions) {
+            if (resolution.getWidth() == width && resolution.getHeight() == height) {
+                return resolution;
+            }
+        }
+        return newResolution(Math.min(width, height) + "p", width, height);
+    }
 }
