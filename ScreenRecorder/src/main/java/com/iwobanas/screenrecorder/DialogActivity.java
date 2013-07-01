@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 
+import com.iwobanas.screenrecorder.settings.Settings;
+
 public class DialogActivity extends Activity {
     public static final String MESSAGE_EXTRA = "MESSAGE_EXTRA";
     public static final String TITLE_EXTRA = "TITLE_EXTRA";

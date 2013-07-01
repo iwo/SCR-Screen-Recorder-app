@@ -20,6 +20,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.iwobanas.screenrecorder.settings.Settings;
+import com.iwobanas.screenrecorder.settings.SettingsActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;

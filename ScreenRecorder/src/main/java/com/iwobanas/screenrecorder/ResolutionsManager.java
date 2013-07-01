@@ -3,7 +3,6 @@ package com.iwobanas.screenrecorder;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import com.iwobanas.screenrecorder.Settings.Resolution;
+import com.iwobanas.screenrecorder.settings.Resolution;
 
 public class ResolutionsManager {
 

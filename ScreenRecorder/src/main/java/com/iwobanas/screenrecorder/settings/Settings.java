@@ -1,7 +1,9 @@
-package com.iwobanas.screenrecorder;
+package com.iwobanas.screenrecorder.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.iwobanas.screenrecorder.ResolutionsManager;
 
 public class Settings {
     private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
@@ -88,44 +90,6 @@ public class Settings {
         return resolutionsManager.getDefaultResolution();
     }
 
-    public static enum AudioSource {
-        MIC("m"),
-        MUTE("x");
-
-        private String command;
-
-        AudioSource(String command) {
-            this.command = command;
-        }
-
-        String getCommand() {
-            return command;
-        }
-    }
-
-    public static class Resolution {
-        private String label;
-        private int width;
-        private int height;
-
-        public Resolution(String label, int width, int height) {
-            this.label = label;
-            this.width = width;
-            this.height = height;
-        }
-
-        public String getLabel() {
-            return label;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-    }
 }
 
 

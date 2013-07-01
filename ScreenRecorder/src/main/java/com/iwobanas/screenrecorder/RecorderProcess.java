@@ -3,6 +3,7 @@ package com.iwobanas.screenrecorder;
 import android.util.Log;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.iwobanas.screenrecorder.settings.Settings;
 
 import java.io.IOException;
 import java.io.OutputStream;

@@ -1,4 +1,4 @@
-package com.iwobanas.screenrecorder;
+package com.iwobanas.screenrecorder.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.iwobanas.screenrecorder.R;
+import com.iwobanas.screenrecorder.RecorderService;
 
 public class SettingsActivity extends Activity {
     public static final String TAG = "SettingsActivity";
@@ -116,13 +119,13 @@ public class SettingsActivity extends Activity {
         private void refreshValues() {
             Settings settings = Settings.getInstance();
             if (audioText != null) {
-                String audioSource = settings.getAudioSource() == Settings.AudioSource.MIC ?
+                String audioSource = settings.getAudioSource() == AudioSource.MIC ?
                         getString(R.string.settings_audio_mic) : getString(R.string.settings_audio_mute);
                 audioText.setText(audioSource);
             }
 
             if (resolutionText != null) {
-                Settings.Resolution resolution = settings.getResolution();
+                Resolution resolution = settings.getResolution();
                 if (resolution == null)
                     resolution = settings.getDefaultResolution();
 
@@ -133,76 +136,6 @@ public class SettingsActivity extends Activity {
 
     }
 
-    public static class AudioDialogFragment extends DialogFragment {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo);
-            AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
-            builder.setIcon(R.drawable.ic_launcher);
-            builder.setTitle(R.string.settings_audio);
-            String[] items = new String[] {getString(R.string.settings_audio_mic), getString(R.string.settings_audio_mute), };
-            final Settings.AudioSource[] options = new Settings.AudioSource[] {Settings.AudioSource.MIC, Settings.AudioSource.MUTE};
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Settings.getInstance().setAudioSource(options[i]);
-                    ((SettingsActivity) getActivity()).settingsChanged();
-                }
-            });
-            return builder.create();
-        }
-    }
-
-    public static class ResolutionDialogFragment extends DialogFragment {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo);
-            AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
-            builder.setIcon(R.drawable.ic_launcher);
-            builder.setTitle(R.string.settings_resolution);
-            final Settings.Resolution[] resolutions = Settings.getInstance().getResolutions();
-            final String[] items = new String[resolutions.length];
-
-            for (int i = 0; i < resolutions.length; i++) {
-                items[i] = formatLabel(resolutions[i]);
-            }
-
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Settings.getInstance().setResolution(resolutions[i]);
-                    ((SettingsActivity) getActivity()).settingsChanged();
-                }
-            });
-            return builder.create();
-        }
-
-        private String formatLabel(Settings.Resolution r) {
-            return r.getLabel() + " - " + Math.max(r.getWidth(), r.getHeight())
-                    + "x" + Math.min(r.getWidth(), r.getHeight());
-        }
-    }
-
-    public static class FrameRateDialogFragment extends DialogFragment {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo);
-            AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
-            builder.setIcon(R.drawable.ic_launcher);
-            builder.setTitle(R.string.settings_frame_rate);
-            String[] items = new String[] {"5 fps", "10 fps", "15 fps", "30 fps", "40 fps"};
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-                }
-            });
-            return builder.create();
-        }
-    }
 }
 
 

@@ -32,7 +32,7 @@
                 android:theme="@style/Theme.Transparent">
         </activity>
         <activity
-                android:name=".SettingsActivity"
+                android:name=".settings.SettingsActivity"
                 android:label="@string/settings_activity_label"
                 android:excludeFromRecents="true"
                 android:theme="@style/Theme.Transparent">

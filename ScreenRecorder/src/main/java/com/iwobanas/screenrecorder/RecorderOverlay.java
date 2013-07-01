@@ -7,6 +7,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.iwobanas.screenrecorder.settings.AudioSource;
+import com.iwobanas.screenrecorder.settings.Settings;
+
 public class RecorderOverlay extends AbstractScreenOverlay {
 
     private IRecorderService mService;
@@ -43,10 +46,10 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             @Override
             public void onClick(View view) {
                 Settings settings = Settings.getInstance();
-                if (settings.getAudioSource() == Settings.AudioSource.MIC) {
-                    settings.setAudioSource(Settings.AudioSource.MUTE);
+                if (settings.getAudioSource() == AudioSource.MIC) {
+                    settings.setAudioSource(AudioSource.MUTE);
                 } else {
-                    settings.setAudioSource(Settings.AudioSource.MIC);
+                    settings.setAudioSource(AudioSource.MIC);
                 }
                 updateMicButton();
             }
@@ -73,8 +76,8 @@ public class RecorderOverlay extends AbstractScreenOverlay {
 
     private void updateMicButton() {
         if (mMicButton != null) {
-            Settings.AudioSource audioSource = Settings.getInstance().getAudioSource();
-            int iconRes = audioSource == Settings.AudioSource.MIC ? R.drawable.ic_audio_vol : R.drawable.ic_audio_vol_mute;
+            AudioSource audioSource = Settings.getInstance().getAudioSource();
+            int iconRes = audioSource == AudioSource.MIC ? R.drawable.ic_audio_vol : R.drawable.ic_audio_vol_mute;
             mMicButton.setImageResource(iconRes);
         }
     }
