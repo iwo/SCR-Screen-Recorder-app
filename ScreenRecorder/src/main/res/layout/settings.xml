@@ -12,23 +12,22 @@
     <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/settings_audio_row">
+            android:id="@+id/settings_audio_row"
+            android:padding="12dp">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/settings_audio"
-                android:padding="10dp"
                 android:layout_column="0"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/settings_audio_text"
                 android:layout_column="1"
-                android:padding="10dp"
                 android:gravity="center"
                 android:text="Mic"/>
     </TableRow>
@@ -36,20 +35,20 @@
     <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/settings_resolution_row">
+            android:id="@+id/settings_resolution_row"
+            android:padding="12dp">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/settings_resolution"
-                android:padding="10dp"
                 android:layout_column="0"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="720p"
                 android:id="@+id/settings_resolution_text"
                 android:gravity="center"
@@ -60,20 +59,19 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/settings_frame_rate_row"
-            >
+            android:padding="12dp">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/settings_frame_rate"
-                android:padding="10dp"
                 android:layout_column="0"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="30fps"
                 android:id="@+id/settings_frame_rate_text"
                 android:gravity="center"
@@ -83,21 +81,19 @@
     <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/settings_hide_icon_row">
+            android:id="@+id/settings_hide_icon_row"
+            android:padding="12dp">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Status Bar Icon"
-                android:padding="10dp"
                 android:layout_column="0"/>
 
         <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOn="Show"
-                android:textOff="Hide"
                 android:id="@+id/settings_hide_icon_switch"
                 android:gravity="center"
                 android:layout_column="1"/>l
