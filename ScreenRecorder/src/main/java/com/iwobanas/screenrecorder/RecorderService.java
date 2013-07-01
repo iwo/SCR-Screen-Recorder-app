@@ -399,6 +399,7 @@ public class RecorderService extends Service implements IRecorderService {
                 mRecorderOverlay.hide();
                 Intent intent = new Intent(RecorderService.this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
             }
         });

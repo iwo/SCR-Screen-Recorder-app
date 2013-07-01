@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:stretchColumns="0"
+             android:baselineAligned="false"
+             android:divider="?android:attr/dividerHorizontal"
+             android:showDividers="middle">
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/settings_audio_row">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/settings_audio"
+                android:padding="10dp"
+                android:layout_column="0"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/settings_audio_text"
+                android:layout_column="1"
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="Mic"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/settings_resolution_row">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/settings_resolution"
+                android:padding="10dp"
+                android:layout_column="0"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="720p"
+                android:id="@+id/settings_resolution_text"
+                android:gravity="center"
+                android:layout_column="1"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/settings_frame_rate_row"
+            >
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/settings_frame_rate"
+                android:padding="10dp"
+                android:layout_column="0"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="30fps"
+                android:id="@+id/settings_frame_rate_text"
+                android:gravity="center"
+                android:layout_column="1"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/settings_hide_icon_row">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Status Bar Icon"
+                android:padding="10dp"
+                android:layout_column="0"/>
+
+        <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="Show"
+                android:textOff="Hide"
+                android:id="@+id/settings_hide_icon_switch"
+                android:gravity="center"
+                android:layout_column="1"/>l
+    </TableRow>
+
+</TableLayout>
