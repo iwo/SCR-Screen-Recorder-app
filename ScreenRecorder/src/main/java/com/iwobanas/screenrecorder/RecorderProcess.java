@@ -104,6 +104,8 @@ class RecorderProcess implements Runnable{
         runCommand(fileName);
         runCommand(rotation);
         runCommand(settings.getAudioSource().getCommand());
+        runCommand(String.valueOf(settings.getResolution().getWidth()));
+        runCommand(String.valueOf(settings.getResolution().getHeight()));
     }
 
     public void stopRecording() {
