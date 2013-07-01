@@ -91,7 +91,7 @@ class RecorderProcess implements Runnable{
         }
     }
 
-    public void startRecording(String fileName, String rotation, boolean micAudio) {
+    public void startRecording(String fileName, String rotation) {
         Log.d(TAG, "startRecording");
         if (state != ProcessState.READY) {
             Log.e(TAG, "Can't start recording in current state: " + state);

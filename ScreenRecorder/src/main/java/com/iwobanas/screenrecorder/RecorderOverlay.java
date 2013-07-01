@@ -21,6 +21,12 @@ public class RecorderOverlay extends AbstractScreenOverlay {
     }
 
     @Override
+    public void show() {
+        super.show();
+        updateMicButton();
+    }
+
+    @Override
     protected View createView() {
         View view = getLayoutInflater().inflate(R.layout.recorder, null);
 
@@ -36,7 +42,12 @@ public class RecorderOverlay extends AbstractScreenOverlay {
         mMicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mService.setMicAudio(!mService.getMicAudio());
+                Settings settings = Settings.getInstance();
+                if (settings.getAudioSource() == Settings.AudioSource.MIC) {
+                    settings.setAudioSource(Settings.AudioSource.MUTE);
+                } else {
+                    settings.setAudioSource(Settings.AudioSource.MIC);
+                }
                 updateMicButton();
             }
         });
@@ -62,7 +73,8 @@ public class RecorderOverlay extends AbstractScreenOverlay {
 
     private void updateMicButton() {
         if (mMicButton != null) {
-            int iconRes = mService.getMicAudio() ? R.drawable.ic_audio_vol : R.drawable.ic_audio_vol_mute;
+            Settings.AudioSource audioSource = Settings.getInstance().getAudioSource();
+            int iconRes = audioSource == Settings.AudioSource.MIC ? R.drawable.ic_audio_vol : R.drawable.ic_audio_vol_mute;
             mMicButton.setImageResource(iconRes);
         }
     }

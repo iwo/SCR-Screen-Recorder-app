@@ -58,8 +58,6 @@ public class RecorderService extends Service implements IRecorderService {
 
     private File outputFile;
 
-    private static boolean mMicAudio = true;
-
     private boolean isRecording;
 
     private long mRecordingStartTime;
@@ -127,11 +125,11 @@ public class RecorderService extends Service implements IRecorderService {
         outputFile = getOutputFile();
         isRecording = true;
         mTimeController.start();
-        mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation(), mMicAudio);
+        mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
         mRecordingStartTime = System.currentTimeMillis();
 
         EasyTracker.getTracker().sendEvent(ACTION, START, START, null);
-        EasyTracker.getTracker().sendEvent(SETTINGS, AUDIO, mMicAudio ? MIC : MUTE, null);
+        EasyTracker.getTracker().sendEvent(SETTINGS, AUDIO, Settings.getInstance().getAudioSource().name(), null);
     }
 
     private File getOutputFile() {
@@ -364,16 +362,6 @@ public class RecorderService extends Service implements IRecorderService {
             }
         });
         EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
-    }
-
-    @Override
-    public boolean getMicAudio() {
-        return mMicAudio;
-    }
-
-    @Override
-    public void setMicAudio(boolean micAudio) {
-        mMicAudio = micAudio;
     }
 
     @Override
