@@ -19,14 +19,6 @@
             android:layout_height="fill_parent"
             android:text="@string/start"
             android:id="@+id/start_button"/>
-<!--
-    <ImageButton
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/play"
-            android:src="@android:drawable/ic_media_play"
-            android:id="@+id/play_button"/>
-            -->
 
     <ImageButton
             android:layout_width="wrap_content"

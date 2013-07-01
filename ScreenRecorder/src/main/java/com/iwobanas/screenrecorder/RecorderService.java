@@ -40,8 +40,6 @@ public class RecorderService extends Service implements IRecorderService {
 
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
 
-    private static final String LAST_RECORDED_FILE_PREFERENCE = "lastRecordedFile";
-
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
 
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
@@ -67,8 +65,6 @@ public class RecorderService extends Service implements IRecorderService {
     private long mRecordingStartTime;
 
     // Preferences
-    private String mLastRecorderFile;
-
     private boolean mStopHelpDisplayed;
 
     @Override
@@ -198,21 +194,10 @@ public class RecorderService extends Service implements IRecorderService {
         mTimeController.reset();
     }
 
-    @Override
-    public void openLastFile() {
-        if (mLastRecorderFile == null) {
-            //TODO: Store last path, if it's not available disable play button
-            Log.w(TAG, "Remove this message when fixed");
-            return;
-        }
-        startActivity(getPlayVideoIntent());
-        stopSelf();
-    }
-
     private Intent getPlayVideoIntent() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(mLastRecorderFile)), "video/*");
+        intent.setDataAndType(Uri.fromFile(outputFile), "video/*");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
@@ -255,7 +240,6 @@ public class RecorderService extends Service implements IRecorderService {
         String message = String.format(getString(R.string.recording_saved_toast), outputFile.getName());
         Toast.makeText(RecorderService.this, message, Toast.LENGTH_LONG).show();
         scanFile(outputFile);
-        setLastRecorderFile(outputFile.getAbsolutePath());
         notificationSaved();
 
         EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, outputFile.length() / 1000000l);
@@ -433,30 +417,14 @@ public class RecorderService extends Service implements IRecorderService {
         savePreferences();
     }
 
-    private void setLastRecorderFile(String path) {
-        if (path != null) {
-            File file = new File(path);
-            if (file.exists()) {
-                mLastRecorderFile = path;
-            } else {
-                mLastRecorderFile = null;
-            }
-        } else {
-            mLastRecorderFile = null;
-        }
-
-    }
-
     private void readPreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
-        setLastRecorderFile(preferences.getString(LAST_RECORDED_FILE_PREFERENCE, null));
         mStopHelpDisplayed = preferences.getBoolean(STOP_HELP_DISPLAYED_PREFERENCE, false);
     }
 
     private void savePreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(LAST_RECORDED_FILE_PREFERENCE, mLastRecorderFile);
         editor.putBoolean(STOP_HELP_DISPLAYED_PREFERENCE, mStopHelpDisplayed);
         editor.commit();
 

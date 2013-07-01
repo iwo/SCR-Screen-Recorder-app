@@ -50,15 +50,6 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             }
         });
 
-
-        /*ImageButton playButton = (ImageButton) view.findViewById(R.id.play_button);
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mService.openLastFile();
-            }
-        });*/
-
         ImageButton closeButton = (ImageButton) view.findViewById(R.id.close_button);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
