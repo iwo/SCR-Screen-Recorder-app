@@ -27,7 +27,6 @@ public class SettingsActivity extends Activity {
         dialogFragment.show(getFragmentManager(), "settingsDialog");
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
@@ -121,6 +120,15 @@ public class SettingsActivity extends Activity {
                         getString(R.string.settings_audio_mic) : getString(R.string.settings_audio_mute);
                 audioText.setText(audioSource);
             }
+
+            if (resolutionText != null) {
+                Settings.Resolution resolution = settings.getResolution();
+                if (resolution == null)
+                    resolution = settings.getDefaultResolution();
+
+                resolutionText.setText(resolution.getLabel());
+            }
+
         }
 
     }
@@ -154,14 +162,26 @@ public class SettingsActivity extends Activity {
             AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
             builder.setIcon(R.drawable.ic_launcher);
             builder.setTitle(R.string.settings_resolution);
-            String[] items = new String[] {"320p", "480p", "720p", "max"};
+            final Settings.Resolution[] resolutions = Settings.getInstance().getResolutions();
+            final String[] items = new String[resolutions.length];
+
+            for (int i = 0; i < resolutions.length; i++) {
+                items[i] = formatLabel(resolutions[i]);
+            }
+
             builder.setItems(items, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                    Settings.getInstance().setResolution(resolutions[i]);
+                    ((SettingsActivity) getActivity()).settingsChanged();
                 }
             });
             return builder.create();
+        }
+
+        private String formatLabel(Settings.Resolution r) {
+            return r.getLabel() + " - " + Math.max(r.getWidth(), r.getHeight())
+                    + "x" + Math.min(r.getWidth(), r.getHeight());
         }
     }
 

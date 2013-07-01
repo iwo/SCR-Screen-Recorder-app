@@ -149,7 +149,7 @@ public class RecorderService extends Service implements IRecorderService {
         Configuration config = getResources().getConfiguration();
         int rotationDeg = getRotationDeg(display);
 
-        if (getDeviceDefaultOrientation(display, config) == Configuration.ORIENTATION_PORTRAIT) {
+        if (Utils.getDeviceDefaultOrientation(display, config) == Configuration.ORIENTATION_PORTRAIT) {
             rotationDeg = ((360 - rotationDeg) + 90) % 360;
         } else {
             rotationDeg = (360 - rotationDeg) % 360; //TODO: test on horizontal device
@@ -171,20 +171,6 @@ public class RecorderService extends Service implements IRecorderService {
         }
         return 0;
     }
-
-    public int getDeviceDefaultOrientation(Display display, Configuration config) {
-        int rotation = display.getRotation();
-
-        if (((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &&
-                config.orientation == Configuration.ORIENTATION_LANDSCAPE)
-                || ((rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) &&
-                config.orientation == Configuration.ORIENTATION_PORTRAIT)) {
-            return Configuration.ORIENTATION_LANDSCAPE;
-        } else {
-            return Configuration.ORIENTATION_PORTRAIT;
-        }
-    }
-
 
     @Override
     public void stopRecording() {
