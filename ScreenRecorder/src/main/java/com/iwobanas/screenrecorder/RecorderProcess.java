@@ -98,10 +98,11 @@ class RecorderProcess implements Runnable{
             //TODO: add error handling
             return;
         }
+        Settings settings = Settings.getInstance();
         setState(ProcessState.RECORDING);
         runCommand(fileName);
         runCommand(rotation);
-        runCommand(micAudio ? "m" : "x");
+        runCommand(settings.getAudioSource().getCommand());
     }
 
     public void stopRecording() {

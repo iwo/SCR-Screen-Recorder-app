@@ -21,6 +21,7 @@ public class SettingsActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Settings.initialize(this);
         super.onCreate(savedInstanceState);
         dialogFragment = new SettingsDialogFragment();
         dialogFragment.show(getFragmentManager(), "settingsDialog");
@@ -39,6 +40,12 @@ public class SettingsActivity extends Activity {
         intent.putExtra(RecorderService.SETTINGS_CLOSED_EXTRA, true);
         startService(intent);
         super.onDestroy();
+    }
+
+    public void settingsChanged() {
+        if (dialogFragment != null) {
+            dialogFragment.settingsChanged();
+        }
     }
 
     public static class SettingsDialogFragment extends DialogFragment {
@@ -90,6 +97,8 @@ public class SettingsActivity extends Activity {
                 }
             });
 
+            refreshValues();
+
             return builder.create();
         }
 
@@ -100,6 +109,20 @@ public class SettingsActivity extends Activity {
                 activity.finish();
             }
         }
+
+        public void settingsChanged() {
+            refreshValues();
+        }
+
+        private void refreshValues() {
+            Settings settings = Settings.getInstance();
+            if (audioText != null) {
+                String audioSource = settings.getAudioSource() == Settings.AudioSource.MIC ?
+                        getString(R.string.settings_audio_mic) : getString(R.string.settings_audio_mute);
+                audioText.setText(audioSource);
+            }
+        }
+
     }
 
     public static class AudioDialogFragment extends DialogFragment {
@@ -111,10 +134,12 @@ public class SettingsActivity extends Activity {
             builder.setIcon(R.drawable.ic_launcher);
             builder.setTitle(R.string.settings_audio);
             String[] items = new String[] {getString(R.string.settings_audio_mic), getString(R.string.settings_audio_mute), };
+            final Settings.AudioSource[] options = new Settings.AudioSource[] {Settings.AudioSource.MIC, Settings.AudioSource.MUTE};
             builder.setItems(items, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                    Settings.getInstance().setAudioSource(options[i]);
+                    ((SettingsActivity) getActivity()).settingsChanged();
                 }
             });
             return builder.create();

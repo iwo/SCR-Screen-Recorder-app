@@ -10,6 +10,7 @@ public class RecorderActivity extends Activity {
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Settings.initialize(this);
         super.onCreate(savedInstanceState);
         Intent intent = new Intent(this, RecorderService.class);
         startService(intent);

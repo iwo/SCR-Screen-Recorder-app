@@ -69,6 +69,7 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void onCreate() {
+        Settings.initialize(this);
         mHandler = new Handler();
         mWatermark.show();
 

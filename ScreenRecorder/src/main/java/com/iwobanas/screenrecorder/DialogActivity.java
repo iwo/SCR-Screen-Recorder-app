@@ -18,6 +18,7 @@ public class DialogActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Settings.initialize(this);
         super.onCreate(savedInstanceState);
         DialogFragment dialogFragment = new DialogFragment();
         dialogFragment.show(getFragmentManager(), "errorDialog");
