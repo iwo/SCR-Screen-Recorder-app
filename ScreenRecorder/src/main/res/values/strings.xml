@@ -19,7 +19,7 @@
     <string name="recording_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error R%1$d.</string>
 
     <string name="media_recorder_error_title">Recorder error</string>
-    <string name="media_recorder_error_message">Please uninstall other screencast applications and restart your device. If the problem persists please get in touch via support email.</string>
+    <string name="media_recorder_error_message">Try changing recording settings. Please uninstall other screencast applications and restart your device. If the problem persists please get in touch via support email.</string>
 
     <string name="help_stop_title">How to stop</string>
     <string name="help_stop_ok">Got it!</string>

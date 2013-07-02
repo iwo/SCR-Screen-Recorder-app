@@ -97,7 +97,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
 
     private void handleRecordingError(int exitValue) {
         logError(exitValue);
-        if (exitValue == 300 || exitValue == 213) {
+        if (exitValue == 302 || exitValue == 213) {
             service.mediaRecorderError(exitValue);
         } else {
             service.recordingError(exitValue);
