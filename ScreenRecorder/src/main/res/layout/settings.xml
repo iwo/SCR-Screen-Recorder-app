@@ -100,7 +100,7 @@
                 android:gravity="center"/>
     </TableRow>
 
-    <TableRow
+    <!--<TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/settings_hide_icon_row"
@@ -119,6 +119,6 @@
                 android:id="@+id/settings_hide_icon_switch"
                 android:gravity="center"
                 android:layout_column="1"/>
-    </TableRow>
+    </TableRow>-->
 
 </TableLayout>

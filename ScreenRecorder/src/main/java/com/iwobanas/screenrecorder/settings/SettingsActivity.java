@@ -78,7 +78,7 @@ public class SettingsActivity extends Activity {
             resolutionText = (TextView) view.findViewById(R.id.settings_resolution_text);
             frameRateText = (TextView) view.findViewById(R.id.settings_frame_rate_text);
             transformationText = (TextView) view.findViewById(R.id.settings_transformation_text);
-            hideIconSwitch = (Switch) view.findViewById(R.id.settings_hide_icon_switch);
+            //hideIconSwitch = (Switch) view.findViewById(R.id.settings_hide_icon_switch);
 
             TableRow audioRow = (TableRow) view.findViewById(R.id.settings_audio_row);
             audioRow.setOnClickListener(new View.OnClickListener() {
