@@ -21,6 +21,8 @@ public class Tracker {
     public final static String ERROR_ = "error_";
     public final static String STOPPING_ERROR = "stopping_error";
     public final static String STOP_TIMEOUT = "stop_timeout";
+    public final static String CONFIGURE_TIMEOUT = "configure_timeout";
+    public final static String START_TIMEOUT = "start_timeout";
     public final static String SU_ERROR = "su_error";
     public final static String NO_SU = "no_su";
     public final static String SU_DENY = "su_deny";

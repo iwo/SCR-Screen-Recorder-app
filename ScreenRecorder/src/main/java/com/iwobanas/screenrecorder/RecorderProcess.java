@@ -5,7 +5,10 @@ import android.util.Log;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.iwobanas.screenrecorder.settings.Settings;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.Timer;
@@ -23,6 +26,8 @@ class RecorderProcess implements Runnable{
 
     private OutputStream stdin;
 
+    private InputStream stdout;
+
     private volatile ProcessState state = ProcessState.NEW;
 
     private String executable;
@@ -31,11 +36,17 @@ class RecorderProcess implements Runnable{
 
     private int exitValue = -1;
 
+    private Integer exitValueOverride;
+
     private boolean destroying = false;
 
     private volatile boolean forceKilled = false;
 
-    private Timer stopTimeoutTimer;
+    private Timeout configureTimeout = new Timeout(3000, RECORDING_ERROR, CONFIGURE_TIMEOUT, 301);
+
+    private Timeout startTimeout = new Timeout(10000, RECORDING_ERROR, START_TIMEOUT, 302);
+
+    private Timeout stopTimeout = new Timeout(10000, STOPPING_ERROR, STOP_TIMEOUT, 303);
 
     public RecorderProcess(String executable, OnStateChangeListener onStateChangeListener) {
         this.executable = executable;
@@ -55,8 +66,28 @@ class RecorderProcess implements Runnable{
         }
         if (process != null) {
             stdin = process.getOutputStream();
+            stdout = process.getInputStream();
 
-            setState(ProcessState.READY);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
+            try {
+                String status = reader.readLine();
+                checkStatus("ready", status, 304);
+
+                setState(ProcessState.READY);
+
+                status = reader.readLine();
+                checkStatus("configured", status, 305);
+                configureTimeout.cancel();
+
+                status = reader.readLine();
+                checkStatus("recording", status, 306);
+                startTimeout.cancel();
+
+            } catch (IOException e) {
+                Log.e(TAG, "Exception when reading state", e);
+                exitValueOverride = 307;
+                forceKill();
+            }
 
             try {
                 Log.d(TAG, "Waiting for native process to exit");
@@ -66,13 +97,13 @@ class RecorderProcess implements Runnable{
                 Log.e(TAG, "Native process interrupted", e);
             }
 
-            cancelStopTimeout();
+            stopTimeout.cancel();
 
             exitValue = process.exitValue();
         }
 
-        if (forceKilled) {
-            exitValue = 300;
+        if (exitValueOverride != null) {
+            exitValue = exitValueOverride;
             setState(ProcessState.ERROR);
         } else if (state == ProcessState.STOPPING) {
             setState(ProcessState.FINISHED);
@@ -81,6 +112,15 @@ class RecorderProcess implements Runnable{
         }
 
         Log.d(TAG, "Return value: " + exitValue);
+    }
+
+    private void checkStatus(String expectedStatus, String status, int errorCode) {
+        if (forceKilled || destroying) return;
+        if (!expectedStatus.equals(status)) {
+            Log.e(TAG, "Incorrect status received: " + status);
+            exitValueOverride = errorCode;
+            forceKill();
+        }
     }
 
     private void setState(ProcessState state) {
@@ -101,6 +141,8 @@ class RecorderProcess implements Runnable{
         }
         Settings settings = Settings.getInstance();
         setState(ProcessState.RECORDING);
+        configureTimeout.start();
+        startTimeout.start();
         runCommand(fileName);
         runCommand(rotation);
         runCommand(settings.getAudioSource().getCommand());
@@ -117,31 +159,52 @@ class RecorderProcess implements Runnable{
         }
         setState(ProcessState.STOPPING);
         runCommand("stop");
-        startStopTimeout();
+        stopTimeout.start();
     }
 
-    private synchronized void startStopTimeout() {
-        if (stopTimeoutTimer != null) {
-            Log.d(TAG, "Stop timeout already started");
-            return;
+    class Timeout {
+        private int time;
+        private String errorName;
+        private String errorCategory;
+        private int errorCode;
+        private Timer timer;
+
+        public Timeout(int time, String errorCategory, String errorName, int errorCode) {
+            this.time = time;
+            this.errorCategory = errorCategory;
+            this.errorName = errorName;
+            this.errorCode = errorCode;
         }
-        stopTimeoutTimer = new Timer();
-        stopTimeoutTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (process != null) {
-                    Log.w(TAG, "Stop timeout, killing the native process");
-                    EasyTracker.getTracker().sendEvent(ERROR, STOPPING_ERROR, STOP_TIMEOUT, null);
-                    forceKill();
+
+        public void start() {
+            synchronized (RecorderProcess.this) {
+                if (timer != null) {
+                    Log.e(TAG, "Timeout already started");
+                    return;
+                }
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        if (process != null) {
+                            Log.w(TAG, "Timeout, killing the native process" + errorName);
+                            EasyTracker.getTracker().sendEvent(ERROR, errorCategory, errorName, null);
+                            exitValueOverride = errorCode;
+                            forceKill();
+                            timer = null;
+                        }
+                    }
+                }, time);
+            }
+        }
+
+        public void cancel() {
+            synchronized (RecorderProcess.this) {
+                if (timer != null) {
+                    timer.cancel();
+                    timer = null;
                 }
             }
-        }, 10 * 1000); // wait 10s before force killing the process
-    }
-
-    private synchronized void cancelStopTimeout() {
-        if (stopTimeoutTimer != null) {
-            stopTimeoutTimer.cancel();
-            stopTimeoutTimer = null;
         }
     }
 
@@ -167,7 +230,7 @@ class RecorderProcess implements Runnable{
         if (process != null) {
             Log.d(TAG, "Destroying process");
             destroying = true;
-            startStopTimeout();
+            stopTimeout.start();
             killProcess();
         }
     }
@@ -175,20 +238,24 @@ class RecorderProcess implements Runnable{
     private void killProcess() {
         if (process != null) try {
             // process.destroy(); fails with "EPERM (Operation not permitted)"
-            // so we close streams to force SIGPIPE
-            process.getInputStream().close();
-            process.getOutputStream().close();
+            // so we just close the input stream
+            stdin.close();
         } catch (IOException ignored) {
         }
     }
 
-    private void forceKill() {
+    private synchronized void forceKill() {
         Log.d(TAG, "forceKill");
+        if (forceKilled) {
+            Log.d(TAG, "Already force killed");
+            return;
+        }
+        forceKilled = true;
+
         try {
             Field f = process.getClass().getDeclaredField("pid");
             f.setAccessible(true);
             Integer pid = (Integer) f.get(process);
-            forceKilled = true;
             Log.d(TAG, "killing pid " + pid);
             Runtime.getRuntime().exec(new String[]{"su", "-c", "kill -9 "+ pid});
         } catch (Exception e){

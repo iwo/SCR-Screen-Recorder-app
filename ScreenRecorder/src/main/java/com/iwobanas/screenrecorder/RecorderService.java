@@ -62,6 +62,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     private boolean isRecording;
 
+    private boolean isReady;
+
     private long mRecordingStartTime;
 
     // Preferences
@@ -79,6 +81,7 @@ public class RecorderService extends Service implements IRecorderService {
         EasyTracker.getInstance().setContext(getApplicationContext());
 
         mRecorderOverlay.show();
+        isReady = false;
         mNativeProcessRunner.initialize();
     }
 
@@ -112,6 +115,10 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void startRecording() {
+        if (!isReady) {
+            return;
+            //TODO: indicate to the user that recorder is not ready e.g. grey out button
+        }
         if (!mStopHelpDisplayed) {
             mRecorderOverlay.hide();
             displayStopHelp();
@@ -196,6 +203,7 @@ public class RecorderService extends Service implements IRecorderService {
 
     @Override
     public void setReady(boolean ready) {
+        isReady = true;
     }
 
     private void showRecorderOverlay() {
@@ -218,6 +226,7 @@ public class RecorderService extends Service implements IRecorderService {
                 }
                 mTimeController.reset();
                 showRecorderOverlay();
+                isReady = false;
                 mNativeProcessRunner.initialize();
             }
         });
