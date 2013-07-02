@@ -68,8 +68,11 @@ public class ResolutionsManager {
                 w = (int) (h * aspectRatio);
             }
             heightsSet.add(h);
-
-            resolutions.add(newResolution(label, w, h));
+            Resolution resolution = newResolution(label, w, h);
+            if (h == 480) {
+                defaultResolution = resolution;
+            }
+            resolutions.add(resolution);
         }
 
         for (int i = 0; i < standardWidths.length; i++) {
@@ -84,7 +87,11 @@ public class ResolutionsManager {
         }
 
         if (!heightsSet.contains(height)) {
-            resolutions.add(newResolution(original, width, height));
+            Resolution resolution = newResolution(original, width, height);
+            if (defaultResolution == null) {
+                defaultResolution = resolution;
+            }
+            resolutions.add(resolution);
         }
         if (!heightsSet.contains(height / 2)) {
             resolutions.add(newResolution(half, width / 2, height / 2));
@@ -108,7 +115,7 @@ public class ResolutionsManager {
     }
 
     public Resolution getDefaultResolution() {
-        return new Resolution("Default", 0, 0);
+        return defaultResolution;
     }
 
     public Resolution[] getResolutions() {
