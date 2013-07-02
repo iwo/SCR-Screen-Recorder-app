@@ -150,6 +150,7 @@ class RecorderProcess implements Runnable{
         runCommand(String.valueOf(settings.getResolution().getWidth()));
         runCommand(String.valueOf(settings.getResolution().getHeight()));
         runCommand(String.valueOf(settings.getFrameRate()));
+        runCommand(settings.getTransformation().name());
     }
 
     public void stopRecording() {
