@@ -19,14 +19,12 @@ public class ResolutionsManager {
     private int width = 0;
     private int height = 0;
     private Resolution[] resolutions;
-
-
+    private Resolution defaultResolution;
 
     private int[] standardHeights = new int[]{1080, 720, 480, 360, 240};
 
     private String original = "Original";
     private String half = "Half";
-    private String quarter = "Quarter";
 
     @SuppressLint("NewApi")
     public ResolutionsManager(Context context) {
@@ -45,7 +43,6 @@ public class ResolutionsManager {
         double aspectRatio = (double) width / (double) height;
         boolean gotOriginal = false;
         boolean gotHalf = false;
-        boolean gotQuarter = false;
 
         ArrayList<Resolution> resolutions = new ArrayList<Resolution>(10);
 
@@ -65,11 +62,7 @@ public class ResolutionsManager {
                 label = half;
                 w = width / 2;
                 gotHalf = true;
-            } else if (h == height / 4) {
-                label = quarter;
-                w = width / 4;
-                gotQuarter = true;
-            }else {
+            } else {
                 label = h + "p";
                 w = (int) (h * aspectRatio);
             }
@@ -82,9 +75,6 @@ public class ResolutionsManager {
         }
         if (!gotHalf) {
             resolutions.add(newResolution(half, width / 2, height / 2));
-        }
-        if (!gotQuarter) {
-            resolutions.add(newResolution(quarter, width / 4, height / 4));
         }
 
         Collections.sort(resolutions, new Comparator<Resolution>() {
