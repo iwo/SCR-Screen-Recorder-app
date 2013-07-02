@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.iwobanas.screenrecorder.settings.Resolution;
 
@@ -22,6 +24,7 @@ public class ResolutionsManager {
     private Resolution defaultResolution;
 
     private int[] standardHeights = new int[]{1080, 720, 480, 360, 240};
+    private int[] standardWidths = new int[]{1080, 720, 480};
 
     private String original = "Original";
     private String half = "Half";
@@ -41,8 +44,8 @@ public class ResolutionsManager {
 
     private void generateResolutions() {
         double aspectRatio = (double) width / (double) height;
-        boolean gotOriginal = false;
-        boolean gotHalf = false;
+
+        Set<Integer> heightsSet = new HashSet<Integer>();
 
         ArrayList<Resolution> resolutions = new ArrayList<Resolution>(10);
 
@@ -57,23 +60,33 @@ public class ResolutionsManager {
             if (h == height) {
                 w = width;
                 label = original;
-                gotOriginal = true;
             } else if (h == height / 2) {
                 label = half;
                 w = width / 2;
-                gotHalf = true;
             } else {
                 label = h + "p";
                 w = (int) (h * aspectRatio);
             }
+            heightsSet.add(h);
 
             resolutions.add(newResolution(label, w, h));
         }
 
-        if (!gotOriginal) {
+        for (int i = 0; i < standardWidths.length; i++) {
+            int w = standardWidths[i];
+            int h = (int) (w / aspectRatio);
+            String label = w + "p↦";
+
+            if (h > height || heightsSet.contains(h))
+                continue;
+
+            resolutions.add(newResolution(label, w, h));
+        }
+
+        if (!heightsSet.contains(height)) {
             resolutions.add(newResolution(original, width, height));
         }
-        if (!gotHalf) {
+        if (!heightsSet.contains(height / 2)) {
             resolutions.add(newResolution(half, width / 2, height / 2));
         }
 
