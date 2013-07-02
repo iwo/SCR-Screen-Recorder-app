@@ -101,6 +101,13 @@ public class SettingsActivity extends Activity {
 
             refreshValues();
 
+            builder.setPositiveButton(R.string.settings_ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+
             return builder.create();
         }
 
