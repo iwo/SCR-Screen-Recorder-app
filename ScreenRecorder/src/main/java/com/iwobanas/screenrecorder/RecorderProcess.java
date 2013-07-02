@@ -71,18 +71,19 @@ class RecorderProcess implements Runnable{
             BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
             try {
                 String status = reader.readLine();
-                checkStatus("ready", status, 304);
+                if (status != null) {
+                    checkStatus("ready", status, 304);
 
-                setState(ProcessState.READY);
+                    setState(ProcessState.READY);
 
-                status = reader.readLine();
-                checkStatus("configured", status, 305);
-                configureTimeout.cancel();
+                    status = reader.readLine();
+                    checkStatus("configured", status, 305);
+                    configureTimeout.cancel();
 
-                status = reader.readLine();
-                checkStatus("recording", status, 306);
-                startTimeout.cancel();
-
+                    status = reader.readLine();
+                    checkStatus("recording", status, 306);
+                    startTimeout.cancel();
+                }
             } catch (IOException e) {
                 Log.e(TAG, "Exception when reading state", e);
                 exitValueOverride = 307;
