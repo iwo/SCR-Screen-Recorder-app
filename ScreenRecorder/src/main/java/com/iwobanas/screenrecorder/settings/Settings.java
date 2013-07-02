@@ -11,6 +11,7 @@ public class Settings {
     private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
     private static final String FRAME_RATE = "FRAME_RATE";
+    private static final String TRANSFORMATION = "TRANSFORMATION";
 
     private static Settings instance;
 
@@ -37,6 +38,8 @@ public class Settings {
 
     private int frameRate = 15;
 
+    private Transformation transformation = Transformation.GPU;
+
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
@@ -54,6 +57,9 @@ public class Settings {
         }
 
         frameRate = preferences.getInt(FRAME_RATE, 15);
+
+        String transformation = preferences.getString(TRANSFORMATION, Transformation.GPU.name());
+        this.transformation = Transformation.valueOf(transformation);
     }
 
     public AudioSource getAudioSource() {
@@ -101,6 +107,17 @@ public class Settings {
 
     public int getFrameRate() {
         return frameRate;
+    }
+
+    public void setTransformation(Transformation transformation) {
+        this.transformation = transformation;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(TRANSFORMATION, transformation.name());
+        editor.commit();
+    }
+
+    public Transformation getTransformation() {
+        return transformation;
     }
 
 }

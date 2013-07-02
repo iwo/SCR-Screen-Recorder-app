@@ -36,4 +36,7 @@
     <string name="settings_frame_rate_max_short">Max</string>
     <string name="settings_frame_rate_up_to">Up to #0 fps</string>
     <string name="settings_frame_rate_up_to_short">#0 fps</string>
+    <string name="settings_transformation">Image transformation</string>
+    <string name="settings_transformation_cpu">CPU</string>
+    <string name="settings_transformation_gpu">GPU</string>
 </resources>

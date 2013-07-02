@@ -60,6 +60,8 @@ public class SettingsActivity extends Activity {
 
         private TextView frameRateText;
 
+        private TextView transformationText;
+
         private Switch hideIconSwitch;
 
         @Override
@@ -75,6 +77,7 @@ public class SettingsActivity extends Activity {
             audioText = (TextView) view.findViewById(R.id.settings_audio_text);
             resolutionText = (TextView) view.findViewById(R.id.settings_resolution_text);
             frameRateText = (TextView) view.findViewById(R.id.settings_frame_rate_text);
+            transformationText = (TextView) view.findViewById(R.id.settings_transformation_text);
             hideIconSwitch = (Switch) view.findViewById(R.id.settings_hide_icon_switch);
 
             TableRow audioRow = (TableRow) view.findViewById(R.id.settings_audio_row);
@@ -98,6 +101,14 @@ public class SettingsActivity extends Activity {
                 @Override
                 public void onClick(View view) {
                     new FrameRateDialogFragment().show(getFragmentManager(), "frameRate");
+                }
+            });
+
+            TableRow transformationRow = (TableRow) view.findViewById(R.id.settings_transformation_row);
+            transformationRow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new TransformationDialogFragment().show(getFragmentManager(), "transformation");
                 }
             });
 
@@ -149,6 +160,12 @@ public class SettingsActivity extends Activity {
                     DecimalFormat format = new DecimalFormat(getString(R.string.settings_frame_rate_up_to_short));
                     frameRateText.setText(format.format(frameRate));
                 }
+            }
+
+            if (transformationText != null) {
+                String transformation = settings.getTransformation() == Transformation.GPU ?
+                        getString(R.string.settings_transformation_gpu) : getString(R.string.settings_transformation_cpu);
+                transformationText.setText(transformation);
             }
 
         }
