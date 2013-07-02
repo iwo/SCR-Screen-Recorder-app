@@ -10,6 +10,7 @@ public class Settings {
     private static final String AUDIO_SOURCE = "AUDIO_SOURCE";
     private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
+    private static final String FRAME_RATE = "FRAME_RATE";
 
     private static Settings instance;
 
@@ -34,6 +35,8 @@ public class Settings {
 
     private ResolutionsManager resolutionsManager;
 
+    private int frameRate = 15;
+
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
@@ -49,6 +52,8 @@ public class Settings {
             int resolutionHeight = preferences.getInt(RESOLUTION_HEIGHT, 0);
             resolution = resolutionsManager.getResolution(resolutionWidth, resolutionHeight);
         }
+
+        frameRate = preferences.getInt(FRAME_RATE, 15);
     }
 
     public AudioSource getAudioSource() {
@@ -85,6 +90,17 @@ public class Settings {
 
     public Resolution getDefaultResolution() {
         return resolutionsManager.getDefaultResolution();
+    }
+
+    public void setFrameRate(int value) {
+        frameRate = value;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(FRAME_RATE, frameRate);
+        editor.commit();
+    }
+
+    public int getFrameRate() {
+        return frameRate;
     }
 
 }

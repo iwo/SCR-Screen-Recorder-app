@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
 
+import java.text.DecimalFormat;
+
 public class SettingsActivity extends Activity {
     public static final String TAG = "SettingsActivity";
 
@@ -137,6 +139,16 @@ public class SettingsActivity extends Activity {
                     resolution = settings.getDefaultResolution();
 
                 resolutionText.setText(resolution.getLabel());
+            }
+
+            if (frameRateText != null) {
+                int frameRate = settings.getFrameRate();
+                if (frameRate == -1) {
+                    frameRateText.setText(R.string.settings_frame_rate_max_short);
+                } else {
+                    DecimalFormat format = new DecimalFormat(getString(R.string.settings_frame_rate_up_to_short));
+                    frameRateText.setText(format.format(frameRate));
+                }
             }
 
         }

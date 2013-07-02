@@ -32,4 +32,8 @@
     <string name="settings_audio_mute">Mute</string>
     <string name="settings_resolution">Resolution</string>
     <string name="settings_frame_rate">Target frame rate</string>
+    <string name="settings_frame_rate_max">Maximum</string>
+    <string name="settings_frame_rate_max_short">Max</string>
+    <string name="settings_frame_rate_up_to">Up to #0 fps</string>
+    <string name="settings_frame_rate_up_to_short">#0 fps</string>
 </resources>
