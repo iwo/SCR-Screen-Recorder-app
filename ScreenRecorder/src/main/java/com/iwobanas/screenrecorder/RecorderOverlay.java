@@ -14,8 +14,6 @@ public class RecorderOverlay extends AbstractScreenOverlay {
 
     private IRecorderService mService;
 
-    private ImageButton mMicButton;
-
     private ImageButton mSettingsButton;
 
     public RecorderOverlay(Context context, IRecorderService service) {
@@ -26,7 +24,6 @@ public class RecorderOverlay extends AbstractScreenOverlay {
     @Override
     public void show() {
         super.show();
-        updateMicButton();
     }
 
     @Override
@@ -40,21 +37,6 @@ public class RecorderOverlay extends AbstractScreenOverlay {
                 mService.startRecording();
             }
         });
-
-        mMicButton = (ImageButton) view.findViewById(R.id.mic_button);
-        mMicButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Settings settings = Settings.getInstance();
-                if (settings.getAudioSource() == AudioSource.MIC) {
-                    settings.setAudioSource(AudioSource.MUTE);
-                } else {
-                    settings.setAudioSource(AudioSource.MIC);
-                }
-                updateMicButton();
-            }
-        });
-        updateMicButton();
 
         mSettingsButton = (ImageButton) view.findViewById(R.id.settings_button);
         mSettingsButton.setOnClickListener(new View.OnClickListener() {
@@ -72,14 +54,6 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             }
         });
         return view;
-    }
-
-    private void updateMicButton() {
-        if (mMicButton != null) {
-            AudioSource audioSource = Settings.getInstance().getAudioSource();
-            int iconRes = audioSource == AudioSource.MIC ? R.drawable.ic_audio_vol : R.drawable.ic_audio_vol_mute;
-            mMicButton.setImageResource(iconRes);
-        }
     }
 
     @Override
