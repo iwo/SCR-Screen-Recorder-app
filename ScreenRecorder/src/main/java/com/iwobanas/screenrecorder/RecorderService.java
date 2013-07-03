@@ -408,8 +408,10 @@ public class RecorderService extends Service implements IRecorderService {
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
+            EasyTracker.getTracker().sendEvent(ERROR, BUY_ERROR, TIMEOUT_DIALOG, null);
             displayErrorMessage(getString(R.string.buy_error_message), getString(R.string.buy_error_title), true);
         }
+        EasyTracker.getTracker().sendEvent(ACTION, BUY, TIMEOUT_DIALOG, null);
         stopSelf();
     }
 

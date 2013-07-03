@@ -8,6 +8,7 @@ public class Tracker {
 
     public final static String START = "start";
     public final static String STOP = "stop";
+    public final static String BUY = "buy";
 
 
     public final static String STOP_ICON = "stop_icon";
@@ -18,6 +19,7 @@ public class Tracker {
 
     public final static String STARTUP_ERROR = "startup_error";
     public final static String RECORDING_ERROR = "recording_error";
+    public final static String BUY_ERROR = "buy_error";
     public final static String ERROR_ = "error_";
     public final static String STOPPING_ERROR = "stopping_error";
     public final static String STOP_TIMEOUT = "stop_timeout";
@@ -27,6 +29,7 @@ public class Tracker {
     public final static String NO_SU = "no_su";
     public final static String SU_DENY = "su_deny";
 
+    public final static String TIMEOUT_DIALOG = "timeout_dialog";
 
     public final static String AUDIO = "audio";
     public final static String MIC = "mic";
