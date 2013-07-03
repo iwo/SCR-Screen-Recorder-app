@@ -13,4 +13,5 @@ public interface IRecorderService {
     void mediaRecorderError(int exitValue);
 
     void showSettings();
+    void showTimeoutDialog();
 }

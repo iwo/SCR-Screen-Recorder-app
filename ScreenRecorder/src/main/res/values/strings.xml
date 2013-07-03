@@ -24,6 +24,14 @@
     <string name="help_stop_title">How to stop</string>
     <string name="help_stop_ok">Got it!</string>
 
+    <string name="free_timeout_title">Time limit expired</string>
+    <string name="free_timeout_message">Buy SCR Screen Recorder Pro to get unlimited recording time and no watermark on the video.</string>
+    <string name="free_timeout_buy">Buy now!</string>
+    <string name="free_timeout_no_thanks">No thanks</string>
+
+    <string name="buy_error_title">Google Play error</string>
+    <string name="buy_error_message">Please search for SCR Screen Recorder Pro in Google Play</string>
+
     <string name="settings_activity_label">SCR Settings</string>
     <string name="settings_title">Settings</string>
     <string name="settings_ok">OK</string>

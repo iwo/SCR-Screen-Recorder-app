@@ -3,6 +3,7 @@ package com.iwobanas.screenrecorder;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,8 @@ public class RecorderService extends Service implements IRecorderService {
 
     public static final String SETTINGS_CLOSED_EXTRA = "SETTINGS_CLOSED_EXTRA";
 
+    public static final String TIMEOUT_DIALOG_CLOSED_EXTRA = "TIMEOUT_DIALOG_CLOSED_EXTRA";
+
     private static final String TAG = "RecorderService";
 
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
@@ -63,6 +66,8 @@ public class RecorderService extends Service implements IRecorderService {
     private boolean isRecording;
 
     private boolean isReady;
+
+    private boolean isTimeoutDisplayed;
 
     private long mRecordingStartTime;
 
@@ -207,7 +212,9 @@ public class RecorderService extends Service implements IRecorderService {
     }
 
     private void showRecorderOverlay() {
-        mRecorderOverlay.show();
+        if (!isTimeoutDisplayed) {
+            mRecorderOverlay.show();
+        }
         mScreenOffReceiver.unregister();
 
     }
@@ -376,6 +383,37 @@ public class RecorderService extends Service implements IRecorderService {
     }
 
     @Override
+    public void showTimeoutDialog() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                isTimeoutDisplayed = true;
+                Intent intent = new Intent(RecorderService.this, DialogActivity.class);
+                intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.free_timeout_message));
+                intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.free_timeout_title));
+                intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.free_timeout_buy));
+                intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.free_timeout_no_thanks));
+                intent.putExtra(DialogActivity.RESTART_EXTRA, true);
+                intent.putExtra(DialogActivity.RESTART_EXTRA_EXTRA, TIMEOUT_DIALOG_CLOSED_EXTRA);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void buyPro() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=com.iwobanas.screenrecorder.pro"));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            displayErrorMessage(getString(R.string.buy_error_message), getString(R.string.buy_error_title), true);
+        }
+        stopSelf();
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground();
         if (intent.getBooleanExtra(STOP_HELP_DISPLAYED_EXTRA, false)) {
@@ -383,6 +421,13 @@ public class RecorderService extends Service implements IRecorderService {
         } else if (intent.getBooleanExtra(SETTINGS_CLOSED_EXTRA, false)) {
             mRecorderOverlay.show();
             //refresh settings if needed
+        } else if (intent.getBooleanExtra(TIMEOUT_DIALOG_CLOSED_EXTRA, false)) {
+            if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
+                buyPro();
+            } else {
+                isTimeoutDisplayed = false;
+                mRecorderOverlay.show();
+            }
         } else if (isRecording) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);

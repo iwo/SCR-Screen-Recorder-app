@@ -16,6 +16,7 @@ public class DialogActivity extends Activity {
     public static final String TITLE_EXTRA = "TITLE_EXTRA";
     public static final String RESTART_EXTRA = "RESTART_EXTRA";
     public static final String POSITIVE_EXTRA = "POSITIVE_EXTRA";
+    public static final String NEGATIVE_EXTRA = "NEGATIVE_EXTRA";
     public static final String RESTART_EXTRA_EXTRA = "RESTART_EXTRA_EXTRA";
 
     @Override
@@ -32,6 +33,10 @@ public class DialogActivity extends Activity {
 
         private String extra;
 
+        private boolean positiveSelected;
+
+        private boolean negativeSelected;
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             Activity activity = getActivity();
@@ -43,7 +48,21 @@ public class DialogActivity extends Activity {
             builder.setIcon(R.drawable.ic_launcher);
             String positiveLabel = intent.getStringExtra(POSITIVE_EXTRA);
             if (positiveLabel != null) {
-                builder.setPositiveButton(positiveLabel, null);
+                builder.setPositiveButton(positiveLabel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        positiveSelected = true;
+                    }
+                });
+            }
+            String negativeLabel = intent.getStringExtra(NEGATIVE_EXTRA);
+            if (negativeLabel != null) {
+                builder.setNegativeButton(negativeLabel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        negativeSelected = true;
+                    }
+                });
             }
             restart = intent.getBooleanExtra(RESTART_EXTRA, false);
             extra = intent.getStringExtra(RESTART_EXTRA_EXTRA);
@@ -58,6 +77,8 @@ public class DialogActivity extends Activity {
                 if (extra != null) {
                     intent.putExtra(extra, true);
                 }
+                intent.putExtra(POSITIVE_EXTRA, positiveSelected);
+                intent.putExtra(NEGATIVE_EXTRA, negativeSelected);
                 activity.startService(intent);
             }
             activity.finish();
