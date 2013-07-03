@@ -12,6 +12,7 @@ public class Settings {
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
     private static final String FRAME_RATE = "FRAME_RATE";
     private static final String TRANSFORMATION = "TRANSFORMATION";
+    private static final String COLOR_FIX = "COLOR_FIX";
 
     private static Settings instance;
 
@@ -40,6 +41,8 @@ public class Settings {
 
     private Transformation transformation = Transformation.GPU;
 
+    private boolean colorFix = false;
+
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
@@ -60,6 +63,8 @@ public class Settings {
 
         String transformation = preferences.getString(TRANSFORMATION, Transformation.GPU.name());
         this.transformation = Transformation.valueOf(transformation);
+
+        colorFix = preferences.getBoolean(COLOR_FIX, false);
     }
 
     public AudioSource getAudioSource() {
@@ -118,6 +123,17 @@ public class Settings {
 
     public Transformation getTransformation() {
         return transformation;
+    }
+
+    public void setColorFix(boolean colorFix) {
+        this.colorFix = colorFix;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(COLOR_FIX, colorFix);
+        editor.commit();
+    }
+
+    public boolean getColorFix() {
+        return colorFix;
     }
 
 }

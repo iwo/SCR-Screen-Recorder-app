@@ -39,4 +39,5 @@
     <string name="settings_transformation">Image transformation</string>
     <string name="settings_transformation_cpu">CPU</string>
     <string name="settings_transformation_gpu">GPU</string>
+    <string name="settings_color_fix">Inverted color fix</string>
 </resources>

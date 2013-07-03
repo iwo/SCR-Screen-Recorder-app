@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -62,6 +64,8 @@ public class SettingsActivity extends Activity {
 
         private TextView transformationText;
 
+        private CheckBox colorFixCheckBox;
+
         private Switch hideIconSwitch;
 
         @Override
@@ -78,6 +82,7 @@ public class SettingsActivity extends Activity {
             resolutionText = (TextView) view.findViewById(R.id.settings_resolution_text);
             frameRateText = (TextView) view.findViewById(R.id.settings_frame_rate_text);
             transformationText = (TextView) view.findViewById(R.id.settings_transformation_text);
+            colorFixCheckBox = (CheckBox) view.findViewById(R.id.settings_color_fix_checkbox);
             //hideIconSwitch = (Switch) view.findViewById(R.id.settings_hide_icon_switch);
 
             TableRow audioRow = (TableRow) view.findViewById(R.id.settings_audio_row);
@@ -109,6 +114,14 @@ public class SettingsActivity extends Activity {
                 @Override
                 public void onClick(View view) {
                     new TransformationDialogFragment().show(getFragmentManager(), "transformation");
+                }
+            });
+
+            colorFixCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                    Settings.getInstance().setColorFix(checked);
+                    refreshValues();
                 }
             });
 
@@ -166,6 +179,10 @@ public class SettingsActivity extends Activity {
                 String transformation = settings.getTransformation() == Transformation.GPU ?
                         getString(R.string.settings_transformation_gpu) : getString(R.string.settings_transformation_cpu);
                 transformationText.setText(transformation);
+            }
+
+            if (colorFixCheckBox != null) {
+                colorFixCheckBox.setChecked(settings.getColorFix());
             }
 
         }

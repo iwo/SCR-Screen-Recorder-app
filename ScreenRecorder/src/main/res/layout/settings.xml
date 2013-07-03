@@ -100,6 +100,29 @@
                 android:gravity="center"/>
     </TableRow>
 
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/settings_color_fix_row"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/settings_color_fix"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:layout_column="0"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/settings_color_fix_checkbox"
+                android:layout_column="1"/>
+    </TableRow>
+
     <!--<TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

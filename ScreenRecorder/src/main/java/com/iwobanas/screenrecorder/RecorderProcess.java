@@ -151,6 +151,7 @@ class RecorderProcess implements Runnable{
         runCommand(String.valueOf(settings.getResolution().getHeight()));
         runCommand(String.valueOf(settings.getFrameRate()));
         runCommand(settings.getTransformation().name());
+        runCommand(settings.getColorFix() ? "BGRA" : "RGBA");
     }
 
     public void stopRecording() {
