@@ -111,7 +111,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         } catch (IOException e) {
             Log.e(TAG, "Can't install native executable", e);
-            //TODO: indicate installation error
+            EasyTracker.getTracker().sendEvent(ERROR, INSTALLATION_ERROR, INSTALLATION_ERROR, null);
+            EasyTracker.getTracker().sendException(Thread.currentThread().getName(), e, false);
         }
         mNativeProcessRunner.setExecutable(executable.getAbsolutePath());
     }

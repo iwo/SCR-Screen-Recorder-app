@@ -20,6 +20,7 @@ public class Tracker {
     public final static String STARTUP_ERROR = "startup_error";
     public final static String RECORDING_ERROR = "recording_error";
     public final static String BUY_ERROR = "buy_error";
+    public final static String INSTALLATION_ERROR = "installation_error";
     public final static String ERROR_ = "error_";
     public final static String STOPPING_ERROR = "stopping_error";
     public final static String STOP_TIMEOUT = "stop_timeout";
