@@ -26,7 +26,7 @@ public class ResolutionsManager {
     private int[] standardHeights = new int[]{1080, 720, 480, 360, 240};
     private int[] standardWidths = new int[]{1080, 720, 480};
 
-    private String original = "Original";
+    private String original = "Max";
     private String half = "Half";
 
     @SuppressLint("NewApi")
