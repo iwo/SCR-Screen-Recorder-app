@@ -35,6 +35,7 @@
     <string name="settings_activity_label">SCR Settings</string>
     <string name="settings_title">Settings</string>
     <string name="settings_ok">OK</string>
+    <string name="settings_reset">Reset</string>
     <string name="settings_audio">Audio</string>
     <string name="settings_audio_mic">Mic</string>
     <string name="settings_audio_mute">Mute</string>
@@ -48,6 +49,7 @@
     <string name="settings_transformation_cpu">CPU</string>
     <string name="settings_transformation_gpu">GPU</string>
     <string name="settings_color_fix">Inverted color fix</string>
+
     <string name="license_dont_allow">License check failed. Make sure your Internet connection is up
         and your\'re logged into Google Play.
     </string>

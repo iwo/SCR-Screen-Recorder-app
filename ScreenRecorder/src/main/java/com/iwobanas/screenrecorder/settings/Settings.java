@@ -136,6 +136,13 @@ public class Settings {
         return colorFix;
     }
 
+    public void restoreDefault() {
+        setAudioSource(AudioSource.MIC);
+        setResolution(getDefaultResolution());
+        setFrameRate(15);
+        setTransformation(Transformation.GPU);
+        setColorFix(false);
+    }
 }
 
 
