@@ -32,11 +32,16 @@ public class Tracker {
     public final static String TIMEOUT_DIALOG = "timeout_dialog";
 
     public final static String AUDIO = "audio";
-    public final static String MIC = "mic";
-    public final static String MUTE = "mute";
 
     public final static String RECORDING = "recording";
     public final static String SIZE = "size";
     public final static String TIME = "time";
+
+    public final static String LICENSE = "license";
+    public final static String LICENSE_ALLOW_ = "license_allow_";
+    public final static String LICENSE_DONT_ALLOW_ = "license_dont_allow_";
+    public final static String LICENSE_ERROR_ = "license_error_";
+
+
 
 }

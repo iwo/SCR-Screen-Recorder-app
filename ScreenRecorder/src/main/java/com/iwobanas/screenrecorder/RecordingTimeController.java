@@ -46,8 +46,15 @@ public class RecordingTimeController {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                dialogTimer.cancel();
-                timer.cancel();
+                if (dialogTimer != null) {
+                    dialogTimer.cancel();
+                    dialogTimer = null;
+                }
+                if (timer != null) {
+                    timer.cancel();
+                    timer = null;
+                }
+
             }
         });
     }

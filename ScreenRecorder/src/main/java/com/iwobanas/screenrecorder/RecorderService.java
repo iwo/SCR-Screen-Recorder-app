@@ -21,6 +21,10 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.android.vending.licensing.AESObfuscator;
+import com.google.android.vending.licensing.LicenseChecker;
+import com.google.android.vending.licensing.LicenseCheckerCallback;
+import com.google.android.vending.licensing.ServerManagedPolicy;
 import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
 
@@ -33,7 +37,7 @@ import java.util.Date;
 
 import static com.iwobanas.screenrecorder.Tracker.*;
 
-public class RecorderService extends Service implements IRecorderService {
+public class RecorderService extends Service implements IRecorderService, LicenseCheckerCallback {
 
     public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
 
@@ -71,12 +75,15 @@ public class RecorderService extends Service implements IRecorderService {
 
     private long mRecordingStartTime;
 
+    private boolean mTaniosc = true;
+
     // Preferences
     private boolean mStopHelpDisplayed;
 
     @Override
     public void onCreate() {
         Settings.initialize(this);
+        mTaniosc = getResources().getBoolean(R.bool.taniosc);
         mHandler = new Handler();
         mWatermark.show();
 
@@ -88,6 +95,10 @@ public class RecorderService extends Service implements IRecorderService {
         mRecorderOverlay.show();
         isReady = false;
         mNativeProcessRunner.initialize();
+
+        if (!mTaniosc) {
+            checkLicense();
+        }
     }
 
     private void installExecutable() {
@@ -130,15 +141,15 @@ public class RecorderService extends Service implements IRecorderService {
             return;
         }
         mRecorderOverlay.hide();
-        if (getResources().getBoolean(R.bool.taniosc)) {
+        if (mTaniosc) {
             mWatermark.start();
+            mTimeController.start();
         } else {
             mWatermark.hide();
         }
         mScreenOffReceiver.register();
         outputFile = getOutputFile();
         isRecording = true;
-        mTimeController.start();
         mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
         mRecordingStartTime = System.currentTimeMillis();
 
@@ -226,7 +237,7 @@ public class RecorderService extends Service implements IRecorderService {
             public void run() {
                 scanOutputAndNotify();
 
-                if (getResources().getBoolean(R.bool.taniosc)) {
+                if (mTaniosc) {
                     mWatermark.stop();
                 } else {
                     mWatermark.show();
@@ -466,5 +477,48 @@ public class RecorderService extends Service implements IRecorderService {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    // Licensing
+    private static final byte[] LICENSE_SALT = new byte[]{ 95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47,  122};
+    private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmOZqTyb4AOB4IEWZiXd0SRYyJ2Y0xu1FBDmxvQqFG+D1wMJMKPxJlMNYwwS3AYjGgzhJzdWFd+oMaRV5uD9BWinHXyUppIrQcHfINv1J9VuwQnVQVYDG+EEiKOAGnnOLhg5EaJ5bdpvRyMLpD3wz9qcIx1YC99/TJC+ACABrhCfkc+U9hKyNe0m4C7DHBEW4SIq22bC1vPOw5KgbdruFxRoQiYU3GE7o8/fH37Vk9Rc+75QrtNYsJ9W0Vm7f2brN+lVwnQVEfsRVBr4k+yHVDVdo82SQfiUo6Q6d0S3HMCqMeRe8UQxGpPxRpE75cADR3LyyduRJ4+KJHPuY38AEAQIDAQAB";
+    private LicenseChecker mChecker;
+
+    private void checkLicense() {
+        String deviceId = android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+
+        mChecker = new LicenseChecker(
+                this, new ServerManagedPolicy(this,
+                new AESObfuscator(LICENSE_SALT, getPackageName(), deviceId)),
+                LICENSE_KEY);
+
+        mChecker.checkAccess(this);
+    }
+
+    @Override
+    public void allow(int policyReason) {
+        EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_ALLOW_ + policyReason, null);
+    }
+
+    @Override
+    public void dontAllow(int policyReason) {
+        EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_DONT_ALLOW_ + policyReason, null);
+        mTaniosc = true;
+        if (isRecording) {
+            mWatermark.show();
+            mWatermark.start();
+        }
+        Toast.makeText(this, getString(R.string.license_dont_allow), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void applicationError(int errorCode) {
+        EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_ERROR_ + errorCode, null);
+        mTaniosc = true;
+        if (isRecording) {
+            mWatermark.show();
+            mWatermark.start();
+        }
+        Toast.makeText(this, getString(R.string.license_error), Toast.LENGTH_LONG).show();
     }
 }
