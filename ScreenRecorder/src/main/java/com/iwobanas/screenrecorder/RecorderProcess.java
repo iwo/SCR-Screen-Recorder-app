@@ -88,7 +88,6 @@ class RecorderProcess implements Runnable{
                 Log.e(TAG, "Exception when reading state", e);
                 exitValueOverride = 307;
                 forceKill();
-                killMediaServer();
             }
 
             try {
@@ -107,10 +106,12 @@ class RecorderProcess implements Runnable{
         if (exitValueOverride != null) {
             exitValue = exitValueOverride;
             setState(ProcessState.ERROR);
+            killMediaServer();
         } else if (state == ProcessState.STOPPING) {
             setState(ProcessState.FINISHED);
         } else {
             setState(ProcessState.ERROR);
+            killMediaServer();
         }
 
         Log.d(TAG, "Return value: " + exitValue);
@@ -122,7 +123,6 @@ class RecorderProcess implements Runnable{
             Log.e(TAG, "Incorrect status received: " + status);
             exitValueOverride = errorCode;
             forceKill();
-            killMediaServer();
         }
     }
 
@@ -197,7 +197,6 @@ class RecorderProcess implements Runnable{
                             EasyTracker.getTracker().sendEvent(ERROR, errorCategory, errorName, null);
                             exitValueOverride = errorCode;
                             forceKill();
-                            killMediaServer();
                             timer = null;
                         }
                     }
