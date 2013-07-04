@@ -40,6 +40,7 @@
     <string name="settings_audio_mic">Mic</string>
     <string name="settings_audio_mute">Mute</string>
     <string name="settings_resolution">Resolution</string>
+    <string name="settings_resolution_unstable">(unstable)</string>
     <string name="settings_frame_rate">Target frame rate</string>
     <string name="settings_frame_rate_max">Maximum</string>
     <string name="settings_frame_rate_max_short">Max</string>
