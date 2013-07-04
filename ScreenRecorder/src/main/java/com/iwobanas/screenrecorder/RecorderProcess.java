@@ -88,6 +88,7 @@ class RecorderProcess implements Runnable{
                 Log.e(TAG, "Exception when reading state", e);
                 exitValueOverride = 307;
                 forceKill();
+                killMediaServer();
             }
 
             try {
@@ -121,6 +122,7 @@ class RecorderProcess implements Runnable{
             Log.e(TAG, "Incorrect status received: " + status);
             exitValueOverride = errorCode;
             forceKill();
+            killMediaServer();
         }
     }
 
@@ -195,6 +197,7 @@ class RecorderProcess implements Runnable{
                             EasyTracker.getTracker().sendEvent(ERROR, errorCategory, errorName, null);
                             exitValueOverride = errorCode;
                             forceKill();
+                            killMediaServer();
                             timer = null;
                         }
                     }
@@ -264,6 +267,19 @@ class RecorderProcess implements Runnable{
             Runtime.getRuntime().exec(new String[]{"su", "-c", "kill -9 "+ pid});
         } catch (Exception e){
             Log.e(TAG, "Error killing the process", e);
+        }
+    }
+
+    private void killMediaServer() {
+        Log.d(TAG, "restartMediaServer");
+        int pid = Utils.findProcessByCommand("/system/bin/mediaserver");
+        if (pid == -1) {
+            Log.e(TAG, "mediaserver process not found");
+        }
+        try {
+            Runtime.getRuntime().exec(new String[]{"su", "-c", "kill -9 " + pid});
+        } catch (IOException e) {
+            Log.e(TAG, "error killing mediaserver", e);
         }
     }
 
