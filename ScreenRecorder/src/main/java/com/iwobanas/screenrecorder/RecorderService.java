@@ -333,6 +333,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
         intent.putExtra(DialogActivity.TITLE_EXTRA, title);
         intent.putExtra(DialogActivity.RESTART_EXTRA, restart);
+        intent.putExtra(DialogActivity.REPORT_BUG_EXTRA, true);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         stopSelf();

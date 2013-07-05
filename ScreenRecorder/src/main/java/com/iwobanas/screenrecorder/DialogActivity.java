@@ -18,6 +18,7 @@ public class DialogActivity extends Activity {
     public static final String POSITIVE_EXTRA = "POSITIVE_EXTRA";
     public static final String NEGATIVE_EXTRA = "NEGATIVE_EXTRA";
     public static final String RESTART_EXTRA_EXTRA = "RESTART_EXTRA_EXTRA";
+    public static final String REPORT_BUG_EXTRA = "REPORT_BUG_EXTRA";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,23 +47,33 @@ public class DialogActivity extends Activity {
             builder.setMessage(intent.getStringExtra(MESSAGE_EXTRA));
             builder.setTitle(intent.getStringExtra(TITLE_EXTRA));
             builder.setIcon(R.drawable.ic_launcher);
-            String positiveLabel = intent.getStringExtra(POSITIVE_EXTRA);
-            if (positiveLabel != null) {
-                builder.setPositiveButton(positiveLabel, new DialogInterface.OnClickListener() {
+            if (intent.getBooleanExtra(REPORT_BUG_EXTRA, false)) {
+                builder.setPositiveButton(R.string.error_report_report, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        positiveSelected = true;
+                        new ReportBugTask(getActivity().getApplicationContext()).execute();
                     }
                 });
-            }
-            String negativeLabel = intent.getStringExtra(NEGATIVE_EXTRA);
-            if (negativeLabel != null) {
-                builder.setNegativeButton(negativeLabel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        negativeSelected = true;
-                    }
-                });
+                builder.setNegativeButton(R.string.error_report_close, null);
+            } else {
+                String positiveLabel = intent.getStringExtra(POSITIVE_EXTRA);
+                if (positiveLabel != null) {
+                    builder.setPositiveButton(positiveLabel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            positiveSelected = true;
+                        }
+                    });
+                }
+                String negativeLabel = intent.getStringExtra(NEGATIVE_EXTRA);
+                if (negativeLabel != null) {
+                    builder.setNegativeButton(negativeLabel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            negativeSelected = true;
+                        }
+                    });
+                }
             }
             restart = intent.getBooleanExtra(RESTART_EXTRA, false);
             extra = intent.getStringExtra(RESTART_EXTRA_EXTRA);

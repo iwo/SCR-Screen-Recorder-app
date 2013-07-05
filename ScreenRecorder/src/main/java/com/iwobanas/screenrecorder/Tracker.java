@@ -43,6 +43,7 @@ public class Tracker {
     public final static String LICENSE_DONT_ALLOW_ = "license_dont_allow_";
     public final static String LICENSE_ERROR_ = "license_error_";
 
-
+    public final static String BUG = "bug";
+    public final static String REPORT = "report";
 
 }
