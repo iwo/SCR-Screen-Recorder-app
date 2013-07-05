@@ -122,7 +122,7 @@ class RecorderProcess implements Runnable{
     }
 
     private void checkStatus(String expectedStatus, String status, int errorCode) {
-        if (forceKilled || destroying) return;
+        if (forceKilled || destroying || exitValueOverride != null) return;
         if (!expectedStatus.equals(status)) {
             Log.e(TAG, "Incorrect status received: " + status);
             exitValueOverride = errorCode;
