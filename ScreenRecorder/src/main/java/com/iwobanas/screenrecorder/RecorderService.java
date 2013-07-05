@@ -45,6 +45,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     public static final String TIMEOUT_DIALOG_CLOSED_EXTRA = "TIMEOUT_DIALOG_CLOSED_EXTRA";
 
+    public static final String HIDE_ICON_DIALOG_CLOSED_EXTRA = "HIDE_ICON_DIALOG_CLOSED_EXTRA";
+
     private static final String TAG = "RecorderService";
 
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
@@ -303,7 +305,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 new NotificationCompat.Builder(this)
                         .setContentTitle(getString(R.string.app_full_name));
 
-        if (/*!mTaniosc && */Settings.getInstance().getHideIcon()) {
+        if (!mTaniosc && Settings.getInstance().getHideIcon()) {
             builder.setSmallIcon(R.drawable.transparent);
             builder.setPriority(NotificationCompat.PRIORITY_MIN);
         } else {
@@ -443,6 +445,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 buyPro();
             } else {
                 isTimeoutDisplayed = false;
+                mRecorderOverlay.show();
+            }
+        } else if (intent.getBooleanExtra(HIDE_ICON_DIALOG_CLOSED_EXTRA, false)) {
+            if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
+                buyPro();
+            } else {
                 mRecorderOverlay.show();
             }
         } else if (isRecording) {

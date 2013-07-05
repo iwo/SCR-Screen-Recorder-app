@@ -12,10 +12,10 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.iwobanas.screenrecorder.DialogActivity;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
 
@@ -26,10 +26,13 @@ public class SettingsActivity extends Activity {
 
     private SettingsDialogFragment dialogFragment;
 
+    private boolean buyDialogOpen;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Settings.initialize(this);
         super.onCreate(savedInstanceState);
+        buyDialogOpen = false;
         dialogFragment = new SettingsDialogFragment();
         dialogFragment.show(getFragmentManager(), "settingsDialog");
     }
@@ -42,9 +45,11 @@ public class SettingsActivity extends Activity {
 
     @Override
     public void onDestroy() {
-        Intent intent = new Intent(this, RecorderService.class);
-        intent.putExtra(RecorderService.SETTINGS_CLOSED_EXTRA, true);
-        startService(intent);
+        if (!buyDialogOpen) {
+            Intent intent = new Intent(this, RecorderService.class);
+            intent.putExtra(RecorderService.SETTINGS_CLOSED_EXTRA, true);
+            startService(intent);
+        }
         super.onDestroy();
     }
 
@@ -52,6 +57,10 @@ public class SettingsActivity extends Activity {
         if (dialogFragment != null) {
             dialogFragment.settingsChanged();
         }
+    }
+
+    public void setBuyDialogOpen(boolean buyDialogOpen) {
+        this.buyDialogOpen = buyDialogOpen;
     }
 
     public static class SettingsDialogFragment extends DialogFragment {
@@ -128,7 +137,21 @@ public class SettingsActivity extends Activity {
             hideIconCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                    Settings.getInstance().setHideIcon(checked);
+                    if (getResources().getBoolean(R.bool.taniosc)) {
+                        SettingsActivity activity = (SettingsActivity) getActivity();
+                        activity.setBuyDialogOpen(true);
+                        Intent intent = new Intent(activity, DialogActivity.class);
+                        intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.hide_icon_message));
+                        intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.hide_icon_title));
+                        intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.free_timeout_buy));
+                        intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.free_timeout_no_thanks));
+                        intent.putExtra(DialogActivity.RESTART_EXTRA, true);
+                        intent.putExtra(DialogActivity.RESTART_EXTRA_EXTRA, RecorderService.HIDE_ICON_DIALOG_CLOSED_EXTRA);
+                        startActivity(intent);
+                        compoundButton.setChecked(false);
+                    } else {
+                        Settings.getInstance().setHideIcon(checked);
+                    }
                     refreshValues();
                 }
             });

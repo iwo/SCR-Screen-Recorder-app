@@ -28,6 +28,8 @@
     <string name="free_timeout_message">Buy SCR Screen Recorder Pro to get unlimited recording time and no watermark on the video.</string>
     <string name="free_timeout_buy">Buy now!</string>
     <string name="free_timeout_no_thanks">No thanks</string>
+    <string name="hide_icon_title">Pro feature</string>
+    <string name="hide_icon_message">Buy SCR Screen Recorder Pro to hide watermark and notification icon. You\'ll get unlimited recording time as well!</string>
 
     <string name="buy_error_title">Google Play error</string>
     <string name="buy_error_message">Please search for SCR Screen Recorder Pro in Google Play</string>
