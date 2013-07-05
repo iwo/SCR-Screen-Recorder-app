@@ -2,10 +2,11 @@ package com.iwobanas.screenrecorder;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
+
+import com.iwobanas.screenrecorder.settings.Resolution;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,11 +14,8 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.iwobanas.screenrecorder.settings.Resolution;
-
 public class ResolutionsManager {
 
-    private boolean isPortrait;
     private int width = 0;
     private int height = 0;
     private Resolution[] resolutions;
@@ -32,8 +30,6 @@ public class ResolutionsManager {
     @SuppressLint("NewApi")
     public ResolutionsManager(Context context) {
         Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        Configuration config = context.getResources().getConfiguration();
-        isPortrait = Utils.getDeviceDefaultOrientation(display, config) == Configuration.ORIENTATION_PORTRAIT;
         DisplayMetrics metrics = new DisplayMetrics();
         display.getRealMetrics(metrics);
         height = Math.min(metrics.heightPixels, metrics.widthPixels);
@@ -68,7 +64,7 @@ public class ResolutionsManager {
                 w = (int) (h * aspectRatio);
             }
             heightsSet.add(h);
-            Resolution resolution = newResolution(label, w, h);
+            Resolution resolution = new Resolution(label, w, h);
             if (h == 480) {
                 defaultResolution = resolution;
             }
@@ -83,18 +79,18 @@ public class ResolutionsManager {
             if (h > height || heightsSet.contains(h))
                 continue;
 
-            resolutions.add(newResolution(label, w, h));
+            resolutions.add(new Resolution(label, w, h));
         }
 
         if (!heightsSet.contains(height)) {
-            Resolution resolution = newResolution(original, width, height);
+            Resolution resolution = new Resolution(original, width, height);
             if (defaultResolution == null) {
                 defaultResolution = resolution;
             }
             resolutions.add(resolution);
         }
         if (!heightsSet.contains(height / 2)) {
-            resolutions.add(newResolution(half, width / 2, height / 2));
+            resolutions.add(new Resolution(half, width / 2, height / 2));
         }
 
         Collections.sort(resolutions, new Comparator<Resolution>() {
@@ -105,13 +101,6 @@ public class ResolutionsManager {
         });
 
         this.resolutions = resolutions.toArray(new Resolution[resolutions.size()]);
-    }
-
-    private Resolution newResolution(String label, int videoWidth, int videoHeight) {
-        if (isPortrait)
-            return new Resolution(label, videoHeight, videoWidth);
-
-        return new Resolution(label, videoWidth, videoHeight);
     }
 
     public Resolution getDefaultResolution() {
@@ -128,6 +117,6 @@ public class ResolutionsManager {
                 return resolution;
             }
         }
-        return newResolution(Math.min(width, height) + "p", width, height);
+        return new Resolution(Math.min(width, height) + "p", width, height);
     }
 }

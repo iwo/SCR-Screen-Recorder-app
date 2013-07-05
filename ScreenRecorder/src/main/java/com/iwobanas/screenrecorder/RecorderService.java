@@ -174,13 +174,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         Display display = ((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         Configuration config = getResources().getConfiguration();
         int rotationDeg = getRotationDeg(display);
-
-        if (Utils.getDeviceDefaultOrientation(display, config) == Configuration.ORIENTATION_PORTRAIT) {
-            rotationDeg = ((360 - rotationDeg) + 90) % 360;
-        } else {
-            rotationDeg = (360 - rotationDeg) % 360; //TODO: test on horizontal device
-        }
-
+        rotationDeg = (360 - rotationDeg) % 360;
         return String.valueOf(rotationDeg);
     }
 
