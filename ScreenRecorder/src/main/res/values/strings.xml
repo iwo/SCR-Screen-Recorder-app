@@ -60,7 +60,7 @@
 
     <string name="error_report_report">Report</string>
     <string name="error_report_close">Close</string>
-    <string name="error_report_subject">[error] </string>
+    <string name="error_report_subject">[error]</string>
     <string name="error_report_text">The attachment contains detailed system log including information about an error. Feel free to add any comments here.</string>
     <string name="error_report_chooser">Email error report with</string>
 </resources>
