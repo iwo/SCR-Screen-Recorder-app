@@ -65,7 +65,7 @@ public class ResolutionsManager {
             }
             heightsSet.add(h);
             Resolution resolution = new Resolution(label, w, h);
-            if (h == 480) {
+            if (h == 480 && w != 819) { // 819 is a special case for 1024x600 which crashes media recorder when scaled down
                 defaultResolution = resolution;
             }
             resolutions.add(resolution);
