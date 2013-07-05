@@ -13,6 +13,7 @@ public class Settings {
     private static final String FRAME_RATE = "FRAME_RATE";
     private static final String TRANSFORMATION = "TRANSFORMATION";
     private static final String COLOR_FIX = "COLOR_FIX";
+    private static final String HIDE_ICON = "HIDE_ICON";
 
     private static Settings instance;
 
@@ -43,6 +44,8 @@ public class Settings {
 
     private boolean colorFix = false;
 
+    private boolean hideIcon = false;
+
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
@@ -65,6 +68,7 @@ public class Settings {
         this.transformation = Transformation.valueOf(transformation);
 
         colorFix = preferences.getBoolean(COLOR_FIX, false);
+        hideIcon = preferences.getBoolean(HIDE_ICON, false);
     }
 
     public AudioSource getAudioSource() {
@@ -136,12 +140,24 @@ public class Settings {
         return colorFix;
     }
 
+    public boolean getHideIcon() {
+        return hideIcon;
+    }
+
+    public void setHideIcon(boolean hideIcon) {
+        this.hideIcon = hideIcon;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(HIDE_ICON, colorFix);
+        editor.commit();
+    }
+
     public void restoreDefault() {
         setAudioSource(AudioSource.MIC);
         setResolution(getDefaultResolution());
         setFrameRate(15);
         setTransformation(Transformation.GPU);
         setColorFix(false);
+        setHideIcon(false);
     }
 }
 

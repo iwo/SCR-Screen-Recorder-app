@@ -66,7 +66,7 @@ public class SettingsActivity extends Activity {
 
         private CheckBox colorFixCheckBox;
 
-        private Switch hideIconSwitch;
+        private CheckBox hideIconCheckBox;
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class SettingsActivity extends Activity {
             frameRateText = (TextView) view.findViewById(R.id.settings_frame_rate_text);
             transformationText = (TextView) view.findViewById(R.id.settings_transformation_text);
             colorFixCheckBox = (CheckBox) view.findViewById(R.id.settings_color_fix_checkbox);
-            //hideIconSwitch = (Switch) view.findViewById(R.id.settings_hide_icon_switch);
+            hideIconCheckBox = (CheckBox) view.findViewById(R.id.settings_hide_icon_checkbox);
 
             TableRow audioRow = (TableRow) view.findViewById(R.id.settings_audio_row);
             audioRow.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +121,14 @@ public class SettingsActivity extends Activity {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                     Settings.getInstance().setColorFix(checked);
+                    refreshValues();
+                }
+            });
+
+            hideIconCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                    Settings.getInstance().setHideIcon(checked);
                     refreshValues();
                 }
             });
@@ -185,6 +193,10 @@ public class SettingsActivity extends Activity {
 
             if (colorFixCheckBox != null) {
                 colorFixCheckBox.setChecked(settings.getColorFix());
+            }
+
+            if (hideIconCheckBox != null) {
+                hideIconCheckBox.setChecked(settings.getHideIcon());
             }
 
         }

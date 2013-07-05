@@ -50,6 +50,7 @@
     <string name="settings_transformation_cpu">CPU</string>
     <string name="settings_transformation_gpu">GPU</string>
     <string name="settings_color_fix">Inverted color fix</string>
+    <string name="settings_hide_icon">Hide notification icon</string>
 
     <string name="license_dont_allow">License check failed. Make sure your Internet connection is up
         and your\'re logged into Google Play.

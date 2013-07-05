@@ -301,8 +301,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private void startForeground() {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(getString(R.string.app_full_name));
+
+        if (/*!mTaniosc && */Settings.getInstance().getHideIcon()) {
+            builder.setSmallIcon(R.drawable.transparent);
+            builder.setPriority(NotificationCompat.PRIORITY_MIN);
+        } else {
+            builder.setSmallIcon(R.drawable.ic_notification);
+            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        }
 
         PendingIntent intent = PendingIntent.getService(this, 0, new Intent(this, RecorderService.class), 0);
         builder.setContentIntent(intent);
