@@ -264,7 +264,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void logStats(int exitValue, int size, int time) {
-        new SendStatsAsyncTask(getDeviceId(), outputFile.getName(), exitValue, size, time).execute();
+        new SendStatsAsyncTask(getPackageName(), getDeviceId(), outputFile.getName(), exitValue, size, time).execute();
     }
 
     private void scanFile(File file) {
