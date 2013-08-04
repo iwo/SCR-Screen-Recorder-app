@@ -142,7 +142,7 @@ class RecorderProcess implements Runnable{
     }
 
     public void startRecording(String fileName, String rotation) {
-        Log.d(TAG, "startRecording");
+        Log.i(TAG, "startRecording " + fileName);
         if (state != ProcessState.READY) {
             Log.e(TAG, "Can't start recording in current state: " + state);
             //TODO: add error handling
@@ -160,6 +160,20 @@ class RecorderProcess implements Runnable{
         runCommand(String.valueOf(settings.getFrameRate()));
         runCommand(settings.getTransformation().name());
         runCommand(settings.getColorFix() ? "BGRA" : "RGBA");
+        logSettings(settings, rotation);
+    }
+
+    private void logSettings(Settings settings, String rotation) {
+        try {
+            Log.d(TAG, "settings rotation: " + rotation +
+                    " audioSource: " + settings.getAudioSource().name() +
+                    " resolution: " + settings.getResolution().getWidth() + " x " + settings.getResolution().getHeight() +
+                    " frameRate: " + settings.getFrameRate() +
+                    " colorFix: " + settings.getColorFix()
+            );
+        } catch (Throwable e) {
+            Log.w(TAG, "Can't log settings");
+        }
     }
 
     public void stopRecording() {

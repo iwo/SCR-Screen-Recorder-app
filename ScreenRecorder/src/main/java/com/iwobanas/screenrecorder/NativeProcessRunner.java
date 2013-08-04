@@ -23,6 +23,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
 
     public void start(String fileName, String rotation) {
         this.fileName = fileName;
+        Log.i(TAG, "start deviceId: " + service.getDeviceId());
         process.startRecording(fileName, rotation);
     }
 

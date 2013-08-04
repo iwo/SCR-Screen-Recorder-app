@@ -327,17 +327,18 @@ public class RecorderService extends Service implements IRecorderService, Licens
             public void run() {
                 String message = getString(R.string.su_required_message);
                 String title = getString(R.string.su_required_title);
-                displayErrorMessage(message, title, false, false);
+                displayErrorMessage(message, title, false, false, 0);
             }
         });
     }
 
-    private void displayErrorMessage(final String message, final String title, final boolean restart, boolean report) {
+    private void displayErrorMessage(final String message, final String title, final boolean restart, boolean report, int errorCode) {
         Intent intent = new Intent(RecorderService.this, DialogActivity.class);
         intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
         intent.putExtra(DialogActivity.TITLE_EXTRA, title);
         intent.putExtra(DialogActivity.RESTART_EXTRA, restart);
         intent.putExtra(DialogActivity.REPORT_BUG_EXTRA, report);
+        intent.putExtra(DialogActivity.REPORT_BUG_ERROR_EXTRA, errorCode);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         Log.w(TAG, "displayErrorMessage: " + message);
@@ -350,7 +351,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 String message = String.format(getString(R.string.startup_error_message), exitValue);
-                displayErrorMessage(message, getString(R.string.error_dialog_title), false, true);
+                displayErrorMessage(message, getString(R.string.error_dialog_title), false, true, exitValue);
             }
         });
         EasyTracker.getTracker().sendEvent(ERROR, STARTUP_ERROR, ERROR_ + exitValue, null);
@@ -362,7 +363,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 String message = String.format(getString(R.string.recording_error_message), exitValue);
-                displayErrorMessage(message, getString(R.string.error_dialog_title), true, true);
+                displayErrorMessage(message, getString(R.string.error_dialog_title), true, true, exitValue);
                 if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
                     scanOutputAndNotify();
                 }
@@ -377,7 +378,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 String message = getString(R.string.media_recorder_error_message);
-                displayErrorMessage(message, getString(R.string.media_recorder_error_title), false, true);
+                displayErrorMessage(message, getString(R.string.media_recorder_error_title), false, true, exitValue);
                 if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
                     scanOutputAndNotify();
                 }
@@ -432,7 +433,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
             EasyTracker.getTracker().sendEvent(ERROR, BUY_ERROR, TIMEOUT_DIALOG, null);
-            displayErrorMessage(getString(R.string.buy_error_message), getString(R.string.buy_error_title), true, true);
+            displayErrorMessage(getString(R.string.buy_error_message), getString(R.string.buy_error_title), true, true, -1);
         }
         EasyTracker.getTracker().sendEvent(ACTION, BUY, TIMEOUT_DIALOG, null);
         stopSelf();

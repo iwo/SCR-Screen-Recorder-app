@@ -14,23 +14,24 @@ import static com.iwobanas.screenrecorder.Tracker.*;
 
 public class ReportBugTask extends AsyncTask<Void, Void, Void> {
 
-    public ReportBugTask(Context context) {
+    public ReportBugTask(Context context, int errorCode) {
         this.context = context;
+        this.errorCode = errorCode;
     }
 
     private Context context;
+
+    private int errorCode;
 
     private File output;
 
     @Override
     protected Void doInBackground(Void... params) {
         try {
-            output = new File(context.getFilesDir(), "logcat" + System.currentTimeMillis() + ".txt");
+            output = new File("/sdcard/", "scr_logcat" + System.currentTimeMillis() + ".txt");
             String out = output.getAbsolutePath();
 
-            Process process = Runtime.getRuntime()
-                    .exec(new String[]{"su", "-c", "logcat -d -v threadtime -f " + out
-                            + "; chmod 666 " + out});
+            Process process = Runtime.getRuntime().exec(new String[]{"su", "-c", "/system/bin/logcat -d -v threadtime -f " + out});
 
             process.waitFor();
 
@@ -48,7 +49,7 @@ public class ReportBugTask extends AsyncTask<Void, Void, Void> {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent.setType("text/plain");
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"scr.screen.recorder@gmail.com"});
-        String subject = context.getString(R.string.error_report_subject) + " " + context.getString(R.string.app_name);
+        String subject = context.getString(R.string.error_report_subject) + " " + context.getString(R.string.app_name) + " " + errorCode;
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, context.getString(R.string.error_report_text));
         emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(output));
