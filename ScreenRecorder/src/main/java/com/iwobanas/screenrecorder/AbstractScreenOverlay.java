@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 public abstract class AbstractScreenOverlay implements IScreenOverlay {
 
-    private static final String TAG = "AbstractScreenOverlay";
+    private static final String TAG = "scr_AbstractScreenOverlay";
 
     private Context mContext;
 

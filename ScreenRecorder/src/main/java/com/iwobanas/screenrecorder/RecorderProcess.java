@@ -20,7 +20,7 @@ class RecorderProcess implements Runnable{
 
     private static int instancesCount = 0;
 
-    private final String TAG = "RecorderProcess-" + instancesCount++;
+    private final String TAG = "scr_RecorderProcess-" + instancesCount++;
 
     private Process process ;
 

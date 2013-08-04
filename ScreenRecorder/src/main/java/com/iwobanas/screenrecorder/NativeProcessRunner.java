@@ -7,7 +7,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 import static com.iwobanas.screenrecorder.Tracker.*;
 
 public class NativeProcessRunner implements RecorderProcess.OnStateChangeListener {
-    private static final String TAG = "NativeProcessRunner";
+    private static final String TAG = "scr_NativeProcessRunner";
 
     IRecorderService service;
 

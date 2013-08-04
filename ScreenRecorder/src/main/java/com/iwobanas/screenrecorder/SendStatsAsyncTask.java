@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SendStatsAsyncTask extends AsyncTask<Void, Void, Void> {
-    private static final String TAG = "SendStatsAsyncTask";
+    private static final String TAG = "scr_SendStatsAsyncTask";
     private static final String BASE_URL = "http://www.iwobanas.com/scr/?";
 
     private Map<String, String> params = new HashMap<String, String>();

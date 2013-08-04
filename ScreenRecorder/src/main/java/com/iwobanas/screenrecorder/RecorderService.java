@@ -48,7 +48,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     public static final String HIDE_ICON_DIALOG_CLOSED_EXTRA = "HIDE_ICON_DIALOG_CLOSED_EXTRA";
 
-    private static final String TAG = "RecorderService";
+    private static final String TAG = "scr_RecorderService";
 
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
 

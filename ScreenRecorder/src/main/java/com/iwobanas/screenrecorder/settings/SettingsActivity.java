@@ -22,7 +22,7 @@ import com.iwobanas.screenrecorder.RecorderService;
 import java.text.DecimalFormat;
 
 public class SettingsActivity extends Activity {
-    public static final String TAG = "SettingsActivity";
+    public static final String TAG = "scr_SettingsActivity";
 
     private SettingsDialogFragment dialogFragment;
 
