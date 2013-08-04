@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static com.iwobanas.screenrecorder.Tracker.*;
 
-public class ReportBugTask extends AsyncTask<Void, Void, Void> {
+public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
 
     public ReportBugTask(Context context, int errorCode) {
         this.context = context;
@@ -26,25 +26,39 @@ public class ReportBugTask extends AsyncTask<Void, Void, Void> {
     private File output;
 
     @Override
-    protected Void doInBackground(Void... params) {
+    protected Integer doInBackground(Void... params) {
+        int exitValue = -1;
         try {
             output = new File("/sdcard/", "scr_logcat" + System.currentTimeMillis() + ".txt");
             String out = output.getAbsolutePath();
+            String command = "/system/bin/logcat -d -v threadtime -f " + out;
 
-            Process process = Runtime.getRuntime().exec(new String[]{"su", "-c", "/system/bin/logcat -d -v threadtime -f " + out});
+            exitValue = runAndWait(command);
 
-            process.waitFor();
+            if (exitValue != 0) { // retry
+                Thread.sleep(2000);
+                exitValue = runAndWait(command);
+            }
 
         } catch (IOException e) {
             EasyTracker.getTracker().sendException("ReportBugTask", e, false);
         } catch (InterruptedException e) {
             EasyTracker.getTracker().sendException("ReportBugTask", e, false);
         }
-        return null;
+        return exitValue;
+    }
+
+    private int runAndWait(String command) throws InterruptedException, IOException {
+        Process process = Runtime.getRuntime().exec(new String[]{"su", "-c", command});
+        process.waitFor();
+        return process.exitValue();
     }
 
     @Override
-    protected void onPostExecute(Void param) {
+    protected void onPostExecute(Integer exitValue) {
+        if (exitValue != 0) {
+            return;
+        }
         EasyTracker.getTracker().sendEvent(ACTION, BUG, REPORT, null);
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent.setType("text/plain");
