@@ -14,4 +14,6 @@ public interface IRecorderService {
 
     void showSettings();
     void showTimeoutDialog();
+
+    String getDeviceId();
 }

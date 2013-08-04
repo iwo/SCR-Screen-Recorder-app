@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.provider.Settings.Secure;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Display;
@@ -416,6 +417,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public String getDeviceId() {
+        return Secure.getString(getContentResolver(), Secure.ANDROID_ID);
     }
 
     private void buyPro() {
