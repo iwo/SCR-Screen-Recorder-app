@@ -47,7 +47,7 @@ public class ResolutionsManager {
 
         for (int i = 0; i < standardHeights.length; i++) {
             int h = standardHeights[i];
-            int w = 0;
+            int w = nearestEven(h * aspectRatio);
             String label = null;
 
             if (h > height)
@@ -58,14 +58,12 @@ public class ResolutionsManager {
                 label = original;
             } else if (h == height / 2) {
                 label = half;
-                w = width / 2;
             } else {
                 label = h + "p";
-                w = (int) (h * aspectRatio);
             }
             heightsSet.add(h);
             Resolution resolution = new Resolution(label, w, h);
-            if (h == 480 && w != 819) { // 819 is a special case for 1024x600 which crashes media recorder when scaled down
+            if (h == 480) {
                 defaultResolution = resolution;
             }
             resolutions.add(resolution);
@@ -73,7 +71,7 @@ public class ResolutionsManager {
 
         for (int i = 0; i < standardWidths.length; i++) {
             int w = standardWidths[i];
-            int h = (int) (w / aspectRatio);
+            int h = nearestEven(w / aspectRatio);
             String label = w + "p↦";
 
             if (h > height || heightsSet.contains(h))
@@ -89,8 +87,8 @@ public class ResolutionsManager {
             }
             resolutions.add(resolution);
         }
-        if (!heightsSet.contains(height / 2)) {
-            resolutions.add(new Resolution(half, width / 2, height / 2));
+        if (!heightsSet.contains(nearestEven(height / 2.0))) {
+            resolutions.add(new Resolution(half, nearestEven(width / 2.0), nearestEven(height / 2.0)));
         }
 
         Collections.sort(resolutions, new Comparator<Resolution>() {
@@ -101,6 +99,10 @@ public class ResolutionsManager {
         });
 
         this.resolutions = resolutions.toArray(new Resolution[resolutions.size()]);
+    }
+
+    private int nearestEven(double value) {
+        return (int) (2.0 * Math.round(value / 2.0));
     }
 
     public Resolution getDefaultResolution() {
