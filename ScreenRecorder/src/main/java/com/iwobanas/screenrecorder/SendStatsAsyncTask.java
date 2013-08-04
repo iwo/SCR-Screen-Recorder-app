@@ -21,10 +21,12 @@ public class SendStatsAsyncTask extends AsyncTask<Void, Void, Void> {
 
     private Map<String, String> params = new HashMap<String, String>();
 
-    public SendStatsAsyncTask(String deviceId, String recordingId, int errorCode) {
+    public SendStatsAsyncTask(String deviceId, String recordingId, int errorCode, long size, long time) {
         params.put("device_id", deviceId);
         params.put("recording_id", recordingId);
         params.put("error_code", String.valueOf(errorCode));
+        params.put("recording_size", String.valueOf(size));
+        params.put("recording_time", String.valueOf(time));
     }
 
     @Override

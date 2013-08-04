@@ -67,7 +67,6 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
                 service.setReady(true);
                 break;
             case FINISHED:
-                logStats(-1);
                 service.recordingFinished();
                 service.setReady(false);
                 break;
@@ -75,7 +74,6 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
                 if (previousState == RecorderProcess.ProcessState.RECORDING
                     || previousState == RecorderProcess.ProcessState.STOPPING
                     || previousState == RecorderProcess.ProcessState.FINISHED) {
-                    logStats(exitValue);
                     handleRecordingError(exitValue);
                 } else {
                     handleStartupError(exitValue);
@@ -119,9 +117,5 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         } else {
             Log.e(TAG, "Unknown exit value: " + exitValue);
         }
-    }
-
-    private void logStats(int exitValue) {
-        new SendStatsAsyncTask(service.getDeviceId(), fileName, exitValue).execute();
     }
 }
