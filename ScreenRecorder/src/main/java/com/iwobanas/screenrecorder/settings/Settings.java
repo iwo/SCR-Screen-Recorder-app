@@ -14,6 +14,11 @@ public class Settings {
     private static final String TRANSFORMATION = "TRANSFORMATION";
     private static final String COLOR_FIX = "COLOR_FIX";
     private static final String HIDE_ICON = "HIDE_ICON";
+    private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
+    private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
+    private static final String DEFAULT_TRANSFORMATION = "DEFAULT_TRANSFORMATION";
+    private static final String DEFAULT_COLOR_FIX = "DEFAULT_COLOR_FIX";
+    private static final String DEFAULTS_UPDATE_TIMESTAMP = "DEFAULTS_UPDATE_TIMESTAMP";
 
     private static Settings instance;
 
@@ -36,13 +41,19 @@ public class Settings {
 
     private Resolution resolution;
 
+    private Resolution defaultResolution;
+
     private ResolutionsManager resolutionsManager;
 
     private int frameRate = 15;
 
     private Transformation transformation = Transformation.GPU;
 
+    private Transformation defaultTransformation = Transformation.GPU;
+
     private boolean colorFix = false;
+
+    private boolean defaultColorFix = false;
 
     private boolean hideIcon = false;
 
@@ -50,11 +61,20 @@ public class Settings {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
         readPreferences();
+        if (shouldUpdateDefaults()) {
+            new LoadDefaultsAsyncTask().execute();
+        }
     }
 
     private void readPreferences() {
         String audioSource = preferences.getString(AUDIO_SOURCE, AudioSource.MIC.name());
         this.audioSource = AudioSource.valueOf(audioSource);
+
+        int defaultResolutionWidth = preferences.getInt(DEFAULT_RESOLUTION_WIDTH, -1);
+        if (defaultResolutionWidth != -1) {
+            int defaultResolutionHeight = preferences.getInt(DEFAULT_RESOLUTION_HEIGHT, 0);
+            defaultResolution = resolutionsManager.getResolution(defaultResolutionWidth, defaultResolutionHeight);
+        }
 
         int resolutionWidth = preferences.getInt(RESOLUTION_WIDTH, -1);
         if (resolutionWidth != -1) {
@@ -64,11 +84,61 @@ public class Settings {
 
         frameRate = preferences.getInt(FRAME_RATE, 15);
 
-        String transformation = preferences.getString(TRANSFORMATION, Transformation.GPU.name());
+        String defaultTransformation = preferences.getString(DEFAULT_TRANSFORMATION, Transformation.GPU.name());
+        this.defaultTransformation = Transformation.valueOf(defaultTransformation);
+
+        String transformation = preferences.getString(TRANSFORMATION, defaultTransformation);
         this.transformation = Transformation.valueOf(transformation);
 
-        colorFix = preferences.getBoolean(COLOR_FIX, false);
+        defaultColorFix = preferences.getBoolean(DEFAULT_COLOR_FIX, false);
+        colorFix = preferences.getBoolean(COLOR_FIX, defaultColorFix);
+
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
+    }
+
+    public void updateDefaults(String resolutionWidth, String resolutionHeight, String transformation, String colorFix) {
+        if (resolutionWidth != null && resolutionWidth.length() > 0 &&
+            resolutionHeight != null && resolutionHeight.length() > 0) {
+            int w = Integer.parseInt(resolutionWidth);
+            int h = Integer.parseInt(resolutionHeight);
+            defaultResolution = resolutionsManager.getResolution(w, h);
+        }
+        if (transformation != null && transformation.length() > 0) {
+            defaultTransformation = Transformation.valueOf(transformation);
+        }
+        if (colorFix != null && colorFix.length() > 0) {
+            defaultColorFix = Boolean.valueOf(colorFix);
+        }
+
+        saveDefaults();
+        readPreferences(); // refresh preferences to restore update defaults
+    }
+
+    private void saveDefaults() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putLong(DEFAULTS_UPDATE_TIMESTAMP, System.currentTimeMillis());
+        if (defaultResolution != null) {
+            editor.putInt(DEFAULT_RESOLUTION_WIDTH, defaultResolution.getWidth());
+            editor.putInt(DEFAULT_RESOLUTION_HEIGHT, defaultResolution.getHeight());
+        } else {
+            editor.remove(DEFAULT_RESOLUTION_WIDTH);
+            editor.remove(DEFAULT_RESOLUTION_HEIGHT);
+        }
+
+        if (defaultTransformation != null) {
+            editor.putString(DEFAULT_TRANSFORMATION, defaultTransformation.name());
+        } else {
+            editor.remove(DEFAULT_TRANSFORMATION);
+        }
+
+        editor.putBoolean(DEFAULT_COLOR_FIX, defaultColorFix);
+
+        editor.commit();
+    }
+
+    private Boolean shouldUpdateDefaults() {
+        long time = System.currentTimeMillis() - preferences.getLong(DEFAULTS_UPDATE_TIMESTAMP, 0);
+        return (time > 24 * 60 * 60 * 1000);
     }
 
     public AudioSource getAudioSource() {
@@ -84,7 +154,7 @@ public class Settings {
 
     public Resolution getResolution() {
         if (resolution == null)
-            return resolutionsManager.getDefaultResolution();
+            return getDefaultResolution();
 
         return resolution;
     }
@@ -104,6 +174,9 @@ public class Settings {
     }
 
     public Resolution getDefaultResolution() {
+        if (defaultResolution != null) {
+            return defaultResolution;
+        }
         return resolutionsManager.getDefaultResolution();
     }
 
@@ -155,8 +228,8 @@ public class Settings {
         setAudioSource(AudioSource.MIC);
         setResolution(getDefaultResolution());
         setFrameRate(15);
-        setTransformation(Transformation.GPU);
-        setColorFix(false);
+        setTransformation(defaultTransformation);
+        setColorFix(defaultColorFix);
         setHideIcon(false);
     }
 }

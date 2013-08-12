@@ -119,6 +119,6 @@ public class ResolutionsManager {
                 return resolution;
             }
         }
-        return new Resolution(Math.min(width, height) + "p", width, height);
+        return null;
     }
 }
