@@ -376,10 +376,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
                     scanOutputAndNotify();
                 }
+                logStats(exitValue, 0, 0);
             }
         });
         EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
-        logStats(exitValue, 0, 0);
     }
 
     @Override
@@ -392,10 +392,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
                     scanOutputAndNotify();
                 }
+                logStats(exitValue, 0, 0);
             }
         });
         EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
-        logStats(exitValue, 0, 0);
     }
 
     @Override
