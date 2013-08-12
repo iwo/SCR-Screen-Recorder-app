@@ -147,7 +147,7 @@ public class Settings {
     public void setHideIcon(boolean hideIcon) {
         this.hideIcon = hideIcon;
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(HIDE_ICON, colorFix);
+        editor.putBoolean(HIDE_ICON, hideIcon);
         editor.commit();
     }
 
