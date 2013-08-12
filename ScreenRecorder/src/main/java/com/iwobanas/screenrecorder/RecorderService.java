@@ -388,7 +388,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 String message = getString(R.string.media_recorder_error_message);
-                displayErrorMessage(message, getString(R.string.media_recorder_error_title), false, true, exitValue);
+                displayErrorMessage(message, getString(R.string.media_recorder_error_title), true, true, exitValue);
                 if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
                     scanOutputAndNotify();
                 }
