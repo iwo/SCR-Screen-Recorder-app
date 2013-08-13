@@ -85,6 +85,7 @@ public class DialogActivity extends Activity {
         @Override
         public void onDismiss(DialogInterface dialog) {
             Activity activity = getActivity();
+            if (activity == null) return;
             if (restart) {
                 Intent intent = new Intent(activity, RecorderService.class);
                 if (extra != null) {
