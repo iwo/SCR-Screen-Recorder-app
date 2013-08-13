@@ -23,7 +23,8 @@ public class LoadDefaultsAsyncTask extends AsyncTask<Void, Void, Properties> {
 
     private Map<String, String> params = new HashMap<String, String>();
 
-    public LoadDefaultsAsyncTask() {
+    public LoadDefaultsAsyncTask(int appVersion) {
+        params.put("app_version", String.valueOf(appVersion));
     }
 
     @Override

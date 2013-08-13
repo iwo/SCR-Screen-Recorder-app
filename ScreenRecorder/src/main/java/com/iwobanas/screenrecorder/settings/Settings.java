@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.iwobanas.screenrecorder.ResolutionsManager;
+import com.iwobanas.screenrecorder.Utils;
 
 public class Settings {
     private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
@@ -62,7 +63,7 @@ public class Settings {
         resolutionsManager = new ResolutionsManager(context);
         readPreferences();
         if (shouldUpdateDefaults()) {
-            new LoadDefaultsAsyncTask().execute();
+            new LoadDefaultsAsyncTask(Utils.getAppVersion(context)).execute();
         }
     }
 

@@ -1,5 +1,7 @@
 package com.iwobanas.screenrecorder;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,5 +56,13 @@ public class Utils {
         }
 
         return hex.toString();
+    }
+
+    public static int getAppVersion(Context context) {
+        int appVersion = -1;
+        try {
+            appVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+        } catch (Exception ignored) {}
+        return appVersion;
     }
 }
