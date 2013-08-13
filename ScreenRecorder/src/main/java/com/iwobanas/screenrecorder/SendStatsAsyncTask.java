@@ -37,6 +37,7 @@ public class SendStatsAsyncTask extends AsyncTask<Void, Void, Void> {
         params.put("build_device", Build.DEVICE);
         params.put("build_board", Build.BOARD);
         params.put("build_hardware", Build.HARDWARE);
+        params.put("build_model", Build.MODEL);
         params.put("build_id", Build.ID);
         params.put("build_version_sdk_int", String.valueOf(Build.VERSION.SDK_INT));
         params.put("build_version_release", Build.VERSION.RELEASE);
