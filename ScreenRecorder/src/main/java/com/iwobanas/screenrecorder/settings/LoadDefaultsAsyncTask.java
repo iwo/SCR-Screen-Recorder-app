@@ -67,6 +67,8 @@ public class LoadDefaultsAsyncTask extends AsyncTask<Void, Void, Properties> {
 
     @Override
     protected void onPostExecute(Properties properties) {
+        if (properties == null) return;
+
         Settings.getInstance().updateDefaults(
             properties.getProperty("resolution_width"),
             properties.getProperty("resolution_height"),
