@@ -11,8 +11,8 @@ import com.iwobanas.screenrecorder.settings.Resolution;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResolutionsManager {
 
@@ -41,7 +41,7 @@ public class ResolutionsManager {
     private void generateResolutions() {
         double aspectRatio = (double) width / (double) height;
 
-        Set<Integer> heightsSet = new HashSet<Integer>();
+        Map<Integer, Resolution> resolutionsByHeight = new HashMap<Integer, Resolution>();
 
         ArrayList<Resolution> resolutions = new ArrayList<Resolution>(10);
 
@@ -61,8 +61,8 @@ public class ResolutionsManager {
             } else {
                 label = h + "p";
             }
-            heightsSet.add(h);
             Resolution resolution = new Resolution(label, w, h);
+            resolutionsByHeight.put(h, resolution);
             if (h == 720) {
                 defaultResolution = resolution;
             }
@@ -74,21 +74,22 @@ public class ResolutionsManager {
             int h = nearestEven(w / aspectRatio);
             String label = w + "p↦";
 
-            if (h > height || heightsSet.contains(h))
+            if (h > height || resolutionsByHeight.containsKey(h))
                 continue;
 
             resolutions.add(new Resolution(label, w, h));
         }
 
-        if (!heightsSet.contains(height)) {
+        if (!resolutionsByHeight.containsKey(height)) {
             Resolution resolution = new Resolution(original, width, height);
-            if (defaultResolution == null) {
-                defaultResolution = resolution;
-            }
             resolutions.add(resolution);
         }
-        if (!heightsSet.contains(nearestEven(height / 2.0))) {
+        if (!resolutionsByHeight.containsKey(nearestEven(height / 2.0))) {
             resolutions.add(new Resolution(half, nearestEven(width / 2.0), nearestEven(height / 2.0)));
+        }
+
+        if (defaultResolution == null) {
+            defaultResolution = resolutionsByHeight.get(height);
         }
 
         Collections.sort(resolutions, new Comparator<Resolution>() {
