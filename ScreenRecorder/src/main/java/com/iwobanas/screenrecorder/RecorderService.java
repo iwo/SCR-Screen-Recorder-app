@@ -85,6 +85,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void onCreate() {
+        EasyTracker.getInstance().setContext(getApplicationContext());
+
         Settings.initialize(this);
         mTaniosc = getResources().getBoolean(R.bool.taniosc);
         mHandler = new Handler();
@@ -92,8 +94,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         readPreferences();
         installExecutable();
-
-        EasyTracker.getInstance().setContext(getApplicationContext());
 
         mRecorderOverlay.show();
         isReady = false;
