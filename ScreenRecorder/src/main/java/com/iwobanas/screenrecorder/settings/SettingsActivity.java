@@ -73,6 +73,10 @@ public class SettingsActivity extends Activity {
 
         private TextView transformationText;
 
+        private TextView videoBitrateText;
+
+        private TextView samplingRateText;
+
         private CheckBox colorFixCheckBox;
 
         private CheckBox hideIconCheckBox;
@@ -91,6 +95,8 @@ public class SettingsActivity extends Activity {
             resolutionText = (TextView) view.findViewById(R.id.settings_resolution_text);
             frameRateText = (TextView) view.findViewById(R.id.settings_frame_rate_text);
             transformationText = (TextView) view.findViewById(R.id.settings_transformation_text);
+            videoBitrateText = (TextView) view.findViewById(R.id.settings_video_bitrate_text);
+            samplingRateText = (TextView) view.findViewById(R.id.settings_sampling_rate_text);
             colorFixCheckBox = (CheckBox) view.findViewById(R.id.settings_color_fix_checkbox);
             hideIconCheckBox = (CheckBox) view.findViewById(R.id.settings_hide_icon_checkbox);
 
@@ -115,6 +121,22 @@ public class SettingsActivity extends Activity {
                 @Override
                 public void onClick(View view) {
                     new FrameRateDialogFragment().show(getFragmentManager(), "frameRate");
+                }
+            });
+
+            TableRow videoBitrateRow = (TableRow) view.findViewById(R.id.settings_video_bitrate_row);
+            videoBitrateRow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new VideoBitrateDialogFragment().show(getFragmentManager(), "video_bitrate");
+                }
+            });
+
+            TableRow samplingRateRow = (TableRow) view.findViewById(R.id.settings_sampling_rate_row);
+            samplingRateRow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new SamplingRateDialogFragment().show(getFragmentManager(), "sampling_rate");
                 }
             });
 
@@ -209,9 +231,27 @@ public class SettingsActivity extends Activity {
             }
 
             if (transformationText != null) {
-                String transformation = settings.getTransformation() == Transformation.GPU ?
-                        getString(R.string.settings_transformation_gpu) : getString(R.string.settings_transformation_cpu);
+                String transformation = null;
+                switch (settings.getTransformation()) {
+                    case CPU:
+                        transformation = getString(R.string.settings_transformation_cpu);
+                        break;
+                    case GPU:
+                        transformation = getString(R.string.settings_transformation_gpu);
+                        break;
+                    case OES:
+                        transformation = getString(R.string.settings_transformation_oes);
+                        break;
+                }
                 transformationText.setText(transformation);
+            }
+
+            if (videoBitrateText != null) {
+                videoBitrateText.setText(settings.getVideoBitrate().getLabel());
+            }
+
+            if (samplingRateText != null) {
+                samplingRateText.setText(settings.getSamplingRate().getLabel());
             }
 
             if (colorFixCheckBox != null) {

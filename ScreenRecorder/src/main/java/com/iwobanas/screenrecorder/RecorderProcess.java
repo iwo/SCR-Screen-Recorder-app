@@ -160,6 +160,8 @@ class RecorderProcess implements Runnable{
         runCommand(String.valueOf(settings.getFrameRate()));
         runCommand(settings.getTransformation().name());
         runCommand(settings.getColorFix() ? "BGRA" : "RGBA");
+        runCommand(settings.getVideoBitrate().getCommand());
+        runCommand(settings.getSamplingRate().getCommand());
         logSettings(settings, rotation);
     }
 
@@ -169,6 +171,9 @@ class RecorderProcess implements Runnable{
                     " audioSource: " + settings.getAudioSource().name() +
                     " resolution: " + settings.getResolution().getWidth() + " x " + settings.getResolution().getHeight() +
                     " frameRate: " + settings.getFrameRate() +
+                    " transformation: " + settings.getTransformation().name() +
+                    " videoBitrate: " + settings.getVideoBitrate().name() +
+                    " samplingRate: " + settings.getSamplingRate().name() +
                     " colorFix: " + settings.getColorFix()
             );
         } catch (Throwable e) {

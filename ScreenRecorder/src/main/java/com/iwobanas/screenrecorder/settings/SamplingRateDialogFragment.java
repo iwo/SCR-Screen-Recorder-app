@@ -10,24 +10,25 @@ import android.view.ContextThemeWrapper;
 
 import com.iwobanas.screenrecorder.R;
 
-public class TransformationDialogFragment extends DialogFragment {
+public class SamplingRateDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo);
         AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
         builder.setIcon(R.drawable.ic_launcher);
-        builder.setTitle(R.string.settings_transformation);
-        String[] items = new String[]{
-                getString(R.string.settings_transformation_oes),
-                getString(R.string.settings_transformation_gpu),
-                getString(R.string.settings_transformation_cpu)
-        };
-        final Transformation[] options = new Transformation[]{Transformation.OES, Transformation.GPU, Transformation.CPU};
+        builder.setTitle(R.string.settings_sampling_rate);
+        final SamplingRate[] samplingRates = SamplingRate.values();
+        final String[] items = new String[samplingRates.length];
+
+        for (int i = 0; i < samplingRates.length; i++) {
+            items[i] = samplingRates[i].getLabel();
+        }
+
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Settings.getInstance().setTransformation(options[i]);
+                Settings.getInstance().setSamplingRate(samplingRates[i]);
                 ((SettingsActivity) getActivity()).settingsChanged();
             }
         });

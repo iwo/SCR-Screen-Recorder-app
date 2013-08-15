@@ -147,5 +147,49 @@
                 android:layout_column="1"/>
     </TableRow>
 
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/settings_video_bitrate_row"
+            android:padding="12dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/settings_video_bitrate"
+                android:layout_column="0"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/settings_video_bitrate_text"
+                android:layout_column="1"
+                android:gravity="center"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/settings_sampling_rate_row"
+            android:padding="12dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/settings_sampling_rate"
+                android:layout_column="0"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/settings_sampling_rate_text"
+                android:layout_column="1"
+                android:gravity="center"/>
+    </TableRow>
+
 </TableLayout>
 </ScrollView>

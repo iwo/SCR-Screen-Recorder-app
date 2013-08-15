@@ -10,24 +10,25 @@ import android.view.ContextThemeWrapper;
 
 import com.iwobanas.screenrecorder.R;
 
-public class TransformationDialogFragment extends DialogFragment {
+public class VideoBitrateDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo);
         AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
         builder.setIcon(R.drawable.ic_launcher);
-        builder.setTitle(R.string.settings_transformation);
-        String[] items = new String[]{
-                getString(R.string.settings_transformation_oes),
-                getString(R.string.settings_transformation_gpu),
-                getString(R.string.settings_transformation_cpu)
-        };
-        final Transformation[] options = new Transformation[]{Transformation.OES, Transformation.GPU, Transformation.CPU};
+        builder.setTitle(R.string.settings_video_bitrate);
+        final VideoBitrate[] bitrates = VideoBitrate.values();
+        final String[] items = new String[bitrates.length];
+
+        for (int i = 0; i < bitrates.length; i++) {
+            items[i] = bitrates[i].getLabel();
+        }
+
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Settings.getInstance().setTransformation(options[i]);
+                Settings.getInstance().setVideoBitrate(bitrates[i]);
                 ((SettingsActivity) getActivity()).settingsChanged();
             }
         });

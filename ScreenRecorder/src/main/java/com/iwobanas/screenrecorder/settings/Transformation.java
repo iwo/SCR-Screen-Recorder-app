@@ -2,5 +2,6 @@ package com.iwobanas.screenrecorder.settings;
 
 public enum Transformation {
     CPU,
-    GPU
+    GPU,
+    OES
 }

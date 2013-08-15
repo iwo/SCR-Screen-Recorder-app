@@ -13,11 +13,15 @@ public class Settings {
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
     private static final String FRAME_RATE = "FRAME_RATE";
     private static final String TRANSFORMATION = "TRANSFORMATION";
+    private static final String SAMPLING_RATE = "SAMPLING_RATE";
+    private static final String VIDO_BITRATE = "VIDO_BITRATE";
     private static final String COLOR_FIX = "COLOR_FIX";
     private static final String HIDE_ICON = "HIDE_ICON";
     private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
     private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
     private static final String DEFAULT_TRANSFORMATION = "DEFAULT_TRANSFORMATION";
+    private static final String DEFAULT_SAMPLING_RATE = "DEFAULT_SAMPLING_RATE";
+    private static final String DEFAULT_VIDO_BITRATE = "DEFAULT_VIDO_BITRATE";
     private static final String DEFAULT_COLOR_FIX = "DEFAULT_COLOR_FIX";
     private static final String DEFAULTS_UPDATE_TIMESTAMP = "DEFAULTS_UPDATE_TIMESTAMP";
 
@@ -51,6 +55,14 @@ public class Settings {
     private Transformation transformation = Transformation.GPU;
 
     private Transformation defaultTransformation = Transformation.GPU;
+
+    private SamplingRate defaultSamplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
+
+    private SamplingRate samplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
+
+    private VideoBitrate defaultVideoBitrate = VideoBitrate.BITRATE_10_MBPS;
+
+    private VideoBitrate videoBitrate = VideoBitrate.BITRATE_10_MBPS;
 
     private boolean colorFix = false;
 
@@ -90,6 +102,19 @@ public class Settings {
 
         String transformation = preferences.getString(TRANSFORMATION, defaultTransformation);
         this.transformation = Transformation.valueOf(transformation);
+
+        String defaultVideoBitrate = preferences.getString(DEFAULT_VIDO_BITRATE, VideoBitrate.BITRATE_10_MBPS.name());
+        this.defaultVideoBitrate = VideoBitrate.valueOf(defaultVideoBitrate);
+
+        String videoBitrate = preferences.getString(DEFAULT_VIDO_BITRATE, defaultVideoBitrate);
+        this.videoBitrate = VideoBitrate.valueOf(videoBitrate);
+
+
+        String defaultSamplingRate = preferences.getString(DEFAULT_SAMPLING_RATE, SamplingRate.SAMPLING_RATE_16_KHZ.name());
+        this.defaultSamplingRate = SamplingRate.valueOf(defaultSamplingRate);
+
+        String samplingRate = preferences.getString(SAMPLING_RATE, defaultSamplingRate);
+        this.samplingRate = SamplingRate.valueOf(samplingRate);
 
         defaultColorFix = preferences.getBoolean(DEFAULT_COLOR_FIX, false);
         colorFix = preferences.getBoolean(COLOR_FIX, defaultColorFix);
@@ -203,6 +228,28 @@ public class Settings {
         return transformation;
     }
 
+    public void setSamplingRate(SamplingRate samplingRate) {
+        this.samplingRate = samplingRate;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(SAMPLING_RATE, samplingRate.name());
+        editor.commit();
+    }
+
+    public SamplingRate getSamplingRate() {
+        return samplingRate;
+    }
+
+    public void setVideoBitrate(VideoBitrate videoBitrate) {
+        this.videoBitrate = videoBitrate;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(VIDO_BITRATE, videoBitrate.name());
+        editor.commit();
+    }
+
+    public VideoBitrate getVideoBitrate() {
+        return videoBitrate;
+    }
+
     public void setColorFix(boolean colorFix) {
         this.colorFix = colorFix;
         SharedPreferences.Editor editor = preferences.edit();
@@ -230,6 +277,8 @@ public class Settings {
         setResolution(getDefaultResolution());
         setFrameRate(15);
         setTransformation(defaultTransformation);
+        setSamplingRate(defaultSamplingRate);
+        setVideoBitrate(defaultVideoBitrate);
         setColorFix(defaultColorFix);
         setHideIcon(false);
     }
