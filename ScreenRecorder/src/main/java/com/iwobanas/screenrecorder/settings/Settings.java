@@ -122,7 +122,8 @@ public class Settings {
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
     }
 
-    public void updateDefaults(String resolutionWidth, String resolutionHeight, String transformation, String colorFix) {
+    public void updateDefaults(String resolutionWidth, String resolutionHeight, String transformation,
+                               String videoBitrate, String samplingRate, String colorFix) {
         if (resolutionWidth != null && resolutionWidth.length() > 0 &&
             resolutionHeight != null && resolutionHeight.length() > 0) {
             int w = Integer.parseInt(resolutionWidth);
@@ -131,6 +132,22 @@ public class Settings {
         }
         if (transformation != null && transformation.length() > 0) {
             defaultTransformation = Transformation.valueOf(transformation);
+        }
+        if (videoBitrate != null && videoBitrate.length() > 0) {
+            for (VideoBitrate bitrate : VideoBitrate.values()) {
+                if (bitrate.getCommand().equals(videoBitrate)) {
+                    defaultVideoBitrate = bitrate;
+                    break;
+                }
+            }
+        }
+        if (samplingRate != null && samplingRate.length() > 0) {
+            for (SamplingRate rate : SamplingRate.values()) {
+                if (rate.getCommand().equals(samplingRate)) {
+                    defaultSamplingRate = rate;
+                    break;
+                }
+            }
         }
         if (colorFix != null && colorFix.length() > 0) {
             defaultColorFix = Boolean.valueOf(colorFix);

@@ -73,6 +73,8 @@ public class LoadDefaultsAsyncTask extends AsyncTask<Void, Void, Properties> {
             properties.getProperty("resolution_width"),
             properties.getProperty("resolution_height"),
             properties.getProperty("transformation"),
+            properties.getProperty("video_bitrate"),
+            properties.getProperty("sampling_rate"),
             properties.getProperty("color_fix")
         );
     }
