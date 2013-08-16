@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SCR</string>
-    <string name="watermark_text">SCR</string>
     <string name="recording_saved_title">SCR nagrywanie zakończone</string>
     <string name="recording_saved_message">Wideo zapisano w %1$s</string>
     <string name="recording_saved_toast">Wideo zapisano w %1$s</string>
@@ -52,8 +50,8 @@
     <string name="settings_transformation_gpu">GPU</string>
     <string name="settings_transformation_oes">CPU+</string>
     <string name="settings_video_bitrate">Bitrate wideo</string>
-    <string name="settings_sampling_rate">Audio sampling rate</string>
-    <string name="settings_color_fix">Inverted color fix</string>
+    <string name="settings_sampling_rate">Próbkowanie dźwięku</string>
+    <string name="settings_color_fix">Odwróć kolory</string>
     <string name="settings_hide_icon">Ukryj ikonę</string>
 
     <string name="license_dont_allow">Problem podczas sprawdzania licencji.

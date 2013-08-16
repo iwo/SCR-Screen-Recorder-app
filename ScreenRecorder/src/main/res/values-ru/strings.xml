@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_full_name">SCR Screen Recorder Pro</string>
-    <string name="app_name">SCR Pro</string>
     <string name="buy_error_message">Ищите SCR Screen Recorder Pro в Google Play</string>
     <string name="buy_error_title">Ошибка Google</string>
     <string name="error_dialog_title">Что-то пошло не так :-(</string>
@@ -40,7 +38,7 @@
     <string name="settings_frame_rate_max_short">Макс</string>
     <string name="settings_frame_rate_up_to">До #0 fps</string>
     <string name="settings_frame_rate_up_to_short">\#0 fps</string>
-    <string name="settings_hide_icon">Скрыть значок уведомления</string>
+    <string name="settings_hide_icon">Скрыть значок</string>
     <string name="settings_ok">OK</string>
     <string name="settings_reset">Сброс</string>
     <string name="settings_resolution">Разрешение</string>
