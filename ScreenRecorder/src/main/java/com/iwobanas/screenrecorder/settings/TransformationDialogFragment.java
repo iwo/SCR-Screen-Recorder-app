@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 
@@ -18,12 +19,28 @@ public class TransformationDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
         builder.setIcon(R.drawable.ic_launcher);
         builder.setTitle(R.string.settings_transformation);
-        String[] items = new String[]{
-                getString(R.string.settings_transformation_oes),
-                getString(R.string.settings_transformation_gpu),
-                getString(R.string.settings_transformation_cpu)
-        };
-        final Transformation[] options = new Transformation[]{Transformation.OES, Transformation.GPU, Transformation.CPU};
+        String[] items = (Build.VERSION.SDK_INT < 18) ?
+                new String[]{
+                        getString(R.string.settings_transformation_gpu),
+                        getString(R.string.settings_transformation_cpu)
+                } :
+                new String[]{
+                        getString(R.string.settings_transformation_oes),
+                        getString(R.string.settings_transformation_gpu),
+                        getString(R.string.settings_transformation_cpu)
+                };
+
+        final Transformation[] options = (Build.VERSION.SDK_INT < 18) ?
+                new Transformation[]{
+                        Transformation.GPU,
+                        Transformation.CPU
+                } :
+                new Transformation[]{
+                        Transformation.OES,
+                        Transformation.GPU,
+                        Transformation.CPU
+                };
+
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
