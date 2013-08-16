@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="buy_error_message">Prosím vyhľadajte SCR Screen Recorder Pro v Obchode Play</string>
+    <string name="buy_error_title">Chyba Obchodu Play</string>
+    <string name="error_dialog_title">Niečo sa pokazilo :-(</string>
+	<string name="free_timeout_buy">Kúpiť teraz</string>
+    <string name="free_timeout_message">Zakúpte si SCR Screen Recorder Pro pre získanie neobmedzeného času na nahrávanie a odstránenie vodoznaku na videu.</string>
+    <string name="free_timeout_no_thanks">Nie, vďaka</string>
+    <string name="free_timeout_title">Časový limit vypršal</string>
+    <string name="help_stop_message">Ak chcete zastaviť nahrávanie, zamknite obrazovku a počkajte 2 sekundy. Prípadne môžete jednoducho znovu spustiť aplikáciu SCR Pro.</string>
+    <string name="help_stop_ok">OK</string>
+    <string name="help_stop_title">Ako zastaviť nahrávanie</string>
+	<string name="license_dont_allow">Kontrola licencie zlyhala. Uistite sa, že ste pripojený k Internetu a že ste prihlásený do Obchoda Play.</string>
+    <string name="license_error">Chyba kontroly licencie. Uistite sa, že ste pripojený k Internetu a že ste prihlásený do Obchoda Play.</string>
+    <string name="media_recorder_error_message">Prosím odinštalujte iné screencast aplikácie a reštartujte Vaše zariadenie. Ak problém pretrváva, obráťte sa prosím prostredníctvom e-mailu na podporu aplikácie.</string>
+    <string name="media_recorder_error_title">Chyba nahrávača</string>
+    <string name="play">Prehrať</string>
+    <string name="recording_error_message">Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d.</string>
+    <string name="recording_saved_message">Nahrávka uložená do %1$s</string>
+    <string name="recording_saved_title">SCR nahrávka uložená</string>
+    <string name="recording_saved_toast">Nahrávka uložená do %1$s</string>
+	<string name="settings_activity_label">Nastavenia SCR</string>
+    <string name="settings_audio">Zvuk</string>
+    <string name="settings_audio_mic">Mikrofón</string>
+    <string name="settings_audio_mute">Bez zvuku</string>
+    <string name="settings_color_fix">Opraviť invertované farby</string>
+    <string name="settings_frame_rate">Počet snímok za sekundu</string>
+    <string name="settings_frame_rate_max">Maximálny</string>
+    <string name="settings_frame_rate_up_to">Až do #0 fps</string>
+    <string name="settings_ok">OK</string>
+    <string name="settings_reset">Obnoviť</string>
+    <string name="settings_resolution">Rozlíšenie</string>
+    <string name="settings_resolution_unstable">(nestabilné)</string>
+    <string name="settings_title">Nastavenia</string>
+    <string name="settings_transformation">Transformácia obrazu</string>
+    <string name="start">Štart</string>
+    <string name="startup_error_message">Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu S%1$d.</string>
+    <string name="su_required_message">Ak chcete spustiť ľubovoľný nahrávač obrazovky, zariadenie musí byť rootnuté. Na Internete sa nachádza veľa návodov, ktoré vysvetľujú, ako rootnúť rôzne zariadenia.</string>
+    <string name="su_required_title">Root prístup je vyžadovaný</string>
+</resources>
