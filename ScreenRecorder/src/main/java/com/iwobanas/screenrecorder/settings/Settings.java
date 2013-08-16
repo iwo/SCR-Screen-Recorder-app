@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import com.iwobanas.screenrecorder.ResolutionsManager;
 import com.iwobanas.screenrecorder.Utils;
@@ -24,6 +25,7 @@ public class Settings {
     private static final String DEFAULT_VIDO_BITRATE = "DEFAULT_VIDO_BITRATE";
     private static final String DEFAULT_COLOR_FIX = "DEFAULT_COLOR_FIX";
     private static final String DEFAULTS_UPDATE_TIMESTAMP = "DEFAULTS_UPDATE_TIMESTAMP";
+    private static final String APP_VERSION = "APP_VERSION";
 
     private static Settings instance;
 
@@ -70,12 +72,18 @@ public class Settings {
 
     private boolean hideIcon = false;
 
+    private int appVersion;
+
+    private boolean appUpdated;
+
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
+        appVersion = Utils.getAppVersion(context);
         readPreferences();
+        handleUpdate();
         if (shouldUpdateDefaults()) {
-            new LoadDefaultsAsyncTask(Utils.getAppVersion(context)).execute();
+            new LoadDefaultsAsyncTask(appVersion).execute();
         }
     }
 
@@ -122,6 +130,23 @@ public class Settings {
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
     }
 
+    private void handleUpdate() {
+        if (appVersion == preferences.getInt(APP_VERSION, -1)) return;
+
+        appUpdated = true;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(APP_VERSION, appVersion);
+
+        if (appVersion == 17) {
+            if (transformation == Transformation.GPU && Build.VERSION.SDK_INT >= 18) {
+                editor.remove(TRANSFORMATION);
+                transformation = Transformation.OES;
+            }
+        }
+
+        editor.commit();
+    }
+
     public void updateDefaults(String resolutionWidth, String resolutionHeight, String transformation,
                                String videoBitrate, String samplingRate, String colorFix) {
         if (resolutionWidth != null && resolutionWidth.length() > 0 &&
@@ -131,7 +156,9 @@ public class Settings {
             defaultResolution = resolutionsManager.getResolution(w, h);
         }
         if (transformation != null && transformation.length() > 0) {
-            defaultTransformation = Transformation.valueOf(transformation);
+            try {
+                defaultTransformation = Transformation.valueOf(transformation);
+            } catch (IllegalArgumentException ignored) {}
         }
         if (videoBitrate != null && videoBitrate.length() > 0) {
             for (VideoBitrate bitrate : VideoBitrate.values()) {
@@ -180,6 +207,7 @@ public class Settings {
     }
 
     private Boolean shouldUpdateDefaults() {
+        if (appUpdated) return true;
         long time = System.currentTimeMillis() - preferences.getLong(DEFAULTS_UPDATE_TIMESTAMP, 0);
         return (time > 24 * 60 * 60 * 1000);
     }
@@ -290,14 +318,34 @@ public class Settings {
     }
 
     public void restoreDefault() {
-        setAudioSource(AudioSource.MIC);
-        setResolution(getDefaultResolution());
-        setFrameRate(15);
-        setTransformation(defaultTransformation);
-        setSamplingRate(defaultSamplingRate);
-        setVideoBitrate(defaultVideoBitrate);
-        setColorFix(defaultColorFix);
-        setHideIcon(false);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        audioSource = AudioSource.MIC;
+        editor.remove(AUDIO_SOURCE);
+
+        resolution = getDefaultResolution();
+        editor.remove(RESOLUTION_WIDTH);
+        editor.remove(RESOLUTION_HEIGHT);
+
+        frameRate = 15;
+        editor.remove(FRAME_RATE);
+
+        transformation = defaultTransformation;
+        editor.remove(TRANSFORMATION);
+
+        samplingRate = defaultSamplingRate;
+        editor.remove(SAMPLING_RATE);
+
+        videoBitrate = defaultVideoBitrate;
+        editor.remove(VIDO_BITRATE);
+
+        colorFix = defaultColorFix;
+        editor.remove(COLOR_FIX);
+
+        hideIcon = false;
+        editor.remove(HIDE_ICON);
+
+        editor.commit();
     }
 }
 
