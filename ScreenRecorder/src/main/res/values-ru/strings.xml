@@ -47,6 +47,7 @@
     <string name="settings_transformation">Обработка изображения</string>
     <string name="settings_transformation_cpu">CPU</string>
     <string name="settings_transformation_gpu">GPU</string>
+    <string name="settings_transformation_oes">GPU+</string>
     <string name="start">Старт</string>
     <string name="startup_error_message">Чтобы помочь нам решить проблему, будет отправлено анонимное сообщение об ошибке. Не стесняйтесь связаться через поддержку по электронной почте с указанием ошибки S%1$d.</string>
     <string name="su_required_message">Для запуска любого подобного приложения, ваш телефон/планшет должен иметь root. В интернете есть много учебников где описывается как рутировать различные устройства. Вернитесь снова, когда все будет готово!</string>

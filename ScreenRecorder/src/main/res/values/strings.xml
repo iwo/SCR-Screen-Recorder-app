@@ -51,7 +51,7 @@
     <string name="settings_transformation">Image transformation</string>
     <string name="settings_transformation_cpu">CPU</string>
     <string name="settings_transformation_gpu">GPU</string>
-    <string name="settings_transformation_oes">CPU+</string>
+    <string name="settings_transformation_oes">GPU+</string>
     <string name="settings_video_bitrate">Video bitrate</string>
     <string name="settings_sampling_rate">Audio sampling rate</string>
     <string name="settings_color_fix">Inverted color fix</string>

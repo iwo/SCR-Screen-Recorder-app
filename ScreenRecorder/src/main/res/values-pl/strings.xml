@@ -48,7 +48,7 @@
     <string name="settings_transformation">Przetwarzanie obrazu</string>
     <string name="settings_transformation_cpu">CPU</string>
     <string name="settings_transformation_gpu">GPU</string>
-    <string name="settings_transformation_oes">CPU+</string>
+    <string name="settings_transformation_oes">GPU+</string>
     <string name="settings_video_bitrate">Bitrate wideo</string>
     <string name="settings_sampling_rate">Próbkowanie dźwięku</string>
     <string name="settings_color_fix">Odwróć kolory</string>
