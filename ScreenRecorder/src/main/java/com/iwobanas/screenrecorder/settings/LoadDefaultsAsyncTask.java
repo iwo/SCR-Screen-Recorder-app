@@ -9,7 +9,6 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -58,7 +57,7 @@ public class LoadDefaultsAsyncTask extends AsyncTask<Void, Void, Properties> {
             result = client.execute(get, handler);
             properties = new Properties();
             properties.load(new StringReader(result));
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.w(TAG, "HTTP GET execution error", e);
         }
         client.close();
