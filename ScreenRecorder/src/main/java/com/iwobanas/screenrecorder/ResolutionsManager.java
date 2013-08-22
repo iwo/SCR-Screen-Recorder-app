@@ -82,10 +82,13 @@ public class ResolutionsManager {
 
         if (!resolutionsByHeight.containsKey(height)) {
             Resolution resolution = new Resolution(original, width, height);
+            resolutionsByHeight.put(resolution.getHeight(), resolution);
             resolutions.add(resolution);
         }
         if (!resolutionsByHeight.containsKey(nearestEven(height / 2.0))) {
-            resolutions.add(new Resolution(half, nearestEven(width / 2.0), nearestEven(height / 2.0)));
+            Resolution resolution = new Resolution(half, nearestEven(width / 2.0), nearestEven(height / 2.0));
+            resolutionsByHeight.put(resolution.getHeight(), resolution);
+            resolutions.add(resolution);
         }
 
         if (defaultResolution == null) {
