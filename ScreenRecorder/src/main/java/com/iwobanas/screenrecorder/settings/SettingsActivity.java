@@ -217,7 +217,7 @@ public class SettingsActivity extends Activity {
                 if (resolution == null)
                     resolution = settings.getDefaultResolution();
 
-                resolutionText.setText(resolution.getLabel());
+                resolutionText.setText(resolution.getWidth() + "x" + resolution.getHeight());
             }
 
             if (frameRateText != null) {

@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.CamcorderProfile;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -13,6 +14,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.media.CamcorderProfile.*;
 
 public class ResolutionsManager {
 
@@ -95,6 +98,8 @@ public class ResolutionsManager {
             defaultResolution = resolutionsByHeight.get(height);
         }
 
+        addStandardResolutions(aspectRatio, resolutions, resolutionsByHeight);
+
         Collections.sort(resolutions, new Comparator<Resolution>() {
             @Override
             public int compare(Resolution a, Resolution b) {
@@ -103,6 +108,32 @@ public class ResolutionsManager {
         });
 
         this.resolutions = resolutions.toArray(new Resolution[resolutions.size()]);
+    }
+
+    private void addStandardResolutions(double aspectRatio, ArrayList<Resolution> resolutions, Map<Integer, Resolution> resolutionsByHeight) {
+        for (int profileId : new int[]{QUALITY_1080P, QUALITY_720P, CamcorderProfile.QUALITY_480P}) {
+            if (!CamcorderProfile.hasProfile(profileId)) continue;
+            CamcorderProfile profile = CamcorderProfile.get(profileId);
+            if (profile.videoFrameHeight > height && profile.videoFrameWidth > width) {
+                continue;
+            }
+            Resolution existingResolution = resolutionsByHeight.get(profile.videoFrameHeight);
+            if (existingResolution != null && existingResolution.getWidth() == profile.videoFrameWidth) {
+                continue;
+            }
+
+            int paddingHeight = 0;
+            int paddingWidth = 0;
+
+            if (profile.videoFrameHeight * aspectRatio > profile.videoFrameWidth) {
+                paddingHeight = (int) Math.round((profile.videoFrameHeight - profile.videoFrameWidth / aspectRatio) / 2);
+            } else {
+                paddingWidth = (int) Math.round((profile.videoFrameWidth - profile.videoFrameHeight * aspectRatio) / 2);
+            }
+            resolutions.add(new Resolution(profile.videoFrameHeight + "p",
+                    profile.videoFrameWidth, profile.videoFrameHeight,
+                    paddingWidth, paddingHeight));
+        }
     }
 
     private int nearestEven(double value) {
