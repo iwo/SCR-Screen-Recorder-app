@@ -5,6 +5,7 @@
     <string name="recording_saved_title">SCR Recording Saved</string>
     <string name="recording_saved_message">Recording saved to %1$s</string>
     <string name="recording_saved_toast">Recording saved to %1$s</string>
+    <string name="max_file_size_reached_toast">Max file size reached. Recording saved to %1$s</string>
     <string name="start">Start</string>
     <string name="play">Play</string>
     <string name="output_dir">ScreenRecorder</string>

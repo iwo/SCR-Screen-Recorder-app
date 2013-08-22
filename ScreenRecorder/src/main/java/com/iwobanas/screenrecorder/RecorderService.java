@@ -233,31 +233,37 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                scanOutputAndNotify();
-
-                if (mTaniosc) {
-                    mWatermark.stop();
-                } else {
-                    mWatermark.show();
-                }
-                mTimeController.reset();
-
-                long sizeK = outputFile.length() / 1024l;
-                long sizeM = sizeK / 1024l;
-                long time = (System.currentTimeMillis() - mRecordingStartTime) / 1000l;
-                EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, sizeM);
-                EasyTracker.getTracker().sendEvent(STATS, RECORDING, TIME, time);
-                logStats(-1, (int) sizeK, (int) time);
-
-                showRecorderOverlay();
-                isReady = false;
-                mNativeProcessRunner.initialize();
+                scanOutputAndNotify(R.string.recording_saved_toast);
+                reportRecordingStats(-1);
+                reinitialize();
             }
         });
     }
 
-    public void scanOutputAndNotify() {
-        String message = String.format(getString(R.string.recording_saved_toast), outputFile.getName());
+    private void reinitialize() {
+        if (mTaniosc) {
+            mWatermark.stop();
+        } else {
+            mWatermark.show();
+        }
+        mTimeController.reset();
+
+        showRecorderOverlay();
+        isReady = false;
+        mNativeProcessRunner.initialize();
+    }
+
+    private void reportRecordingStats(int errorCode) {
+        long sizeK = outputFile.length() / 1024l;
+        long sizeM = sizeK / 1024l;
+        long time = (System.currentTimeMillis() - mRecordingStartTime) / 1000l;
+        EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, sizeM);
+        EasyTracker.getTracker().sendEvent(STATS, RECORDING, TIME, time);
+        logStats(errorCode, (int) sizeK, (int) time);
+    }
+
+    public void scanOutputAndNotify(int toastId) {
+        String message = String.format(getString(toastId), outputFile.getName());
         Toast.makeText(RecorderService.this, message, Toast.LENGTH_LONG).show();
         scanFile(outputFile);
         notificationSaved();
@@ -375,7 +381,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 String message = String.format(getString(R.string.recording_error_message), exitValue);
                 displayErrorMessage(message, getString(R.string.error_dialog_title), true, true, exitValue);
                 if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
-                    scanOutputAndNotify();
+                    scanOutputAndNotify(R.string.recording_saved_toast);
                 }
                 logStats(exitValue, 0, 0);
             }
@@ -391,12 +397,24 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 String message = getString(R.string.media_recorder_error_message);
                 displayErrorMessage(message, getString(R.string.media_recorder_error_title), true, true, exitValue);
                 if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
-                    scanOutputAndNotify();
+                    scanOutputAndNotify(R.string.recording_saved_toast);
                 }
                 logStats(exitValue, 0, 0);
             }
         });
         EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
+    }
+
+    @Override
+    public void maxFileSizeReached() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                scanOutputAndNotify(R.string.max_file_size_reached_toast);
+                reportRecordingStats(229);
+                reinitialize();
+            }
+        });
     }
 
     @Override

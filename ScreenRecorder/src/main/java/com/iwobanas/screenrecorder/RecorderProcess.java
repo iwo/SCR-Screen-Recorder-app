@@ -107,20 +107,21 @@ class RecorderProcess implements Runnable{
             if (exitValue < 200) {
                 exitValue = exitValueOverride;
             }
-            setState(ProcessState.ERROR);
-            if (!destroying) {
-                killMediaServer();
-            }
+            setErrorState();
         } else if (state == ProcessState.STOPPING) {
             setState(ProcessState.FINISHED);
         } else {
-            setState(ProcessState.ERROR);
-            if (!destroying) {
-                killMediaServer();
-            }
+            setErrorState();
         }
 
         Log.d(TAG, "Return value: " + exitValue);
+    }
+
+    private void setErrorState() {
+        setState(ProcessState.ERROR);
+        if (!destroying && exitValue != 229) {
+            killMediaServer();
+        }
     }
 
     private void checkStatus(String expectedStatus, String status, int errorCode) {
