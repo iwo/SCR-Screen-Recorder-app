@@ -394,7 +394,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                String message = getString(R.string.media_recorder_error_message);
+                String message = String.format(getString(R.string.media_recorder_error_message), exitValue);
                 displayErrorMessage(message, getString(R.string.media_recorder_error_title), true, true, exitValue);
                 if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
                     scanOutputAndNotify(R.string.recording_saved_toast);
