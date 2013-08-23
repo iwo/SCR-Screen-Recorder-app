@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -265,11 +264,11 @@ class RecorderProcess implements Runnable{
             Log.d(TAG, "Destroying process");
             destroying = true;
             stopTimeout.start();
-            killProcess();
+            stopProcess();
         }
     }
 
-    private void killProcess() {
+    private void stopProcess() {
         if (process != null) try {
             // process.destroy(); fails with "EPERM (Operation not permitted)"
             // so we just close the input stream
@@ -286,28 +285,25 @@ class RecorderProcess implements Runnable{
         }
         forceKilled = true;
 
-        try {
-            Field f = process.getClass().getDeclaredField("pid");
-            f.setAccessible(true);
-            Integer pid = (Integer) f.get(process);
-            Log.d(TAG, "killing pid " + pid);
-            Runtime.getRuntime().exec(new String[]{"su", "-c", "kill -9 "+ pid});
-        } catch (Exception e){
-            Log.e(TAG, "Error killing the process", e);
-        }
+        killProcess(executable);
     }
 
     private void killMediaServer() {
         Log.d(TAG, "restartMediaServer");
-        int pid = Utils.findProcessByCommand("/system/bin/mediaserver");
+        killProcess("/system/bin/mediaserver");
+    }
+
+    private void killProcess(String command) {
+        Log.d(TAG, "kill process " + command);
+        int pid = Utils.findProcessByCommand(command);
         if (pid == -1 || pid == 0) {
-            Log.e(TAG, "mediaserver process not found");
+            Log.e(TAG, command + " process not found");
             return;
         }
         try {
             Runtime.getRuntime().exec(new String[]{"su", "-c", "kill -9 " + pid});
         } catch (IOException e) {
-            Log.e(TAG, "error killing mediaserver", e);
+            Log.e(TAG, "error killing " + command, e);
         }
     }
 
