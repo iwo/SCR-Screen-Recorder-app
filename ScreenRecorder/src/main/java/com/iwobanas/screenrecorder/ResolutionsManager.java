@@ -27,9 +27,6 @@ public class ResolutionsManager {
     private int[] standardHeights = new int[]{1080, 720, 480, 360, 240};
     private int[] standardWidths = new int[]{1080, 720, 480};
 
-    private String original = "Max";
-    private String half = "Half";
-
     @SuppressLint("NewApi")
     public ResolutionsManager(Context context) {
         Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -51,20 +48,20 @@ public class ResolutionsManager {
         for (int i = 0; i < standardHeights.length; i++) {
             int h = standardHeights[i];
             int w = nearestEven(h * aspectRatio);
-            String label = null;
+            int labelId = 0;
 
             if (h > height)
                 continue;
 
             if (h == height) {
                 w = width;
-                label = original;
+                labelId = R.string.settings_resolution_max;
             } else if (h == height / 2) {
-                label = half;
+                labelId = R.string.settings_resolution_half;
             } else {
-                label = h + "p";
+                labelId = R.string.settings_resolution_p;
             }
-            Resolution resolution = new Resolution(label, w, h);
+            Resolution resolution = new Resolution(labelId, w, h);
             resolutionsByHeight.put(h, resolution);
             if (h == 720) {
                 defaultResolution = resolution;
@@ -75,21 +72,20 @@ public class ResolutionsManager {
         for (int i = 0; i < standardWidths.length; i++) {
             int w = standardWidths[i];
             int h = nearestEven(w / aspectRatio);
-            String label = w + "p↦";
 
             if (h > height || resolutionsByHeight.containsKey(h))
                 continue;
 
-            resolutions.add(new Resolution(label, w, h));
+            resolutions.add(new Resolution(R.string.settings_resolution_horizontal, w, h));
         }
 
         if (!resolutionsByHeight.containsKey(height)) {
-            Resolution resolution = new Resolution(original, width, height);
+            Resolution resolution = new Resolution(R.string.settings_resolution_max, width, height);
             resolutionsByHeight.put(resolution.getHeight(), resolution);
             resolutions.add(resolution);
         }
         if (!resolutionsByHeight.containsKey(nearestEven(height / 2.0))) {
-            Resolution resolution = new Resolution(half, nearestEven(width / 2.0), nearestEven(height / 2.0));
+            Resolution resolution = new Resolution(R.string.settings_resolution_half, nearestEven(width / 2.0), nearestEven(height / 2.0));
             resolutionsByHeight.put(resolution.getHeight(), resolution);
             resolutions.add(resolution);
         }
@@ -130,7 +126,7 @@ public class ResolutionsManager {
             } else {
                 paddingWidth = (int) Math.round((profile.videoFrameWidth - profile.videoFrameHeight * aspectRatio) / 2);
             }
-            resolutions.add(new Resolution(profile.videoFrameHeight + "p",
+            resolutions.add(new Resolution(R.string.settings_resolution_padding,
                     profile.videoFrameWidth, profile.videoFrameHeight,
                     paddingWidth, paddingHeight));
         }

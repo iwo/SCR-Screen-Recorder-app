@@ -36,9 +36,10 @@ public class ResolutionDialogFragment extends DialogFragment {
     }
 
     private String formatLabel(Resolution r) {
-        boolean above720p = Math.min(r.getWidth(), r.getHeight()) > 720;
-        return r.getLabel() + " - " + Math.max(r.getWidth(), r.getHeight())
-                + "x" + Math.min(r.getWidth(), r.getHeight())
-                + " " + (above720p ? getString(R.string.settings_resolution_unstable) : "");
+        String label = String.format(getString(r.getLabelId(), r.getWidth(), r.getHeight()));
+        if (r.getHeight() > 720) {
+            label += " " + getString(R.string.settings_resolution_unstable);
+        }
+        return label;
     }
 }
