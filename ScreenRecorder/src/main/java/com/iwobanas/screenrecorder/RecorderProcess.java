@@ -300,8 +300,9 @@ class RecorderProcess implements Runnable{
     private void killMediaServer() {
         Log.d(TAG, "restartMediaServer");
         int pid = Utils.findProcessByCommand("/system/bin/mediaserver");
-        if (pid == -1) {
+        if (pid == -1 || pid == 0) {
             Log.e(TAG, "mediaserver process not found");
+            return;
         }
         try {
             Runtime.getRuntime().exec(new String[]{"su", "-c", "kill -9 " + pid});
