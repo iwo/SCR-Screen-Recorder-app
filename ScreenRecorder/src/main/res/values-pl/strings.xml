@@ -3,6 +3,8 @@
     <string name="recording_saved_title">SCR nagrywanie zakończone</string>
     <string name="recording_saved_message">Wideo zapisano w %1$s</string>
     <string name="recording_saved_toast">Wideo zapisano w %1$s</string>
+    <string name="max_file_size_reached_toast">
+        Maksymalny rozmiar pliku osiągnięty. Wideo zapisano w %1$s</string>
     <string name="start">Start</string>
     <string name="play">Odtwórz</string>
     <string name="output_dir">ScreenRecorder</string>
@@ -39,6 +41,12 @@
     <string name="settings_audio_mic">Mikrofon</string>
     <string name="settings_audio_mute">Brak</string>
     <string name="settings_resolution">Rozdzielczość</string>
+    <string name="settings_resolution_short">%1$dx%2$d</string>
+    <string name="settings_resolution_p">%1$dx%2$d - %2$dp</string>
+    <string name="settings_resolution_horizontal">%1$dx%2$d - %1$dp w poziomie</string>
+    <string name="settings_resolution_padding">%1$dx%2$d - %2$dp z marginesem</string>
+    <string name="settings_resolution_max">%1$dx%2$d - Max</string>
+    <string name="settings_resolution_half">%1$dx%2$d - Połowa</string>
     <string name="settings_resolution_unstable">(niestabilne)</string>
     <string name="settings_frame_rate">Częstotliwość klatek</string>
     <string name="settings_frame_rate_max">Maksymalna</string>
