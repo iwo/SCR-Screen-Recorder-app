@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.MediaStore;
@@ -163,10 +164,18 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private File getOutputFile() {
         //TODO: check external storage state
-        File dir = new File("/sdcard", getString(R.string.output_dir)); // there are some issues with Environment.getExternalStorageDirectory() on Nexus 4
+        File dir = new File(Environment.getExternalStorageDirectory(), getString(R.string.output_dir));
         if (!dir.exists()) {
             if (!dir.mkdirs()) {
-                Log.w(TAG, "mkdirs failed " + dir.getAbsolutePath());
+                Log.w(TAG, "mkdirs failed " + dir.getAbsolutePath() + " fallback to legacy storage dir");
+                // fallback to legacy path /sdcard
+                dir = new File("/sdcard", getString(R.string.output_dir));
+                if (!dir.exists()) {
+                    if (!dir.mkdirs()) {
+                        Log.e(TAG, "mkdirs failed " + dir.getAbsolutePath());
+                        //TODO: display error message
+                    }
+                }
             }
         }
         SimpleDateFormat format = new SimpleDateFormat(getString(R.string.file_name_format));
