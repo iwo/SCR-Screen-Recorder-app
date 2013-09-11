@@ -97,6 +97,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mRecorderOverlay.show();
         isReady = false;
         mNativeProcessRunner.initialize();
+        Settings.getInstance().applyShowTouches();
 
         if (!mTaniosc) {
             checkLicense();
@@ -519,6 +520,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mNativeProcessRunner.destroy();
         mScreenOffReceiver.unregister();
         savePreferences();
+        Settings.getInstance().restoreShowTouches();
     }
 
     private void readPreferences() {

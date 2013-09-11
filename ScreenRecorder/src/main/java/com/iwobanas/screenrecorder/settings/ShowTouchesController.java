@@ -19,6 +19,8 @@ public class ShowTouchesController {
     }
 
     public void setShowTouches(boolean show) {
-        System.putInt(contentResolver, SHOW_TOUCHES_SETTING, show ? 1 : 0);
+        if (getShowTouches() != show) {
+            System.putInt(contentResolver, SHOW_TOUCHES_SETTING, show ? 1 : 0);
+        }
     }
 }

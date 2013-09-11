@@ -76,6 +76,8 @@ public class Settings {
 
     private ShowTouchesController showTouchesController;
 
+    private boolean originalShowTouches;
+
     private int appVersion;
 
     private boolean appUpdated;
@@ -84,6 +86,7 @@ public class Settings {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
         showTouchesController = new ShowTouchesController(context);
+        originalShowTouches = showTouchesController.getShowTouches();
         appVersion = Utils.getAppVersion(context);
         readPreferences();
         handleUpdate();
@@ -374,6 +377,17 @@ public class Settings {
         editor.remove(SHOW_TOUCHES);
 
         editor.commit();
+    }
+
+    public void restoreShowTouches() {
+        // only hide touch indicators here to prevent confusion for users who enabled touch indicators via Android Settings
+        if (!originalShowTouches) {
+            showTouchesController.setShowTouches(false);
+        }
+    }
+
+    public void applyShowTouches() {
+        showTouchesController.setShowTouches(showTouches);
     }
 }
 
