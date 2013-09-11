@@ -17,26 +17,30 @@
             android:label="@string/app_name"
             android:icon="@drawable/ic_launcher">
         <service android:name=".RecorderService"/>
+
         <activity
                 android:name=".RecorderActivity"
                 android:label="@string/app_name"
+                android:launchMode="singleInstance"
+                android:excludeFromRecents="true"
                 android:theme="@style/Theme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
                 android:name=".DialogActivity"
                 android:label="@string/app_name"
                 android:excludeFromRecents="true"
                 android:theme="@style/Theme.Transparent">
         </activity>
+
         <activity
                 android:name=".settings.SettingsActivity"
                 android:label="@string/settings_activity_label"
-                android:excludeFromRecents="true"
-                android:theme="@style/Theme.Transparent">
+                android:launchMode="singleTop">
         </activity>
 
         <!-- Used for install referral measurement-->

@@ -43,8 +43,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
 
-    public static final String SETTINGS_CLOSED_EXTRA = "SETTINGS_CLOSED_EXTRA";
-
     public static final String TIMEOUT_DIALOG_CLOSED_EXTRA = "TIMEOUT_DIALOG_CLOSED_EXTRA";
 
     public static final String HIDE_ICON_DIALOG_CLOSED_EXTRA = "HIDE_ICON_DIALOG_CLOSED_EXTRA";
@@ -432,10 +430,14 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 mRecorderOverlay.hide();
+                mWatermark.hide();
+
+                Intent recorderIntent = new Intent(RecorderService.this, RecorderActivity.class);
+                recorderIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startService(recorderIntent);
+
                 Intent intent = new Intent(RecorderService.this, SettingsActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
+                startActivities(new Intent[] {recorderIntent, intent});
             }
         });
     }
@@ -483,9 +485,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         startForeground();
         if (intent.getBooleanExtra(STOP_HELP_DISPLAYED_EXTRA, false)) {
             startRecording();
-        } else if (intent.getBooleanExtra(SETTINGS_CLOSED_EXTRA, false)) {
-            mRecorderOverlay.show();
-            //refresh settings if needed
         } else if (intent.getBooleanExtra(TIMEOUT_DIALOG_CLOSED_EXTRA, false)) {
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 buyPro();
@@ -502,6 +501,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else if (isRecording) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
+        } else {
+            mRecorderOverlay.show();
+            mWatermark.show();
         }
         return START_NOT_STICKY;
     }

@@ -2,6 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
+<LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+    >
 <TableLayout android:orientation="vertical"
              android:layout_width="fill_parent"
              android:layout_height="fill_parent"
@@ -190,6 +195,14 @@
                 android:layout_column="1"
                 android:gravity="center"/>
     </TableRow>
-
 </TableLayout>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_span="2"
+        android:gravity="center"
+        android:id="@+id/settings_reset_button"
+        android:text="@string/settings_reset"/>
+</LinearLayout>
 </ScrollView>
