@@ -35,6 +35,8 @@ public class SettingsActivity extends Activity {
 
     private CheckBox hideIconCheckBox;
 
+    private CheckBox showTouchesCheckBox;
+
     private Button resetButton;
 
     @Override
@@ -53,6 +55,7 @@ public class SettingsActivity extends Activity {
         samplingRateText = (TextView) findViewById(R.id.settings_sampling_rate_text);
         colorFixCheckBox = (CheckBox) findViewById(R.id.settings_color_fix_checkbox);
         hideIconCheckBox = (CheckBox) findViewById(R.id.settings_hide_icon_checkbox);
+        showTouchesCheckBox = (CheckBox) findViewById(R.id.settings_show_touches_checkbox);
         resetButton = (Button) findViewById(R.id.settings_reset_button);
 
         TableRow audioRow = (TableRow) findViewById(R.id.settings_audio_row);
@@ -132,6 +135,13 @@ public class SettingsActivity extends Activity {
             }
         });
 
+        showTouchesCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                Settings.getInstance().setShowTouches(checked);
+            }
+        });
+
         refreshValues();
 
         resetButton.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +211,10 @@ public class SettingsActivity extends Activity {
 
         if (hideIconCheckBox != null) {
             hideIconCheckBox.setChecked(settings.getHideIcon());
+        }
+
+        if (showTouchesCheckBox != null) {
+            showTouchesCheckBox.setChecked(settings.getShowTouches());
         }
 
     }

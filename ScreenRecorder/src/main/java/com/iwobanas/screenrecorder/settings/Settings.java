@@ -17,6 +17,7 @@ public class Settings {
     private static final String VIDO_BITRATE = "VIDO_BITRATE";
     private static final String COLOR_FIX = "COLOR_FIX";
     private static final String HIDE_ICON = "HIDE_ICON";
+    private static final String SHOW_TOUCHES = "SHOW_TOUCHES";
     private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
     private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
     private static final String DEFAULT_TRANSFORMATION = "DEFAULT_TRANSFORMATION";
@@ -71,6 +72,10 @@ public class Settings {
 
     private boolean hideIcon = false;
 
+    private boolean showTouches = true;
+
+    private ShowTouchesController showTouchesController;
+
     private int appVersion;
 
     private boolean appUpdated;
@@ -78,6 +83,7 @@ public class Settings {
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
+        showTouchesController = new ShowTouchesController(context);
         appVersion = Utils.getAppVersion(context);
         readPreferences();
         handleUpdate();
@@ -127,6 +133,8 @@ public class Settings {
         colorFix = preferences.getBoolean(COLOR_FIX, defaultColorFix);
 
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
+
+        setShowTouches(preferences.getBoolean(SHOW_TOUCHES, true), false);
     }
 
     private void handleUpdate() {
@@ -316,6 +324,24 @@ public class Settings {
         editor.commit();
     }
 
+    public boolean getShowTouches() {
+        return showTouches;
+    }
+
+    public void setShowTouches(boolean showTouches) {
+        setShowTouches(showTouches, true);
+    }
+
+    private void setShowTouches(boolean showTouches, boolean save) {
+        this.showTouches = showTouches;
+        showTouchesController.setShowTouches(showTouches);
+        if (save) {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean(SHOW_TOUCHES, showTouches);
+            editor.commit();
+        }
+    }
+
     public void restoreDefault() {
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -343,6 +369,9 @@ public class Settings {
 
         hideIcon = false;
         editor.remove(HIDE_ICON);
+
+        setShowTouches(true, false);
+        editor.remove(SHOW_TOUCHES);
 
         editor.commit();
     }

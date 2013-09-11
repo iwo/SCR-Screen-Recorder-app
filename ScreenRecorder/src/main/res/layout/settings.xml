@@ -87,6 +87,30 @@
             </TableRow>
 
             <TableRow
+                android:id="@+id/settings_show_touches_row"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:text="@string/settings_show_touches"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/settings_show_touches_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_gravity="center" />
+            </TableRow>
+
+            <TableRow
                 android:id="@+id/settings_hide_icon_row"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
