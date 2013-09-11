@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
-import com.iwobanas.screenrecorder.ResolutionsManager;
 import com.iwobanas.screenrecorder.Utils;
 
 public class Settings {

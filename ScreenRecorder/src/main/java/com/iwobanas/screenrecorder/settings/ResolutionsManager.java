@@ -1,4 +1,4 @@
-package com.iwobanas.screenrecorder;
+package com.iwobanas.screenrecorder.settings;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.iwobanas.screenrecorder.settings.Resolution;
+import com.iwobanas.screenrecorder.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
