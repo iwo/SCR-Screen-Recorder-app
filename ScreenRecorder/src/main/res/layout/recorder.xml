@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:background="#aa000000"
-              android:padding="10dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#aa000000"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageView"
-            android:layout_gravity="center_horizontal|top"
-            android:src="@drawable/ic_launcher"/>
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal|top"
+        android:src="@drawable/ic_launcher" />
 
     <Button
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/start"
-            android:id="@+id/start_button"/>
+        android:id="@+id/start_button"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="@string/start" />
 
     <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/settings_button"
-            android:baselineAlignBottom="true"
-            android:src="@drawable/ic_settings"/>
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/ic_settings" />
 
     <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/close_button"
-            android:baselineAlignBottom="true"
-            android:src="@android:drawable/ic_lock_power_off"/>
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:baselineAlignBottom="true"
+        android:src="@android:drawable/ic_lock_power_off" />
 
 </LinearLayout>
