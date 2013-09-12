@@ -1,38 +1,38 @@
 package com.iwobanas.screenrecorder.settings;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-
 import com.iwobanas.screenrecorder.R;
 
-public class ResolutionDialogFragment extends DialogFragment {
+public class ResolutionDialogFragment extends SettingsListDialogFragment<Resolution> {
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo);
-        AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
-        builder.setIcon(R.drawable.ic_launcher);
-        builder.setTitle(R.string.settings_resolution);
-        final Resolution[] resolutions = Settings.getInstance().getResolutions();
-        final String[] items = new String[resolutions.length];
+    protected int getTitle() {
+        return R.string.settings_resolution;
+    }
 
+    @Override
+    protected Resolution[] getItems() {
+        return getSettings().getResolutions();
+    }
+
+    @Override
+    protected Resolution getSelectedItem() {
+        return getSettings().getResolution();
+    }
+
+    @Override
+    protected void setSelected(Resolution item) {
+        getSettings().setResolution(item);
+    }
+
+    @Override
+    protected String[] getLabels() {
+        Resolution[] resolutions = getItems();
+        String[] labels = new String[resolutions.length];
         for (int i = 0; i < resolutions.length; i++) {
-            items[i] = formatLabel(resolutions[i]);
+            Resolution resolution = resolutions[i];
+            labels[i] = formatLabel(resolution);
         }
-
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Settings.getInstance().setResolution(resolutions[i]);
-                ((SettingsActivity) getActivity()).settingsChanged();
-            }
-        });
-        return builder.create();
+        return labels;
     }
 
     private String formatLabel(Resolution r) {
