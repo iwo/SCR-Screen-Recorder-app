@@ -31,6 +31,7 @@ public class Tracker {
     public final static String SU_DENY = "su_deny";
 
     public final static String TIMEOUT_DIALOG = "timeout_dialog";
+    public final static String WATERMARK_DIALOG = "watermark_dialog";
 
     public final static String AUDIO = "audio";
 

@@ -1,7 +1,6 @@
 package com.iwobanas.screenrecorder.settings;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,9 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.iwobanas.screenrecorder.DialogActivity;
 import com.iwobanas.screenrecorder.R;
-import com.iwobanas.screenrecorder.RecorderService;
 
 import java.text.DecimalFormat;
 
@@ -118,15 +115,7 @@ public class SettingsActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 if (getResources().getBoolean(R.bool.taniosc)) {
-                    SettingsActivity activity = SettingsActivity.this;
-                    Intent intent = new Intent(activity, DialogActivity.class);
-                    intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.hide_icon_message));
-                    intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.hide_icon_title));
-                    intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.free_timeout_buy));
-                    intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.free_timeout_no_thanks));
-                    intent.putExtra(DialogActivity.RESTART_EXTRA, true);
-                    intent.putExtra(DialogActivity.RESTART_EXTRA_EXTRA, RecorderService.HIDE_ICON_DIALOG_CLOSED_EXTRA);
-                    startActivity(intent);
+                    new HideIconDialogFragment().show(getFragmentManager(), "hideWatermark");
                     compoundButton.setChecked(false);
                 } else {
                     Settings.getInstance().setHideIcon(checked);
