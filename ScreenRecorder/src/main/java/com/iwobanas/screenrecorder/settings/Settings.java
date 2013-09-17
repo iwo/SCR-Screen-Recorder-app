@@ -51,7 +51,6 @@ public class Settings {
     private File outputDir;
     private File defaultOutputDir;
     private ShowTouchesController showTouchesController;
-    private boolean originalShowTouches;
     private int appVersion;
     private boolean appUpdated;
 
@@ -59,7 +58,6 @@ public class Settings {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
         showTouchesController = new ShowTouchesController(context);
-        originalShowTouches = showTouchesController.getShowTouches();
         appVersion = Utils.getAppVersion(context);
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), context.getString(R.string.output_dir));
         readPreferences();
@@ -388,14 +386,11 @@ public class Settings {
     }
 
     public void restoreShowTouches() {
-        // only hide touch indicators here to prevent confusion for users who enabled touch indicators via Android Settings
-        if (!originalShowTouches) {
-            showTouchesController.setShowTouches(false);
-        }
+        showTouchesController.restoreShowTouches();
     }
 
     public void applyShowTouches() {
-        showTouchesController.setShowTouches(showTouches);
+        showTouchesController.applyShowTouches();
     }
 }
 
