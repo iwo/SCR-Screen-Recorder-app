@@ -65,6 +65,8 @@
     <string name="settings_color_fix">Inverted color fix</string>
     <string name="settings_hide_icon">Hide notification icon</string>
     <string name="settings_show_touches">Show touches</string>
+    <string name="settings_output_dir">Output directory</string>
+    <string name="directory_chooser_select">Select</string>
 
     <string name="license_dont_allow">License check failed. Make sure your Internet connection is up
         and your\'re logged into Google Play.

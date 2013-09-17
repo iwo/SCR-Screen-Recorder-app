@@ -44,6 +44,11 @@
                 android:launchMode="singleTop">
         </activity>
 
+        <activity
+            android:name=".DirectoryChooserActivity"
+            android:label="@string/settings_activity_label">
+        </activity>
+
         <!-- Used for install referral measurement-->
         <service android:name="com.google.analytics.tracking.android.CampaignTrackingService"/>
         <receiver android:name="com.google.analytics.tracking.android.CampaignTrackingReceiver" android:exported="true">

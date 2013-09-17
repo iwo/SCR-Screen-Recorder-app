@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.MediaStore;
@@ -37,48 +36,56 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.iwobanas.screenrecorder.Tracker.*;
+import static com.iwobanas.screenrecorder.Tracker.ACTION;
+import static com.iwobanas.screenrecorder.Tracker.AUDIO;
+import static com.iwobanas.screenrecorder.Tracker.BUY;
+import static com.iwobanas.screenrecorder.Tracker.BUY_ERROR;
+import static com.iwobanas.screenrecorder.Tracker.ERROR;
+import static com.iwobanas.screenrecorder.Tracker.ERROR_;
+import static com.iwobanas.screenrecorder.Tracker.INSTALLATION_ERROR;
+import static com.iwobanas.screenrecorder.Tracker.LICENSE;
+import static com.iwobanas.screenrecorder.Tracker.LICENSE_ALLOW_;
+import static com.iwobanas.screenrecorder.Tracker.LICENSE_DONT_ALLOW_;
+import static com.iwobanas.screenrecorder.Tracker.LICENSE_ERROR_;
+import static com.iwobanas.screenrecorder.Tracker.RECORDING;
+import static com.iwobanas.screenrecorder.Tracker.RECORDING_ERROR;
+import static com.iwobanas.screenrecorder.Tracker.SETTINGS;
+import static com.iwobanas.screenrecorder.Tracker.SIZE;
+import static com.iwobanas.screenrecorder.Tracker.START;
+import static com.iwobanas.screenrecorder.Tracker.STARTUP_ERROR;
+import static com.iwobanas.screenrecorder.Tracker.STATS;
+import static com.iwobanas.screenrecorder.Tracker.STOP;
+import static com.iwobanas.screenrecorder.Tracker.STOP_DESTROY;
+import static com.iwobanas.screenrecorder.Tracker.STOP_ICON;
+import static com.iwobanas.screenrecorder.Tracker.TIME;
+import static com.iwobanas.screenrecorder.Tracker.TIMEOUT_DIALOG;
 
 public class RecorderService extends Service implements IRecorderService, LicenseCheckerCallback {
 
     public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
-
     public static final String TIMEOUT_DIALOG_CLOSED_EXTRA = "TIMEOUT_DIALOG_CLOSED_EXTRA";
-
-    private static final String TAG = "scr_RecorderService";
-
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
-
+    private static final String TAG = "scr_RecorderService";
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
-
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
-
+    // Licensing
+    private static final byte[] LICENSE_SALT = new byte[]{95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47, 122};
+    private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmOZqTyb4AOB4IEWZiXd0SRYyJ2Y0xu1FBDmxvQqFG+D1wMJMKPxJlMNYwwS3AYjGgzhJzdWFd+oMaRV5uD9BWinHXyUppIrQcHfINv1J9VuwQnVQVYDG+EEiKOAGnnOLhg5EaJ5bdpvRyMLpD3wz9qcIx1YC99/TJC+ACABrhCfkc+U9hKyNe0m4C7DHBEW4SIq22bC1vPOw5KgbdruFxRoQiYU3GE7o8/fH37Vk9Rc+75QrtNYsJ9W0Vm7f2brN+lVwnQVEfsRVBr4k+yHVDVdo82SQfiUo6Q6d0S3HMCqMeRe8UQxGpPxRpE75cADR3LyyduRJ4+KJHPuY38AEAQIDAQAB";
     private WatermarkOverlay mWatermark = new WatermarkOverlay(this);
-
     private IScreenOverlay mRecorderOverlay = new RecorderOverlay(this, this);
-
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this, this);
-
     private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this);
-
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
-
     private Handler mHandler;
-
     private File outputFile;
-
     private boolean isRecording;
-
     private boolean isReady;
-
     private boolean isTimeoutDisplayed;
-
     private long mRecordingStartTime;
-
     private boolean mTaniosc = true;
-
     // Preferences
     private boolean mStopHelpDisplayed;
+    private LicenseChecker mChecker;
 
     @Override
     public void onCreate() {
@@ -161,7 +168,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private File getOutputFile() {
         //TODO: check external storage state
-        File dir = new File(Environment.getExternalStorageDirectory(), getString(R.string.output_dir));
+        File dir = Settings.getInstance().getOutputDir();
         if (!dir.exists()) {
             if (!dir.mkdirs()) {
                 Log.w(TAG, "mkdirs failed " + dir.getAbsolutePath() + " fallback to legacy storage dir");
@@ -180,7 +187,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private String getRotation() {
-        Display display = ((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         Configuration config = getResources().getConfiguration();
         int rotationDeg = getRotationDeg(display);
         rotationDeg = (360 - rotationDeg) % 360;
@@ -284,7 +291,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.Video.Media.TITLE, file.getName());
         contentValues.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4");
-        contentValues.put(MediaStore.Video.Media.DATA,file.getAbsolutePath());
+        contentValues.put(MediaStore.Video.Media.DATA, file.getAbsolutePath());
 
         getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
     }
@@ -436,7 +443,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 startService(recorderIntent);
 
                 Intent intent = new Intent(RecorderService.this, SettingsActivity.class);
-                startActivities(new Intent[] {recorderIntent, intent});
+                startActivities(new Intent[]{recorderIntent, intent});
             }
         });
     }
@@ -532,11 +539,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public IBinder onBind(Intent intent) {
         return null;
     }
-
-    // Licensing
-    private static final byte[] LICENSE_SALT = new byte[]{ 95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47,  122};
-    private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmOZqTyb4AOB4IEWZiXd0SRYyJ2Y0xu1FBDmxvQqFG+D1wMJMKPxJlMNYwwS3AYjGgzhJzdWFd+oMaRV5uD9BWinHXyUppIrQcHfINv1J9VuwQnVQVYDG+EEiKOAGnnOLhg5EaJ5bdpvRyMLpD3wz9qcIx1YC99/TJC+ACABrhCfkc+U9hKyNe0m4C7DHBEW4SIq22bC1vPOw5KgbdruFxRoQiYU3GE7o8/fH37Vk9Rc+75QrtNYsJ9W0Vm7f2brN+lVwnQVEfsRVBr4k+yHVDVdo82SQfiUo6Q6d0S3HMCqMeRe8UQxGpPxRpE75cADR3LyyduRJ4+KJHPuY38AEAQIDAQAB";
-    private LicenseChecker mChecker;
 
     private void checkLicense() {
         String deviceId = android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);

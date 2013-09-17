@@ -1,6 +1,8 @@
 package com.iwobanas.screenrecorder.settings;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,31 +11,25 @@ import android.widget.CompoundButton;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
 
+import java.io.File;
 import java.text.DecimalFormat;
 
 public class SettingsActivity extends Activity {
     public static final String TAG = "scr_SettingsActivity";
-
+    private static final int SELECT_OUTPUT_DIR = 1;
     private TextView audioText;
-
     private TextView resolutionText;
-
     private TextView frameRateText;
-
     private TextView transformationText;
-
     private TextView videoBitrateText;
-
     private TextView samplingRateText;
-
     private CheckBox colorFixCheckBox;
-
     private CheckBox hideIconCheckBox;
-
     private CheckBox showTouchesCheckBox;
-
+    private TextView outputDirText;
     private Button resetButton;
 
     @Override
@@ -53,6 +49,7 @@ public class SettingsActivity extends Activity {
         colorFixCheckBox = (CheckBox) findViewById(R.id.settings_color_fix_checkbox);
         hideIconCheckBox = (CheckBox) findViewById(R.id.settings_hide_icon_checkbox);
         showTouchesCheckBox = (CheckBox) findViewById(R.id.settings_show_touches_checkbox);
+        outputDirText = (TextView) findViewById(R.id.settings_output_dir_text);
         resetButton = (Button) findViewById(R.id.settings_reset_button);
 
         TableRow audioRow = (TableRow) findViewById(R.id.settings_audio_row);
@@ -131,6 +128,16 @@ public class SettingsActivity extends Activity {
             }
         });
 
+        TableRow outputDirRow = (TableRow) findViewById(R.id.settings_output_dir_row);
+        outputDirRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this, DirectoryChooserActivity.class);
+                intent.setData(Uri.fromFile(Settings.getInstance().getOutputDir()));
+                startActivityForResult(intent, SELECT_OUTPUT_DIR);
+            }
+        });
+
         refreshValues();
 
         resetButton.setOnClickListener(new View.OnClickListener() {
@@ -206,12 +213,26 @@ public class SettingsActivity extends Activity {
             showTouchesCheckBox.setChecked(settings.getShowTouches());
         }
 
+        if (outputDirText != null) {
+            outputDirText.setText(settings.getOutputDir().getAbsolutePath());
+        }
+
     }
 
     public void settingsChanged() {
         refreshValues();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SELECT_OUTPUT_DIR) {
+
+            if (resultCode == RESULT_OK) {
+                Settings.getInstance().setOutputDir(new File(data.getData().getPath()));
+                refreshValues();
+            }
+        }
+    }
 }
 
 

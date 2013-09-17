@@ -3,8 +3,12 @@ package com.iwobanas.screenrecorder.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Environment;
 
+import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.Utils;
+
+import java.io.File;
 
 public class Settings {
     private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
@@ -18,6 +22,7 @@ public class Settings {
     private static final String COLOR_FIX = "COLOR_FIX";
     private static final String HIDE_ICON = "HIDE_ICON";
     private static final String SHOW_TOUCHES = "SHOW_TOUCHES";
+    private static final String OUTPUT_DIR = "OUTPUT_DIR";
     private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
     private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
     private static final String DEFAULT_TRANSFORMATION = "DEFAULT_TRANSFORMATION";
@@ -26,8 +31,43 @@ public class Settings {
     private static final String DEFAULT_COLOR_FIX = "DEFAULT_COLOR_FIX";
     private static final String DEFAULTS_UPDATE_TIMESTAMP = "DEFAULTS_UPDATE_TIMESTAMP";
     private static final String APP_VERSION = "APP_VERSION";
-
     private static Settings instance;
+    private SharedPreferences preferences;
+    private AudioSource audioSource = AudioSource.MIC;
+    private Resolution resolution;
+    private Resolution defaultResolution;
+    private ResolutionsManager resolutionsManager;
+    private int frameRate = 15;
+    private Transformation transformation = Transformation.GPU;
+    private Transformation defaultTransformation = Transformation.GPU;
+    private SamplingRate defaultSamplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
+    private SamplingRate samplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
+    private VideoBitrate defaultVideoBitrate = VideoBitrate.BITRATE_10_MBPS;
+    private VideoBitrate videoBitrate = VideoBitrate.BITRATE_10_MBPS;
+    private boolean colorFix = false;
+    private boolean defaultColorFix = false;
+    private boolean hideIcon = false;
+    private boolean showTouches = true;
+    private File outputDir;
+    private File defaultOutputDir;
+    private ShowTouchesController showTouchesController;
+    private boolean originalShowTouches;
+    private int appVersion;
+    private boolean appUpdated;
+
+    private Settings(Context context) {
+        preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        resolutionsManager = new ResolutionsManager(context);
+        showTouchesController = new ShowTouchesController(context);
+        originalShowTouches = showTouchesController.getShowTouches();
+        appVersion = Utils.getAppVersion(context);
+        defaultOutputDir = new File(Environment.getExternalStorageDirectory(), context.getString(R.string.output_dir));
+        readPreferences();
+        handleUpdate();
+        if (shouldUpdateDefaults()) {
+            new LoadDefaultsAsyncTask(appVersion).execute();
+        }
+    }
 
     public static synchronized void initialize(Context context) {
         if (instance == null) {
@@ -40,59 +80,6 @@ public class Settings {
             throw new IllegalStateException("Settings not initialized");
         }
         return instance;
-    }
-
-    private SharedPreferences preferences;
-
-    private AudioSource audioSource = AudioSource.MIC;
-
-    private Resolution resolution;
-
-    private Resolution defaultResolution;
-
-    private ResolutionsManager resolutionsManager;
-
-    private int frameRate = 15;
-
-    private Transformation transformation = Transformation.GPU;
-
-    private Transformation defaultTransformation = Transformation.GPU;
-
-    private SamplingRate defaultSamplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
-
-    private SamplingRate samplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
-
-    private VideoBitrate defaultVideoBitrate = VideoBitrate.BITRATE_10_MBPS;
-
-    private VideoBitrate videoBitrate = VideoBitrate.BITRATE_10_MBPS;
-
-    private boolean colorFix = false;
-
-    private boolean defaultColorFix = false;
-
-    private boolean hideIcon = false;
-
-    private boolean showTouches = true;
-
-    private ShowTouchesController showTouchesController;
-
-    private boolean originalShowTouches;
-
-    private int appVersion;
-
-    private boolean appUpdated;
-
-    private Settings(Context context) {
-        preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        resolutionsManager = new ResolutionsManager(context);
-        showTouchesController = new ShowTouchesController(context);
-        originalShowTouches = showTouchesController.getShowTouches();
-        appVersion = Utils.getAppVersion(context);
-        readPreferences();
-        handleUpdate();
-        if (shouldUpdateDefaults()) {
-            new LoadDefaultsAsyncTask(appVersion).execute();
-        }
     }
 
     private void readPreferences() {
@@ -138,6 +125,9 @@ public class Settings {
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
 
         setShowTouches(preferences.getBoolean(SHOW_TOUCHES, true), false);
+
+        String outputDirPath = preferences.getString(OUTPUT_DIR, defaultOutputDir.getAbsolutePath());
+        outputDir = new File(outputDirPath);
     }
 
     private void handleUpdate() {
@@ -261,6 +251,10 @@ public class Settings {
         return resolutionsManager.getDefaultResolution();
     }
 
+    public int getFrameRate() {
+        return frameRate;
+    }
+
     public void setFrameRate(int value) {
         frameRate = value;
         SharedPreferences.Editor editor = preferences.edit();
@@ -268,8 +262,8 @@ public class Settings {
         editor.commit();
     }
 
-    public int getFrameRate() {
-        return frameRate;
+    public Transformation getTransformation() {
+        return transformation;
     }
 
     public void setTransformation(Transformation transformation) {
@@ -279,8 +273,8 @@ public class Settings {
         editor.commit();
     }
 
-    public Transformation getTransformation() {
-        return transformation;
+    public SamplingRate getSamplingRate() {
+        return samplingRate;
     }
 
     public void setSamplingRate(SamplingRate samplingRate) {
@@ -290,8 +284,8 @@ public class Settings {
         editor.commit();
     }
 
-    public SamplingRate getSamplingRate() {
-        return samplingRate;
+    public VideoBitrate getVideoBitrate() {
+        return videoBitrate;
     }
 
     public void setVideoBitrate(VideoBitrate videoBitrate) {
@@ -301,8 +295,8 @@ public class Settings {
         editor.commit();
     }
 
-    public VideoBitrate getVideoBitrate() {
-        return videoBitrate;
+    public boolean getColorFix() {
+        return colorFix;
     }
 
     public void setColorFix(boolean colorFix) {
@@ -310,10 +304,6 @@ public class Settings {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(COLOR_FIX, colorFix);
         editor.commit();
-    }
-
-    public boolean getColorFix() {
-        return colorFix;
     }
 
     public boolean getHideIcon() {
@@ -343,6 +333,21 @@ public class Settings {
             editor.putBoolean(SHOW_TOUCHES, showTouches);
             editor.commit();
         }
+    }
+
+    public File getOutputDir() {
+        if (outputDir == null) {
+            return defaultOutputDir;
+        }
+        return outputDir;
+    }
+
+    public void setOutputDir(File outputDir) {
+        this.outputDir = outputDir;
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(OUTPUT_DIR, outputDir.getAbsolutePath());
+        editor.commit();
     }
 
     public void restoreDefault() {
@@ -375,6 +380,9 @@ public class Settings {
 
         setShowTouches(true, false);
         editor.remove(SHOW_TOUCHES);
+
+        outputDir = defaultOutputDir;
+        editor.remove(OUTPUT_DIR);
 
         editor.commit();
     }
