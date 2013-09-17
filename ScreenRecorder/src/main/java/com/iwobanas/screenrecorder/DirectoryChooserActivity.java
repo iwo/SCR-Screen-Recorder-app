@@ -52,7 +52,7 @@ public class DirectoryChooserActivity extends ListActivity {
 
         adapter = new ArrayAdapter<FileWrapper>(
                 this,
-                android.R.layout.simple_selectable_list_item,
+                android.R.layout.simple_list_item_1,
                 items
         );
 
