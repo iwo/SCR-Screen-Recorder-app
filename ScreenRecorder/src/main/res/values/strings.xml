@@ -67,6 +67,7 @@
     <string name="settings_show_touches">Show touches</string>
     <string name="settings_output_dir">Output directory</string>
     <string name="directory_chooser_select">Select</string>
+    <string name="directory_chooser_refresh">Refresh</string>
 
     <string name="license_dont_allow">License check failed. Make sure your Internet connection is up
         and your\'re logged into Google Play.

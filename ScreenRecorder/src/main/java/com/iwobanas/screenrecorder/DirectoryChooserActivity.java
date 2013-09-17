@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -102,6 +104,23 @@ public class DirectoryChooserActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         FileWrapper item = (FileWrapper) l.getItemAtPosition(position);
         setDir(item.getFile());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.directory_chooser, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.directory_chooser_refresh:
+                setDir(dir);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
