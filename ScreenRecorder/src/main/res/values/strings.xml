@@ -66,6 +66,7 @@
     <string name="settings_hide_icon">Hide notification icon</string>
     <string name="settings_show_touches">Show touches</string>
     <string name="settings_output_dir">Output directory</string>
+
     <string name="directory_chooser_select">Select</string>
     <string name="directory_chooser_refresh">Refresh</string>
     <string name="directory_chooser_new">New</string>
@@ -73,6 +74,11 @@
     <string name="directory_chooser_new_ok">OK</string>
     <string name="directory_chooser_new_cancel">Cancel</string>
     <string name="directory_chooser_error_message">Directory can\'t be created. Make sure to choose a writable location e.g. SD Card.</string>
+    <string name="directory_chooser_not_writable_title">Selected directory is not writable</string>
+    <string name="directory_chooser_not_writable_message">The application doesn\'t seem to have write permission to %1$s directory. This may cause recording issues.</string>
+    <string name="directory_chooser_ignore">Ignore</string>
+    <string name="directory_chooser_cancel">Cancel</string>
+    <string name="directory_chooser_default">Default</string>
 
     <string name="license_dont_allow">License check failed. Make sure your Internet connection is up
         and your\'re logged into Google Play.

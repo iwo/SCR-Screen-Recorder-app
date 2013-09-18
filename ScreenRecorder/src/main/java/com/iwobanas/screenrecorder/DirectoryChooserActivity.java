@@ -27,9 +27,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DirectoryChooserActivity extends ListActivity {
+    public static final String DEFAULT_DIR_EXTRA = "DEFAULT_DIR_EXTRA";
     private static final String TAG = "scr_DirectoryChooserActivity";
     private static final String DIR = "DIR";
     private File dir;
+    private File defaultDir;
     private ArrayList<FileWrapper> items = new ArrayList<FileWrapper>();
     private ArrayAdapter<FileWrapper> adapter;
 
@@ -45,9 +47,7 @@ public class DirectoryChooserActivity extends ListActivity {
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent result = new Intent(null, Uri.fromFile(dir));
-                setResult(Activity.RESULT_OK, result);
-                finish();
+                selectCurrentDir(true);
             }
         });
 
@@ -62,8 +62,19 @@ public class DirectoryChooserActivity extends ListActivity {
         } else {
             setDir(new File(getIntent().getData().getPath()));
         }
+        defaultDir = new File(getIntent().getStringExtra(DEFAULT_DIR_EXTRA));
 
         setListAdapter(adapter);
+    }
+
+    private void selectCurrentDir(boolean checkWritable) {
+        if (!checkWritable || dir.canWrite()) {
+            Intent result = new Intent(null, Uri.fromFile(dir));
+            setResult(Activity.RESULT_OK, result);
+            finish();
+        } else {
+            new NotWritableDialogFragment().show(getFragmentManager(), "NotWritableDialog");
+        }
     }
 
     @Override
@@ -81,6 +92,10 @@ public class DirectoryChooserActivity extends ListActivity {
             }
         } catch (Throwable ignored) {
         }
+    }
+
+    public File getDir() {
+        return dir;
     }
 
     private void setDir(File dir) {
@@ -115,6 +130,10 @@ public class DirectoryChooserActivity extends ListActivity {
         Collections.sort(items);
 
         return items;
+    }
+
+    private void goToDefault() {
+        setDir(defaultDir);
     }
 
     @Override
@@ -188,6 +207,40 @@ public class DirectoryChooserActivity extends ListActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage(getString(R.string.directory_chooser_error_message));
             return builder.create();
+        }
+    }
+
+    public static class NotWritableDialogFragment extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.directory_chooser_not_writable_title);
+            String path = getDirectoryChooserActivity().getDir().getAbsolutePath();
+            String message = String.format(getString(R.string.directory_chooser_not_writable_message), path);
+            builder.setMessage(message);
+
+
+            builder.setNegativeButton(getString(R.string.directory_chooser_cancel), null);
+
+            builder.setNeutralButton(getString(R.string.directory_chooser_default), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    getDirectoryChooserActivity().goToDefault();
+                }
+            });
+
+            builder.setPositiveButton(R.string.directory_chooser_ignore, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    getDirectoryChooserActivity().selectCurrentDir(false);
+                }
+            });
+            return builder.create();
+        }
+
+        private DirectoryChooserActivity getDirectoryChooserActivity() {
+            return ((DirectoryChooserActivity) getActivity());
         }
     }
 }

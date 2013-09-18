@@ -348,6 +348,10 @@ public class Settings {
         editor.commit();
     }
 
+    public File getDefaultOutputDir() {
+        return defaultOutputDir;
+    }
+
     public void restoreDefault() {
         SharedPreferences.Editor editor = preferences.edit();
 

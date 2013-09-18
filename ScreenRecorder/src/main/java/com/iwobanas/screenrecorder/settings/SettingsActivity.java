@@ -134,6 +134,7 @@ public class SettingsActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(SettingsActivity.this, DirectoryChooserActivity.class);
                 intent.setData(Uri.fromFile(Settings.getInstance().getOutputDir()));
+                intent.putExtra(DirectoryChooserActivity.DEFAULT_DIR_EXTRA, Settings.getInstance().getDefaultOutputDir().getAbsolutePath());
                 startActivityForResult(intent, SELECT_OUTPUT_DIR);
             }
         });
