@@ -7,6 +7,11 @@
         android:showAsAction="never"
         android:title="@string/directory_chooser_new" />
     <item
+        android:id="@+id/directory_chooser_default"
+        android:orderInCategory="95"
+        android:showAsAction="never"
+        android:title="@string/directory_chooser_default" />
+    <item
         android:id="@+id/directory_chooser_refresh"
         android:orderInCategory="100"
         android:showAsAction="never"

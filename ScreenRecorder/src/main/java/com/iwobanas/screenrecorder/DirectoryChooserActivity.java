@@ -165,6 +165,9 @@ public class DirectoryChooserActivity extends ListActivity {
             case R.id.directory_chooser_refresh:
                 setDir(dir);
                 return true;
+            case R.id.directory_chooser_default:
+                goToDefault();
+                return true;
             case R.id.directory_chooser_new:
                 showNewDirDialog();
                 return true;
