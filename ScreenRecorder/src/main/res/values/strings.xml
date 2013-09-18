@@ -67,7 +67,7 @@
     <string name="settings_show_touches">Show touches</string>
     <string name="settings_output_dir">Output directory</string>
 
-    <string name="directory_chooser_select">Select</string>
+    <string name="directory_chooser_select">Select \"%1$s\"</string>
     <string name="directory_chooser_refresh">Refresh</string>
     <string name="directory_chooser_new">New</string>
     <string name="directory_chooser_new_title">New directory name</string>

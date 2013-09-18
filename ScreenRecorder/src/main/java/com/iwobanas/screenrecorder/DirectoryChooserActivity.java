@@ -34,6 +34,7 @@ public class DirectoryChooserActivity extends ListActivity {
     private File defaultDir;
     private ArrayList<FileWrapper> items = new ArrayList<FileWrapper>();
     private ArrayAdapter<FileWrapper> adapter;
+    private Button selectButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class DirectoryChooserActivity extends ListActivity {
 
         setContentView(R.layout.directory_chooser);
 
-        Button selectButton = (Button) findViewById(R.id.select_button);
+        selectButton = (Button) findViewById(R.id.select_button);
 
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,10 +102,20 @@ public class DirectoryChooserActivity extends ListActivity {
     private void setDir(File dir) {
         this.dir = dir;
         setTitle(dir.getAbsolutePath());
+        setButtonLabel();
 
         items.clear();
         items.addAll(listWrapped(dir));
         adapter.notifyDataSetChanged();
+    }
+
+    private void setButtonLabel() {
+        String name = dir.getName();
+        if (name == null || name.length() == 0) {
+            name = "/";
+        }
+        String label = String.format(getString(R.string.directory_chooser_select), name);
+        selectButton.setText(label);
     }
 
     private ArrayList<FileWrapper> listWrapped(File dir) {
