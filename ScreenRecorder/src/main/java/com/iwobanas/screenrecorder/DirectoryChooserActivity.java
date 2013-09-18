@@ -28,6 +28,7 @@ import java.util.Collections;
 
 public class DirectoryChooserActivity extends ListActivity {
     private static final String TAG = "scr_DirectoryChooserActivity";
+    private static final String DIR = "DIR";
     private File dir;
     private ArrayList<FileWrapper> items = new ArrayList<FileWrapper>();
     private ArrayAdapter<FileWrapper> adapter;
@@ -56,9 +57,19 @@ public class DirectoryChooserActivity extends ListActivity {
                 items
         );
 
-        setDir(new File(getIntent().getData().getPath()));
+        if (savedInstanceState != null && savedInstanceState.getString(DIR) != null) {
+            setDir(new File(savedInstanceState.getString(DIR)));
+        } else {
+            setDir(new File(getIntent().getData().getPath()));
+        }
 
         setListAdapter(adapter);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString(DIR, dir.getAbsolutePath());
     }
 
     private void truncateTittleAtMiddle() {
