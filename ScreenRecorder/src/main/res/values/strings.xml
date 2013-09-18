@@ -38,7 +38,7 @@
     <string name="settings_activity_label">SCR Settings</string>
     <string name="settings_title">Settings</string>
     <string name="settings_ok">OK</string>
-    <string name="settings_reset">Reset</string>
+    <string name="settings_reset">Restore defaults</string>
     <string name="settings_cancel">Cancel</string>
     <string name="settings_audio">Audio</string>
     <string name="settings_audio_mic">Mic</string>

@@ -254,14 +254,5 @@
 
 
         </TableLayout>
-
-        <Button
-            android:id="@+id/settings_reset_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_span="2"
-            android:gravity="center"
-            android:text="@string/settings_reset" />
     </LinearLayout>
 </ScrollView>

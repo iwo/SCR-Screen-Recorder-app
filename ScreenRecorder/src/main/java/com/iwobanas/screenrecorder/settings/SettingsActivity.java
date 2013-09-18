@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TableRow;
@@ -30,7 +31,6 @@ public class SettingsActivity extends Activity {
     private CheckBox hideIconCheckBox;
     private CheckBox showTouchesCheckBox;
     private TextView outputDirText;
-    private Button resetButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,6 @@ public class SettingsActivity extends Activity {
         hideIconCheckBox = (CheckBox) findViewById(R.id.settings_hide_icon_checkbox);
         showTouchesCheckBox = (CheckBox) findViewById(R.id.settings_show_touches_checkbox);
         outputDirText = (TextView) findViewById(R.id.settings_output_dir_text);
-        resetButton = (Button) findViewById(R.id.settings_reset_button);
 
         TableRow audioRow = (TableRow) findViewById(R.id.settings_audio_row);
         audioRow.setOnClickListener(new View.OnClickListener() {
@@ -140,15 +139,24 @@ public class SettingsActivity extends Activity {
         });
 
         refreshValues();
+    }
 
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings_restore_defaults:
                 Settings.getInstance().restoreDefault();
                 refreshValues();
-            }
-        });
-
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void refreshValues() {
