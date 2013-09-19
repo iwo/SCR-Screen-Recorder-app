@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Environment;
 
@@ -23,6 +24,7 @@ public class Settings {
     private static final String HIDE_ICON = "HIDE_ICON";
     private static final String SHOW_TOUCHES = "SHOW_TOUCHES";
     private static final String OUTPUT_DIR = "OUTPUT_DIR";
+    private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
     private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
     private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
     private static final String DEFAULT_TRANSFORMATION = "DEFAULT_TRANSFORMATION";
@@ -48,6 +50,7 @@ public class Settings {
     private boolean defaultColorFix = false;
     private boolean hideIcon = false;
     private boolean showTouches = true;
+    private int videoEncoder = MediaRecorder.VideoEncoder.H264;
     private File outputDir;
     private File defaultOutputDir;
     private ShowTouchesController showTouchesController;
@@ -126,6 +129,8 @@ public class Settings {
 
         String outputDirPath = preferences.getString(OUTPUT_DIR, defaultOutputDir.getAbsolutePath());
         outputDir = new File(outputDirPath);
+
+        videoEncoder = preferences.getInt(VIDEO_ENCODER, MediaRecorder.VideoEncoder.H264);
     }
 
     private void handleUpdate() {
@@ -333,6 +338,17 @@ public class Settings {
         }
     }
 
+    public int getVideoEncoder() {
+        return videoEncoder;
+    }
+
+    public void setVideoEncoder(int videoEncoder) {
+        this.videoEncoder = videoEncoder;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(VIDEO_ENCODER, videoEncoder);
+        editor.commit();
+    }
+
     public File getOutputDir() {
         if (outputDir == null) {
             return defaultOutputDir;
@@ -385,6 +401,9 @@ public class Settings {
 
         outputDir = defaultOutputDir;
         editor.remove(OUTPUT_DIR);
+
+        videoEncoder = MediaRecorder.VideoEncoder.H264;
+        editor.remove(VIDEO_ENCODER);
 
         editor.commit();
     }

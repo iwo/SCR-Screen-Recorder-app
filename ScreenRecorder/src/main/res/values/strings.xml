@@ -66,6 +66,12 @@
     <string name="settings_hide_icon">Hide notification icon</string>
     <string name="settings_show_touches">Show touches</string>
     <string name="settings_output_dir">Output directory</string>
+    <string name="settings_video_encoder">Video encoder</string>
+    <string name="settings_video_encoder_h264">H264</string>
+    <string name="settings_video_encoder_h263">H263</string>
+    <string name="settings_video_encoder_h263_unstable">H263 (unstable)</string>
+    <string name="settings_video_encoder_mpeg_4_sp">MPEG-4 SP</string>
+    <string name="settings_video_encoder_default">Auto</string>
 
     <string name="directory_chooser_select">Select \"%1$s\"</string>
     <string name="directory_chooser_refresh">Refresh</string>

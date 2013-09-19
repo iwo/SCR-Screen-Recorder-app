@@ -181,6 +181,28 @@
             </TableRow>
 
             <TableRow
+                android:id="@+id/settings_video_encoder_row"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:text="@string/settings_video_encoder"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/settings_video_encoder_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </TableRow>
+
+            <TableRow
                 android:id="@+id/settings_video_bitrate_row"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"

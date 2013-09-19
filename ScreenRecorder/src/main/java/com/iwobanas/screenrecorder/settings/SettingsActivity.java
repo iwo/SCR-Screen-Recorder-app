@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder.settings;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -31,6 +32,7 @@ public class SettingsActivity extends Activity {
     private CheckBox hideIconCheckBox;
     private CheckBox showTouchesCheckBox;
     private TextView outputDirText;
+    private TextView videoEncoderText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class SettingsActivity extends Activity {
         hideIconCheckBox = (CheckBox) findViewById(R.id.settings_hide_icon_checkbox);
         showTouchesCheckBox = (CheckBox) findViewById(R.id.settings_show_touches_checkbox);
         outputDirText = (TextView) findViewById(R.id.settings_output_dir_text);
+        videoEncoderText = (TextView) findViewById(R.id.settings_video_encoder_text);
 
         TableRow audioRow = (TableRow) findViewById(R.id.settings_audio_row);
         audioRow.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +138,14 @@ public class SettingsActivity extends Activity {
                 intent.setData(Uri.fromFile(Settings.getInstance().getOutputDir()));
                 intent.putExtra(DirectoryChooserActivity.DEFAULT_DIR_EXTRA, Settings.getInstance().getDefaultOutputDir().getAbsolutePath());
                 startActivityForResult(intent, SELECT_OUTPUT_DIR);
+            }
+        });
+
+        TableRow videoEncoderRow = (TableRow) findViewById(R.id.settings_video_encoder_row);
+        videoEncoderRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new VideoEncoderDialogFragment().show(getFragmentManager(), "videoEncoder");
             }
         });
 
@@ -224,6 +235,25 @@ public class SettingsActivity extends Activity {
 
         if (outputDirText != null) {
             outputDirText.setText(settings.getOutputDir().getAbsolutePath());
+        }
+
+        if (videoEncoderText != null) {
+            String encoder = null;
+            switch (settings.getVideoEncoder()) {
+                case MediaRecorder.VideoEncoder.DEFAULT:
+                    encoder = getString(R.string.settings_video_encoder_default);
+                    break;
+                case MediaRecorder.VideoEncoder.H264:
+                    encoder = getString(R.string.settings_video_encoder_h264);
+                    break;
+                case MediaRecorder.VideoEncoder.H263:
+                    encoder = getString(R.string.settings_video_encoder_h263);
+                    break;
+                case MediaRecorder.VideoEncoder.MPEG_4_SP:
+                    encoder = getString(R.string.settings_video_encoder_mpeg_4_sp);
+                    break;
+            }
+            videoEncoderText.setText(encoder);
         }
 
     }

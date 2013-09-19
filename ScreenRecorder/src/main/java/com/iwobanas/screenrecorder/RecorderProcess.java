@@ -164,6 +164,7 @@ class RecorderProcess implements Runnable{
         runCommand(settings.getColorFix() ? "BGRA" : "RGBA");
         runCommand(settings.getVideoBitrate().getCommand());
         runCommand(settings.getSamplingRate().getCommand());
+        runCommand(String.valueOf(settings.getVideoEncoder()));
         logSettings(settings, rotation);
     }
 
@@ -176,7 +177,8 @@ class RecorderProcess implements Runnable{
                     " transformation: " + settings.getTransformation().name() +
                     " videoBitrate: " + settings.getVideoBitrate().name() +
                     " samplingRate: " + settings.getSamplingRate().name() +
-                    " colorFix: " + settings.getColorFix()
+                    " colorFix: " + settings.getColorFix() +
+                    " videoEncoder: " + settings.getVideoEncoder()
             );
         } catch (Throwable e) {
             Log.w(TAG, "Can't log settings");
