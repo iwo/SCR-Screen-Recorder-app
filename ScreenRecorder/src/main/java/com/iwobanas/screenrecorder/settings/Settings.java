@@ -102,10 +102,18 @@ public class Settings {
         frameRate = preferences.getInt(FRAME_RATE, 15);
 
         String defaultTransformation = preferences.getString(DEFAULT_TRANSFORMATION, Transformation.GPU.name());
-        this.defaultTransformation = Transformation.valueOf(defaultTransformation);
+        try {
+            this.defaultTransformation = Transformation.valueOf(defaultTransformation);
+        } catch (IllegalArgumentException e) {
+            this.defaultTransformation = Transformation.GPU;
+        }
 
         String transformation = preferences.getString(TRANSFORMATION, defaultTransformation);
-        this.transformation = Transformation.valueOf(transformation);
+        try {
+            this.transformation = Transformation.valueOf(transformation);
+        } catch (IllegalArgumentException e) {
+            this.transformation = this.defaultTransformation;
+        }
 
         String defaultVideoBitrate = preferences.getString(DEFAULT_VIDO_BITRATE, VideoBitrate.BITRATE_10_MBPS.name());
         this.defaultVideoBitrate = VideoBitrate.valueOf(defaultVideoBitrate);
