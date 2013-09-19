@@ -51,6 +51,7 @@ public class SendStatsAsyncTask extends AsyncTask<Void, Void, Void> {
         params.put("video_bitrate", s.getVideoBitrate().getCommand());
         params.put("sampling_rate", s.getSamplingRate().getCommand());
         params.put("color_fix", s.getColorFix() ? "1" : "0");
+        params.put("video_encoder", String.valueOf(s.getVideoEncoder()));
     }
 
     @Override
