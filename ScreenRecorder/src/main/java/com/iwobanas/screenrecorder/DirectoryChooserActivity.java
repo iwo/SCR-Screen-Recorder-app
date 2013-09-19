@@ -65,6 +65,12 @@ public class DirectoryChooserActivity extends ListActivity {
         }
         defaultDir = new File(getIntent().getStringExtra(DEFAULT_DIR_EXTRA));
 
+        if (!defaultDir.exists()) {
+            if (!defaultDir.mkdirs()) {
+                Log.e(TAG, "Can't create default dir.");
+            }
+        }
+
         setListAdapter(adapter);
     }
 
