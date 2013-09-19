@@ -1,6 +1,7 @@
 package com.iwobanas.screenrecorder.settings;
 
 public enum VideoBitrate {
+    BITRATE_AUTO(-1, "Auto"),
     BITRATE_500_KBPS(500000, "500kbps"),
     BITRATE_1_MBPS(1000000, "1Mbps"),
     BITRATE_2_MBPS(2000000, "2Mbps"),
