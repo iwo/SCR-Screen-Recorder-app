@@ -18,29 +18,6 @@
             android:stretchColumns="0,1">
 
             <TableRow
-                android:id="@+id/settings_audio_row"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:text="@string/settings_audio"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/settings_audio_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:gravity="center"
-                    android:text="Mic"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </TableRow>
-
-            <TableRow
                 android:id="@+id/settings_resolution_row"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -64,6 +41,72 @@
             </TableRow>
 
             <TableRow
+                android:id="@+id/settings_transformation_row"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:text="@string/settings_transformation"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/settings_transformation_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/settings_video_encoder_row"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:text="@string/settings_video_encoder"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/settings_video_encoder_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/settings_video_bitrate_row"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:text="@string/settings_video_bitrate"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/settings_video_bitrate_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </TableRow>
+
+            <TableRow
                 android:id="@+id/settings_frame_rate_row"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -83,6 +126,51 @@
                     android:layout_column="1"
                     android:gravity="center"
                     android:text="30fps"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/settings_audio_row"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:text="@string/settings_audio"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/settings_audio_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:text="Mic"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/settings_sampling_rate_row"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:text="@string/settings_sampling_rate"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/settings_sampling_rate_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </TableRow>
 
@@ -135,28 +223,6 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/settings_transformation_row"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:text="@string/settings_transformation"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/settings_transformation_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </TableRow>
-
-            <TableRow
                 android:id="@+id/settings_color_fix_row"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -178,72 +244,6 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:layout_gravity="center" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/settings_video_encoder_row"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:text="@string/settings_video_encoder"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/settings_video_encoder_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/settings_video_bitrate_row"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:text="@string/settings_video_bitrate"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/settings_video_bitrate_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/settings_sampling_rate_row"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:text="@string/settings_sampling_rate"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/settings_sampling_rate_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </TableRow>
 
             <TableRow
@@ -273,7 +273,6 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </LinearLayout>
             </TableRow>
-
 
         </TableLayout>
     </LinearLayout>
