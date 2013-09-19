@@ -22,6 +22,9 @@
     <string name="media_recorder_error_title">Recorder error</string>
     <string name="media_recorder_error_message">Try changing resolution or switching image transformation between GPU/CPU. Please uninstall other screencast applications if you have any. If the problem persists please get in touch via support email quoting error R%1$d.</string>
 
+    <string name="output_file_error_title">Can\'t create video file</string>
+    <string name="output_file_error_message">SCR was unable to create %1$s video file. Make sure that selected output directory is writable and that SD Card is not locked by USB connection.</string>
+
     <string name="help_stop_title">How to stop</string>
     <string name="help_stop_ok">Got it!</string>
 

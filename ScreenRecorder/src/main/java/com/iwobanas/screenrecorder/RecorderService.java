@@ -431,6 +431,19 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     @Override
+    public void outputFileError(final int exitValue) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String message = String.format(getString(R.string.output_file_error_message), outputFile);
+                displayErrorMessage(message, getString(R.string.output_file_error_title), true, false, exitValue);
+                logStats(exitValue, 0, 0);
+            }
+        });
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
+    }
+
+    @Override
     public void showSettings() {
         mHandler.post(new Runnable() {
             @Override

@@ -12,6 +12,7 @@ public interface IRecorderService {
     void recordingError(int exitValue);
     void mediaRecorderError(int exitValue);
     void maxFileSizeReached();
+    void outputFileError(int exitValue);
 
     void showSettings();
     void showTimeoutDialog();
