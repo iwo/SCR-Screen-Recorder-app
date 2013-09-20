@@ -101,4 +101,11 @@
     <string name="error_report_subject">[error]</string>
     <string name="error_report_text">The attachment contains detailed system log including information about an error. Feel free to add any comments here.</string>
     <string name="error_report_chooser">Email error report with</string>
+
+    <string name="rating_rate_title">Rate %1$s</string>
+    <string name="rating_rate_message">If you enjoy using %1$s, please take a moment to rate it. Thanks for your support!</string>
+    <string name="rating_rate_now">Rate now!</string>
+    <string name="rating_remind">Remind me later</string>
+    <string name="rating_no_thanks">No, thanks</string>
+    <string name="rating_play_error">Couldn\'t open Google Play.</string>
 </resources>

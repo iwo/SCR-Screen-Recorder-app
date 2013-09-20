@@ -26,6 +26,7 @@ import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
 import com.google.android.vending.licensing.ServerManagedPolicy;
+import com.iwobanas.screenrecorder.rating.RatingController;
 import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
 
@@ -76,6 +77,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this, this);
     private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this);
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
+    private RatingController mRatingController;
     private Handler mHandler;
     private File outputFile;
     private boolean isRecording;
@@ -95,6 +97,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mTaniosc = getResources().getBoolean(R.bool.taniosc);
         mHandler = new Handler();
         mWatermark.show();
+
+        mRatingController = new RatingController(this);
+        if (mRatingController.shouldShow()) {
+            mRatingController.show();
+            stopSelf();
+        }
 
         readPreferences();
         installExecutable();
@@ -249,6 +257,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 scanOutputAndNotify(R.string.recording_saved_toast);
                 reportRecordingStats(-1);
                 reinitialize();
+                mRatingController.increaseSuccessCount();
             }
         });
     }
@@ -371,6 +380,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         Log.w(TAG, "displayErrorMessage: " + message);
+        mRatingController.resetSuccessCount();
         stopSelf();
     }
 
@@ -457,6 +467,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
                 Intent intent = new Intent(RecorderService.this, SettingsActivity.class);
                 startActivities(new Intent[]{recorderIntent, intent});
+                mRatingController.resetSuccessCount();
             }
         });
     }

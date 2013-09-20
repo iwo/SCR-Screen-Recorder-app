@@ -49,6 +49,13 @@
             android:label="@string/settings_activity_label">
         </activity>
 
+        <activity
+            android:name=".rating.RatingActivity"
+            android:label="@string/app_name"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Transparent">
+        </activity>
+
         <!-- Used for install referral measurement-->
         <service android:name="com.google.analytics.tracking.android.CampaignTrackingService"/>
         <receiver android:name="com.google.analytics.tracking.android.CampaignTrackingReceiver" android:exported="true">
