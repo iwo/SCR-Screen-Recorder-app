@@ -37,7 +37,9 @@ public class ShowTouchesController {
     public void setShowTouches(boolean show) {
         Log.d(TAG, "set " + show);
         scrValue = show;
-        applyScrValue();
+        if (preferences.getBoolean(SCR_VALUE_APPLIED, false)) {
+            setSystemSetting(scrValue);
+        }
     }
 
     public void applyShowTouches() {

@@ -110,7 +110,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mRecorderOverlay.show();
         isReady = false;
         mNativeProcessRunner.initialize();
-        Settings.getInstance().applyShowTouches();
 
         if (!mTaniosc) {
             checkLicense();
@@ -239,6 +238,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public void setReady(boolean ready) {
         isReady = true;
+        Settings.getInstance().applyShowTouches();
     }
 
     private void showRecorderOverlay() {
