@@ -14,8 +14,15 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
+
+import static com.iwobanas.screenrecorder.Tracker.RATING;
+import static com.iwobanas.screenrecorder.Tracker.RATING_NO_THANKS;
+import static com.iwobanas.screenrecorder.Tracker.RATING_RATE_NOW;
+import static com.iwobanas.screenrecorder.Tracker.RATING_REMIND;
+import static com.iwobanas.screenrecorder.Tracker.RATING_SHOW;
 
 public class RatingDialogFragment extends DialogFragment {
 
@@ -59,6 +66,8 @@ public class RatingDialogFragment extends DialogFragment {
             }
         });
 
+        EasyTracker.getTracker().sendEvent(RATING, RATING_SHOW, RATING_SHOW, null);
+
         return builder.create();
     }
 
@@ -87,9 +96,11 @@ public class RatingDialogFragment extends DialogFragment {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(RatingController.DISABLED, true);
         editor.commit();
+        EasyTracker.getTracker().sendEvent(RATING, RATING_RATE_NOW, RATING_RATE_NOW, null);
     }
 
     private void remindLater() {
+        EasyTracker.getTracker().sendEvent(RATING, RATING_REMIND, RATING_REMIND, null);
         goBackToOverlay();
     }
 
@@ -98,6 +109,7 @@ public class RatingDialogFragment extends DialogFragment {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(RatingController.DISABLED, true);
         editor.commit();
+        EasyTracker.getTracker().sendEvent(RATING, RATING_NO_THANKS, RATING_NO_THANKS, null);
         goBackToOverlay();
     }
 

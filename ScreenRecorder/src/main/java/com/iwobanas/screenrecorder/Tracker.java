@@ -44,6 +44,12 @@ public class Tracker {
     public final static String LICENSE_DONT_ALLOW_ = "license_dont_allow_";
     public final static String LICENSE_ERROR_ = "license_error_";
 
+    public final static String RATING = "rating";
+    public final static String RATING_SHOW = "rating_show";
+    public final static String RATING_RATE_NOW = "rating_rate_now";
+    public final static String RATING_REMIND = "rating_remind";
+    public final static String RATING_NO_THANKS = "rating_no_thanks";
+
     public final static String BUG = "bug";
     public final static String REPORT = "report";
 
