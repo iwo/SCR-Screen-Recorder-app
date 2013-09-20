@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
@@ -195,7 +194,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private String getRotation() {
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        Configuration config = getResources().getConfiguration();
         int rotationDeg = getRotationDeg(display);
         rotationDeg = (360 - rotationDeg) % 360;
         return String.valueOf(rotationDeg);
