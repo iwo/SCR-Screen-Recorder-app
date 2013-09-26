@@ -3,7 +3,6 @@
     <string name="free_app_full_name">"SCR螢幕錄影免費版"</string>
     <string name="pro_app_name">"SCR專業版"</string>
     <string name="pro_app_full_name">"SCR螢幕錄影專業版"</string>
-    <string name="app_name">"SCR"</string>
     <string name="watermark_text">"SCR"</string>
     <string name="recording_saved_title">"SCR 錄製已儲存"</string>
     <string name="recording_saved_message">"錄製儲存到 %1$s"</string>

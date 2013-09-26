@@ -3,7 +3,6 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
-    <string name="app_name">"SCR"</string>
     <string name="watermark_text">"SCR"</string>
     <string name="recording_saved_title">"SCR nagrywanie zakończone"</string>
     <string name="recording_saved_message">"Wideo zapisano w %1$s"</string>
