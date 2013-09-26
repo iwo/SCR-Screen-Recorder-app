@@ -1,52 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="buy_error_message">Prosím vyhľadajte SCR Screen Recorder Pro v Obchode Play</string>
-    <string name="buy_error_title">Chyba Obchodu Play</string>
-    <string name="error_dialog_title">Niečo sa pokazilo :-(</string>
-	<string name="error_report_chooser">Odoslať e-mail s chybou pomocou</string>
-    <string name="error_report_close">Zavrieť</string>
-    <string name="error_report_report">Oznámiť</string>
-    <string name="free_timeout_buy">Kúpiť teraz</string>
-    <string name="free_timeout_message">Zakúpte si SCR Screen Recorder Pro pre získanie neobmedzeného času na nahrávanie a odstránenie vodoznaku na videu.</string>
-    <string name="free_timeout_no_thanks">Nie, vďaka</string>
-    <string name="free_timeout_title">Časový limit vypršal</string>
-    <string name="help_stop_message">Ak chcete zastaviť nahrávanie, zamknite obrazovku a počkajte 2 sekundy. Prípadne môžete jednoducho znovu spustiť aplikáciu SCR Pro.</string>
-    <string name="help_stop_ok">OK</string>
-    <string name="help_stop_title">Ako zastaviť nahrávanie</string>
-    <string name="license_dont_allow">Kontrola licencie zlyhala. Uistite sa, že ste pripojený k Internetu a že ste prihlásený do Obchoda Play.</string>
-    <string name="license_error">Chyba kontroly licencie. Uistite sa, že ste pripojený k Internetu a že ste prihlásený do Obchoda Play.</string>
-    <string name="media_recorder_error_message">Prosím odinštalujte iné screencast aplikácie a reštartujte Vaše zariadenie. Ak problém pretrváva, obráťte sa prosím prostredníctvom e-mailu na podporu aplikácie.</string>
-    <string name="media_recorder_error_title">Chyba nahrávača</string>
-    <string name="play">Prehrať</string>
-    <string name="recording_error_message">Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d.</string>
-    <string name="recording_saved_message">Nahrávka uložená do %1$s</string>
-    <string name="recording_saved_title">SCR nahrávka uložená</string>
-    <string name="recording_saved_toast">Nahrávka uložená do %1$s</string>
-    <string name="settings_activity_label">Nastavenia SCR</string>
-    <string name="settings_audio">Zvuk</string>
-    <string name="settings_audio_mic">Mikrofón</string>
-    <string name="settings_audio_mute">Bez zvuku</string>
-    <string name="settings_color_fix">Opraviť invertované farby</string>
-    <string name="settings_frame_rate">Počet snímok za sekundu</string>
-    <string name="settings_frame_rate_max">Maximálny</string>
-    <string name="settings_frame_rate_up_to">Až do #0 fps</string>
-	<string name="settings_hide_icon">Skryť ikonu oznámenia</string>
-    <string name="settings_ok">OK</string>
-    <string name="settings_reset">Obnoviť</string>
-    <string name="settings_resolution">Rozlíšenie</string>
-    <string name="settings_resolution_short">%1$dx%2$d</string>
-    <string name="settings_resolution_p">%1$dx%2$d - %2$dp</string>
-    <string name="settings_resolution_horizontal">%1$dx%2$d - %1$dp horizontálne</string>
-    <string name="settings_resolution_padding">%1$dx%2$d - %2$dp s polstrovaním</string>
-    <string name="settings_resolution_max">%1$dx%2$d - Max</string>
-    <string name="settings_resolution_half">%1$dx%2$d - pol</string>
-    <string name="settings_resolution_unstable">(nestabilné)</string>
-	<string name="settings_sampling_rate">Vzorkovacia frekvencia zvuku</string>
-    <string name="settings_title">Nastavenia</string>
-    <string name="settings_transformation">Transformácia obrazu</string>
-	<string name="settings_video_bitrate">Prenosová rýchlosť videa</string>
-    <string name="start">Štart</string>
-    <string name="startup_error_message">Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu S%1$d.</string>
-    <string name="su_required_message">Ak chcete spustiť ľubovoľný nahrávač obrazovky, zariadenie musí byť rootnuté. Na Internete sa nachádza veľa návodov, ktoré vysvetľujú, ako rootnúť rôzne zariadenia.</string>
-    <string name="su_required_title">Root prístup je vyžadovaný</string>
+    <string name="free_app_name">"SCR Free"</string>
+    <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
+    <string name="pro_app_name">"SCR Pro"</string>
+    <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+    <string name="app_name">"SCR"</string>
+    <string name="watermark_text">"SCR"</string>
+    <string name="recording_saved_title">"SCR nahrávka uložená"</string>
+    <string name="recording_saved_message">"Nahrávka uložená ako %1$s"</string>
+    <string name="recording_saved_toast">"Nahrávka uložená ako %1$s"</string>
+    <string name="max_file_size_reached_toast">"Bola dosiahnutá maximálna veľkosť súboru. Nahrávka bola uložená ako %1$s"</string>
+    <string name="start">"Štart"</string>
+    <string name="play">"Prehrať"</string>
+    <string name="output_dir">"ScreenRecorder"</string>
+    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
+
+    <string name="su_required_title">"Root prístup je vyžadovaný prístup"</string>
+    <string name="su_required_message">"Ak chcete spustiť ľubovoľný nahrávač obrazovky, zariadenie musí byť rootnuté. Na Internete sa nachádza veľa návodov, ktoré vysvetľujú, ako rootnúť rôzne zariadenia."</string>
+
+    <string name="error_dialog_title">"Niečo sa pokazilo :-("</string>
+    <string name="startup_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu S%1$d."</string>
+    <string name="recording_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d."</string>
+
+    <string name="media_recorder_error_title">"Chyba nahrávača"</string>
+    <string name="media_recorder_error_message">"Skúste zmeniť rozlíšenie alebo prepnite transformáciu obrazu medzi GPU/CPU. Prosím odinštalujte iné screencast aplikácie, ak máte nejaké. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d ."</string>
+
+    <string name="output_file_error_title">"Nemožno vytvoriť video súbor"</string>
+    <string name="output_file_error_message">"SCR nemohol vytvoriť video súbor %1$s. Uistite sa, že do vybraného výstupného priečinka je možné zapisovať a že SD karta nie je uzamknutá pripojením USB."</string>
+
+    <string name="help_stop_title">"Ako zastaviť nahrávanie"</string>
+    <string name="help_stop_ok">"OK"</string>
+
+    <string name="free_timeout_title">"Časový limit vypršal"</string>
+    <string name="free_timeout_message">"Zakúpte si SCR Screen Recorder Pro pre získanie neobmedzeného času na nahrávanie a odstránenie vodoznaku na videu."</string>
+    <string name="free_timeout_buy">"Kúpiť teraz"</string>
+    <string name="free_timeout_no_thanks">"Nie, vďaka"</string>
+    <string name="hide_icon_title">"Pre funkcia"</string>
+    <string name="hide_icon_message">"Zakúpte si SCR Screen Recorder Pro pre skrytie vodoznaku a notifikačnej ikony. Taktiež získate neobmedzený čas na nahrávanie!"</string>
+
+    <string name="buy_error_title">"Chyba Obchodu Play"</string>
+    <string name="buy_error_message">"Prosím vyhľadajte SCR Screen Recorder Pro V Obchode Play"</string>
+
+    <string name="settings_activity_label">"Nastavenia SCR"</string>
+    <string name="settings_title">"Nastavenia"</string>
+    <string name="settings_ok">"OK"</string>
+    <string name="settings_reset">"Obnoviť predvolené"</string>
+    <string name="settings_cancel">"Zrušiť"</string>
+    <string name="settings_audio">"Zvuk"</string>
+    <string name="settings_audio_mic">"Mikrofón"</string>
+    <string name="settings_audio_mute">"Bez zvuku"</string>
+    <string name="settings_resolution">"Rozlíšenie"</string>
+    <string name="settings_resolution_short">"%1$dx%2$d"</string>
+    <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
+    <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp horizontálne"</string>
+    <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp s polstrovaním"</string>
+    <string name="settings_resolution_max">"%1$dx%2$d - maximálne"</string>
+    <string name="settings_resolution_half">"%1$dx%2$d - polovičné"</string>
+    <string name="settings_resolution_unstable">"(nestabilné)"</string>
+    <string name="settings_frame_rate">"Počet snímok za sekundu"</string>
+    <string name="settings_frame_rate_max">"Maximálny"</string>
+    <string name="settings_frame_rate_max_short">"Max"</string>
+    <string name="settings_frame_rate_up_to">"Až do #0 fps"</string>
+    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_transformation">"Transformácia obrazu"</string>
+    <string name="settings_transformation_cpu">"CPU"</string>
+    <string name="settings_transformation_gpu">"GPU "</string>
+    <string name="settings_transformation_oes">"GPU+"</string>
+    <string name="settings_video_bitrate">"Prenosová rýchlosť videa"</string>
+    <string name="settings_sampling_rate">"Vzorkovacia frekvencia zvuku"</string>
+    <string name="settings_color_fix">"Opraviť invertované farby"</string>
+    <string name="settings_hide_icon">"Skryť ikonu oznámenia"</string>
+    <string name="settings_show_touches">"Zobraziť dotyky"</string>
+    <string name="settings_output_dir">"Výstupný priečinok"</string>
+    <string name="settings_video_encoder">"Video enkodér"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 (nestabilné)"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"Automatický"</string>
+
+    <string name="directory_chooser_select">"Vybrať \"%1$s\""</string>
+    <string name="directory_chooser_refresh">"Obnoviť"</string>
+    <string name="directory_chooser_new">"Nový"</string>
+    <string name="directory_chooser_new_title">"Názov nového priečinka"</string>
+    <string name="directory_chooser_new_ok">"OK"</string>
+    <string name="directory_chooser_new_cancel">"Zrušiť"</string>
+    <string name="directory_chooser_error_message">"Priečinoknie je možné vytvoriť. Uistite sa, že ste vybrali zapisovateľné umiestnenie (napr. SD karta)."</string>
+    <string name="directory_chooser_not_writable_title">"Vybraný priečinok nie je zapisovateľný"</string>
+    <string name="directory_chooser_not_writable_message">"Zdá sa, že aplikácia nemá povolenie na zápis do %1$s adresári. To môže spôsobiť problémy pri nahrávaní."</string>
+    <string name="directory_chooser_ignore">"Ignorovať"</string>
+    <string name="directory_chooser_cancel">"Zrušiť"</string>
+    <string name="directory_chooser_default">"Štandardný"</string>
+
+    <string name="license_dont_allow">"Kontrola licencie zlyhala. Uistite sa, že ste pripojení k internetu je a prihlásení do Obchodu Play.
+    "</string>
+    <string name="license_error">"Chyba kontroly licencie. Uistite sa, že ste pripojení k internetu je a prihlásení do Obchodu Play.
+    "</string>
+
+    <string name="error_report_report">"Ohlásiť"</string>
+    <string name="error_report_close">"Zavrieť"</string>
+    <string name="error_report_subject">"[error]"</string>
+    <string name="error_report_text">"Príloha obsahuje podrobný systémový protokol, vrátane informácií o chybe. Neváhajte a pridajte akékoľvek pripomienky sem."</string>
+    <string name="error_report_chooser">"Odoslať e-mail pomocou"</string>
+
+    <string name="rating_rate_title">"Ohodnotiť %1$s"</string>
+    <string name="rating_rate_message">"Ak sa Vám páči %1$s , prosím ohodnoťte túto aplikáciu. Ďakujeme za vašu podporu!"</string>
+    <string name="rating_rate_now">"Ohodnotiť teraz"</string>
+    <string name="rating_remind">"Pripomenúť neskôr"</string>
+    <string name="rating_no_thanks">"Nie, vďaka"</string>
+    <string name="rating_play_error">"Nemožno otvoriť Obchod Play."</string>
+
+    <string name="help_stop_message">"Ak chcete zastaviť nahrávanie, zamknite obrazovku a počkajte 2 sekundy. Prípadne môžete jednoducho znovu spustiť aplikáciu %1$s."</string>
+    <string name="menu_send_bug_report">"Ohlásiť chybu"</string>
+    <string name="settings_stop_when_screen_off">"Zastaviť pri vypnutí obrazovky"</string>
 </resources>

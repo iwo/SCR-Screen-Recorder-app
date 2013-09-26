@@ -1,65 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="buy_error_message">Ищите SCR Screen Recorder Pro в Google Play</string>
-    <string name="buy_error_title">Ошибка Google</string>
-    <string name="error_dialog_title">Что-то пошло не так :-(</string>
-    <string name="error_report_chooser">Сообщить об ошибке по почте</string>
-    <string name="error_report_close">Закрыть</string>
-    <string name="error_report_report">Отчет</string>
-    <string name="error_report_text">Вложение содержит подробный системный журнал, включая информацию об ошибке. Не стесняйтесь добавлять здесь любые комментарии.</string>
-    <string name="file_name_format">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
-    <string name="free_timeout_buy">Купить сейчас!</string>
-    <string name="free_timeout_message">Покупка SCR Screen Recorder Pro, дает вам неограниченное время записи и убирает водяные знаки на видео.</string>
-    <string name="free_timeout_no_thanks">Нет, спасибо</string>
-    <string name="free_timeout_title">Лимит времени истек</string>
-    <string name="ga_trackingId">UA-41916238-2</string>
-    <string name="help_stop_message">Для остановки записи заблокируйте экран и подождите 2 секунды. В качестве альтернативы можно просто открыть приложение SCR Pro.</string>
-    <string name="help_stop_ok">Понятно!</string>
-    <string name="help_stop_title">Как остановить</string>
-    <string name="hide_icon_message">Покупка SCR Screen Recorder Pro позволяет скрывать водяной знак и значок уведомления. Вы получите неограниченное время записи, как хорошо!</string>
-    <string name="hide_icon_title">Pro–функция</string>
-    <string name="license_dont_allow">Не удалось проверить лицензию. Убедитесь, что есть соединение с интернетом, и вы вошли в Google Play.</string>
-    <string name="license_error">Не удалось проверить лицензию. Убедитесь, что есть соединение с интернетом, и вы вошли в Google Play.</string>
-    <string name="media_recorder_error_message">Попробуйте изменить настройки записи. Пожалуйста удалите другие скринкаст–приложения и перезагрузите устройство. Если проблема не устраняется, свяжитесь с нами через поддержку по электронной почте.</string>
-    <string name="media_recorder_error_title">Ошибка записи</string>
-    <string name="output_dir">ScreenRecorder</string>
-    <string name="play">Играть</string>
-    <string name="recording_error_message">Чтобы помочь нам решить проблему, будет отправлено анонимное сообщение об ошибке. Не стесняйтесь связаться через поддержку по электронной почте с указанием ошибки R%1$d.</string>
-    <string name="recording_saved_message">Запись сохраняется в %1$s</string>
-    <string name="recording_saved_title">Запись SCR сохранена</string>
-    <string name="recording_saved_toast">Запись сохраняется в %1$s</string>
-    <string name="max_file_size_reached_toast">Максимальный размер файла достигнут. Запись сохраняется в %1$s</string>
-    <string name="settings_activity_label">Настройки SCR</string>
-    <string name="settings_audio">Аудио</string>
-    <string name="settings_audio_mic">Микр</string>
-    <string name="settings_audio_mute">Тихо</string>
-    <string name="settings_color_fix">Фикс инверсии цвета</string>
-    <string name="settings_frame_rate">Частота кадров</string>
-    <string name="settings_frame_rate_max">Максимум</string>
-    <string name="settings_frame_rate_max_short">Макс</string>
-    <string name="settings_frame_rate_up_to">До #0 fps</string>
-    <string name="settings_frame_rate_up_to_short">\#0 fps</string>
-    <string name="settings_hide_icon">Скрыть значок</string>
-    <string name="settings_ok">OK</string>
-    <string name="settings_reset">Сброс</string>
-    <string name="settings_resolution">Разрешение</string>
-    <string name="settings_resolution_short">%1$dx%2$d</string>
-    <string name="settings_resolution_p">%1$dx%2$d - %2$dp</string>
-    <string name="settings_resolution_horizontal">%1$dx%2$d - %1$dp горизонтальный</string>
-    <string name="settings_resolution_padding">%1$dx%2$d - %2$dp с прокладкой</string>
-    <string name="settings_resolution_max">%1$dx%2$d - высший</string>
-    <string name="settings_resolution_half">%1$dx%2$d - половина</string>
-    <string name="settings_resolution_unstable">(нестабильно)</string>
-	<string name="settings_sampling_rate">Качество аудио</string>
-    <string name="settings_title">Настройки</string>
-    <string name="settings_transformation">Обработка изображения</string>
-    <string name="settings_transformation_cpu">CPU</string>
-    <string name="settings_transformation_gpu">GPU</string>
-    <string name="settings_transformation_oes">GPU+</string>
-	<string name="settings_video_bitrate">Видео битрейт</string>
-    <string name="start">Старт</string>
-    <string name="startup_error_message">Чтобы помочь нам решить проблему, будет отправлено анонимное сообщение об ошибке. Не стесняйтесь связаться через поддержку по электронной почте с указанием ошибки S%1$d.</string>
-    <string name="su_required_message">Для запуска любого подобного приложения, ваш телефон/планшет должен иметь root. В интернете есть много учебников где описывается как рутировать различные устройства. Вернитесь снова, когда все будет готово!</string>
-    <string name="su_required_title">Требуется доступ с правами root</string>
-    <string name="watermark_text">SCR</string>
+    <string name="free_app_name">"SCR Free"</string>
+    <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
+    <string name="pro_app_name">"SCR Pro"</string>
+    <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+    <string name="app_name">"SCR"</string>
+    <string name="watermark_text">"SCR"</string>
+    <string name="recording_saved_title">"Сохранение записи SCR"</string>
+    <string name="recording_saved_message">"Сохранение в... %1$s"</string>
+    <string name="recording_saved_toast">"Запись сохранена в %1$s"</string>
+    <string name="max_file_size_reached_toast">"Достигнут максимальный размер файла. Запись сохранена в %1$s"</string>
+    <string name="start">"Старт"</string>
+    <string name="play">"Играть"</string>
+    <string name="output_dir">"ScreenRecorder"</string>
+    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
+
+    <string name="su_required_title">"Требуется доступ с правами root"</string>
+    <string name="su_required_message">"Для запуска любого подобного приложения, ваш телефон/планшет должен иметь root. В интернете есть много учебников где описывается как рутировать различные устройства. Вернитесь снова, когда все будет готово!"</string>
+
+    <string name="error_dialog_title">"Что-то пошло не так :-("</string>
+    <string name="startup_error_message">"Чтобы помочь нам решить проблему, будет отправлено анонимное сообщение об ошибке. Не стесняйтесь связаться через поддержку по электронной почте с указанием ошибки S%1$d."</string>
+    <string name="recording_error_message">"Чтобы помочь нам решить проблему, будет отправлено анонимное сообщение об ошибке. Не стесняйтесь связаться через поддержку по электронной почте с указанием ошибки R%1$d."</string>
+
+    <string name="media_recorder_error_title">"Ошибка записи"</string>
+    <string name="media_recorder_error_message">"Попробуйте изменить настройки записи. Пожалуйста удалите другие скринкаст–приложения и перезагрузите устройство. Если проблема не устраняется, свяжитесь с нами через поддержку по электронной почте. R%1$d"</string>
+
+    <string name="output_file_error_title">"Не удается создать видеофайл"</string>
+    <string name="output_file_error_message">"SCR не удалось создать видеофайл %1$s. Убедитесь, что выбран выходной каталог для записи и SD-карта не заблокирована подключением через USB."</string>
+
+    <string name="help_stop_title">"Как остановить"</string>
+    <string name="help_stop_ok">"Понятно!"</string>
+
+    <string name="free_timeout_title">"Лимит времени истек"</string>
+    <string name="free_timeout_message">"Покупка SCR Screen Recorder Pro, дает вам неограниченное время записи и убирает водяные знаки на видео."</string>
+    <string name="free_timeout_buy">"Купить сейчас!"</string>
+    <string name="free_timeout_no_thanks">"Нет, спасибо"</string>
+    <string name="hide_icon_title">"Pro–функция"</string>
+    <string name="hide_icon_message">"Покупка SCR Screen Recorder Pro позволяет скрывать водяной знак и значок уведомления. А еще вы получаете неограниченное время записи, как это здорово!"</string>
+
+    <string name="buy_error_title">"Ошибка Google"</string>
+    <string name="buy_error_message">"Ищите SCR Screen Recorder Pro в Google Play"</string>
+
+    <string name="settings_activity_label">"Настройки SCR"</string>
+    <string name="settings_title">"Настройки"</string>
+    <string name="settings_ok">"OK"</string>
+    <string name="settings_reset">"Сброс"</string>
+    <string name="settings_cancel">"Отмена"</string>
+    <string name="settings_audio">"Аудио"</string>
+    <string name="settings_audio_mic">"Микр"</string>
+    <string name="settings_audio_mute">"Тихо"</string>
+    <string name="settings_resolution">"Разрешение"</string>
+    <string name="settings_resolution_short">"%1$dх%2$d"</string>
+    <string name="settings_resolution_p">"%1$dх%2$d - %2$dp"</string>
+    <string name="settings_resolution_horizontal">"%1$dх%2$d - %1$dp горизонтально"</string>
+    <string name="settings_resolution_padding">"%1$dх%2$d - %2$dp с полями"</string>
+    <string name="settings_resolution_max">"%1$dх%2$d - максимум"</string>
+    <string name="settings_resolution_half">"%1$dх%2$d - половина"</string>
+    <string name="settings_resolution_unstable">"(нестабильно)"</string>
+    <string name="settings_frame_rate">"Частота кадров"</string>
+    <string name="settings_frame_rate_max">"Максимум"</string>
+    <string name="settings_frame_rate_max_short">"Макс"</string>
+    <string name="settings_frame_rate_up_to">"До #0 fps"</string>
+    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_transformation">"Обработка изображения"</string>
+    <string name="settings_transformation_cpu">"CPU"</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"GPU+"</string>
+    <string name="settings_video_bitrate">"Битрейт видео"</string>
+    <string name="settings_sampling_rate">"Качество звука"</string>
+    <string name="settings_color_fix">"Фикс инверсии цвета"</string>
+    <string name="settings_hide_icon">"Скрыть значок"</string>
+    <string name="settings_show_touches">"Показать касания"</string>
+    <string name="settings_output_dir">"Выходной каталог"</string>
+    <string name="settings_video_encoder">"Видеокодер"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 (нестабильно)"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"Авто"</string>
+
+    <string name="directory_chooser_select">"Выбрать \"%1$s\""</string>
+    <string name="directory_chooser_refresh">"Обновить"</string>
+    <string name="directory_chooser_new">"Новый"</string>
+    <string name="directory_chooser_new_title">"Название нового каталога"</string>
+    <string name="directory_chooser_new_ok">"OK"</string>
+    <string name="directory_chooser_new_cancel">"Отмена"</string>
+    <string name="directory_chooser_error_message">"Каталог не может быть создан. Убедитесь, что выбрано место для записи например SD-карта."</string>
+    <string name="directory_chooser_not_writable_title">"Каталог не доступен для записи"</string>
+    <string name="directory_chooser_not_writable_message">"Приложение не имеет прав на запись в каталог %1$s. Это может привести к проблемам записи."</string>
+    <string name="directory_chooser_ignore">"Игнорировать"</string>
+    <string name="directory_chooser_cancel">"Отмена"</string>
+    <string name="directory_chooser_default">"Умолчание"</string>
+
+    <string name="license_dont_allow">"Не удалось проверить лицензию. Убедитесь, что есть соединение с интернетом, и вы вошли в Google Play.
+    "</string>
+    <string name="license_error">"Не удалось проверить лицензию. Убедитесь, что есть соединение с интернетом, и вы вошли в Google Play.
+    "</string>
+
+    <string name="error_report_report">"Отчет"</string>
+    <string name="error_report_close">"Закрыть"</string>
+    <string name="error_report_subject">"[error]"</string>
+    <string name="error_report_text">"Вложение содержит подробный системный журнал, включая информацию об ошибке. Не стесняйтесь добавлять здесь любые комментарии."</string>
+    <string name="error_report_chooser">"Сообщить об ошибке по почте"</string>
+
+    <string name="rating_rate_title">"Рейтинг %1$s"</string>
+    <string name="rating_rate_message">"Если вам нравится использовать %1$s, пожалуйста уделите минутку чтобы оценить его. Спасибо за поддержку!"</string>
+    <string name="rating_rate_now">"Оценить сейчас!"</string>
+    <string name="rating_remind">"Напомнить позже"</string>
+    <string name="rating_no_thanks">"Нет, спасибо"</string>
+    <string name="rating_play_error">"Не удалось открыть Google Play."</string>
+
+    <string name="help_stop_message">"Для остановки записи заблокируйте экран и подождите 2 секунды. В качестве альтернативы можно просто открыть приложение %1$s."</string>
+    <string name="menu_send_bug_report">"Отправить отчет об ошибке"</string>
+    <string name="settings_stop_when_screen_off">"Остановить при отключении экрана"</string>
 </resources>

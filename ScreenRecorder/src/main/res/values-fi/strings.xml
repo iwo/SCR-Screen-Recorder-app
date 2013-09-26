@@ -1,0 +1,115 @@
+<resources>
+    <string name="free_app_name">"SCR Free"</string>
+    <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
+    <string name="pro_app_name">"SCR Pro"</string>
+    <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+    <string name="app_name">"SCR"</string>
+    <string name="watermark_text">"SCR"</string>
+    <string name="recording_saved_title">"SCR Videotiedosto Tallennettu"</string>
+    <string name="recording_saved_message">"Videotiedosto tallennettu %1$s"</string>
+    <string name="recording_saved_toast">"Videotiedosto tallennettu %1$s"</string>
+    <string name="max_file_size_reached_toast">"Tiedoston enimmäiskoko saavutettu. VIdeotiedosto tallennettu %1$s"</string>
+    <string name="start">"Alkaa"</string>
+    <string name="play">"Toista"</string>
+    <string name="output_dir">"ScreenRecorder "</string>
+    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
+
+    <string name="su_required_title">"Pääkäyttäjän eli root oikeudet tarvitaan"</string>
+    <string name="su_required_message">"Jotta voit käyttää jotakin näytönkaappaussovellusta sinun puhelimella/tabletilla pitää olla pääkäyttäjäoikeudet eli ro).Netistä löytyy paljon ohjeita kuinka saada root eri laitteilla. Tule takaisin kun olet valmis!"</string>
+
+    <string name="error_dialog_title">"Jokin meni pahasti pieleen :-("</string>
+    <string name="startup_error_message">"Anonyymi virheraportti lähetetään automaattisesti, joka auttaa meitä korjaamaan ongelman. Ota yhteyttä sähköpostin  kautta tukea varten lainaten virhe S %1$d ."</string>
+    <string name="recording_error_message">"Anonyymi virheraportti lähetetään automaattisesti, joka auttaa meitä korjaamaan ongelman. Ota yhteyttä sähköpostin kautta tukea varten lainaten virhe R %1$d ."</string>
+
+    <string name="media_recorder_error_title">"Nauhoitus virhe"</string>
+    <string name="media_recorder_error_message">"Kokeile vaihtaa resoluutiota tai vaihtaa kuvan välisen muunnosten GPU / CPU välillä. Ole hyvä ja poistaa muut näytönkaappaussovellukset , jos sinulla on muita. Jos ongelma ei korjaannu, ota yhteyttä sähköpostin kautta lainaten virhe R %1$d ."</string>
+
+    <string name="output_file_error_title">"Ei voi luoda videotiedostoa"</string>
+    <string name="output_file_error_message">"SCR ei voinut luoda %1$s videotiedostoa. Varmista, että valitun lähdön hakemisto on kirjoitettava ja että SD-kortti ei ole lukittu USB-liitännän takia."</string>
+
+    <string name="help_stop_title">"Miten lopettaa"</string>
+    <string name="help_stop_ok">"Tajusin!"</string>
+
+    <string name="free_timeout_title">"Määräaika päättyi"</string>
+    <string name="free_timeout_message">"Osta SCR Screen Recorder Pro jotta voit saada rajoittamattoman tallennusajan, eikä vesileimaa videoon."</string>
+    <string name="free_timeout_buy">"Osta nyt!"</string>
+    <string name="free_timeout_no_thanks">"Ei kiitos"</string>
+    <string name="hide_icon_title">"Pro ominaisuus"</string>
+    <string name="hide_icon_message">"Osta SCR Screen Recorder Pro piilottaaksesi vesileima ja ilmoituksen kuvake. Saat myös rajoittamatoman tallennusajan!"</string>
+
+    <string name="buy_error_title">"Google Play virhe"</string>
+    <string name="buy_error_message">"Ole hyvä ja etsi SCR Screen Recorder Pro Google Playstä"</string>
+
+    <string name="settings_activity_label">"SCR Asetukset"</string>
+    <string name="settings_title">"Asetukset"</string>
+    <string name="settings_ok">"OK"</string>
+    <string name="settings_reset">"Palauta oletusarvot"</string>
+    <string name="settings_cancel">"Peruuta"</string>
+    <string name="settings_audio">"Ääni"</string>
+    <string name="settings_audio_mic">"Mikki"</string>
+    <string name="settings_audio_mute">"Mykistetty"</string>
+    <string name="settings_resolution">"Resoluutio"</string>
+    <string name="settings_resolution_short">"%1$dx%2$d"</string>
+    <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
+    <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp vaaka"</string>
+    <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp pysty"</string>
+    <string name="settings_resolution_max">"%1$dx%2$d - Maksimi"</string>
+    <string name="settings_resolution_half">"%1$dx%2$d - Puoli"</string>
+    <string name="settings_resolution_unstable">"(Epävakaa)"</string>
+    <string name="settings_frame_rate">"tavoite fps"</string>
+    <string name="settings_frame_rate_max">"Maksimi"</string>
+    <string name="settings_frame_rate_max_short">"Maksimi"</string>
+    <string name="settings_frame_rate_up_to">"Jopa #0 fps"</string>
+    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_transformation">"Kuvan muunnin"</string>
+    <string name="settings_transformation_cpu">"CPU "</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"GPU+"</string>
+    <string name="settings_video_bitrate">"Video bitrate"</string>
+    <string name="settings_sampling_rate">"Äänen näytteenottotaajuus"</string>
+    <string name="settings_color_fix">"Käännetty värikorjaus"</string>
+    <string name="settings_hide_icon">"Piilota ilmoituksen kuvake"</string>
+    <string name="settings_show_touches">"Näytä koskettaa"</string>
+    <string name="settings_output_dir">"Tallennusijainti"</string>
+    <string name="settings_video_encoder">"Videokodeekk"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 (epävakaa)"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"Auto"</string>
+
+    <string name="directory_chooser_select">"Valitse \"%1$s\""</string>
+    <string name="directory_chooser_refresh">"Virkistä"</string>
+    <string name="directory_chooser_new">"Uusi"</string>
+    <string name="directory_chooser_new_title">"Uuden hakemiston nimi"</string>
+    <string name="directory_chooser_new_ok">"OK"</string>
+    <string name="directory_chooser_new_cancel">"Peruutta"</string>
+    <string name="directory_chooser_error_message">"Hakemistoon ei voi luoda. Varmista, että valittuun sijaintiin voi kirjoittaa  esim. SD-kortille."</string>
+    <string name="directory_chooser_not_writable_title">"Valittu hakemisto ei ole kirjoitettavissa"</string>
+    <string name="directory_chooser_not_writable_message">"Sovelluksella ei näytä olevan kirjoitusoikeuksia %1$s hakemistoon. Tämä voi aiheuttaa tallennuksen ongelmia."</string>
+    <string name="directory_chooser_ignore">"Sivuutta"</string>
+    <string name="directory_chooser_cancel">"Peruutta"</string>
+    <string name="directory_chooser_default">"Oletusarvo"</string>
+
+    <string name="license_dont_allow">"Lisenssin tarkistus epäonnistui. Varmista, että Internet-yhteys on muodostettu ja olet kirjautunut Google Playhyn.
+    "</string>
+    <string name="license_error">"LIsenssin tarkistus epäonnistui. Varmista, että Internet-yhteys on muodostettu ja olet kirjautunut Google Playhyn.
+    "</string>
+
+    <string name="error_report_report">"Ilmoita"</string>
+    <string name="error_report_close">"Sulje"</string>
+    <string name="error_report_subject">"[error]"</string>
+    <string name="error_report_text">"Kiinnitys sisältää yksityiskohtaisen järjestelmälokin ja myös tietoa virheestä. Voit vapaasti lisätä kommentteja täällä."</string>
+    <string name="error_report_chooser">"Lähetä virheraportti sähköpostissa"</string>
+
+    <string name="rating_rate_title">"Arvostele %1$s"</string>
+    <string name="rating_rate_message">"Jos pidit %1$s , käytä hetki arvostellessa se. Kiitos tuesta!"</string>
+    <string name="rating_rate_now">"Arvostele nyt!"</string>
+    <string name="rating_remind">"Muistuta myöhemmin"</string>
+    <string name="rating_no_thanks">"Kiitos ei"</string>
+    <string name="rating_play_error">"Ei voitu avata Google Playtä."</string>
+
+    <string name="help_stop_message">"Lopeta tallennus lukita näytön ja odota 2 sekuntia. Vaihtoehtoisesti voit uudelleen %1$s sovellus."</string>
+    <string name="menu_send_bug_report">"Lähetä vikailmoitus"</string>
+    <string name="settings_stop_when_screen_off">"Lopeta näytön pois"</string>
+</resources>

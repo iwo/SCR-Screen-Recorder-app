@@ -1,0 +1,113 @@
+<resources>
+    <string name="free_app_name">"SCR免費版"</string>
+    <string name="free_app_full_name">"SCR螢幕錄影免費版"</string>
+    <string name="pro_app_name">"SCR專業版"</string>
+    <string name="pro_app_full_name">"SCR螢幕錄影專業版"</string>
+    <string name="app_name">"SCR"</string>
+    <string name="watermark_text">"SCR"</string>
+    <string name="recording_saved_title">"SCR 錄製已儲存"</string>
+    <string name="recording_saved_message">"錄製儲存到 %1$s"</string>
+    <string name="recording_saved_toast">"錄製儲存到 %1$s"</string>
+    <string name="max_file_size_reached_toast">"已達最大檔案大小，您的錄製已儲存到 %1$s"</string>
+    <string name="start">"開始"</string>
+    <string name="play">"播放"</string>
+    <string name="output_dir">"ScreenRecorder"</string>
+    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
+
+    <string name="su_required_title">"需要root存取權限"</string>
+    <string name="su_required_message">"要在手機或平板上執行任何螢幕錄影程式都必須取得root權限。在網路上有許多相關教學及說明如何取得不同裝置的root權限。請在取得root權限之後再繼續使用吧！"</string>
+
+    <string name="error_dialog_title">"發生了嚴重錯誤:-("</string>
+    <string name="startup_error_message">"將寄送出匿名的錯誤回饋報告以協助我們修正問題。請放心的透過email引用錯誤 S%1$d 聯絡我們。"</string>
+    <string name="recording_error_message">"將寄送出匿名的錯誤回饋報告以協助我們修正問題。請放心的透過email引用錯誤 R%1$d 聯絡我們。"</string>
+
+    <string name="media_recorder_error_title">"攝影機錯誤"</string>
+    <string name="media_recorder_error_message">"正試著變更影像解析度或切換 GPU/CPU 之間的轉碼。請移除您其它已安裝的擷圖程式！如果問題依然存在，請透過email引用錯誤 R%1$d 聯絡我們。"</string>
+
+    <string name="output_file_error_title">"無法新增影片檔"</string>
+    <string name="output_file_error_message">"SCR無法新增 %1$s 影片檔！請確認選擇的輸出目錄是可寫入的，並且以USB連結的SD卡沒有被鎖定住。"</string>
+
+    <string name="help_stop_title">"該如何停止呢?"</string>
+    <string name="help_stop_ok">"明白了"</string>
+
+    <string name="free_timeout_title">"使用時限已過期"</string>
+    <string name="free_timeout_message">"購買 SCR 螢幕錄影專業版以享有無限制錄影時間及錄影畫面無浮水印等功能"</string>
+    <string name="free_timeout_buy">"立即購買！"</string>
+    <string name="free_timeout_no_thanks">"不，謝了！"</string>
+    <string name="hide_icon_title">"專業版功能"</string>
+    <string name="hide_icon_message">"購買 SCR 螢幕錄影專業版以享有無限制錄影時間及錄影畫面無浮水印等功能!"</string>
+
+    <string name="buy_error_title">"Google Play 錯誤"</string>
+    <string name="buy_error_message">"請在 Google Play 上面搜尋 SCR Screen Recorder Pro"</string>
+
+    <string name="settings_activity_label">"SCR 設定"</string>
+    <string name="settings_title">"設定"</string>
+    <string name="settings_ok">"確定"</string>
+    <string name="settings_reset">"恢復預設值"</string>
+    <string name="settings_cancel">"取消"</string>
+    <string name="settings_audio">"音訊"</string>
+    <string name="settings_audio_mic">"麥克風"</string>
+    <string name="settings_audio_mute">"靜音"</string>
+    <string name="settings_resolution">"解析度"</string>
+    <string name="settings_resolution_short">"%1$dx%2$d"</string>
+    <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
+    <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp 水平"</string>
+    <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp 填滿"</string>
+    <string name="settings_resolution_max">"%1$dx%2$d - 最大"</string>
+    <string name="settings_resolution_half">"%1$dx%2$d - 半版"</string>
+    <string name="settings_resolution_unstable">"（不穩定）"</string>
+    <string name="settings_frame_rate">"目標畫面播放速率"</string>
+    <string name="settings_frame_rate_max">"最大值"</string>
+    <string name="settings_frame_rate_max_short">"最大"</string>
+    <string name="settings_frame_rate_up_to">" #0 fps"</string>
+    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_transformation">"影像轉碼"</string>
+    <string name="settings_transformation_cpu">"CPU"</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"GPU+"</string>
+    <string name="settings_video_bitrate">"影片位元率"</string>
+    <string name="settings_sampling_rate">"音訊取樣率"</string>
+    <string name="settings_color_fix">"反色修正"</string>
+    <string name="settings_hide_icon">"隱藏通知圖示"</string>
+    <string name="settings_show_touches">"顯示觸控點"</string>
+    <string name="settings_output_dir">"輸出目錄"</string>
+    <string name="settings_video_encoder">"影片編碼"</string>
+    <string name="settings_video_encoder_h264">"H264 "</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263（不穩定）"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"自動"</string>
+
+    <string name="directory_chooser_select">"選擇 \\"%1$s\\""</string>
+    <string name="directory_chooser_refresh">"重新載入"</string>
+    <string name="directory_chooser_new">"新增"</string>
+    <string name="directory_chooser_new_title">"新增目錄名稱"</string>
+    <string name="directory_chooser_new_ok">"確定"</string>
+    <string name="directory_chooser_new_cancel">"取消"</string>
+    <string name="directory_chooser_error_message">"無法新增目錄! 請確認選擇一個可寫入的位置 *如 : SD卡"</string>
+    <string name="directory_chooser_not_writable_title">"您選擇的目錄無法寫入"</string>
+    <string name="directory_chooser_not_writable_message">"應用程式似乎沒有寫入到 %1$s 目錄的權限，而這可能導致錄製上的問題。"</string>
+    <string name="directory_chooser_ignore">"忽略"</string>
+    <string name="directory_chooser_cancel">"取消"</string>
+    <string name="directory_chooser_default">"預設"</string>
+
+    <string name="license_dont_allow">"驗證檢查失敗 ! 請確認您的網路已連線並且已登入到Google Play。"</string>
+    <string name="license_error">"驗證檢查錯誤 ! 請確認您的網路已連線並且已登入到Google Play。"</string>
+
+    <string name="error_report_report">"報告"</string>
+    <string name="error_report_close">"關閉"</string>
+    <string name="error_report_subject">"[錯誤]"</string>
+    <string name="error_report_text">"附件中包含了詳細的系統日誌及相關錯誤的資訊。請放心的在這裡寫入任何建議或評論。"</string>
+    <string name="error_report_chooser">"電子郵件錯誤報告Email 錯誤報告"</string>
+
+    <string name="rating_rate_title">"評價 %1$s"</string>
+    <string name="rating_rate_message">"如果您使用 %1$s 愉快的話, 請花點時間幫我們評價。 非常感謝您的支持!"</string>
+    <string name="rating_rate_now">"立即評價!"</string>
+    <string name="rating_remind">"稍後再提醒我"</string>
+    <string name="rating_no_thanks">"不用了，謝謝"</string>
+    <string name="rating_play_error">"無法開啟 Google Play !"</string>
+
+    <string name="help_stop_message">"我們得停止錄製並鎖定螢幕再稍等約 2 秒。或是您也可以簡單地重新開啟 %1$s 應用程式"</string>
+    <string name="menu_send_bug_report">"寄送錯誤報告"</string>
+    <string name="settings_stop_when_screen_off">"螢幕關閉時停止錄影"</string>
+</resources>
