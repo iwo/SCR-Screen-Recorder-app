@@ -64,7 +64,7 @@ public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent.setType("text/plain");
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"scr.screen.recorder@gmail.com"});
-        String subject = context.getString(R.string.error_report_subject) + " " + context.getString(R.string.app_name) + " - " + errorCode + " - " + Build.DEVICE;
+        String subject = context.getString(R.string.error_report_subject) + " " + context.getString(R.string.app_name) + " - " + errorCode + " - " + Build.DEVICE + " - " + Build.VERSION.RELEASE ;
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, context.getString(R.string.error_report_text));
         emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(output));
