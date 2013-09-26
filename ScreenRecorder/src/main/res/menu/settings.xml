@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/settings_reset" />
+    <item
+        android:id="@+id/settings_send_bug_report"
+        android:orderInCategory="110"
+        android:showAsAction="never"
+        android:title="@string/menu_send_bug_report" />
 </menu>

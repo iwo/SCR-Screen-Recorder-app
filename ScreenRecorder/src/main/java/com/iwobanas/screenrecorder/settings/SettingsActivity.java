@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
+import com.iwobanas.screenrecorder.ReportBugTask;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -165,9 +166,16 @@ public class SettingsActivity extends Activity {
                 Settings.getInstance().restoreDefault();
                 refreshValues();
                 return true;
+            case R.id.settings_send_bug_report:
+                sendBugReport();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void sendBugReport() {
+        new ReportBugTask(getApplicationContext(), 1000).execute();
     }
 
     private void refreshValues() {
