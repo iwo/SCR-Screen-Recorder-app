@@ -15,6 +15,7 @@
             android:divider="?android:attr/dividerHorizontal"
             android:orientation="vertical"
             android:showDividers="middle"
+            android:shrinkColumns="0"
             android:stretchColumns="0,1">
 
             <TableRow
