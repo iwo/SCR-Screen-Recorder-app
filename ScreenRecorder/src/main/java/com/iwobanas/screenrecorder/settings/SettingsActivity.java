@@ -35,12 +35,20 @@ public class SettingsActivity extends Activity {
     private CheckBox stopOnScreenOffCheckBox;
     private TextView outputDirText;
     private TextView videoEncoderText;
+    private TableRow audioRow;
+    private TableRow resolutionRow;
+    private TableRow frameRateRow;
+    private TableRow videoBitrateRow;
+    private TableRow samplingRateRow;
+    private TableRow transformationRow;
+    private TableRow outputDirRow;
+    private TableRow videoEncoderRow;
+    private boolean viewsInitialized = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Settings.initialize(this);
         super.onCreate(savedInstanceState);
-        //buyDialogOpen = false;
 
         setContentView(R.layout.settings);
 
@@ -57,54 +65,53 @@ public class SettingsActivity extends Activity {
         outputDirText = (TextView) findViewById(R.id.settings_output_dir_text);
         videoEncoderText = (TextView) findViewById(R.id.settings_video_encoder_text);
 
-        TableRow audioRow = (TableRow) findViewById(R.id.settings_audio_row);
+        audioRow = (TableRow) findViewById(R.id.settings_audio_row);
+        resolutionRow = (TableRow) findViewById(R.id.settings_resolution_row);
+        frameRateRow = (TableRow) findViewById(R.id.settings_frame_rate_row);
+        videoBitrateRow = (TableRow) findViewById(R.id.settings_video_bitrate_row);
+        samplingRateRow = (TableRow) findViewById(R.id.settings_sampling_rate_row);
+        transformationRow = (TableRow) findViewById(R.id.settings_transformation_row);
+        outputDirRow = (TableRow) findViewById(R.id.settings_output_dir_row);
+        videoEncoderRow = (TableRow) findViewById(R.id.settings_video_encoder_row);
+
+        viewsInitialized = true;
+
         audioRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new AudioDialogFragment().show(getFragmentManager(), "audio");
             }
         });
-
-        TableRow resolutionRow = (TableRow) findViewById(R.id.settings_resolution_row);
         resolutionRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new ResolutionDialogFragment().show(getFragmentManager(), "resolution");
             }
         });
-
-        TableRow frameRateRow = (TableRow) findViewById(R.id.settings_frame_rate_row);
         frameRateRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new FrameRateDialogFragment().show(getFragmentManager(), "frameRate");
             }
         });
-
-        TableRow videoBitrateRow = (TableRow) findViewById(R.id.settings_video_bitrate_row);
         videoBitrateRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new VideoBitrateDialogFragment().show(getFragmentManager(), "video_bitrate");
             }
         });
-
-        TableRow samplingRateRow = (TableRow) findViewById(R.id.settings_sampling_rate_row);
         samplingRateRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new SamplingRateDialogFragment().show(getFragmentManager(), "sampling_rate");
             }
         });
-
-        TableRow transformationRow = (TableRow) findViewById(R.id.settings_transformation_row);
         transformationRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new TransformationDialogFragment().show(getFragmentManager(), "transformation");
             }
         });
-
         colorFixCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
@@ -112,7 +119,6 @@ public class SettingsActivity extends Activity {
                 refreshValues();
             }
         });
-
         hideIconCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
@@ -125,22 +131,18 @@ public class SettingsActivity extends Activity {
                 refreshValues();
             }
         });
-
         showTouchesCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 Settings.getInstance().setShowTouches(checked);
             }
         });
-
         stopOnScreenOffCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 Settings.getInstance().setStopOnScreenOff(checked);
             }
         });
-
-        TableRow outputDirRow = (TableRow) findViewById(R.id.settings_output_dir_row);
         outputDirRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,8 +152,6 @@ public class SettingsActivity extends Activity {
                 startActivityForResult(intent, SELECT_OUTPUT_DIR);
             }
         });
-
-        TableRow videoEncoderRow = (TableRow) findViewById(R.id.settings_video_encoder_row);
         videoEncoderRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,95 +188,70 @@ public class SettingsActivity extends Activity {
     }
 
     private void refreshValues() {
+        if (!viewsInitialized) return;
+
         Settings settings = Settings.getInstance();
-        if (audioText != null) {
-            String audioSource = settings.getAudioSource() == AudioSource.MIC ?
-                    getString(R.string.settings_audio_mic) : getString(R.string.settings_audio_mute);
-            audioText.setText(audioSource);
+
+        audioText.setText(getAudioSourceLabel(settings.getAudioSource()));
+        resolutionText.setText(getResolutionLabel(settings.getResolution(), settings.getDefaultResolution()));
+        frameRateText.setText(getFrameRateLabel(settings.getFrameRate()));
+        transformationText.setText(getTransformationLabel(settings.getTransformation()));
+        videoBitrateText.setText(settings.getVideoBitrate().getLabel());
+        samplingRateText.setText(settings.getSamplingRate().getLabel());
+        colorFixCheckBox.setChecked(settings.getColorFix());
+        hideIconCheckBox.setChecked(settings.getHideIcon());
+        showTouchesCheckBox.setChecked(settings.getShowTouches());
+        stopOnScreenOffCheckBox.setChecked(settings.getStopOnScreenOff());
+        outputDirText.setText(settings.getOutputDir().getAbsolutePath());
+        videoEncoderText.setText(getVideoEncoderLabel(settings.getVideoEncoder()));
+
+    }
+
+    private String getAudioSourceLabel(AudioSource audioSource) {
+        return audioSource == AudioSource.MIC ?
+                getString(R.string.settings_audio_mic)
+                : getString(R.string.settings_audio_mute);
+    }
+
+    private String getResolutionLabel(Resolution resolution, Resolution defaultResolution) {
+        if (resolution == null) {
+            resolution = defaultResolution;
         }
+        return String.format(getString(R.string.settings_resolution_short), resolution.getWidth(), resolution.getHeight());
+    }
 
-        if (resolutionText != null) {
-            Resolution resolution = settings.getResolution();
-            if (resolution == null)
-                resolution = settings.getDefaultResolution();
-
-            resolutionText.setText(String.format(getString(R.string.settings_resolution_short),
-                    resolution.getWidth(), resolution.getHeight()));
+    private String getFrameRateLabel(int frameRate) {
+        if (frameRate == -1) {
+            return getString(R.string.settings_frame_rate_max_short);
         }
+        DecimalFormat format = new DecimalFormat(getString(R.string.settings_frame_rate_up_to_short));
+        return format.format(frameRate);
+    }
 
-        if (frameRateText != null) {
-            int frameRate = settings.getFrameRate();
-            if (frameRate == -1) {
-                frameRateText.setText(R.string.settings_frame_rate_max_short);
-            } else {
-                DecimalFormat format = new DecimalFormat(getString(R.string.settings_frame_rate_up_to_short));
-                frameRateText.setText(format.format(frameRate));
-            }
+    private String getTransformationLabel(Transformation transformation) {
+        switch (transformation) {
+            case CPU:
+                return getString(R.string.settings_transformation_cpu);
+            case GPU:
+                return getString(R.string.settings_transformation_gpu);
+            case OES:
+                return getString(R.string.settings_transformation_oes);
         }
+        return "";
+    }
 
-        if (transformationText != null) {
-            String transformation = null;
-            switch (settings.getTransformation()) {
-                case CPU:
-                    transformation = getString(R.string.settings_transformation_cpu);
-                    break;
-                case GPU:
-                    transformation = getString(R.string.settings_transformation_gpu);
-                    break;
-                case OES:
-                    transformation = getString(R.string.settings_transformation_oes);
-                    break;
-            }
-            transformationText.setText(transformation);
+    private String getVideoEncoderLabel(int videoEncoder) {
+        switch (videoEncoder) {
+            case MediaRecorder.VideoEncoder.DEFAULT:
+                return getString(R.string.settings_video_encoder_default);
+            case MediaRecorder.VideoEncoder.H264:
+                return getString(R.string.settings_video_encoder_h264);
+            case MediaRecorder.VideoEncoder.H263:
+                return getString(R.string.settings_video_encoder_h263);
+            case MediaRecorder.VideoEncoder.MPEG_4_SP:
+                return getString(R.string.settings_video_encoder_mpeg_4_sp);
         }
-
-        if (videoBitrateText != null) {
-            videoBitrateText.setText(settings.getVideoBitrate().getLabel());
-        }
-
-        if (samplingRateText != null) {
-            samplingRateText.setText(settings.getSamplingRate().getLabel());
-        }
-
-        if (colorFixCheckBox != null) {
-            colorFixCheckBox.setChecked(settings.getColorFix());
-        }
-
-        if (hideIconCheckBox != null) {
-            hideIconCheckBox.setChecked(settings.getHideIcon());
-        }
-
-        if (showTouchesCheckBox != null) {
-            showTouchesCheckBox.setChecked(settings.getShowTouches());
-        }
-
-        if (stopOnScreenOffCheckBox != null) {
-            stopOnScreenOffCheckBox.setChecked(settings.getStopOnScreenOff());
-        }
-
-        if (outputDirText != null) {
-            outputDirText.setText(settings.getOutputDir().getAbsolutePath());
-        }
-
-        if (videoEncoderText != null) {
-            String encoder = null;
-            switch (settings.getVideoEncoder()) {
-                case MediaRecorder.VideoEncoder.DEFAULT:
-                    encoder = getString(R.string.settings_video_encoder_default);
-                    break;
-                case MediaRecorder.VideoEncoder.H264:
-                    encoder = getString(R.string.settings_video_encoder_h264);
-                    break;
-                case MediaRecorder.VideoEncoder.H263:
-                    encoder = getString(R.string.settings_video_encoder_h263);
-                    break;
-                case MediaRecorder.VideoEncoder.MPEG_4_SP:
-                    encoder = getString(R.string.settings_video_encoder_mpeg_4_sp);
-                    break;
-            }
-            videoEncoderText.setText(encoder);
-        }
-
+        return "";
     }
 
     public void settingsChanged() {
