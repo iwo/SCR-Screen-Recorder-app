@@ -19,6 +19,7 @@ import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
 
 import static com.iwobanas.screenrecorder.Tracker.RATING;
+import static com.iwobanas.screenrecorder.Tracker.RATING_CANCEL;
 import static com.iwobanas.screenrecorder.Tracker.RATING_NO_THANKS;
 import static com.iwobanas.screenrecorder.Tracker.RATING_RATE_NOW;
 import static com.iwobanas.screenrecorder.Tracker.RATING_REMIND;
@@ -79,6 +80,7 @@ public class RatingDialogFragment extends DialogFragment {
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
+        EasyTracker.getTracker().sendEvent(RATING, RATING_CANCEL, RATING_CANCEL, null);
         goBackToOverlay();
     }
 

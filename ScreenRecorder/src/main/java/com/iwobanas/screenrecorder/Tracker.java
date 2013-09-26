@@ -49,6 +49,7 @@ public class Tracker {
     public final static String RATING_RATE_NOW = "rating_rate_now";
     public final static String RATING_REMIND = "rating_remind";
     public final static String RATING_NO_THANKS = "rating_no_thanks";
+    public final static String RATING_CANCEL = "rating_cancel";
 
     public final static String BUG = "bug";
     public final static String REPORT = "report";
