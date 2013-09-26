@@ -162,7 +162,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else {
             mWatermark.hide();
         }
-        mScreenOffReceiver.register();
+        if (Settings.getInstance().getStopOnScreenOff()) {
+            mScreenOffReceiver.register();
+        }
         outputFile = getOutputFile();
         isRecording = true;
         mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());

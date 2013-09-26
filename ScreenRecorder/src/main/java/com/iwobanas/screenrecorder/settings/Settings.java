@@ -23,6 +23,7 @@ public class Settings {
     private static final String COLOR_FIX = "COLOR_FIX";
     private static final String HIDE_ICON = "HIDE_ICON";
     private static final String SHOW_TOUCHES = "SHOW_TOUCHES";
+    private static final String STOP_ON_SCREEN_OFF = "STOP_ON_SCREEN_OFF";
     private static final String OUTPUT_DIR = "OUTPUT_DIR";
     private static final String OUTPUT_DIR_WRITABLE = "OUTPUT_DIR_WRITABLE";
     private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
@@ -51,6 +52,7 @@ public class Settings {
     private boolean defaultColorFix = false;
     private boolean hideIcon = false;
     private boolean showTouches = true;
+    private boolean stopOnScreenOff = true;
     private int videoEncoder = MediaRecorder.VideoEncoder.H264;
     private File outputDir;
     private File defaultOutputDir;
@@ -139,6 +141,8 @@ public class Settings {
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
 
         setShowTouches(preferences.getBoolean(SHOW_TOUCHES, true), false);
+
+        stopOnScreenOff = preferences.getBoolean(STOP_ON_SCREEN_OFF, true);
 
         String outputDirPath = preferences.getString(OUTPUT_DIR, defaultOutputDir.getAbsolutePath());
         outputDir = new File(outputDirPath);
@@ -371,6 +375,17 @@ public class Settings {
         }
     }
 
+    public boolean getStopOnScreenOff() {
+        return stopOnScreenOff;
+    }
+
+    public void setStopOnScreenOff(boolean stopOnScreenOff) {
+        this.stopOnScreenOff = stopOnScreenOff;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(STOP_ON_SCREEN_OFF, stopOnScreenOff);
+        editor.commit();
+    }
+
     public int getVideoEncoder() {
         return videoEncoder;
     }
@@ -431,6 +446,9 @@ public class Settings {
 
         setShowTouches(true, false);
         editor.remove(SHOW_TOUCHES);
+
+        stopOnScreenOff = true;
+        editor.remove(STOP_ON_SCREEN_OFF);
 
         outputDir = defaultOutputDir;
         editor.remove(OUTPUT_DIR);

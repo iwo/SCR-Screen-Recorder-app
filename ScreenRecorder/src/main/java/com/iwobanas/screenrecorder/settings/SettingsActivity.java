@@ -32,6 +32,7 @@ public class SettingsActivity extends Activity {
     private CheckBox colorFixCheckBox;
     private CheckBox hideIconCheckBox;
     private CheckBox showTouchesCheckBox;
+    private CheckBox stopOnScreenOffCheckBox;
     private TextView outputDirText;
     private TextView videoEncoderText;
 
@@ -52,6 +53,7 @@ public class SettingsActivity extends Activity {
         colorFixCheckBox = (CheckBox) findViewById(R.id.settings_color_fix_checkbox);
         hideIconCheckBox = (CheckBox) findViewById(R.id.settings_hide_icon_checkbox);
         showTouchesCheckBox = (CheckBox) findViewById(R.id.settings_show_touches_checkbox);
+        stopOnScreenOffCheckBox = (CheckBox) findViewById(R.id.settings_stop_on_screen_off_checkbox);
         outputDirText = (TextView) findViewById(R.id.settings_output_dir_text);
         videoEncoderText = (TextView) findViewById(R.id.settings_video_encoder_text);
 
@@ -128,6 +130,13 @@ public class SettingsActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 Settings.getInstance().setShowTouches(checked);
+            }
+        });
+
+        stopOnScreenOffCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                Settings.getInstance().setStopOnScreenOff(checked);
             }
         });
 
@@ -239,6 +248,10 @@ public class SettingsActivity extends Activity {
 
         if (showTouchesCheckBox != null) {
             showTouchesCheckBox.setChecked(settings.getShowTouches());
+        }
+
+        if (stopOnScreenOffCheckBox != null) {
+            stopOnScreenOffCheckBox.setChecked(settings.getStopOnScreenOff());
         }
 
         if (outputDirText != null) {
