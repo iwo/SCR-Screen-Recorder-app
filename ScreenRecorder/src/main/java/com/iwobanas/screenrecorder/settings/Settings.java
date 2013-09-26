@@ -12,6 +12,7 @@ import com.iwobanas.screenrecorder.Utils;
 import java.io.File;
 
 public class Settings {
+    public static final int FFMPEG_MPEG_4_ENCODER = -2;
     private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
     private static final String AUDIO_SOURCE = "AUDIO_SOURCE";
     private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";

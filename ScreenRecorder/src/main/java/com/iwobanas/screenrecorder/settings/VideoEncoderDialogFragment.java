@@ -15,8 +15,8 @@ public class VideoEncoderDialogFragment extends SettingsListDialogFragment<Integ
     protected Integer[] getItems() {
         return new Integer[]{
                 MediaRecorder.VideoEncoder.H264,
-                MediaRecorder.VideoEncoder.MPEG_4_SP,
-                MediaRecorder.VideoEncoder.H263
+                Settings.FFMPEG_MPEG_4_ENCODER,
+                MediaRecorder.VideoEncoder.MPEG_4_SP
         };
     }
 
@@ -34,8 +34,8 @@ public class VideoEncoderDialogFragment extends SettingsListDialogFragment<Integ
     protected String[] getLabels() {
         return new String[]{
                 getString(R.string.settings_video_encoder_h264),
-                getString(R.string.settings_video_encoder_mpeg_4_sp),
-                getString(R.string.settings_video_encoder_h263_unstable)
+                getString(R.string.settings_video_encoder_ffmpeg_mpeg_4),
+                getString(R.string.settings_video_encoder_mpeg_4_sp)
         };
     }
 }

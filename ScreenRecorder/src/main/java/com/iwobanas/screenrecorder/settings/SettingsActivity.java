@@ -205,6 +205,17 @@ public class SettingsActivity extends Activity {
         outputDirText.setText(settings.getOutputDir().getAbsolutePath());
         videoEncoderText.setText(getVideoEncoderLabel(settings.getVideoEncoder()));
 
+        if (settings.getVideoEncoder() == Settings.FFMPEG_MPEG_4_ENCODER) {
+            transformationRow.setVisibility(View.GONE);
+        } else {
+            transformationRow.setVisibility(View.VISIBLE);
+        }
+
+        if (AudioSource.MUTE.equals(settings.getAudioSource())) {
+            samplingRateRow.setVisibility(View.GONE);
+        } else {
+            samplingRateRow.setVisibility(View.VISIBLE);
+        }
     }
 
     private String getAudioSourceLabel(AudioSource audioSource) {
@@ -250,6 +261,8 @@ public class SettingsActivity extends Activity {
                 return getString(R.string.settings_video_encoder_h263);
             case MediaRecorder.VideoEncoder.MPEG_4_SP:
                 return getString(R.string.settings_video_encoder_mpeg_4_sp);
+            case Settings.FFMPEG_MPEG_4_ENCODER:
+                return getString(R.string.settings_video_encoder_ffmpeg_mpeg_4_short);
         }
         return "";
     }

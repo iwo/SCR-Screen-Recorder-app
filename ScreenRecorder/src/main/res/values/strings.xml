@@ -112,4 +112,6 @@
     <string name="help_stop_message">To stop recording lock the screen and wait 2 seconds. Alternatively you can simply reopen %1$s app.</string>
     <string name="menu_send_bug_report">Send bug report</string>
     <string name="settings_stop_when_screen_off">Stop on screen off</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4 (slow)</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">SW MPEG-4</string>
 </resources>
