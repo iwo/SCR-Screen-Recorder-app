@@ -24,6 +24,7 @@ public class Settings {
     private static final String HIDE_ICON = "HIDE_ICON";
     private static final String SHOW_TOUCHES = "SHOW_TOUCHES";
     private static final String OUTPUT_DIR = "OUTPUT_DIR";
+    private static final String OUTPUT_DIR_WRITABLE = "OUTPUT_DIR_WRITABLE";
     private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
     private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
     private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
@@ -53,6 +54,8 @@ public class Settings {
     private int videoEncoder = MediaRecorder.VideoEncoder.H264;
     private File outputDir;
     private File defaultOutputDir;
+    private String outputDirName;
+    private boolean outputDirWritable;
     private ShowTouchesController showTouchesController;
     private int appVersion;
     private boolean appUpdated;
@@ -62,12 +65,14 @@ public class Settings {
         resolutionsManager = new ResolutionsManager(context);
         showTouchesController = new ShowTouchesController(context);
         appVersion = Utils.getAppVersion(context);
-        defaultOutputDir = new File(Environment.getExternalStorageDirectory(), context.getString(R.string.output_dir));
+        outputDirName = context.getString(R.string.output_dir);
+        defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
         readPreferences();
         handleUpdate();
         if (shouldUpdateDefaults()) {
             new LoadDefaultsAsyncTask(appVersion).execute();
         }
+        validateOutputDir();
     }
 
     public static synchronized void initialize(Context context) {
@@ -137,6 +142,7 @@ public class Settings {
 
         String outputDirPath = preferences.getString(OUTPUT_DIR, defaultOutputDir.getAbsolutePath());
         outputDir = new File(outputDirPath);
+        outputDirWritable = preferences.getBoolean(OUTPUT_DIR_WRITABLE, false);
 
         videoEncoder = preferences.getInt(VIDEO_ENCODER, MediaRecorder.VideoEncoder.H264);
     }
@@ -155,6 +161,25 @@ public class Settings {
             }
         }
 
+        editor.commit();
+    }
+
+    private void validateOutputDir() {
+
+        if (outputDirWritable) return; // Skip validation if it passed before
+
+        SharedPreferences.Editor editor = preferences.edit();
+        if (Utils.checkDirWritable(defaultOutputDir)) {
+            editor.putBoolean(OUTPUT_DIR_WRITABLE, true);
+        } else {
+            boolean usingDefault = defaultOutputDir.equals(getOutputDir());
+            // fallback to legacy path /sdcard
+            defaultOutputDir = new File("/sdcard", outputDirName);
+            if (usingDefault) {
+                outputDir = defaultOutputDir;
+                editor.remove(OUTPUT_DIR);
+            }
+        }
         editor.commit();
     }
 

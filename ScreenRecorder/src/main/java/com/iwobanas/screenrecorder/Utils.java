@@ -65,4 +65,19 @@ public class Utils {
         } catch (Exception ignored) {}
         return appVersion;
     }
+
+    public static boolean checkDirWritable(File dir) {
+        try {
+            if (!dir.exists()) {
+                if (!dir.mkdirs())
+                    return false;
+            }
+            File testFile = new File(dir, "scr_write_test.txt");
+            testFile.createNewFile();
+            testFile.delete();
+        } catch (Throwable e) {
+            return false;
+        }
+        return true;
+    }
 }
