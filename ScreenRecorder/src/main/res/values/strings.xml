@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SCR</string>
+    <string name="free_app_name">SCR Free</string>
+    <string name="free_app_full_name">SCR Screen Recorder Free</string>
+    <string name="pro_app_name">SCR Pro</string>
+    <string name="pro_app_full_name">SCR Screen Recorder Pro</string>
     <string name="watermark_text">SCR</string>
     <string name="recording_saved_title">SCR Recording Saved</string>
     <string name="recording_saved_message">Recording saved to %1$s</string>
@@ -108,4 +111,8 @@
     <string name="rating_remind">Remind me later</string>
     <string name="rating_no_thanks">No, thanks</string>
     <string name="rating_play_error">Couldn\'t open Google Play.</string>
+
+    <string name="help_stop_message">To stop recording lock the screen and wait 2 seconds. Alternatively you can simply reopen %1$s app.</string>
+    <string name="menu_send_bug_report">Send bug report</string>
+    <string name="settings_stop_when_screen_off">Stop on screen off</string>
 </resources>

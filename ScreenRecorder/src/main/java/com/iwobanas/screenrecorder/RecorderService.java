@@ -327,7 +327,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private void displayStopHelp() {
         Intent intent = new Intent(RecorderService.this, DialogActivity.class);
-        intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.help_stop_message));
+        String message = String.format(getString(R.string.help_stop_message), getString(R.string.app_name));
+        intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
         intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.help_stop_title));
         intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.help_stop_ok));
         intent.putExtra(DialogActivity.RESTART_EXTRA, true);
