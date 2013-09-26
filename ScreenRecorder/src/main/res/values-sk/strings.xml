@@ -12,7 +12,6 @@
     <string name="start">"Štart"</string>
     <string name="play">"Prehrať"</string>
     <string name="output_dir">"ScreenRecorder"</string>
-    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
 
     <string name="su_required_title">"Root prístup je vyžadovaný prístup"</string>
     <string name="su_required_message">"Ak chcete spustiť ľubovoľný nahrávač obrazovky, zariadenie musí byť rootnuté. Na Internete sa nachádza veľa návodov, ktoré vysvetľujú, ako rootnúť rôzne zariadenia."</string>

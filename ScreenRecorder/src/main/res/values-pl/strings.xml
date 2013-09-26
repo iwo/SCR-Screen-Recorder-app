@@ -12,7 +12,6 @@
     <string name="start">"Start"</string>
     <string name="play">"Odtwórz"</string>
     <string name="output_dir">"ScreenRecorder"</string>
-    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
 
     <string name="su_required_title">"Wymagane uprawnienie Root"</string>
     <string name="su_required_message">"Wszystkie programy nagrywające zawartość ekranu telefonu lub tabletu wymagają uprawnień root. Instrukcję jak \"zrootować\" twoje urządzenie można znaleźć w Internecie."</string>

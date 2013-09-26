@@ -12,7 +12,6 @@
     <string name="start">"Старт"</string>
     <string name="play">"Играть"</string>
     <string name="output_dir">"ScreenRecorder"</string>
-    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
 
     <string name="su_required_title">"Требуется доступ с правами root"</string>
     <string name="su_required_message">"Для запуска любого подобного приложения, ваш телефон/планшет должен иметь root. В интернете есть много учебников где описывается как рутировать различные устройства. Вернитесь снова, когда все будет готово!"</string>

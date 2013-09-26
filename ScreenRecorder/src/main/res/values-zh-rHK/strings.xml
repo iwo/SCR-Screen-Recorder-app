@@ -12,7 +12,6 @@
     <string name="start">"開始"</string>
     <string name="play">"播放"</string>
     <string name="output_dir">"ScreenRecorder"</string>
-    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
 
     <string name="su_required_title">"需要root存取權限"</string>
     <string name="su_required_message">"要在手機或平板上執行任何螢幕錄影程式都必須取得root權限。在網路上有許多相關教學及說明如何取得不同裝置的root權限。請在取得root權限之後再繼續使用吧！"</string>

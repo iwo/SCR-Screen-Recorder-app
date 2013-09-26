@@ -12,7 +12,6 @@
     <string name="start">"Alkaa"</string>
     <string name="play">"Toista"</string>
     <string name="output_dir">"ScreenRecorder "</string>
-    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
 
     <string name="su_required_title">"Pääkäyttäjän eli root oikeudet tarvitaan"</string>
     <string name="su_required_message">"Jotta voit käyttää jotakin näytönkaappaussovellusta sinun puhelimella/tabletilla pitää olla pääkäyttäjäoikeudet eli ro).Netistä löytyy paljon ohjeita kuinka saada root eri laitteilla. Tule takaisin kun olet valmis!"</string>
