@@ -51,7 +51,7 @@ public class Settings {
     private boolean colorFix = false;
     private boolean defaultColorFix = false;
     private boolean hideIcon = false;
-    private boolean showTouches = true;
+    private boolean showTouches = false;
     private boolean stopOnScreenOff = true;
     private int videoEncoder = MediaRecorder.VideoEncoder.H264;
     private File outputDir;
@@ -140,7 +140,7 @@ public class Settings {
 
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
 
-        setShowTouches(preferences.getBoolean(SHOW_TOUCHES, true), false);
+        showTouches = preferences.getBoolean(SHOW_TOUCHES, false);
 
         stopOnScreenOff = preferences.getBoolean(STOP_ON_SCREEN_OFF, true);
 
@@ -362,17 +362,11 @@ public class Settings {
     }
 
     public void setShowTouches(boolean showTouches) {
-        setShowTouches(showTouches, true);
-    }
-
-    private void setShowTouches(boolean showTouches, boolean save) {
         this.showTouches = showTouches;
         showTouchesController.setShowTouches(showTouches);
-        if (save) {
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean(SHOW_TOUCHES, showTouches);
-            editor.commit();
-        }
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(SHOW_TOUCHES, showTouches);
+        editor.commit();
     }
 
     public boolean getStopOnScreenOff() {
@@ -444,7 +438,10 @@ public class Settings {
         hideIcon = false;
         editor.remove(HIDE_ICON);
 
-        setShowTouches(true, false);
+        if (showTouches) {
+            showTouchesController.setShowTouches(false);
+            showTouches = false;
+        }
         editor.remove(SHOW_TOUCHES);
 
         stopOnScreenOff = true;
@@ -460,11 +457,15 @@ public class Settings {
     }
 
     public void restoreShowTouches() {
-        showTouchesController.restoreShowTouches();
+        if (showTouches) {
+            showTouchesController.setShowTouches(false);
+        }
     }
 
     public void applyShowTouches() {
-        showTouchesController.applyShowTouches();
+        if (showTouches) {
+            showTouchesController.setShowTouches(true);
+        }
     }
 }
 
