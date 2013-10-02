@@ -167,7 +167,11 @@ public class Settings {
         }
 
         if (previousVersion <= 24) {
-            if (!preferences.contains(SHOW_TOUCHES)) {
+            if (preferences.contains(SHOW_TOUCHES)) {
+                if (!preferences.getBoolean(SHOW_TOUCHES, true)) {
+                    showTouchesController.setShowTouches(false);
+                }
+            } else {
                 showTouches = true;
                 editor.putBoolean(SHOW_TOUCHES, true);
             }
