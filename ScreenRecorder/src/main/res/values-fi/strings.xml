@@ -107,7 +107,7 @@
     <string name="rating_no_thanks">"Kiitos ei"</string>
     <string name="rating_play_error">"Ei voitu avata Google Playtä."</string>
 
-    <string name="help_stop_message">"Lopeta tallennus lukita näytön ja odota 2 sekuntia. Vaihtoehtoisesti voit uudelleen %1$s sovellus."</string>
-    <string name="menu_send_bug_report">"Lähetä vikailmoitus"</string>
-    <string name="settings_stop_when_screen_off">"Lopeta näytön pois"</string>
+    <string name="help_stop_message">"Lopeta tallennus lukitsemalla näytn ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
+    <string name="menu_send_bug_report">"Lähetä virheilmoitus"</string>
+    <string name="settings_stop_when_screen_off">"Lopeta tallennus kun näyttö lukitaan."</string>
 </resources>

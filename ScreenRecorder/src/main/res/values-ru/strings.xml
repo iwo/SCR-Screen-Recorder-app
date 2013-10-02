@@ -108,6 +108,6 @@
     <string name="rating_play_error">"Не удалось открыть Google Play."</string>
 
     <string name="help_stop_message">"Для остановки записи заблокируйте экран и подождите 2 секунды. В качестве альтернативы можно просто открыть приложение %1$s."</string>
-    <string name="menu_send_bug_report">"Отправить отчет об ошибке"</string>
-    <string name="settings_stop_when_screen_off">"Остановить при отключении экрана"</string>
+    <string name="menu_send_bug_report">"Сообщить об ошибке"</string>
+    <string name="settings_stop_when_screen_off">"Остановить при\nотключении экрана"</string>
 </resources>
