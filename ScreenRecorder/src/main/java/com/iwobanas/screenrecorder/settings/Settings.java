@@ -152,7 +152,8 @@ public class Settings {
     }
 
     private void handleUpdate() {
-        if (appVersion == preferences.getInt(APP_VERSION, -1)) return;
+        int previousVersion = preferences.getInt(APP_VERSION, -1);
+        if (previousVersion == -1 || appVersion == previousVersion) return;
 
         appUpdated = true;
         SharedPreferences.Editor editor = preferences.edit();
@@ -162,6 +163,13 @@ public class Settings {
             if (transformation == Transformation.GPU && Build.VERSION.SDK_INT >= 18) {
                 editor.remove(TRANSFORMATION);
                 transformation = Transformation.OES;
+            }
+        }
+
+        if (previousVersion <= 24) {
+            if (!preferences.contains(SHOW_TOUCHES)) {
+                showTouches = true;
+                editor.putBoolean(SHOW_TOUCHES, true);
             }
         }
 
