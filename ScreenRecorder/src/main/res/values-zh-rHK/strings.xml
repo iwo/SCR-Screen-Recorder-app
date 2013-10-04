@@ -3,14 +3,12 @@
     <string name="free_app_full_name">"SCR螢幕錄影免費版"</string>
     <string name="pro_app_name">"SCR專業版"</string>
     <string name="pro_app_full_name">"SCR螢幕錄影專業版"</string>
-    <string name="watermark_text">"SCR"</string>
     <string name="recording_saved_title">"SCR 錄製已儲存"</string>
     <string name="recording_saved_message">"錄製儲存到 %1$s"</string>
     <string name="recording_saved_toast">"錄製儲存到 %1$s"</string>
     <string name="max_file_size_reached_toast">"已達最大檔案大小，您的錄製已儲存到 %1$s"</string>
     <string name="start">"開始"</string>
     <string name="play">"播放"</string>
-    <string name="output_dir">"ScreenRecorder"</string>
 
     <string name="su_required_title">"需要root存取權限"</string>
     <string name="su_required_message">"要在手機或平板上執行任何螢幕錄影程式都必須取得root權限。在網路上有許多相關教學及說明如何取得不同裝置的root權限。請在取得root權限之後再繼續使用吧！"</string>

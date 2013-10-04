@@ -3,14 +3,12 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
-    <string name="watermark_text">"SCR"</string>
     <string name="recording_saved_title">"Сохранение записи SCR"</string>
     <string name="recording_saved_message">"Сохранение в... %1$s"</string>
     <string name="recording_saved_toast">"Запись сохранена в %1$s"</string>
     <string name="max_file_size_reached_toast">"Достигнут максимальный размер файла. Запись сохранена в %1$s"</string>
     <string name="start">"Старт"</string>
     <string name="play">"Играть"</string>
-    <string name="output_dir">"ScreenRecorder"</string>
 
     <string name="su_required_title">"Требуется доступ с правами root"</string>
     <string name="su_required_message">"Для запуска любого подобного приложения, ваш телефон/планшет должен иметь root. В интернете есть много учебников где описывается как рутировать различные устройства. Вернитесь снова, когда все будет готово!"</string>

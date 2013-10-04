@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watermark_text" translatable="false">SCR</string>
+    <string name="output_dir" translatable="false">ScreenRecorder</string>
+    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
+</resources>

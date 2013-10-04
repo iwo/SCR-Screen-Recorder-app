@@ -3,14 +3,12 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
-    <string name="watermark_text">"SCR"</string>
     <string name="recording_saved_title">"SCR Videotiedosto Tallennettu"</string>
     <string name="recording_saved_message">"Videotiedosto tallennettu %1$s"</string>
     <string name="recording_saved_toast">"Videotiedosto tallennettu %1$s"</string>
     <string name="max_file_size_reached_toast">"Tiedoston enimmäiskoko saavutettu. VIdeotiedosto tallennettu %1$s"</string>
     <string name="start">"Alkaa"</string>
     <string name="play">"Toista"</string>
-    <string name="output_dir">"ScreenRecorder "</string>
 
     <string name="su_required_title">"Pääkäyttäjän eli root oikeudet tarvitaan"</string>
     <string name="su_required_message">"Jotta voit käyttää jotakin näytönkaappaussovellusta sinun puhelimella/tabletilla pitää olla pääkäyttäjäoikeudet eli ro).Netistä löytyy paljon ohjeita kuinka saada root eri laitteilla. Tule takaisin kun olet valmis!"</string>

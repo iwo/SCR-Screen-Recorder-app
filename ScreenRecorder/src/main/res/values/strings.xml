@@ -4,15 +4,12 @@
     <string name="free_app_full_name">SCR Screen Recorder Free</string>
     <string name="pro_app_name">SCR Pro</string>
     <string name="pro_app_full_name">SCR Screen Recorder Pro</string>
-    <string name="watermark_text">SCR</string>
     <string name="recording_saved_title">SCR Recording Saved</string>
     <string name="recording_saved_message">Recording saved to %1$s</string>
     <string name="recording_saved_toast">Recording saved to %1$s</string>
     <string name="max_file_size_reached_toast">Max file size reached. Recording saved to %1$s</string>
     <string name="start">Start</string>
     <string name="play">Play</string>
-    <string name="output_dir">ScreenRecorder</string>
-    <string name="file_name_format" translatable="false">"'SCR'_yyyyMMdd_HHmmss'.mp4'"</string>
 
     <string name="su_required_title">Root access is required</string>
     <string name="su_required_message">To run any screen recorder app your phone/tablet needs to be rooted.
