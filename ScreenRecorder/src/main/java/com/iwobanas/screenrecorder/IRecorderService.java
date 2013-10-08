@@ -6,7 +6,7 @@ public interface IRecorderService {
     void close();
 
     void setReady(boolean ready);
-    void recordingFinished();
+    void recordingFinished(float fps);
     void suRequired();
     void startupError(int exitValue);
     void recordingError(int exitValue);

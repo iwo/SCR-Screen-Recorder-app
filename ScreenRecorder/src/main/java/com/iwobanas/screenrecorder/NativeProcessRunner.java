@@ -57,7 +57,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
     }
 
     @Override
-    public void onStateChange(RecorderProcess target, RecorderProcess.ProcessState state, RecorderProcess.ProcessState previousState, int exitValue) {
+    public void onStateChange(RecorderProcess target, RecorderProcess.ProcessState state, RecorderProcess.ProcessState previousState, int exitValue, float fps) {
         if (target != process) {
             Log.w(TAG, "received state update from old process");
             return;
@@ -67,7 +67,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
                 service.setReady(true);
                 break;
             case FINISHED:
-                service.recordingFinished();
+                service.recordingFinished(fps);
                 service.setReady(false);
                 break;
             case ERROR:

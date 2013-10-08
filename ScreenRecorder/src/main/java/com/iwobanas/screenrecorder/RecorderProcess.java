@@ -37,6 +37,8 @@ class RecorderProcess implements Runnable{
 
     private Integer exitValueOverride;
 
+    private float fps = -1.0f;
+
     private boolean destroying = false;
 
     private volatile boolean forceKilled = false;
@@ -82,6 +84,9 @@ class RecorderProcess implements Runnable{
                     status = reader.readLine();
                     checkStatus("recording", status, 306);
                     startTimeout.cancel();
+
+                    status = reader.readLine();
+                    parseFps(status);
                 }
             } catch (IOException e) {
                 Log.e(TAG, "Exception when reading state", e);
@@ -132,12 +137,25 @@ class RecorderProcess implements Runnable{
         }
     }
 
+    private void parseFps(String fpsString) {
+        if (fpsString != null && fpsString.startsWith("fps ") && fpsString.length() > 4) {
+            try {
+                fps = Float.parseFloat(fpsString.substring(4));
+            } catch (NumberFormatException e) {
+                fps = -1;
+            }
+        }
+        if (fps < 0) {
+            Log.e(TAG, "Incorrect fps value received \"" + fpsString + "\"");
+        }
+    }
+
     private void setState(ProcessState state) {
         Log.d(TAG, "setState " + state);
         ProcessState previousState = this.state;
         this.state = state;
         if (!destroying && onStateChangeListener != null) {
-            onStateChangeListener.onStateChange(this, state, previousState, exitValue);
+            onStateChangeListener.onStateChange(this, state, previousState, exitValue, fps);
         }
     }
 
@@ -310,7 +328,7 @@ class RecorderProcess implements Runnable{
     }
 
     public static interface OnStateChangeListener {
-        void onStateChange(RecorderProcess target, ProcessState state, ProcessState previousState, int exitValue);
+        void onStateChange(RecorderProcess target, ProcessState state, ProcessState previousState, int exitValue, float fps);
     }
 
     public static enum ProcessState {

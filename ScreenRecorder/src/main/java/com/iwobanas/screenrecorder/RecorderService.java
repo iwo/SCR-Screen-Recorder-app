@@ -250,12 +250,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     @Override
-    public void recordingFinished() {
+    public void recordingFinished(final float fps) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 scanOutputAndNotify(R.string.recording_saved_toast);
-                reportRecordingStats(-1);
+                reportRecordingStats(-1, fps);
                 reinitialize();
                 mRatingController.increaseSuccessCount();
             }
@@ -275,13 +275,13 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mNativeProcessRunner.initialize();
     }
 
-    private void reportRecordingStats(int errorCode) {
+    private void reportRecordingStats(int errorCode, float fps) {
         long sizeK = outputFile.length() / 1024l;
         long sizeM = sizeK / 1024l;
         long time = (System.currentTimeMillis() - mRecordingStartTime) / 1000l;
         EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, sizeM);
         EasyTracker.getTracker().sendEvent(STATS, RECORDING, TIME, time);
-        logStats(errorCode, (int) sizeK, (int) time);
+        logStats(errorCode, (int) sizeK, (int) time, fps);
     }
 
     public void scanOutputAndNotify(int toastId) {
@@ -292,8 +292,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void logStats(int exitValue, int size, int time) {
+        logStats(exitValue, size, time, -1);
+    }
+
+    private void logStats(int exitValue, int size, int time, float fps) {
         int appVersion = Utils.getAppVersion(this);
-        new SendStatsAsyncTask(getPackageName(), appVersion, getDeviceId(), outputFile.getName(), exitValue, size, time).execute();
+        new SendStatsAsyncTask(getPackageName(), appVersion, getDeviceId(), outputFile.getName(), exitValue, size, time, fps).execute();
     }
 
     private void scanFile(File file) {
@@ -435,7 +439,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 scanOutputAndNotify(R.string.max_file_size_reached_toast);
-                reportRecordingStats(229);
+                reportRecordingStats(229, -1.0f);
                 reinitialize();
             }
         });
