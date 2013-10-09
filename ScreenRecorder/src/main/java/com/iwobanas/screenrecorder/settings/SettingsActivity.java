@@ -35,6 +35,7 @@ public class SettingsActivity extends Activity {
     private CheckBox stopOnScreenOffCheckBox;
     private TextView outputDirText;
     private TextView videoEncoderText;
+    private CheckBox verticalFramesCheckBox;
     private TableRow audioRow;
     private TableRow resolutionRow;
     private TableRow frameRateRow;
@@ -43,6 +44,7 @@ public class SettingsActivity extends Activity {
     private TableRow transformationRow;
     private TableRow outputDirRow;
     private TableRow videoEncoderRow;
+    private TableRow verticalFramesRow;
     private boolean viewsInitialized = false;
 
     @Override
@@ -64,6 +66,7 @@ public class SettingsActivity extends Activity {
         stopOnScreenOffCheckBox = (CheckBox) findViewById(R.id.settings_stop_on_screen_off_checkbox);
         outputDirText = (TextView) findViewById(R.id.settings_output_dir_text);
         videoEncoderText = (TextView) findViewById(R.id.settings_video_encoder_text);
+        verticalFramesRow = (TableRow) findViewById(R.id.settings_vertical_frames_row);
 
         audioRow = (TableRow) findViewById(R.id.settings_audio_row);
         resolutionRow = (TableRow) findViewById(R.id.settings_resolution_row);
@@ -73,6 +76,7 @@ public class SettingsActivity extends Activity {
         transformationRow = (TableRow) findViewById(R.id.settings_transformation_row);
         outputDirRow = (TableRow) findViewById(R.id.settings_output_dir_row);
         videoEncoderRow = (TableRow) findViewById(R.id.settings_video_encoder_row);
+        verticalFramesCheckBox = (CheckBox) findViewById(R.id.settings_vertical_frames_checkbox);
 
         viewsInitialized = true;
 
@@ -158,6 +162,18 @@ public class SettingsActivity extends Activity {
                 new VideoEncoderDialogFragment().show(getFragmentManager(), "videoEncoder");
             }
         });
+        verticalFramesCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if (checked == Settings.getInstance().getVerticalFrames()) {
+                    return;
+                }
+                Settings.getInstance().setVerticalFrames(checked);
+                if (checked) {
+                    new VerticalFramesDialogFragment().show(getFragmentManager(), "verticalFrames");
+                }
+            }
+        });
 
         refreshValues();
     }
@@ -204,6 +220,7 @@ public class SettingsActivity extends Activity {
         stopOnScreenOffCheckBox.setChecked(settings.getStopOnScreenOff());
         outputDirText.setText(settings.getOutputDir().getAbsolutePath());
         videoEncoderText.setText(getVideoEncoderLabel(settings.getVideoEncoder()));
+        verticalFramesCheckBox.setChecked(settings.getVerticalFrames());
 
         if (settings.getVideoEncoder() == Settings.FFMPEG_MPEG_4_ENCODER) {
             transformationRow.setVisibility(View.GONE);

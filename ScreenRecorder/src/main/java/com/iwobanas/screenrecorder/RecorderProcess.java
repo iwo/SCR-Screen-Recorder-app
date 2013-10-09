@@ -183,6 +183,7 @@ class RecorderProcess implements Runnable{
         runCommand(settings.getVideoBitrate().getCommand());
         runCommand(settings.getSamplingRate().getCommand());
         runCommand(String.valueOf(settings.getVideoEncoder()));
+        runCommand(String.valueOf(settings.getVerticalFrames() ? 1 : 0));
         logSettings(settings, rotation);
     }
 

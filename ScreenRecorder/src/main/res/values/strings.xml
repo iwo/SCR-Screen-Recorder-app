@@ -114,4 +114,9 @@
     <string name="settings_stop_when_screen_off">Stop on screen off</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4 (slow)</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4_short">SW MPEG-4</string>
+    <string name="settings_vertical_frames">Vertical frames</string>
+    <string name="settings_vertical_frames_warning">Video players on many devices can\'t play videos with vertical frames.
+        Even if this option is unselected orientation metadata is added to the video so that it\'s displayed correctly in default Android player, YouTube etc.</string>
+    <string name="settings_vertical_frames_ok">OK</string>
+    <string name="settings_vertical_frames_cancel">Cancel</string>
 </resources>

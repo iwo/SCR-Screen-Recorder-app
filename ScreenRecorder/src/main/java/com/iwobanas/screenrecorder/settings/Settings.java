@@ -28,6 +28,7 @@ public class Settings {
     private static final String OUTPUT_DIR = "OUTPUT_DIR";
     private static final String OUTPUT_DIR_WRITABLE = "OUTPUT_DIR_WRITABLE";
     private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
+    private static final String VERTICAL_FRAMES = "VERTICAL_FRAMES";
     private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
     private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
     private static final String DEFAULT_TRANSFORMATION = "DEFAULT_TRANSFORMATION";
@@ -55,6 +56,7 @@ public class Settings {
     private boolean showTouches = false;
     private boolean stopOnScreenOff = true;
     private int videoEncoder = MediaRecorder.VideoEncoder.H264;
+    private boolean verticalFrames = false;
     private File outputDir;
     private File defaultOutputDir;
     private String outputDirName;
@@ -150,6 +152,8 @@ public class Settings {
         outputDirWritable = preferences.getBoolean(OUTPUT_DIR_WRITABLE, false);
 
         videoEncoder = preferences.getInt(VIDEO_ENCODER, MediaRecorder.VideoEncoder.H264);
+
+        verticalFrames = preferences.getBoolean(VERTICAL_FRAMES, false);
     }
 
     private void handleUpdate() {
@@ -423,6 +427,18 @@ public class Settings {
         return defaultOutputDir;
     }
 
+    public void setVerticalFrames(boolean verticalFrames) {
+        this.verticalFrames = verticalFrames;
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(VERTICAL_FRAMES, verticalFrames);
+        editor.commit();
+    }
+
+    public boolean getVerticalFrames() {
+        return verticalFrames;
+    }
+
     public void restoreDefault() {
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -465,6 +481,9 @@ public class Settings {
 
         videoEncoder = MediaRecorder.VideoEncoder.H264;
         editor.remove(VIDEO_ENCODER);
+
+        verticalFrames = false;
+        editor.remove(VERTICAL_FRAMES);
 
         editor.commit();
     }
