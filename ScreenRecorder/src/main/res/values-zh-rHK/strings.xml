@@ -106,4 +106,10 @@
     <string name="help_stop_message">"我們得停止錄製並鎖定螢幕再稍等約 2 秒。或是您也可以簡單地重新開啟 %1$s 應用程式"</string>
     <string name="menu_send_bug_report">"寄送錯誤報告"</string>
     <string name="settings_stop_when_screen_off">"螢幕關閉時停止錄影"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"軟體編碼 MPEG-4（慢）"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_vertical_frames">"直向畫面"</string>
+    <string name="settings_vertical_frames_warning">"在許多裝置上的影片播放器並無法播放直向畫面的影片。即使在未選用此選項的情況下，方向性相關的資訊也會加入到影片中，以使其能夠在預設的 Android 播放器及YouTube 等等播放介面中正確地播放。"</string>
+    <string name="settings_vertical_frames_ok">"確定"</string>
+    <string name="settings_vertical_frames_cancel">"取消"</string>
 </resources>

@@ -108,4 +108,10 @@
     <string name="help_stop_message">"Ak chcete zastaviť nahrávanie, zamknite obrazovku a počkajte 2 sekundy. Prípadne môžete jednoducho znovu spustiť aplikáciu %1$s."</string>
     <string name="menu_send_bug_report">"Ohlásiť chybu"</string>
     <string name="settings_stop_when_screen_off">"Zastaviť pri vypnutí obrazovky"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Softvér MPEG-4 (pomalé)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_vertical_frames">"Zvislé rámy"</string>
+    <string name="settings_vertical_frames_warning">"Video prehrávače na mnohých zariadeniach nevedia prehrávať videá so zvislými rámami. Aj keď nie je povolená táto voľba, orientácia je pridaná do metadát videa, aby bolo správne zobrazené v predvolenom Android prehrávači, na YouTube, atď."</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
+    <string name="settings_vertical_frames_cancel">"Zrušiť"</string>
 </resources>

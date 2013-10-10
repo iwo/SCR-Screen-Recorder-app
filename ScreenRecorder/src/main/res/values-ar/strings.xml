@@ -1,0 +1,116 @@
+<resources>
+    <string name="free_app_name">"SCR المجاني"</string>
+    <string name="free_app_full_name">"SCR مسجل الشاشة المجاني"</string>
+    <string name="pro_app_name">"SCR الاحترافي"</string>
+    <string name="pro_app_full_name">"SCR مسجل الشاشة الاحترافي"</string>
+    <string name="recording_saved_title">"SCR التسجيلات المحفوظة"</string>
+    <string name="recording_saved_message">"التسجيلات تم حفظها في %1$s"</string>
+    <string name="recording_saved_toast">"التسجيلات تم حفظها في %1$s"</string>
+    <string name="max_file_size_reached_toast">"تم الوصول إلى الحد الأقصى لحجم الملف . التسجيل تم حفظه في %1$s"</string>
+    <string name="start">"بدء التسجيل"</string>
+    <string name="play">"تشغيل"</string>
+
+    <string name="su_required_title">"يتطلب صلاحيات روت (Root)"</string>
+    <string name="su_required_message">"للبدء في تسجيل الشاشة سيحتاج هاتفك إلى صلاحيات روت (Root) . هناك الكثير من الدروس على شبكة الإنترنت تشرح كيفية الحصول على روت (Root) لنوع جهازك . يرجى منك العودة من حيث بدأت !"</string>
+
+    <string name="error_dialog_title">"حدث خطأ خطير :-("</string>
+    <string name="startup_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني نقلاً عن الخطأ S%1$d ."</string>
+    <string name="recording_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني نقلاً عن الخطأ R%1$d ."</string>
+
+    <string name="media_recorder_error_title">"خطأ في التسجيل"</string>
+    <string name="media_recorder_error_message">"حاول تغيير دقة التسجيل أو تبديل تحول الصورة بين CPU/GPU . ويرجى منك إلغاء تثبيت تطبيقات تسجيل الشاشة الأخرى إذا كان لديك أي واحد منها . إذا استمرت المشكلة لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني نقلاً عن الخطأ R%1$d ."</string>
+
+    <string name="output_file_error_title">"لا يمكن إنشاء ملف الفيديو"</string>
+    <string name="output_file_error_message">"مسجل الشاشة غير قادر على إنشاء %1$s ملف الفيديو . تأكد من مسار الحفظ المحدد للفيديو وأن بطاقة SD غير مؤمنة بواسطة اتصال USB ."</string>
+
+    <string name="help_stop_title">"كيفية إيقاف"</string>
+    <string name="help_stop_ok">"فهمت ذلك !"</string>
+
+    <string name="free_timeout_title">"انتهت صلاحية المهلة الزمنية"</string>
+    <string name="free_timeout_message">"شراء SCR مسجل الشاشة الاحترافي للحصول على وقت غير محدود للتسجيل وإخفاء العلامة المائية التي تكون على الفيديو ."</string>
+    <string name="free_timeout_buy">"شراء الآن !"</string>
+    <string name="free_timeout_no_thanks">"لا شكراً"</string>
+    <string name="hide_icon_title">"ميزة مسجل الشاشة الاحترافي"</string>
+    <string name="hide_icon_message">"شراء SCR مسجل الشاشة الاحترافي لإخفاء العلامة المائية التي تكون على الفيديو وإخفاء رمز الإعلام . ستحصل على وقت غير محدود للتسجيل ، وكذلك !"</string>
+
+    <string name="buy_error_title">"خطأ في تشغيل سوق Google Play"</string>
+    <string name="buy_error_message">"الرجاء البحث عن SCR مسجل الشاشة الاحترافي في سوق Google Play"</string>
+
+    <string name="settings_activity_label">"إعدادات SCR"</string>
+    <string name="settings_title">"إعدادات"</string>
+    <string name="settings_ok">"موافق"</string>
+    <string name="settings_reset">"استعادة الافتراضيات"</string>
+    <string name="settings_cancel">"إلغاء"</string>
+    <string name="settings_audio">"تسجيل الصوت"</string>
+    <string name="settings_audio_mic">"عبر الميكروفون"</string>
+    <string name="settings_audio_mute">"كتم الصوت"</string>
+    <string name="settings_resolution">"دقة التسجيل"</string>
+    <string name="settings_resolution_short">"%1$dx%2$d"</string>
+    <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
+    <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp أفقي"</string>
+    <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp مع الملء"</string>
+    <string name="settings_resolution_max">"%1$dx%2$d - الحد الأقصى"</string>
+    <string name="settings_resolution_half">"%1$dx%2$d - النصف"</string>
+    <string name="settings_resolution_unstable">"( غير مستقر )"</string>
+    <string name="settings_frame_rate">"معدل الإطار الهدف"</string>
+    <string name="settings_frame_rate_max">"الحد الأقصى"</string>
+    <string name="settings_frame_rate_max_short">"الحد الأقصى"</string>
+    <string name="settings_frame_rate_up_to">"يصل إلى #0 إطار في الثانية"</string>
+    <string name="settings_frame_rate_up_to_short">"#0"</string>
+    <string name="settings_transformation">"تحول الصورة"</string>
+    <string name="settings_transformation_cpu">"CPU"</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"+GPU"</string>
+    <string name="settings_video_bitrate">"معدل البت للفيديو"</string>
+    <string name="settings_sampling_rate">"معدل أخذ العينات الصوتية"</string>
+    <string name="settings_color_fix">"إصلاح اللون الباهت"</string>
+    <string name="settings_hide_icon">"إخفاء رمز الإعلام"</string>
+    <string name="settings_show_touches">"مشاهدة اللمسات"</string>
+    <string name="settings_output_dir">"مسار حفظ الفيديو"</string>
+    <string name="settings_video_encoder">"ترميز الفيديو"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 ( غير مستقرة )"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"تلقائي"</string>
+
+    <string name="directory_chooser_select">"حدد \"%1$s\""</string>
+    <string name="directory_chooser_refresh">"تحديث"</string>
+    <string name="directory_chooser_new">"جديد"</string>
+    <string name="directory_chooser_new_title">"اسم مسار حفظ الفيديو الجديد"</string>
+    <string name="directory_chooser_new_ok">"موافق"</string>
+    <string name="directory_chooser_new_cancel">"إلغاء"</string>
+    <string name="directory_chooser_error_message">"لا يمكن إنشاء مسار حفظ للفيديو . تأكد من اختيار موقع للكتابة عليه مثل بطاقة SD ."</string>
+    <string name="directory_chooser_not_writable_title">"المسار المحدد غير قابل للكتابة عليه"</string>
+    <string name="directory_chooser_not_writable_message">"يبدو أن التطبيق ليس لديه إذن الكتابة على %1$s مسار الحفظ . قد يسبب هذا مشاكل في التسجيل ."</string>
+    <string name="directory_chooser_ignore">"تجاهل"</string>
+    <string name="directory_chooser_cancel">"إلغاء"</string>
+    <string name="directory_chooser_default">"الافتراضي"</string>
+
+    <string name="license_dont_allow">"فشل التحقق من الترخيص . تأكد من اتصال الإنترنت الخاص بك وتأكد أنك قمت بتسجيل الدخول إلى سوق Google Play .
+    "</string>
+    <string name="license_error">"خطأ التحقق من الترخيص . تأكد من اتصال الإنترنت الخاص بك وتأكد أنك قمت بتسجيل الدخول إلى سوق Google Play .
+    "</string>
+
+    <string name="error_report_report">"تقرير"</string>
+    <string name="error_report_close">"إغلاق"</string>
+    <string name="error_report_text">"المرفق يحتوي على سجل النظام مفصلاً بما في ذلك معلومات حول الخطأ . لا تتردد في إضافة أي تعليق هنا ."</string>
+    <string name="error_report_chooser">"إرسال تقرير عن الخطأ بواسطة البريد الإلكتروني"</string>
+
+    <string name="rating_rate_title">"معدل %1$s"</string>
+    <string name="rating_rate_message">"إذا كنت تتمتع باستخدام %1$s ، يرجى أن تتوقف للحظة لتقييم التطبيق . شكرا لدعمك !"</string>
+    <string name="rating_rate_now">"تقييم التطبيق الآن !"</string>
+    <string name="rating_remind">"ذكرني لاحقاً"</string>
+    <string name="rating_no_thanks">"لا ، شكراً"</string>
+    <string name="rating_play_error">"لا يمكن فتح سوق Google Play ."</string>
+
+    <string name="help_stop_message">"لإيقاف التسجيل قم بقفل الشاشة وانتظر ثانيتين . بدلاً من ذلك يمكنك ببساطة إعادة فتح %1$s التطبيق ."</string>
+    <string name="menu_send_bug_report">"إرسال تقرير عن خطأ"</string>
+    <string name="settings_stop_when_screen_off">"إيقاف التسجيل إذا توقفت الشاشة"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"خاصية MPEG-4 ( بطيئة )"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_vertical_frames">"الإطارات الرأسية"</string>
+    <string name="settings_vertical_frames_warning">"مشغلات الفيديو على العديد من الأجهزة لا يمكنها تشغيل ملفات الفيديو ذات الإطارات الرأسية . حتى إذا كان هذا الخيار غير محدد تتم إضافته إلى شريط الفيديو حتى يصبح العرض صحيح في مشغل الأندرويد الافتراضي ، ويوتيوب وغيرها ."</string>
+    <string name="settings_vertical_frames_ok">"موافق"</string>
+    <string name="settings_vertical_frames_cancel">"إلغاء"</string>
+</resources>

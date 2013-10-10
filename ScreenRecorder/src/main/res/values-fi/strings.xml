@@ -7,18 +7,18 @@
     <string name="recording_saved_message">"Videotiedosto tallennettu %1$s"</string>
     <string name="recording_saved_toast">"Videotiedosto tallennettu %1$s"</string>
     <string name="max_file_size_reached_toast">"Tiedoston enimmäiskoko saavutettu. VIdeotiedosto tallennettu %1$s"</string>
-    <string name="start">"Alkaa"</string>
+    <string name="start">"Aloita"</string>
     <string name="play">"Toista"</string>
 
     <string name="su_required_title">"Pääkäyttäjän eli root oikeudet tarvitaan"</string>
-    <string name="su_required_message">"Jotta voit käyttää jotakin näytönkaappaussovellusta sinun puhelimella/tabletilla pitää olla pääkäyttäjäoikeudet eli ro).Netistä löytyy paljon ohjeita kuinka saada root eri laitteilla. Tule takaisin kun olet valmis!"</string>
+    <string name="su_required_message">"Jotta voit käyttää jotakin näytönkaappaussovellusta sinun puhelimella/tabletilla pitää olla pääkäyttäjäoikeudet eli root.Netistä löytyy paljon ohjeita kuinka saada root eri laitteilla. Tule takaisin kun olet valmis!"</string>
 
     <string name="error_dialog_title">"Jokin meni pahasti pieleen :-("</string>
     <string name="startup_error_message">"Anonyymi virheraportti lähetetään automaattisesti, joka auttaa meitä korjaamaan ongelman. Ota yhteyttä sähköpostin  kautta tukea varten lainaten virhe S %1$d ."</string>
     <string name="recording_error_message">"Anonyymi virheraportti lähetetään automaattisesti, joka auttaa meitä korjaamaan ongelman. Ota yhteyttä sähköpostin kautta tukea varten lainaten virhe R %1$d ."</string>
 
-    <string name="media_recorder_error_title">"Nauhoitus virhe"</string>
-    <string name="media_recorder_error_message">"Kokeile vaihtaa resoluutiota tai vaihtaa kuvan välisen muunnosten GPU / CPU välillä. Ole hyvä ja poistaa muut näytönkaappaussovellukset , jos sinulla on muita. Jos ongelma ei korjaannu, ota yhteyttä sähköpostin kautta lainaten virhe R %1$d ."</string>
+    <string name="media_recorder_error_title">"Tallennusvirhe"</string>
+    <string name="media_recorder_error_message">"Kokeile vaihtaa resoluutiota tai vaihtaa kuvan välisen muunnosten GPU / CPU välillä. Ole hyvä ja poista muut näytönkaappaussovellukset, jos sinulla on muita. Jos ongelma ei korjaannu, ota yhteyttä sähköpostin kautta lainaten virhe R %1$d ."</string>
 
     <string name="output_file_error_title">"Ei voi luoda videotiedostoa"</string>
     <string name="output_file_error_message">"SCR ei voinut luoda %1$s videotiedostoa. Varmista, että valitun lähdön hakemisto on kirjoitettava ja että SD-kortti ei ole lukittu USB-liitännän takia."</string>
@@ -67,7 +67,7 @@
     <string name="settings_hide_icon">"Piilota ilmoituksen kuvake"</string>
     <string name="settings_show_touches">"Näytä koskettaa"</string>
     <string name="settings_output_dir">"Tallennusijainti"</string>
-    <string name="settings_video_encoder">"Videokodeekk"</string>
+    <string name="settings_video_encoder">"Videokodeekki"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
     <string name="settings_video_encoder_h263_unstable">"H263 (epävakaa)"</string>
@@ -105,7 +105,7 @@
     <string name="rating_no_thanks">"Kiitos ei"</string>
     <string name="rating_play_error">"Ei voitu avata Google Playtä."</string>
 
-    <string name="help_stop_message">"Lopeta tallennus lukitsemalla näytn ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
+    <string name="help_stop_message">"Lopeta tallennus lukitsemalla näytö ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
     <string name="menu_send_bug_report">"Lähetä virheilmoitus"</string>
     <string name="settings_stop_when_screen_off">"Lopeta tallennus kun näyttö lukitaan."</string>
 </resources>

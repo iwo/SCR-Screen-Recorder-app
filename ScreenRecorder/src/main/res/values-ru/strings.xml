@@ -108,4 +108,11 @@
     <string name="help_stop_message">"Для остановки записи заблокируйте экран и подождите 2 секунды. В качестве альтернативы можно просто открыть приложение %1$s."</string>
     <string name="menu_send_bug_report">"Сообщить об ошибке"</string>
     <string name="settings_stop_when_screen_off">"Остановить при\nотключении экрана"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Программный MPEG-4 (медленно)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_vertical_frames">"Вертикальный кадр"</string>
+    <string name="settings_vertical_frames_warning">"Видео-плееры многих устройств не могут проигрывать вертикальные кадры.
+        Даже если этот параметр отключен, метаданные ориентации добавляются к видео, поэтому отображение будет всегда правильным в стандартном плеере, YouTube и т.д."</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
+    <string name="settings_vertical_frames_cancel">"Отмена"</string>
 </resources>

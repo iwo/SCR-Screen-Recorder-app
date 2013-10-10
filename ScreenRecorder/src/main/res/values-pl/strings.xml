@@ -109,4 +109,10 @@ internetowe oraz, że jesteś zalogowany do Google Play.
     <string name="help_stop_message">"Aby zakończyć nagrywanie zablokuj ekran i poczekaj 2 sekundy. Ponowne otwarcie %1$s również zakończy nagrywanie."</string>
     <string name="menu_send_bug_report">"Zgłoś problem"</string>
     <string name="settings_stop_when_screen_off">"Zatrzymaj po wyłączeniu ekranu"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 (wolny)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_vertical_frames">"Pionowe ramki"</string>
+    <string name="settings_vertical_frames_warning">"Odtwarzacze wideo na wielu urządzeniach nie obsługują odtwarzania filmów z pionowymi ramkami. Nawet jeśli ta opcja nie jest zaznaczona do pliku wideo są dodawane informacje o orientacji obrazu co pozwala na poprawne wyświetlanie pionowych filmów w domyślnym odtwarzaczu wideo na Androidzie, YouTube, itp."</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
+    <string name="settings_vertical_frames_cancel">"Anuluj"</string>
 </resources>
