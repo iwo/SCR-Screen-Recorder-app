@@ -125,10 +125,31 @@ class RecorderProcess implements Runnable{
 
     private void setErrorState() {
         setState(ProcessState.ERROR);
-        if (!destroying && exitValue != 229) {
+        if (mediaServerRelatedError()) {
             killMediaServer();
         }
     }
+
+    private boolean mediaServerRelatedError() {
+        if (destroying)
+            return false;
+        if (Settings.getInstance().getVideoEncoder() < 0)
+            return false;
+        switch (exitValue) {
+            case 216:
+            case 217:
+            case 219:
+            case 221:
+            case 223:
+            case 227:
+            case 226:
+            case 229:
+                return false;
+            default:
+                return true;
+        }
+    }
+
 
     private void checkStatus(String expectedStatus, String status, int errorCode) {
         if (forceKilled || destroying || status == null) return;
