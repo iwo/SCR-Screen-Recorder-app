@@ -35,7 +35,6 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
     @Override
     public void show() {
         if (visible) {
-            Log.e(TAG, "Trying to show the view which is already displayed");
             return;
         }
         if (mView == null) {
@@ -53,7 +52,6 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
     @Override
     public void hide() {
         if (!visible) {
-            Log.w(TAG, "Trying to hide the view which is not displayed");
             return;
         }
         getWindowManager().removeView(mView);
