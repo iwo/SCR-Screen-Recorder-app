@@ -107,7 +107,9 @@ class RecorderProcess implements Runnable{
             exitValue = process.exitValue();
         }
 
-        if (exitValueOverride != null) {
+        if (destroying && (exitValue == 200 || exitValue == 222)) {
+            setState(ProcessState.FINISHED);
+        } else if (exitValueOverride != null) {
             if (exitValue < 200) {
                 exitValue = exitValueOverride;
             }
@@ -145,7 +147,7 @@ class RecorderProcess implements Runnable{
                 fps = -1;
             }
         }
-        if (fps < 0) {
+        if (!destroying && fps < 0) {
             Log.e(TAG, "Incorrect fps value received \"" + fpsString + "\"");
         }
     }
