@@ -113,6 +113,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (!mTaniosc) {
             checkLicense();
         }
+        Log.v(TAG, "Service initialized. version: " + Utils.getAppVersion(this));
     }
 
     private void installExecutable() {

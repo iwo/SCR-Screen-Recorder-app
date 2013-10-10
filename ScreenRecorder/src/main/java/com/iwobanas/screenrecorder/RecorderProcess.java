@@ -197,7 +197,8 @@ class RecorderProcess implements Runnable{
                     " videoBitrate: " + settings.getVideoBitrate().name() +
                     " samplingRate: " + settings.getSamplingRate().name() +
                     " colorFix: " + settings.getColorFix() +
-                    " videoEncoder: " + settings.getVideoEncoder()
+                    " videoEncoder: " + settings.getVideoEncoder() +
+                    " verticalFrames: " + settings.getVerticalFrames()
             );
         } catch (Throwable e) {
             Log.w(TAG, "Can't log settings");
