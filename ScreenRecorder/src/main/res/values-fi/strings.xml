@@ -61,11 +61,11 @@
     <string name="settings_transformation_cpu">"CPU "</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_video_bitrate">"Video bitrate"</string>
+    <string name="settings_video_bitrate">"Videobittinopeus"</string>
     <string name="settings_sampling_rate">"Äänen näytteenottotaajuus"</string>
     <string name="settings_color_fix">"Käännetty värikorjaus"</string>
     <string name="settings_hide_icon">"Piilota ilmoituksen kuvake"</string>
-    <string name="settings_show_touches">"Näytä koskettaa"</string>
+    <string name="settings_show_touches">"Näytä kosketukset"</string>
     <string name="settings_output_dir">"Tallennusijainti"</string>
     <string name="settings_video_encoder">"Videokodeekki"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
@@ -105,7 +105,13 @@
     <string name="rating_no_thanks">"Kiitos ei"</string>
     <string name="rating_play_error">"Ei voitu avata Google Playtä."</string>
 
-    <string name="help_stop_message">"Lopeta tallennus lukitsemalla näytö ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
+    <string name="help_stop_message">"Lopeta tallennus lukitsemalla näyt ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
     <string name="menu_send_bug_report">"Lähetä virheilmoitus"</string>
     <string name="settings_stop_when_screen_off">"Lopeta tallennus kun näyttö lukitaan."</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Laite MPEG-4 (hidas)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_vertical_frames">"Pystykuvat"</string>
+    <string name="settings_vertical_frames_warning">"Videosoittimet useissa laitteissa eivät voi toistaa videoita pystyasennossa. Vaikka tämä vaihtoehto ei ole valittu suuntautumisen metatiedot lisätään videon niin, että se näkyy oikein oletuksena Android videosoittimessa, YouTubessa jne."</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
+    <string name="settings_vertical_frames_cancel">"Peruutta"</string>
 </resources>
