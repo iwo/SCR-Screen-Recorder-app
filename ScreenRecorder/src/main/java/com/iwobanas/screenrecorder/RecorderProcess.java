@@ -193,7 +193,7 @@ class RecorderProcess implements Runnable{
         setState(ProcessState.RECORDING);
         configureTimeout.start();
         startTimeout.start();
-        runCommand(fileName);
+        runCommand(fixEmulatedStorageMapping(fileName));
         runCommand(rotation);
         runCommand(settings.getAudioSource().getCommand());
         runCommand(String.valueOf(settings.getResolution().getVideoWidth()));
@@ -208,6 +208,16 @@ class RecorderProcess implements Runnable{
         runCommand(String.valueOf(settings.getVideoEncoder()));
         runCommand(String.valueOf(settings.getVerticalFrames() ? 1 : 0));
         logSettings(settings, rotation);
+    }
+
+    private String fixEmulatedStorageMapping(String fileName) {
+        String emulatedSrc = System.getenv("EMULATED_STORAGE_SOURCE");
+        String emulatedTarget = System.getenv("EMULATED_STORAGE_TARGET");
+
+        if (emulatedSrc == null || emulatedTarget == null || !fileName.startsWith(emulatedTarget)) {
+            return fileName;
+        }
+        return fileName.replaceFirst(emulatedTarget, emulatedSrc);
     }
 
     private void logSettings(Settings settings, String rotation) {
