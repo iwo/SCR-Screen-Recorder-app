@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
+import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.ReportBugTask;
 
 import java.io.File;
@@ -46,6 +48,8 @@ public class SettingsActivity extends Activity {
     private TableRow videoEncoderRow;
     private TableRow verticalFramesRow;
     private boolean viewsInitialized = false;
+
+    private boolean outputDirChooserOpen = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -153,6 +157,7 @@ public class SettingsActivity extends Activity {
                 Intent intent = new Intent(SettingsActivity.this, DirectoryChooserActivity.class);
                 intent.setData(Uri.fromFile(Settings.getInstance().getOutputDir()));
                 intent.putExtra(DirectoryChooserActivity.DEFAULT_DIR_EXTRA, Settings.getInstance().getDefaultOutputDir().getAbsolutePath());
+                outputDirChooserOpen = true;
                 startActivityForResult(intent, SELECT_OUTPUT_DIR);
             }
         });
@@ -291,11 +296,21 @@ public class SettingsActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SELECT_OUTPUT_DIR) {
-
+            outputDirChooserOpen = false;
             if (resultCode == RESULT_OK) {
                 Settings.getInstance().setOutputDir(new File(data.getData().getPath()));
                 refreshValues();
             }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //TODO: remove this KK workaround and identify the problem with intents flow
+        if (Build.VERSION.SDK_INT == 19 && !outputDirChooserOpen) {
+            Intent intent = new Intent(this, RecorderService.class);
+            startService(intent);
         }
     }
 }
