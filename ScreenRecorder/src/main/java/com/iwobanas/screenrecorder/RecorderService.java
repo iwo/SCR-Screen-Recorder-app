@@ -306,6 +306,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         contentValues.put(MediaStore.Video.Media.TITLE, file.getName());
         contentValues.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4");
         contentValues.put(MediaStore.Video.Media.DATA, file.getAbsolutePath());
+        contentValues.put(MediaStore.Video.Media.DATE_TAKEN, mRecordingStartTime);
+        contentValues.put(MediaStore.Video.Media.DATE_ADDED, mRecordingStartTime / 1000);
+        contentValues.put(MediaStore.Video.Media.DATE_MODIFIED, mRecordingStartTime / 1000);
 
         getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
     }
