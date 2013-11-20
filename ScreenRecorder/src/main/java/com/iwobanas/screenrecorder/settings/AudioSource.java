@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder.settings;
 
 public enum AudioSource {
     MIC("m"),
+    INTERNAL("i"),
     MUTE("x");
 
     private String command;

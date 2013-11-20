@@ -119,4 +119,22 @@
         Even if this option is unselected orientation metadata is added to the video so that it\'s displayed correctly in default Android player, YouTube etc.</string>
     <string name="settings_vertical_frames_ok">OK</string>
     <string name="settings_vertical_frames_cancel">Cancel</string>
+
+    <string name="settings_audio_internal">Internal</string>
+    <string name="settings_audio_internal_experimental">Internal (experimental)</string>
+
+    <string name="settings_audio_driver_not_installed">SCR audio driver not installed. Tap to install.</string>
+    <string name="settings_audio_driver_installing">Installing SCR audio driver...</string>
+    <string name="settings_audio_driver_installed">SCR audio driver installed. Tap to uninstall.</string>
+    <string name="settings_audio_driver_uninstalling">Uninstalling SCR audio driver...</string>
+    <string name="settings_audio_driver_installation_failure">SCR audio driver installation failed. Tap to retry.</string>
+
+    <string name="internal_audio_dialog_title">Audio driver installation</string>
+    <string name="internal_audio_dialog_message">
+        Internal audio recording is an experimental feature and requires installation of custom audio driver.
+        It is recommended to uninstall this driver after you\'re done with the recording.
+        If the installation fails you may need to use ADB console or re-flash system partition to uninstall this driver.
+        You are processing AT YOUR OWN RISK.</string>
+    <string name="internal_audio_dialog_install">Install</string>
+    <string name="internal_audio_dialog_cancel">Cancel</string>
 </resources>

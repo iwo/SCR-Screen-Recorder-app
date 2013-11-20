@@ -18,14 +18,16 @@ import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.ReportBugTask;
+import com.iwobanas.screenrecorder.audio.AudioDriver;
 
 import java.io.File;
 import java.text.DecimalFormat;
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends Activity implements AudioDriver.OnInstallListener {
     public static final String TAG = "scr_SettingsActivity";
     private static final int SELECT_OUTPUT_DIR = 1;
     private TextView audioText;
+    private TextView audioDriverText;
     private TextView resolutionText;
     private TextView frameRateText;
     private TextView transformationText;
@@ -39,6 +41,7 @@ public class SettingsActivity extends Activity {
     private TextView videoEncoderText;
     private CheckBox verticalFramesCheckBox;
     private TableRow audioRow;
+    private TableRow audioDriverRow;
     private TableRow resolutionRow;
     private TableRow frameRateRow;
     private TableRow videoBitrateRow;
@@ -59,6 +62,7 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.settings);
 
         audioText = (TextView) findViewById(R.id.settings_audio_text);
+        audioDriverText = (TextView) findViewById(R.id.settings_audio_driver_text);
         resolutionText = (TextView) findViewById(R.id.settings_resolution_text);
         frameRateText = (TextView) findViewById(R.id.settings_frame_rate_text);
         transformationText = (TextView) findViewById(R.id.settings_transformation_text);
@@ -73,6 +77,7 @@ public class SettingsActivity extends Activity {
         verticalFramesRow = (TableRow) findViewById(R.id.settings_vertical_frames_row);
 
         audioRow = (TableRow) findViewById(R.id.settings_audio_row);
+        audioDriverRow = (TableRow) findViewById(R.id.settings_audio_driver_row);
         resolutionRow = (TableRow) findViewById(R.id.settings_resolution_row);
         frameRateRow = (TableRow) findViewById(R.id.settings_frame_rate_row);
         videoBitrateRow = (TableRow) findViewById(R.id.settings_video_bitrate_row);
@@ -88,6 +93,21 @@ public class SettingsActivity extends Activity {
             @Override
             public void onClick(View view) {
                 new AudioDialogFragment().show(getFragmentManager(), "audio");
+            }
+        });
+        audioDriverRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AudioDriver audioDriver = Settings.getInstance().getAudioDriver();
+                switch (audioDriver.getInstallationStatus()) {
+                    case INSTALLED:
+                        audioDriver.uninstall();
+                        break;
+                    case NOT_INSTALLED:
+                    case INSTALLATION_FAILURE:
+                        new AudioDriverDialogFragment().show(getFragmentManager(), "audio_driver");
+                        break;
+                }
             }
         });
         resolutionRow.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +200,15 @@ public class SettingsActivity extends Activity {
             }
         });
 
+        Settings.getInstance().getAudioDriver().addInstallListener(this);
+
         refreshValues();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Settings.getInstance().getAudioDriver().removeInstallListener(this);
     }
 
     @Override
@@ -212,10 +240,13 @@ public class SettingsActivity extends Activity {
         if (!viewsInitialized) return;
 
         Settings settings = Settings.getInstance();
+        AudioDriver audioDriver = settings.getAudioDriver();
 
         audioText.setText(getAudioSourceLabel(settings.getAudioSource()));
+        audioDriverText.setText(getAudioDriverText(audioDriver));
         resolutionText.setText(getResolutionLabel(settings.getResolution(), settings.getDefaultResolution()));
         frameRateText.setText(getFrameRateLabel(settings.getFrameRate()));
+        transformationText.setText(getTransformationLabel(settings.getTransformation()));
         transformationText.setText(getTransformationLabel(settings.getTransformation()));
         videoBitrateText.setText(settings.getVideoBitrate().getLabel());
         samplingRateText.setText(settings.getSamplingRate().getLabel());
@@ -233,17 +264,46 @@ public class SettingsActivity extends Activity {
             transformationRow.setVisibility(View.VISIBLE);
         }
 
-        if (AudioSource.MUTE.equals(settings.getAudioSource())) {
-            samplingRateRow.setVisibility(View.GONE);
-        } else {
+        if (AudioSource.MIC.equals(settings.getAudioSource())) {
             samplingRateRow.setVisibility(View.VISIBLE);
+        } else {
+            samplingRateRow.setVisibility(View.GONE);
+        }
+
+        if (audioDriver.getInstallationStatus() != AudioDriver.InstallationStatus.NOT_INSTALLED
+                || AudioSource.INTERNAL.equals(settings.getAudioSource())) {
+            audioDriverRow.setVisibility(View.VISIBLE);
+        } else {
+            audioDriverRow.setVisibility(View.GONE);
         }
     }
 
+    private int getAudioDriverText(AudioDriver audioDriver) {
+        switch (audioDriver.getInstallationStatus()) {
+            case NOT_INSTALLED:
+                return R.string.settings_audio_driver_not_installed;
+            case INSTALLING:
+                return R.string.settings_audio_driver_installing;
+            case INSTALLED:
+                return R.string.settings_audio_driver_installed;
+            case UNINSTALLING:
+                return R.string.settings_audio_driver_uninstalling;
+            case INSTALLATION_FAILURE:
+                return R.string.settings_audio_driver_installation_failure;
+        }
+        return R.string.settings_audio_driver_not_installed;
+    }
+
     private String getAudioSourceLabel(AudioSource audioSource) {
-        return audioSource == AudioSource.MIC ?
-                getString(R.string.settings_audio_mic)
-                : getString(R.string.settings_audio_mute);
+        switch (audioSource) {
+            case MIC:
+                return getString(R.string.settings_audio_mic);
+            case INTERNAL:
+                return getString(R.string.settings_audio_internal);
+            case MUTE:
+                return getString(R.string.settings_audio_mute);
+        }
+        return "";
     }
 
     private String getResolutionLabel(Resolution resolution, Resolution defaultResolution) {
@@ -312,6 +372,11 @@ public class SettingsActivity extends Activity {
             Intent intent = new Intent(this, RecorderService.class);
             startService(intent);
         }
+    }
+
+    @Override
+    public void onInstall(AudioDriver.InstallationStatus status) {
+        refreshValues();
     }
 }
 

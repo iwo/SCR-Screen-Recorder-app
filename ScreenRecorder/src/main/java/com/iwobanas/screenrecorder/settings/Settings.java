@@ -8,6 +8,7 @@ import android.os.Environment;
 
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.Utils;
+import com.iwobanas.screenrecorder.audio.AudioDriver;
 
 import java.io.File;
 
@@ -62,6 +63,7 @@ public class Settings {
     private String outputDirName;
     private boolean outputDirWritable;
     private ShowTouchesController showTouchesController;
+    private AudioDriver audioDriver;
     private int appVersion;
     private boolean appUpdated;
 
@@ -69,6 +71,7 @@ public class Settings {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
         showTouchesController = new ShowTouchesController(context);
+        audioDriver = new AudioDriver(context);
         appVersion = Utils.getAppVersion(context);
         outputDirName = context.getString(R.string.output_dir);
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
@@ -498,6 +501,10 @@ public class Settings {
         if (showTouches) {
             showTouchesController.setShowTouches(true);
         }
+    }
+
+    public AudioDriver getAudioDriver() {
+        return audioDriver;
     }
 }
 

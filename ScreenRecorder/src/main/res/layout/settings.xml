@@ -178,6 +178,21 @@
             </TableRow>
 
             <TableRow
+                android:id="@+id/settings_audio_driver_row"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/settings_audio_driver_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_span="2"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </TableRow>
+
+            <TableRow
                 android:id="@+id/settings_sampling_rate_row"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
