@@ -88,9 +88,15 @@
     <string name="settings_transformation_cpu">CPU</string>
     <string name="settings_transformation_gpu">GPU</string>
     <string name="settings_transformation_oes">GPU+</string>
+    <string name="settings_vertical_frames">垂直帧</string>
+    <string name="settings_vertical_frames_cancel">取消</string>
+    <string name="settings_vertical_frames_ok">确定</string>
+    <string name="settings_vertical_frames_warning">某些设备的视频播放器不能播放含有垂直帧的视频。若视频加入了方向元数据，即使您没有勾选该选项，Android、YouTube 等播放器也可以正常显示视频画面。</string>
     <string name="settings_video_bitrate">视频比特率</string>
     <string name="settings_video_encoder">视频编码器</string>
     <string name="settings_video_encoder_default">自动</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">软解码 MPEG-4（慢）</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">软解码 MPEG-4</string>
     <string name="settings_video_encoder_h263">H263</string>
     <string name="settings_video_encoder_h263_unstable">H263（不稳定）</string>
     <string name="settings_video_encoder_h264">H264</string>
