@@ -104,6 +104,7 @@ public class SettingsActivity extends Activity implements AudioDriver.OnInstallL
                         audioDriver.uninstall();
                         break;
                     case NOT_INSTALLED:
+                    case OUTDATED:
                     case INSTALLATION_FAILURE:
                         new AudioDriverDialogFragment().show(getFragmentManager(), "audio_driver");
                         break;
@@ -290,6 +291,8 @@ public class SettingsActivity extends Activity implements AudioDriver.OnInstallL
                 return R.string.settings_audio_driver_uninstalling;
             case INSTALLATION_FAILURE:
                 return R.string.settings_audio_driver_installation_failure;
+            case OUTDATED:
+                return R.string.settings_audio_driver_outdated;
         }
         return R.string.settings_audio_driver_not_installed;
     }

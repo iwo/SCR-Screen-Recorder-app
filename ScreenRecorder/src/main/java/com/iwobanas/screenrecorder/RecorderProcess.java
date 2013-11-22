@@ -3,6 +3,7 @@ package com.iwobanas.screenrecorder;
 import android.util.Log;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
 
 import java.io.BufferedReader;
@@ -204,7 +205,11 @@ class RecorderProcess implements Runnable{
         runCommand(settings.getTransformation().name());
         runCommand(settings.getColorFix() ? "BGRA" : "RGBA");
         runCommand(settings.getVideoBitrate().getCommand());
-        runCommand(settings.getSamplingRate().getCommand());
+        if (settings.getAudioSource().equals(AudioSource.INTERNAL)) {
+            runCommand(String.valueOf(settings.getAudioDriver().getSamplingRate()));
+        } else {
+            runCommand(settings.getSamplingRate().getCommand());
+        }
         runCommand(String.valueOf(settings.getVideoEncoder()));
         runCommand(String.valueOf(settings.getVerticalFrames() ? 1 : 0));
         logSettings(settings, rotation);

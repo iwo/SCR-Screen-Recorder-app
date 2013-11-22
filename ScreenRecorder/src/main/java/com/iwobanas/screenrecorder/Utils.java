@@ -5,8 +5,10 @@ import android.content.Context;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -79,5 +81,18 @@ public class Utils {
             return false;
         }
         return true;
+    }
+
+    public static void extractResource(Context context, int resourceId, File outputFile) throws IOException {
+        InputStream inputStream = context.getResources().openRawResource(resourceId);
+        FileOutputStream outputStream = new FileOutputStream(outputFile);
+
+        int count;
+        byte[] buffer = new byte[1024];
+        while ((count = inputStream.read(buffer)) > 0) {
+            outputStream.write(buffer, 0, count);
+        }
+        inputStream.close();
+        outputStream.close();
     }
 }

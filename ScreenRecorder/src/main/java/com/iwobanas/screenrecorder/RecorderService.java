@@ -30,9 +30,7 @@ import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -119,7 +117,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private void installExecutable() {
         File executable = new File(getFilesDir(), "screenrec");
         try {
-            extractResource(R.raw.screenrec, executable);
+            Utils.extractResource(this, R.raw.screenrec, executable);
             if (!executable.setExecutable(true, false)) {
                 Log.w(TAG, "Can't set executable property on " + executable.getAbsolutePath());
             }
@@ -130,19 +128,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             EasyTracker.getTracker().sendException(Thread.currentThread().getName(), e, false);
         }
         mNativeProcessRunner.setExecutable(executable.getAbsolutePath());
-    }
-
-    private void extractResource(int resourceId, File outputFile) throws IOException {
-        InputStream inputStream = getResources().openRawResource(resourceId);
-        FileOutputStream outputStream = new FileOutputStream(outputFile);
-
-        int count;
-        byte[] buffer = new byte[1024];
-        while ((count = inputStream.read(buffer)) > 0) {
-            outputStream.write(buffer, 0, count);
-        }
-        inputStream.close();
-        outputStream.close();
     }
 
     @Override
