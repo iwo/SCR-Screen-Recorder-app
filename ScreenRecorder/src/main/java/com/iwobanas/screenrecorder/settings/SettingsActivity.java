@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class SettingsActivity extends Activity implements AudioDriver.OnInstallL
     private static final int SELECT_OUTPUT_DIR = 1;
     private TextView audioText;
     private TextView audioDriverText;
+    private ProgressBar audioDriverProgressBar;
     private TextView resolutionText;
     private TextView frameRateText;
     private TextView transformationText;
@@ -63,6 +65,7 @@ public class SettingsActivity extends Activity implements AudioDriver.OnInstallL
 
         audioText = (TextView) findViewById(R.id.settings_audio_text);
         audioDriverText = (TextView) findViewById(R.id.settings_audio_driver_text);
+        audioDriverProgressBar = (ProgressBar) findViewById(R.id.settings_audio_driver_progress_bar);
         resolutionText = (TextView) findViewById(R.id.settings_resolution_text);
         frameRateText = (TextView) findViewById(R.id.settings_frame_rate_text);
         transformationText = (TextView) findViewById(R.id.settings_transformation_text);
@@ -276,6 +279,13 @@ public class SettingsActivity extends Activity implements AudioDriver.OnInstallL
             audioDriverRow.setVisibility(View.VISIBLE);
         } else {
             audioDriverRow.setVisibility(View.GONE);
+        }
+
+        if (audioDriver.getInstallationStatus() == AudioDriver.InstallationStatus.INSTALLING ||
+                audioDriver.getInstallationStatus() == AudioDriver.InstallationStatus.UNINSTALLING) {
+            audioDriverProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            audioDriverProgressBar.setVisibility(View.GONE);
         }
     }
 

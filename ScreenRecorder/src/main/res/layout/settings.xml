@@ -183,13 +183,24 @@
                 android:layout_height="fill_parent"
                 android:padding="12dp">
 
-                <TextView
-                    android:id="@+id/settings_audio_driver_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:layout_column="0"
                     android:layout_span="2"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:orientation="horizontal">
+
+                    <ProgressBar
+                        android:id="@+id/settings_audio_driver_progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/settings_audio_driver_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
             </TableRow>
 
             <TableRow
@@ -319,9 +330,9 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="vertical"
                     android:layout_column="0"
                     android:layout_span="2"
+                    android:orientation="vertical"
                     >
 
                     <TextView
