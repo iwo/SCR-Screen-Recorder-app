@@ -16,7 +16,7 @@ import java.util.TimerTask;
 
 import static com.iwobanas.screenrecorder.Tracker.*;
 
-class RecorderProcess implements Runnable{
+class RecorderProcess implements Runnable {
 
     private static int instancesCount = 0;
 
@@ -70,6 +70,8 @@ class RecorderProcess implements Runnable{
             stdin = process.getOutputStream();
             stdout = process.getInputStream();
 
+            new Thread(new ErrorStreamReader(process.getErrorStream())).start();
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
             try {
                 String status = reader.readLine();
@@ -94,6 +96,17 @@ class RecorderProcess implements Runnable{
                 exitValueOverride = 307;
                 forceKill();
             }
+
+            try {
+                Log.d(TAG, "Flushing output");
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    Log.e(TAG, "unexpected output: " + line);
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Error when flushing stdout", e);
+            }
+
 
             try {
                 Log.d(TAG, "Waiting for native process to exit");
@@ -379,5 +392,23 @@ class RecorderProcess implements Runnable{
         STOPPING,
         FINISHED,
         ERROR
+    }
+
+    class ErrorStreamReader implements Runnable {
+        private BufferedReader reader;
+
+        public ErrorStreamReader(InputStream stream) {
+            reader = new BufferedReader(new InputStreamReader(stream));
+        }
+
+        @Override
+        public void run() {
+            String line;
+            try {
+                while ((line = reader.readLine()) != null) {
+                    Log.w(TAG, "stderr: " + line);
+                }
+            } catch (IOException ignored) {}
+        }
     }
 }
