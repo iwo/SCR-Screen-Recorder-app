@@ -14,6 +14,8 @@
     <string name="su_required_title">Root access is required</string>
     <string name="su_required_message">To run any screen recorder app your phone/tablet needs to be rooted.
         There are plenty tutorials on the Internet explaining how to root different devices. Pleas come back when you are done!</string>
+    <string name="su_required_help">What\'s "rooting"?</string>
+    <string name="su_required_help_link">http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/</string>
 
     <string name="error_dialog_title">Something went seriously wrong :-(</string>
     <string name="startup_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error S%1$d.</string>
@@ -24,6 +26,24 @@
 
     <string name="output_file_error_title">Can\'t create video file</string>
     <string name="output_file_error_message">SCR was unable to create %1$s video file. Make sure that selected output directory is writable and that SD Card is not locked by USB connection.</string>
+
+    <string name="microphone_busy_error_title">Microphone busy</string>
+    <string name="microphone_busy_error_message">
+        Only one app can use microphone at a time. This is an Android system limitation.
+        Close other app using the microphone (e.g. Google Now or Skype) or continue recording without audio.
+    </string>
+    <string name="microphone_busy_error_continue_mute">Continue Mute</string>
+
+    <string name="screen_protected_error_title">Screen protected</string>
+    <string name="screen_protected_error_message">The screen can\’t be captured because some app marked the screen content as secure.</string>
+
+    <string name="opengl_error_title">GPU not supported</string>
+    <string name="opengl_error_message">Your graphic card is not supported yet.
+        Switch Image transformation setting to CPU or use software video encoder.
+    </string>
+
+    <string name="android_version_error_title">Android version not supported</string>
+    <string name="android_version_error_message">Your Android version is not supported yet.</string>
 
     <string name="help_stop_title">How to stop</string>
     <string name="help_stop_ok">Got it!</string>
@@ -43,9 +63,20 @@
     <string name="settings_ok">OK</string>
     <string name="settings_reset">Restore defaults</string>
     <string name="settings_cancel">Cancel</string>
-    <string name="settings_audio">Audio</string>
-    <string name="settings_audio_mic">Mic</string>
-    <string name="settings_audio_mute">Mute</string>
+
+    <string name="settings_video_category">Video</string>
+
+    <string name="settings_video_encoder">Encoder</string>
+    <string name="settings_video_encoder_h264">H264</string>
+    <string name="settings_video_encoder_h263">H263</string>
+    <string name="settings_video_encoder_h263_unstable">H263 (unstable)</string>
+    <string name="settings_video_encoder_mpeg_4_sp">MPEG-4 SP</string>
+    <string name="settings_video_encoder_default">Auto</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4 (slow)</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">SW MPEG-4</string>
+    <string name="settings_video_encoder_built_in_summary">Android built-in %1$s encoder</string>
+    <string name="settings_video_encoder_ffmpeg_summary">FFmpeg software MPEG4 encoder</string>
+
     <string name="settings_resolution">Resolution</string>
     <string name="settings_resolution_short">%1$dx%2$d</string>
     <string name="settings_resolution_p">%1$dx%2$d - %2$dp</string>
@@ -54,27 +85,86 @@
     <string name="settings_resolution_max">%1$dx%2$d - Max</string>
     <string name="settings_resolution_half">%1$dx%2$d - Half</string>
     <string name="settings_resolution_unstable">(unstable)</string>
-    <string name="settings_frame_rate">Target frame rate</string>
-    <string name="settings_frame_rate_max">Maximum</string>
-    <string name="settings_frame_rate_max_short">Max</string>
-    <string name="settings_frame_rate_up_to">Up to #0 fps</string>
-    <string name="settings_frame_rate_up_to_short">#0 fps</string>
+
     <string name="settings_transformation">Image transformation</string>
     <string name="settings_transformation_cpu">CPU</string>
     <string name="settings_transformation_gpu">GPU</string>
     <string name="settings_transformation_oes">GPU+</string>
-    <string name="settings_video_bitrate">Video bitrate</string>
-    <string name="settings_sampling_rate">Audio sampling rate</string>
-    <string name="settings_color_fix">Inverted color fix</string>
+    <string name="settings_transformation_cpu_summary">Process screen image on the processor (CPU)</string>
+    <string name="settings_transformation_gpu_summary">Process screen image on the graphic card (%1$s)</string>
+    <string name="settings_transformation_sw_summary">Unavailable in software encoder</string>
+
+    <string name="settings_video_bitrate">Bitrate</string>
+    <string name="settings_video_bitrate_summary">around %1$s depending on the encoder</string>
+    <string name="settings_video_bitrate_default">Default</string>
+
+
+    <string name="settings_frame_rate">Frame rate</string>
+    <string name="settings_frame_rate_max">Maximum</string>
+    <string name="settings_frame_rate_max_short">Max</string>
+    <string name="settings_frame_rate_up_to">Up to #0 fps</string>
+    <string name="settings_frame_rate_up_to_short">#0 fps</string>
+    <string name="settings_frame_rate_summary">Up to %1$dfps, limited by hardware capabilities</string>
+    <string name="settings_frame_rate_max_summary">Maximum allowed by hardware</string>
+
+    <string name="settings_orientation">Orientation</string>
+    <string name="settings_orientation_description">
+        By default video frames are always horizontal and rotation metadata is added to the portrait recordings.
+        YouTube and default Android video player plays such videos correctly but some PC players (e.g. VLC)
+        ignore rotation metadata and display it in landscape mode.
+        You can enable Vertical frames below but use this option with caution as many devices can\’t
+        record/play videos with Vertical frames.
+    </string>
+    <string name="settings_orientation_auto">Auto</string>
+    <string name="settings_orientation_portrait">Portrait</string>
+    <string name="settings_orientation_landscape">Landscape</string>
+    <string name="settings_orientation_clockwise">rotate clockwise</string>
+    <string name="settings_orientation_anticlockwise">rotate anticlockwise</string>
+
+    <string name="settings_vertical_frames">Vertical frames</string>
+    <string name="settings_vertical_frames_warning">Video players on many devices can\'t play videos with vertical frames.
+        Even if this option is unselected orientation metadata is added to the video so that it\'s displayed correctly in default Android player, YouTube etc.</string>
+    <string name="settings_vertical_frames_ok">OK</string>
+    <string name="settings_vertical_frames_cancel">Cancel</string>
+
+    <string name="settings_audio_category">Audio</string>
+    <string name="settings_audio_source">Audio</string>
+    <string name="settings_audio_mic">Microphone</string>
+    <string name="settings_audio_mute">Mute</string>
+    <string name="settings_audio_internal">Internal</string>
+    <string name="settings_audio_internal_experimental">Internal (experimental)</string>
+    <string name="settings_audio_mic_summary">Microphone. Only one app can use microphone at a time!</string>
+    <string name="settings_audio_mute_summary">Mute. No Audio track</string>
+    <string name="settings_audio_internal_summary">Audio output. Joint "SCR Alpha testing" Google+ community to test internal audio recording</string>
+    <string name="settings_audio">Audio</string>
+    <string name="settings_sampling_rate">Sampling rate</string>
+
+    <string name="settings_audio_driver_not_installed">SCR audio driver not installed. Tap to install.</string>
+    <string name="settings_audio_driver_installing">Installing SCR audio driver...</string>
+    <string name="settings_audio_driver_installed">SCR audio driver installed. Tap to uninstall.</string>
+    <string name="settings_audio_driver_uninstalling">Uninstalling SCR audio driver...</string>
+    <string name="settings_audio_driver_installation_failure">SCR audio driver installation failed. Tap to retry.</string>
+    <string name="settings_audio_driver_outdated">Old version of SCR audio driver installed. Tap to update.</string>
+
+    <string name="internal_audio_dialog_title">Audio driver installation</string>
+    <string name="internal_audio_dialog_message">
+        Internal audio recording is an experimental feature and requires installation of custom audio driver.
+        It is recommended to uninstall this driver after you are done with the recording.
+        You will be able to easily uninstall SCR Audio driver from SCR Settings.
+        If the installer crashes you may need to use ADB console or re-flash system partition to restore original audio drivers.
+        It is recommended to backup your system. You are proceeding AT YOUR OWN RISK.</string>
+    <string name="internal_audio_dialog_install">Install</string>
+    <string name="internal_audio_dialog_cancel">Cancel</string>
+
+    <string name="settings_other_category">Other</string>
     <string name="settings_hide_icon">Hide notification icon</string>
     <string name="settings_show_touches">Show touches</string>
+    <string name="settings_show_touches_summary">Show visual feedback for touches. You can also activate touch indicators permanently through Android Settings => Developer Options => Show touches</string>
     <string name="settings_output_dir">Output directory</string>
-    <string name="settings_video_encoder">Video encoder</string>
-    <string name="settings_video_encoder_h264">H264</string>
-    <string name="settings_video_encoder_h263">H263</string>
-    <string name="settings_video_encoder_h263_unstable">H263 (unstable)</string>
-    <string name="settings_video_encoder_mpeg_4_sp">MPEG-4 SP</string>
-    <string name="settings_video_encoder_default">Auto</string>
+    <string name="settings_stop_when_screen_off">Stop on screen off</string>
+    <string name="settings_stop_when_screen_off_summary">Finish recording after the screen is turned off</string>
+    <string name="settings_color_fix">Inverted color fix</string>
+    <string name="settings_color_fix_summary">Toggle this option if blue and red colors are inverted</string>
 
     <string name="directory_chooser_select">Select \"%1$s\"</string>
     <string name="directory_chooser_refresh">Refresh</string>
@@ -98,7 +188,6 @@
 
     <string name="error_report_report">Report</string>
     <string name="error_report_close">Close</string>
-    <string name="error_report_subject">[error]</string>
     <string name="error_report_text">The attachment contains detailed system log including information about an error. Feel free to add any comments here.</string>
     <string name="error_report_chooser">Email error report with</string>
 
@@ -111,31 +200,5 @@
 
     <string name="help_stop_message">To stop recording lock the screen and wait 2 seconds. Alternatively you can simply reopen %1$s app.</string>
     <string name="menu_send_bug_report">Send bug report</string>
-    <string name="settings_stop_when_screen_off">Stop on screen off</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4 (slow)</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">SW MPEG-4</string>
-    <string name="settings_vertical_frames">Vertical frames</string>
-    <string name="settings_vertical_frames_warning">Video players on many devices can\'t play videos with vertical frames.
-        Even if this option is unselected orientation metadata is added to the video so that it\'s displayed correctly in default Android player, YouTube etc.</string>
-    <string name="settings_vertical_frames_ok">OK</string>
-    <string name="settings_vertical_frames_cancel">Cancel</string>
 
-    <string name="settings_audio_internal">Internal</string>
-    <string name="settings_audio_internal_experimental">Internal (experimental)</string>
-
-    <string name="settings_audio_driver_not_installed">SCR audio driver not installed. Tap to install.</string>
-    <string name="settings_audio_driver_installing">Installing SCR audio driver...</string>
-    <string name="settings_audio_driver_installed">SCR audio driver installed. Tap to uninstall.</string>
-    <string name="settings_audio_driver_uninstalling">Uninstalling SCR audio driver...</string>
-    <string name="settings_audio_driver_installation_failure">SCR audio driver installation failed. Tap to retry.</string>
-    <string name="settings_audio_driver_outdated">Old version of SCR audio driver installed. Tap to update.</string>
-
-    <string name="internal_audio_dialog_title">Audio driver installation</string>
-    <string name="internal_audio_dialog_message">
-        Internal audio recording is an experimental feature and requires installation of custom audio driver.
-        It is recommended to uninstall this driver after you\'re done with the recording.
-        If the installation fails you may need to use ADB console or re-flash system partition to uninstall this driver.
-        You are processing AT YOUR OWN RISK.</string>
-    <string name="internal_audio_dialog_install">Install</string>
-    <string name="internal_audio_dialog_cancel">Cancel</string>
 </resources>
