@@ -107,13 +107,24 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
             case 213: // start() error
             case 227: // MEDIA_RECORDER_EVENT_ERROR
             case 228: // MEDIA_RECORDER_TRACK_EVENT_ERROR
+            case 248: // MEDIA_RECORDER_EVENT_ERROR during startup
+            case 249: // MEDIA_RECORDER_TRACK_EVENT_ERROR during startup
                 service.mediaRecorderError(exitValue);
                 break;
             case 229: // MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED
-                service.maxFileSizeReached();
+                service.maxFileSizeReached(exitValue);
                 break;
             case 201:
                 service.outputFileError(exitValue);
+                break;
+            case 237:
+                service.microphoneBusyError(exitValue);
+                break;
+            case 209:
+                service.openGlError(exitValue);
+                break;
+            case 217:
+                service.secureSurfaceError(exitValue);
                 break;
             case 230: // MEDIA_RECORDER_INFO_MAX_DURATION_REACHED
                 // fall through - this should never happen unless user fiddles with Free version limitations

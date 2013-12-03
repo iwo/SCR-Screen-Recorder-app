@@ -11,8 +11,11 @@ public interface IRecorderService {
     void startupError(int exitValue);
     void recordingError(int exitValue);
     void mediaRecorderError(int exitValue);
-    void maxFileSizeReached();
+    void maxFileSizeReached(int exitValue);
     void outputFileError(int exitValue);
+    void microphoneBusyError(int exitValue);
+    void openGlError(int exitValue);
+    void secureSurfaceError(int exitValue);
 
     void showSettings();
     void showTimeoutDialog();

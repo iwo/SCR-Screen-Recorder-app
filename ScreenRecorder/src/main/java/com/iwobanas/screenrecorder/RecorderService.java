@@ -423,12 +423,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     @Override
-    public void maxFileSizeReached() {
+    public void maxFileSizeReached(final int exitValue) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 scanOutputAndNotify(R.string.max_file_size_reached_toast);
-                reportRecordingStats(229, -1.0f);
+                reportRecordingStats(exitValue, -1.0f);
                 reinitialize();
             }
         });
@@ -441,6 +441,42 @@ public class RecorderService extends Service implements IRecorderService, Licens
             public void run() {
                 String message = String.format(getString(R.string.output_file_error_message), outputFile);
                 displayErrorMessage(message, getString(R.string.output_file_error_title), true, false, exitValue);
+                logStats(exitValue, 0, 0);
+            }
+        });
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
+    }
+
+    @Override
+    public void microphoneBusyError(final int exitValue) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                displayErrorMessage(getString(R.string.microphone_busy_error_message), getString(R.string.microphone_busy_error_title), true, false, exitValue);
+                logStats(exitValue, 0, 0);
+            }
+        });
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
+    }
+
+    @Override
+    public void openGlError(final int exitValue) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                displayErrorMessage(getString(R.string.opengl_error_message), getString(R.string.opengl_error_title), true, true, exitValue);
+                logStats(exitValue, 0, 0);
+            }
+        });
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
+    }
+
+    @Override
+    public void secureSurfaceError(final int exitValue) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                displayErrorMessage(getString(R.string.screen_protected_error_message), getString(R.string.screen_protected_error_title), true, false, exitValue);
                 logStats(exitValue, 0, 0);
             }
         });
