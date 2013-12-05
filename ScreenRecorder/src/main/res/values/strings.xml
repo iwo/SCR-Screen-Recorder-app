@@ -102,8 +102,8 @@
     <string name="settings_frame_rate">Frame rate</string>
     <string name="settings_frame_rate_max">Maximum</string>
     <string name="settings_frame_rate_max_short">Max</string>
-    <string name="settings_frame_rate_up_to">Up to #0 fps</string>
-    <string name="settings_frame_rate_up_to_short">#0 fps</string>
+    <string name="settings_frame_rate_up_to">Up to %1$d fps</string>
+    <string name="settings_frame_rate_up_to_short">%1$d fps</string>
     <string name="settings_frame_rate_summary">Up to %1$dfps, limited by hardware capabilities</string>
     <string name="settings_frame_rate_max_summary">Maximum allowed by hardware</string>
 
@@ -128,7 +128,7 @@
     <string name="settings_vertical_frames_cancel">Cancel</string>
 
     <string name="settings_audio_category">Audio</string>
-    <string name="settings_audio_source">Audio</string>
+    <string name="settings_audio_source">Source</string>
     <string name="settings_audio_mic">Microphone</string>
     <string name="settings_audio_mute">Mute</string>
     <string name="settings_audio_internal">Internal</string>
@@ -159,7 +159,7 @@
     <string name="settings_other_category">Other</string>
     <string name="settings_hide_icon">Hide notification icon</string>
     <string name="settings_show_touches">Show touches</string>
-    <string name="settings_show_touches_summary">Show visual feedback for touches. You can also activate touch indicators permanently through Android Settings => Developer Options => Show touches</string>
+    <string name="settings_show_touches_summary">Show visual feedback for touches. You can also activate touch indicators permanently through Android Settings→Developer Options→Show touches</string>
     <string name="settings_output_dir">Output directory</string>
     <string name="settings_stop_when_screen_off">Stop on screen off</string>
     <string name="settings_stop_when_screen_off_summary">Finish recording after the screen is turned off</string>
