@@ -45,6 +45,9 @@
     <string name="android_version_error_title">Android version not supported</string>
     <string name="android_version_error_message">Your Android version is not supported yet.</string>
 
+    <string name="cpu_error_title">CPU not supported</string>
+    <string name="cpu_error_message">Your CPU architecture (%1$s) is not supported by %2$s.</string>
+
     <string name="help_stop_title">How to stop</string>
     <string name="help_stop_ok">Got it!</string>
 

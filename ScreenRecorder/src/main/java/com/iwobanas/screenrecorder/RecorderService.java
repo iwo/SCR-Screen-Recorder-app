@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.MediaStore;
@@ -117,7 +118,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private void installExecutable() {
         File executable = new File(getFilesDir(), "screenrec");
         try {
-            Utils.extractResource(this, R.raw.screenrec, executable);
+            if (Build.CPU_ABI.contains("arm")) {
+                Utils.extractResource(this, R.raw.screenrec, executable);
+            } else if (Build.CPU_ABI.contains("x86")) {
+                Utils.extractResource(this, R.raw.screenrec_x86, executable);
+            } else {
+                String message = String.format(getString(R.string.cpu_error_message), Build.CPU_ABI, getString(R.string.app_name));
+                displayErrorMessage(message, getString(R.string.cpu_error_title), false, false, -1);
+            }
+
             if (!executable.setExecutable(true, false)) {
                 Log.w(TAG, "Can't set executable property on " + executable.getAbsolutePath());
             }
