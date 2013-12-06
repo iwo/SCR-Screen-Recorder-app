@@ -12,6 +12,8 @@
 
     <string name="su_required_title">"需要root存取權限"</string>
     <string name="su_required_message">"要在手機或平板上執行任何螢幕錄影程式都必須取得root權限。在網路上有許多相關教學及說明如何取得不同裝置的root權限。請在取得root權限之後再繼續使用吧！"</string>
+    <string name="su_required_help">"什麼是“取得root權限”？"</string>
+    <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
 
     <string name="error_dialog_title">"發生了嚴重錯誤:-("</string>
     <string name="startup_error_message">"將寄送出匿名的錯誤回饋報告以協助我們修正問題。請放心的透過email引用錯誤 S%1$d 聯絡我們。"</string>
@@ -22,6 +24,22 @@
 
     <string name="output_file_error_title">"無法新增影片檔"</string>
     <string name="output_file_error_message">"SCR無法新增 %1$s 影片檔！請確認選擇的輸出目錄是可寫入的，並且以USB連結的SD卡沒有被鎖定住。"</string>
+
+    <string name="microphone_busy_error_title">"麥克風使用中"</string>
+    <string name="microphone_busy_error_message">"由於Android 的系統限制，一次只能有一個應用程式可以使用麥克風。 
+        關閉其他正在使用的麥克風的應用程式(例如 Google now 或 Skype)或是繼續保持靜音錄影。"</string>
+    <string name="microphone_busy_error_continue_mute">"保持靜音"</string>
+
+    <string name="screen_protected_error_title">"螢幕保護中"</string>
+    <string name="screen_protected_error_message">"可能某些應用程式因為安全因素鎖定了螢幕，而導致無法擷取螢幕畫面！"</string>
+
+    <string name="opengl_error_title">"GPU 不支援"</string>
+    <string name="opengl_error_message">"尚未支援您的圖形處理器!
+        切換影像轉碼設定為 CPU 或軟體視訊編碼。
+    "</string>
+
+    <string name="android_version_error_title">"Andr​​oid系統版本不支援!"</string>
+    <string name="android_version_error_message">"尚未支援您的Andr​​oid系統版本!"</string>
 
     <string name="help_stop_title">"該如何停止呢?"</string>
     <string name="help_stop_ok">"明白了"</string>
@@ -41,9 +59,20 @@
     <string name="settings_ok">"確定"</string>
     <string name="settings_reset">"恢復預設值"</string>
     <string name="settings_cancel">"取消"</string>
-    <string name="settings_audio">"音訊"</string>
-    <string name="settings_audio_mic">"麥克風"</string>
-    <string name="settings_audio_mute">"靜音"</string>
+
+    <string name="settings_video_category">"視訊"</string>
+
+    <string name="settings_video_encoder">"編碼器"</string>
+    <string name="settings_video_encoder_h264">"H264 "</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263（不穩定）"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"自動"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"軟體編碼 MPEG-4（慢）"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"Android的內建 %1$s 編碼器"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg 的 MPEG4 軟體編碼器"</string>
+
     <string name="settings_resolution">"解析度"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
     <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
@@ -52,27 +81,76 @@
     <string name="settings_resolution_max">"%1$dx%2$d - 最大"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - 半版"</string>
     <string name="settings_resolution_unstable">"（不穩定）"</string>
-    <string name="settings_frame_rate">"目標畫面播放速率"</string>
-    <string name="settings_frame_rate_max">"最大值"</string>
-    <string name="settings_frame_rate_max_short">"最大"</string>
-    <string name="settings_frame_rate_up_to">" #0 fps"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+
     <string name="settings_transformation">"影像轉碼"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_video_bitrate">"影片位元率"</string>
-    <string name="settings_sampling_rate">"音訊取樣率"</string>
-    <string name="settings_color_fix">"反色修正"</string>
+    <string name="settings_transformation_cpu_summary">"透過中央處理器(CPU)來處理螢幕影像"</string>
+    <string name="settings_transformation_gpu_summary">"透過圖形處理器（ %1$s ）來處理螢幕影像"</string>
+    <string name="settings_transformation_sw_summary">"在軟體編碼器中無法使用"</string>
+
+    <string name="settings_video_bitrate">"位元率"</string>
+    <string name="settings_video_bitrate_summary">"大約%1$s (取決於編碼器)"</string>
+    <string name="settings_video_bitrate_default">"預設"</string>
+
+
+    <string name="settings_frame_rate">"幀率"</string>
+    <string name="settings_frame_rate_max">"最大值"</string>
+    <string name="settings_frame_rate_max_short">"最大"</string>
+    <string name="settings_frame_rate_up_to">" %1$d fps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
+    <string name="settings_frame_rate_summary">"  %1$d fps (受限於硬體限制)"</string>
+    <string name="settings_frame_rate_max_summary">"硬體的最大極限"</string>
+
+    <string name="settings_orientation">"螢幕方向"</string>
+    <string name="settings_orientation_description">"在預設情況下的視訊畫面會保持直向顯示並在直向錄影中加入自動旋轉的中繼資料。
+        除了部分 PC 的播放器(例如 VLC)會忽略自動旋轉的中繼資料而以橫向模式播放之外，YouTube 和預設的 Android 視訊播放器則可以正常地播放這類影片。
+        您可以選擇啟用下面垂直畫面，不過請注意！多數的裝置在使用這個選項時會無法正常 錄製或播放影片。"</string>
+    <string name="settings_orientation_auto">"自動"</string>
+    <string name="settings_orientation_portrait">"直向"</string>
+    <string name="settings_orientation_landscape">"橫向"</string>
+    <string name="settings_orientation_clockwise">"順時針旋轉"</string>
+    <string name="settings_orientation_anticlockwise">"逆時針旋轉"</string>
+
+    <string name="settings_vertical_frames">"直向畫面"</string>
+    <string name="settings_vertical_frames_warning">"在許多裝置上的影片播放器並無法播放直向畫面的影片。即使在未選用此選項的情況下，方向性相關的資訊也會加入到影片中，以使其能夠在預設的 Android 播放器及YouTube 等等播放介面中正確地播放。"</string>
+    <string name="settings_vertical_frames_ok">"確定"</string>
+    <string name="settings_vertical_frames_cancel">"取消"</string>
+
+    <string name="settings_audio_category">"音訊"</string>
+    <string name="settings_audio_source">"音訊"</string>
+    <string name="settings_audio_mic">"麥克風"</string>
+    <string name="settings_audio_mute">"靜音"</string>
+    <string name="settings_audio_internal">"內部音訊"</string>
+    <string name="settings_audio_internal_experimental">"內部音訊(實驗性功能)"</string>
+    <string name="settings_audio_mic_summary">"麥克風。一次只能有一個應用程式使用麥克風！"</string>
+    <string name="settings_audio_mute_summary">"靜音。無音軌"</string>
+    <string name="settings_audio_internal_summary">"音訊輸出。加入 \"SCR Alpha testing\" 的Google+ 社群來測試內部音訊錄製功能"</string>
+    <string name="settings_audio">"音訊"</string>
+    <string name="settings_sampling_rate">"取樣率"</string>
+
+    <string name="settings_audio_driver_not_installed">"尚未安裝SCR 音訊驅動程式。請點擊以安裝!"</string>
+    <string name="settings_audio_driver_installing">"正在安裝SCR 音訊驅動程式..."</string>
+    <string name="settings_audio_driver_installed">"SCR 音訊驅動程式已安裝。請點擊以解除安裝!"</string>
+    <string name="settings_audio_driver_uninstalling">"正在解除安裝SCR 音訊驅動程式..."</string>
+    <string name="settings_audio_driver_installation_failure">"安裝SCR 音訊驅動程式失敗。請點擊以重試!"</string>
+    <string name="settings_audio_driver_outdated">"您已安裝了舊版的SCR 音訊驅動程式。請點擊以更新!"</string>
+
+    <string name="internal_audio_dialog_title">"安裝音訊驅動程式"</string>
+    <string name="internal_audio_dialog_message">"內部錄音是一項實驗性的功能，並且需要安裝自訂的音訊驅動程式。我們會建議您在完成錄音後解除安裝此驅動程式。您可以從SCR設定當中輕易地解除安裝音訊驅動程式。如果安裝器當掉了，則您可能需要使用 ADB指令或是重刷系統磁區分割來還原回原始的音效驅動程式。建議最好備份您的系統，您得自行承擔進行操作的風險!"</string>
+    <string name="internal_audio_dialog_install">"安裝"</string>
+    <string name="internal_audio_dialog_cancel">"取消"</string>
+
+    <string name="settings_other_category">"其他"</string>
     <string name="settings_hide_icon">"隱藏通知圖示"</string>
     <string name="settings_show_touches">"顯示觸控點"</string>
+    <string name="settings_show_touches_summary">"顯示觸碰的視覺回饋。您也可以經由Andr​​oid系統設定=&gt;開發人員選項=&gt;顯示觸碰點 來保持啟用觸碰點顯示回饋功能"</string>
     <string name="settings_output_dir">"輸出目錄"</string>
-    <string name="settings_video_encoder">"影片編碼"</string>
-    <string name="settings_video_encoder_h264">"H264 "</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263（不穩定）"</string>
-    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"自動"</string>
+    <string name="settings_stop_when_screen_off">"螢幕關閉時停止錄影"</string>
+    <string name="settings_stop_when_screen_off_summary">"螢幕關閉後即結束錄影"</string>
+    <string name="settings_color_fix">"反色修正"</string>
+    <string name="settings_color_fix_summary">"如果藍色和紅色的顏色相反的話，請切換此選項"</string>
 
     <string name="directory_chooser_select">"選擇 \\"%1$s\\""</string>
     <string name="directory_chooser_refresh">"重新載入"</string>
@@ -92,7 +170,6 @@
 
     <string name="error_report_report">"報告"</string>
     <string name="error_report_close">"關閉"</string>
-    <string name="error_report_subject">"[錯誤]"</string>
     <string name="error_report_text">"附件中包含了詳細的系統日誌及相關錯誤的資訊。請放心的在這裡寫入任何建議或評論。"</string>
     <string name="error_report_chooser">"電子郵件錯誤報告Email 錯誤報告"</string>
 
@@ -105,11 +182,5 @@
 
     <string name="help_stop_message">"我們得停止錄製並鎖定螢幕再稍等約 2 秒。或是您也可以簡單地重新開啟 %1$s 應用程式"</string>
     <string name="menu_send_bug_report">"寄送錯誤報告"</string>
-    <string name="settings_stop_when_screen_off">"螢幕關閉時停止錄影"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"軟體編碼 MPEG-4（慢）"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
-    <string name="settings_vertical_frames">"直向畫面"</string>
-    <string name="settings_vertical_frames_warning">"在許多裝置上的影片播放器並無法播放直向畫面的影片。即使在未選用此選項的情況下，方向性相關的資訊也會加入到影片中，以使其能夠在預設的 Android 播放器及YouTube 等等播放介面中正確地播放。"</string>
-    <string name="settings_vertical_frames_ok">"確定"</string>
-    <string name="settings_vertical_frames_cancel">"取消"</string>
+
 </resources>
