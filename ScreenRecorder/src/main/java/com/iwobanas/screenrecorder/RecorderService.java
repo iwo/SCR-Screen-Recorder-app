@@ -456,6 +456,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 scanOutputAndNotify(R.string.max_file_size_reached_toast);
                 reportRecordingStats(exitValue, -1.0f);
                 reinitializeView();
+                mRatingController.increaseSuccessCount();
                 reinitialize();
             }
         });
