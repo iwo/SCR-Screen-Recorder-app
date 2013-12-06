@@ -69,6 +69,14 @@ public class Utils {
         return appVersion;
     }
 
+    public static String getAppVersionName(Context context) {
+        String appVersion = "unknown";
+        try {
+            appVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+        } catch (Exception ignored) {}
+        return appVersion;
+    }
+
     public static boolean checkDirWritable(File dir) {
         try {
             if (!dir.exists()) {
