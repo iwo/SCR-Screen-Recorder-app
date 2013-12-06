@@ -98,8 +98,8 @@
     <string name="settings_frame_rate">"Częstotliwość klatek"</string>
     <string name="settings_frame_rate_max">"Maksymalna"</string>
     <string name="settings_frame_rate_max_short">"Max"</string>
-    <string name="settings_frame_rate_up_to">"do #0 fps"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_frame_rate_up_to">"do %1$d fps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"Do %1$d fps, ograniczona przez możliwości sprzętowe"</string>
     <string name="settings_frame_rate_max_summary">"Maksymalna dopuszczalna przez sprzęt"</string>
 

@@ -98,8 +98,8 @@
     <string name="settings_frame_rate">"Kuvanopeus (FPS)"</string>
     <string name="settings_frame_rate_max">"Maksimi"</string>
     <string name="settings_frame_rate_max_short">"Maksimi"</string>
-    <string name="settings_frame_rate_up_to">"Jopa #0 fps"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_frame_rate_up_to">"Jopa %1$d fps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"Jopa %1$d fps, rajoitettu laitteiston takia"</string>
     <string name="settings_frame_rate_max_summary">"Suurin sallittu laitteistolla"</string>
 

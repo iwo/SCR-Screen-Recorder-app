@@ -99,8 +99,8 @@
     <string name="settings_frame_rate">"معدل الإطار"</string>
     <string name="settings_frame_rate_max">"الحد الأقصى"</string>
     <string name="settings_frame_rate_max_short">"الحد الأقصى"</string>
-    <string name="settings_frame_rate_up_to">"#0 إطار في الثانية"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 إطار في الثانية"</string>
+    <string name="settings_frame_rate_up_to">"%1$d إطار في الثانية"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d إطار في الثانية"</string>
     <string name="settings_frame_rate_summary">"%1$d إطار في الثانية ، يحد من قدرات الجهاز"</string>
     <string name="settings_frame_rate_max_summary">"الحد الأقصى المسموح به من قبل الجهاز"</string>
 

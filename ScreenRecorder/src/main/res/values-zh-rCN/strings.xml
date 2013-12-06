@@ -66,8 +66,8 @@
     <string name="settings_frame_rate">最大帧速率</string>
     <string name="settings_frame_rate_max">最大帧速</string>
     <string name="settings_frame_rate_max_short">最大</string>
-    <string name="settings_frame_rate_up_to">限制每秒 #0 帧</string>
-    <string name="settings_frame_rate_up_to_short">每秒 \#0 帧</string>
+    <string name="settings_frame_rate_up_to">限制每秒 %1$d 帧</string>
+    <string name="settings_frame_rate_up_to_short">每秒 \%1$d 帧</string>
     <string name="settings_hide_icon">隐藏通知图标</string>
     <string name="settings_ok">确定</string>
     <string name="settings_output_dir">输出目录</string>

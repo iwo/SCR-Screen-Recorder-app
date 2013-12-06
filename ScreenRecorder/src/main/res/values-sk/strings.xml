@@ -98,8 +98,8 @@
     <string name="settings_frame_rate">"Vzorkovacia frekvencia"</string>
     <string name="settings_frame_rate_max">"Maximálna"</string>
     <string name="settings_frame_rate_max_short">"Max"</string>
-    <string name="settings_frame_rate_up_to">"Až do #0 fps"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_frame_rate_up_to">"Až do %1$d fps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"Až do %1$d fps, limitované hardvérovými schopnosťami"</string>
     <string name="settings_frame_rate_max_summary">"Maximum povolené hardvérom"</string>
 

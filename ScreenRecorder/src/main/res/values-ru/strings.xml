@@ -100,8 +100,8 @@
     <string name="settings_frame_rate">"Частота кадров"</string>
     <string name="settings_frame_rate_max">"Максимум"</string>
     <string name="settings_frame_rate_max_short">"Макс"</string>
-    <string name="settings_frame_rate_up_to">"До #0 fps"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_frame_rate_up_to">"До %1$d fps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"До %1$dfps, ограничивается аппаратными возможностями"</string>
     <string name="settings_frame_rate_max_summary">"Максимально допустимое оборудованием"</string>
 

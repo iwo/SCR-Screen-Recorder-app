@@ -98,8 +98,8 @@
     <string name="settings_frame_rate">"Taxa de quadros"</string>
     <string name="settings_frame_rate_max">"Máximo"</string>
     <string name="settings_frame_rate_max_short">"Max"</string>
-    <string name="settings_frame_rate_up_to">"Até #0 fps"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_frame_rate_up_to">"Até %1$d fps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"Até %1$d fps, limitado pelos recursos de hardware"</string>
     <string name="settings_frame_rate_max_summary">"Máxima permitida pelo hardware"</string>
 

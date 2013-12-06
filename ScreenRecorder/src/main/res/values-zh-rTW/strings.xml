@@ -98,8 +98,8 @@
     <string name="settings_frame_rate">"幀率"</string>
     <string name="settings_frame_rate_max">"最大值"</string>
     <string name="settings_frame_rate_max_short">"最大"</string>
-    <string name="settings_frame_rate_up_to">" #0 fps"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_frame_rate_up_to">" %1$d fps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"  %1$d fps (受限於硬體限制)"</string>
     <string name="settings_frame_rate_max_summary">"硬體的最大極限"</string>
 
