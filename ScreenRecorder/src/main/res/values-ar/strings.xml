@@ -71,7 +71,7 @@
     <string name="settings_video_encoder_default">"تلقائي"</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4">"خاصية MPEG-4 ( بطيئة )"</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
-    <string name="settings_video_encoder_built_in_summary">"الأندرويد دمج %1$s من التشفير"</string>
+    <string name="settings_video_encoder_built_in_summary">"دمج خاصية %1$s مع التشفير"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFMPEG البرمجية MPEG4 التشفير"</string>
 
     <string name="settings_resolution">"دقة التسجيل"</string>
@@ -88,7 +88,7 @@
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"+GPU"</string>
     <string name="settings_transformation_cpu_summary">"الصورة المعروضة على الشاشة تعمل على المعالج (CPU)"</string>
-    <string name="settings_transformation_gpu_summary">"الصورة المعروضة على الشاشة تعمل على بطاقة الرسومات ( %1$s )"</string>
+    <string name="settings_transformation_gpu_summary">"الصورة المعروضة على الشاشة تعمل على بطاقة الرسومات (%1$s)"</string>
     <string name="settings_transformation_sw_summary">"غير متوفرة في برامج التشفير"</string>
 
     <string name="settings_video_bitrate">"معدل البت"</string>
@@ -115,7 +115,7 @@
     <string name="settings_orientation_anticlockwise">"تدوير عكس اتجاه عقارب الساعة"</string>
 
     <string name="settings_vertical_frames">"الإطارات الرأسية"</string>
-    <string name="settings_vertical_frames_warning">"مشغلات الفيديو على العديد من الأجهزة لا يمكنها تشغيل ملفات الفيديو ذات الإطارات الرأسية . حتى إذا كان هذا الخيار غير محدد تتم إضافت إلى شريط الفيديو حتى يصبح العرض صحيح في مشغل الأندرويد الافتراضي ، ويوتيوب وغيرها ."</string>
+    <string name="settings_vertical_frames_warning">"مشغلات الفيديو على العديد من الأجهزة لا يمكنها تشغيل ملفات الفيديو ذات الإطارات الرأسية . حتى إذا كان هذا الخيار غير محدد تتم إضافته إلى شريط الفيديو حتى يصبح العرض صحيح في مشغل الأندرويد الافتراضي ، ويوتيوب وغيرها ."</string>
     <string name="settings_vertical_frames_ok">"موافق"</string>
     <string name="settings_vertical_frames_cancel">"إلغاء"</string>
 
@@ -152,7 +152,7 @@
     <string name="settings_stop_when_screen_off">"إيقاف التسجيل عند إغلاق الشاشة"</string>
     <string name="settings_stop_when_screen_off_summary">"إنهاء التسجيل بعد أن يتم إيقاف تشغيل الشاشة"</string>
     <string name="settings_color_fix">"إصلاح اللون الباهت"</string>
-    <string name="settings_color_fix_summary">"قم باختيار هذه الخاصية إذا تم عكس ألوان الشاشة إلى زرقاء وحمراء"</string>
+    <string name="settings_color_fix_summary">"قم باختيار هذه الخاصية إذا تم عكس ألوان الشاشة إلى ألوان زرقاء وحمراء"</string>
 
     <string name="directory_chooser_select">"حدد \"%1$s\""</string>
     <string name="directory_chooser_refresh">"تحديث"</string>
