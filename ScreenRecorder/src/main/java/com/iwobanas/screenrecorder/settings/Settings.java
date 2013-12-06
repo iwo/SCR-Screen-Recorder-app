@@ -43,6 +43,7 @@ public class Settings {
     private static Settings instance;
     private SharedPreferences preferences;
     private AudioSource audioSource = AudioSource.MIC;
+    private boolean temporaryMute = false;
     private Resolution resolution;
     private Resolution defaultResolution;
     private ResolutionsManager resolutionsManager;
@@ -283,6 +284,14 @@ public class Settings {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(AUDIO_SOURCE, audioSource.name());
         editor.commit();
+    }
+
+    public boolean getTemporaryMute() {
+        return temporaryMute;
+    }
+
+    public void setTemporaryMute(boolean temporaryMute) {
+        this.temporaryMute = temporaryMute;
     }
 
     public Resolution getResolution() {

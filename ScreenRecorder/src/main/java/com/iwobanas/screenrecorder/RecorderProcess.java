@@ -158,6 +158,7 @@ class RecorderProcess implements Runnable {
             case 227:
             case 226:
             case 229:
+            case 237: // microphone busy
                 return false;
             default:
                 return true;
@@ -209,7 +210,13 @@ class RecorderProcess implements Runnable {
         startTimeout.start();
         runCommand(fixEmulatedStorageMapping(fileName));
         runCommand(rotation);
-        runCommand(settings.getAudioSource().getCommand());
+        if (settings.getTemporaryMute()) {
+            Log.v(TAG, "Audio muted for this recording");
+            runCommand(AudioSource.MUTE.getCommand());
+            settings.setTemporaryMute(false);
+        } else {
+            runCommand(settings.getAudioSource().getCommand());
+        }
         runCommand(String.valueOf(settings.getResolution().getVideoWidth()));
         runCommand(String.valueOf(settings.getResolution().getVideoHeight()));
         runCommand(String.valueOf(settings.getResolution().getPaddingWidth()));
