@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Log;
 
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.Utils;
@@ -13,6 +14,7 @@ import com.iwobanas.screenrecorder.audio.AudioDriver;
 import java.io.File;
 
 public class Settings {
+    private static final String TAG = "scr_Settings";
     public static final int FFMPEG_MPEG_4_ENCODER = -2;
     private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
     private static final String AUDIO_SOURCE = "AUDIO_SOURCE";
@@ -405,6 +407,10 @@ public class Settings {
     }
 
     public void setVideoEncoder(int videoEncoder) {
+        if (Utils.isX86() && videoEncoder == FFMPEG_MPEG_4_ENCODER) {
+            Log.w(TAG, "Software encoder is not supported on x86 platform, resetting to H264");
+            videoEncoder = MediaRecorder.VideoEncoder.H264;
+        }
         this.videoEncoder = videoEncoder;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(VIDEO_ENCODER, videoEncoder);

@@ -13,6 +13,16 @@
         <item>3</item>
     </string-array>
 
+    <string-array name="video_encoder_entries_no_sw">
+        <item>@string/settings_video_encoder_h264</item>
+        <item>@string/settings_video_encoder_mpeg_4_sp</item>
+    </string-array>
+
+    <string-array name="video_encoder_values_no_sw">
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
     <string-array name="transformation_entries">
         <item>@string/settings_transformation_cpu</item>
         <item>@string/settings_transformation_gpu</item>

@@ -15,6 +15,7 @@ import android.util.Log;
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
+import com.iwobanas.screenrecorder.Utils;
 
 import java.io.File;
 
@@ -61,7 +62,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         videoEncoderPreference = (ListPreference) findPreference(KEY_VIDEO_ENCODER);
         videoEncoderPreference.setOnPreferenceChangeListener(this);
-        //TODO: exclude software encoder for x86 devices
+        if (Utils.isX86()) {
+            videoEncoderPreference.setEntries(R.array.video_encoder_entries_no_sw);
+            videoEncoderPreference.setEntryValues(R.array.video_encoder_values_no_sw);
+        }
 
         resolutionPreference = (ListPreference) findPreference(KEY_RESOLUTION);
         resolutionPreference.setOnPreferenceChangeListener(this);
