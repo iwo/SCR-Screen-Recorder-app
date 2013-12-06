@@ -93,6 +93,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public void onCreate() {
         EasyTracker.getInstance().setContext(getApplicationContext());
 
+        if (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT > 19) {
+            displayErrorMessage(getString(R.string.android_version_error_message), getString(R.string.android_version_error_title), false, false, -1);
+        }
+
         Settings.initialize(this);
         mTaniosc = getResources().getBoolean(R.bool.taniosc);
         mHandler = new Handler();
@@ -400,7 +404,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         Log.w(TAG, "displayErrorMessage: " + message);
-        mRatingController.resetSuccessCount();
+        if (mRatingController != null) {
+            mRatingController.resetSuccessCount();
+        }
         stopSelf();
     }
 
