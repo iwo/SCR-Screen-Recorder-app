@@ -12,9 +12,11 @@
 
     <string name="su_required_title">"Pääkäyttäjän eli root oikeudet tarvitaan"</string>
     <string name="su_required_message">"Jotta voit käyttää jotakin näytönkaappaussovellusta sinun puhelimella/tabletilla pitää olla pääkäyttäjäoikeudet eli root.Netistä löytyy paljon ohjeita kuinka saada root eri laitteilla. Tule takaisin kun olet valmis!"</string>
+    <string name="su_required_help">"Mitä on ''roottaus''?"</string>
+    <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
 
     <string name="error_dialog_title">"Jokin meni pahasti pieleen :-("</string>
-    <string name="startup_error_message">"Anonyymi virheraportti lähetetään automaattisesti, joka auttaa meitä korjaamaan ongelman. Ota yhteyttä sähköpostin  kautta tukea varten lainaten virhe S %1$d ."</string>
+    <string name="startup_error_message">"Anonyymi virheraportti lähetetään automaattisesti, joka auttaa meitä korjaamaan ongelman. Ota yhteyttä sähköpostin kautta tukea varten lainaten virhe S %1$d ."</string>
     <string name="recording_error_message">"Anonyymi virheraportti lähetetään automaattisesti, joka auttaa meitä korjaamaan ongelman. Ota yhteyttä sähköpostin kautta tukea varten lainaten virhe R %1$d ."</string>
 
     <string name="media_recorder_error_title">"Tallennusvirhe"</string>
@@ -22,6 +24,22 @@
 
     <string name="output_file_error_title">"Ei voi luoda videotiedostoa"</string>
     <string name="output_file_error_message">"SCR ei voinut luoda %1$s videotiedostoa. Varmista, että valitun lähdön hakemisto on kirjoitettava ja että SD-kortti ei ole lukittu USB-liitännän takia."</string>
+
+    <string name="microphone_busy_error_title">"Mikrofoni kiireinen"</string>
+    <string name="microphone_busy_error_message">"
+        Vain yksi sovellus voi käyttää mikrofonia kerrallaan. Tämä on Android-järjestelmän rajoitus. Sulje muut mikrofonia käyttävät sovellkset (esim. Google Now tai Skype) tai jatka tallentamista ilman ääntä.
+    "</string>
+    <string name="microphone_busy_error_continue_mute">"Jatka äänettömänä"</string>
+
+    <string name="screen_protected_error_title">"Näyttö suojattu"</string>
+    <string name="screen_protected_error_message">"Näyttöä ei voida tallentaa, koska sovellus on merkinnyt näytön sisällön salatuksi."</string>
+
+    <string name="opengl_error_title">"GPU ei tuettu"</string>
+    <string name="opengl_error_message">"Sinun grafiikkakorttia ei tueta vielä. Vaihda kuvanmuunnin asetukseksi CPU tai käyttä ohjelmisto videokoodekkia.
+    "</string>
+
+    <string name="android_version_error_title">"Android-versiota ei tueta"</string>
+    <string name="android_version_error_message">"Android-versiota ei tueta vielä."</string>
 
     <string name="help_stop_title">"Miten lopettaa"</string>
     <string name="help_stop_ok">"Tajusin!"</string>
@@ -40,39 +58,100 @@
     <string name="settings_title">"Asetukset"</string>
     <string name="settings_ok">"OK"</string>
     <string name="settings_reset">"Palauta oletusarvot"</string>
-    <string name="settings_cancel">"Peruuta"</string>
-    <string name="settings_audio">"Ääni"</string>
-    <string name="settings_audio_mic">"Mikki"</string>
-    <string name="settings_audio_mute">"Mykistetty"</string>
-    <string name="settings_resolution">"Resoluutio"</string>
-    <string name="settings_resolution_short">"%1$dx%2$d"</string>
-    <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
-    <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp vaaka"</string>
-    <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp pysty"</string>
-    <string name="settings_resolution_max">"%1$dx%2$d - Maksimi"</string>
-    <string name="settings_resolution_half">"%1$dx%2$d - Puoli"</string>
-    <string name="settings_resolution_unstable">"(Epävakaa)"</string>
-    <string name="settings_frame_rate">"tavoite fps"</string>
-    <string name="settings_frame_rate_max">"Maksimi"</string>
-    <string name="settings_frame_rate_max_short">"Maksimi"</string>
-    <string name="settings_frame_rate_up_to">"Jopa #0 fps"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
-    <string name="settings_transformation">"Kuvan muunnin"</string>
-    <string name="settings_transformation_cpu">"CPU "</string>
-    <string name="settings_transformation_gpu">"GPU"</string>
-    <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_video_bitrate">"Videobittinopeus"</string>
-    <string name="settings_sampling_rate">"Äänen näytteenottotaajuus"</string>
-    <string name="settings_color_fix">"Käännetty värikorjaus"</string>
-    <string name="settings_hide_icon">"Piilota ilmoituksen kuvake"</string>
-    <string name="settings_show_touches">"Näytä kosketukset"</string>
-    <string name="settings_output_dir">"Tallennusijainti"</string>
-    <string name="settings_video_encoder">"Videokodeekki"</string>
+    <string name="settings_cancel">"Peruutta"</string>
+
+    <string name="settings_video_category">"Video"</string>
+
+    <string name="settings_video_encoder">"Kodeekki"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
     <string name="settings_video_encoder_h263_unstable">"H263 (epävakaa)"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
     <string name="settings_video_encoder_default">"Auto"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Laite MPEG-4 (hidas)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"Androidin sisäänrakennettu %1$s Kodeekki"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg ohjelmisto MPEG4 kodeekki"</string>
+
+    <string name="settings_resolution">"Resoluutio"</string>
+    <string name="settings_resolution_short">"%1$dx%2$d"</string>
+    <string name="settings_resolution_p">"%1$d x %2$d - %2$d p"</string>
+    <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp vaaka"</string>
+    <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp pysty"</string>
+    <string name="settings_resolution_max">"%1$dx%2$d - Maksimi"</string>
+    <string name="settings_resolution_half">"%1$dx%2$d - Puoli"</string>
+    <string name="settings_resolution_unstable">"(Epävakaa)"</string>
+
+    <string name="settings_transformation">"Kuvan muunnin"</string>
+    <string name="settings_transformation_cpu">"CPU "</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"GPU+"</string>
+    <string name="settings_transformation_cpu_summary">"Prosessoi näytön kuva prosessorilla (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Prosessoi näytön kuva näytönohjaimella ( %1$s )"</string>
+    <string name="settings_transformation_sw_summary">"Ei käytettävissä ohjelmistokodeekissa"</string>
+
+    <string name="settings_video_bitrate">"Bitrate"</string>
+    <string name="settings_video_bitrate_summary">"noin %1$s riippuen kodeekista"</string>
+    <string name="settings_video_bitrate_default">"Oletusarvo"</string>
+
+
+    <string name="settings_frame_rate">"Kuvanopeus (FPS)"</string>
+    <string name="settings_frame_rate_max">"Maksimi"</string>
+    <string name="settings_frame_rate_max_short">"Maksimi"</string>
+    <string name="settings_frame_rate_up_to">"Jopa #0 fps"</string>
+    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_frame_rate_summary">"Jopa %1$d fps, rajoitettu laitteiston takia"</string>
+    <string name="settings_frame_rate_max_summary">"Suurin sallittu laitteistolla"</string>
+
+    <string name="settings_orientation">"Suuntautuminen"</string>
+    <string name="settings_orientation_description">"
+        Oletuksena videoruudut ovat aina vaakasuorassa ja kierto metatiedot lisätään pystytallennuksiin. YouTube ja Androidin oletusvideosoitin pelaa näitä videoita oikein, mutta jotkut PC-videosoittimet (esim. VLC) sivuuttavat kierto metatiedot ja näyttävät sen vaaka-asennossa. Voit ottaa pystykuvan päälle, mutta käyttä tätä vaihtoehtoa varoen, koska monet laitteet eivät voi \ 'tallentaa/toistaa videoita Pystykuvalla.
+    "</string>
+    <string name="settings_orientation_auto">"Auto"</string>
+    <string name="settings_orientation_portrait">"Pysty"</string>
+    <string name="settings_orientation_landscape">"Vaaka"</string>
+    <string name="settings_orientation_clockwise">"kierrä myötäpäivään"</string>
+    <string name="settings_orientation_anticlockwise">"kierrä vastapäivään"</string>
+
+    <string name="settings_vertical_frames">"Pystykuvat"</string>
+    <string name="settings_vertical_frames_warning">"Videosoittimet useissa laitteissa eivät voi toistaa videoita pystykuvilla. Vaikka tämä vaihtoehto on valitsematta kierto metatiedot lisätään videon niin, että se näkyy oikein oletuksena Androidsoittimessa, YouTube jne."</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
+    <string name="settings_vertical_frames_cancel">"Peruuta"</string>
+
+    <string name="settings_audio_category">"Ääni"</string>
+    <string name="settings_audio_source">"Ääni"</string>
+    <string name="settings_audio_mic">"Mikrofoni"</string>
+    <string name="settings_audio_mute">"Mykistetty"</string>
+    <string name="settings_audio_internal">"Sisäinen"</string>
+    <string name="settings_audio_internal_experimental">"Sisäinen (kokeellinen)"</string>
+    <string name="settings_audio_mic_summary">"Mikrofoni. Vain yksi sovellus voi käyttää mikrofonia kerrallaan!"</string>
+    <string name="settings_audio_mute_summary">"Ilman ääntä. Ei Ääniraitaa"</string>
+    <string name="settings_audio_internal_summary">"Äänen ulostulo. Liity \"SCR Alpha testing\" Google+ yhteisössä testataksesi sisäistä äänen tallennusta."</string>
+    <string name="settings_audio">"Ääni"</string>
+    <string name="settings_sampling_rate">"Näytteenottotaajuus"</string>
+
+    <string name="settings_audio_driver_not_installed">"SCR ääniajuri ei ole asennettu. Kosketa asentaaksesi."</string>
+    <string name="settings_audio_driver_installing">"Asennetaan SCR ääniajuria ..."</string>
+    <string name="settings_audio_driver_installed">"SCR ääniajuri asennettu. Kosketa poistaaksesi."</string>
+    <string name="settings_audio_driver_uninstalling">"Poistetaan SCR ääniajuria ..."</string>
+    <string name="settings_audio_driver_installation_failure">"SCR ääniajurin asennus epäonnistui. Yritä uudelleen koskettamalla."</string>
+    <string name="settings_audio_driver_outdated">"Vanha versio SCR ääniajurista asennettu. Kosketa päivittääksesi."</string>
+
+    <string name="internal_audio_dialog_title">"Ääniajurin asennus"</string>
+    <string name="internal_audio_dialog_message">"
+        Sisäinen äänitys on kokeellinen ominaisuus ja vaatii oman ääniajurin asennuksen. On suositeltavaa poistaa tämän ajuri kun olet tehnyt tallennuksen. Voit helposti poistaa SCR ääniajurin SCR Asetuksista. Jos asennusohjelma kaatuu saatat joutua käyttämään ADB konsolia tai uudelleen flashätä järjestelmän osio palauttaaksesi alkuperäiset ääniajurit. On suositeltavaa tehdä ensin varmuuskopio. JATKAT OMALLA VASTUULLA."</string>
+    <string name="internal_audio_dialog_install">"Asentaa"</string>
+    <string name="internal_audio_dialog_cancel">"Peruutta"</string>
+
+    <string name="settings_other_category">"Muut"</string>
+    <string name="settings_hide_icon">"Piilota ilmoituksen kuvake"</string>
+    <string name="settings_show_touches">"Näytä kosketukset"</string>
+    <string name="settings_show_touches_summary">"Näytä visuaalista palautetta kosketuksessa. Voit myös aktivoida näkyvät kosketukset pysyvästi Android-asetukset =&gt; Kehittäjän Asetukset =&gt; Näytä kosketukset kautta"</string>
+    <string name="settings_output_dir">"Tallennusijainti"</string>
+    <string name="settings_stop_when_screen_off">"Lopeta tallennus kun näyttö lukitaan"</string>
+    <string name="settings_stop_when_screen_off_summary">"lopeta tallennus näytön sammutuksen jälkeen"</string>
+    <string name="settings_color_fix">"Käännetty värikorjaus"</string>
+    <string name="settings_color_fix_summary">"Ota tämä asetus päälle, jos sininen ja punainen värit ovat toisin päin"</string>
 
     <string name="directory_chooser_select">"Valitse \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Virkistä"</string>
@@ -94,7 +173,6 @@
 
     <string name="error_report_report">"Ilmoita"</string>
     <string name="error_report_close">"Sulje"</string>
-    <string name="error_report_subject">"[error]"</string>
     <string name="error_report_text">"Kiinnitys sisältää yksityiskohtaisen järjestelmälokin ja myös tietoa virheestä. Voit vapaasti lisätä kommentteja täällä."</string>
     <string name="error_report_chooser">"Lähetä virheraportti sähköpostissa"</string>
 
@@ -107,11 +185,5 @@
 
     <string name="help_stop_message">"Lopeta tallennus lukitsemalla näyt ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
     <string name="menu_send_bug_report">"Lähetä virheilmoitus"</string>
-    <string name="settings_stop_when_screen_off">"Lopeta tallennus kun näyttö lukitaan."</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Laite MPEG-4 (hidas)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
-    <string name="settings_vertical_frames">"Pystykuvat"</string>
-    <string name="settings_vertical_frames_warning">"Videosoittimet useissa laitteissa eivät voi toistaa videoita pystyasennossa. Vaikka tämä vaihtoehto ei ole valittu suuntautumisen metatiedot lisätään videon niin, että se näkyy oikein oletuksena Android videosoittimessa, YouTubessa jne."</string>
-    <string name="settings_vertical_frames_ok">"OK"</string>
-    <string name="settings_vertical_frames_cancel">"Peruutta"</string>
+
 </resources>

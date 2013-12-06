@@ -1,19 +1,22 @@
 <resources>
-    <string name="free_app_name">"SCR المجاني"</string>
-    <string name="free_app_full_name">"SCR مسجل الشاشة المجاني"</string>
-    <string name="pro_app_name">"SCR الاحترافي"</string>
-    <string name="pro_app_full_name">"SCR مسجل الشاشة الاحترافي"</string>
-    <string name="recording_saved_title">"SCR التسجيل تم حفظه"</string>
-    <string name="recording_saved_message">"التسجيل تم حفظه بإسم %1$s"</string>
-    <string name="recording_saved_toast">"التسجيل تم حفظه بإسم %1$s"</string>
+    <string name="free_app_name">"SCR Free"</string>
+    <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
+    <string name="pro_app_name">"SCR Pro"</string>
+    <string name="pro_app_full_name">"SCR Screen Recorder Pro
+"</string>
+    <string name="recording_saved_title">"تم حفظ التسجيل بنجاح"</string>
+    <string name="recording_saved_message">"تم حفظ التسجيل بإسم %1$s"</string>
+    <string name="recording_saved_toast">"تم حفظ التسجيل بإسم %1$s"</string>
     <string name="max_file_size_reached_toast">"تم الوصول إلى الحد الأقصى لحجم الملف . التسجيل تم حفظه في %1$s"</string>
     <string name="start">"بدء التسجيل"</string>
     <string name="play">"تشغيل"</string>
 
     <string name="su_required_title">"يتطلب صلاحيات روت (Root)"</string>
     <string name="su_required_message">"للبدء في تسجيل الشاشة سيحتاج هاتفك إلى صلاحيات روت (Root) . هناك الكثير من الدروس على شبكة الإنترنت تشرح كيفية الحصول على صلاحيات روت (Root) لنوع هاتفك . يرجى منك العودة من حيث بدأت !"</string>
+    <string name="su_required_help">"ماهو \" الروت \" ؟"</string>
+    <string name="su_required_help_link">"https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
 
-    <string name="error_dialog_title">"حدث خطأ خطير :-("</string>
+    <string name="error_dialog_title">"حدث خطأ م :-("</string>
     <string name="startup_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني S%1$d ."</string>
     <string name="recording_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>
 
@@ -23,27 +26,54 @@
     <string name="output_file_error_title">"لا يمكن إنشاء ملف الفيديو"</string>
     <string name="output_file_error_message">"مسجل الشاشة غير قادر على إنشاء %1$s ملف الفيديو . تأكد من مسار الحفظ المحدد للفيديو وأن بطاقة SD غير مؤمنة بواسطة اتصال USB ."</string>
 
+    <string name="microphone_busy_error_title">"مكبر الصوت مُستخدم الآن"</string>
+    <string name="microphone_busy_error_message">"
+        يمكن لتطبيق واحد فقط استخدام مكبر الصوت في وقت واحد . وهذا هو الحد الأقصى في نظام الأندرويد . قم بإغلاق التطبيقات الأخرى التي تستخدم مكبر الصوت ( مثل : Google Now أو Skype ) أو قم بالتسجيل دون استخدام مكبر الصوت .
+    "</string>
+    <string name="microphone_busy_error_continue_mute">"مواصلة كتم الصوت"</string>
+
+    <string name="screen_protected_error_title">"الشاشة محمية"</string>
+    <string name="screen_protected_error_message">"يمكن / لا يمكن تسجيل الشاشة نظراً لتمييز بعض التطبيقات لمحتوى الشاشة على أنه محتوى آمن ."</string>
+
+    <string name="opengl_error_title">"GPU غير مدعوم"</string>
+    <string name="opengl_error_message">"بطاقة الرسومات الخاصة بك غير مدعومة حتى الآن . قم بتبديل خيار تحول الصورة إلى وضع CPU أو استخدم برامج ترميز الفيديو .
+    "</string>
+
+    <string name="android_version_error_title">"إصدار نظام الأندرويد الخاص بك غير مدعوم"</string>
+    <string name="android_version_error_message">"إصدار نظام الأندرويد الخاص بك غير مدعوم حتى الآن ."</string>
+
     <string name="help_stop_title">"كيفية إيقاف التسجيل"</string>
     <string name="help_stop_ok">"فهمت ذلك !"</string>
 
     <string name="free_timeout_title">"انتهت صلاحية المهلة الزمنية"</string>
-    <string name="free_timeout_message">"شراء SCR مسجل الشاشة الاحترافي للحصول على وقت غير محدود للتسجيل وإخفاء العلامة المائية التي تكون على الفيديو ."</string>
+    <string name="free_timeout_message">"يجب عليك شراء SCR Screen Recorder Pro للحصول على وقت غير محدود للتسجيل وإخفاء العلامة المائية التي تكون على الفيديو ."</string>
     <string name="free_timeout_buy">"شراء الآن !"</string>
     <string name="free_timeout_no_thanks">"لا شكراً"</string>
-    <string name="hide_icon_title">"ميزة مسجل الشاشة الاحترافي"</string>
-    <string name="hide_icon_message">"شراء SCR مسجل الشاشة الاحترافي لإخفاء العلامة المائية التي تكون على الفيديو وإخفاء رمز الإعلام . ستحصل كذلك على وقت غير محدود للتسجيل !"</string>
+    <string name="hide_icon_title">"هذه الميزة متوفرة لـSCR Pro فقط"</string>
+    <string name="hide_icon_message">"يجب عليك شراء SCR Screen Recorder Pro لإخفاء العلامة المائية التي تكون على الفيديو وإخفاء رمز الإعلام . ستحصل كذلك على وقت غير محدود للتسجيل !"</string>
 
     <string name="buy_error_title">"خطأ في تشغيل سوق Google Play"</string>
-    <string name="buy_error_message">"الرجاء البحث عن SCR مسجل الشاشة الاحترافي في سوق Google Play"</string>
+    <string name="buy_error_message">"الرجاء البحث عن SCR Screen Recorder Pro في سوق Google Play"</string>
 
     <string name="settings_activity_label">"إعدادات SCR"</string>
     <string name="settings_title">"إعدادات"</string>
     <string name="settings_ok">"موافق"</string>
     <string name="settings_reset">"استعادة الافتراضيات"</string>
     <string name="settings_cancel">"إلغاء"</string>
-    <string name="settings_audio">"تسجيل الصوت"</string>
-    <string name="settings_audio_mic">"بالميكروفون"</string>
-    <string name="settings_audio_mute">"كتم الصوت"</string>
+
+    <string name="settings_video_category">"فيديو"</string>
+
+    <string name="settings_video_encoder">"التشفير"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 ( غير مستقرة )"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"تلقائي"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"خاصية MPEG-4 ( بطيئة )"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"الأندرويد دمج %1$s من التشفير"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"FFMPEG البرمجية MPEG4 التشفير"</string>
+
     <string name="settings_resolution">"دقة التسجيل"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
     <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
@@ -52,27 +82,77 @@
     <string name="settings_resolution_max">"%1$dx%2$d - الحد الأقصى"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - النصف"</string>
     <string name="settings_resolution_unstable">"( غير مستقر )"</string>
-    <string name="settings_frame_rate">"معدل الإطارات في الثانية"</string>
-    <string name="settings_frame_rate_max">"الحد الأقصى"</string>
-    <string name="settings_frame_rate_max_short">"الحد الأقصى"</string>
-    <string name="settings_frame_rate_up_to">"#0 إطار في الثانية"</string>
-    <string name="settings_frame_rate_up_to_short">"#0"</string>
+
     <string name="settings_transformation">"تحول الصورة"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"+GPU"</string>
-    <string name="settings_video_bitrate">"معدل البت للفيديو"</string>
-    <string name="settings_sampling_rate">"معدل أخذ العينات الصوتية"</string>
-    <string name="settings_color_fix">"إصلاح اللون الباهت"</string>
+    <string name="settings_transformation_cpu_summary">"الصورة المعروضة على الشاشة تعمل على المعالج (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"الصورة المعروضة على الشاشة تعمل على بطاقة الرسومات ( %1$s )"</string>
+    <string name="settings_transformation_sw_summary">"غير متوفرة في برامج التشفير"</string>
+
+    <string name="settings_video_bitrate">"معدل البت"</string>
+    <string name="settings_video_bitrate_summary">"حوّل %1$s اعتماداً على التشفير"</string>
+    <string name="settings_video_bitrate_default">"الافتراضي"</string>
+
+
+    <string name="settings_frame_rate">"معدل الإطار"</string>
+    <string name="settings_frame_rate_max">"الحد الأقصى"</string>
+    <string name="settings_frame_rate_max_short">"الحد الأقصى"</string>
+    <string name="settings_frame_rate_up_to">"#0 إطار في الثانية"</string>
+    <string name="settings_frame_rate_up_to_short">"#0 إطار في الثانية"</string>
+    <string name="settings_frame_rate_summary">"%1$d إطار في الثانية ، يحد من قدرات الجهاز"</string>
+    <string name="settings_frame_rate_max_summary">"الحد الأقصى المسموح به من قبل الجهاز"</string>
+
+    <string name="settings_orientation">"اتجاه"</string>
+    <string name="settings_orientation_description">"
+        بشكل افتراضي ، إطارات الفيديو دائماً تكون أفقية ، ويتم إضافة البيانات الوصفية إلى التسجيلات العمودية . يوتيوب ومشغل الفيديو الافتراضي لنظام الأندرويد يعملان مثل أشرطة الفيديو بشكل صحيح ولكن بعض مشغلات الفيديو للحاسب الآلي ( مثل : VLC ) تتجاهل بيانات التعريف وتعرضها في الوضع الأفقي . يمكنك تمكين وضع الإطارات الرأسية أدناه ولكن استخدم هذا الوضع بحذر . كما يمكن / لا يمكن العديد من الأجهزة تسجيل الفيديو / تشغيل الفيديو في وضع الإطارات الرأسية .
+    "</string>
+    <string name="settings_orientation_auto">"تلقائي"</string>
+    <string name="settings_orientation_portrait">"عمودي"</string>
+    <string name="settings_orientation_landscape">"أفقي"</string>
+    <string name="settings_orientation_clockwise">"تدوير في اتجاه عقارب الساعة"</string>
+    <string name="settings_orientation_anticlockwise">"تدوير عكس اتجاه عقارب الساعة"</string>
+
+    <string name="settings_vertical_frames">"الإطارات الرأسية"</string>
+    <string name="settings_vertical_frames_warning">"مشغلات الفيديو على العديد من الأجهزة لا يمكنها تشغيل ملفات الفيديو ذات الإطارات الرأسية . حتى إذا كان هذا الخيار غير محدد تتم إضافت إلى شريط الفيديو حتى يصبح العرض صحيح في مشغل الأندرويد الافتراضي ، ويوتيوب وغيرها ."</string>
+    <string name="settings_vertical_frames_ok">"موافق"</string>
+    <string name="settings_vertical_frames_cancel">"إلغاء"</string>
+
+    <string name="settings_audio_category">"تسجيل الصوت"</string>
+    <string name="settings_audio_source">"تسجيل الصوت"</string>
+    <string name="settings_audio_mic">"بمكبر الصوت"</string>
+    <string name="settings_audio_mute">"كتم الصوت"</string>
+    <string name="settings_audio_internal">"داخلي"</string>
+    <string name="settings_audio_internal_experimental">"الداخلية ( تجريبية )"</string>
+    <string name="settings_audio_mic_summary">"مكبر الصوت . يمكن لتطبيق واحد فقط استخدام مكبر الصوت في وقت واحد !"</string>
+    <string name="settings_audio_mute_summary">"كتم الصوت . لا يوجد مسار نزول افتراضي للصوت"</string>
+    <string name="settings_audio_internal_summary">"إخراج الصوت . اشترك مع مجموعة \"SCR Alpha testing\" في مجتمع +Google لاختبار تسجيل الصوت الداخلي"</string>
+    <string name="settings_audio">"تسجيل الصوت"</string>
+    <string name="settings_sampling_rate">"معدل أخذ العينات"</string>
+
+    <string name="settings_audio_driver_not_installed">"برنامج تشغيل الصوت لـSCR غير مثبت . اضغط فوق \" تثبيت \" لتثبيت البرنامج ."</string>
+    <string name="settings_audio_driver_installing">"جار تثبيت برنامج تشغيل الصوت لـSCR ..."</string>
+    <string name="settings_audio_driver_installed">"برنامج تشغيل الصوت لـSCR تم تثبيته . اضغط فوق \" إلغاء التثبيت \" لإلغاء تثبيت برنامج تشغيل الصوت ."</string>
+    <string name="settings_audio_driver_uninstalling">"جار إلغاء تثبيت برنامج تشغيل الصوت لـSCR ..."</string>
+    <string name="settings_audio_driver_installation_failure">"فشل تثبيت برنامج تشغيل الصوت لـSCR . اضغط لإعادة المحاولة ."</string>
+    <string name="settings_audio_driver_outdated">"الإصدار القديم من برنامج تشغيل الصوت لـSCR مثبت . اضغط لتحديثه ."</string>
+
+    <string name="internal_audio_dialog_title">"تثبيت برنامج تشغيل الصوت"</string>
+    <string name="internal_audio_dialog_message">"
+        تسجيل الصوت الداخلي هو ميزة جديدة تجريبية ، ويتطلب تثبيت برنامج تشغيل الصوت المخصص له . فمن المستحسن إلغاء تثبيت برنامج تشغيل الصوت هذا بعد الانتهاء من تجربته والتسجيل به . وسوف تكون قادراً على إلغاء تثبيت برنامج تشغيل الصوت لـSCR بسهولة من إعدادات SCR . وإذا تعطل المثبت قد تحتاج لاستخدام وحدة التحكم ADB أو إعادة تركيب النظام لاستعادة برنامج تشغيل الصوت الأصلي . ومن المستحسن أخذ نسخة احتياطية للنظام الخاص بك . وكل ذلك سيكون \" على مسؤوليتك الخاصة \" ."</string>
+    <string name="internal_audio_dialog_install">"تثبيت"</string>
+    <string name="internal_audio_dialog_cancel">"إلغاء"</string>
+
+    <string name="settings_other_category">"أخرى"</string>
     <string name="settings_hide_icon">"إخفاء رمز الإعلام"</string>
     <string name="settings_show_touches">"عرض اللمسات"</string>
+    <string name="settings_show_touches_summary">"هذه الخاصية تُظهر ردود الفعل البصري للمسات . يمكنك أيضاً عرض اللمسات بشكل دائم من خلال الذهاب إلى الضبط =&gt; خيارات المطور =&gt; عرض اللمسات"</string>
     <string name="settings_output_dir">"مسار حفظ الفيديو"</string>
-    <string name="settings_video_encoder">"ترميز الفيديو"</string>
-    <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 ( غير مستقرة )"</string>
-    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"تلقائي"</string>
+    <string name="settings_stop_when_screen_off">"إيقاف التسجيل عند إغلاق الشاشة"</string>
+    <string name="settings_stop_when_screen_off_summary">"إنهاء التسجيل بعد أن يتم إيقاف تشغيل الشاشة"</string>
+    <string name="settings_color_fix">"إصلاح اللون الباهت"</string>
+    <string name="settings_color_fix_summary">"قم باختيار هذه الخاصية إذا تم عكس ألوان الشاشة إلى زرقاء وحمراء"</string>
 
     <string name="directory_chooser_select">"حدد \"%1$s\""</string>
     <string name="directory_chooser_refresh">"تحديث"</string>
@@ -98,19 +178,13 @@
     <string name="error_report_chooser">"إرسال تقرير عن الخطأ بواسطة البريد الإلكتروني"</string>
 
     <string name="rating_rate_title">"معدل %1$s"</string>
-    <string name="rating_rate_message">"إذا كنت تتمتع باستخدام %1$s ، يرجى أن تتوقف للحظة لتقييم التطبيق . شكرا لدعمك !"</string>
+    <string name="rating_rate_message">"إذا كنت تتمتع باستخدام %1$s ، يرجى أن تتوقف للحظة لتقييم التطبيق . شكراً لدعمك !"</string>
     <string name="rating_rate_now">"تقييم التطبيق الآن !"</string>
     <string name="rating_remind">"ذكرني لاحقاً"</string>
     <string name="rating_no_thanks">"لا ، شكراً"</string>
-    <string name="rating_play_error">"لا يمكن فتح سوق Google Play ."</string>
+    <string name="rating_play_error">"لا يمكن فتح سوق Google Play "</string>
 
     <string name="help_stop_message">"لإيقاف التسجيل قم بقفل الشاشة وانتظر ثانيتين . بدلاً من ذلك يمكنك ببساطة إعادة فتح تطبيق %1$s ."</string>
-    <string name="menu_send_bug_report">"إرسال تقرير عن خطأ"</string>
-    <string name="settings_stop_when_screen_off">"إغلاق التسجيل عند توقف الشاشة"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"خاصية MPEG-4 ( بطيئة )"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
-    <string name="settings_vertical_frames">"الإطارات الرأسية"</string>
-    <string name="settings_vertical_frames_warning">"مشغلات الفيديو على العديد من الأجهزة لا يمكنها تشغيل ملفات الفيديو ذات الإطارات الرأسية . حتى إذا كان هذا الخيار غير محدد تتم إضافته إلى شريط الفيديو حتى يصبح العرض صحيح في مشغل الأندرويد الافتراضي ، ويوتيوب وغيرها ."</string>
-    <string name="settings_vertical_frames_ok">"موافق"</string>
-    <string name="settings_vertical_frames_cancel">"إلغاء"</string>
+    <string name="menu_send_bug_report">"إرسال تقرير عن خطأ ما"</string>
+
 </resources>

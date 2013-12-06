@@ -12,6 +12,8 @@
 
     <string name="su_required_title">"Wymagane uprawnienie Root"</string>
     <string name="su_required_message">"Wszystkie programy nagrywające zawartość ekranu telefonu lub tabletu wymagają uprawnień root. Instrukcję jak \"zrootować\" twoje urządzenie można znaleźć w Internecie."</string>
+    <string name="su_required_help">"Co to jest \"Root\"?"</string>
+    <string name="su_required_help_link">"http://galaktyczny.pl/2013/06/10/galaktyczny-poradnik-co-to-jest-root-tajniki-rootowania/"</string>
 
     <string name="error_dialog_title">"Wystąpił błąd :-("</string>
     <string name="startup_error_message">"Anonimowa informacja o błędzie została automatycznie wysłana do autora programu. Jeżeli problem będzie się powtarzał prosimy o kontakt mailowy i podanie numeru błędu S%1$d."</string>
@@ -22,6 +24,22 @@
 
     <string name="output_file_error_title">"Nie można utworzyć plik wideo"</string>
     <string name="output_file_error_message">"SCR nie może utworzyć plik %1$s . Upewnij się, że wybrany katalog docelowy jest nie jest w trybie tylko do odczytu i że karta SD nie jest zablokowana przez połączenie USB."</string>
+
+    <string name="microphone_busy_error_title">"Mikrofon zajęty"</string>
+    <string name="microphone_busy_error_message">"
+        Tylko jedna aplikacja może korzystać z mikrofonu w tym samym czasie. Jest to ograniczenie systemu Android. Zamknij aplikację używającą mikrofonu (np. Google, teraz lub Skype) lub kontynuować nagrywanie bez dźwięku.
+    "</string>
+    <string name="microphone_busy_error_continue_mute">"Kontynuuj"</string>
+
+    <string name="screen_protected_error_title">"Ekran chroniony"</string>
+    <string name="screen_protected_error_message">"Ekran nie może być nagrany ponieważ jakaś aplikacja blokuje zawartość ekranu w celu ochrony praw autorskich lub prywatności."</string>
+
+    <string name="opengl_error_title">"Niekompatybilna karta graficzna"</string>
+    <string name="opengl_error_message">"Twoja karta graficzna nie jest jeszcze obsługiwana. Przełącznik ustawienia przetwarzania obrazu na CPU lub użyj kodeka Software MPEG4.
+    "</string>
+
+    <string name="android_version_error_title">"Nie obsługiwana wersja Androida"</string>
+    <string name="android_version_error_message">"Twoja wersja Androida nie jest jeszcze obsługiwana."</string>
 
     <string name="help_stop_title">"Jak zakończyć nagrywanie"</string>
     <string name="help_stop_ok">"OK"</string>
@@ -41,9 +59,20 @@
     <string name="settings_ok">"OK"</string>
     <string name="settings_reset">"Przywróć domyślne"</string>
     <string name="settings_cancel">"Anuluj"</string>
-    <string name="settings_audio">"Audio "</string>
-    <string name="settings_audio_mic">"Mikrofon"</string>
-    <string name="settings_audio_mute">"Brak"</string>
+
+    <string name="settings_video_category">"Wideo"</string>
+
+    <string name="settings_video_encoder">"Kodek"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 (niestabilny)"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"Auto"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 (wolny)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"Wbudowany kodek %1$s systemowy"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"Programowy kodek MPEG4 korzystający z FFmpeg"</string>
+
     <string name="settings_resolution">"Rozdzielczość"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
     <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
@@ -52,27 +81,77 @@
     <string name="settings_resolution_max">"%1$dx%2$d - Max"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - Połowa"</string>
     <string name="settings_resolution_unstable">"(niestabilne)"</string>
+
+    <string name="settings_transformation">"Przetwarzanie obrazu"</string>
+    <string name="settings_transformation_cpu">"CPU"</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"GPU+"</string>
+    <string name="settings_transformation_cpu_summary">"Na głównym procesorze (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Na karcie graficznej (%1$s)"</string>
+    <string name="settings_transformation_sw_summary">"Nie dotyczy kodeka programowego"</string>
+
+    <string name="settings_video_bitrate">"Bitrate"</string>
+    <string name="settings_video_bitrate_summary">"około %1$s zależnie od kodeka"</string>
+    <string name="settings_video_bitrate_default">"Domyślny"</string>
+
+
     <string name="settings_frame_rate">"Częstotliwość klatek"</string>
     <string name="settings_frame_rate_max">"Maksymalna"</string>
     <string name="settings_frame_rate_max_short">"Max"</string>
     <string name="settings_frame_rate_up_to">"do #0 fps"</string>
     <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
-    <string name="settings_transformation">"Przetwarzanie obrazu"</string>
-    <string name="settings_transformation_cpu">"CPU"</string>
-    <string name="settings_transformation_gpu">"GPU"</string>
-    <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_video_bitrate">"Bitrate wideo"</string>
-    <string name="settings_sampling_rate">"Próbkowanie dźwięku"</string>
-    <string name="settings_color_fix">"Odwróć kolory"</string>
+    <string name="settings_frame_rate_summary">"Do %1$d fps, ograniczona przez możliwości sprzętowe"</string>
+    <string name="settings_frame_rate_max_summary">"Maksymalna dopuszczalna przez sprzęt"</string>
+
+    <string name="settings_orientation">"Orientacja"</string>
+    <string name="settings_orientation_description">"
+        Domyślnie klatki wideo są zawsze nagrywane w poziomie, a do pionowych nagrań dodawane są metadane o obrocie. YouTube i domyślny odtwarzacz wideo Android odtwarza takie filmy poprawnie, ale niektórzy odtwarzacze PC (np. VLC) ignorują metadane rotacji i odtwarzają je w poziomie. Pionowe ramki można włączyć poniżej. Nie wszystkie urządzenia są w stanie nagrywać i odtwarzać wideo z pionowymi ramkami.
+    "</string>
+    <string name="settings_orientation_auto">"Auto"</string>
+    <string name="settings_orientation_portrait">"Portret"</string>
+    <string name="settings_orientation_landscape">"Krajobraz"</string>
+    <string name="settings_orientation_clockwise">"obrócić w prawo"</string>
+    <string name="settings_orientation_anticlockwise">"obracać w lewo"</string>
+
+    <string name="settings_vertical_frames">"Pionowe ramki"</string>
+    <string name="settings_vertical_frames_warning">"Odtwarzacze wideo na wielu urządzeniach nie obsługują odtwarzania filmów z pionowymi ramkami. Nawet jeśli ta opcja nie jest zaznaczona do pliku wideo są dodawane informacje o orientacji obrazu co pozwala na poprawne wyświetlanie pionowych filmów w domyślnym odtwarzaczu wideo na Androidzie, YouTube, itp."</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
+    <string name="settings_vertical_frames_cancel">"Anuluj"</string>
+
+    <string name="settings_audio_category">"Audio "</string>
+    <string name="settings_audio_source">"Źródło"</string>
+    <string name="settings_audio_mic">"Mikrofon"</string>
+    <string name="settings_audio_mute">"Brak"</string>
+    <string name="settings_audio_internal">"Wyjście audio"</string>
+    <string name="settings_audio_internal_experimental">"Wyjście audio (eksperymentalne)"</string>
+    <string name="settings_audio_mic_summary">"Mikrofon. Tylko jedna aplikacja może używać mikrofonu w tym samym czasie!"</string>
+    <string name="settings_audio_mute_summary">"Wyciszone. Brak ścieżki audio"</string>
+    <string name="settings_audio_internal_summary">"Wyjście audio. Dołącz do społeczności Google+ \"SCR Alpha testing\" aby przetestiwać na nagrywanie wyjścia audio."</string>
+    <string name="settings_audio">"Audio "</string>
+    <string name="settings_sampling_rate">"Próbkowanie"</string>
+
+    <string name="settings_audio_driver_not_installed">"Sterownik audio SCR nie jest zainstalowany. Dotknij, aby zainstalować."</string>
+    <string name="settings_audio_driver_installing">"Instalacja sterownika SCR..."</string>
+    <string name="settings_audio_driver_installed">"Sterownik audio SCR zainstalowany. Dotknij, aby odinstalować."</string>
+    <string name="settings_audio_driver_uninstalling">"Odinstalowywanie sterownika SCR..."</string>
+    <string name="settings_audio_driver_installation_failure">"Instalacja sterownika SCR nie powiodło się. Dotknij, aby ponowić próbę."</string>
+    <string name="settings_audio_driver_outdated">"Stara wersja sterownik SCR. Dotknij, aby zaktualizować."</string>
+
+    <string name="internal_audio_dialog_title">"Instalacja sterownika audio"</string>
+    <string name="internal_audio_dialog_message">"
+        Wewnętrzne nagrywanie dźwięku jest funkcja eksperymentalna i wymaga instalacji niestandardowego sterownika audio. Zaleca się, aby odinstalować sterownik, po zakończeniu z nagraniem. Sterownika SCR będzie można łatwo odinstalować z Ustawień SCR. W razie awarii instalatora może zaistnieć konieczność użycia konsoli ADB lub flashowania partycji system w celu przywrócenia oryginalnego sterownika. Zalecane jest, aby wykonanie kopii zapasowej systemu. Instalujesz testowy sterownik NA WŁASNE RYZYKO."</string>
+    <string name="internal_audio_dialog_install">"Zainstaluj"</string>
+    <string name="internal_audio_dialog_cancel">"Anuluj"</string>
+
+    <string name="settings_other_category">"Pozostałe"</string>
     <string name="settings_hide_icon">"Ukryj ikonę"</string>
-    <string name="settings_show_touches">"Pokaż wskaźnik dotknięć"</string>
+    <string name="settings_show_touches">"Pokaż dotknięcia"</string>
+    <string name="settings_show_touches_summary">"Wyświetlanie punktów w miejscu dotknięć. Możesz też włączyć na stałe poprzez Ustawienia =&gt; Opcje programistyczne =&gt; Pokaż dotknięcia"</string>
     <string name="settings_output_dir">"Katalog docelowy"</string>
-    <string name="settings_video_encoder">"Kodek wideo"</string>
-    <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (niestabilny)"</string>
-    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"Auto"</string>
+    <string name="settings_stop_when_screen_off">"Zatrzymaj po wyłączeniu ekranu"</string>
+    <string name="settings_stop_when_screen_off_summary">"Zakończ nagrywanie po wyłączeniu ekranu"</string>
+    <string name="settings_color_fix">"Odwróć kolory"</string>
+    <string name="settings_color_fix_summary">"Zmień tę opcję, jeśli niebieski i czerwony kolor są odwrócone"</string>
 
     <string name="directory_chooser_select">"Wybierz \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Odśwież"</string>
@@ -95,7 +174,6 @@ internetowe oraz, że jesteś zalogowany do Google Play.
 
     <string name="error_report_report">"Zgłoś"</string>
     <string name="error_report_close">"Zamknij"</string>
-    <string name="error_report_subject">"[error]"</string>
     <string name="error_report_text">"W załączniku znajduje się dziennik systemu zawierający dokładne informacje na temat błędu. Jeżeli chcesz wysłać dodatkowe informacje o błędzie zapisz je poniżej."</string>
     <string name="error_report_chooser">"Wyślij email z błędem"</string>
 
@@ -108,11 +186,5 @@ internetowe oraz, że jesteś zalogowany do Google Play.
 
     <string name="help_stop_message">"Aby zakończyć nagrywanie zablokuj ekran i poczekaj 2 sekundy. Ponowne otwarcie %1$s również zakończy nagrywanie."</string>
     <string name="menu_send_bug_report">"Zgłoś problem"</string>
-    <string name="settings_stop_when_screen_off">"Zatrzymaj po wyłączeniu ekranu"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 (wolny)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
-    <string name="settings_vertical_frames">"Pionowe ramki"</string>
-    <string name="settings_vertical_frames_warning">"Odtwarzacze wideo na wielu urządzeniach nie obsługują odtwarzania filmów z pionowymi ramkami. Nawet jeśli ta opcja nie jest zaznaczona do pliku wideo są dodawane informacje o orientacji obrazu co pozwala na poprawne wyświetlanie pionowych filmów w domyślnym odtwarzaczu wideo na Androidzie, YouTube, itp."</string>
-    <string name="settings_vertical_frames_ok">"OK"</string>
-    <string name="settings_vertical_frames_cancel">"Anuluj"</string>
+
 </resources>

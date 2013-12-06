@@ -12,6 +12,8 @@
 
     <string name="su_required_title">"Требуется доступ с правами root"</string>
     <string name="su_required_message">"Для запуска любого подобного приложения, ваш телефон/планшет должен иметь root. В интернете есть много учебников где описывается как рутировать различные устройства. Вернитесь снова, когда все будет готово!"</string>
+    <string name="su_required_help">"Что такое \"rooting\"?"</string>
+    <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
 
     <string name="error_dialog_title">"Что-то пошло не так :-("</string>
     <string name="startup_error_message">"Чтобы помочь нам решить проблему, будет отправлено анонимное сообщение об ошибке. Не стесняйтесь связаться через поддержку по электронной почте с указанием ошибки S%1$d."</string>
@@ -22,6 +24,24 @@
 
     <string name="output_file_error_title">"Не удается создать видеофайл"</string>
     <string name="output_file_error_message">"SCR не удалось создать видеофайл %1$s. Убедитесь, что выбран выходной каталог для записи и SD-карта не заблокирована подключением через USB."</string>
+
+    <string name="microphone_busy_error_title">"Микрофон используется"</string>
+    <string name="microphone_busy_error_message">"
+        Только одно приложение одновременно может использовать микрофон. Это ограничение системы Android.
+        Закройте другие приложения использующие микрофон (например Google Now или Skype) или продолжайте запись в тихом режиме.
+    "</string>
+    <string name="microphone_busy_error_continue_mute">"Продолжить без звука"</string>
+
+    <string name="screen_protected_error_title">"Экран защищен"</string>
+    <string name="screen_protected_error_message">"Экран не может быть захвачен так как содержимое некоторых приложений отмечены как защищенные."</string>
+
+    <string name="opengl_error_title">"GPU не поддерживается"</string>
+    <string name="opengl_error_message">"Ваша GPU пока не поддерживается.
+        Переключите обработку изображения на CPU или используйте программный видеокодер.
+    "</string>
+
+    <string name="android_version_error_title">"Версия Android не поддерживается"</string>
+    <string name="android_version_error_message">"Ваша версия Android пока не поддерживается."</string>
 
     <string name="help_stop_title">"Как остановить"</string>
     <string name="help_stop_ok">"Понятно!"</string>
@@ -41,9 +61,20 @@
     <string name="settings_ok">"OK"</string>
     <string name="settings_reset">"Сброс"</string>
     <string name="settings_cancel">"Отмена"</string>
-    <string name="settings_audio">"Аудио"</string>
-    <string name="settings_audio_mic">"Микр"</string>
-    <string name="settings_audio_mute">"Тихо"</string>
+
+    <string name="settings_video_category">"Видео"</string>
+
+    <string name="settings_video_encoder">"Кодер"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 (нестабильно)"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"Авто"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Программный MPEG-4 (медленно)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"Встроенный кодер Android %1$s"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg программный кодер MPEG4"</string>
+
     <string name="settings_resolution">"Разрешение"</string>
     <string name="settings_resolution_short">"%1$dх%2$d"</string>
     <string name="settings_resolution_p">"%1$dх%2$d - %2$dp"</string>
@@ -52,27 +83,83 @@
     <string name="settings_resolution_max">"%1$dх%2$d - максимум"</string>
     <string name="settings_resolution_half">"%1$dх%2$d - половина"</string>
     <string name="settings_resolution_unstable">"(нестабильно)"</string>
+
+    <string name="settings_transformation">"Обработка изображения"</string>
+    <string name="settings_transformation_cpu">"CPU"</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"GPU+"</string>
+    <string name="settings_transformation_cpu_summary">"Способ обработки изображения процессором (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Способ обработки изображения графической картой (%1$s)"</string>
+    <string name="settings_transformation_sw_summary">"Недоступно в программном кодере"</string>
+
+    <string name="settings_video_bitrate">"Битрейт"</string>
+    <string name="settings_video_bitrate_summary">"около %1$s в зависимости от кодера"</string>
+    <string name="settings_video_bitrate_default">"Умолчание"</string>
+
+
     <string name="settings_frame_rate">"Частота кадров"</string>
     <string name="settings_frame_rate_max">"Максимум"</string>
     <string name="settings_frame_rate_max_short">"Макс"</string>
     <string name="settings_frame_rate_up_to">"До #0 fps"</string>
     <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
-    <string name="settings_transformation">"Обработка изображения"</string>
-    <string name="settings_transformation_cpu">"CPU"</string>
-    <string name="settings_transformation_gpu">"GPU"</string>
-    <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_video_bitrate">"Битрейт видео"</string>
+    <string name="settings_frame_rate_summary">"До %1$dfps, ограничивается аппаратными возможностями"</string>
+    <string name="settings_frame_rate_max_summary">"Максимально допустимое оборудованием"</string>
+
+    <string name="settings_orientation">"Ориентация"</string>
+    <string name="settings_orientation_description">"
+        По умолчанию видео кадры всегда горизонтальные и метаданные вращения добавляются к портретной записи.
+        YouTube и видео-плеер Android воспроизводят такое видео правильно, однако некоторые PC-плееры (например VLC) игнорируют метаданные вращения и отображают его в альбомной ориентации.
+        Вы можете включить вертикальные кадры ниже, но используйте этот параметр с осторожностью, так как многие устройства не записывают/воспроизводят видео с такими кадрами.
+    "</string>
+    <string name="settings_orientation_auto">"Авто"</string>
+    <string name="settings_orientation_portrait">"Портретная"</string>
+    <string name="settings_orientation_landscape">"Альбомная"</string>
+    <string name="settings_orientation_clockwise">"повернуть по часовой"</string>
+    <string name="settings_orientation_anticlockwise">"повернуть против часовой"</string>
+
+    <string name="settings_vertical_frames">"Вертикальный кадр"</string>
+    <string name="settings_vertical_frames_warning">"Видео-плееры многих устройств не могут проигрывать вертикальные кадры.
+        Даже если этот параметр отключен, метаданные ориентации добавляются к видео, поэтому отображение будет всегда правильным в стандартном плеере, YouTube и т.д."</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
+    <string name="settings_vertical_frames_cancel">"Отмена"</string>
+
+    <string name="settings_audio_category">"Аудио"</string>
+    <string name="settings_audio_source">"Аудио"</string>
+    <string name="settings_audio_mic">"Микрофон"</string>
+    <string name="settings_audio_mute">"Тихо"</string>
+    <string name="settings_audio_internal">"Внутренний"</string>
+    <string name="settings_audio_internal_experimental">"Внутренний (эксперимент)"</string>
+    <string name="settings_audio_mic_summary">"Микрофон. Только одно приложение одновременно может использовать микрофон!"</string>
+    <string name="settings_audio_mute_summary">"Тихо (без звуковой дорожки)"</string>
+    <string name="settings_audio_internal_summary">"Аудио выход. Сообщество \"Альфа-тестирование SCR\" Google+ для проверки внутренней аудиозаписи"</string>
+    <string name="settings_audio">"Аудио"</string>
     <string name="settings_sampling_rate">"Качество звука"</string>
-    <string name="settings_color_fix">"Фикс инверсии цвета"</string>
+
+    <string name="settings_audio_driver_not_installed">"Аудио драйвер SCR не установлен. Нажмите чтобы установить."</string>
+    <string name="settings_audio_driver_installing">"Установка аудио драйвера..."</string>
+    <string name="settings_audio_driver_installed">"Аудио драйвер SCR установлен. Нажмите чтобы удалить."</string>
+    <string name="settings_audio_driver_uninstalling">"Удаление аудио драйвера..."</string>
+    <string name="settings_audio_driver_installation_failure">"Ошибка установки аудио драйвера. Нажмите чтобы повторить."</string>
+    <string name="settings_audio_driver_outdated">"Установлена старая версия аудио драйвера. Нажмите чтобы обновить."</string>
+
+    <string name="internal_audio_dialog_title">"Установка аудио драйвера"</string>
+    <string name="internal_audio_dialog_message">"
+        Внутренняя аудиозапись - экспериментальная функция требующая установки пользовательского аудио драйвера.
+        Рекомендуется удалить этот драйвер после выполнения записи (это делается в меню настроек SCR).
+        При возникновении сбоя программы установки может потребоваться использование ADB консоли или повторная прошивка системного раздела для восстановления оригинального аудио драйвера.
+        Рекомендуется сделать резервную копию вашей системы. Все делается НА СВОЙ СТРАХ И РИСК!"</string>
+    <string name="internal_audio_dialog_install">"Установить"</string>
+    <string name="internal_audio_dialog_cancel">"Отмена"</string>
+
+    <string name="settings_other_category">"Прочее"</string>
     <string name="settings_hide_icon">"Скрыть значок"</string>
-    <string name="settings_show_touches">"Показать касания"</string>
+    <string name="settings_show_touches">"Показать нажатия"</string>
+    <string name="settings_show_touches_summary">"Отображать точки в местах нажатия на экран. Также это можно сделать постоянным через Настройки Android =&gt; Для разработчиков =&gt; Показывать нажатия"</string>
     <string name="settings_output_dir">"Выходной каталог"</string>
-    <string name="settings_video_encoder">"Видеокодер"</string>
-    <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (нестабильно)"</string>
-    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"Авто"</string>
+    <string name="settings_stop_when_screen_off">"Закончить при выкл экрана"</string>
+    <string name="settings_stop_when_screen_off_summary">"Останавливать запись после отключения экрана"</string>
+    <string name="settings_color_fix">"Фикс инверсии цвета"</string>
+    <string name="settings_color_fix_summary">"Включите этот параметр если синий и красный цвета инвертированы"</string>
 
     <string name="directory_chooser_select">"Выбрать \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Обновить"</string>
@@ -94,7 +181,6 @@
 
     <string name="error_report_report">"Отчет"</string>
     <string name="error_report_close">"Закрыть"</string>
-    <string name="error_report_subject">"[error]"</string>
     <string name="error_report_text">"Вложение содержит подробный системный журнал, включая информацию об ошибке. Не стесняйтесь добавлять здесь любые комментарии."</string>
     <string name="error_report_chooser">"Сообщить об ошибке по почте"</string>
 
@@ -107,12 +193,5 @@
 
     <string name="help_stop_message">"Для остановки записи заблокируйте экран и подождите 2 секунды. В качестве альтернативы можно просто открыть приложение %1$s."</string>
     <string name="menu_send_bug_report">"Сообщить об ошибке"</string>
-    <string name="settings_stop_when_screen_off">"Остановить при\nотключении экрана"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Программный MPEG-4 (медленно)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
-    <string name="settings_vertical_frames">"Вертикальный кадр"</string>
-    <string name="settings_vertical_frames_warning">"Видео-плееры многих устройств не могут проигрывать вертикальные кадры.
-        Даже если этот параметр отключен, метаданные ориентации добавляются к видео, поэтому отображение будет всегда правильным в стандартном плеере, YouTube и т.д."</string>
-    <string name="settings_vertical_frames_ok">"OK"</string>
-    <string name="settings_vertical_frames_cancel">"Отмена"</string>
+
 </resources>

@@ -12,16 +12,34 @@
 
     <string name="su_required_title">"Root prístup je vyžadovaný prístup"</string>
     <string name="su_required_message">"Ak chcete spustiť ľubovoľný nahrávač obrazovky, zariadenie musí byť rootnuté. Na Internete sa nachádza veľa návodov, ktoré vysvetľujú, ako rootnúť rôzne zariadenia."</string>
+    <string name="su_required_help">"Čo je \"rootovanie\"?"</string>
+    <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
 
     <string name="error_dialog_title">"Niečo sa pokazilo :-("</string>
     <string name="startup_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu S%1$d."</string>
     <string name="recording_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d."</string>
 
     <string name="media_recorder_error_title">"Chyba nahrávača"</string>
-    <string name="media_recorder_error_message">"Skúste zmeniť rozlíšenie alebo prepnite transformáciu obrazu medzi GPU/CPU. Prosím odinštalujte iné screencast aplikácie, ak máte nejaké. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d ."</string>
+    <string name="media_recorder_error_message">"Skúste zmeniť rozlíšenie alebo prepnite transformáciu obrazu medzi GPU/CPU. Prosím, odinštalujte iné screencast aplikácie, ak máte nejaké. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d ."</string>
 
-    <string name="output_file_error_title">"Nemožno vytvoriť video súbor"</string>
-    <string name="output_file_error_message">"SCR nemohol vytvoriť video súbor %1$s. Uistite sa, že do vybraného výstupného priečinka je možné zapisovať a že SD karta nie je uzamknutá pripojením USB."</string>
+    <string name="output_file_error_title">"Nemožno vytvoriť súbor videa"</string>
+    <string name="output_file_error_message">"SCR nemohol vytvoriť súbor videa %1$s. Uistite sa, že do vybraného výstupného priečinka je možné zapisovať a že karta SD nie je uzamknutá pripojením pomocou USB."</string>
+
+    <string name="microphone_busy_error_title">"Mikrofón je zaneprázdnený"</string>
+    <string name="microphone_busy_error_message">"
+        Len jedna aplikácia môže používať mikrofón naraz. Toto je obmedzenie systému Android. Zatvorte ostatné aplikácie používajúce mikrofón (napr. Google Now alebo Skype) alebo pokračujte v nahrávaní bez zvuku.
+    "</string>
+    <string name="microphone_busy_error_continue_mute">"Pokračovať a stlmiť"</string>
+
+    <string name="screen_protected_error_title">"Chránená obrazovka"</string>
+    <string name="screen_protected_error_message">"Obrazovka nemôže byť nahratá, pretože nejaká aplikácia označila obsah obrazovky za chránený."</string>
+
+    <string name="opengl_error_title">"Nepodporované GPU"</string>
+    <string name="opengl_error_message">"Vaša grafická karta nie je ešte podporovaná. Prepnite nastavenie transformácie obrazu na CPU alebo použite softvérový video dekóder.
+    "</string>
+
+    <string name="android_version_error_title">"Nepodporovaná verzia Androida"</string>
+    <string name="android_version_error_message">"Vaša verzia Androida ešte nie je podporovaná."</string>
 
     <string name="help_stop_title">"Ako zastaviť nahrávanie"</string>
     <string name="help_stop_ok">"OK"</string>
@@ -30,20 +48,31 @@
     <string name="free_timeout_message">"Zakúpte si SCR Screen Recorder Pro pre získanie neobmedzeného času na nahrávanie a odstránenie vodoznaku na videu."</string>
     <string name="free_timeout_buy">"Kúpiť teraz"</string>
     <string name="free_timeout_no_thanks">"Nie, vďaka"</string>
-    <string name="hide_icon_title">"Pre funkcia"</string>
+    <string name="hide_icon_title">"Pro funkcia"</string>
     <string name="hide_icon_message">"Zakúpte si SCR Screen Recorder Pro pre skrytie vodoznaku a notifikačnej ikony. Taktiež získate neobmedzený čas na nahrávanie!"</string>
 
     <string name="buy_error_title">"Chyba Obchodu Play"</string>
-    <string name="buy_error_message">"Prosím vyhľadajte SCR Screen Recorder Pro V Obchode Play"</string>
+    <string name="buy_error_message">"Prosím, vyhľadajte SCR Screen Recorder Pro V Obchode Play"</string>
 
     <string name="settings_activity_label">"Nastavenia SCR"</string>
     <string name="settings_title">"Nastavenia"</string>
     <string name="settings_ok">"OK"</string>
     <string name="settings_reset">"Obnoviť predvolené"</string>
     <string name="settings_cancel">"Zrušiť"</string>
-    <string name="settings_audio">"Zvuk"</string>
-    <string name="settings_audio_mic">"Mikrofón"</string>
-    <string name="settings_audio_mute">"Bez zvuku"</string>
+
+    <string name="settings_video_category">"Video"</string>
+
+    <string name="settings_video_encoder">"Dekóder"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 (nestabilné)"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"Automatický"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Softvér MPEG-4 (pomalé)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"Vstavaný Android %1$s dekóder"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg softvérový MPEG4 dekóder"</string>
+
     <string name="settings_resolution">"Rozlíšenie"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
     <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
@@ -52,27 +81,77 @@
     <string name="settings_resolution_max">"%1$dx%2$d - maximálne"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - polovičné"</string>
     <string name="settings_resolution_unstable">"(nestabilné)"</string>
-    <string name="settings_frame_rate">"Počet snímok za sekundu"</string>
-    <string name="settings_frame_rate_max">"Maximálny"</string>
-    <string name="settings_frame_rate_max_short">"Max"</string>
-    <string name="settings_frame_rate_up_to">"Až do #0 fps"</string>
-    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+
     <string name="settings_transformation">"Transformácia obrazu"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU "</string>
     <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_video_bitrate">"Prenosová rýchlosť videa"</string>
-    <string name="settings_sampling_rate">"Vzorkovacia frekvencia zvuku"</string>
-    <string name="settings_color_fix">"Opraviť invertované farby"</string>
+    <string name="settings_transformation_cpu_summary">"Spracovať snímku obrazovky na procesore (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Spracovať snímku obrazovky na grafickej karte (%1$s)"</string>
+    <string name="settings_transformation_sw_summary">"Nedostupné v softvérovom dekóderi"</string>
+
+    <string name="settings_video_bitrate">"Dátový tok"</string>
+    <string name="settings_video_bitrate_summary">"okolo %1$s v závislosti na dekóderi"</string>
+    <string name="settings_video_bitrate_default">"Štandardný"</string>
+
+
+    <string name="settings_frame_rate">"Vzorkovacia frekvencia"</string>
+    <string name="settings_frame_rate_max">"Maximálna"</string>
+    <string name="settings_frame_rate_max_short">"Max"</string>
+    <string name="settings_frame_rate_up_to">"Až do #0 fps"</string>
+    <string name="settings_frame_rate_up_to_short">"#0 fps"</string>
+    <string name="settings_frame_rate_summary">"Až do %1$d fps, limitované hardvérovými schopnosťami"</string>
+    <string name="settings_frame_rate_max_summary">"Maximum povolené hardvérom"</string>
+
+    <string name="settings_orientation">"Orientácia"</string>
+    <string name="settings_orientation_description">"
+        V predvolenom nastavení sú video snímky vždy vodorovné a metadáta otáčania sú pridávané do nahrávok na výšku. YouTube a predvolený Android video prehrávač prehrá také video správne, ale niektoré PC prehrávače (napr. VLC) ignorujú metadáta otáčania a zobrazia video v režime na šírku. Môžete povoliť zvislé rámy nižšie, ale túto možnosť používajte s opatrnosťou, pretože mnoho zariadení nemôže nahrať/prehrať videá so zvislými rámami.
+    "</string>
+    <string name="settings_orientation_auto">"Automatický"</string>
+    <string name="settings_orientation_portrait">"Na výšku"</string>
+    <string name="settings_orientation_landscape">"Na šírku"</string>
+    <string name="settings_orientation_clockwise">"otáčať v smere hodinových ručičiek "</string>
+    <string name="settings_orientation_anticlockwise">"otáčať proti smeru hodinových ručičiek"</string>
+
+    <string name="settings_vertical_frames">"Zvislé rámy"</string>
+    <string name="settings_vertical_frames_warning">"Video prehrávače na mnohých zariadeniach nevedia prehrávať videá so zvislými rámami. Aj keď nie je povolená táto voľba, orientácia je pridaná do metadát videa, aby bolo správne zobrazené v predvolenom Android prehrávači, na YouTube, atď."</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
+    <string name="settings_vertical_frames_cancel">"Zrušiť"</string>
+
+    <string name="settings_audio_category">"Zvuk"</string>
+    <string name="settings_audio_source">"Zvuk"</string>
+    <string name="settings_audio_mic">"Mikrofón"</string>
+    <string name="settings_audio_mute">"Stlmiť"</string>
+    <string name="settings_audio_internal">"Interný"</string>
+    <string name="settings_audio_internal_experimental">"Interný (experimentálne)"</string>
+    <string name="settings_audio_mic_summary">"Mikrofón. Len jedna aplikácia môže používať mikrofón naraz!"</string>
+    <string name="settings_audio_mute_summary">"Stlmené. Žiadna zvuková stopa"</string>
+    <string name="settings_audio_internal_summary">"Zvukový výstup. Pripojte sa k Google+ komunite \"SCR Alpha testing\" pre otestovanie interného nahrávania zvuku."</string>
+    <string name="settings_audio">"Zvuk"</string>
+    <string name="settings_sampling_rate">"Vzorkovacia frekvencia"</string>
+
+    <string name="settings_audio_driver_not_installed">"Zvukový ovládač SCR nie je nainštalovaný. Kliknite pre inštaláciu."</string>
+    <string name="settings_audio_driver_installing">"Inštalácia zvukového ovládača SCR ..."</string>
+    <string name="settings_audio_driver_installed">"Zvukový ovládač SCR je nainštalovaný. Kliknite pre odinštalovanie."</string>
+    <string name="settings_audio_driver_uninstalling">"Odinštalácia zvukového ovládača SCR ..."</string>
+    <string name="settings_audio_driver_installation_failure">"Inštalácia zvukového ovládača SCR zlyhala. Kliknite pre opakovanie."</string>
+    <string name="settings_audio_driver_outdated">"Je nainštalovaná stará verzia zvukového ovládača SCR. Kliknite pre jeho aktualizáciu."</string>
+
+    <string name="internal_audio_dialog_title">"Inštalácia zvukového ovládača"</string>
+    <string name="internal_audio_dialog_message">"
+        Interný záznam zvuku je experimentálna funkcia a vyžaduje inštaláciu vlastného zvukového ovládača. Odporúča sa odinštalovať tento ovládač po tom, čo ste dokončili nahrávku. Zvukový ovládač SCR je možné jednoducho odinštalovať z Nastavení SCR. Ak sa inštalačný program zrúti, budete musieť použiť ADB konzolu alebo vykonať reflash pre obnovu originálnych zvukových ovládačov. Záloha Vášho systém je odporúčaná. Pokračujete NA VAŠE VLASTNÉ RIZIKO."</string>
+    <string name="internal_audio_dialog_install">"Inštalovať"</string>
+    <string name="internal_audio_dialog_cancel">"Zrušiť"</string>
+
+    <string name="settings_other_category">"Ďalšie"</string>
     <string name="settings_hide_icon">"Skryť ikonu oznámenia"</string>
     <string name="settings_show_touches">"Zobraziť dotyky"</string>
+    <string name="settings_show_touches_summary">"Zobraziť vizuálnu spätnú väzbu pre dotyky. Môžete tiež aktivovať dotykové indikátory trvalo cez Nastavenia systému Android =&gt; Možnosti pre vývojárov =&gt; Zobraziť dotyky"</string>
     <string name="settings_output_dir">"Výstupný priečinok"</string>
-    <string name="settings_video_encoder">"Video enkodér"</string>
-    <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (nestabilné)"</string>
-    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"Automatický"</string>
+    <string name="settings_stop_when_screen_off">"Zastaviť pri vypnutí obrazovky"</string>
+    <string name="settings_stop_when_screen_off_summary">"Dokončiť nahrávanie po vypnutí obrazovky"</string>
+    <string name="settings_color_fix">"Opraviť invertované farby"</string>
+    <string name="settings_color_fix_summary">"Prepnúť túto možnosť, ak sú invertované farby modrá a červená"</string>
 
     <string name="directory_chooser_select">"Vybrať \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Obnoviť"</string>
@@ -94,12 +173,11 @@
 
     <string name="error_report_report">"Ohlásiť"</string>
     <string name="error_report_close">"Zavrieť"</string>
-    <string name="error_report_subject">"[error]"</string>
     <string name="error_report_text">"Príloha obsahuje podrobný systémový protokol, vrátane informácií o chybe. Neváhajte a pridajte akékoľvek pripomienky sem."</string>
     <string name="error_report_chooser">"Odoslať e-mail pomocou"</string>
 
     <string name="rating_rate_title">"Ohodnotiť %1$s"</string>
-    <string name="rating_rate_message">"Ak sa Vám páči %1$s , prosím ohodnoťte túto aplikáciu. Ďakujeme za vašu podporu!"</string>
+    <string name="rating_rate_message">"Ak sa Vám páči %1$s , prosím, ohodnoťte túto aplikáciu. Ďakujeme za vašu podporu!"</string>
     <string name="rating_rate_now">"Ohodnotiť teraz"</string>
     <string name="rating_remind">"Pripomenúť neskôr"</string>
     <string name="rating_no_thanks">"Nie, vďaka"</string>
@@ -107,11 +185,5 @@
 
     <string name="help_stop_message">"Ak chcete zastaviť nahrávanie, zamknite obrazovku a počkajte 2 sekundy. Prípadne môžete jednoducho znovu spustiť aplikáciu %1$s."</string>
     <string name="menu_send_bug_report">"Ohlásiť chybu"</string>
-    <string name="settings_stop_when_screen_off">"Zastaviť pri vypnutí obrazovky"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Softvér MPEG-4 (pomalé)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
-    <string name="settings_vertical_frames">"Zvislé rámy"</string>
-    <string name="settings_vertical_frames_warning">"Video prehrávače na mnohých zariadeniach nevedia prehrávať videá so zvislými rámami. Aj keď nie je povolená táto voľba, orientácia je pridaná do metadát videa, aby bolo správne zobrazené v predvolenom Android prehrávači, na YouTube, atď."</string>
-    <string name="settings_vertical_frames_ok">"OK"</string>
-    <string name="settings_vertical_frames_cancel">"Zrušiť"</string>
+
 </resources>
