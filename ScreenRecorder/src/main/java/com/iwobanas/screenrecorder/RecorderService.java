@@ -118,9 +118,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private void installExecutable() {
         File executable = new File(getFilesDir(), "screenrec");
         try {
-            if (Build.CPU_ABI.contains("arm")) {
+            if (Utils.isArm()) {
                 Utils.extractResource(this, R.raw.screenrec, executable);
-            } else if (Build.CPU_ABI.contains("x86")) {
+            } else if (Utils.isX86()) {
                 Utils.extractResource(this, R.raw.screenrec_x86, executable);
             } else {
                 String message = String.format(getString(R.string.cpu_error_message), Build.CPU_ABI, getString(R.string.app_name));

@@ -1,6 +1,7 @@
 package com.iwobanas.screenrecorder;
 
 import android.content.Context;
+import android.os.Build;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -94,5 +95,13 @@ public class Utils {
         }
         inputStream.close();
         outputStream.close();
+    }
+
+    public static boolean isX86() {
+        return Build.CPU_ABI.contains("x86");
+    }
+
+    public static boolean isArm() {
+        return Build.CPU_ABI.contains("arm");
     }
 }
