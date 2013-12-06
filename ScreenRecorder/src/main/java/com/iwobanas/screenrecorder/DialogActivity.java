@@ -16,6 +16,7 @@ public class DialogActivity extends Activity {
     public static final String TITLE_EXTRA = "TITLE_EXTRA";
     public static final String RESTART_EXTRA = "RESTART_EXTRA";
     public static final String POSITIVE_EXTRA = "POSITIVE_EXTRA";
+    public static final String POSITIVE_INTENT_EXTRA = "POSITIVE_INTENT_EXTRA";
     public static final String NEGATIVE_EXTRA = "NEGATIVE_EXTRA";
     public static final String RESTART_EXTRA_EXTRA = "RESTART_EXTRA_EXTRA";
     public static final String REPORT_BUG_EXTRA = "REPORT_BUG_EXTRA";
@@ -60,10 +61,14 @@ public class DialogActivity extends Activity {
             } else {
                 String positiveLabel = intent.getStringExtra(POSITIVE_EXTRA);
                 if (positiveLabel != null) {
+                    final Intent positiveIntent = intent.getParcelableExtra(POSITIVE_INTENT_EXTRA);
                     builder.setPositiveButton(positiveLabel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             positiveSelected = true;
+                            if (positiveIntent != null) {
+                                startActivity(positiveIntent);
+                            }
                         }
                     });
                 }
