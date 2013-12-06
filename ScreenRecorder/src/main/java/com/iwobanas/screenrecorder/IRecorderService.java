@@ -16,6 +16,7 @@ public interface IRecorderService {
     void microphoneBusyError(int exitValue);
     void openGlError(int exitValue);
     void secureSurfaceError(int exitValue);
+    void audioConfigError(int exitValue);
 
     void showSettings();
     void showTimeoutDialog();

@@ -527,6 +527,18 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     @Override
+    public void audioConfigError(final int exitValue) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                displayErrorMessage(getString(R.string.audio_config_error_message), getString(R.string.audio_config_error_title), true, false, exitValue);
+                logStats(exitValue, 0, 0);
+            }
+        });
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + exitValue, null);
+    }
+
+    @Override
     public void showSettings() {
         mHandler.post(new Runnable() {
             @Override

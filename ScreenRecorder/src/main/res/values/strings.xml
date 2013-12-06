@@ -42,6 +42,9 @@
         Switch Image transformation setting to CPU or use software video encoder.
     </string>
 
+    <string name="audio_config_error_title">Audio error</string>
+    <string name="audio_config_error_message">Unsupported audio configuration. Try changing SCR audio Settings.</string>
+
     <string name="android_version_error_title">Android version not supported</string>
     <string name="android_version_error_message">Your Android version is not supported yet.</string>
 

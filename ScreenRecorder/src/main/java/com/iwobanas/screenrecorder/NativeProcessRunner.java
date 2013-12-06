@@ -126,6 +126,9 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
             case 217:
                 service.secureSurfaceError(exitValue);
                 break;
+            case 250: // audioRecord.initCheck()
+                service.audioConfigError(exitValue);
+                break;
             case 230: // MEDIA_RECORDER_INFO_MAX_DURATION_REACHED
                 // fall through - this should never happen unless user fiddles with Free version limitations
             default:
