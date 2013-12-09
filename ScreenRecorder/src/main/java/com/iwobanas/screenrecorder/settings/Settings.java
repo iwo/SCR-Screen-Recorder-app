@@ -38,6 +38,7 @@ public class Settings {
     private static final String DEFAULT_SAMPLING_RATE = "DEFAULT_SAMPLING_RATE";
     private static final String DEFAULT_VIDO_BITRATE = "DEFAULT_VIDO_BITRATE";
     private static final String DEFAULT_COLOR_FIX = "DEFAULT_COLOR_FIX";
+    private static final String DEFAULT_VIDEO_ENCODER = "DEFAULT_VIDEO_ENCODER";
     private static final String DEFAULTS_UPDATE_TIMESTAMP = "DEFAULTS_UPDATE_TIMESTAMP";
     private static final String APP_VERSION = "APP_VERSION";
     private static Settings instance;
@@ -60,6 +61,7 @@ public class Settings {
     private boolean showTouches = false;
     private boolean stopOnScreenOff = true;
     private int videoEncoder = MediaRecorder.VideoEncoder.H264;
+    private int defaultVideoEncoder = MediaRecorder.VideoEncoder.H264;
     private boolean verticalFrames = false;
     private File outputDir;
     private File defaultOutputDir;
@@ -157,7 +159,8 @@ public class Settings {
         outputDir = new File(outputDirPath);
         outputDirWritable = preferences.getBoolean(OUTPUT_DIR_WRITABLE, false);
 
-        videoEncoder = preferences.getInt(VIDEO_ENCODER, MediaRecorder.VideoEncoder.H264);
+        defaultVideoEncoder = preferences.getInt(DEFAULT_VIDEO_ENCODER, MediaRecorder.VideoEncoder.H264);
+        videoEncoder = preferences.getInt(VIDEO_ENCODER, defaultVideoEncoder);
 
         verticalFrames = preferences.getBoolean(VERTICAL_FRAMES, false);
     }
@@ -211,7 +214,7 @@ public class Settings {
     }
 
     public void updateDefaults(String resolutionWidth, String resolutionHeight, String transformation,
-                               String videoBitrate, String samplingRate, String colorFix) {
+                               String videoBitrate, String samplingRate, String colorFix, String videoEncoder) {
         if (resolutionWidth != null && resolutionWidth.length() > 0 &&
             resolutionHeight != null && resolutionHeight.length() > 0) {
             int w = Integer.parseInt(resolutionWidth);
@@ -242,6 +245,11 @@ public class Settings {
         if (colorFix != null && colorFix.length() > 0) {
             defaultColorFix = Boolean.valueOf(colorFix);
         }
+        if (videoEncoder != null && videoEncoder.length() > 0) {
+            try {
+                defaultVideoEncoder = Integer.parseInt(videoEncoder);
+            } catch (NumberFormatException ignored) {}
+        }
 
         saveDefaults();
         readPreferences(); // refresh preferences to restore update defaults
@@ -265,6 +273,7 @@ public class Settings {
         }
 
         editor.putBoolean(DEFAULT_COLOR_FIX, defaultColorFix);
+        editor.putInt(DEFAULT_VIDEO_ENCODER, defaultVideoEncoder);
 
         editor.commit();
     }
@@ -497,7 +506,7 @@ public class Settings {
         outputDir = defaultOutputDir;
         editor.remove(OUTPUT_DIR);
 
-        videoEncoder = MediaRecorder.VideoEncoder.H264;
+        videoEncoder = defaultVideoEncoder;
         editor.remove(VIDEO_ENCODER);
 
         verticalFrames = false;
