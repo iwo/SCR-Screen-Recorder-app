@@ -118,6 +118,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
                 service.outputFileError(exitValue);
                 break;
             case 237:
+            case 251: // AudioSystem::isSourceActive()
                 service.microphoneBusyError(exitValue);
                 break;
             case 209:

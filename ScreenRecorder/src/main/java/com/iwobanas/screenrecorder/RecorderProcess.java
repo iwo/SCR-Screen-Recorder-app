@@ -160,6 +160,7 @@ class RecorderProcess implements Runnable {
             case 226:
             case 229:
             case 237: // microphone busy
+            case 251: // microphone busy
                 return false;
             default:
                 return true;
