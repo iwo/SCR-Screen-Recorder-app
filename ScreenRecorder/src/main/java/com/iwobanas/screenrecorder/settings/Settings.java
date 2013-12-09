@@ -36,7 +36,7 @@ public class Settings {
     private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
     private static final String DEFAULT_TRANSFORMATION = "DEFAULT_TRANSFORMATION";
     private static final String DEFAULT_SAMPLING_RATE = "DEFAULT_SAMPLING_RATE";
-    private static final String DEFAULT_VIDO_BITRATE = "DEFAULT_VIDO_BITRATE";
+    private static final String DEFAULT_VIDEO_BITRATE = "DEFAULT_VIDEO_BITRATE";
     private static final String DEFAULT_COLOR_FIX = "DEFAULT_COLOR_FIX";
     private static final String DEFAULT_VIDEO_ENCODER = "DEFAULT_VIDEO_ENCODER";
     private static final String DEFAULTS_UPDATE_TIMESTAMP = "DEFAULTS_UPDATE_TIMESTAMP";
@@ -133,10 +133,10 @@ public class Settings {
             this.transformation = this.defaultTransformation;
         }
 
-        String defaultVideoBitrate = preferences.getString(DEFAULT_VIDO_BITRATE, VideoBitrate.BITRATE_10_MBPS.name());
+        String defaultVideoBitrate = preferences.getString(DEFAULT_VIDEO_BITRATE, VideoBitrate.BITRATE_10_MBPS.name());
         this.defaultVideoBitrate = VideoBitrate.valueOf(defaultVideoBitrate);
 
-        String videoBitrate = preferences.getString(DEFAULT_VIDO_BITRATE, defaultVideoBitrate);
+        String videoBitrate = preferences.getString(DEFAULT_VIDEO_BITRATE, defaultVideoBitrate);
         this.videoBitrate = VideoBitrate.valueOf(videoBitrate);
 
 
@@ -272,6 +272,11 @@ public class Settings {
             editor.remove(DEFAULT_TRANSFORMATION);
         }
 
+        if (defaultVideoBitrate != null) {
+            editor.putString(DEFAULT_VIDEO_BITRATE, defaultVideoBitrate.name());
+        } else {
+            editor.remove(DEFAULT_VIDEO_BITRATE);
+        }
         editor.putBoolean(DEFAULT_COLOR_FIX, defaultColorFix);
         editor.putInt(DEFAULT_VIDEO_ENCODER, defaultVideoEncoder);
 
