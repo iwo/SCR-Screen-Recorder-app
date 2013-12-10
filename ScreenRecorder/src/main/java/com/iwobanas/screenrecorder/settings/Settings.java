@@ -520,6 +520,35 @@ public class Settings {
         editor.commit();
     }
 
+    public boolean currentEqualsDefault() {
+        return audioSource == AudioSource.MIC
+                && resolution == getDefaultResolution()
+                && frameRate == 15
+                && transformation == defaultTransformation
+                && samplingRate == defaultSamplingRate
+                && videoBitrate == defaultVideoBitrate
+                && colorFix == defaultColorFix
+                && !hideIcon
+                && !showTouches
+                && stopOnScreenOff
+                && outputDir == defaultOutputDir
+                && videoEncoder == defaultVideoEncoder
+                && !verticalFrames;
+    }
+
+    public boolean coreEqualsDefault() {
+        return resolution == getDefaultResolution()
+                && transformation == defaultTransformation
+                && samplingRate == defaultSamplingRate
+                && videoBitrate == defaultVideoBitrate
+                && colorFix == defaultColorFix
+                && videoEncoder == defaultVideoEncoder;
+    }
+
+    public boolean statsBasedDefaults() {
+        return preferences.getLong(DEFAULTS_UPDATE_TIMESTAMP, 0) != 0;
+    }
+
     public void restoreShowTouches() {
         if (showTouches) {
             showTouchesController.setShowTouches(false);
