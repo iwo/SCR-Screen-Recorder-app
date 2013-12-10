@@ -23,7 +23,7 @@ public class Settings {
     private static final String FRAME_RATE = "FRAME_RATE";
     private static final String TRANSFORMATION = "TRANSFORMATION";
     private static final String SAMPLING_RATE = "SAMPLING_RATE";
-    private static final String VIDO_BITRATE = "VIDO_BITRATE";
+    private static final String VIDEO_BITRATE = "VIDEO_BITRATE";
     private static final String COLOR_FIX = "COLOR_FIX";
     private static final String HIDE_ICON = "HIDE_ICON";
     private static final String SHOW_TOUCHES = "SHOW_TOUCHES";
@@ -136,7 +136,7 @@ public class Settings {
         String defaultVideoBitrate = preferences.getString(DEFAULT_VIDEO_BITRATE, VideoBitrate.BITRATE_10_MBPS.name());
         this.defaultVideoBitrate = VideoBitrate.valueOf(defaultVideoBitrate);
 
-        String videoBitrate = preferences.getString(DEFAULT_VIDEO_BITRATE, defaultVideoBitrate);
+        String videoBitrate = preferences.getString(VIDEO_BITRATE, defaultVideoBitrate);
         this.videoBitrate = VideoBitrate.valueOf(videoBitrate);
 
 
@@ -376,7 +376,7 @@ public class Settings {
     public void setVideoBitrate(VideoBitrate videoBitrate) {
         this.videoBitrate = videoBitrate;
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(VIDO_BITRATE, videoBitrate.name());
+        editor.putString(VIDEO_BITRATE, videoBitrate.name());
         editor.commit();
     }
 
@@ -491,7 +491,7 @@ public class Settings {
         editor.remove(SAMPLING_RATE);
 
         videoBitrate = defaultVideoBitrate;
-        editor.remove(VIDO_BITRATE);
+        editor.remove(VIDEO_BITRATE);
 
         colorFix = defaultColorFix;
         editor.remove(COLOR_FIX);
