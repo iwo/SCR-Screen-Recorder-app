@@ -109,6 +109,9 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
             case 228: // MEDIA_RECORDER_TRACK_EVENT_ERROR
             case 248: // MEDIA_RECORDER_EVENT_ERROR during startup
             case 249: // MEDIA_RECORDER_TRACK_EVENT_ERROR during startup
+            case 242: // dequeueBuffer
+            case 243: // eglSwapBuffers
+            case 245: // queueBuffer
             case 198: // SurfaceMediaSource error
                 service.mediaRecorderError(exitValue);
                 break;
