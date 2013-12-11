@@ -1,6 +1,7 @@
 package com.iwobanas.screenrecorder.audio;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.R;
@@ -41,7 +42,13 @@ public class InstallerThread extends Thread {
         File driverFile = new File(context.getFilesDir(), "audio.primary.default.so");
         try {
             Log.v(TAG, "Extracting driver binaries");
-            Utils.extractResource(context, R.raw.audio, driverFile);
+            if (Utils.isArm()) {
+                Utils.extractResource(context, R.raw.audio, driverFile);
+            } else if (Utils.isX86()) {
+                Utils.extractResource(context, R.raw.audio_x86, driverFile);
+            } else {
+                error("Unsupported CPU: " + Build.CPU_ABI);
+            }
         } catch (IOException e) {
             error("Error extracting driver", e);
             return;
