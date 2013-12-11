@@ -57,7 +57,7 @@ public class InstallerThread extends Thread {
         File policyFile = new File(context.getFilesDir(), "audio_policy.conf");
         try {
             Log.v(TAG, "Processing audio_policy.conf");
-            AudioPolicyUtils.commentOutOutputs("/etc/audio_policy.conf", policyFile.getAbsolutePath());
+            AudioPolicyUtils.fixPolicyFile(policyFile.getAbsolutePath());
         } catch (IOException e) {
             Log.e(TAG, "Error processing policy file ", e);
             if (policyFile.exists()) {

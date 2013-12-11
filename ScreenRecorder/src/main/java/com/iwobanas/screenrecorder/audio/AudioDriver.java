@@ -37,7 +37,7 @@ public class AudioDriver {
 
     public int getSamplingRate() {
         if (samplingRate == 0) {
-            samplingRate = AudioPolicyUtils.getMaxPrimarySamplingRate("/etc/audio_policy.conf");
+            samplingRate = AudioPolicyUtils.getMaxPrimarySamplingRate();
             if (samplingRate <= 0) {
                 samplingRate = 44100;
             }

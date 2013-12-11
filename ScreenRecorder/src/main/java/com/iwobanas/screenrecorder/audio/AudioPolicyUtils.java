@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,20 +14,56 @@ import java.util.List;
 public class AudioPolicyUtils {
 
     private static final String TAG = "scr_AudioPolicyUtils";
+    private static final String AUDIO_POLICY_VENDOR_CONFIG_FILE = "/vendor/etc/audio_policy.conf";
+    private static final String AUDIO_POLICY_CONFIG_FILE = "/system/etc/audio_policy.conf";
+    private static final String AUDIO_POLICY_ETC_CONFIG_FILE = "/vendor/etc/audio_policy.conf";
 
-    public static boolean commentOutOutputs(String inPath, String outPath) throws IOException {
+    public static boolean fixPolicyFile( String outPath) throws IOException {
+        String inPath = getPolicyFilePath();
         boolean modified = false;
         BufferedWriter writer = null;
         try {
             List<ConfigLine> lines = getConfigLines(inPath);
             writer = new BufferedWriter(new FileWriter(outPath));
 
+            int outputSamplingRate = getMaxPrimarySamplingRate(lines);
+
             for (ConfigLine line : lines) {
+
                 if (line.getSection().startsWith(".audio_hw_modules.primary.outputs.") &&
                         !line.getSection().equals(".audio_hw_modules.primary.outputs.primary")) {
                     writer.write("# SCR #");
                     modified = true;
                 }
+
+                if (outputSamplingRate != -1 && line.getSection().equals(".audio_hw_modules.primary.inputs.primary") && line.getText().trim().startsWith("sampling_rates")) {
+                    boolean hasOutputRate = false;
+                    String[] rates = line.getText().split("[^\\d]+");
+                    for (String rateString : rates) {
+                        int rate = -1;
+                        try {
+                            rate = Integer.parseInt(rateString);
+                        } catch (NumberFormatException ignored) {
+                        }
+                        if (rate == outputSamplingRate) {
+                            hasOutputRate = true;
+                            break;
+                        }
+                    }
+
+                    if (!hasOutputRate) {
+                        String text = line.getText();
+                        if (text.contains("#")) {
+                            text = text.split("#")[0];
+                        }
+                        writer.write(text);
+                        writer.write("|" + outputSamplingRate);
+                        writer.write("\n");
+                        writer.write("# SCR #");
+                        modified = true;
+                    }
+                }
+
                 writer.write(line.getText());
                 writer.write("\n");
             }
@@ -40,29 +77,35 @@ public class AudioPolicyUtils {
         return modified;
     }
 
-    public static int getMaxPrimarySamplingRate(String policyPath) {
+    public static int getMaxPrimarySamplingRate() {
+        String policyPath = getPolicyFilePath();
         try {
             List<ConfigLine> lines = getConfigLines(policyPath);
+            return getMaxPrimarySamplingRate(lines);
 
-            for (ConfigLine line : lines) {
-                if (line.getSection().equals(".audio_hw_modules.primary.outputs.primary") && line.getText().trim().startsWith("sampling_rates")) {
-                    int maxRate = -1;
-                    String[] rates = line.getText().split("[^\\d]+");
-                    for (String rateString : rates) {
-                        int rate = -1;
-                        try {
-                            rate = Integer.parseInt(rateString);
-                        } catch (NumberFormatException ignored) {
-                        }
-                        if (rate > maxRate) {
-                            maxRate = rate;
-                        }
-                    }
-                    return maxRate;
-                }
-            }
         } catch (Exception e) {
             Log.w(TAG, "getMaxPrimarySamplingRate ", e);
+        }
+        return -1;
+    }
+
+    private static int getMaxPrimarySamplingRate(List<ConfigLine> lines) {
+        for (ConfigLine line : lines) {
+            if (line.getSection().equals(".audio_hw_modules.primary.outputs.primary") && line.getText().trim().startsWith("sampling_rates")) {
+                int maxRate = -1;
+                String[] rates = line.getText().split("[^\\d]+");
+                for (String rateString : rates) {
+                    int rate = -1;
+                    try {
+                        rate = Integer.parseInt(rateString);
+                    } catch (NumberFormatException ignored) {
+                    }
+                    if (rate > maxRate) {
+                        maxRate = rate;
+                    }
+                }
+                return maxRate;
+            }
         }
         return -1;
     }
@@ -102,6 +145,19 @@ public class AudioPolicyUtils {
         }
 
         return result;
+    }
+
+    public static String getPolicyFilePath() {
+        if (new File(AUDIO_POLICY_VENDOR_CONFIG_FILE).exists()) {
+            Log.v(TAG, "Policy file found: " + AUDIO_POLICY_VENDOR_CONFIG_FILE);
+            return AUDIO_POLICY_VENDOR_CONFIG_FILE;
+        }
+        if (new File(AUDIO_POLICY_CONFIG_FILE).exists()) {
+            Log.v(TAG, "Policy file found: " + AUDIO_POLICY_CONFIG_FILE);
+            return AUDIO_POLICY_CONFIG_FILE;
+        }
+        Log.w(TAG, "No policy file found. Using: " + AUDIO_POLICY_ETC_CONFIG_FILE);
+        return AUDIO_POLICY_ETC_CONFIG_FILE;
     }
 
     static class ConfigLine {
