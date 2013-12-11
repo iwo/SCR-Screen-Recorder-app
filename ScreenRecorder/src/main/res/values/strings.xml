@@ -141,16 +141,17 @@
     <string name="settings_audio_internal_experimental">Internal (experimental)</string>
     <string name="settings_audio_mic_summary">Microphone. Only one app can use microphone at a time!</string>
     <string name="settings_audio_mute_summary">Mute. No Audio track</string>
-    <string name="settings_audio_internal_summary">Audio output. Joint "SCR Alpha testing" Google+ community to test internal audio recording</string>
+    <string name="settings_audio_internal_summary">System audio output. Requires SCR audio driver.</string>
     <string name="settings_audio">Audio</string>
     <string name="settings_sampling_rate">Sampling rate</string>
 
-    <string name="settings_audio_driver_not_installed">SCR audio driver not installed. Tap to install.</string>
-    <string name="settings_audio_driver_installing">Installing SCR audio driver...</string>
-    <string name="settings_audio_driver_installed">SCR audio driver installed. Tap to uninstall.</string>
-    <string name="settings_audio_driver_uninstalling">Uninstalling SCR audio driver...</string>
-    <string name="settings_audio_driver_installation_failure">SCR audio driver installation failed. Tap to retry.</string>
-    <string name="settings_audio_driver_outdated">Old version of SCR audio driver installed. Tap to update.</string>
+    <string name="settings_audio_driver">SCR audio driver</string>
+    <string name="settings_audio_driver_not_installed">Not installed, tap to install</string>
+    <string name="settings_audio_driver_installing">Installing...</string>
+    <string name="settings_audio_driver_installed">Installed. Tap to uninstall.</string>
+    <string name="settings_audio_driver_uninstalling">Uninstalling...</string>
+    <string name="settings_audio_driver_installation_failure">Installation failed. Tap to retry.</string>
+    <string name="settings_audio_driver_outdated">Old version installed. Tap to update.</string>
 
     <string name="internal_audio_dialog_title">Audio driver installation</string>
     <string name="internal_audio_dialog_message">
