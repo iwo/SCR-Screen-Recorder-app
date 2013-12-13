@@ -41,6 +41,7 @@ public class WatermarkOverlay extends AbstractScreenOverlay {
                 WindowManager.LayoutParams.MATCH_PARENT);
         lp.type = WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
         lp.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN
+                | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
                 | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
                 | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         lp.format = PixelFormat.TRANSLUCENT;
