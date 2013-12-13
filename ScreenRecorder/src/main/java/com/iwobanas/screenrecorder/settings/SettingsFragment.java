@@ -133,6 +133,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         frameRatePreference.setValue(String.valueOf(settings.getFrameRate()));
         frameRatePreference.setSummary(formatFrameRateSummary(settings.getFrameRate()));
 
+        verticalFramesPreference.setChecked(settings.getVerticalFrames());
+
+        audioSourcePreference.setValue(settings.getAudioSource().name());
         audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource()));
 
         samplingRatePreference.setSummary(settings.getSamplingRate().getLabel());
