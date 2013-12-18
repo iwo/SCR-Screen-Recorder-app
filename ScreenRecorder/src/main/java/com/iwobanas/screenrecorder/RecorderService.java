@@ -64,6 +64,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
     public static final String TIMEOUT_DIALOG_CLOSED_EXTRA = "TIMEOUT_DIALOG_CLOSED_EXTRA";
     public static final String RESTART_MUTE_EXTRA = "RESTART_MUTE_EXTRA";
+    public static final String PLAY_EXTRA = "PLAY_EXTRA";
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
     private static final String TAG = "scr_RecorderService";
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
@@ -222,12 +223,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mTimeController.reset();
     }
 
-    private Intent getPlayVideoIntent() {
+    private void playVideo(Uri uri) {
+        mRecorderOverlay.hide();
+        mWatermark.hide();
+
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(outputFile), "video/*");
+        intent.setDataAndType(uri, "video/*");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return intent;
+        startActivity(intent);
     }
 
     @Override
@@ -334,12 +338,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
                         .setContentTitle(getString(R.string.recording_saved_title))
                         .setContentText(message);
 
-        Intent playVideoIntent = getPlayVideoIntent();
-        Intent recorderIntent = new Intent(this, RecorderActivity.class);
-
-        PendingIntent resultPendingIntent = PendingIntent.getActivities(this, 0, new Intent[]{recorderIntent, playVideoIntent}, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        mBuilder.setContentIntent(resultPendingIntent);
+        Intent playIntent = new Intent(this, RecorderService.class);
+        playIntent.putExtra(PLAY_EXTRA, true);
+        playIntent.setData(Uri.fromFile(outputFile));
+        mBuilder.setContentIntent(PendingIntent.getService(this, 0, playIntent, PendingIntent.FLAG_ONE_SHOT));
         mBuilder.setAutoCancel(true);
 
         NotificationManager mNotificationManager =
@@ -374,7 +376,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         }
 
-        PendingIntent intent = PendingIntent.getService(this, 0, new Intent(this, RecorderService.class), 0);
+        PendingIntent intent = PendingIntent.getService(this, 0, new Intent(this, RecorderService.class), PendingIntent.FLAG_ONE_SHOT);
         builder.setContentIntent(intent);
 
         startForeground(FOREGROUND_NOTIFICATION_ID, builder.build());
@@ -625,6 +627,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
             } else {
                 reinitializeView();
             }
+        } else if (intent.getBooleanExtra(PLAY_EXTRA, false)) {
+            playVideo(intent.getData());
         } else if (isRecording) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
