@@ -41,7 +41,11 @@
         <activity
                 android:name=".settings.SettingsActivity"
                 android:label="@string/settings_activity_label"
-                android:launchMode="singleTop">
+                android:launchMode="singleTop"
+                android:parentActivityName="com.iwobanas.screenrecorder.RecorderActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.iwobanas.screenrecorder.RecorderActivity" />
         </activity>
 
         <activity
