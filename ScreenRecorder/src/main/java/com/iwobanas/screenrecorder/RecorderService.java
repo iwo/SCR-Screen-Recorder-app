@@ -554,12 +554,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 mRecorderOverlay.hide();
                 mWatermark.hide();
 
-                Intent recorderIntent = new Intent(RecorderService.this, RecorderActivity.class);
-                recorderIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startService(recorderIntent);
-
                 Intent intent = new Intent(RecorderService.this, SettingsActivity.class);
-                startActivities(new Intent[]{recorderIntent, intent});
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 mRatingController.resetSuccessCount();
             }
         });

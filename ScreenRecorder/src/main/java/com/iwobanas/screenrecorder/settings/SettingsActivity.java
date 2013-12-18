@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.iwobanas.screenrecorder.R;
+import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.ReportBugTask;
 
 public class SettingsActivity extends Activity {
@@ -62,6 +63,13 @@ public class SettingsActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, RecorderService.class);
+        startService(intent);
+        super.onBackPressed();
     }
 
     private void sendBugReport() {
