@@ -137,6 +137,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         audioSourcePreference.setValue(settings.getAudioSource().name());
         audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource()));
 
+        samplingRatePreference.setValue(settings.getSamplingRate().name());
         samplingRatePreference.setSummary(settings.getSamplingRate().getLabel());
         samplingRatePreference.setEnabled(settings.getAudioSource().equals(AudioSource.MIC));
 
