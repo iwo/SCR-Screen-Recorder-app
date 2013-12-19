@@ -72,6 +72,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
                 break;
             case ERROR:
                 if (previousState == RecorderProcess.ProcessState.RECORDING
+                    || previousState == RecorderProcess.ProcessState.STARTING
                     || previousState == RecorderProcess.ProcessState.STOPPING
                     || previousState == RecorderProcess.ProcessState.FINISHED) {
                     handleRecordingError(exitValue);

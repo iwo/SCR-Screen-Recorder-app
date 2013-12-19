@@ -57,7 +57,7 @@ class RecorderProcess implements Runnable {
 
     @Override
     public void run() {
-        setState(ProcessState.STARTING);
+        setState(ProcessState.INITIALIZING);
         try {
             Log.d(TAG, "Starting native process");
             process = Runtime.getRuntime()
@@ -87,6 +87,8 @@ class RecorderProcess implements Runnable {
                     status = reader.readLine();
                     checkStatus("recording", status, 306);
                     startTimeout.cancel();
+
+                    setState(ProcessState.RECORDING);
 
                     status = reader.readLine();
                     parseFps(status);
@@ -207,7 +209,7 @@ class RecorderProcess implements Runnable {
             return;
         }
         Settings settings = Settings.getInstance();
-        setState(ProcessState.RECORDING);
+        setState(ProcessState.STARTING);
         configureTimeout.start();
         startTimeout.start();
         runCommand(fixEmulatedStorageMapping(fileName));
@@ -338,7 +340,7 @@ class RecorderProcess implements Runnable {
     }
 
     public boolean isRecording() {
-        return state == ProcessState.RECORDING;
+        return state == ProcessState.STARTING || state == ProcessState.RECORDING;
     }
 
     public void destroy() {
@@ -395,8 +397,9 @@ class RecorderProcess implements Runnable {
 
     public static enum ProcessState {
         NEW,
-        STARTING,
+        INITIALIZING,
         READY,
+        STARTING,
         RECORDING,
         STOPPING,
         FINISHED,
