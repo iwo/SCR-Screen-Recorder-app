@@ -1,11 +1,15 @@
 package com.iwobanas.screenrecorder.settings;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.iwobanas.screenrecorder.R;
+import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.ReportBugTask;
 
 public class SettingsActivity extends Activity {
@@ -16,6 +20,7 @@ public class SettingsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         Settings.initialize(this);
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {
             fragment = new SettingsFragment();
@@ -49,9 +54,22 @@ public class SettingsActivity extends Activity {
             case R.id.settings_send_bug_report:
                 sendBugReport();
                 return true;
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent upIntent = NavUtils.getParentActivityIntent(this);
+                TaskStackBuilder.create(this).addNextIntentWithParentStack(upIntent).startActivities();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, RecorderService.class);
+        startService(intent);
+        super.onBackPressed();
     }
 
     private void sendBugReport() {

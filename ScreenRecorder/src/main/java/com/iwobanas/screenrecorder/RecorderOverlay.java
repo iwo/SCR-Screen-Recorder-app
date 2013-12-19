@@ -7,9 +7,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.iwobanas.screenrecorder.settings.AudioSource;
-import com.iwobanas.screenrecorder.settings.Settings;
-
 public class RecorderOverlay extends AbstractScreenOverlay {
 
     private IRecorderService mService;
@@ -37,6 +34,8 @@ public class RecorderOverlay extends AbstractScreenOverlay {
                 mService.startRecording();
             }
         });
+
+        view.setOnTouchListener(new WindowDragListener(getLayoutParams()));
 
         mSettingsButton = (ImageButton) view.findViewById(R.id.settings_button);
         mSettingsButton.setOnClickListener(new View.OnClickListener() {

@@ -14,7 +14,6 @@ import android.util.Log;
 
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
-import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
 
@@ -141,6 +140,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         frameRatePreference.setValue(String.valueOf(settings.getFrameRate()));
         frameRatePreference.setSummary(formatFrameRateSummary(settings.getFrameRate()));
+
+        verticalFramesPreference.setChecked(settings.getVerticalFrames());
 
         audioSourcePreference.setValue(settings.getAudioSource().name());
         audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource()));
@@ -422,17 +423,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 settings.setOutputDir(new File(data.getData().getPath()));
                 outputDirPreference.setSummary(settings.getOutputDir().getAbsolutePath());
             }
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        //TODO: remove this KK workaround and identify the problem with intents flow
-        Activity activity = getActivity();
-        if (activity != null && Build.VERSION.SDK_INT == 19 && !outputDirChooserOpen) {
-            Intent intent = new Intent(activity, RecorderService.class);
-            activity.startService(intent);
         }
     }
 

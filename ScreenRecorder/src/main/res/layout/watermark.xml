@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="right|center_vertical"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:autoText="false"
         android:drawableLeft="@anim/blink"
         android:gravity="center"
