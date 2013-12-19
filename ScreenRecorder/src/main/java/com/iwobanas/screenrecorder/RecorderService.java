@@ -31,7 +31,6 @@ import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -41,7 +40,6 @@ import static com.iwobanas.screenrecorder.Tracker.BUY;
 import static com.iwobanas.screenrecorder.Tracker.BUY_ERROR;
 import static com.iwobanas.screenrecorder.Tracker.ERROR;
 import static com.iwobanas.screenrecorder.Tracker.ERROR_;
-import static com.iwobanas.screenrecorder.Tracker.INSTALLATION_ERROR;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE_ALLOW_;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE_DONT_ALLOW_;
@@ -122,27 +120,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void installExecutable() {
-        File executable = new File(getFilesDir(), "screenrec");
-        try {
-            if (Utils.isArm()) {
-                Utils.extractResource(this, R.raw.screenrec, executable);
-            } else if (Utils.isX86()) {
-                Utils.extractResource(this, R.raw.screenrec_x86, executable);
-            } else {
-                String message = String.format(getString(R.string.cpu_error_message), Build.CPU_ABI, getString(R.string.app_name));
-                displayErrorMessage(message, getString(R.string.cpu_error_title), false, false, -1);
-            }
+        new InstallExecutableAsyncTask(this, this).execute();
+    }
 
-            if (!executable.setExecutable(true, false)) {
-                Log.w(TAG, "Can't set executable property on " + executable.getAbsolutePath());
-            }
-
-        } catch (IOException e) {
-            Log.e(TAG, "Can't install native executable", e);
-            EasyTracker.getTracker().sendEvent(ERROR, INSTALLATION_ERROR, INSTALLATION_ERROR, null);
-            EasyTracker.getTracker().sendException(Thread.currentThread().getName(), e, false);
-        }
-        mNativeProcessRunner.setExecutable(executable.getAbsolutePath());
+    public void executableInstalled(String executable) {
+        mNativeProcessRunner.initialize(executable);
     }
 
     @Override
@@ -399,6 +381,28 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 stopSelf();
+            }
+        });
+    }
+
+    @Override
+    public void cpuNotSupportedError() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String message = String.format(getString(R.string.cpu_error_message), Build.CPU_ABI, getString(R.string.app_name));
+                displayErrorMessage(message, getString(R.string.cpu_error_title), false, false, -1);
+            }
+        });
+    }
+
+    @Override
+    public void installationError() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String message = String.format(getString(R.string.installation_error_message), getString(R.string.app_name));
+                displayErrorMessage(message, getString(R.string.installation_error_title), false, false, -1);
             }
         });
     }

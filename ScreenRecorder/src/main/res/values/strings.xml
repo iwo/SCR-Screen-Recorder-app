@@ -51,6 +51,9 @@
     <string name="cpu_error_title">CPU not supported</string>
     <string name="cpu_error_message">Your CPU architecture (%1$s) is not supported by %2$s.</string>
 
+    <string name="installation_error_title">Installation error</string>
+    <string name="installation_error_message">Can\'t install required files. Make sure you have some free space on your device and restart %1$s.</string>
+
     <string name="help_stop_title">How to stop</string>
     <string name="help_stop_ok">Got it!</string>
 

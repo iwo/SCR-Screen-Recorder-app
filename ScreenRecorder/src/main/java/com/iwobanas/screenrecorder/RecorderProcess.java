@@ -201,6 +201,10 @@ class RecorderProcess implements Runnable {
         }
     }
 
+    public ProcessState getState() {
+        return state;
+    }
+
     public void startRecording(String fileName, String rotation) {
         Log.i(TAG, "startRecording " + fileName);
         if (state != ProcessState.READY) {

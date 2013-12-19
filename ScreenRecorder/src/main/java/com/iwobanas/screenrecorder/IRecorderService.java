@@ -6,8 +6,11 @@ public interface IRecorderService {
     void close();
 
     void setReady(boolean ready);
+    void executableInstalled(String executable);
     void recordingFinished(float fps);
     void suRequired();
+    void cpuNotSupportedError();
+    void installationError();
     void startupError(int exitValue);
     void recordingError(int exitValue);
     void mediaRecorderError(int exitValue);
