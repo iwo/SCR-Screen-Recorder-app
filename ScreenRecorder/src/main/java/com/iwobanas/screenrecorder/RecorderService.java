@@ -231,6 +231,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         intent.setAction(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, "video/*");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
