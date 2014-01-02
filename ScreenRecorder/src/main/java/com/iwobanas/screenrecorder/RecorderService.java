@@ -651,7 +651,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_DESTROY, null);
         }
         mWatermark.hide();
+        mWatermark.onDestroy();
         mRecorderOverlay.hide();
+        mRecorderOverlay.onDestroy();
         mNativeProcessRunner.destroy();
         mScreenOffReceiver.unregister();
         savePreferences();

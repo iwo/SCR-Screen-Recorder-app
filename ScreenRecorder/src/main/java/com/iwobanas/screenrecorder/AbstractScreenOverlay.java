@@ -57,4 +57,8 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
         getWindowManager().removeView(mView);
         visible = false;
     }
+
+    @Override
+    public void onDestroy() {
+    }
 }
