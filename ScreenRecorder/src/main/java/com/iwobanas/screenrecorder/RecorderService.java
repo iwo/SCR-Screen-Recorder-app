@@ -78,8 +78,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private RatingController mRatingController;
     private Handler mHandler;
     private File outputFile;
-    private boolean isRecording;
-    private boolean isReady;
+    private RecorderServiceState state = RecorderServiceState.INSTALLING;
     private boolean isTimeoutDisplayed;
     private boolean startOnReady;
     private long mRecordingStartTime;
@@ -124,12 +123,22 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     public void executableInstalled(String executable) {
+        setState(RecorderServiceState.INITIALIZING);
         mNativeProcessRunner.initialize(executable);
     }
 
     @Override
+    public void recordingStarted() {
+        setState(RecorderServiceState.RECORDING);
+    }
+
+    private void setState(RecorderServiceState state) {
+        this.state = state;
+    }
+
+    @Override
     public void startRecording() {
-        if (!isReady) {
+        if (state != RecorderServiceState.READY) {
             return;
             //TODO: indicate to the user that recorder is not ready e.g. grey out button
         }
@@ -138,6 +147,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             displayStopHelp();
             return;
         }
+        setState(RecorderServiceState.STARTING);
         mRecorderOverlay.hide();
         if (mTaniosc) {
             mWatermark.start();
@@ -149,7 +159,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             mScreenOffReceiver.register();
         }
         outputFile = getOutputFile();
-        isRecording = true;
         mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
         mRecordingStartTime = System.currentTimeMillis();
 
@@ -200,7 +209,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void stopRecording() {
-        isRecording = false;
+        setState(RecorderServiceState.STOPPING);
         mNativeProcessRunner.stop();
         mTimeController.reset();
     }
@@ -223,8 +232,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     @Override
-    public synchronized void setReady(boolean ready) {
-        isReady = true;
+    public synchronized void setReady() {
+        setState(RecorderServiceState.READY);
         Settings.getInstance().applyShowTouches();
         if (startOnReady) {
             startOnReady = false;
@@ -271,8 +280,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private void reinitialize() {
         mTimeController.reset();
 
-        isRecording = false;
-        isReady = false;
+        if (state != RecorderServiceState.INSTALLING) {
+            setState(RecorderServiceState.INITIALIZING);
+        }
         mNativeProcessRunner.initialize();
     }
 
@@ -623,7 +633,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 Settings.getInstance().setTemporaryMute(true);
                 synchronized (this) {
-                    if (isReady) {
+                    if (state == RecorderServiceState.READY) {
                         startRecording();
                     } else {
                         startOnReady = true;
@@ -634,7 +644,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             }
         } else if (intent.getBooleanExtra(PLAY_EXTRA, false)) {
             playVideo(intent.getData());
-        } else if (isRecording) {
+        } else if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
         } else {
@@ -646,10 +656,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void onDestroy() {
-        if (isRecording) {
+        if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_DESTROY, null);
         }
+        startOnReady = false;
         mWatermark.hide();
         mWatermark.onDestroy();
         mRecorderOverlay.hide();
@@ -698,7 +709,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public void dontAllow(int policyReason) {
         EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_DONT_ALLOW_ + policyReason, null);
         mTaniosc = true;
-        if (isRecording) {
+        if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             mWatermark.show();
             mWatermark.start();
         }
@@ -709,10 +720,19 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public void applicationError(int errorCode) {
         EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_ERROR_ + errorCode, null);
         mTaniosc = true;
-        if (isRecording) {
+        if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             mWatermark.show();
             mWatermark.start();
         }
         Toast.makeText(this, getString(R.string.license_error), Toast.LENGTH_LONG).show();
+    }
+
+    private static enum RecorderServiceState {
+        INSTALLING,
+        INITIALIZING,
+        READY,
+        STARTING,
+        RECORDING,
+        STOPPING
     }
 }

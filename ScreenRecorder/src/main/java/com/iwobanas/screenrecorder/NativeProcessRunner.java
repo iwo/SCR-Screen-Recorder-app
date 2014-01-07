@@ -75,11 +75,13 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         }
         switch (state) {
             case READY:
-                service.setReady(true);
+                service.setReady();
+                break;
+            case RECORDING:
+                service.recordingStarted();
                 break;
             case FINISHED:
                 service.recordingFinished(fps);
-                service.setReady(false);
                 break;
             case ERROR:
                 if (previousState == RecorderProcess.ProcessState.RECORDING
@@ -90,7 +92,6 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
                 } else {
                     handleStartupError(exitValue);
                 }
-                service.setReady(false);
                 break;
             default:
                 break;

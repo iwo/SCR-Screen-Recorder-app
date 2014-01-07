@@ -5,8 +5,9 @@ public interface IRecorderService {
     void stopRecording();
     void close();
 
-    void setReady(boolean ready);
+    void setReady();
     void executableInstalled(String executable);
+    void recordingStarted();
     void recordingFinished(float fps);
     void suRequired();
     void cpuNotSupportedError();
