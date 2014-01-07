@@ -361,6 +361,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
                         .setContentTitle(getString(R.string.app_full_name));
+        builder.setWhen(0);
         builder.setContentText(getStatusString());
 
         if (!mTaniosc && Settings.getInstance().getHideIcon()) {
