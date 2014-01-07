@@ -134,6 +134,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private void setState(RecorderServiceState state) {
         this.state = state;
+        startForeground();
     }
 
     @Override
@@ -360,6 +361,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
                         .setContentTitle(getString(R.string.app_full_name));
+        builder.setContentText(getStatusString());
 
         if (!mTaniosc && Settings.getInstance().getHideIcon()) {
             builder.setSmallIcon(R.drawable.transparent);
@@ -373,6 +375,24 @@ public class RecorderService extends Service implements IRecorderService, Licens
         builder.setContentIntent(intent);
 
         startForeground(FOREGROUND_NOTIFICATION_ID, builder.build());
+    }
+
+    private CharSequence getStatusString() {
+        switch (state) {
+            case INITIALIZING:
+                return getString(R.string.notification_status_initializing);
+            case INSTALLING:
+                return getString(R.string.notification_status_installing);
+            case READY:
+                return getString(R.string.notification_status_ready);
+            case STARTING:
+                return getString(R.string.notification_status_starting);
+            case RECORDING:
+                return getString(R.string.notification_status_recording);
+            case STOPPING:
+                return getString(R.string.notification_status_stopping);
+        }
+        return "";
     }
 
     @Override
