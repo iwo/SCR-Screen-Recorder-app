@@ -64,6 +64,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String RESTART_MUTE_EXTRA = "RESTART_MUTE_EXTRA";
     public static final String PLAY_EXTRA = "PLAY_EXTRA";
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
+    public static final String START_RECORDING_ACTION = "scr.intent.action.start_recording";
     private static final String TAG = "scr_RecorderService";
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
@@ -165,6 +166,14 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         EasyTracker.getTracker().sendEvent(ACTION, START, START, null);
         EasyTracker.getTracker().sendEvent(SETTINGS, AUDIO, Settings.getInstance().getAudioSource().name(), null);
+    }
+
+    private synchronized void startRecordingWhenReady() {
+        if (state == RecorderServiceState.READY) {
+            startRecording();
+        } else {
+            startOnReady = true;
+        }
     }
 
     private File getOutputFile() {
@@ -653,18 +662,14 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else if (intent.getBooleanExtra(RESTART_MUTE_EXTRA,false)) {
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 Settings.getInstance().setTemporaryMute(true);
-                synchronized (this) {
-                    if (state == RecorderServiceState.READY) {
-                        startRecording();
-                    } else {
-                        startOnReady = true;
-                    }
-                }
+                startRecordingWhenReady();
             } else {
                 reinitializeView();
             }
         } else if (intent.getBooleanExtra(PLAY_EXTRA, false)) {
             playVideo(intent.getData());
+        } else if (START_RECORDING_ACTION.equals(intent.getAction())) {
+            startRecordingWhenReady();
         } else if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
