@@ -217,4 +217,7 @@
     <string name="notification_status_recording">Recording</string>
     <string name="notification_status_stopping">Stopping</string>
 
+    <string name="sale_title">Sale</string>
+    <string name="sale_text">Buy SCR Pro now and save %1$d %%! This offer ends on %2$s.</string>
+
 </resources>
