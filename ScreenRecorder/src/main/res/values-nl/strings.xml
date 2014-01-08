@@ -1,0 +1,215 @@
+<resources>
+    <string name="free_app_name">"SCR Free"</string>
+    <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
+    <string name="pro_app_name">"SCR Pro"</string>
+    <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+    <string name="recording_saved_title">"SCR Opname Opgeslagen"</string>
+    <string name="recording_saved_message">"Opname opgeslagen in %1$s"</string>
+    <string name="recording_saved_toast">"Opname opgeslagen in %1$s"</string>
+    <string name="max_file_size_reached_toast">"Maximale bestandsgrootte bereikt. Opname opgeslagen in %1$s"</string>
+    <string name="start">"Start"</string>
+    <string name="play">"Afspelen"</string>
+
+    <string name="su_required_title">"Root-toegang nodig"</string>
+    <string name="su_required_message">"Om een screen recorder app te gebruiken moet je telefoon/tablet geroot zijn.
+        Er zijn genoeg tutorials op het internet die uitleggen hoe je verschillende apparaten kunt rooten. Kom terug als je klaar bent!"</string>
+    <string name="su_required_help">"Wat is \"rooten\"?"</string>
+    <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
+
+    <string name="error_dialog_title">"Er ging iets ernstig mis :-("</string>
+    <string name="startup_error_message">"Het anonieme foutenrapport wordt automatisch opgestuurd om ons te helpen met het oplossen van het probleem. Neem gerust contact op via e-mail ondersteuning. Vermeld error S%1$d ."</string>
+    <string name="recording_error_message">"Het anonieme foutenrapport wordt automatisch opgestuurd om ons te helpen met het oplossen van het probleem. Neem gerust contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
+
+    <string name="media_recorder_error_title">"Opname fout"</string>
+    <string name="media_recorder_error_message">"Probeer de resolutie te veranderen of wissel de beeldtransformatie tussen GPU/CPU. Verwijder andere screencast toepassingen als je die hebt. Als het probleem zich blijft voordoen, neem dan contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
+
+    <string name="output_file_error_title">"Kan het video-bestand niet aanmaken"</string>
+    <string name="output_file_error_message">"SCR kon het video-bestand %1$s niet aanmaken. Zorg ervoor dat de geselecteerde map beschrijfbaar is en dat de SD-kaart niet door de USB-aansluiting is geblokkeerd."</string>
+
+    <string name="microphone_busy_error_title">"Microfoon is al in gebruik"</string>
+    <string name="microphone_busy_error_message">"
+        Slechts één app tegelijk kan de microfoon gebruiken. Dit is een beperking van Android.
+        Sluit andere apps die de microfoon gebruiken af (bijv. Google Now of Skype) of ga door met opnemen zonder geluid.
+    "</string>
+    <string name="microphone_busy_error_continue_mute">"Doorgaan Zonder Geluid"</string>
+
+    <string name="screen_protected_error_title">"Scherm beschermd"</string>
+    <string name="screen_protected_error_message">"Het scherm kan niet worden opgenomen omdat sommige apps de inhoud op het scherm als beveiligd hebben gemarkeerd."</string>
+
+    <string name="opengl_error_title">"GPU niet ondersteund"</string>
+    <string name="opengl_error_message">"Je grafische kaart wordt nog niet ondersteund.
+        Schakel beeldtransformatie over naar CPU of gebruik de software video encoder.
+    "</string>
+
+    <string name="audio_config_error_title">"Audio fout"</string>
+    <string name="audio_config_error_message">"Niet-ondersteunde audio-configuratie. Probeer de audio instellingen van SCR aan te passen."</string>
+
+    <string name="android_version_error_title">"Android-versie niet ondersteund"</string>
+    <string name="android_version_error_message">"Je Android-versie wordt nog niet ondersteund."</string>
+
+    <string name="cpu_error_title">"CPU niet ondersteund"</string>
+    <string name="cpu_error_message">"Je CPU architectuur (%1$s) wordt niet ondersteund door %2$s."</string>
+
+    <string name="installation_error_title">"Installatie fout"</string>
+    <string name="installation_error_message">"Kan benodigde bestanden niet installeren. Zorg ervoor dat je wat vrije ruimte op je apparaat hebt en herstart %1$s."</string>
+
+    <string name="help_stop_title">"Hoe stop je de opname"</string>
+    <string name="help_stop_ok">"Ik snap het!"</string>
+
+    <string name="free_timeout_title">"Tijdslimiet voorbij"</string>
+    <string name="free_timeout_message">"Koop SCR Screen Recorder Pro voor onbeperkte opnametijd en geen watermerk op de video."</string>
+    <string name="free_timeout_buy">"Koop nu!"</string>
+    <string name="free_timeout_no_thanks">"Nee, bedankt"</string>
+    <string name="hide_icon_title">"Pro-functie"</string>
+    <string name="hide_icon_message">"Koop SCR Screen Recorder Pro om het watermerk en het meldingspictogram te verbergen. Je krijgt ook onbeperkte opnametijd!"</string>
+
+    <string name="buy_error_title">"Google Play fout"</string>
+    <string name="buy_error_message">"Zoek aub voor SCR Screen Recorder Pro in Google Play"</string>
+
+    <string name="settings_activity_label">"SCR Instellingen"</string>
+    <string name="settings_title">"Instellingen"</string>
+    <string name="settings_ok">"Ok"</string>
+    <string name="settings_reset">"Herstel standaardinstellingen"</string>
+    <string name="settings_cancel">"Annuleren"</string>
+
+    <string name="settings_video_category">"Video"</string>
+
+    <string name="settings_video_encoder">"Encoder"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 (onstabiel)"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"Automatisch"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 (langzaam)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"Ingebouwde Android %1$s encoder"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg software MPEG4-encoder"</string>
+
+    <string name="settings_resolution">"Resolutie"</string>
+    <string name="settings_resolution_short">"%1$dx%2$d"</string>
+    <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
+    <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp horizontaal"</string>
+    <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp met padding"</string>
+    <string name="settings_resolution_max">"%1$dx%2$d - Max"</string>
+    <string name="settings_resolution_half">"%1$dx%2$d - Half"</string>
+    <string name="settings_resolution_unstable">"(instabiel)"</string>
+
+    <string name="settings_transformation">"Beeldtransformatie"</string>
+    <string name="settings_transformation_cpu">"CPU"</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"GPU+"</string>
+    <string name="settings_transformation_cpu_summary">"Beeld verwerken op de processor (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Beeld verwerken op de grafische kaart (%1$s)"</string>
+    <string name="settings_transformation_sw_summary">"Niet beschikbaar in de software-encoder"</string>
+
+    <string name="settings_video_bitrate">"Bitsnelheid"</string>
+    <string name="settings_video_bitrate_summary">"ongeveer %1$s, afhankelijk van de encoder"</string>
+    <string name="settings_video_bitrate_default">"Standaard"</string>
+
+
+    <string name="settings_frame_rate">"Famesnelheid"</string>
+    <string name="settings_frame_rate_max">"Maximaal"</string>
+    <string name="settings_frame_rate_max_short">"Max"</string>
+    <string name="settings_frame_rate_up_to">"Tot %1$d fps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
+    <string name="settings_frame_rate_summary">"Tot %1$d fps, beperkt door hardwaremogelijkheden"</string>
+    <string name="settings_frame_rate_max_summary">"Maximaal toegestaan ​​door de hardware"</string>
+
+    <string name="settings_orientation">"Oriëntatie"</string>
+    <string name="settings_orientation_description">"
+        Video frames zijn standaard altijd horizontaal. Rotatie metadata wordt toegevoegd aan de verticale opnamen.
+        YouTube en de standaard Android-videospeler spelen dergelijke video's correct af, maar sommige PC-spelers (zoals VLC) negeren de rotatie metadata en spelen de video horizontaal af.
+        Je kunt verticale frames hieronder inschakelen, maar pas wel op, want veel apparaten kunnen geen video's met verticale frames opnemen/afspelen.
+    "</string>
+    <string name="settings_orientation_auto">"Automatisch"</string>
+    <string name="settings_orientation_portrait">"Verticaal"</string>
+    <string name="settings_orientation_landscape">"Horizontaal"</string>
+    <string name="settings_orientation_clockwise">"rechtsom draaien"</string>
+    <string name="settings_orientation_anticlockwise">"linksom draaien"</string>
+
+    <string name="settings_vertical_frames">"Verticale frames"</string>
+    <string name="settings_vertical_frames_warning">"Videospelers op veel apparaten kunnen geen video's met verticale frames afspelen.
+        Zelfs als deze optie niet geselecteerd is word er oriëntatie metadata toegevoegd aan de video zodat het correct wordt weergegeven in de standaard Android-speler, YouTube etc."</string>
+    <string name="settings_vertical_frames_ok">"Ok"</string>
+    <string name="settings_vertical_frames_cancel">"Annuleren"</string>
+
+    <string name="settings_audio_category">"Geluid"</string>
+    <string name="settings_audio_source">"Bron"</string>
+    <string name="settings_audio_mic">"Microfoon"</string>
+    <string name="settings_audio_mute">"Geen"</string>
+    <string name="settings_audio_internal">"Intern"</string>
+    <string name="settings_audio_internal_experimental">"Intern (experimenteel)"</string>
+    <string name="settings_audio_mic_summary">"Microfoon. Slechts één app tegelijk kan de microfoon gebruiken!"</string>
+    <string name="settings_audio_mute_summary">"Dempen. Geen audiospoor"</string>
+    <string name="settings_audio_internal_summary">"Audio-uitgang. Je bent lid geworden van de \"SCR Alpha testing\" Google+ community om interne audio-opname te testen"</string>
+    <string name="settings_audio">"Geluid"</string>
+    <string name="settings_sampling_rate">"Sampling rate"</string>
+
+    <string name="settings_audio_driver_not_installed">"SCR audio driver niet geïnstalleerd. Tik om te installeren."</string>
+    <string name="settings_audio_driver_installing">"SCR audio driver installeren..."</string>
+    <string name="settings_audio_driver_installed">"SCR audio driver geïnstalleerd. Tik om te verwijderen."</string>
+    <string name="settings_audio_driver_uninstalling">"SCR audio driver verwijderen..."</string>
+    <string name="settings_audio_driver_installation_failure">"SCR audio driver installatie is mislukt. Tik om opnieuw te proberen."</string>
+    <string name="settings_audio_driver_outdated">"Oude versie van SCR audio driver geïnstalleerd. Tik om te updaten."</string>
+
+    <string name="internal_audio_dialog_title">"Audio driver installatie"</string>
+    <string name="internal_audio_dialog_message">"
+        Interne audio-opname is een experimentele functie en vereist de installatie van een aangepaste audio driver.
+        Het wordt aanbevolen om deze driver te verwijderen nadat je klaar bent met de opname.
+        Je zult in staat zijn om de SCR Audio driver gemakkelijk te verwijderen via SCR instellingen.
+        Als het installatieprogramma crasht moet je mogelijk de ADB console gebruiken of je systeem partitie re-flashen om de originele audio drivers te herstellen.
+        Het wordt aanbevolen om een ​​reservekopie van je systeem te maken. Je gaat door OP EIGEN RISICO."</string>
+    <string name="internal_audio_dialog_install">"Installeren"</string>
+    <string name="internal_audio_dialog_cancel">"Annuleren"</string>
+
+    <string name="settings_other_category">"Overig"</string>
+    <string name="settings_hide_icon">"Pictogram in het systeemvak verbergen"</string>
+    <string name="settings_show_touches">"Aanrakingen weergeven"</string>
+    <string name="settings_show_touches_summary">"Toon visuele feedback voor aanrakingen. Je kunt dit permanent activeren via Instellingen → Opties voor ontwikkelaars → Aanraakbewerkingen weergeven"</string>
+    <string name="settings_output_dir">"Opslag map"</string>
+    <string name="settings_stop_when_screen_off">"Stop als het scherm uit gaat"</string>
+    <string name="settings_stop_when_screen_off_summary">"Opname stopt nadat het scherm wordt uitgeschakeld"</string>
+    <string name="settings_color_fix">"Negatieve kleuren fix"</string>
+    <string name="settings_color_fix_summary">"Schakel deze optie in als de blauwe en rode kleuren zijn omgekeerd"</string>
+
+    <string name="directory_chooser_select">"Selecteer \"%1$s\""</string>
+    <string name="directory_chooser_refresh">"Vernieuwen"</string>
+    <string name="directory_chooser_new">"Nieuw"</string>
+    <string name="directory_chooser_new_title">"Nieuwe naam voor map"</string>
+    <string name="directory_chooser_new_ok">"Ok"</string>
+    <string name="directory_chooser_new_cancel">"Annuleren"</string>
+    <string name="directory_chooser_error_message">"Map kan niet worden aangemaakt. Zorg ervoor dat u een beschrijfbare locatie kiest, bijv. SD-kaart."</string>
+    <string name="directory_chooser_not_writable_title">"Geselecteerde map is niet beschrijfbaar"</string>
+    <string name="directory_chooser_not_writable_message">"De applicatie lijkt geen rechten te hebben om de map %1$s te beschrijven. Dit kan opname-problemen veroorzaken."</string>
+    <string name="directory_chooser_ignore">"Negeren"</string>
+    <string name="directory_chooser_cancel">"Annuleren"</string>
+    <string name="directory_chooser_default">"Standaard"</string>
+
+    <string name="license_dont_allow">"Licentie check mislukt. Zorg ervoor dat je een internetverbinding hebt en dat je bent ingelogd bij Google Play.
+    "</string>
+    <string name="license_error">"Licentie check fout. Zorg ervoor dat je een internetverbinding hebt en dat je bent ingelogd bij Google Play.
+    "</string>
+
+    <string name="error_report_report">"Rapport"</string>
+    <string name="error_report_close">"Sluiten"</string>
+    <string name="error_report_text">"De bijlage bevat een gedetailleerd systeem logbestand met onder andere informatie over een fout. Voeg een reactie toe als je dat wilt."</string>
+    <string name="error_report_chooser">"E-mail foutenrapport met"</string>
+
+    <string name="rating_rate_title">"Beoordeling %1$s"</string>
+    <string name="rating_rate_message">"Als je %1$s met plezier gebruikt, neem dan even de tijd om het te beoordelen. Bedankt voor je steun!"</string>
+    <string name="rating_rate_now">"Beoordeel nu!"</string>
+    <string name="rating_remind">"Herinner me later"</string>
+    <string name="rating_no_thanks">"Nee, bedankt"</string>
+    <string name="rating_play_error">"Kan Google Play niet openen."</string>
+
+    <string name="help_stop_message">"Om te stoppen met de opname vergrendel het scherm en wacht 2 seconden. Als alternatief kan je de %1$s app heropenen."</string>
+    <string name="menu_send_bug_report">"Stuur bug report"</string>
+
+    <string name="notification_status_installing">"Initialiseren"</string>
+    <string name="notification_status_initializing">"Wachten op root-toegang"</string>
+    <string name="notification_status_ready">"Klaar"</string>
+    <string name="notification_status_starting">"Aan het starten"</string>
+    <string name="notification_status_recording">"Aan het opnemen"</string>
+    <string name="notification_status_stopping">"Aan het stoppen"</string>
+
+</resources>
