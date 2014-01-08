@@ -62,9 +62,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
     public static final String TIMEOUT_DIALOG_CLOSED_EXTRA = "TIMEOUT_DIALOG_CLOSED_EXTRA";
     public static final String RESTART_MUTE_EXTRA = "RESTART_MUTE_EXTRA";
-    public static final String PLAY_EXTRA = "PLAY_EXTRA";
+    public static final String PLAY_ACTION = "scr.intent.action.PLAY";
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
-    public static final String START_RECORDING_ACTION = "scr.intent.action.start_recording";
+    public static final String START_RECORDING_ACTION = "scr.intent.action.START_RECORDING";
     private static final String TAG = "scr_RecorderService";
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
@@ -342,7 +342,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                         .setContentText(message);
 
         Intent playIntent = new Intent(this, RecorderService.class);
-        playIntent.putExtra(PLAY_EXTRA, true);
+        playIntent.setAction(PLAY_ACTION);
         playIntent.setData(Uri.fromFile(outputFile));
         mBuilder.setContentIntent(PendingIntent.getService(this, 0, playIntent, PendingIntent.FLAG_ONE_SHOT));
         mBuilder.setAutoCancel(true);
@@ -666,7 +666,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             } else {
                 reinitializeView();
             }
-        } else if (intent.getBooleanExtra(PLAY_EXTRA, false)) {
+        } else if (PLAY_ACTION.equals(intent.getAction())) {
             playVideo(intent.getData());
         } else if (START_RECORDING_ACTION.equals(intent.getAction())) {
             startRecordingWhenReady();
