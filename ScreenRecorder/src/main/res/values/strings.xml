@@ -175,6 +175,10 @@
     <string name="settings_color_fix">Inverted color fix</string>
     <string name="settings_color_fix_summary">Toggle this option if blue and red colors are inverted</string>
 
+    <string name="settings_zigzag_fix">Zigzag fix</string>
+    <string name="settings_zigzag_fix_summary">Select if the recording contains random colourful stripes</string>
+    <string name="settings_zigzag_fix_cpu_only">Available only with CPU Image transformation</string>
+
     <string name="directory_chooser_select">Select \"%1$s\"</string>
     <string name="directory_chooser_refresh">Refresh</string>
     <string name="directory_chooser_new">New</string>
