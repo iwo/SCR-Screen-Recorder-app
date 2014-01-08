@@ -32,15 +32,26 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
     }
 
     public void initialize() {
+        if (executable == null) {
+            return;
+        }
+
         if (process == null || process.isStopped()) {
             process = new RecorderProcess(executable, this);
             this.fileName = null;
             new Thread(process).start();
+        } else {
+            try {
+                throw new IllegalStateException();
+            } catch (IllegalStateException e) {
+                Log.e(TAG, "Can't initialize process in state: " + process.getState(), e);
+            }
         }
     }
 
-    public void setExecutable(String executable) {
+    public void initialize(String executable) {
         this.executable = executable;
+        initialize();
     }
 
     public void destroy() {
@@ -64,21 +75,23 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         }
         switch (state) {
             case READY:
-                service.setReady(true);
+                service.setReady();
+                break;
+            case RECORDING:
+                service.recordingStarted();
                 break;
             case FINISHED:
                 service.recordingFinished(fps);
-                service.setReady(false);
                 break;
             case ERROR:
                 if (previousState == RecorderProcess.ProcessState.RECORDING
+                    || previousState == RecorderProcess.ProcessState.STARTING
                     || previousState == RecorderProcess.ProcessState.STOPPING
                     || previousState == RecorderProcess.ProcessState.FINISHED) {
                     handleRecordingError(exitValue);
                 } else {
                     handleStartupError(exitValue);
                 }
-                service.setReady(false);
                 break;
             default:
                 break;

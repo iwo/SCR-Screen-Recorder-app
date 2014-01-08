@@ -51,6 +51,9 @@
     <string name="cpu_error_title">CPU not supported</string>
     <string name="cpu_error_message">Your CPU architecture (%1$s) is not supported by %2$s.</string>
 
+    <string name="installation_error_title">Installation error</string>
+    <string name="installation_error_message">Can\'t install required files. Make sure you have some free space on your device and restart %1$s.</string>
+
     <string name="help_stop_title">How to stop</string>
     <string name="help_stop_ok">Got it!</string>
 
@@ -173,6 +176,10 @@
     <string name="settings_color_fix">Inverted color fix</string>
     <string name="settings_color_fix_summary">Toggle this option if blue and red colors are inverted</string>
 
+    <string name="settings_zigzag_fix">Zigzag fix</string>
+    <string name="settings_zigzag_fix_summary">Select if the recording contains random colourful stripes</string>
+    <string name="settings_zigzag_fix_cpu_only">Available only with CPU Image transformation</string>
+
     <string name="directory_chooser_select">Select \"%1$s\"</string>
     <string name="directory_chooser_refresh">Refresh</string>
     <string name="directory_chooser_new">New</string>
@@ -207,5 +214,15 @@
 
     <string name="help_stop_message">To stop recording lock the screen and wait 2 seconds. Alternatively you can simply reopen %1$s app.</string>
     <string name="menu_send_bug_report">Send bug report</string>
+
+    <string name="notification_status_installing">Initializing</string>
+    <string name="notification_status_initializing">Waiting for root access</string>
+    <string name="notification_status_ready">Ready</string>
+    <string name="notification_status_starting">Starting</string>
+    <string name="notification_status_recording">Recording</string>
+    <string name="notification_status_stopping">Stopping</string>
+
+    <string name="sale_title">Sale</string>
+    <string name="sale_text">Buy SCR Pro now and save %1$d %%! This offer ends on %2$s.</string>
 
 </resources>

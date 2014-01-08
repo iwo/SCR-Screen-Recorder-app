@@ -31,7 +31,6 @@ import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -41,7 +40,6 @@ import static com.iwobanas.screenrecorder.Tracker.BUY;
 import static com.iwobanas.screenrecorder.Tracker.BUY_ERROR;
 import static com.iwobanas.screenrecorder.Tracker.ERROR;
 import static com.iwobanas.screenrecorder.Tracker.ERROR_;
-import static com.iwobanas.screenrecorder.Tracker.INSTALLATION_ERROR;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE_ALLOW_;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE_DONT_ALLOW_;
@@ -64,8 +62,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
     public static final String TIMEOUT_DIALOG_CLOSED_EXTRA = "TIMEOUT_DIALOG_CLOSED_EXTRA";
     public static final String RESTART_MUTE_EXTRA = "RESTART_MUTE_EXTRA";
-    public static final String PLAY_EXTRA = "PLAY_EXTRA";
+    public static final String PLAY_ACTION = "scr.intent.action.PLAY";
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
+    public static final String START_RECORDING_ACTION = "scr.intent.action.START_RECORDING";
     private static final String TAG = "scr_RecorderService";
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
@@ -80,8 +79,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private RatingController mRatingController;
     private Handler mHandler;
     private File outputFile;
-    private boolean isRecording;
-    private boolean isReady;
+    private RecorderServiceState state = RecorderServiceState.INSTALLING;
     private boolean isTimeoutDisplayed;
     private boolean startOnReady;
     private long mRecordingStartTime;
@@ -122,32 +120,27 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void installExecutable() {
-        File executable = new File(getFilesDir(), "screenrec");
-        try {
-            if (Utils.isArm()) {
-                Utils.extractResource(this, R.raw.screenrec, executable);
-            } else if (Utils.isX86()) {
-                Utils.extractResource(this, R.raw.screenrec_x86, executable);
-            } else {
-                String message = String.format(getString(R.string.cpu_error_message), Build.CPU_ABI, getString(R.string.app_name));
-                displayErrorMessage(message, getString(R.string.cpu_error_title), false, false, -1);
-            }
+        new InstallExecutableAsyncTask(this, this).execute();
+    }
 
-            if (!executable.setExecutable(true, false)) {
-                Log.w(TAG, "Can't set executable property on " + executable.getAbsolutePath());
-            }
+    public void executableInstalled(String executable) {
+        setState(RecorderServiceState.INITIALIZING);
+        mNativeProcessRunner.initialize(executable);
+    }
 
-        } catch (IOException e) {
-            Log.e(TAG, "Can't install native executable", e);
-            EasyTracker.getTracker().sendEvent(ERROR, INSTALLATION_ERROR, INSTALLATION_ERROR, null);
-            EasyTracker.getTracker().sendException(Thread.currentThread().getName(), e, false);
-        }
-        mNativeProcessRunner.setExecutable(executable.getAbsolutePath());
+    @Override
+    public void recordingStarted() {
+        setState(RecorderServiceState.RECORDING);
+    }
+
+    private void setState(RecorderServiceState state) {
+        this.state = state;
+        startForeground();
     }
 
     @Override
     public void startRecording() {
-        if (!isReady) {
+        if (state != RecorderServiceState.READY) {
             return;
             //TODO: indicate to the user that recorder is not ready e.g. grey out button
         }
@@ -156,6 +149,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             displayStopHelp();
             return;
         }
+        setState(RecorderServiceState.STARTING);
         mRecorderOverlay.hide();
         if (mTaniosc) {
             mWatermark.start();
@@ -167,12 +161,19 @@ public class RecorderService extends Service implements IRecorderService, Licens
             mScreenOffReceiver.register();
         }
         outputFile = getOutputFile();
-        isRecording = true;
         mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
         mRecordingStartTime = System.currentTimeMillis();
 
         EasyTracker.getTracker().sendEvent(ACTION, START, START, null);
         EasyTracker.getTracker().sendEvent(SETTINGS, AUDIO, Settings.getInstance().getAudioSource().name(), null);
+    }
+
+    private synchronized void startRecordingWhenReady() {
+        if (state == RecorderServiceState.READY) {
+            startRecording();
+        } else {
+            startOnReady = true;
+        }
     }
 
     private File getOutputFile() {
@@ -218,7 +219,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void stopRecording() {
-        isRecording = false;
+        setState(RecorderServiceState.STOPPING);
         mNativeProcessRunner.stop();
         mTimeController.reset();
     }
@@ -241,8 +242,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     @Override
-    public synchronized void setReady(boolean ready) {
-        isReady = true;
+    public synchronized void setReady() {
+        setState(RecorderServiceState.READY);
         Settings.getInstance().applyShowTouches();
         if (startOnReady) {
             startOnReady = false;
@@ -289,8 +290,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private void reinitialize() {
         mTimeController.reset();
 
-        isRecording = false;
-        isReady = false;
+        if (state != RecorderServiceState.INSTALLING) {
+            setState(RecorderServiceState.INITIALIZING);
+        }
         mNativeProcessRunner.initialize();
     }
 
@@ -340,7 +342,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                         .setContentText(message);
 
         Intent playIntent = new Intent(this, RecorderService.class);
-        playIntent.putExtra(PLAY_EXTRA, true);
+        playIntent.setAction(PLAY_ACTION);
         playIntent.setData(Uri.fromFile(outputFile));
         mBuilder.setContentIntent(PendingIntent.getService(this, 0, playIntent, PendingIntent.FLAG_ONE_SHOT));
         mBuilder.setAutoCancel(true);
@@ -368,6 +370,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
                         .setContentTitle(getString(R.string.app_full_name));
+        builder.setWhen(0);
+        builder.setContentText(getStatusString());
 
         if (!mTaniosc && Settings.getInstance().getHideIcon()) {
             builder.setSmallIcon(R.drawable.transparent);
@@ -381,6 +385,24 @@ public class RecorderService extends Service implements IRecorderService, Licens
         builder.setContentIntent(intent);
 
         startForeground(FOREGROUND_NOTIFICATION_ID, builder.build());
+    }
+
+    private CharSequence getStatusString() {
+        switch (state) {
+            case INITIALIZING:
+                return getString(R.string.notification_status_initializing);
+            case INSTALLING:
+                return getString(R.string.notification_status_installing);
+            case READY:
+                return getString(R.string.notification_status_ready);
+            case STARTING:
+                return getString(R.string.notification_status_starting);
+            case RECORDING:
+                return getString(R.string.notification_status_recording);
+            case STOPPING:
+                return getString(R.string.notification_status_stopping);
+        }
+        return "";
     }
 
     @Override
@@ -399,6 +421,28 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 stopSelf();
+            }
+        });
+    }
+
+    @Override
+    public void cpuNotSupportedError() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String message = String.format(getString(R.string.cpu_error_message), Build.CPU_ABI, getString(R.string.app_name));
+                displayErrorMessage(message, getString(R.string.cpu_error_title), false, false, -1);
+            }
+        });
+    }
+
+    @Override
+    public void installationError() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String message = String.format(getString(R.string.installation_error_message), getString(R.string.app_name));
+                displayErrorMessage(message, getString(R.string.installation_error_title), false, false, -1);
             }
         });
     }
@@ -618,19 +662,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else if (intent.getBooleanExtra(RESTART_MUTE_EXTRA,false)) {
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 Settings.getInstance().setTemporaryMute(true);
-                synchronized (this) {
-                    if (isReady) {
-                        startRecording();
-                    } else {
-                        startOnReady = true;
-                    }
-                }
+                startRecordingWhenReady();
             } else {
                 reinitializeView();
             }
-        } else if (intent.getBooleanExtra(PLAY_EXTRA, false)) {
+        } else if (PLAY_ACTION.equals(intent.getAction())) {
             playVideo(intent.getData());
-        } else if (isRecording) {
+        } else if (START_RECORDING_ACTION.equals(intent.getAction())) {
+            startRecordingWhenReady();
+        } else if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
         } else {
@@ -642,12 +682,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void onDestroy() {
-        if (isRecording) {
+        if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_DESTROY, null);
         }
+        startOnReady = false;
         mWatermark.hide();
+        mWatermark.onDestroy();
         mRecorderOverlay.hide();
+        mRecorderOverlay.onDestroy();
         mNativeProcessRunner.destroy();
         mScreenOffReceiver.unregister();
         savePreferences();
@@ -692,7 +735,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public void dontAllow(int policyReason) {
         EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_DONT_ALLOW_ + policyReason, null);
         mTaniosc = true;
-        if (isRecording) {
+        if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             mWatermark.show();
             mWatermark.start();
         }
@@ -703,10 +746,19 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public void applicationError(int errorCode) {
         EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_ERROR_ + errorCode, null);
         mTaniosc = true;
-        if (isRecording) {
+        if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             mWatermark.show();
             mWatermark.start();
         }
         Toast.makeText(this, getString(R.string.license_error), Toast.LENGTH_LONG).show();
+    }
+
+    private static enum RecorderServiceState {
+        INSTALLING,
+        INITIALIZING,
+        READY,
+        STARTING,
+        RECORDING,
+        STOPPING
     }
 }
