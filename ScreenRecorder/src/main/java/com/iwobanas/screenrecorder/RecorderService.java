@@ -337,7 +337,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         String message = String.format(getString(R.string.recording_saved_message), outputFile.getName());
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setSmallIcon(R.drawable.ic_notification_saved)
                         .setContentTitle(getString(R.string.recording_saved_title))
                         .setContentText(message);
 

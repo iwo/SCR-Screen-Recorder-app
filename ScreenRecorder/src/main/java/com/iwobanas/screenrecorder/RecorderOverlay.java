@@ -33,7 +33,7 @@ public class RecorderOverlay extends AbstractScreenOverlay {
     protected View createView() {
         View view = getLayoutInflater().inflate(R.layout.recorder, null);
 
-        Button startButton = (Button) view.findViewById(R.id.start_button);
+        ImageButton startButton = (ImageButton) view.findViewById(R.id.start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

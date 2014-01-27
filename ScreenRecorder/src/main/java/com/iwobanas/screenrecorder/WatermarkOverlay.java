@@ -3,10 +3,9 @@ package com.iwobanas.screenrecorder;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 public class WatermarkOverlay extends AbstractScreenOverlay {
 
@@ -28,9 +27,10 @@ public class WatermarkOverlay extends AbstractScreenOverlay {
     @Override
     protected View createView() {
         View view = getLayoutInflater().inflate(R.layout.watermark, null);
-        TextView textView = (TextView) view.findViewById(R.id.watermark_text);
-        Drawable[] drawables = textView.getCompoundDrawables();
-        blinkAnimation = (AnimationDrawable) drawables[0];
+        ImageView imageView = (ImageView) view.findViewById(R.id.watermark_image);
+        imageView.getDrawable();
+        blinkAnimation = (AnimationDrawable) imageView.getDrawable();
+        stop();
         return view;
     }
 
