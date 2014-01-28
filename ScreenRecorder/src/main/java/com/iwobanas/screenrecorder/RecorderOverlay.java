@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -13,6 +14,7 @@ public class RecorderOverlay extends AbstractScreenOverlay {
     private static final String TAG = "scr_RecorderOverlay";
     private static final String RECORDER_OVERLAY_POSITION_X = "RECORDER_OVERLAY_POSITION_X";
     private static final String RECORDER_OVERLAY_POSITION_Y = "RECORDER_OVERLAY_POSITION_Y";
+    private static final String RECORDER_OVERLAY_GRAVITY = "RECORDER_OVERLAY_GRAVITY";
     private static final String SCR_UI_PREFERENCES = "scr_ui";
     private IRecorderService mService;
 
@@ -78,6 +80,7 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             SharedPreferences preferences = getContext().getSharedPreferences(SCR_UI_PREFERENCES, Context.MODE_PRIVATE);
             layoutParams.x = preferences.getInt(RECORDER_OVERLAY_POSITION_X, 0);
             layoutParams.y = preferences.getInt(RECORDER_OVERLAY_POSITION_Y, 0);
+            layoutParams.gravity = preferences.getInt(RECORDER_OVERLAY_GRAVITY, Gravity.CENTER);
             Log.v(TAG, "Initializing window position to " + layoutParams.x + ":" + layoutParams.y);
         }
         return layoutParams;
@@ -90,6 +93,7 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt(RECORDER_OVERLAY_POSITION_X, layoutParams.x);
             editor.putInt(RECORDER_OVERLAY_POSITION_Y, layoutParams.y);
+            editor.putInt(RECORDER_OVERLAY_GRAVITY, layoutParams.gravity);
             editor.commit();
         }
     }
