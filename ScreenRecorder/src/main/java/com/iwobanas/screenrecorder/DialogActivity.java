@@ -18,7 +18,7 @@ public class DialogActivity extends Activity {
     public static final String POSITIVE_EXTRA = "POSITIVE_EXTRA";
     public static final String POSITIVE_INTENT_EXTRA = "POSITIVE_INTENT_EXTRA";
     public static final String NEGATIVE_EXTRA = "NEGATIVE_EXTRA";
-    public static final String RESTART_EXTRA_EXTRA = "RESTART_EXTRA_EXTRA";
+    public static final String RESTART_ACTION_EXTRA = "RESTART_ACTION_EXTRA";
     public static final String REPORT_BUG_EXTRA = "REPORT_BUG_EXTRA";
     public static final String REPORT_BUG_ERROR_EXTRA = "REPORT_BUG_ERROR_EXTRA";
 
@@ -34,7 +34,7 @@ public class DialogActivity extends Activity {
 
         private boolean restart;
 
-        private String extra;
+        private String restartAction;
 
         private boolean positiveSelected;
 
@@ -83,7 +83,7 @@ public class DialogActivity extends Activity {
                 }
             }
             restart = intent.getBooleanExtra(RESTART_EXTRA, false);
-            extra = intent.getStringExtra(RESTART_EXTRA_EXTRA);
+            restartAction = intent.getStringExtra(RESTART_ACTION_EXTRA);
             return builder.create();
         }
 
@@ -93,8 +93,8 @@ public class DialogActivity extends Activity {
             if (activity == null) return;
             if (restart) {
                 Intent intent = new Intent(activity, RecorderService.class);
-                if (extra != null) {
-                    intent.putExtra(extra, true);
+                if (restartAction != null) {
+                    intent.setAction(restartAction);
                 }
                 intent.putExtra(POSITIVE_EXTRA, positiveSelected);
                 intent.putExtra(NEGATIVE_EXTRA, negativeSelected);

@@ -59,9 +59,9 @@ import static com.iwobanas.screenrecorder.Tracker.TIMEOUT_DIALOG;
 
 public class RecorderService extends Service implements IRecorderService, LicenseCheckerCallback {
 
-    public static final String STOP_HELP_DISPLAYED_EXTRA = "STOP_HELP_DISPLAYED_EXTRA";
-    public static final String TIMEOUT_DIALOG_CLOSED_EXTRA = "TIMEOUT_DIALOG_CLOSED_EXTRA";
-    public static final String RESTART_MUTE_EXTRA = "RESTART_MUTE_EXTRA";
+    public static final String STOP_HELP_DISPLAYED_ACTION = "scr.intent.action.STOP_HELP_DISPLAYED";
+    public static final String TIMEOUT_DIALOG_CLOSED_ACTION = "scr.intent.action.TIMEOUT_DIALOG_CLOSED";
+    public static final String RESTART_MUTE_ACTION = "scr.intent.action.RESTART_MUTE";
     public static final String PLAY_ACTION = "scr.intent.action.PLAY";
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
     public static final String START_RECORDING_ACTION = "scr.intent.action.START_RECORDING";
@@ -356,7 +356,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.help_stop_title));
         intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.help_stop_ok));
         intent.putExtra(DialogActivity.RESTART_EXTRA, true);
-        intent.putExtra(DialogActivity.RESTART_EXTRA_EXTRA, STOP_HELP_DISPLAYED_EXTRA);
+        intent.putExtra(DialogActivity.RESTART_ACTION_EXTRA, STOP_HELP_DISPLAYED_ACTION);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         mStopHelpDisplayed = true;
@@ -543,7 +543,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.microphone_busy_error_continue_mute));
                 intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.settings_cancel));
                 intent.putExtra(DialogActivity.RESTART_EXTRA, true);
-                intent.putExtra(DialogActivity.RESTART_EXTRA_EXTRA, RESTART_MUTE_EXTRA);
+                intent.putExtra(DialogActivity.RESTART_ACTION_EXTRA, RESTART_MUTE_ACTION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 logStats(exitValue, 0, 0);
@@ -616,7 +616,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.free_timeout_buy));
                 intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.free_timeout_no_thanks));
                 intent.putExtra(DialogActivity.RESTART_EXTRA, true);
-                intent.putExtra(DialogActivity.RESTART_EXTRA_EXTRA, TIMEOUT_DIALOG_CLOSED_EXTRA);
+                intent.putExtra(DialogActivity.RESTART_ACTION_EXTRA, TIMEOUT_DIALOG_CLOSED_ACTION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -645,16 +645,16 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground();
-        if (intent.getBooleanExtra(STOP_HELP_DISPLAYED_EXTRA, false)) {
+        if (STOP_HELP_DISPLAYED_ACTION.equals(intent.getAction())) {
             startRecording();
-        } else if (intent.getBooleanExtra(TIMEOUT_DIALOG_CLOSED_EXTRA, false)) {
+        } else if (TIMEOUT_DIALOG_CLOSED_ACTION.equals(intent.getAction())) {
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 buyPro();
             } else {
                 isTimeoutDisplayed = false;
                 mRecorderOverlay.show();
             }
-        } else if (intent.getBooleanExtra(RESTART_MUTE_EXTRA,false)) {
+        } else if (RESTART_MUTE_ACTION.equals(intent.getAction())) {
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 Settings.getInstance().setTemporaryMute(true);
                 startRecordingWhenReady();
