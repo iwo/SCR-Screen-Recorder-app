@@ -24,6 +24,10 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
 
     protected abstract WindowManager.LayoutParams getLayoutParams();
 
+    protected void updateLayoutParams() {
+        getWindowManager().updateViewLayout(mView, getLayoutParams());
+    }
+
     protected LayoutInflater getLayoutInflater() {
         return (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -60,5 +64,10 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
 
     @Override
     public void onDestroy() {
+    }
+
+    @Override
+    public boolean isVisible() {
+        return visible;
     }
 }

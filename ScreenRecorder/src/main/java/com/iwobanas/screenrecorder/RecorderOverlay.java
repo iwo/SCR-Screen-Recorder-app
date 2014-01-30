@@ -1,5 +1,6 @@
 package com.iwobanas.screenrecorder;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
@@ -7,7 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 
 public class RecorderOverlay extends AbstractScreenOverlay {
@@ -29,6 +30,23 @@ public class RecorderOverlay extends AbstractScreenOverlay {
     @Override
     public void show() {
         super.show();
+    }
+
+    public void highlightPosition() {
+        int x = layoutParams.x;
+        float delta = Utils.dipToPixels(getContext(), 20f);
+        ValueAnimator animator = ValueAnimator.ofInt(x, x + (int)delta, x - (int) (delta * 0.6f), x + (int) (delta * 0.3f), x);
+        animator.setDuration(750);
+        animator.setInterpolator(new DecelerateInterpolator(2f));
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int value = (Integer) animation.getAnimatedValue();
+                layoutParams.x = value;
+                updateLayoutParams();
+            }
+        });
+        animator.start();
     }
 
     @Override

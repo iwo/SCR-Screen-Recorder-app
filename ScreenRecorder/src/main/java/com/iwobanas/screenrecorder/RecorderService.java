@@ -72,7 +72,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private static final byte[] LICENSE_SALT = new byte[]{95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47, 122};
     private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmOZqTyb4AOB4IEWZiXd0SRYyJ2Y0xu1FBDmxvQqFG+D1wMJMKPxJlMNYwwS3AYjGgzhJzdWFd+oMaRV5uD9BWinHXyUppIrQcHfINv1J9VuwQnVQVYDG+EEiKOAGnnOLhg5EaJ5bdpvRyMLpD3wz9qcIx1YC99/TJC+ACABrhCfkc+U9hKyNe0m4C7DHBEW4SIq22bC1vPOw5KgbdruFxRoQiYU3GE7o8/fH37Vk9Rc+75QrtNYsJ9W0Vm7f2brN+lVwnQVEfsRVBr4k+yHVDVdo82SQfiUo6Q6d0S3HMCqMeRe8UQxGpPxRpE75cADR3LyyduRJ4+KJHPuY38AEAQIDAQAB";
     private WatermarkOverlay mWatermark = new WatermarkOverlay(this);
-    private IScreenOverlay mRecorderOverlay = new RecorderOverlay(this, this);
+    private RecorderOverlay mRecorderOverlay = new RecorderOverlay(this, this);
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this, this);
     private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this);
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
@@ -84,6 +84,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private boolean startOnReady;
     private long mRecordingStartTime;
     private boolean mTaniosc = true;
+    private boolean firstCommand = true;
+
     // Preferences
     private boolean mStopHelpDisplayed;
     private LicenseChecker mChecker;
@@ -674,9 +676,14 @@ public class RecorderService extends Service implements IRecorderService, Licens
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
         } else {
-            mRecorderOverlay.show();
+            if (mRecorderOverlay.isVisible() && !firstCommand) {
+                mRecorderOverlay.highlightPosition();
+            } else {
+                mRecorderOverlay.show();
+            }
             mWatermark.show();
         }
+        firstCommand = false;
         return START_NOT_STICKY;
     }
 
