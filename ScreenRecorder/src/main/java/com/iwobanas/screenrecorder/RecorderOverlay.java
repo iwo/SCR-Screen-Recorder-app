@@ -61,7 +61,20 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             }
         });
 
-        view.setOnTouchListener(new WindowDragListener(getLayoutParams()));
+        WindowDragListener dragListener = new WindowDragListener(getLayoutParams());
+        dragListener.setDragStartListener(new WindowDragListener.OnWindowDragStartListener() {
+            @Override
+            public void onDragStart() {
+                getView().setBackgroundResource(R.drawable.bg_h);
+            }
+        });
+        dragListener.setDragEndListener(new WindowDragListener.OnWindowDragEndListener() {
+            @Override
+            public void onDragEnd() {
+                getView().setBackgroundResource(R.drawable.bg);
+            }
+        });
+        view.setOnTouchListener(dragListener);
 
         mSettingsButton = (ImageButton) view.findViewById(R.id.settings_button);
         mSettingsButton.setOnClickListener(new View.OnClickListener() {

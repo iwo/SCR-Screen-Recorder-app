@@ -12,6 +12,9 @@ class WindowDragListener implements View.OnTouchListener {
     private int dragStartY;
     private WindowManager.LayoutParams params;
 
+    private OnWindowDragStartListener startListener;
+    private OnWindowDragEndListener endListener;
+
     WindowDragListener(WindowManager.LayoutParams params) {
         this.params = params;
     }
@@ -27,6 +30,9 @@ class WindowDragListener implements View.OnTouchListener {
         if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
             dragStartX = (int) motionEvent.getX();
             dragStartY = (int) motionEvent.getY();
+            if (startListener != null) {
+                startListener.onDragStart();
+            }
             return true;
         }
         if (motionEvent.getActionMasked() == MotionEvent.ACTION_MOVE) {
@@ -70,10 +76,29 @@ class WindowDragListener implements View.OnTouchListener {
             getWindowManager(view.getContext()).updateViewLayout(view, params);
             return true;
         }
+        if (motionEvent.getActionMasked() == MotionEvent.ACTION_UP && endListener != null) {
+            endListener.onDragEnd();
+        }
         return false;
     }
 
     private WindowManager getWindowManager(Context context) {
         return (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+    }
+
+    public void setDragStartListener(OnWindowDragStartListener startListener) {
+        this.startListener = startListener;
+    }
+
+    public void setDragEndListener(OnWindowDragEndListener endListener) {
+        this.endListener = endListener;
+    }
+
+    public interface OnWindowDragStartListener {
+        void onDragStart();
+    }
+
+    public interface OnWindowDragEndListener {
+        void onDragEnd();
     }
 }

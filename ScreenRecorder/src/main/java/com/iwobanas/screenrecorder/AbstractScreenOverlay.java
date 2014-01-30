@@ -36,16 +36,20 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
         return mContext;
     }
 
+    protected View getView() {
+        if (mView == null) {
+            mView = createView();
+        }
+        return mView;
+    }
+
     @Override
     public void show() {
         if (visible) {
             return;
         }
-        if (mView == null) {
-            mView = createView();
-        }
 
-        getWindowManager().addView(mView, getLayoutParams());
+        getWindowManager().addView(getView(), getLayoutParams());
         visible = true;
     }
 
