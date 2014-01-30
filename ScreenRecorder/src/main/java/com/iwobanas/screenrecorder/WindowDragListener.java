@@ -44,10 +44,10 @@ class WindowDragListener implements View.OnTouchListener {
             bottomY = frame.bottom - (int) motionEvent.getRawY() - view.getHeight() + dragStartY;
 
             if (leftX <= Math.abs(centerX) && leftX <= rightX) {
-                params.x = leftX;
+                params.x = Math.max(leftX, 0);
                 gravity |= Gravity.LEFT;
             } else if (rightX <= Math.abs(centerX) && rightX <= leftX) {
-                params.x = rightX;
+                params.x = Math.max(rightX, 0);
                 gravity |= Gravity.RIGHT;
             } else {
                 params.x = centerX;
@@ -55,10 +55,10 @@ class WindowDragListener implements View.OnTouchListener {
             }
 
             if (topY <= Math.abs(centerY) && topY <= bottomY) {
-                params.y = topY;
+                params.y = Math.max(topY, 0);
                 gravity |= Gravity.TOP;
             } else if (bottomY <= Math.abs(centerY) && bottomY <= topY) {
-                params.y = bottomY;
+                params.y = Math.max(bottomY, 0);
                 gravity |= Gravity.BOTTOM;
             } else {
                 params.y = centerY;
