@@ -71,7 +71,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     // Licensing
     private static final byte[] LICENSE_SALT = new byte[]{95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47, 122};
     private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmOZqTyb4AOB4IEWZiXd0SRYyJ2Y0xu1FBDmxvQqFG+D1wMJMKPxJlMNYwwS3AYjGgzhJzdWFd+oMaRV5uD9BWinHXyUppIrQcHfINv1J9VuwQnVQVYDG+EEiKOAGnnOLhg5EaJ5bdpvRyMLpD3wz9qcIx1YC99/TJC+ACABrhCfkc+U9hKyNe0m4C7DHBEW4SIq22bC1vPOw5KgbdruFxRoQiYU3GE7o8/fH37Vk9Rc+75QrtNYsJ9W0Vm7f2brN+lVwnQVEfsRVBr4k+yHVDVdo82SQfiUo6Q6d0S3HMCqMeRe8UQxGpPxRpE75cADR3LyyduRJ4+KJHPuY38AEAQIDAQAB";
-    private WatermarkOverlay mWatermark = new WatermarkOverlay(this);
+    private IScreenOverlay mWatermark = new WatermarkOverlay(this);
     private RecorderOverlay mRecorderOverlay = new RecorderOverlay(this, this);
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this, this);
     private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this);
@@ -101,7 +101,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         Settings.initialize(this);
         mTaniosc = getResources().getBoolean(R.bool.taniosc);
         mHandler = new Handler();
-        mWatermark.show();
 
         mRatingController = new RatingController(this);
         if (mRatingController.shouldShow()) {
@@ -154,10 +153,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
         setState(RecorderServiceState.STARTING);
         mRecorderOverlay.hide();
         if (mTaniosc) {
-            mWatermark.start();
+            mWatermark.show();
             mTimeController.start();
-        } else {
-            mWatermark.hide();
         }
         if (Settings.getInstance().getStopOnScreenOff()) {
             mScreenOffReceiver.register();
@@ -228,7 +225,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private void playVideo(Uri uri) {
         mRecorderOverlay.hide();
-        mWatermark.hide();
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
@@ -282,9 +278,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private synchronized void reinitializeView() {
         if (mTaniosc) {
-            mWatermark.stop();
-        } else {
-            mWatermark.show();
+            mWatermark.hide();
         }
         showRecorderOverlay();
     }
@@ -601,7 +595,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 mRecorderOverlay.hide();
-                mWatermark.hide();
 
                 Intent intent = new Intent(RecorderService.this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -681,7 +674,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             } else {
                 mRecorderOverlay.show();
             }
-            mWatermark.show();
         }
         firstCommand = false;
         return START_NOT_STICKY;
@@ -744,7 +736,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mTaniosc = true;
         if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             mWatermark.show();
-            mWatermark.start();
         }
         Toast.makeText(this, getString(R.string.license_dont_allow), Toast.LENGTH_LONG).show();
     }
@@ -755,7 +746,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mTaniosc = true;
         if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             mWatermark.show();
-            mWatermark.start();
         }
         Toast.makeText(this, getString(R.string.license_error), Toast.LENGTH_LONG).show();
     }
