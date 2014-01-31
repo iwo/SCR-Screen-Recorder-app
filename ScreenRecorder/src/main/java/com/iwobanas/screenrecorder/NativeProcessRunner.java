@@ -15,14 +15,11 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
 
     private String executable;
 
-    private String fileName;
-
     public NativeProcessRunner(IRecorderService service) {
         this.service = service;
     }
 
     public void start(String fileName, String rotation) {
-        this.fileName = fileName;
         Log.i(TAG, "start deviceId: " + service.getDeviceId());
         process.startRecording(fileName, rotation);
     }
@@ -38,7 +35,6 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
 
         if (process == null || process.isStopped()) {
             process = new RecorderProcess(executable, this);
-            this.fileName = null;
             new Thread(process).start();
         } else {
             try {
@@ -68,7 +64,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
     }
 
     @Override
-    public void onStateChange(RecorderProcess target, RecorderProcess.ProcessState state, RecorderProcess.ProcessState previousState, int exitValue, float fps) {
+    public void onStateChange(RecorderProcess target, RecorderProcess.ProcessState state, RecorderProcess.ProcessState previousState, RecordingInfo recordingInfo) {
         if (target != process) {
             Log.w(TAG, "received state update from old process");
             return;
@@ -81,16 +77,16 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
                 service.recordingStarted();
                 break;
             case FINISHED:
-                service.recordingFinished(fps);
+                service.recordingFinished(recordingInfo);
                 break;
             case ERROR:
                 if (previousState == RecorderProcess.ProcessState.RECORDING
                     || previousState == RecorderProcess.ProcessState.STARTING
                     || previousState == RecorderProcess.ProcessState.STOPPING
                     || previousState == RecorderProcess.ProcessState.FINISHED) {
-                    handleRecordingError(exitValue);
+                    handleRecordingError(recordingInfo);
                 } else {
-                    handleStartupError(exitValue);
+                    handleStartupError(recordingInfo);
                 }
                 break;
             default:
@@ -98,24 +94,24 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         }
     }
 
-    private void handleStartupError(int exitValue) {
-        if (exitValue == -1 || exitValue == 1) { // general error e.g. SuperSu Deny access
+    private void handleStartupError(RecordingInfo recordingInfo) {
+        if (recordingInfo.exitValue == -1 || recordingInfo.exitValue == 1) { // general error e.g. SuperSu Deny access
             Log.e(TAG, "Error code 1. Assuming no super user access");
             service.suRequired();
-            EasyTracker.getTracker().sendEvent(ERROR, SU_ERROR, exitValue == -1 ? NO_SU : SU_DENY, null);
-        } else if (exitValue == 127) { // command not found
+            EasyTracker.getTracker().sendEvent(ERROR, SU_ERROR, recordingInfo.exitValue == -1 ? NO_SU : SU_DENY, null);
+        } else if (recordingInfo.exitValue == 127) { // command not found
             //TODO: verify installation
             Log.e(TAG, "Error code 127. This may be an installation issue");
-            service.startupError(exitValue);
+            service.startupError(recordingInfo);
         } else {
-            logError(exitValue);
-            service.startupError(exitValue);
+            logError(recordingInfo.exitValue);
+            service.startupError(recordingInfo);
         }
     }
 
-    private void handleRecordingError(int exitValue) {
-        logError(exitValue);
-        switch (exitValue) {
+    private void handleRecordingError(RecordingInfo recordingInfo) {
+        logError(recordingInfo.exitValue);
+        switch (recordingInfo.exitValue) {
             case 302: // start timeout
             case 213: // start() error
             case 227: // MEDIA_RECORDER_EVENT_ERROR
@@ -126,31 +122,31 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
             case 243: // eglSwapBuffers
             case 245: // queueBuffer
             case 198: // SurfaceMediaSource error
-                service.mediaRecorderError(exitValue);
+                service.mediaRecorderError(recordingInfo);
                 break;
             case 229: // MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED
-                service.maxFileSizeReached(exitValue);
+                service.maxFileSizeReached(recordingInfo);
                 break;
             case 201:
-                service.outputFileError(exitValue);
+                service.outputFileError(recordingInfo);
                 break;
             case 237:
             case 251: // AudioSystem::isSourceActive()
-                service.microphoneBusyError(exitValue);
+                service.microphoneBusyError(recordingInfo);
                 break;
             case 209:
-                service.openGlError(exitValue);
+                service.openGlError(recordingInfo);
                 break;
             case 217:
-                service.secureSurfaceError(exitValue);
+                service.secureSurfaceError(recordingInfo);
                 break;
             case 250: // audioRecord.initCheck()
-                service.audioConfigError(exitValue);
+                service.audioConfigError(recordingInfo);
                 break;
             case 230: // MEDIA_RECORDER_INFO_MAX_DURATION_REACHED
                 // fall through - this should never happen unless user fiddles with Free version limitations
             default:
-                service.recordingError(exitValue);
+                service.recordingError(recordingInfo);
         }
     }
 
