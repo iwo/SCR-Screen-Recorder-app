@@ -56,6 +56,7 @@ public class SendStatsAsyncTask extends AsyncTask<Void, Void, Void> {
         params.put("defaults_all", s.currentEqualsDefault() ? "1" : "0");
         params.put("defaults_core", s.coreEqualsDefault() ? "1" : "0");
         params.put("defaults_stats", s.statsBasedDefaults() ? "1" : "0");
+        params.put("settings_modified", s.areSettingsModified() ? "1" : "0");
     }
 
     @Override
