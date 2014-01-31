@@ -522,7 +522,7 @@ public class Settings {
 
     public boolean currentEqualsDefault() {
         return audioSource == AudioSource.MIC
-                && resolution == getDefaultResolution()
+                && getResolution() == getDefaultResolution()
                 && frameRate == 15
                 && transformation == defaultTransformation
                 && samplingRate == defaultSamplingRate
@@ -531,13 +531,13 @@ public class Settings {
                 && !hideIcon
                 && !showTouches
                 && stopOnScreenOff
-                && outputDir == defaultOutputDir
+                && outputDir.equals(defaultOutputDir)
                 && videoEncoder == defaultVideoEncoder
                 && !verticalFrames;
     }
 
     public boolean coreEqualsDefault() {
-        return resolution == getDefaultResolution()
+        return getResolution() == getDefaultResolution()
                 && transformation == defaultTransformation
                 && samplingRate == defaultSamplingRate
                 && videoBitrate == defaultVideoBitrate
