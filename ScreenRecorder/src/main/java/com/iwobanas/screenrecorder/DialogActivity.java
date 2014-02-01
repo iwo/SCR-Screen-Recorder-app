@@ -95,6 +95,8 @@ public class DialogActivity extends Activity {
                 Intent intent = new Intent(activity, RecorderService.class);
                 if (restartAction != null) {
                     intent.setAction(restartAction);
+                } else {
+                    intent.setAction(RecorderService.DIALOG_CLOSED_ACTION);
                 }
                 intent.putExtra(POSITIVE_EXTRA, positiveSelected);
                 intent.putExtra(NEGATIVE_EXTRA, negativeSelected);

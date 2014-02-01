@@ -65,6 +65,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String PLAY_ACTION = "scr.intent.action.PLAY";
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
     public static final String START_RECORDING_ACTION = "scr.intent.action.START_RECORDING";
+    public static final String DIALOG_CLOSED_ACTION = "scr.intent.action.DIALOG_CLOSED";
+    public static final String RATING_DIALOG_CLOSED_ACTION = "scr.intent.action.RATING_DIALOG_CLOSED";
+    public static final String SETTINGS_CLOSED_ACTION = "scr.intent.action.SETTINGS_CLOSED";
+    public static final String NOTIFICATION_ACTION = "scr.intent.action.NOTIFICATION";
+    public static final String LOUNCHER_ACTION = "scr.intent.action.LOUNCHER";
     private static final String TAG = "scr_RecorderService";
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
@@ -375,8 +380,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
             builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         }
 
-        PendingIntent intent = PendingIntent.getService(this, 0, new Intent(this, RecorderService.class), PendingIntent.FLAG_ONE_SHOT);
-        builder.setContentIntent(intent);
+        Intent intent = new Intent(this, RecorderService.class);
+        intent.setAction(NOTIFICATION_ACTION);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        builder.setContentIntent(pendingIntent);
 
         startForeground(FOREGROUND_NOTIFICATION_ID, builder.build());
     }

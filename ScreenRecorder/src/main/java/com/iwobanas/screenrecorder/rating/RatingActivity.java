@@ -23,6 +23,7 @@ public class RatingActivity extends Activity {
 
         if (dialogDisplayed) {
             Intent intent = new Intent(this, RecorderService.class);
+            intent.setAction(RecorderService.RATING_DIALOG_CLOSED_ACTION);
             startService(intent);
             finish();
         } else {
