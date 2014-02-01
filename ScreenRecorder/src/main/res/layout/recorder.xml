@@ -12,9 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:minHeight="52dp"
         android:minWidth="0dp"
         android:paddingEnd="12dp"
-        android:paddingStart="1dp"
+        android:paddingStart="0dp"
         android:src="@drawable/ic_start" />
 
     <!-- ImageView is used instead of dividers because dividers are stretched vertically -->
@@ -29,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:minHeight="52dp"
         android:minWidth="54dip"
         android:paddingEnd="0dp"
         android:paddingStart="0dp"
@@ -45,9 +47,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:minHeight="52dp"
         android:minWidth="0dp"
-        android:paddingEnd="0dp"
-        android:paddingStart="5dp"
+        android:paddingEnd="1dp"
+        android:paddingStart="6dp"
         android:src="@drawable/ic_exit" />
 
 </com.iwobanas.screenrecorder.LongClickInterceptor>
