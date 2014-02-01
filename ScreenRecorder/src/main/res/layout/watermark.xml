@@ -5,20 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/watermark_text"
+    <ImageView
+        android:id="@+id/watermark_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:layout_gravity="right|center_vertical"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="40dp"
-        android:autoText="false"
-        android:drawableLeft="@anim/blink"
-        android:gravity="center"
-        android:text="@string/watermark_text"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="30sp" />
+        android:src="@anim/blink"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -15,6 +15,7 @@ public class RecorderActivity extends Activity {
         Settings.initialize(this);
         super.onCreate(savedInstanceState);
         Intent intent = new Intent(this, RecorderService.class);
+        intent.setAction(RecorderService.LOUNCHER_ACTION);
         startService(intent);
         finish();
     }

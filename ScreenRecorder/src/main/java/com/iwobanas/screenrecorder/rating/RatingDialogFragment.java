@@ -119,6 +119,7 @@ public class RatingDialogFragment extends DialogFragment {
         Activity activity = getActivity();
         if (activity != null) {
             Intent intent = new Intent(activity, RecorderService.class);
+            intent.setAction(RecorderService.RATING_DIALOG_CLOSED_ACTION);
             activity.startService(intent);
             activity.finish();
         }

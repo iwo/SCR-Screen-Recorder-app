@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.android.tools.build:gradle:0.8.+'
     }
 }
 apply plugin: 'android'
@@ -15,8 +15,8 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "17.0.0"
+    compileSdkVersion 19
+    buildToolsVersion '19.0.1'
 
     defaultConfig {
         minSdkVersion 15
@@ -31,6 +31,10 @@ android {
         pro {
             packageName "com.iwobanas.screenrecorder.pro"
         }
+    }
+
+    lintOptions {
+        disable 'MissingTranslation','ExtraTranslation'
     }
 
     signingConfigs {

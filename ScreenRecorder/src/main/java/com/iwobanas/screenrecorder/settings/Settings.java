@@ -32,6 +32,7 @@ public class Settings {
     private static final String OUTPUT_DIR_WRITABLE = "OUTPUT_DIR_WRITABLE";
     private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
     private static final String VERTICAL_FRAMES = "VERTICAL_FRAMES";
+    private static final String SETTINGS_MODIFIED = "SETTINGS_MODIFIED";
     private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
     private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
     private static final String DEFAULT_TRANSFORMATION = "DEFAULT_TRANSFORMATION";
@@ -69,6 +70,7 @@ public class Settings {
     private boolean outputDirWritable;
     private ShowTouchesController showTouchesController;
     private AudioDriver audioDriver;
+    private boolean settingsModified;
     private int appVersion;
     private boolean appUpdated;
 
@@ -102,6 +104,8 @@ public class Settings {
     }
 
     private void readPreferences() {
+        settingsModified = preferences.getBoolean(SETTINGS_MODIFIED, false);
+
         String audioSource = preferences.getString(AUDIO_SOURCE, AudioSource.MIC.name());
         this.audioSource = AudioSource.valueOf(audioSource);
 
@@ -289,6 +293,18 @@ public class Settings {
         return (time > 24 * 60 * 60 * 1000);
     }
 
+    private void settingsModified(SharedPreferences.Editor editor) {
+        if (!settingsModified) {
+            settingsModified = true;
+            editor.putBoolean(SETTINGS_MODIFIED, true);
+        }
+        editor.commit();
+    }
+
+    public boolean areSettingsModified() {
+        return settingsModified;
+    }
+
     public AudioSource getAudioSource() {
         return audioSource;
     }
@@ -297,7 +313,7 @@ public class Settings {
         this.audioSource = audioSource;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(AUDIO_SOURCE, audioSource.name());
-        editor.commit();
+        settingsModified(editor);
     }
 
     public boolean getTemporaryMute() {
@@ -321,7 +337,7 @@ public class Settings {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt(RESOLUTION_WIDTH, resolution.getWidth());
             editor.putInt(RESOLUTION_HEIGHT, resolution.getHeight());
-            editor.commit();
+            settingsModified(editor);
         }
     }
 
@@ -344,7 +360,7 @@ public class Settings {
         frameRate = value;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(FRAME_RATE, frameRate);
-        editor.commit();
+        settingsModified(editor);
     }
 
     public Transformation getTransformation() {
@@ -355,7 +371,7 @@ public class Settings {
         this.transformation = transformation;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(TRANSFORMATION, transformation.name());
-        editor.commit();
+        settingsModified(editor);
     }
 
     public SamplingRate getSamplingRate() {
@@ -366,7 +382,7 @@ public class Settings {
         this.samplingRate = samplingRate;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(SAMPLING_RATE, samplingRate.name());
-        editor.commit();
+        settingsModified(editor);
     }
 
     public VideoBitrate getVideoBitrate() {
@@ -377,7 +393,7 @@ public class Settings {
         this.videoBitrate = videoBitrate;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(VIDEO_BITRATE, videoBitrate.name());
-        editor.commit();
+        settingsModified(editor);
     }
 
     public boolean getColorFix() {
@@ -388,7 +404,7 @@ public class Settings {
         this.colorFix = colorFix;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(COLOR_FIX, colorFix);
-        editor.commit();
+        settingsModified(editor);
     }
 
     public boolean getHideIcon() {
@@ -399,7 +415,7 @@ public class Settings {
         this.hideIcon = hideIcon;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(HIDE_ICON, hideIcon);
-        editor.commit();
+        settingsModified(editor);
     }
 
     public boolean getShowTouches() {
@@ -411,7 +427,7 @@ public class Settings {
         showTouchesController.setShowTouches(showTouches);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(SHOW_TOUCHES, showTouches);
-        editor.commit();
+        settingsModified(editor);
     }
 
     public boolean getStopOnScreenOff() {
@@ -422,7 +438,7 @@ public class Settings {
         this.stopOnScreenOff = stopOnScreenOff;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(STOP_ON_SCREEN_OFF, stopOnScreenOff);
-        editor.commit();
+        settingsModified(editor);
     }
 
     public int getVideoEncoder() {
@@ -437,7 +453,7 @@ public class Settings {
         this.videoEncoder = videoEncoder;
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(VIDEO_ENCODER, videoEncoder);
-        editor.commit();
+        settingsModified(editor);
     }
 
     public File getOutputDir() {
@@ -452,7 +468,7 @@ public class Settings {
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(OUTPUT_DIR, outputDir.getAbsolutePath());
-        editor.commit();
+        settingsModified(editor);
     }
 
     public File getDefaultOutputDir() {
@@ -464,7 +480,7 @@ public class Settings {
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(VERTICAL_FRAMES, verticalFrames);
-        editor.commit();
+        settingsModified(editor);
     }
 
     public boolean getVerticalFrames() {
@@ -517,12 +533,15 @@ public class Settings {
         verticalFrames = false;
         editor.remove(VERTICAL_FRAMES);
 
+        settingsModified = false;
+        editor.remove(SETTINGS_MODIFIED);
+
         editor.commit();
     }
 
     public boolean currentEqualsDefault() {
         return audioSource == AudioSource.MIC
-                && resolution == getDefaultResolution()
+                && getResolution() == getDefaultResolution()
                 && frameRate == 15
                 && transformation == defaultTransformation
                 && samplingRate == defaultSamplingRate
@@ -531,13 +550,13 @@ public class Settings {
                 && !hideIcon
                 && !showTouches
                 && stopOnScreenOff
-                && outputDir == defaultOutputDir
+                && outputDir.equals(defaultOutputDir)
                 && videoEncoder == defaultVideoEncoder
                 && !verticalFrames;
     }
 
     public boolean coreEqualsDefault() {
-        return resolution == getDefaultResolution()
+        return getResolution() == getDefaultResolution()
                 && transformation == defaultTransformation
                 && samplingRate == defaultSamplingRate
                 && videoBitrate == defaultVideoBitrate

@@ -9,6 +9,7 @@ import com.iwobanas.screenrecorder.settings.Settings;
 
 import org.apache.http.client.methods.HttpGet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -21,15 +22,21 @@ public class SendStatsAsyncTask extends AsyncTask<Void, Void, Void> {
 
     private Map<String, String> params = new HashMap<String, String>();
 
-    public SendStatsAsyncTask(String packageName, int appVersion, String deviceId, String recordingId, int errorCode, long size, long time, float fps) {
+    public SendStatsAsyncTask(String packageName, int appVersion, String deviceId, RecordingInfo recordingInfo) {
         params.put("package_name", packageName);
         params.put("app_version", String.valueOf(appVersion));
         params.put("device_id", deviceId);
-        params.put("recording_id", recordingId);
-        params.put("error_code", String.valueOf(errorCode));
-        params.put("recording_size", String.valueOf(size));
-        params.put("recording_time", String.valueOf(time));
-        params.put("recording_fps", String.valueOf(fps));
+        if (recordingInfo.fileName != null) {
+            params.put("recording_id", new File(recordingInfo.fileName).getName());
+        }
+        params.put("error_code", String.valueOf(recordingInfo.exitValue));
+        params.put("recording_size", String.valueOf(recordingInfo.size));
+        params.put("recording_time", String.valueOf(recordingInfo.time));
+        params.put("recording_fps", String.valueOf(recordingInfo.fps));
+        params.put("rotation", String.valueOf(recordingInfo.rotation));
+        params.put("adjusted_rotation", String.valueOf(recordingInfo.adjustedRotation));
+        params.put("vertical_input", String.valueOf(recordingInfo.verticalInput));
+        params.put("rotate_view", String.valueOf(recordingInfo.rotateView));
     }
 
     @Override
@@ -51,11 +58,17 @@ public class SendStatsAsyncTask extends AsyncTask<Void, Void, Void> {
         params.put("transformation", s.getTransformation().name());
         params.put("video_bitrate", s.getVideoBitrate().getCommand());
         params.put("sampling_rate", s.getSamplingRate().getCommand());
-        params.put("color_fix", s.getColorFix() ? "1" : "0");
+        params.put("color_fix", formatBoolean(s.getColorFix()));
         params.put("video_encoder", String.valueOf(s.getVideoEncoder()));
-        params.put("defaults_all", s.currentEqualsDefault() ? "1" : "0");
-        params.put("defaults_core", s.coreEqualsDefault() ? "1" : "0");
-        params.put("defaults_stats", s.statsBasedDefaults() ? "1" : "0");
+        params.put("vertical_frames", formatBoolean(s.getVerticalFrames()));
+        params.put("defaults_all", formatBoolean(s.currentEqualsDefault()));
+        params.put("defaults_core", formatBoolean(s.coreEqualsDefault()));
+        params.put("defaults_stats", formatBoolean(s.statsBasedDefaults()));
+        params.put("settings_modified", formatBoolean(s.areSettingsModified()));
+    }
+
+    private String formatBoolean(boolean value) {
+        return value ? "1" : "0";
     }
 
     @Override

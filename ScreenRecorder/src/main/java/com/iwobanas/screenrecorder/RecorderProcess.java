@@ -34,11 +34,9 @@ class RecorderProcess implements Runnable {
 
     private OnStateChangeListener onStateChangeListener;
 
-    private int exitValue = -1;
-
     private Integer exitValueOverride;
 
-    private float fps = -1.0f;
+    private RecordingInfo recordingInfo = new RecordingInfo();
 
     private boolean destroying = false;
 
@@ -85,6 +83,9 @@ class RecorderProcess implements Runnable {
                     configureTimeout.cancel();
 
                     status = reader.readLine();
+                    parseInputParams(status);
+
+                    status = reader.readLine();
                     checkStatus("recording", status, 306);
                     startTimeout.cancel();
 
@@ -120,23 +121,29 @@ class RecorderProcess implements Runnable {
 
             stopTimeout.cancel();
 
-            exitValue = process.exitValue();
+            recordingInfo.exitValue = process.exitValue();
         }
 
-        if (destroying && (exitValue == 200 || exitValue == 222)) {
+        if (destroying && (recordingInfo.exitValue == 200 || recordingInfo.exitValue == 222)) {
             setState(ProcessState.FINISHED);
         } else if (exitValueOverride != null) {
-            if (exitValue < 200) {
-                exitValue = exitValueOverride;
+            if (recordingInfo.exitValue < 165) {
+                recordingInfo.exitValue = exitValueOverride;
             }
             setErrorState();
         } else if (state == ProcessState.STOPPING) {
+            if (recordingInfo.exitValue == 0) {
+                recordingInfo.exitValue = -1; // use -1 as "success" for backward compatibility
+            } else {
+                Log.e(TAG, "Unexpected exit value: " + recordingInfo.exitValue);
+                recordingInfo.exitValue += 1000;
+            }
             setState(ProcessState.FINISHED);
         } else {
             setErrorState();
         }
 
-        Log.d(TAG, "Return value: " + exitValue);
+        Log.d(TAG, "Return value: " + recordingInfo.exitValue);
     }
 
     private void setErrorState() {
@@ -152,7 +159,7 @@ class RecorderProcess implements Runnable {
             return false;
         if (Settings.getInstance().getVideoEncoder() < 0)
             return false;
-        switch (exitValue) {
+        switch (recordingInfo.exitValue) {
             case 216:
             case 217:
             case 219:
@@ -182,13 +189,30 @@ class RecorderProcess implements Runnable {
     private void parseFps(String fpsString) {
         if (fpsString != null && fpsString.startsWith("fps ") && fpsString.length() > 4) {
             try {
-                fps = Float.parseFloat(fpsString.substring(4));
+                recordingInfo.fps = Float.parseFloat(fpsString.substring(4));
             } catch (NumberFormatException e) {
-                fps = -1;
+                recordingInfo.fps = -1;
             }
         }
-        if (!destroying && fps < 0) {
+        if (!destroying && recordingInfo.fps < 0) {
             Log.e(TAG, "Incorrect fps value received \"" + fpsString + "\"");
+        }
+    }
+
+    private void parseInputParams(String params) {
+        Log.v(TAG, "Input params: " + params);
+        boolean parsed = false;
+        if (params != null && params.startsWith("rotateView")) {
+            String[] kv = params.split("\\s");
+            try {
+                recordingInfo.rotateView = Integer.parseInt(kv[1]);
+                recordingInfo.verticalInput = Integer.parseInt(kv[3]);
+                recordingInfo.adjustedRotation = Integer.parseInt(kv[5]);
+                parsed = true;
+            } catch (NumberFormatException ignored) {}
+        }
+        if (!destroying && !parsed) {
+            Log.e(TAG, "Incorrect input params received \"" + params + "\"");
         }
     }
 
@@ -197,7 +221,7 @@ class RecorderProcess implements Runnable {
         ProcessState previousState = this.state;
         this.state = state;
         if (!destroying && onStateChangeListener != null) {
-            onStateChangeListener.onStateChange(this, state, previousState, exitValue, fps);
+            onStateChangeListener.onStateChange(this, state, previousState, recordingInfo);
         }
     }
 
@@ -212,6 +236,8 @@ class RecorderProcess implements Runnable {
             //TODO: add error handling
             return;
         }
+        recordingInfo.fileName = fileName;
+        recordingInfo.rotation = rotation;
         Settings settings = Settings.getInstance();
         setState(ProcessState.STARTING);
         configureTimeout.start();
@@ -396,7 +422,7 @@ class RecorderProcess implements Runnable {
     }
 
     public static interface OnStateChangeListener {
-        void onStateChange(RecorderProcess target, ProcessState state, ProcessState previousState, int exitValue, float fps);
+        void onStateChange(RecorderProcess target, ProcessState state, ProcessState previousState, RecordingInfo recordingInfo);
     }
 
     public static enum ProcessState {

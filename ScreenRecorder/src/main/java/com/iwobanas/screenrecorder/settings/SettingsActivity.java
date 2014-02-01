@@ -68,6 +68,7 @@ public class SettingsActivity extends Activity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, RecorderService.class);
+        intent.setAction(RecorderService.SETTINGS_CLOSED_ACTION);
         startService(intent);
         super.onBackPressed();
     }

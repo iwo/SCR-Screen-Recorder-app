@@ -2,6 +2,8 @@ package com.iwobanas.screenrecorder;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -111,5 +113,10 @@ public class Utils {
 
     public static boolean isArm() {
         return Build.CPU_ABI.contains("arm");
+    }
+
+    public static float dipToPixels(Context context, float dipValue) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
     }
 }
