@@ -116,7 +116,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         readPreferences();
         installExecutable();
 
-        mRecorderOverlay.show();
+        mRecorderOverlay.animateShow();
         reinitialize();
 
         if (!mTaniosc) {
@@ -261,7 +261,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private void showRecorderOverlay() {
         if (!isTimeoutDisplayed) {
-            mRecorderOverlay.show();
+            mRecorderOverlay.animateShow();
         }
         mScreenOffReceiver.unregister();
 
@@ -650,25 +650,26 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground();
-        if (STOP_HELP_DISPLAYED_ACTION.equals(intent.getAction())) {
+        String action = intent.getAction();
+        if (STOP_HELP_DISPLAYED_ACTION.equals(action)) {
             startRecording();
-        } else if (TIMEOUT_DIALOG_CLOSED_ACTION.equals(intent.getAction())) {
+        } else if (TIMEOUT_DIALOG_CLOSED_ACTION.equals(action)) {
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 buyPro();
             } else {
                 isTimeoutDisplayed = false;
                 mRecorderOverlay.show();
             }
-        } else if (RESTART_MUTE_ACTION.equals(intent.getAction())) {
+        } else if (RESTART_MUTE_ACTION.equals(action)) {
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 Settings.getInstance().setTemporaryMute(true);
                 startRecordingWhenReady();
             } else {
                 reinitializeView();
             }
-        } else if (PLAY_ACTION.equals(intent.getAction())) {
+        } else if (PLAY_ACTION.equals(action)) {
             playVideo(intent.getData());
-        } else if (START_RECORDING_ACTION.equals(intent.getAction())) {
+        } else if (START_RECORDING_ACTION.equals(action)) {
             startRecordingWhenReady();
         } else if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             stopRecording();
@@ -677,7 +678,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
             if (mRecorderOverlay.isVisible() && !firstCommand) {
                 mRecorderOverlay.highlightPosition();
             } else {
-                mRecorderOverlay.show();
+                if (LOUNCHER_ACTION.equals(action) || NOTIFICATION_ACTION.equals(action)) {
+                    mRecorderOverlay.animateShow();
+                } else {
+                    mRecorderOverlay.show();
+                }
             }
         }
         firstCommand = false;
@@ -693,7 +698,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         startOnReady = false;
         mWatermark.hide();
         mWatermark.onDestroy();
-        mRecorderOverlay.hide();
+        mRecorderOverlay.animateHide();
         mRecorderOverlay.onDestroy();
         mNativeProcessRunner.destroy();
         mScreenOffReceiver.unregister();

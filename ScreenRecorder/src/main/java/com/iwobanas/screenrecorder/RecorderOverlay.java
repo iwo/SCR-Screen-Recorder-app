@@ -27,11 +27,6 @@ public class RecorderOverlay extends AbstractScreenOverlay {
         mService = service;
     }
 
-    @Override
-    public void show() {
-        super.show();
-    }
-
     public void highlightPosition() {
         int x = layoutParams.x;
         float delta = Utils.dipToPixels(getContext(), 20f);
@@ -126,6 +121,39 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             editor.putInt(RECORDER_OVERLAY_POSITION_Y, layoutParams.y);
             editor.putInt(RECORDER_OVERLAY_GRAVITY, layoutParams.gravity);
             editor.commit();
+        }
+    }
+
+    @Override
+    public void show() {
+        if (!isVisible()) {
+            getLayoutParams().windowAnimations = 0;
+        }
+        super.show();
+    }
+
+    public void animateShow() {
+        if (!isVisible()) {
+            getLayoutParams().windowAnimations = android.R.style.Animation_Translucent;
+        }
+        super.show();
+    }
+
+    @Override
+    public void hide() {
+        setHideAnimation(0);
+        super.hide();
+    }
+
+    public void animateHide() {
+        setHideAnimation(android.R.style.Animation_Translucent);
+        super.hide();
+    }
+
+    private void setHideAnimation(int animation) {
+        if (isVisible() && getLayoutParams().windowAnimations != animation) {
+            getLayoutParams().windowAnimations = animation;
+            updateLayoutParams();
         }
     }
 }
