@@ -1,0 +1,208 @@
+<resources>
+    <string name="free_app_name">"SCR Gratis"</string>
+    <string name="free_app_full_name">"SCR Grabadora de Pantalla Gratis"</string>
+    <string name="pro_app_name">"SCR Pro"</string>
+    <string name="pro_app_full_name">"SCR Grabadora de Pantalla Pro"</string>
+    <string name="recording_saved_title">"SCR Grabación Guardada"</string>
+    <string name="recording_saved_message">"Grabación guardada en %1$s"</string>
+    <string name="recording_saved_toast">"Grabación guardada en %1$s"</string>
+    <string name="max_file_size_reached_toast">"Tamaño máximo de archivo alcanzado. Grabación guardada en %1$s"</string>
+    <string name="start">"Iniciar"</string>
+    <string name="play">"Play"</string>
+
+    <string name="su_required_title">"Se requiere acceso root"</string>
+    <string name="su_required_message">"Para ejecutar cualquier aplicación que grabe la pantalla, su teléfono/tablet debe estar rooteada. Hay un montón de tutoriales en Internet que explican cómo rootear los diferentes dispositivos. Vuelva a intentarlo cuando su dispositivo esté rooteado!"</string>
+    <string name="su_required_help">"¿Qué es \"rootear\"?"</string>
+    <string name="su_required_help_link">"http://www.youtube.com/watch?v=Lg2C8t8eA5U"</string>
+
+    <string name="error_dialog_title">"Algo salió mal :-("</string>
+    <string name="startup_error_message">"El informe de errores en el anonimato se enviará automáticamente para ayudarnos a arreglar el problema. No dude en ponerse en contacto a través de correo electrónico de soporte citando el error S%1$d."</string>
+    <string name="recording_error_message">"El informe de errores anónimo, se enviará automáticamente para ayudarnos a arreglar el problema. No dude en ponerse en contacto a través de correo electrónico de soporte citando el error R%1$d."</string>
+
+    <string name="media_recorder_error_title">"Error de grabación"</string>
+    <string name="media_recorder_error_message">"Intente cambiar la resolución o el cambio de transformación de imagen entre GPU/CPU. Por favor, desinstala otras aplicaciones que graben la pantalla en el caso de que usted tenga otras instaladas. Si el problema persiste, póngase en contacto a través de correo electrónico de soporte citando el error R%1$d."</string>
+
+    <string name="output_file_error_title">"No se puede crear el archivo de vídeo"</string>
+    <string name="output_file_error_message">"SCR no pudo crear %1$s archivo de vídeo. Asegúrese de que la ruta de guardado seleccionada es modificable y que la tarjeta SD no está bloqueada mediante la conexión USB."</string>
+
+    <string name="microphone_busy_error_title">"Micrófono ocupado"</string>
+    <string name="microphone_busy_error_message">"
+        Sólo una aplicación puede utilizar el micrófono a la vez. Esta es una limitación del sistema Android. Cierre la otra aplicación que utiliza el micrófono (por ejemplo, Google! O Skype) o continuar con la grabación sin audio.
+    "</string>
+    <string name="microphone_busy_error_continue_mute">"Continuar sin sonido"</string>
+
+    <string name="screen_protected_error_title">"Pantalla protegida"</string>
+    <string name="screen_protected_error_message">"La pantalla no puede ser capturada porque algunas aplicaciones están utilizando el contenido de la pantalla lo más seguro."</string>
+
+    <string name="opengl_error_title">"GPU no soportada"</string>
+    <string name="opengl_error_message">"Su tarjeta gráfica no es compatible. Cambie la transformación de imagen a la opción CPU o cambie el codificador de vídeo.
+    "</string>
+
+    <string name="audio_config_error_title">"Error de audio"</string>
+    <string name="audio_config_error_message">"Configuración de audio no compatible. Intente cambiar la configuración de audio de SCR."</string>
+
+    <string name="android_version_error_title">"Versión de Android no soportada"</string>
+    <string name="android_version_error_message">"Su versión de Android no es compatible."</string>
+
+    <string name="cpu_error_title">"CPU no admitida"</string>
+    <string name="cpu_error_message">"Su arquitectura de CPU (%1$s) no está soportada por %2$s."</string>
+
+    <string name="installation_error_title">"Error de instalación"</string>
+    <string name="installation_error_message">"No se pueden instalar los archivos necesarios. Asegúrese de que tiene algo de espacio libre en el dispositivo y reinicie %1$s."</string>
+
+    <string name="help_stop_title">"Cómo parar la grabación"</string>
+    <string name="help_stop_ok">"¡Lo tengo!"</string>
+
+    <string name="free_timeout_title">"Tiempo límite expirado"</string>
+    <string name="free_timeout_message">"Compra SCR Screen Recorder Pro para obtener el tiempo de grabación ilimitado y sin marca de agua en el video."</string>
+    <string name="free_timeout_buy">"¡Comprar ahora!"</string>
+    <string name="free_timeout_no_thanks">"No, gracias"</string>
+    <string name="hide_icon_title">"Característica Pro "</string>
+    <string name="hide_icon_message">"Comprar SCR Screen Recorder Pro para ocultar la marca de agua y el icono de notificación. ¡También tendrás tiempo de grabación ilimitado!"</string>
+
+    <string name="buy_error_title">"Error de Google Play"</string>
+    <string name="buy_error_message">"Por favor, busca SCR Screen Recorder Pro en Google Play"</string>
+
+    <string name="settings_activity_label">"Ajustes SCR"</string>
+    <string name="settings_title">"Ajustes"</string>
+    <string name="settings_ok">"OK"</string>
+    <string name="settings_reset">"Restaurar valores predeterminados"</string>
+    <string name="settings_cancel">"Cancelar"</string>
+
+    <string name="settings_video_category">"Vídeo"</string>
+
+    <string name="settings_video_encoder">"Codificador"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 (inestable)"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"Auto"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 (lento)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"Android codificador incorporado %1$s"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg MPEG4 software codificador"</string>
+
+    <string name="settings_resolution">"Resolución"</string>
+    <string name="settings_resolution_short">"%1$dx%2$d"</string>
+    <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
+    <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp horizontal"</string>
+    <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp con padding"</string>
+    <string name="settings_resolution_max">"%1$dx%2$d - Max"</string>
+    <string name="settings_resolution_half">"%1$dx%2$d - Media"</string>
+    <string name="settings_resolution_unstable">"(Inestable)"</string>
+
+    <string name="settings_transformation">"Transformación de la imagen"</string>
+    <string name="settings_transformation_cpu">"CPU"</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"GPU +"</string>
+    <string name="settings_transformation_cpu_summary">"Imagen de la pantalla de proceso del procesador (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Imagen de la pantalla de proceso de la tarjeta gráfica (%1$s)"</string>
+    <string name="settings_transformation_sw_summary">"No disponible en codificador de software"</string>
+
+    <string name="settings_video_bitrate">"Bitrate"</string>
+    <string name="settings_video_bitrate_summary">"alrededor de %1$s dependiendo del codificador"</string>
+    <string name="settings_video_bitrate_default">"Por defecto"</string>
+
+
+    <string name="settings_frame_rate">"Frecuencia de imagen"</string>
+    <string name="settings_frame_rate_max">"Máximo"</string>
+    <string name="settings_frame_rate_max_short">"Max"</string>
+    <string name="settings_frame_rate_up_to">"Hasta %1$d fps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
+    <string name="settings_frame_rate_summary">"Hasta %1$dfps,  limitado por las capacidades del hardware"</string>
+    <string name="settings_frame_rate_max_summary">"Máximo permitido por el hardware"</string>
+
+    <string name="settings_orientation">"Orientación"</string>
+    <string name="settings_orientation_description">"
+        Por defecto los fotogramas de vídeo son siempre horizontales y los metadatos de rotación se añaden a las grabaciones. YouTube y reproductores de vídeo por defecto de Android reproducen esos videos correctamente, pero algunos reproductores de PC (por ejemplo VLC) ignorar los metadatos de rotación y se muestra en modo horizontal. Puede habilitar los fotogramas verticales de abajo, pero utilice esta opción con cautela, ya que muchos dispositivos puede que no pueda ni grabar ni reproducir vídeos con fotogramas verticales.
+    "</string>
+    <string name="settings_orientation_auto">"Auto"</string>
+    <string name="settings_orientation_portrait">"Retrato"</string>
+    <string name="settings_orientation_landscape">"Paisaje"</string>
+    <string name="settings_orientation_clockwise">"Girar en sentido del reloj"</string>
+    <string name="settings_orientation_anticlockwise">"Girar en sentido contrario al reloj"</string>
+
+    <string name="settings_vertical_frames">"Fotogramas verticales"</string>
+    <string name="settings_vertical_frames_warning">"Los reproductores de vídeo en muchos dispositivos no pueden reproducir los vídeos con los fotogramas verticales. Si esta opción está seleccionada, los metadatos de orientación se añaden al vídeo para que se muestre correctamente en el reproductor de Android, YouTube, etc"</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
+    <string name="settings_vertical_frames_cancel">"Cancelar"</string>
+
+    <string name="settings_audio_category">"Audio"</string>
+    <string name="settings_audio_source">"Fuente"</string>
+    <string name="settings_audio_mic">"Micrófono"</string>
+    <string name="settings_audio_mute">"Sin sonido"</string>
+    <string name="settings_audio_internal">"Interno"</string>
+    <string name="settings_audio_internal_experimental">"Interno (experimental)"</string>
+    <string name="settings_audio_mic_summary">"Micrófono. Sólo una aplicación puede utilizar el micrófono a la vez!"</string>
+    <string name="settings_audio_mute_summary">"Silencio. Sin Pista de audio"</string>
+    <string name="settings_audio_internal_summary">"La salida de audio. Unete a \"SCR Alpha testing\" en la comunidad Google+ para probar la grabación de audio interno"</string>
+    <string name="settings_audio">"Audio"</string>
+    <string name="settings_sampling_rate">"Frecuencia de muestreo"</string>
+
+    <string name="settings_audio_driver_not_installed">"SCR controlador de audio no está instalado. Toque para instalar."</string>
+    <string name="settings_audio_driver_installing">"Instalando controlador de audio SCR..."</string>
+    <string name="settings_audio_driver_installed">"Controlador de audio SCR instalado. Toque para desinstalar."</string>
+    <string name="settings_audio_driver_uninstalling">"Desinstalando controlador de audio SCR..."</string>
+    <string name="settings_audio_driver_installation_failure">"La instalación del controlador de audio SCR falló. Toque para volver a intentarlo."</string>
+    <string name="settings_audio_driver_outdated">"La versión antigua del controlador de audio SCR instalado. Toque para actualizar."</string>
+
+    <string name="internal_audio_dialog_title">"Instalación del controlador de audio"</string>
+    <string name="internal_audio_dialog_message">"
+        La grabación de audio interno, es una característica experimental y requiere la instalación del controlador de audio personalizado. Se recomienda desinstalar este driver después de que haya terminado la grabación. Usted será capaz de desinstalar fácilmente el controlador de Audio SCR desde los ajustes de SCR. Si el instalador se bloquea, puede que tenga que utilizar la consola ADB o partición del sistema de re-flash para restaurar los controladores de audio originales. Se recomienda hacer copias de seguridad de su sistema desde un recovery. Usted está aceptando proceder BAJO SU PROPIO RIESGO."</string>
+    <string name="internal_audio_dialog_install">"Instalar"</string>
+    <string name="internal_audio_dialog_cancel">"Cancelar"</string>
+
+    <string name="settings_other_category">"Otro"</string>
+    <string name="settings_hide_icon">"Ocultar icono de notificación"</string>
+    <string name="settings_show_touches">"Mostrar detalles"</string>
+    <string name="settings_show_touches_summary">"Mostrar indicadores táctiles cuando tocamos la pantalla. También puede activar los indicadores táctiles de forma permanente a través de Ajustes Android → Opciones → Opciones de desarrollo → Mostrar pulsaciones"</string>
+    <string name="settings_output_dir">"Ruta de guardado"</string>
+    <string name="settings_stop_when_screen_off">"Detener grabación cuando se apague la pantalla"</string>
+    <string name="settings_stop_when_screen_off_summary">"Finalice la grabación después de que se apague la pantalla"</string>
+    <string name="settings_color_fix">"Corregir el color invertido"</string>
+    <string name="settings_color_fix_summary">"Activa esta opción si se invierten los colores azul y rojo"</string>
+
+    <string name="directory_chooser_select">"Seleccione \"%1$s\""</string>
+    <string name="directory_chooser_refresh">"Actualizar"</string>
+    <string name="directory_chooser_new">"Nuevo"</string>
+    <string name="directory_chooser_new_title">"Nuevo nombre de directorio"</string>
+    <string name="directory_chooser_new_ok">"OK"</string>
+    <string name="directory_chooser_new_cancel">"Cancelar"</string>
+    <string name="directory_chooser_error_message">"El directorio no puede ser creado. Asegúrese de elegir una ubicación en la que se pueda escribir EJ: tarjeta SD "</string>
+    <string name="directory_chooser_not_writable_title">"No se puede escribir en el directorio seleccionado"</string>
+    <string name="directory_chooser_not_writable_message">"La aplicación no parece tener permiso de escritura en el directorio directorio %1$s . Esto puede causar problemas de grabación."</string>
+    <string name="directory_chooser_ignore">"Ignorar"</string>
+    <string name="directory_chooser_cancel">"Cancelar"</string>
+    <string name="directory_chooser_default">"Defecto"</string>
+
+    <string name="license_dont_allow">"Error de comprobación de licencia. Asegúrese de que su conexión a Internet es correcta y estás conectado a Google Play.
+    "</string>
+    <string name="license_error">"Error de comprobación de licencia. Asegúrese de que su conexión a Internet es correcta y estás conectado a Google Play.
+    "</string>
+
+    <string name="error_report_report">"Informe"</string>
+    <string name="error_report_close">"Cerrar"</string>
+    <string name="error_report_text">"El archivo adjunto contiene el registro del sistema detallado que incluye información 
+acerca de un error. Siéntase libre de agregar cualquier comentario aquí."</string>
+    <string name="error_report_chooser">"Email de informe de errores con"</string>
+
+    <string name="rating_rate_title">"Votanos %1$s"</string>
+    <string name="rating_rate_message">"Si te gusta usar %1$s , por favor tome un momento para evaluarlo. ¡Gracias por su apoyo!"</string>
+    <string name="rating_rate_now">"¡Vota ahora!"</string>
+    <string name="rating_remind">"Recordar más tarde"</string>
+    <string name="rating_no_thanks">"No, gracias"</string>
+    <string name="rating_play_error">"No se pudo abrir Google Play."</string>
+
+    <string name="help_stop_message">"Para detener la grabación, bloquea la pantalla y espera 2 segundos. Alternativamente, usted puede simplemente volver reabrir la aplicación %1$s ."</string>
+    <string name="menu_send_bug_report">"Enviar informe de error"</string>
+
+    <string name="notification_status_initializing">"Iniciando"</string>
+    <string name="notification_status_waiting_for_su">"A la espera de acceso root"</string>
+    <string name="notification_status_ready">"Listo"</string>
+    <string name="notification_status_starting">"Comenzando"</string>
+    <string name="notification_status_recording">"Grabando"</string>
+    <string name="notification_status_stopping">"Parando"</string>
+    <string name="notification_status_">""</string>
+
+
+</resources>
