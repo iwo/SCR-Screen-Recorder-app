@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.util.Log;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
 import static com.iwobanas.screenrecorder.Tracker.*;
 
 public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
+    private static final String TAG = "scr_ReportBugTask";
 
     public ReportBugTask(Context context, int errorCode) {
         this.context = context;
@@ -42,9 +44,9 @@ public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
             }
 
         } catch (IOException e) {
-            EasyTracker.getTracker().sendException("ReportBugTask", e, false);
+            Log.e(TAG, "Error running logcat", e);
         } catch (InterruptedException e) {
-            EasyTracker.getTracker().sendException("ReportBugTask", e, false);
+            Log.e(TAG, "Error running logcat", e);
         }
         return exitValue;
     }
