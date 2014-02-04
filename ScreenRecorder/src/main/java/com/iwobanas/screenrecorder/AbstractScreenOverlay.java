@@ -25,7 +25,14 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
     protected abstract WindowManager.LayoutParams getLayoutParams();
 
     protected void updateLayoutParams() {
-        getWindowManager().updateViewLayout(mView, getLayoutParams());
+        if (!visible) {
+            return;
+        }
+        try {
+            getWindowManager().updateViewLayout(mView, getLayoutParams());
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Error updating layout", e);
+        }
     }
 
     protected LayoutInflater getLayoutInflater() {

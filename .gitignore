@@ -6,4 +6,5 @@ out
 local.properties
 .gradle
 ScreenRecorder/build
+ScreenRecorder/src/*/res/raw-v*/*
 

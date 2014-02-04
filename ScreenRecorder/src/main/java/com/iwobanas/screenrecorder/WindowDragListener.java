@@ -2,12 +2,14 @@ package com.iwobanas.screenrecorder;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
 class WindowDragListener implements View.OnTouchListener {
+    private static final String TAG = "scr_WindowDragListener";
     private int dragStartX;
     private int dragStartY;
     private boolean dragging;
@@ -78,7 +80,12 @@ class WindowDragListener implements View.OnTouchListener {
 
                 params.gravity = gravity;
 
-                getWindowManager(view.getContext()).updateViewLayout(view, params);
+                try {
+                    getWindowManager(view.getContext()).updateViewLayout(view, params);
+                } catch (IllegalArgumentException e) {
+                    Log.e(TAG, "Error updating layout", e);
+                    return false;
+                }
                 return true;
 
             case MotionEvent.ACTION_UP:
