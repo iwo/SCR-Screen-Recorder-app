@@ -5,8 +5,12 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -95,6 +99,8 @@ public class Utils {
     }
 
     public static void extractResource(Context context, int resourceId, File outputFile) throws IOException {
+        if (resourceFileValid(context, resourceId, outputFile))
+            return;
         InputStream inputStream = context.getResources().openRawResource(resourceId);
         FileOutputStream outputStream = new FileOutputStream(outputFile);
 
@@ -105,6 +111,41 @@ public class Utils {
         }
         inputStream.close();
         outputStream.close();
+    }
+
+    private static boolean resourceFileValid(Context context, int resourceId, File outputFile) throws IOException {
+        if (!outputFile.exists()) {
+            return false;
+        }
+        InputStream resourceStream = new BufferedInputStream(context.getResources().openRawResource(resourceId));
+        InputStream fileStream = null;
+        try {
+            fileStream = new BufferedInputStream(new FileInputStream(outputFile));
+        } catch (IOException e) {
+            return false;
+        }
+
+        return streamsEqual(resourceStream, fileStream);
+    }
+
+    private static boolean streamsEqual(InputStream i1, InputStream i2) throws IOException {
+        byte[] buf1 = new byte[1024];
+        byte[] buf2 = new byte[1024];
+        try {
+            DataInputStream d2 = new DataInputStream(i2);
+            int len;
+            while ((len = i1.read(buf1)) > 0) {
+                d2.readFully(buf2,0,len);
+                for(int i=0;i<len;i++)
+                    if(buf1[i] != buf2[i]) return false;
+            }
+            return d2.read() < 0; // is the end of the second file also.
+        } catch(EOFException ioe) {
+            return false;
+        } finally {
+            i1.close();
+            i2.close();
+        }
     }
 
     public static boolean isX86() {
