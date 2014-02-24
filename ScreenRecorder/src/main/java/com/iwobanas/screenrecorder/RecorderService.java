@@ -109,10 +109,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mHandler = new Handler();
 
         mRatingController = new RatingController(this);
-        if (mRatingController.shouldShow()) {
-            mRatingController.show();
-            stopSelf();
-        }
 
         readPreferences();
         installExecutable();
@@ -689,7 +685,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
         } else {
-            if (mRecorderOverlay.isVisible() && !firstCommand) {
+            if (mRatingController.shouldShow()) {
+                mRecorderOverlay.hide();
+                mRatingController.show();
+            } else if (mRecorderOverlay.isVisible() && !firstCommand) {
                 mRecorderOverlay.highlightPosition();
             } else {
                 if (LOUNCHER_ACTION.equals(action) || NOTIFICATION_ACTION.equals(action)) {
