@@ -78,8 +78,11 @@ public class SendStatsAsyncTask extends AsyncTask<Void, Void, Void> {
         String url = BASE_URL;
 
         for (String key: params.keySet()) {
+            String vale = params.get(key);
+            if (vale == null) continue;
+
             try {
-                url += key.toLowerCase() + '=' + URLEncoder.encode(params.get(key), "UTF-8") + "&";
+                url += key.toLowerCase() + '=' + URLEncoder.encode(vale, "UTF-8") + "&";
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException("UTF-8 should always be supported", e);
             }
