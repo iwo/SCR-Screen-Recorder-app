@@ -51,7 +51,8 @@ public class RatingController {
 
     public void show() {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putLong(LAST_SHOWN, System.currentTimeMillis());
+        lastShown = System.currentTimeMillis();
+        editor.putLong(LAST_SHOWN, lastShown);
         editor.commit();
         Intent intent = new Intent(context, RatingActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
