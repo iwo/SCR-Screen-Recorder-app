@@ -90,6 +90,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private long mRecordingStartTime;
     private boolean mTaniosc = true;
     private boolean firstCommand = true;
+    private boolean destroyed = false;
 
     // Preferences
     private boolean mStopHelpDisplayed;
@@ -129,19 +130,32 @@ public class RecorderService extends Service implements IRecorderService, Licens
         new InstallExecutableAsyncTask(this, this).execute();
     }
 
-    public void executableInstalled(String executable) {
-        setState(RecorderServiceState.INITIALIZING);
-        mNativeProcessRunner.initialize(executable);
+    public void executableInstalled(final String executable) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (destroyed) return;
+                setState(RecorderServiceState.INITIALIZING);
+                mNativeProcessRunner.initialize(executable);
+            }
+        });
     }
 
     @Override
     public void recordingStarted() {
-        setState(RecorderServiceState.RECORDING);
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                setState(RecorderServiceState.RECORDING);
+            }
+        });
     }
 
     private void setState(RecorderServiceState state) {
         this.state = state;
-        startForeground();
+        if (!destroyed) {
+            startForeground();
+        }
     }
 
     @Override
@@ -704,6 +718,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mScreenOffReceiver.unregister();
         savePreferences();
         Settings.getInstance().restoreShowTouches();
+        destroyed = true;
     }
 
     private void readPreferences() {
