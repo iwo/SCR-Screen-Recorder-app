@@ -34,19 +34,23 @@ public class RatingController {
     }
 
     public void increaseSuccessCount() {
-        if (disabled || preferences.getBoolean(DISABLED, false)) return;
+        if (isDisabled()) return;
 
         setSuccessCount(getSuccessCount() + 1);
     }
 
     public void resetSuccessCount() {
-        if (disabled || preferences.getBoolean(DISABLED, false)) return;
+        if (isDisabled()) return;
 
         setSuccessCount(0);
     }
 
     public boolean shouldShow() {
-        return !disabled && successCount >= MIN_SUCCESS_COUNT && System.currentTimeMillis() - getLastShown() > SHOW_INTERVAL;
+        return !isDisabled() && successCount >= MIN_SUCCESS_COUNT && System.currentTimeMillis() - getLastShown() > SHOW_INTERVAL;
+    }
+
+    private boolean isDisabled() {
+        return disabled || preferences.getBoolean(DISABLED, false);
     }
 
     public void show() {
