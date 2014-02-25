@@ -171,6 +171,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             mWatermark.show();
             mTimeController.start();
         }
+        Settings.getInstance().applyShowTouches();
         if (Settings.getInstance().getStopOnScreenOff()) {
             mScreenOffReceiver.register();
         }
@@ -257,7 +258,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public synchronized void setReady() {
         setState(RecorderServiceState.READY);
-        Settings.getInstance().applyShowTouches();
         if (startOnReady) {
             startOnReady = false;
             mHandler.post(new Runnable() {
@@ -295,6 +295,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (mTaniosc) {
             mWatermark.hide();
         }
+        Settings.getInstance().restoreShowTouches();
         showRecorderOverlay();
     }
 
