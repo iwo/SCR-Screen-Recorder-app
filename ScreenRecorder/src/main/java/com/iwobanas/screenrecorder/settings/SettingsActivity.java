@@ -66,6 +66,18 @@ public class SettingsActivity extends Activity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        Settings.getInstance().restoreShowTouches();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Settings.getInstance().applyShowTouches();
+    }
+
+    @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, RecorderService.class);
         intent.setAction(RecorderService.SETTINGS_CLOSED_ACTION);
