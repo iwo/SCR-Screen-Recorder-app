@@ -154,7 +154,7 @@
     <string name="settings_audio_driver_installed">Installed. Tap to uninstall.</string>
     <string name="settings_audio_driver_uninstalling">Uninstalling...</string>
     <string name="settings_audio_driver_installation_failure">Installation failed. Tap to retry.</string>
-    <string name="settings_audio_driver_outdated">Old version installed. Tap to update.</string>
+    <string name="settings_audio_driver_outdated">Old version installed. Tap to uninstall.</string>
 
     <string name="internal_audio_dialog_title">Audio driver installation</string>
     <string name="internal_audio_dialog_message">

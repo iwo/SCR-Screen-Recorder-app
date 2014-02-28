@@ -326,10 +326,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         AudioDriver audioDriver = settings.getAudioDriver();
         switch (audioDriver.getInstallationStatus()) {
             case INSTALLED:
+            case OUTDATED:
                 audioDriver.uninstall();
                 break;
             case NOT_INSTALLED:
-            case OUTDATED:
             case INSTALLATION_FAILURE:
                 showAudioDriverDialog();
                 break;

@@ -17,6 +17,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -159,5 +160,37 @@ public class Utils {
     public static float dipToPixels(Context context, float dipValue) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
+    }
+
+    public static boolean copyFile(File sourceFile, File destFile) {
+
+
+        FileChannel source = null;
+        FileChannel destination = null;
+        boolean success = false;
+
+        try {
+            if(!destFile.exists()) {
+                destFile.createNewFile();
+            }
+            source = new FileInputStream(sourceFile).getChannel();
+            destination = new FileOutputStream(destFile).getChannel();
+            destination.transferFrom(source, 0, source.size());
+            success = true;
+        } catch (IOException e) {
+            success = false;
+        } finally {
+            if(source != null) {
+                try {
+                    source.close();
+                } catch (IOException ignored) {}
+            }
+            if(destination != null) {
+                try {
+                    destination.close();
+                } catch (IOException ignored) {}
+            }
+            return success;
+        }
     }
 }

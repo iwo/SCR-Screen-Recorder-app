@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="audio_driver_version">2</integer>
+    <integer name="audio_driver_version">3</integer>
 </resources>
