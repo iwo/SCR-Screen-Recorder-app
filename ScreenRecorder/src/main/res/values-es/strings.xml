@@ -3,14 +3,38 @@
     <string name="free_app_full_name">"SCR Grabadora de Pantalla Gratis"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Grabadora de Pantalla Pro"</string>
-    <string name="recording_saved_title">"SCR Grabación Guardada"</string>
+
+    <string name="play_free_app_name">"
+SCR Grabadora de Pantalla Gratis ★ root
+    "</string>
+    <string name="play_pro_app_name">"
+SCR Grabadora de Pantalla Pro ★ root
+    "</string>
+
+    <string name="play_root_required">"
+&lt;b&gt; Sólo funcionará en dispositivos rooteados / jailbreakeados / desbloqueados! &lt;/ b&gt; &lt;br/&gt; No lo instale si el dispositivo no está rooteado."</string>
+    <string name="play_description_main">"
+Registre grandes screencasts calidad directamente desde su teléfono o tableta! Screen Recorder SCR usa aceleración por hardware de codificación de vídeo para lograr la mejor calidad de grabación de pantalla en cualquier dispositivo. Es la única grabadora de vídeo en el mercado que admite el dispositivo Tegra incluyendo Nexus 7."</string>
+    <string name="play_description_free">"
+Con &lt;b&gt; SCR gratuito &lt;/ b&gt; se puede grabar un máximo de 3 minutos screencasts y la marca de agua SCR se agrega a su video. Comprar &lt;b&gt; SCR Pro &lt;/ b&gt; para obtener la longitud screencast ilimitado sin marca de agua. Este es un BETA &lt;b&gt; temprano vista previa &lt;/ b&gt; la versión por lo que puede no funcionar en todos los dispositivos y las ROMs. Si tiene algún problema por favor repórtelo a scr.screen.recorder @ gmail.com para ayudarme a conseguir su dispositivo compatible.
+    "</string>
+
+    <string name="play_description_pro">"
+Este es un BETA &lt;b&gt; temprano vista previa &lt;/ b&gt; la versión por lo que puede no funcionar en todos los dispositivos y las ROMs. Antes de comprar considerar la prueba &lt;b&gt; SCR gratuito &lt;/ b&gt; para asegurarse de que su dispositivo ya es compatible. Si tiene algún problema por favor repórtelo a scr.screen.recorder @ gmail.com para ayudarme a conseguir su dispositivo compatible.
+    "</string>
+
+    <string name="play_small_print">"
+Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bichos de la pista y analizar cómo los usuarios utilizan la aplicación. Este software utiliza código no modificada de FFmpeg 1.2 licenciado bajo la LGPL.
+    "</string>
+
+    <string name="recording_saved_title">"SCR Grabación Guardado"</string>
     <string name="recording_saved_message">"Grabación guardada en %1$s"</string>
     <string name="recording_saved_toast">"Grabación guardada en %1$s"</string>
     <string name="max_file_size_reached_toast">"Tamaño máximo de archivo alcanzado. Grabación guardada en %1$s"</string>
     <string name="start">"Iniciar"</string>
     <string name="play">"Play"</string>
 
-    <string name="su_required_title">"Se requiere acceso root"</string>
+    <string name="su_required_title">"Se requiere el acceso root"</string>
     <string name="su_required_message">"Para ejecutar cualquier aplicación que grabe la pantalla, su teléfono/tablet debe estar rooteada. Hay un montón de tutoriales en Internet que explican cómo rootear los diferentes dispositivos. Vuelva a intentarlo cuando su dispositivo esté rooteado!"</string>
     <string name="su_required_help">"¿Qué es \"rootear\"?"</string>
     <string name="su_required_help_link">"http://www.youtube.com/watch?v=Lg2C8t8eA5U"</string>
@@ -55,7 +79,7 @@
 
     <string name="free_timeout_title">"Tiempo límite expirado"</string>
     <string name="free_timeout_message">"Compra SCR Screen Recorder Pro para obtener el tiempo de grabación ilimitado y sin marca de agua en el video."</string>
-    <string name="free_timeout_buy">"¡Comprar ahora!"</string>
+    <string name="free_timeout_buy">"Comprar ahora!"</string>
     <string name="free_timeout_no_thanks">"No, gracias"</string>
     <string name="hide_icon_title">"Característica Pro "</string>
     <string name="hide_icon_message">"Comprar SCR Screen Recorder Pro para ocultar la marca de agua y el icono de notificación. ¡También tendrás tiempo de grabación ilimitado!"</string>
@@ -135,7 +159,7 @@
     <string name="settings_audio_internal_experimental">"Interno (experimental)"</string>
     <string name="settings_audio_mic_summary">"Micrófono. Sólo una aplicación puede utilizar el micrófono a la vez!"</string>
     <string name="settings_audio_mute_summary">"Silencio. Sin Pista de audio"</string>
-    <string name="settings_audio_internal_summary">"La salida de audio. Unete a \"SCR Alpha testing\" en la comunidad Google+ para probar la grabación de audio interno"</string>
+    <string name="settings_audio_internal_summary">"La salida de audio. Conjunto \"pruebas SCR Alpha\" comunidad Google+ para probar la grabación de audio interno"</string>
     <string name="settings_audio">"Audio"</string>
     <string name="settings_sampling_rate">"Frecuencia de muestreo"</string>
 
@@ -161,6 +185,10 @@
     <string name="settings_stop_when_screen_off_summary">"Finalice la grabación después de que se apague la pantalla"</string>
     <string name="settings_color_fix">"Corregir el color invertido"</string>
     <string name="settings_color_fix_summary">"Activa esta opción si se invierten los colores azul y rojo"</string>
+
+    <string name="settings_zigzag_fix">"Fix Zigzag"</string>
+    <string name="settings_zigzag_fix_summary">"Seleccione si la grabación contiene rayas de colores aleatorios"</string>
+    <string name="settings_zigzag_fix_cpu_only">"Disponible sólo con la transformación de la imagen de la CPU"</string>
 
     <string name="directory_chooser_select">"Seleccione \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Actualizar"</string>
@@ -196,13 +224,14 @@ acerca de un error. Siéntase libre de agregar cualquier comentario aquí."</str
     <string name="help_stop_message">"Para detener la grabación, bloquea la pantalla y espera 2 segundos. Alternativamente, usted puede simplemente volver reabrir la aplicación %1$s ."</string>
     <string name="menu_send_bug_report">"Enviar informe de error"</string>
 
-    <string name="notification_status_initializing">"Iniciando"</string>
-    <string name="notification_status_waiting_for_su">"A la espera de acceso root"</string>
+    <string name="notification_status_installing">"Iniciando"</string>
+    <string name="notification_status_initializing">"A la espera de acceso root"</string>
     <string name="notification_status_ready">"Listo"</string>
     <string name="notification_status_starting">"Comenzando"</string>
     <string name="notification_status_recording">"Grabando"</string>
     <string name="notification_status_stopping">"Parando"</string>
-    <string name="notification_status_">""</string>
 
+    <string name="sale_title">"Venta"</string>
+    <string name="sale_text">"Comprar SCR Pro ahora y ahorre %1$d %% ! Esta oferta finaliza el %2$s ."</string>
 
 </resources>

@@ -3,6 +3,36 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+
+    <string name="play_free_app_name">"
+SCR Screen Recorder Free ★ root
+    "</string>
+    <string name="play_pro_app_name">"
+SCR Screen Recorder Pro ★ root
+    "</string>
+
+    <string name="play_root_required">"
+&lt;b&gt; Działa tylko na \"zrootowanych\" urządzeniach tzn. na urządzeniach z prawami administratora!&lt;/b&gt; &lt;br/&gt; Nie instaluj jeśli twój telefon lub tablet nie jest zrootowany."</string>
+    <string name="play_description_main">"
+Nagrywaj doskonałej jakości wideo ekranu bezpośrednio z telefonu lub tabletu!
+
+SCR Screen Recorder wykorzystuje sprzętowe kodowanie wideo dzięki czemu pozwala uzyskać najlepszej jakości nagrywania ekranu na każdym urządzeniu. Jest to jedyny tego typu program obsługujący urządzenia z układem NVIDA Tegra w tym Nexus 7."</string>
+    <string name="play_description_free">"
+W &lt;b&gt;SCR Free&lt;/ b&gt; czas nagrania ograniczony jest do 3 minut oraz podczas nagrania wyświetlana jest ikona SCR. Kup &lt;b&gt; SCR Pro &lt;/ b&gt;, aby tworzyć nagrania bez ograniczeń czasowych oraz bez oznaczeń SCR.
+
+Aplikacja jest dopiero tworzona, jest to wersja &lt;b&gt;beta&lt;/b&gt;, w związku z tym może nie działać na wszystkich urządzeniach i ROMach. Jeśli napotkasz jakiekolwiek problemy proszę o kontakt na scr.screen.recorder@gmail.com i przekazanie możliwie dużo informacji o problemie. Pomoże mi to poprawić obsługę twojego urządzenia w przyszłych aktualizacjach.
+    "</string>
+
+    <string name="play_description_pro">"
+Aplikacja jest dopiero 
+tworzona, jest to wersja &lt;b&gt;beta&lt;/b&gt;, w związku z tym może 
+nie działać na wszystkich urządzeniach i ROMach. Przed zakupem zainstaluj&lt;b&gt; SCR Free&lt;/ b&gt;, aby upewnić się, że twoje urządzenie jest już obsługiwane. Jeśli napotkasz jakiekolwiek problemy proszę o kontakt na scr.screen.recorder@gmail.com i przekazanie możliwie dużo informacji o problemie. Pomoże mi to poprawić obsługę twojego urządzenia w przyszłych aktualizacjach.
+    "</string>
+
+    <string name="play_small_print">"
+SCR Screen Recorder zbiera anonimowe statystyki w celu naprawy błędów oraz analizy jak użytkownicy korzystają z aplikacji. Oprogramowanie to wykorzystuje niezmodyfikowany kod FFmpeg 1.2 licencją LGPL.
+    "</string>
+
     <string name="recording_saved_title">"SCR nagrywanie zakończone"</string>
     <string name="recording_saved_message">"Wideo zapisano w %1$s"</string>
     <string name="recording_saved_toast">"Wideo zapisano w %1$s"</string>
@@ -13,7 +43,8 @@
     <string name="su_required_title">"Wymagane uprawnienie Root"</string>
     <string name="su_required_message">"Wszystkie programy nagrywające zawartość ekranu telefonu lub tabletu wymagają uprawnień root. Instrukcję jak \"zrootować\" twoje urządzenie można znaleźć w Internecie."</string>
     <string name="su_required_help">"Co to jest \"Root\"?"</string>
-    <string name="su_required_help_link">"http://galaktyczny.pl/2013/06/10/galaktyczny-poradnik-co-to-jest-root-tajniki-rootowania/"</string>
+    <string name="su_required_help_link">"http://galaktyc
+zny.pl/2013/06/10/galaktyczny-poradnik-co-to-jest-root-tajniki-rootowania/"</string>
 
     <string name="error_dialog_title">"Wystąpił błąd :-("</string>
     <string name="startup_error_message">"Anonimowa informacja o błędzie została automatycznie wysłana do autora programu. Jeżeli problem będzie się powtarzał prosimy o kontakt mailowy i podanie numeru błędu S%1$d."</string>
@@ -38,8 +69,17 @@
     <string name="opengl_error_message">"Twoja karta graficzna nie jest jeszcze obsługiwana. Przełącznik ustawienia przetwarzania obrazu na CPU lub użyj kodeka Software MPEG4.
     "</string>
 
+    <string name="audio_config_error_title">"Błąd audio"</string>
+    <string name="audio_config_error_message">"Nieobsługiwany konfiguracji dźwięku. Spróbuj zmienić ustawienia audio."</string>
+
     <string name="android_version_error_title">"Nie obsługiwana wersja Androida"</string>
     <string name="android_version_error_message">"Twoja wersja Androida nie jest jeszcze obsługiwana."</string>
+
+    <string name="cpu_error_title">"Nieobsługiwany procesor"</string>
+    <string name="cpu_error_message">"Twój procesor ( %1$s ) nie jest obsługiwana przez %2$s ."</string>
+
+    <string name="installation_error_title">"Błąd instalacji"</string>
+    <string name="installation_error_message">"Nie może zainstalować wymaganych plików. Upewnij się, że masz trochę wolnego miejsca na urządzeniu i uruchom ponownie %1$s ."</string>
 
     <string name="help_stop_title">"Jak zakończyć nagrywanie"</string>
     <string name="help_stop_ok">"OK"</string>
@@ -98,7 +138,7 @@
     <string name="settings_frame_rate">"Częstotliwość klatek"</string>
     <string name="settings_frame_rate_max">"Maksymalna"</string>
     <string name="settings_frame_rate_max_short">"Max"</string>
-    <string name="settings_frame_rate_up_to">"do %1$d fps"</string>
+    <string name="settings_frame_rate_up_to">"Do %1$d fps"</string>
     <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"Do %1$d fps, ograniczona przez możliwości sprzętowe"</string>
     <string name="settings_frame_rate_max_summary">"Maksymalna dopuszczalna przez sprzęt"</string>
@@ -118,7 +158,7 @@
     <string name="settings_vertical_frames_ok">"OK"</string>
     <string name="settings_vertical_frames_cancel">"Anuluj"</string>
 
-    <string name="settings_audio_category">"Audio "</string>
+    <string name="settings_audio_category">"Audio"</string>
     <string name="settings_audio_source">"Źródło"</string>
     <string name="settings_audio_mic">"Mikrofon"</string>
     <string name="settings_audio_mute">"Brak"</string>
@@ -126,8 +166,8 @@
     <string name="settings_audio_internal_experimental">"Wyjście audio (eksperymentalne)"</string>
     <string name="settings_audio_mic_summary">"Mikrofon. Tylko jedna aplikacja może używać mikrofonu w tym samym czasie!"</string>
     <string name="settings_audio_mute_summary">"Wyciszone. Brak ścieżki audio"</string>
-    <string name="settings_audio_internal_summary">"Wyjście audio. Dołącz do społeczności Google+ \"SCR Alpha testing\" aby przetestiwać na nagrywanie wyjścia audio."</string>
-    <string name="settings_audio">"Audio "</string>
+    <string name="settings_audio_internal_summary">"Wyjście audio. Dołącz to społeczności Google+ \"SCR Alpha testy\" aby przetestować nagrywanie dźwięku wychodzącego."</string>
+    <string name="settings_audio">"Audio"</string>
     <string name="settings_sampling_rate">"Próbkowanie"</string>
 
     <string name="settings_audio_driver_not_installed">"Sterownik audio SCR nie jest zainstalowany. Dotknij, aby zainstalować."</string>
@@ -146,12 +186,16 @@
     <string name="settings_other_category">"Pozostałe"</string>
     <string name="settings_hide_icon">"Ukryj ikonę"</string>
     <string name="settings_show_touches">"Pokaż dotknięcia"</string>
-    <string name="settings_show_touches_summary">"Wyświetlanie punktów w miejscu dotknięć. Możesz też włączyć na stałe poprzez Ustawienia =&gt; Opcje programistyczne =&gt; Pokaż dotknięcia"</string>
+    <string name="settings_show_touches_summary">"Wskaźniki dotknięć możesz też włączyć na stałe poprzez wybranie ustawienia systemu Android: Ustawienia → Opcje programistyczne → Pokaż dotknięcia"</string>
     <string name="settings_output_dir">"Katalog docelowy"</string>
     <string name="settings_stop_when_screen_off">"Zatrzymaj po wyłączeniu ekranu"</string>
     <string name="settings_stop_when_screen_off_summary">"Zakończ nagrywanie po wyłączeniu ekranu"</string>
     <string name="settings_color_fix">"Odwróć kolory"</string>
     <string name="settings_color_fix_summary">"Zmień tę opcję, jeśli niebieski i czerwony kolor są odwrócone"</string>
+
+    <string name="settings_zigzag_fix">"Zygzak fix"</string>
+    <string name="settings_zigzag_fix_summary">"Wybierz, jeśli nagranie zawiera losowe kolorowe paski"</string>
+    <string name="settings_zigzag_fix_cpu_only">"Dostępne tylko przy transformacji obrazu CPU"</string>
 
     <string name="directory_chooser_select">"Wybierz \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Odśwież"</string>
@@ -186,5 +230,15 @@ internetowe oraz, że jesteś zalogowany do Google Play.
 
     <string name="help_stop_message">"Aby zakończyć nagrywanie zablokuj ekran i poczekaj 2 sekundy. Ponowne otwarcie %1$s również zakończy nagrywanie."</string>
     <string name="menu_send_bug_report">"Zgłoś problem"</string>
+
+    <string name="notification_status_installing">"Inicjowanie"</string>
+    <string name="notification_status_initializing">"Oczekiwanie na uprawnienia root"</string>
+    <string name="notification_status_ready">"Gotowy"</string>
+    <string name="notification_status_starting">"Uruchamianie"</string>
+    <string name="notification_status_recording">"Nagranie"</string>
+    <string name="notification_status_stopping">"Zatrzymywanie"</string>
+
+    <string name="sale_title">"Promocja"</string>
+    <string name="sale_text">"Kup SCR Pro teraz i oszczędź %1$d %% ! Oferta kończy się %2$s ."</string>
 
 </resources>

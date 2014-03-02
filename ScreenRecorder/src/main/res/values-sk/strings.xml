@@ -3,6 +3,30 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+
+    <string name="play_free_app_name">"
+SCR Screen Recorder Free ★ root
+    "</string>
+    <string name="play_pro_app_name">"
+Recorder SCR Screen Pro ★ root
+    "</string>
+
+    <string name="play_root_required">"
+&lt;b&gt;Funguje len na rootnutých/odomknutých zariadeniach!&lt;/b&gt;&lt;br/&gt;Neinštalujte, ak vaše zariadenie nie je rootnuté."</string>
+    <string name="play_description_main">"
+Zaznamenajte veľmi kvalitné videá obrazovky vášho telefónu alebo tabletu! SCR Screen Recorder využíva hardvérovo akcelerované kódovanie videa pre dosiahnutie najlepšej kvality záznamu obrazu na akomkoľvek zariadení. Je to jediný videorekordér na trhu podporujúci Tegra zariadenia, vrátane Nexus 7."</string>
+    <string name="play_description_free">"
+S &lt;b&gt;SCR Free&lt;/ b&gt; môžete nahrať maximálne 3 minúty videa obrazovky a vodoznak SCR je pridaný do vášho videa. Zakúpte si &lt;b&gt;SCR Pro&lt;/ b&gt; pre neobmedzenú dĺžky videoukážky bez vodoznaku. To je &lt;b&gt;BETA&lt;/ b&gt; verzia pre náhľad, takže nemusí fungovať na všetkých zariadeniach a ROM. Ak narazíte na nejaké problémy, oznámte to prosím na scr.screen.recorder@gmail.com, aby mohlo byť vaše zariadenie podporované.
+    "</string>
+
+    <string name="play_description_pro">"
+To je &lt;b&gt;BETA &lt;/ b&gt; verzia pre náhľad, takže  nemusí fungovať na všetkých zariadeniach a ROM. Než si aplikáciu zakúpite, zvážte otestovanie &lt;b&gt;SCR Free&lt;/ b&gt;, aby ste sa ubezpečili, že vaše zariadenie je už podporované. Ak narazíte na nejaké problémy, oznámte to prosím na scr.screen.recorder@gmail.com, aby mohlo byť vaše zariadenie podporované.
+    "</string>
+
+    <string name="play_small_print">"
+SCR Screen Recorder zhromažďuje anonymné štatistiky využívania aplikácie na sledovanie chýb a analýzu, ako používatelia používajú aplikáciu, ako používatelia používajú aplikáciu. Tento softvér používa neupravený kód FFmpeg 1.2 pod licenciou LGPL.
+    "</string>
+
     <string name="recording_saved_title">"SCR nahrávka uložená"</string>
     <string name="recording_saved_message">"Nahrávka uložená ako %1$s"</string>
     <string name="recording_saved_toast">"Nahrávka uložená ako %1$s"</string>
@@ -20,10 +44,10 @@
     <string name="recording_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d."</string>
 
     <string name="media_recorder_error_title">"Chyba nahrávača"</string>
-    <string name="media_recorder_error_message">"Skúste zmeniť rozlíšenie alebo prepnite transformáciu obrazu medzi GPU/CPU. Prosím, odinštalujte iné screencast aplikácie, ak máte nejaké. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d ."</string>
+    <string name="media_recorder_error_message">"Skúste zmeniť rozlíšenie alebo prepnite transformáciu obrazu medzi GPU/CPU. Prosím odinštalujte iné screencast aplikácie, ak máte nejaké. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d ."</string>
 
     <string name="output_file_error_title">"Nemožno vytvoriť súbor videa"</string>
-    <string name="output_file_error_message">"SCR nemohol vytvoriť súbor videa %1$s. Uistite sa, že do vybraného výstupného priečinka je možné zapisovať a že karta SD nie je uzamknutá pripojením pomocou USB."</string>
+    <string name="output_file_error_message">"SCR nemohol vytvoriť súbor videa %1$s. Uistite sa, že do vybraného výstupného priečinka je možné zapisovať a že karta SD nie je uzamknutá pripojením poUSB."</string>
 
     <string name="microphone_busy_error_title">"Mikrofón je zaneprázdnený"</string>
     <string name="microphone_busy_error_message">"
@@ -38,8 +62,17 @@
     <string name="opengl_error_message">"Vaša grafická karta nie je ešte podporovaná. Prepnite nastavenie transformácie obrazu na CPU alebo použite softvérový video dekóder.
     "</string>
 
+    <string name="audio_config_error_title">"Chyba zvuku"</string>
+    <string name="audio_config_error_message">"Nepodporovaná konfigurácia zvuku. Skúste zmeniť zvuk v Nastaveniach SCR."</string>
+
     <string name="android_version_error_title">"Nepodporovaná verzia Androida"</string>
     <string name="android_version_error_message">"Vaša verzia Androida ešte nie je podporovaná."</string>
+
+    <string name="cpu_error_title">"CPU nie je podporované"</string>
+    <string name="cpu_error_message">"Vaša CPU architektúra (%1$s) nie je podporovaná %2$s ."</string>
+
+    <string name="installation_error_title">"Chyba pri inštalácii"</string>
+    <string name="installation_error_message">"Nemožno nainštalovať potrebné súbory. Uistite sa, že máte nejaké voľné miesto na vašom zariadení a reštartujte %1$s."</string>
 
     <string name="help_stop_title">"Ako zastaviť nahrávanie"</string>
     <string name="help_stop_ok">"OK"</string>
@@ -52,7 +85,7 @@
     <string name="hide_icon_message">"Zakúpte si SCR Screen Recorder Pro pre skrytie vodoznaku a notifikačnej ikony. Taktiež získate neobmedzený čas na nahrávanie!"</string>
 
     <string name="buy_error_title">"Chyba Obchodu Play"</string>
-    <string name="buy_error_message">"Prosím, vyhľadajte SCR Screen Recorder Pro V Obchode Play"</string>
+    <string name="buy_error_message">"Prosím vyhľadajte SCR Screen Recorder Pro V Obchode Play"</string>
 
     <string name="settings_activity_label">"Nastavenia SCR"</string>
     <string name="settings_title">"Nastavenia"</string>
@@ -98,9 +131,9 @@
     <string name="settings_frame_rate">"Vzorkovacia frekvencia"</string>
     <string name="settings_frame_rate_max">"Maximálna"</string>
     <string name="settings_frame_rate_max_short">"Max"</string>
-    <string name="settings_frame_rate_up_to">"Až do %1$d fps"</string>
-    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
-    <string name="settings_frame_rate_summary">"Až do %1$d fps, limitované hardvérovými schopnosťami"</string>
+    <string name="settings_frame_rate_up_to">"Až do %1$d snímkov za sekundu"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d snímkov za sekundu"</string>
+    <string name="settings_frame_rate_summary">"Až do %1$d snímkov za sekundu, obmedzené hardvérovými schopnosťami"</string>
     <string name="settings_frame_rate_max_summary">"Maximum povolené hardvérom"</string>
 
     <string name="settings_orientation">"Orientácia"</string>
@@ -119,14 +152,14 @@
     <string name="settings_vertical_frames_cancel">"Zrušiť"</string>
 
     <string name="settings_audio_category">"Zvuk"</string>
-    <string name="settings_audio_source">"Zvuk"</string>
+    <string name="settings_audio_source">"Zdroj"</string>
     <string name="settings_audio_mic">"Mikrofón"</string>
     <string name="settings_audio_mute">"Stlmiť"</string>
     <string name="settings_audio_internal">"Interný"</string>
     <string name="settings_audio_internal_experimental">"Interný (experimentálne)"</string>
     <string name="settings_audio_mic_summary">"Mikrofón. Len jedna aplikácia môže používať mikrofón naraz!"</string>
     <string name="settings_audio_mute_summary">"Stlmené. Žiadna zvuková stopa"</string>
-    <string name="settings_audio_internal_summary">"Zvukový výstup. Pripojte sa k Google+ komunite \"SCR Alpha testing\" pre otestovanie interného nahrávania zvuku."</string>
+    <string name="settings_audio_internal_summary">"Zvukový výstup. Pripojte sa ku Google+ komunite \"SCR Alpha testing\" na otestovanie vnútorného záznamu zvuku."</string>
     <string name="settings_audio">"Zvuk"</string>
     <string name="settings_sampling_rate">"Vzorkovacia frekvencia"</string>
 
@@ -146,12 +179,16 @@
     <string name="settings_other_category">"Ďalšie"</string>
     <string name="settings_hide_icon">"Skryť ikonu oznámenia"</string>
     <string name="settings_show_touches">"Zobraziť dotyky"</string>
-    <string name="settings_show_touches_summary">"Zobraziť vizuálnu spätnú väzbu pre dotyky. Môžete tiež aktivovať dotykové indikátory trvalo cez Nastavenia systému Android =&gt; Možnosti pre vývojárov =&gt; Zobraziť dotyky"</string>
+    <string name="settings_show_touches_summary">"Zobraziť vizuálnu spätnú väzbu pre dotyky. Môžete tiež aktivovať dotykové indikátory trvalo cez Nastavenia systému Android → Možnosti pre vývojárov → Zobraziť dotyky"</string>
     <string name="settings_output_dir">"Výstupný priečinok"</string>
     <string name="settings_stop_when_screen_off">"Zastaviť pri vypnutí obrazovky"</string>
     <string name="settings_stop_when_screen_off_summary">"Dokončiť nahrávanie po vypnutí obrazovky"</string>
     <string name="settings_color_fix">"Opraviť invertované farby"</string>
     <string name="settings_color_fix_summary">"Prepnúť túto možnosť, ak sú invertované farby modrá a červená"</string>
+
+    <string name="settings_zigzag_fix">"Cik-cak oprava"</string>
+    <string name="settings_zigzag_fix_summary">"Vyberte, ak záznam obsahuje náhodné farebné pruhy"</string>
+    <string name="settings_zigzag_fix_cpu_only">"K dispozícii len s CPU transformáciou obrazu"</string>
 
     <string name="directory_chooser_select">"Vybrať \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Obnoviť"</string>
@@ -159,7 +196,7 @@
     <string name="directory_chooser_new_title">"Názov nového priečinka"</string>
     <string name="directory_chooser_new_ok">"OK"</string>
     <string name="directory_chooser_new_cancel">"Zrušiť"</string>
-    <string name="directory_chooser_error_message">"Priečinoknie je možné vytvoriť. Uistite sa, že ste vybrali zapisovateľné umiestnenie (napr. SD karta)."</string>
+    <string name="directory_chooser_error_message">"Priečinok nie je možné vytvoriť. Uistite sa, že ste vybrali zapisovateľné umiestnenie (napr. SD karta)."</string>
     <string name="directory_chooser_not_writable_title">"Vybraný priečinok nie je zapisovateľný"</string>
     <string name="directory_chooser_not_writable_message">"Zdá sa, že aplikácia nemá povolenie na zápis do %1$s adresári. To môže spôsobiť problémy pri nahrávaní."</string>
     <string name="directory_chooser_ignore">"Ignorovať"</string>
@@ -177,7 +214,7 @@
     <string name="error_report_chooser">"Odoslať e-mail pomocou"</string>
 
     <string name="rating_rate_title">"Ohodnotiť %1$s"</string>
-    <string name="rating_rate_message">"Ak sa Vám páči %1$s , prosím, ohodnoťte túto aplikáciu. Ďakujeme za vašu podporu!"</string>
+    <string name="rating_rate_message">"Ak sa Vám páči %1$s , prosím ohodnoťte túto aplikáciu. Ďakujeme za vašu podporu!"</string>
     <string name="rating_rate_now">"Ohodnotiť teraz"</string>
     <string name="rating_remind">"Pripomenúť neskôr"</string>
     <string name="rating_no_thanks">"Nie, vďaka"</string>
@@ -185,5 +222,15 @@
 
     <string name="help_stop_message">"Ak chcete zastaviť nahrávanie, zamknite obrazovku a počkajte 2 sekundy. Prípadne môžete jednoducho znovu spustiť aplikáciu %1$s."</string>
     <string name="menu_send_bug_report">"Ohlásiť chybu"</string>
+
+    <string name="notification_status_installing">"Inicializácia"</string>
+    <string name="notification_status_initializing">"Čakanie na root prístup"</string>
+    <string name="notification_status_ready">"Pripravené"</string>
+    <string name="notification_status_starting">"Spúšťanie"</string>
+    <string name="notification_status_recording">"Nahrávanie"</string>
+    <string name="notification_status_stopping">"Zastavovanie"</string>
+
+    <string name="sale_title">"Predaj"</string>
+    <string name="sale_text">"Kúpte si teraz SCR Pro a ušetrite %1$d %%! Táto ponuka končí dňa %2$s."</string>
 
 </resources>

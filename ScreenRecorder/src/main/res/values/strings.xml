@@ -4,6 +4,40 @@
     <string name="free_app_full_name">SCR Screen Recorder Free</string>
     <string name="pro_app_name">SCR Pro</string>
     <string name="pro_app_full_name">SCR Screen Recorder Pro</string>
+
+    <string name="play_free_app_name">
+SCR Screen Recorder Free ★ root
+    </string>
+    <string name="play_pro_app_name">
+SCR Screen Recorder Pro ★ root
+    </string>
+
+    <string name="play_root_required">
+<b>Works only on rooted / jailbroken / unlocked devices!</b><br/>Don\'t install if your device is not rooted.</string>
+    <string name="play_description_main">
+Record great quality screencasts directly from your phone or tablet!
+
+SCR Screen Recorder uses hardware accelerated video encoding to achieve best quality screen recording on any device.
+It\'s the only video recorder on the market supporting Tegra device including Nexus 7.</string>
+    <string name="play_description_free">
+With <b>SCR Free</b> you can record maximum 3 minutes screencasts and the SCR watermark is added to your video.
+Buy <b>SCR Pro</b> to get unlimited screencast length with no watermark.
+
+This is an early <b>BETA preview</b> version so it may not work on all devices and ROMs.
+If you encounter any issues please report it at scr.screen.recorder@gmail.com to help me get your device supported.
+    </string>
+
+    <string name="play_description_pro">
+This is an early <b>BETA preview</b> version so it may not work on all devices and ROMs.
+Before you buy consider testing <b>SCR Free</b> to ensure that your device is already supported.
+If you encounter any issues please report it at scr.screen.recorder@gmail.com to help me get your device supported.
+    </string>
+
+    <string name="play_small_print">
+SCR Screen Recorder collects anonymous usage statistics to help track bugs and analyze how users use the app.
+This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
+    </string>
+
     <string name="recording_saved_title">SCR Recording Saved</string>
     <string name="recording_saved_message">Recording saved to %1$s</string>
     <string name="recording_saved_toast">Recording saved to %1$s</string>

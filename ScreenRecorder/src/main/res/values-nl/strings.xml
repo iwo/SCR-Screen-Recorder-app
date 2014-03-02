@@ -3,6 +3,36 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+
+    <string name="play_free_app_name">"
+SCR Screen Recorder Free ★ root
+    "</string>
+    <string name="play_pro_app_name">"
+SCR Screen Recorder Pro ★ root
+    "</string>
+
+    <string name="play_root_required">"
+&lt;b&gt;Werkt alleen op gerootte apparaten!&lt;/b&gt;&lt;br/&gt;Niet installeren als je apparaat niet geroot is."</string>
+    <string name="play_description_main">"
+Neem video's van je scherm op met geweldige kwaliteit, direct vanaf je telefoon of tablet!
+
+SCR Screen Recorder gebruikt hardware-versnelde encoding om op elk apparaat schermopnames van geweldige kwaliteit te maken.
+Het is de enige screen recorder op de markt die Tegra apparaten, inclusief de Nexus 7 ondersteunt."</string>
+    <string name="play_description_free">"
+Met &lt;b&gt;SCR Gratis&lt;/b&gt; kun je maximaal 3 minuten video opnemen en het SCR watermerk wordt toegevoegd aan je video. Koop &lt;b&gt;SCR Pro&lt;/b&gt; om onbeperke videolengte krijgen zonder watermerk. Dit is een vervroegde &lt;b&gt;BETA voorbeeld&lt;/b&gt; versie, dus het zou niet kunnen werken op alle apparaten en roms. Als je problemen hebt, meld dit dan bij scr.screen.recorder@gmail.com (Engels) om me te helpen met het ondersteunen van je apparaat.
+    "</string>
+
+    <string name="play_description_pro">"
+Dit is een vervroegde &lt;b&gt;BETA voorbeeld&lt;/b&gt; versie, dus het zou niet kunnen werken op alle apparaten en roms.
+Voordat je de app koopt, probeer eerst &lt;b&gt;SCR Gratis&lt;/b&gt; om er zeker van te zijn dat je apparaat ondersteund wordt.
+Als je problemen hebt, meld dit dan bij scr.screen.recorder@gmail.com (Engels) om me te helpen met het ondersteunen van je apparaat.
+    "</string>
+
+    <string name="play_small_print">"
+SCR Screen Recorder verzamelt anonieme gebruiksstatistieken om bugs te vinden en te analyseren hoe gebruikers de app gebruiken.
+Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL licentie.
+    "</string>
+
     <string name="recording_saved_title">"SCR Opname Opgeslagen"</string>
     <string name="recording_saved_message">"Opname opgeslagen in %1$s"</string>
     <string name="recording_saved_toast">"Opname opgeslagen in %1$s"</string>
@@ -85,7 +115,7 @@
     <string name="settings_video_encoder_built_in_summary">"Ingebouwde Android %1$s encoder"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg software MPEG4-encoder"</string>
 
-    <string name="settings_resolution">"Resolutie"</string>
+    <string name="settings_resolution">"Resoluti"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
     <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
     <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp horizontaal"</string>
@@ -137,11 +167,11 @@
     <string name="settings_audio_source">"Bron"</string>
     <string name="settings_audio_mic">"Microfoon"</string>
     <string name="settings_audio_mute">"Geen"</string>
-    <string name="settings_audio_internal">"Intern"</string>
+    <string name="settings_audio_internal">"Inter"</string>
     <string name="settings_audio_internal_experimental">"Intern (experimenteel)"</string>
     <string name="settings_audio_mic_summary">"Microfoon. Slechts één app tegelijk kan de microfoon gebruiken!"</string>
     <string name="settings_audio_mute_summary">"Dempen. Geen audiospoor"</string>
-    <string name="settings_audio_internal_summary">"Audio-uitgang. Je bent lid geworden van de \"SCR Alpha testing\" Google+ community om interne audio-opname te testen"</string>
+    <string name="settings_audio_internal_summary">"Audio output. Wordt lid van de \"SCR Alpha testing\" Google+ community om interne audio-opname te testen"</string>
     <string name="settings_audio">"Geluid"</string>
     <string name="settings_sampling_rate">"Sampling rate"</string>
 
@@ -150,7 +180,7 @@
     <string name="settings_audio_driver_installed">"SCR audio driver geïnstalleerd. Tik om te verwijderen."</string>
     <string name="settings_audio_driver_uninstalling">"SCR audio driver verwijderen..."</string>
     <string name="settings_audio_driver_installation_failure">"SCR audio driver installatie is mislukt. Tik om opnieuw te proberen."</string>
-    <string name="settings_audio_driver_outdated">"Oude versie van SCR audio driver geïnstalleerd. Tik om te updaten."</string>
+    <string name="settings_audio_driver_outdated">"Oude versie van SCR audio driver geïnstalleerd. Tik om te updaten"</string>
 
     <string name="internal_audio_dialog_title">"Audio driver installatie"</string>
     <string name="internal_audio_dialog_message">"
@@ -171,6 +201,10 @@
     <string name="settings_stop_when_screen_off_summary">"Opname stopt nadat het scherm wordt uitgeschakeld"</string>
     <string name="settings_color_fix">"Negatieve kleuren fix"</string>
     <string name="settings_color_fix_summary">"Schakel deze optie in als de blauwe en rode kleuren zijn omgekeerd"</string>
+
+    <string name="settings_zigzag_fix">"Zigzag fix"</string>
+    <string name="settings_zigzag_fix_summary">"Selecteer als je opname willekeurig gekleurde strepen heeft"</string>
+    <string name="settings_zigzag_fix_cpu_only">"Alleen beschikbaar met CPU beeldtransformatie"</string>
 
     <string name="directory_chooser_select">"Selecteer \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Vernieuwen"</string>
@@ -209,7 +243,10 @@
     <string name="notification_status_initializing">"Wachten op root-toegang"</string>
     <string name="notification_status_ready">"Klaar"</string>
     <string name="notification_status_starting">"Aan het starten"</string>
-    <string name="notification_status_recording">"Aan het opnemen"</string>
+    <string name="notification_status_recording">"Aan het opneme"</string>
     <string name="notification_status_stopping">"Aan het stoppen"</string>
+
+    <string name="sale_title">"Uitverkoop"</string>
+    <string name="sale_text">"Koop nu SCR Pro en bespaar %1$d %% ! Deze aanbieding eindigt op %2$s ."</string>
 
 </resources>

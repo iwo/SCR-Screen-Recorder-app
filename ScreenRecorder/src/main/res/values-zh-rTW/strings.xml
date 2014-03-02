@@ -3,6 +3,27 @@
     <string name="free_app_full_name">"SCR螢幕錄影免費版"</string>
     <string name="pro_app_name">"SCR專業版"</string>
     <string name="pro_app_full_name">"SCR螢幕錄影專業版"</string>
+
+    <string name="play_free_app_name">"SCR螢幕錄影免費版 ★ root"</string>
+    <string name="play_pro_app_name">"SCR螢幕錄影專業版 ★ root"</string>
+
+    <string name="play_root_required">"&lt;b&gt;僅適用於擁有root權限 / 已越獄 / 已解鎖 的裝置！&lt;/b&gt;&lt;br/&gt;在您的裝置尚未有root權限的情況下請勿安裝。"</string>
+    <string name="play_description_main">"直接從您的手機或平板上錄製高品質擷圖錄影！
+
+SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行最優質的螢幕錄影。
+這是市場上唯一支援Tegra裝置(包括Nexus 7)的錄影程式。"</string>
+    <string name="play_description_free">"使用 &lt;b&gt;SCR 免費版&lt;/b&gt; 您可以錄製最多3分鐘帶有SCR浮水印的擷圖錄影。
+購買 &lt;b&gt;SCR 專業版&lt;/b&gt; 即可錄製無限長度且無浮水印的擷圖錄影。
+
+這是一個初期的 &lt;b&gt;BETA 測試預覽&lt;/b&gt; 版本， 所以它可能無法在所有的裝置和ROM下正常運作。
+如果您遇到任何問題，請到 scr.screen.recorder@gmail.com 回報您的問題，以便我處理您的裝置支援性問題。"</string>
+
+    <string name="play_description_pro">"這是一個初期的 &lt;b&gt;BETA 測試預覽&lt;/b&gt; 版本， 所以它可能無法在所有的裝置和ROM下正常運作。
+請在購買前先試著安裝&lt;b&gt; SCR 免費版&lt;/ b&gt;測試一下，以確保您的裝置能夠正常運作。
+如果您遇到任何問題，請到 scr.screen.recorder@gmail.com 回報您的問題，以便我處理您的裝置支援性問題。"</string>
+
+    <string name="play_small_print">"SCR 螢幕錄影以匿名方式收集使用方式的統計資訊，以協助追蹤 bug 並分析使用者們如何使用應用程式。此軟體使用  LGPL 下的 FFmpeg 1.2 授權源碼。"</string>
+
     <string name="recording_saved_title">"SCR 錄製已儲存"</string>
     <string name="recording_saved_message">"錄製儲存到 %1$s"</string>
     <string name="recording_saved_toast">"錄製儲存到 %1$s"</string>
@@ -12,8 +33,8 @@
 
     <string name="su_required_title">"需要root存取權限"</string>
     <string name="su_required_message">"要在手機或平板上執行任何螢幕錄影程式都必須取得root權限。在網路上有許多相關教學及說明如何取得不同裝置的root權限。請在取得root權限之後再繼續使用吧！"</string>
-    <string name="su_required_help">"什麼是“取得root權限”？"</string>
-    <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
+    <string name="su_required_help">"什麼是“root權限”？"</string>
+    <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone"</string>
 
     <string name="error_dialog_title">"發生了嚴重錯誤:-("</string>
     <string name="startup_error_message">"將寄送出匿名的錯誤回饋報告以協助我們修正問題。請放心的透過email引用錯誤 S%1$d 聯絡我們。"</string>
@@ -38,8 +59,17 @@
         切換影像轉碼設定為 CPU 或軟體視訊編碼。
     "</string>
 
+    <string name="audio_config_error_title">"音訊錯誤"</string>
+    <string name="audio_config_error_message">"未支援的音訊配置。請試著變更SCR的音訊設定。"</string>
+
     <string name="android_version_error_title">"Andr​​oid系統版本不支援!"</string>
-    <string name="android_version_error_message">"尚未支援您的Andr​​oid系統版本!"</string>
+    <string name="android_version_error_message">"尚未支援您的Andr​​oid系統版本"</string>
+
+    <string name="cpu_error_title">"尚未支援的CPU"</string>
+    <string name="cpu_error_message">"您的CPU架構（ %1$s ）並未支援%2$s 。"</string>
+
+    <string name="installation_error_title">"安裝錯誤"</string>
+    <string name="installation_error_message">"無法安裝所需的檔案。請確保您的裝置還有剩餘空間，並重新啟動%1$s 。"</string>
 
     <string name="help_stop_title">"該如何停止呢?"</string>
     <string name="help_stop_ok">"明白了"</string>
@@ -98,9 +128,9 @@
     <string name="settings_frame_rate">"幀率"</string>
     <string name="settings_frame_rate_max">"最大值"</string>
     <string name="settings_frame_rate_max_short">"最大"</string>
-    <string name="settings_frame_rate_up_to">" %1$d fps"</string>
-    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
-    <string name="settings_frame_rate_summary">"  %1$d fps (受限於硬體限制)"</string>
+    <string name="settings_frame_rate_up_to">"達%1$d幀"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d幀"</string>
+    <string name="settings_frame_rate_summary">"  %1$d 幀 (受限於硬體限制)"</string>
     <string name="settings_frame_rate_max_summary">"硬體的最大極限"</string>
 
     <string name="settings_orientation">"螢幕方向"</string>
@@ -119,14 +149,14 @@
     <string name="settings_vertical_frames_cancel">"取消"</string>
 
     <string name="settings_audio_category">"音訊"</string>
-    <string name="settings_audio_source">"音訊"</string>
+    <string name="settings_audio_source">"音源"</string>
     <string name="settings_audio_mic">"麥克風"</string>
     <string name="settings_audio_mute">"靜音"</string>
     <string name="settings_audio_internal">"內部音訊"</string>
     <string name="settings_audio_internal_experimental">"內部音訊(實驗性功能)"</string>
     <string name="settings_audio_mic_summary">"麥克風。一次只能有一個應用程式使用麥克風！"</string>
     <string name="settings_audio_mute_summary">"靜音。無音軌"</string>
-    <string name="settings_audio_internal_summary">"音訊輸出。加入 \"SCR Alpha testing\" 的Google+ 社群來測試內部音訊錄製功能"</string>
+    <string name="settings_audio_internal_summary">"音訊輸出。加入Google+ 的“SCR 開發測試”社群來參加內部錄音測試。"</string>
     <string name="settings_audio">"音訊"</string>
     <string name="settings_sampling_rate">"取樣率"</string>
 
@@ -145,12 +175,16 @@
     <string name="settings_other_category">"其他"</string>
     <string name="settings_hide_icon">"隱藏通知圖示"</string>
     <string name="settings_show_touches">"顯示觸控點"</string>
-    <string name="settings_show_touches_summary">"顯示觸碰的視覺回饋。您也可以經由Andr​​oid系統設定=&gt;開發人員選項=&gt;顯示觸碰點 來保持啟用觸碰點顯示回饋功能"</string>
+    <string name="settings_show_touches_summary">"顯示觸摸視覺回饋。您也可以透過Andr​​oid系統設定→開發人員選項→顯示觸摸回饋 來保持觸摸視覺回饋設定"</string>
     <string name="settings_output_dir">"輸出目錄"</string>
     <string name="settings_stop_when_screen_off">"螢幕關閉時停止錄影"</string>
     <string name="settings_stop_when_screen_off_summary">"螢幕關閉後即結束錄影"</string>
     <string name="settings_color_fix">"反色修正"</string>
     <string name="settings_color_fix_summary">"如果藍色和紅色的顏色相反的話，請切換此選項"</string>
+
+    <string name="settings_zigzag_fix">"曲折修復"</string>
+    <string name="settings_zigzag_fix_summary">"如果錄影畫面帶有不規則的色條紋請選擇此選項"</string>
+    <string name="settings_zigzag_fix_cpu_only">"僅適用於CPU的影像轉換"</string>
 
     <string name="directory_chooser_select">"選擇 \\"%1$s\\""</string>
     <string name="directory_chooser_refresh">"重新載入"</string>
@@ -182,5 +216,15 @@
 
     <string name="help_stop_message">"我們得停止錄製並鎖定螢幕再稍等約 2 秒。或是您也可以簡單地重新開啟 %1$s 應用程式"</string>
     <string name="menu_send_bug_report">"寄送錯誤報告"</string>
+
+    <string name="notification_status_installing">"初始化"</string>
+    <string name="notification_status_initializing">"等待root存取權限"</string>
+    <string name="notification_status_ready">"就緒"</string>
+    <string name="notification_status_starting">"正在開始"</string>
+    <string name="notification_status_recording">"錄影中"</string>
+    <string name="notification_status_stopping">"停止中"</string>
+
+    <string name="sale_title">"特價"</string>
+    <string name="sale_text">"現在購買 SCR 專業版可省下%1$d %%此優惠到 %2$s 結束。"</string>
 
 </resources>
