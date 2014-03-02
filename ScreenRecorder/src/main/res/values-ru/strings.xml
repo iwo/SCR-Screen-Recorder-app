@@ -3,6 +3,41 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+
+    <string name="play_free_app_name">"
+SCR Screen Recorder Free ★ root
+    "</string>
+    <string name="play_pro_app_name">"
+SCR Screen Recorder Pro ★ root
+    "</string>
+
+    <string name="play_root_required">"
+&lt;b&gt;Работает только на рутированных / взломанных / разблокированных устройствах!&lt;/b&gt;&lt;br/&gt;Не устанавливайте, если ваше устройство без root."</string>
+    <string name="play_description_main">"
+Записывайте видеоролики отличного качества прямо с вашего телефона или планшета!
+
+SCR Screen Recorder использует аппаратное ускорение кодирования видео для
+достижения наилучшего качества записи экрана на любом устройстве.
+Это единственное приложение на рынке с поддержкой Tegra устройств, включая Nexus 7."</string>
+    <string name="play_description_free">"
+&lt;b&gt;SCR Free&lt;/b&gt; ограничена 3 минутами записи и имеет водяной знак SCR, который будет добавлен в ваше видео.
+Покупка &lt;b&gt;SCR Pro&lt;/b&gt; дает вам неограниченное время записи и убирает водяные знаки на видео.
+
+Это предварительная &lt;b&gt;BETA&lt;/b&gt; версия, поэтому может не работать на всех устройствах и прошивках.
+При возникновении ошибок, пожалуйста, сообщите об этом на scr.screen.recorder@gmail.com, это поможет мне в устранении проблем поддержки для вашего устройства.
+    "</string>
+
+    <string name="play_description_pro">"
+Это предварительная &lt;b&gt;BETA&lt;/b&gt; версия, поэтому может не работать на всех устройствах и прошивках.
+Чтобы убедиться в поддержке вашего устройства, сначала испробуйте &lt;b&gt;БЕСПЛАТНУЮ&lt;/b&gt; версию.
+При возникновении ошибок, пожалуйста, сообщите об этом на scr.screen.recorder@gmail.com, это поможет мне в устранении проблем поддержки для вашего устройства.
+    "</string>
+
+    <string name="play_small_print">"
+SCR Screen Recorder собирает анонимную статистику для отслеживания ошибок и анализа использования приложения.
+Данное программное обеспечение использует неизмененный код FFmpeg 1.2 лицензируемый в рамках LGPL.
+    "</string>
+
     <string name="recording_saved_title">"Сохранение записи SCR"</string>
     <string name="recording_saved_message">"Сохранение в... %1$s"</string>
     <string name="recording_saved_toast">"Запись сохранена в %1$s"</string>
@@ -36,12 +71,21 @@
     <string name="screen_protected_error_message">"Экран не может быть захвачен так как содержимое некоторых приложений отмечены как защищенные."</string>
 
     <string name="opengl_error_title">"GPU не поддерживается"</string>
-    <string name="opengl_error_message">"Ваша GPU пока не поддерживается.
+    <string name="opengl_error_message">"Ваше GPU пока не поддерживается.
         Переключите обработку изображения на CPU или используйте программный видеокодер.
     "</string>
 
+    <string name="audio_config_error_title">"Ошибка аудио"</string>
+    <string name="audio_config_error_message">"Неподдерживаемая конфигурация аудио. Попробуйте изменить параметры звука SCR."</string>
+
     <string name="android_version_error_title">"Версия Android не поддерживается"</string>
     <string name="android_version_error_message">"Ваша версия Android пока не поддерживается."</string>
+
+    <string name="cpu_error_title">"CPU не поддерживается"</string>
+    <string name="cpu_error_message">"Архитектура процессора (%1$s) не поддерживается %2$s."</string>
+
+    <string name="installation_error_title">"Ошибка установки"</string>
+    <string name="installation_error_message">"Не удается установить необходимые файлы. Убедитесь в наличии свободного места на устройстве и перезапустите %1$s."</string>
 
     <string name="help_stop_title">"Как остановить"</string>
     <string name="help_stop_ok">"Понятно!"</string>
@@ -124,9 +168,9 @@
     <string name="settings_vertical_frames_cancel">"Отмена"</string>
 
     <string name="settings_audio_category">"Аудио"</string>
-    <string name="settings_audio_source">"Аудио"</string>
+    <string name="settings_audio_source">"Источник"</string>
     <string name="settings_audio_mic">"Микрофон"</string>
-    <string name="settings_audio_mute">"Тихо"</string>
+    <string name="settings_audio_mute">"Без звука"</string>
     <string name="settings_audio_internal">"Внутренний"</string>
     <string name="settings_audio_internal_experimental">"Внутренний (эксперимент)"</string>
     <string name="settings_audio_mic_summary">"Микрофон. Только одно приложение одновременно может использовать микрофон!"</string>
@@ -154,12 +198,16 @@
     <string name="settings_other_category">"Прочее"</string>
     <string name="settings_hide_icon">"Скрыть значок"</string>
     <string name="settings_show_touches">"Показать нажатия"</string>
-    <string name="settings_show_touches_summary">"Отображать точки в местах нажатия на экран. Также это можно сделать постоянным через Настройки Android =&gt; Для разработчиков =&gt; Показывать нажатия"</string>
+    <string name="settings_show_touches_summary">"Отображать точки в местах нажатия на экран. Также это можно сделать постоянным через Настройки Android→Для разработчиков→Показывать нажатия"</string>
     <string name="settings_output_dir">"Выходной каталог"</string>
     <string name="settings_stop_when_screen_off">"Закончить при выкл экрана"</string>
     <string name="settings_stop_when_screen_off_summary">"Останавливать запись после отключения экрана"</string>
     <string name="settings_color_fix">"Фикс инверсии цвета"</string>
     <string name="settings_color_fix_summary">"Включите этот параметр если синий и красный цвета инвертированы"</string>
+
+    <string name="settings_zigzag_fix">"Фикс зигзага"</string>
+    <string name="settings_zigzag_fix_summary">"Используйте если в записи присутствуют случайные цветные полосы"</string>
+    <string name="settings_zigzag_fix_cpu_only">"Доступно только при обработке изображения процессором"</string>
 
     <string name="directory_chooser_select">"Выбрать \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Обновить"</string>
@@ -193,5 +241,15 @@
 
     <string name="help_stop_message">"Для остановки записи заблокируйте экран и подождите 2 секунды. В качестве альтернативы можно просто открыть приложение %1$s."</string>
     <string name="menu_send_bug_report">"Сообщить об ошибке"</string>
+
+    <string name="notification_status_installing">"Инициализация"</string>
+    <string name="notification_status_initializing">"Ожидание доступа root"</string>
+    <string name="notification_status_ready">"Готов"</string>
+    <string name="notification_status_starting">"Запуск"</string>
+    <string name="notification_status_recording">"Запись"</string>
+    <string name="notification_status_stopping">"Остановка"</string>
+
+    <string name="sale_title">"Распродажа"</string>
+    <string name="sale_text">"Купите SCR Pro сейчас и сэкономьте %1$d %%! Это предложение заканчивается %2$s."</string>
 
 </resources>

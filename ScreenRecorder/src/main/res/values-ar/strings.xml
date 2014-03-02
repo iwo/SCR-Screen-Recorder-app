@@ -4,6 +4,34 @@
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro
 "</string>
+
+    <string name="play_free_app_name">"
+SCR Screen Recorder Free ★ root
+    "</string>
+    <string name="play_pro_app_name">"
+SCR Screen Recorder Pro ★ root
+    "</string>
+
+    <string name="play_root_required">"
+&lt;B&gt; التطبيق يعمل على أجهزة أندرويد التي تمتلك روت / التطبيق يعمل على أجهزة آيفون التي تمتلك جيلبريك / الأجهزة غير المقفلة ! &lt;/B&gt; &lt;BR/&gt; لا تقم بتثبيت التطبيق إذا كان جهازك لا يمتلك روت ."</string>
+    <string name="play_description_main">"
+تسجيل لقطات للشاشة بجودة كبيرة مباشرة من الهاتف أو الكمبيوتر اللوحي ! يستخدم SCR Screen Recorder ترميز الفيديو لتحقيق أفضل جودة لتسجيل الشاشة على أي جهاز . إنه مسجل الفيديو المتكامل بما في ذلك دعمه لنوع وحدة معالجة الرسومات Tegra على جهاز Nexus 7 ."</string>
+    <string name="play_description_free">"
+مع &lt;B&gt; SCR Free &lt;/B&gt; يمكنك تسجيل الشاشة لـ3 دقائق فقط ويتم إضافة علامة مائية على الفيديو الخاص بك .
+قم بشراء &lt;B&gt; SCR Pro &lt;/b&gt; للحصول على وقت غير محدود لتسجيل الشاشة مع عدم وجود العلامة المائية .
+
+هذا هو وقت اختبار إصدار &lt;b&gt; BETA &lt;/b&gt; لذلك قد لا يعمل التطبيق على جميع الأجهزة . إذا واجهت أي مشاكل يرجى إبلاغي عنها بإرسال رسالة إلى scr.screen.recorder@gmail.com لمساعدتي في دعم جهازك .
+    "</string>
+
+    <string name="play_description_pro">"
+هذا هو وقت اختبار إصدار &lt;b&gt; BETA &lt;/b&gt; لذلك قد لا يعمل التطبيق على جميع الأجهزة .
+قبل أن تشتري النسخة الاحترافية قم بتجربة &lt;B&gt; SCR Free &lt;/b&gt; للتأكد من أن جهازك معتمد بالفعل . إذا واجهت أي مشاكل يرجى إبلاغي عنها بإرسال رسالة إلى scr.screen.recorder@gmail.com لمساعدتي في دعم جهازك .
+    "</string>
+
+    <string name="play_small_print">"
+يقوم SCR Screen Recorder بجمع إحصاءات الاستخدام المجهولة وتحليل كيفية استخدام المستخدمين للتطبيق . هذا التطبيق يستخدم ترميز غير معدل من FFMPEG 1.2 مرخص بموجب LGPL .
+    "</string>
+
     <string name="recording_saved_title">"تم حفظ التسجيل بنجاح"</string>
     <string name="recording_saved_message">"تم حفظ التسجيل بإسم %1$s"</string>
     <string name="recording_saved_toast">"تم حفظ التسجيل بإسم %1$s"</string>
@@ -16,19 +44,19 @@
     <string name="su_required_help">"ماهو \" الروت \" ؟"</string>
     <string name="su_required_help_link">"https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
 
-    <string name="error_dialog_title">"حدث خطأ م :-("</string>
+    <string name="error_dialog_title">"حدث خطأ ما :-("</string>
     <string name="startup_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني S%1$d ."</string>
     <string name="recording_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>
 
     <string name="media_recorder_error_title">"خطأ في التسجيل"</string>
-    <string name="media_recorder_error_message">"حاول تغيير دقة التسجيل أو تبديل تحول الصورة بين CPU/GPU . ويرجى منك إلغاء تثبيت تطبيقات تسجيل الشاشة الأخرى إذا كان لديك أي واحد منها . إذا استمرت المشكلة لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>
+    <string name="media_recorder_error_message">"حاول تغيير دقة التسجيل أو تبديل تحوّل الصورة بين CPU/GPU . ويرجى منك إلغاء تثبيت تطبيقات تسجيل الشاشة الأخرى إذا كان لديك أي واحد منها . إذا استمرت المشكلة لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>
 
     <string name="output_file_error_title">"لا يمكن إنشاء ملف الفيديو"</string>
     <string name="output_file_error_message">"مسجل الشاشة غير قادر على إنشاء %1$s ملف الفيديو . تأكد من مسار الحفظ المحدد للفيديو وأن بطاقة SD غير مؤمنة بواسطة اتصال USB ."</string>
 
     <string name="microphone_busy_error_title">"مكبر الصوت مُستخدم الآن"</string>
     <string name="microphone_busy_error_message">"
-        يمكن لتطبيق واحد فقط استخدام مكبر الصوت في وقت واحد . وهذا هو الحد الأقصى في نظام الأندرويد . قم بإغلاق التطبيقات الأخرى التي تستخدم مكبر الصوت ( مثل : Google Now أو Skype ) أو قم بالتسجيل دون استخدام مكبر الصوت .
+        يمكن لتطبيق واحد فقط استخدام مكبر الصوت في وقت واحد . وهذا هو الحد الأقصى في نظام الأندرويد . قم بإغلاق التطبيقات الأخرى التي تستخدم مكبر الصوت ( مثل : Google Now أو Skype ) أو قم بالتسجيل بدون استخدام مكبر الصوت .
     "</string>
     <string name="microphone_busy_error_continue_mute">"مواصلة كتم الصوت"</string>
 
@@ -36,21 +64,30 @@
     <string name="screen_protected_error_message">"يمكن / لا يمكن تسجيل الشاشة نظراً لتمييز بعض التطبيقات لمحتوى الشاشة على أنه محتوى آمن ."</string>
 
     <string name="opengl_error_title">"GPU غير مدعوم"</string>
-    <string name="opengl_error_message">"بطاقة الرسومات الخاصة بك غير مدعومة حتى الآن . قم بتبديل خيار تحول الصورة إلى وضع CPU أو استخدم برامج ترميز الفيديو .
+    <string name="opengl_error_message">"بطاقة الرسومات الخاصة بك غير مدعومة حتى الآن . قم بتبديل خيار تحوّل الصورة إلى CPU أو استخدم أحد أنواع ترميز الفيديو .
     "</string>
+
+    <string name="audio_config_error_title">"خطأ في الصوت"</string>
+    <string name="audio_config_error_message">"تكوين الصوت غير معتمد . حاول تغيير إعدادات الصوت ."</string>
 
     <string name="android_version_error_title">"إصدار نظام الأندرويد الخاص بك غير مدعوم"</string>
     <string name="android_version_error_message">"إصدار نظام الأندرويد الخاص بك غير مدعوم حتى الآن ."</string>
 
+    <string name="cpu_error_title">"CPU غير مدعوم"</string>
+    <string name="cpu_error_message">"عمارة CPU الخاصة بك (%1$s) غير مدعومة بواسطة %2$s ."</string>
+
+    <string name="installation_error_title">"خطأ في التثبيت"</string>
+    <string name="installation_error_message">"لا يمكن تثبيت الملفات المطلوبة . تأكد أن لديك بعض المساحة التخزينية على الجهاز الخاص بك وقم بإعادة تشغيل جهازك %1$s ."</string>
+
     <string name="help_stop_title">"كيفية إيقاف التسجيل"</string>
     <string name="help_stop_ok">"فهمت ذلك !"</string>
 
-    <string name="free_timeout_title">"انتهت صلاحية المهلة الزمنية"</string>
+    <string name="free_timeout_title">"انتهت المهلة المحددة"</string>
     <string name="free_timeout_message">"يجب عليك شراء SCR Screen Recorder Pro للحصول على وقت غير محدود للتسجيل وإخفاء العلامة المائية التي تكون على الفيديو ."</string>
     <string name="free_timeout_buy">"شراء الآن !"</string>
     <string name="free_timeout_no_thanks">"لا شكراً"</string>
     <string name="hide_icon_title">"هذه الميزة متوفرة لـSCR Pro فقط"</string>
-    <string name="hide_icon_message">"يجب عليك شراء SCR Screen Recorder Pro لإخفاء العلامة المائية التي تكون على الفيديو وإخفاء رمز الإعلام . ستحصل كذلك على وقت غير محدود للتسجيل !"</string>
+    <string name="hide_icon_message">"يجب عليك شراء SCR Screen Recorder Pro لإخفاء العلامة المائية التي تكون على الفيديو وإخفاء رمز التطبيق . ستحصل كذلك على وقت غير محدود للتسجيل !"</string>
 
     <string name="buy_error_title">"خطأ في تشغيل سوق Google Play"</string>
     <string name="buy_error_message">"الرجاء البحث عن SCR Screen Recorder Pro في سوق Google Play"</string>
@@ -69,10 +106,10 @@
     <string name="settings_video_encoder_h263_unstable">"H263 ( غير مستقرة )"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
     <string name="settings_video_encoder_default">"تلقائي"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"خاصية MPEG-4 ( بطيئة )"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 ( بطيئة )"</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"دمج خاصية %1$s مع التشفير"</string>
-    <string name="settings_video_encoder_ffmpeg_summary">"FFMPEG البرمجية MPEG4 التشفير"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg software MPEG4 encoder"</string>
 
     <string name="settings_resolution">"دقة التسجيل"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
@@ -83,13 +120,13 @@
     <string name="settings_resolution_half">"%1$dx%2$d - النصف"</string>
     <string name="settings_resolution_unstable">"( غير مستقر )"</string>
 
-    <string name="settings_transformation">"تحول الصورة"</string>
+    <string name="settings_transformation">"تحوّل الصورة"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"+GPU"</string>
-    <string name="settings_transformation_cpu_summary">"الصورة المعروضة على الشاشة تعمل على المعالج (CPU)"</string>
-    <string name="settings_transformation_gpu_summary">"الصورة المعروضة على الشاشة تعمل على بطاقة الرسومات (%1$s)"</string>
-    <string name="settings_transformation_sw_summary">"غير متوفرة في برامج التشفير"</string>
+    <string name="settings_transformation_cpu_summary">"صورة الشاشة تعمل على المعالج (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"صورة الشاشة تعمل على بطاقة الرسومات (%1$s)"</string>
+    <string name="settings_transformation_sw_summary">"غير متوفرة في أنواع التشفير"</string>
 
     <string name="settings_video_bitrate">"معدل البت"</string>
     <string name="settings_video_bitrate_summary">"حوّل %1$s اعتماداً على التشفير"</string>
@@ -112,7 +149,7 @@
     <string name="settings_orientation_portrait">"عمودي"</string>
     <string name="settings_orientation_landscape">"أفقي"</string>
     <string name="settings_orientation_clockwise">"تدوير في اتجاه عقارب الساعة"</string>
-    <string name="settings_orientation_anticlockwise">"تدوير عكس اتجاه عقارب الساعة"</string>
+    <string name="settings_orientation_anticlockwise">"تدوير في عكس اتجاه عقارب الساعة"</string>
 
     <string name="settings_vertical_frames">"الإطارات الرأسية"</string>
     <string name="settings_vertical_frames_warning">"مشغلات الفيديو على العديد من الأجهزة لا يمكنها تشغيل ملفات الفيديو ذات الإطارات الرأسية . حتى إذا كان هذا الخيار غير محدد تتم إضافته إلى شريط الفيديو حتى يصبح العرض صحيح في مشغل الأندرويد الافتراضي ، ويوتيوب وغيرها ."</string>
@@ -120,39 +157,43 @@
     <string name="settings_vertical_frames_cancel">"إلغاء"</string>
 
     <string name="settings_audio_category">"تسجيل الصوت"</string>
-    <string name="settings_audio_source">"تسجيل الصوت"</string>
-    <string name="settings_audio_mic">"بمكبر الصوت"</string>
+    <string name="settings_audio_source">"المصدر"</string>
+    <string name="settings_audio_mic">"مكبر الصوت"</string>
     <string name="settings_audio_mute">"كتم الصوت"</string>
     <string name="settings_audio_internal">"داخلي"</string>
-    <string name="settings_audio_internal_experimental">"الداخلية ( تجريبية )"</string>
+    <string name="settings_audio_internal_experimental">"داخلي ( تجريبي )"</string>
     <string name="settings_audio_mic_summary">"مكبر الصوت . يمكن لتطبيق واحد فقط استخدام مكبر الصوت في وقت واحد !"</string>
     <string name="settings_audio_mute_summary">"كتم الصوت . لا يوجد مسار نزول افتراضي للصوت"</string>
-    <string name="settings_audio_internal_summary">"إخراج الصوت . اشترك مع مجموعة \"SCR Alpha testing\" في مجتمع +Google لاختبار تسجيل الصوت الداخلي"</string>
+    <string name="settings_audio_internal_summary">"صوت داخلي . اشترك في مجتمع \"SCR Alpha testing\" على +Google لاختبار تسجيل الصوت الداخلي"</string>
     <string name="settings_audio">"تسجيل الصوت"</string>
     <string name="settings_sampling_rate">"معدل أخذ العينات"</string>
 
-    <string name="settings_audio_driver_not_installed">"برنامج تشغيل الصوت لـSCR غير مثبت . اضغط فوق \" تثبيت \" لتثبيت البرنامج ."</string>
-    <string name="settings_audio_driver_installing">"جار تثبيت برنامج تشغيل الصوت لـSCR ..."</string>
-    <string name="settings_audio_driver_installed">"برنامج تشغيل الصوت لـSCR تم تثبيته . اضغط فوق \" إلغاء التثبيت \" لإلغاء تثبيت برنامج تشغيل الصوت ."</string>
-    <string name="settings_audio_driver_uninstalling">"جار إلغاء تثبيت برنامج تشغيل الصوت لـSCR ..."</string>
-    <string name="settings_audio_driver_installation_failure">"فشل تثبيت برنامج تشغيل الصوت لـSCR . اضغط لإعادة المحاولة ."</string>
-    <string name="settings_audio_driver_outdated">"الإصدار القديم من برنامج تشغيل الصوت لـSCR مثبت . اضغط لتحديثه ."</string>
+    <string name="settings_audio_driver_not_installed">"مساعد تشغيل الصوت لـSCR غير مثبت . اضغط فوق \" تثبيت \" لتثبيت البرنامج ."</string>
+    <string name="settings_audio_driver_installing">"جاري تثبيت مساعد تشغيل الصوت لـSCR ..."</string>
+    <string name="settings_audio_driver_installed">"مساعد تشغيل الصوت لـSCR تم تثبيته . اضغط فوق \" إلغاء التثبيت \" لإلغاء تثبيت مساعد تشغيل الصوت ."</string>
+    <string name="settings_audio_driver_uninstalling">"جاري إلغاء تثبيت مساعد تشغيل الصوت لـSCR ..."</string>
+    <string name="settings_audio_driver_installation_failure">"فشل تثبيت مساعد تشغيل الصوت لـSCR . اضغط لإعادة المحاولة ."</string>
+    <string name="settings_audio_driver_outdated">"إصدار قديم من مساعد تشغيل الصوت لـSCR مثبت . اضغط للتحديث ."</string>
 
-    <string name="internal_audio_dialog_title">"تثبيت برنامج تشغيل الصوت"</string>
+    <string name="internal_audio_dialog_title">"تثبيت مساعد تشغيل الصوت"</string>
     <string name="internal_audio_dialog_message">"
-        تسجيل الصوت الداخلي هو ميزة جديدة تجريبية ، ويتطلب تثبيت برنامج تشغيل الصوت المخصص له . فمن المستحسن إلغاء تثبيت برنامج تشغيل الصوت هذا بعد الانتهاء من تجربته والتسجيل به . وسوف تكون قادراً على إلغاء تثبيت برنامج تشغيل الصوت لـSCR بسهولة من إعدادات SCR . وإذا تعطل المثبت قد تحتاج لاستخدام وحدة التحكم ADB أو إعادة تركيب النظام لاستعادة برنامج تشغيل الصوت الأصلي . ومن المستحسن أخذ نسخة احتياطية للنظام الخاص بك . وكل ذلك سيكون \" على مسؤوليتك الخاصة \" ."</string>
+        تسجيل الصوت الداخلي هي ميزة جديدة تجريبية ، وتتطلب تثبيت مساعد تشغيل الصوت المخصص لها . فمن المستحسن إلغاء تثبيت مساعد تشغيل الصوت هذا بعد الانتهاء من تجربته والتسجيل به . سوف تكون قادراً على إلغاء تثبيت مساعد تشغيل الصوت لـSCR بسهولة من إعدادات SCR . إذا تعطل المثبت قد تحتاج لاستخدام وحدة التحكم ADB أو إعادة تركيب النظام لاستعادة مساعد تشغيل الصوت الأصلي . من المستحسن أخذ نسخة احتياطية للنظام الخاص بك . كل ذلك سيكون \" على مسؤوليتك الخاصة \" ."</string>
     <string name="internal_audio_dialog_install">"تثبيت"</string>
     <string name="internal_audio_dialog_cancel">"إلغاء"</string>
 
     <string name="settings_other_category">"أخرى"</string>
-    <string name="settings_hide_icon">"إخفاء رمز الإعلام"</string>
+    <string name="settings_hide_icon">"إخفاء رمز التطبيق"</string>
     <string name="settings_show_touches">"عرض اللمسات"</string>
-    <string name="settings_show_touches_summary">"هذه الخاصية تُظهر ردود الفعل البصري للمسات . يمكنك أيضاً عرض اللمسات بشكل دائم من خلال الذهاب إلى الضبط =&gt; خيارات المطور =&gt; عرض اللمسات"</string>
+    <string name="settings_show_touches_summary">"هذه الخاصية تعرض ملاحظات مرئية لتفاعلات اللمس . يمكنك أيضاً عرض اللمسات بشكل دائم من خلال الذهاب إلى الضبط &gt; خيارات المطور &gt; عرض اللمسات"</string>
     <string name="settings_output_dir">"مسار حفظ الفيديو"</string>
     <string name="settings_stop_when_screen_off">"إيقاف التسجيل عند إغلاق الشاشة"</string>
     <string name="settings_stop_when_screen_off_summary">"إنهاء التسجيل بعد أن يتم إيقاف تشغيل الشاشة"</string>
     <string name="settings_color_fix">"إصلاح اللون الباهت"</string>
     <string name="settings_color_fix_summary">"قم باختيار هذه الخاصية إذا تم عكس ألوان الشاشة إلى ألوان زرقاء وحمراء"</string>
+
+    <string name="settings_zigzag_fix">"إصلاح التعرج"</string>
+    <string name="settings_zigzag_fix_summary">"حدد هذا الخيار إذا كان التسجيل يحتوي على أشرطة ملونة عشوائية"</string>
+    <string name="settings_zigzag_fix_cpu_only">"تحوّل الصورة متوفر فقط مع CPU"</string>
 
     <string name="directory_chooser_select">"حدد \"%1$s\""</string>
     <string name="directory_chooser_refresh">"تحديث"</string>
@@ -174,7 +215,7 @@
 
     <string name="error_report_report">"تقرير"</string>
     <string name="error_report_close">"إغلاق"</string>
-    <string name="error_report_text">"المرفق يحتوي على سجل النظام مفصلاً بما في ذلك معلومات حول الخطأ . لا تتردد في إضافة أي تعليق هنا ."</string>
+    <string name="error_report_text">"المرفق يحتوي على سجل النظام مفصلاً بما في ذلك معلومات حول الخطأ . لا تتردد في إضافة أي تعليقات هنا ."</string>
     <string name="error_report_chooser">"إرسال تقرير عن الخطأ بواسطة البريد الإلكتروني"</string>
 
     <string name="rating_rate_title">"معدل %1$s"</string>
@@ -184,7 +225,17 @@
     <string name="rating_no_thanks">"لا ، شكراً"</string>
     <string name="rating_play_error">"لا يمكن فتح سوق Google Play "</string>
 
-    <string name="help_stop_message">"لإيقاف التسجيل قم بقفل الشاشة وانتظر ثانيتين . بدلاً من ذلك يمكنك ببساطة إعادة فتح تطبيق %1$s ."</string>
+    <string name="help_stop_message">"لإيقاف التسجيل قم بإغلاق الشاشة وانتظر ثانيتين . بدلاً من ذلك يمكنك ببساطة إعادة فتح تطبيق %1$s ."</string>
     <string name="menu_send_bug_report">"إرسال تقرير عن خطأ ما"</string>
+
+    <string name="notification_status_installing">"تهيئة"</string>
+    <string name="notification_status_initializing">"في انتظار الحصول على صلاحيات الروت"</string>
+    <string name="notification_status_ready">"مستعد للتسجيل"</string>
+    <string name="notification_status_starting">"جاري البدء بالتسجيل"</string>
+    <string name="notification_status_recording">"جاري التسجيل"</string>
+    <string name="notification_status_stopping">"جاري إيقاف التسجيل"</string>
+
+    <string name="sale_title">"تخفيض"</string>
+    <string name="sale_text">"قم بشراء SCR Pro الآن ووفر %1$d %% ! هذا العرض سينتهي في %2$s ."</string>
 
 </resources>
