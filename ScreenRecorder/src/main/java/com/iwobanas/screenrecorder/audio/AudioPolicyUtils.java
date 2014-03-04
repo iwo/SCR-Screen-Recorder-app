@@ -14,17 +14,15 @@ import java.util.List;
 public class AudioPolicyUtils {
 
     private static final String TAG = "scr_AudioPolicyUtils";
-    private static final String AUDIO_POLICY_VENDOR_CONFIG_FILE = "/vendor/etc/audio_policy.conf";
-    private static final String AUDIO_POLICY_CONFIG_FILE = "/system/etc/audio_policy.conf";
-    private static final String AUDIO_POLICY_ETC_CONFIG_FILE = "/vendor/etc/audio_policy.conf";
+    private static final String VENDOR_AUDIO_POLICY = "/vendor/etc/audio_policy.conf";
+    private static final String SYSTEM_AUDIO_POLICY = "/system/etc/audio_policy.conf";
 
-    public static boolean fixPolicyFile( String outPath) throws IOException {
-        String inPath = getPolicyFilePath();
+    public static boolean fixPolicyFile(File in, File out) throws IOException {
         boolean modified = false;
         BufferedWriter writer = null;
         try {
-            List<ConfigLine> lines = getConfigLines(inPath);
-            writer = new BufferedWriter(new FileWriter(outPath));
+            List<ConfigLine> lines = getConfigLines(in);
+            writer = new BufferedWriter(new FileWriter(out));
 
             int outputSamplingRate = getMaxPrimarySamplingRate(lines);
 
@@ -78,9 +76,8 @@ public class AudioPolicyUtils {
     }
 
     public static int getMaxPrimarySamplingRate() {
-        String policyPath = getPolicyFilePath();
         try {
-            List<ConfigLine> lines = getConfigLines(policyPath);
+            List<ConfigLine> lines = getConfigLines(getPolicyFile());
             return getMaxPrimarySamplingRate(lines);
 
         } catch (Exception e) {
@@ -110,11 +107,11 @@ public class AudioPolicyUtils {
         return -1;
     }
 
-    private static List<ConfigLine> getConfigLines(String path) throws IOException {
+    private static List<ConfigLine> getConfigLines(File policyFile) throws IOException {
         List<ConfigLine> result = new ArrayList<ConfigLine>();
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new FileReader(path));
+            reader = new BufferedReader(new FileReader(policyFile));
             String section = "";
             String line = null;
             String sectionStartPattern = "^(\\w*)(\\W*)(\\{)$";
@@ -147,17 +144,17 @@ public class AudioPolicyUtils {
         return result;
     }
 
-    public static String getPolicyFilePath() {
-        if (new File(AUDIO_POLICY_VENDOR_CONFIG_FILE).exists()) {
-            Log.v(TAG, "Policy file found: " + AUDIO_POLICY_VENDOR_CONFIG_FILE);
-            return AUDIO_POLICY_VENDOR_CONFIG_FILE;
+    public static File getPolicyFile() {
+        File vendorConf = new File(VENDOR_AUDIO_POLICY);
+        File systemConf = new File(SYSTEM_AUDIO_POLICY);
+        if (vendorConf.exists()) {
+            Log.v(TAG, "Policy file found: " + VENDOR_AUDIO_POLICY);
+            return vendorConf;
         }
-        if (new File(AUDIO_POLICY_CONFIG_FILE).exists()) {
-            Log.v(TAG, "Policy file found: " + AUDIO_POLICY_CONFIG_FILE);
-            return AUDIO_POLICY_CONFIG_FILE;
+        if (!systemConf.exists()) {
+            Log.w(TAG, "No policy file found. Attempting to use: " + SYSTEM_AUDIO_POLICY);
         }
-        Log.w(TAG, "No policy file found. Using: " + AUDIO_POLICY_ETC_CONFIG_FILE);
-        return AUDIO_POLICY_ETC_CONFIG_FILE;
+        return systemConf;
     }
 
     static class ConfigLine {

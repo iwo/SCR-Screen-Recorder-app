@@ -155,7 +155,7 @@ public class Utils {
         }
     }
 
-    private static boolean filesEqual(File fileA, File fileB) {
+    public static boolean filesEqual(File fileA, File fileB) {
         if (!fileA.exists() || !fileB.exists()) {
             return false;
         }

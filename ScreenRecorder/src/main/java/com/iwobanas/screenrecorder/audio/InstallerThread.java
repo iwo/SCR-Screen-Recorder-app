@@ -220,7 +220,7 @@ public class InstallerThread extends Thread {
     }
 
     private void cratePolicyFile() {
-        File policyFile = new File(context.getFilesDir(), "audio_policy.conf");
+        /*File policyFile = new File(context.getFilesDir(), "audio_policy.conf");
         try {
             Log.v(TAG, "Processing audio_policy.conf");
             AudioPolicyUtils.fixPolicyFile(policyFile.getAbsolutePath());
@@ -230,7 +230,7 @@ public class InstallerThread extends Thread {
             if (policyFile.exists()) {
                 policyFile.delete();
             }
-        }
+        }*/
     }
 
     private int getDriverVersion() {
