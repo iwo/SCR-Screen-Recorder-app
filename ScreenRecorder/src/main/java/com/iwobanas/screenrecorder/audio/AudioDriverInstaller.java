@@ -20,7 +20,6 @@ public class AudioDriverInstaller {
     private static final String ORIGINAL_PRIMARY_PREFIX = "audio.original_primary.";
     private static final String SCR_PRIMARY_DEFAULT = "audio.scr_primary.default.so";
     private static final String SYSTEM_LIB_HW = "/system/lib/hw";
-    private static final String BACKUP_SUFIX = ".back";
     private static final String SCR_DIR_MARKER = "scr_dir";
     private static final String SYSTEM_FILES_COPIED_MARKER = "system_files_copied";
     private static final String SCR_AUDIO_DIR = "scr_audio";
@@ -136,42 +135,29 @@ public class AudioDriverInstaller {
     }
 
     private void switchToSCRFiles() throws InstallationException {
-        movePrimaryToOriginalPrimary();
-        moveSCRToPrimary();
+        deletePrimaryModules();
+        applySCRModule();
         applySCRConfigFiles();
     }
 
-    private void movePrimaryToOriginalPrimary() throws InstallationException {
+    private void deletePrimaryModules() throws InstallationException {
         String[] systemFiles = localDir.list(PRIMARY_FILENAME_FILTER);
 
-        if (systemFiles == null) {
-            throw new InstallationException("No system modules found");
-        }
-
-        for (String fileName : systemFiles) {
-            File primaryFile = new File(localDir, fileName);
-            File originalPrimary = new File(localDir, getOriginalPrimaryName(fileName));
-            if (originalPrimary.exists()) {
-                throw new InstallationException("File " + originalPrimary.getAbsolutePath() + " should not exist before switch to SCR");
-            }
-            if (!primaryFile.renameTo(originalPrimary)) {
-                throw new InstallationException("Error renaming " + primaryFile.getAbsolutePath() + " to " + originalPrimary.getAbsolutePath());
+        if (systemFiles != null) {
+            for (String fileName : systemFiles) {
+                File primaryFile = new File(localDir, fileName);
+                if (!primaryFile.delete()) {
+                    throw new InstallationException("Can't delete: " + primaryFile);
+                }
             }
         }
     }
 
-    private String getOriginalPrimaryName(String fileName) {
-        return fileName.replaceFirst(PRIMARY_PREFIX, ORIGINAL_PRIMARY_PREFIX);
-    }
-
-    private void moveSCRToPrimary() throws InstallationException {
+    private void applySCRModule() throws InstallationException {
         File scrModule = new File(localDir, SCR_PRIMARY_DEFAULT);
-        File primaryDefaultModule = new File(localDir, PRIMARY_DEFAULT);
-        if (primaryDefaultModule.exists()) {
-            throw new InstallationException("Primary default module should not exist at this stage");
-        }
-        if (!scrModule.renameTo(primaryDefaultModule)) {
-            throw new InstallationException("Error renaming " + scrModule.getAbsolutePath() + " to " + primaryDefaultModule.getAbsolutePath());
+        File primaryModule = new File(localDir, PRIMARY_DEFAULT);
+        if (!Utils.copyFile(scrModule, primaryModule)) {
+            throw new InstallationException("Can't copy scr module from " + scrModule.getAbsolutePath() + " to " + primaryModule.getAbsolutePath());
         }
     }
 
@@ -246,7 +232,7 @@ public class AudioDriverInstaller {
 
         copySystemConfigFiles();
 
-        backupSystemFiles();
+        movePrimaryToOriginalPrimary();
 
         markSystemFilesCopied();
 
@@ -312,18 +298,27 @@ public class AudioDriverInstaller {
         }
     }
 
-    private void backupSystemFiles() throws InstallationException {
-        String[] fileNames = localDir.list(PRIMARY_FILENAME_FILTER);
-        if (fileNames == null) {
-            throw new InstallationException("No system modules files found");
+    private void movePrimaryToOriginalPrimary() throws InstallationException {
+        String[] systemFiles = localDir.list(PRIMARY_FILENAME_FILTER);
+
+        if (systemFiles == null) {
+            throw new InstallationException("No system modules found");
         }
-        for (String fileName : fileNames) {
-            File src = new File(localDir, fileName);
-            File dst = new File(localDir, fileName + BACKUP_SUFIX);
-            if (!Utils.copyFile(src, dst)) {
-                throw new InstallationException("Couldn't backup system file");
+
+        for (String fileName : systemFiles) {
+            File primaryFile = new File(localDir, fileName);
+            File originalPrimary = new File(localDir, getOriginalPrimaryName(fileName));
+            if (originalPrimary.exists()) {
+                throw new InstallationException("File " + originalPrimary.getAbsolutePath() + " should not exist.");
+            }
+            if (!primaryFile.renameTo(originalPrimary)) {
+                throw new InstallationException("Error renaming " + primaryFile.getAbsolutePath() + " to " + originalPrimary.getAbsolutePath());
             }
         }
+    }
+
+    private String getOriginalPrimaryName(String fileName) {
+        return fileName.replaceFirst(PRIMARY_PREFIX, ORIGINAL_PRIMARY_PREFIX);
     }
 
     private void markSystemFilesCopied() throws InstallationException {
@@ -385,23 +380,11 @@ public class AudioDriverInstaller {
     }
 
     private void switchToSystemFiles() throws InstallationException {
-        movePrimaryToSCR();
-        moveOriginalPrimaryToPrimary();
+        applyOriginalPrimaryModules();
         applyOriginalConfigFiles();
     }
 
-    private void movePrimaryToSCR() throws InstallationException {
-        File primary = new File(localDir, PRIMARY_DEFAULT);
-        File scrPrimary = new File(localDir, SCR_PRIMARY_DEFAULT);
-        if (scrPrimary.exists()) {
-            throw new InstallationException("Error moving SCR module. Destination file exists.");
-        }
-        if (!primary.renameTo(scrPrimary)) {
-            throw new InstallationException("Error moving SCR module.");
-        }
-    }
-
-    private void moveOriginalPrimaryToPrimary() throws InstallationException {
+    private void applyOriginalPrimaryModules() throws InstallationException {
         String[] systemFiles = localDir.list(ORIGINAL_PRIMARY_FILENAME_FILTER);
 
         if (systemFiles == null) {
@@ -411,11 +394,10 @@ public class AudioDriverInstaller {
         for (String fileName : systemFiles) {
             File originalPrimary = new File(localDir, fileName);
             File primary = new File(localDir, getPrimaryName(fileName));
-            if (primary.exists()) {
-                throw new InstallationException("File " + primary.getAbsolutePath() + " should not exist before restoring original files");
-            }
-            if (!originalPrimary.renameTo(primary)) {
-                throw new InstallationException("Error renaming " + originalPrimary.getAbsolutePath() + " to " + primary.getAbsolutePath());
+
+            if (!Utils.copyFile(originalPrimary, primary)) {
+                //TODO: consider if we shouldn't continue with deinstallation on failures
+                throw new InstallationException("Error copying original module from " + originalPrimary.getAbsolutePath() + " to " + primary.getAbsolutePath());
             }
         }
     }
