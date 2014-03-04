@@ -317,4 +317,21 @@ public class Utils {
         }
 
     }
+
+    public static void sendTermSignal(int pid, String executable) {
+        ShellCommand cmd = new ShellCommand(new String[]{"su", "-c", executable});
+        cmd.setInput("kill_term\n" + String.valueOf(pid) + "\n");
+        cmd.execute();
+    }
+
+    public static void sendKillSignal(int pid, String executable) {
+        ShellCommand cmd = new ShellCommand(new String[]{"su", "-c", executable});
+        cmd.setInput("kill_kill\n" + String.valueOf(pid) + "\n");
+        cmd.execute();
+    }
+
+    public static boolean processExists(int pid) {
+        File procFile = new File("/proc", String.valueOf(pid));
+        return procFile.exists();
+    }
 }

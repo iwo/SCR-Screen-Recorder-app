@@ -31,6 +31,7 @@ public class AudioDriverInstaller {
     private static final String SCR_VENDOR_AUDIO_POLICY = "scr_vendor_audio_policy.conf";
     private static final String LOCAL_SYSTEM_AUDIO_POLICY = "system_audio_policy.conf";
     private static final String LOCAL_VENDOR_AUDIO_POLICY = "vendor_audio_policy.conf";
+    private static final String MEDIASERVER_COMMAND = "/system/bin/mediaserver";
     private static final FilenameFilter PRIMARY_FILENAME_FILTER = new FilenameFilter() {
         @Override
         public boolean accept(File dir, String filename) {
@@ -67,8 +68,11 @@ public class AudioDriverInstaller {
             }
             ensureSCRFilesValid();
             switchToSCRFiles();
-            mount();
-            validateMounted();
+            mountAndRestart();
+            if (!isMounted()) {
+                Log.w(TAG, "Unmount happened after restart. Attempting to mount again");
+                mountAndRestart();
+            }
             Log.v(TAG, "Installation completed successfully");
         } catch (InstallationException e) {
             Log.e(TAG, "Installation failed", e);
@@ -90,6 +94,11 @@ public class AudioDriverInstaller {
         } catch (InstallationException e) {
             Log.e(TAG, "Uninstall failed", e);
             dumpState();
+        }
+        try {
+            terminateMediaserver();
+        } catch (InstallationException e) {
+            Log.e(TAG, "Error restarting mediaserver", e);
         }
         Log.v(TAG, "Uninstall completed");
     }
@@ -159,6 +168,7 @@ public class AudioDriverInstaller {
         if (!Utils.copyFile(scrModule, primaryModule)) {
             throw new InstallationException("Can't copy scr module from " + scrModule.getAbsolutePath() + " to " + primaryModule.getAbsolutePath());
         }
+        Utils.setGlobalReadable(primaryModule);
     }
 
     private void applySCRConfigFiles() throws InstallationException {
@@ -175,6 +185,15 @@ public class AudioDriverInstaller {
             throw new InstallationException("Error copying config from " + scrSystemConf.getAbsolutePath() + " to " + localSystemConf.getAbsolutePath());
         }
         Utils.setGlobalReadable(localSystemConf);
+    }
+
+    private void mountAndRestart() throws InstallationException {
+        if (!isMounted()) {
+            mount();
+            validateMounted();
+        }
+        Log.v(TAG, "Mounted. Restarting");
+        restartMediaserver();
     }
 
     private void mount() throws InstallationException {
@@ -216,6 +235,49 @@ public class AudioDriverInstaller {
     private boolean isMounted() {
         File markerFile = new File(systemDir, SCR_DIR_MARKER);
         return markerFile.exists();
+    }
+
+    private void restartMediaserver() throws InstallationException {
+        terminateMediaserver();
+        waitForMediaserver();
+    }
+
+    private void terminateMediaserver() throws InstallationException {
+        int pid = Utils.findProcessByCommand(MEDIASERVER_COMMAND);
+        if (pid > 0) {
+            Utils.sendTermSignal(pid, installer.getAbsolutePath());
+            if (!waitForProcessToStop(pid, 1000, 100)) {
+                Log.v(TAG, "mediaserver not terminating. killing");
+                Utils.sendKillSignal(pid, installer.getAbsolutePath());
+            }
+            if (!waitForProcessToStop(pid, 500, 100)) {
+                throw new InstallationException("Can't restart mediaserver");
+            }
+        }
+    }
+
+    private boolean waitForProcessToStop(int pid, long timeout, long checkFrequency) {
+        long startTime = System.currentTimeMillis();
+        while ((System.currentTimeMillis() - startTime) < timeout) {
+            if (!Utils.processExists(pid)) {
+                return true;
+            }
+            try {
+                Thread.sleep(checkFrequency);
+            } catch (InterruptedException ignored) {}
+        }
+        return false;
+    }
+
+    private void waitForMediaserver() throws InstallationException {
+        long timeout = 3000;
+        long startTime = System.currentTimeMillis();
+        while ((System.currentTimeMillis() - startTime) < timeout) {
+            if (Utils.findProcessByCommand(MEDIASERVER_COMMAND) > 0) {
+                return;
+            }
+        }
+        throw new InstallationException("mediaserver not appearing");
     }
 
     private void initializeDir() throws InstallationException {
@@ -399,6 +461,7 @@ public class AudioDriverInstaller {
                 //TODO: consider if we shouldn't continue with deinstallation on failures
                 throw new InstallationException("Error copying original module from " + originalPrimary.getAbsolutePath() + " to " + primary.getAbsolutePath());
             }
+            Utils.setGlobalReadable(primary);
         }
     }
 
