@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.util.Arrays;
 
 public class ShellCommand {
-    private static final String TAG = "scr_ShellCommand";
+    private static final String TAG = "scr_cmd";
 
     private String[] command;
     private Process process;
@@ -45,8 +45,7 @@ public class ShellCommand {
             Log.v(TAG, "Waiting for process to exit");
             process.waitFor();
             executionCompleted = true;
-            Log.v(TAG, "Process completed");
-            Log.v(TAG, "Exit value: " + process.exitValue());
+            Log.v(TAG, "Process completed with exit value: " + process.exitValue());
         } catch (IOException e) {
             Log.e(TAG, "Exception in " + Arrays.toString(command), e);
         } catch (InterruptedException e) {
