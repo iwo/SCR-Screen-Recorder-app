@@ -156,7 +156,7 @@ public class Utils {
     }
 
     public static boolean filesEqual(File fileA, File fileB) {
-        if (!fileA.exists() || !fileB.exists()) {
+        if (!fileA.exists() || !fileB.exists() || fileA.length() != fileB.length()) {
             return false;
         }
         InputStream streamA, streamB;
