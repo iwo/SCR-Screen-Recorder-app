@@ -26,6 +26,7 @@ import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
 import com.google.android.vending.licensing.ServerManagedPolicy;
+import com.iwobanas.screenrecorder.audio.AudioDriverInstaller;
 import com.iwobanas.screenrecorder.rating.RatingController;
 import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
@@ -96,6 +97,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private boolean mStopHelpDisplayed;
     private LicenseChecker mChecker;
 
+    private AudioDriverInstaller audioDriverInstaller;
+
     @Override
     public void onCreate() {
         EasyTracker.getInstance().setContext(getApplicationContext());
@@ -120,6 +123,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
             checkLicense();
         }
         Log.v(TAG, "Service initialized. version: " + Utils.getAppVersion(this));
+        audioDriverInstaller = new AudioDriverInstaller(RecorderService.this);
+
     }
 
     private void installExecutable() {
@@ -135,6 +140,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 mNativeProcessRunner.initialize(executable);
             }
         });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                audioDriverInstaller.install();
+            }
+        }).start();
     }
 
     @Override
@@ -718,6 +729,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mScreenOffReceiver.unregister();
         savePreferences();
         Settings.getInstance().restoreShowTouches();
+        audioDriverInstaller.uninstall();
         destroyed = true;
     }
 

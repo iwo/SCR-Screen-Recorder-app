@@ -3,6 +3,7 @@ package com.iwobanas.screenrecorder;
 import android.content.Context;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 
 import java.io.BufferedInputStream;
@@ -20,8 +21,13 @@ import java.io.UnsupportedEncodingException;
 import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Utils {
+
+    private static final String TAG = "scr_Utils";
 
     public static int findProcessByCommand(String command) {
         try {
@@ -149,6 +155,20 @@ public class Utils {
         }
     }
 
+    private static boolean filesEqual(File fileA, File fileB) {
+        if (!fileA.exists() || !fileB.exists()) {
+            return false;
+        }
+        InputStream streamA, streamB;
+        try {
+            streamA = new BufferedInputStream(new FileInputStream(fileA));
+            streamB = new BufferedInputStream(new FileInputStream(fileB));
+            return streamsEqual(streamA, streamB);
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
     public static boolean isX86() {
         return Build.CPU_ABI.contains("x86");
     }
@@ -190,7 +210,111 @@ public class Utils {
                     destination.close();
                 } catch (IOException ignored) {}
             }
-            return success;
         }
+        return success;
+    }
+
+    public static boolean allFilesCopied(File sourceDir, File destinationDir) {
+        String[] fileNames = sourceDir.list();
+        if (fileNames != null) {
+            for (String fileName : fileNames) {
+                File src = new File(sourceDir, fileName);
+                File dst = new File(destinationDir, fileName);
+                if ((src.isDirectory() && !allFilesCopied(src, dst)) || !filesEqual(src, dst)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean deleteDir(File dir) {
+        ShellCommand cmd = new ShellCommand(new String[]{"rm", "-rf", dir.getAbsolutePath()});
+        cmd.setErrorLogTag("scr_deleteDir_error");
+        cmd.execute();
+        return cmd.isExecutionCompleted() && cmd.exitValue() == 0;
+    }
+
+    public static boolean copyDir(File sourceDir, File destinationDir) {
+        if (!destinationDir.exists()) {
+            if (!destinationDir.mkdirs()) {
+                Log.w(TAG, "Can't create directory: " + destinationDir);
+                return false;
+            }
+        }
+        String[] fileNames = sourceDir.list();
+        if (fileNames != null) {
+            for (String fileName : fileNames) {
+                File src = new File(sourceDir, fileName);
+                File dst = new File(destinationDir, fileName);
+                if ((src.isDirectory() && !copyDir(src, dst)) || !copyFile(src, dst)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void setGlobalReadable(File file) {
+        file.setReadable(true, false);
+        if (file.isDirectory()) {
+            file.setExecutable(true, false);
+            String[] children = file.list();
+            if (children != null) {
+                for (String child : children) {
+                    setGlobalReadable(new File(file, child));
+                }
+            }
+        }
+    }
+
+    public static List<String> grepFile(File file, String substring) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        List<String> result = new ArrayList<String>();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            if (line.contains(substring)) {
+                result.add(line);
+            }
+        }
+        reader.close();
+        return result;
+    }
+
+    public static void logDirectoryListing(String tag, File dir) {
+        Log.v(tag, "Directory listing for: " + dir.getAbsolutePath());
+        logDirectoryListing(tag, dir, "");
+    }
+
+    private static void logDirectoryListing(String tag, File dir, String prefix) {
+        String[] children = dir.list();
+        Arrays.sort(children);
+        if (children == null) {
+            Log.v(tag, prefix + " [empty]");
+        } else {
+            for (String childName : children) {
+                File child = new File(dir, childName);
+                if (child.isDirectory()) {
+                    logDirectoryListing(tag, child, prefix + childName + "/" );
+                } else {
+                    Log.v(tag, prefix + childName);
+                }
+            }
+        }
+    }
+
+    public static void logFileContent(String tag, File file) {
+        Log.v(tag, "File contents: " + file.getAbsolutePath());
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                Log.v(tag, line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            Log.v(tag, "Error reading file", e);
+        }
+
     }
 }
