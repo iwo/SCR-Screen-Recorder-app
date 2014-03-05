@@ -26,7 +26,8 @@ import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
 import com.google.android.vending.licensing.ServerManagedPolicy;
-import com.iwobanas.screenrecorder.audio.AudioDriverInstaller;
+import com.iwobanas.screenrecorder.audio.AudioDriver;
+import com.iwobanas.screenrecorder.audio.InstallationStatus;
 import com.iwobanas.screenrecorder.rating.RatingController;
 import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
@@ -58,7 +59,7 @@ import static com.iwobanas.screenrecorder.Tracker.STOP_ICON;
 import static com.iwobanas.screenrecorder.Tracker.TIME;
 import static com.iwobanas.screenrecorder.Tracker.TIMEOUT_DIALOG;
 
-public class RecorderService extends Service implements IRecorderService, LicenseCheckerCallback {
+public class RecorderService extends Service implements IRecorderService, LicenseCheckerCallback, AudioDriver.OnInstallListener {
 
     public static final String STOP_HELP_DISPLAYED_ACTION = "scr.intent.action.STOP_HELP_DISPLAYED";
     public static final String TIMEOUT_DIALOG_CLOSED_ACTION = "scr.intent.action.TIMEOUT_DIALOG_CLOSED";
@@ -84,6 +85,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this);
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
     private RatingController mRatingController;
+    private AudioDriver audioDriver;
     private Handler mHandler;
     private File outputFile;
     private RecorderServiceState state = RecorderServiceState.INSTALLING;
@@ -98,8 +100,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private boolean mStopHelpDisplayed;
     private LicenseChecker mChecker;
 
-    private AudioDriverInstaller audioDriverInstaller;
-
     @Override
     public void onCreate() {
         EasyTracker.getInstance().setContext(getApplicationContext());
@@ -109,6 +109,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
 
         Settings.initialize(this);
+        audioDriver = Settings.getInstance().getAudioDriver();
+        audioDriver.addInstallListener(this);
         mTaniosc = getResources().getBoolean(R.bool.taniosc);
         mHandler = new Handler();
 
@@ -124,8 +126,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             checkLicense();
         }
         Log.v(TAG, "Service initialized. version: " + Utils.getAppVersion(this));
-        audioDriverInstaller = new AudioDriverInstaller(RecorderService.this);
-
     }
 
     private void installExecutable() {
@@ -141,12 +141,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 mNativeProcessRunner.initialize(executable);
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                audioDriverInstaller.install();
-            }
-        }).start();
     }
 
     @Override
@@ -269,15 +263,26 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public synchronized void setReady() {
-        setState(RecorderServiceState.READY);
-        if (startOnReady) {
-            startOnReady = false;
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    startRecording();
-                }
-            });
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                checkReady();
+            }
+        });
+    }
+
+    private void checkReady() {
+        if (mNativeProcessRunner.isReady() && audioDriver.isReady()) {
+            setState(RecorderServiceState.READY);
+            if (startOnReady) {
+                startOnReady = false;
+
+                startRecording();
+
+            }
+        } else if (audioDriver.shouldInstall()) {
+            setState(RecorderServiceState.INSTALLING_AUDIO);
+            audioDriver.install();
         }
     }
 
@@ -412,6 +417,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 return getString(R.string.notification_status_initializing);
             case INSTALLING:
                 return getString(R.string.notification_status_installing);
+            case INSTALLING_AUDIO:
+                return getString(R.string.notification_status_installing_audio);
             case READY:
                 return getString(R.string.notification_status_ready);
             case STARTING:
@@ -420,6 +427,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 return getString(R.string.notification_status_recording);
             case STOPPING:
                 return getString(R.string.notification_status_stopping);
+            case ERROR:
+                return getString(R.string.notification_status_error);
+            case UNINSTALLING_AUDIO:
+                return getString(R.string.notification_status_uninstalling_audio);
         }
         return "";
     }
@@ -738,7 +749,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mScreenOffReceiver.unregister();
         savePreferences();
         Settings.getInstance().restoreShowTouches();
-        audioDriverInstaller.uninstall();
+        audioDriver.uninstallIfNeeded();
+        audioDriver.removeInstallListener(this);
         destroyed = true;
     }
 
@@ -796,12 +808,27 @@ public class RecorderService extends Service implements IRecorderService, Licens
         Toast.makeText(this, getString(R.string.license_error), Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onInstall(InstallationStatus status) {
+        if (status != InstallationStatus.INSTALLING && status != InstallationStatus.UNINSTALLING) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    checkReady();
+                }
+            });
+        }
+    }
+
     private static enum RecorderServiceState {
         INSTALLING,
         INITIALIZING,
+        INSTALLING_AUDIO,
         READY,
         STARTING,
         RECORDING,
-        STOPPING
+        STOPPING,
+        ERROR,
+        UNINSTALLING_AUDIO
     }
 }

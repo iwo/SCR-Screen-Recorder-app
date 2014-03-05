@@ -251,10 +251,13 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
 
     <string name="notification_status_installing">Initializing</string>
     <string name="notification_status_initializing">Waiting for root access</string>
+    <string name="notification_status_installing_audio">Installing Audio driver</string>
     <string name="notification_status_ready">Ready</string>
     <string name="notification_status_starting">Starting</string>
     <string name="notification_status_recording">Recording</string>
+    <string name="notification_status_error">Error</string>
     <string name="notification_status_stopping">Stopping</string>
+    <string name="notification_status_uninstalling_audio">Uninstalling Audio driver</string>
 
     <string name="sale_title">Sale</string>
     <string name="sale_text">Buy SCR Pro now and save %1$d %%! This offer ends on %2$s.</string>

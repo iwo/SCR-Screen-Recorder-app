@@ -120,7 +120,7 @@ public class Utils {
         outputStream.close();
     }
 
-    private static boolean resourceFileValid(Context context, int resourceId, File outputFile) throws IOException {
+    public static boolean resourceFileValid(Context context, int resourceId, File outputFile) throws IOException {
         if (!outputFile.exists()) {
             return false;
         }

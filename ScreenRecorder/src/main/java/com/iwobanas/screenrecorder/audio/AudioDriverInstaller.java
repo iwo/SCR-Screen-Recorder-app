@@ -60,9 +60,12 @@ public class AudioDriverInstaller {
     private File systemDir;
     private File installer;
 
-    public void install() {
+    public boolean install() {
         Log.v(TAG, "Installation started");
         try {
+            if (isSystemAlphaModuleInstalled()) {
+                uninstallSystemAlphaModule();
+            }
             if (!systemFilesValid()) {
                 initializeDir();
             }
@@ -77,10 +80,12 @@ public class AudioDriverInstaller {
         } catch (InstallationException e) {
             Log.e(TAG, "Installation failed", e);
             dumpState();
+            return false;
         }
+        return true;
     }
 
-    public void uninstall() {
+    public boolean uninstall() {
         Log.v(TAG, "Uninstall started");
         try {
             unmount();
@@ -101,6 +106,7 @@ public class AudioDriverInstaller {
             Log.e(TAG, "Error restarting mediaserver", e);
         }
         Log.v(TAG, "Uninstall completed");
+        return true; //TODO: catch errors and return false if needed
     }
 
     private void dumpState() {
@@ -224,17 +230,27 @@ public class AudioDriverInstaller {
         if (!isMounted()) {
             throw new InstallationException("Drivers appears not to be mounted correctly");
         }
-        File initMountInfo = new File(INIT_MOUNTINFO);
-        try {
-            if (initMountInfo.exists() && Utils.grepFile(initMountInfo, SYSTEM_LIB_HW).size() == 0) {
-                throw new InstallationException("Drivers directory not mounted globally");
-            }
-        } catch (IOException ignored) {}
+        if (!isGloballyMounted()) {
+            throw new InstallationException("Drivers directory not mounted globally");
+        }
     }
 
     private boolean isMounted() {
         File markerFile = new File(systemDir, SCR_DIR_MARKER);
         return markerFile.exists();
+    }
+
+    /**
+     * If init process had pid different to 1 or IOException occurs revert to isMounted()
+     */
+    private boolean isGloballyMounted() {
+        File initMountInfo = new File(INIT_MOUNTINFO);
+        try {
+            if (initMountInfo.exists() && Utils.grepFile(initMountInfo, SYSTEM_LIB_HW).size() == 0) {
+                return false;
+            }
+        } catch (IOException ignored) {}
+        return isMounted();
     }
 
     private void restartMediaserver() throws InstallationException {
@@ -497,7 +513,68 @@ public class AudioDriverInstaller {
     private void validateNotMounted() {
     }
 
+    public InstallationStatus checkStatus() {
+        if (isSystemAlphaModuleInstalled()) {
+            return InstallationStatus.OUTDATED;
+        }
+        if (!isMounted()) {
+            return InstallationStatus.NOT_INSTALLED;
+        }
+        if (!isGloballyMounted()) {
+            return InstallationStatus.INSTALLATION_FAILURE;
+        }
+        if (scrModuleInstalled() && scrModuleUpToDate()) {
+            return InstallationStatus.INSTALLED;
+        }
+        if (originalPrimaryModulesInstalled()) {
+            return InstallationStatus.NOT_INSTALLED;
+        }
+        return InstallationStatus.UNSPECIFIED;
+    }
 
+    private boolean isSystemAlphaModuleInstalled() {
+        File versionFile = new File("/system/lib/hw/scr_module_version");
+        return versionFile.exists();
+    }
+
+    private void uninstallSystemAlphaModule() {
+        runInstaller("uninstall_audio\n");
+    }
+
+    private boolean scrModuleInstalled() {
+        File scrModule = new File(localDir, SCR_PRIMARY_DEFAULT);
+        File primaryModule = new File(systemDir, PRIMARY_DEFAULT);
+        return Utils.filesEqual(scrModule, primaryModule);
+    }
+
+    private boolean scrModuleUpToDate() {
+        File moduleFile = new File(systemDir, PRIMARY_DEFAULT);
+        try {
+            return Utils.resourceFileValid(context, getDriverResourceId(), moduleFile);
+        } catch (IOException e) {
+            return false;
+        } catch (InstallationException e) {
+            return false;
+        }
+    }
+
+    private boolean originalPrimaryModulesInstalled() {
+        String[] systemFiles = systemDir.list(ORIGINAL_PRIMARY_FILENAME_FILTER);
+
+        if (systemFiles == null) {
+            return false;
+        }
+
+        for (String fileName : systemFiles) {
+            File originalPrimary = new File(localDir, fileName);
+            File primary = new File(localDir, getPrimaryName(fileName));
+
+            if (!Utils.filesEqual(originalPrimary, primary)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     static class InstallationException extends Exception {
 

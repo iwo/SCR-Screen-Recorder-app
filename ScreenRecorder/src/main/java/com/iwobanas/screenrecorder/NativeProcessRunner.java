@@ -50,6 +50,10 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         initialize();
     }
 
+    public boolean isReady() {
+        return process != null && process.getState() == RecorderProcess.ProcessState.READY;
+    }
+
     public void destroy() {
         Log.d(TAG, "destroy()");
         if (process == null || process.isStopped()) {

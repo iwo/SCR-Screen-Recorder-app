@@ -16,6 +16,7 @@ import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
+import com.iwobanas.screenrecorder.audio.InstallationStatus;
 
 import java.io.File;
 
@@ -146,10 +147,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         audioSourcePreference.setValue(settings.getAudioSource().name());
         audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource()));
         audioDriverPreference.setSummary(formatAudioDriverSummary(settings.getAudioDriver().getInstallationStatus()));
-        AudioDriver.InstallationStatus installationStatus = settings.getAudioDriver().getInstallationStatus();
+        InstallationStatus installationStatus = settings.getAudioDriver().getInstallationStatus();
         audioDriverPreference.setEnabled(settings.getAudioSource().equals(AudioSource.INTERNAL)
-                || (!installationStatus.equals(AudioDriver.InstallationStatus.NOT_INSTALLED)
-                && !installationStatus.equals(AudioDriver.InstallationStatus.INSTALLATION_FAILURE)));
+                || (!installationStatus.equals(InstallationStatus.NOT_INSTALLED)
+                && !installationStatus.equals(InstallationStatus.INSTALLATION_FAILURE)));
         samplingRatePreference.setValue(settings.getSamplingRate().name());
         samplingRatePreference.setSummary(formatSamplingRateSummary());
         samplingRatePreference.setEnabled(settings.getAudioSource().equals(AudioSource.MIC));
@@ -279,7 +280,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return "";
     }
 
-    private int formatAudioDriverSummary(AudioDriver.InstallationStatus installationStatus) {
+    private int formatAudioDriverSummary(InstallationStatus installationStatus) {
         switch (installationStatus) {
             case NOT_INSTALLED:
                 return R.string.settings_audio_driver_not_installed;
@@ -433,7 +434,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     @Override
-    public void onInstall(AudioDriver.InstallationStatus status) {
+    public void onInstall(InstallationStatus status) {
         updateValues();
     }
 }
