@@ -176,9 +176,9 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_audio_mute">Mute</string>
     <string name="settings_audio_internal">Internal</string>
     <string name="settings_audio_internal_experimental">Internal (experimental)</string>
-    <string name="settings_audio_mic_summary">Microphone. Only one app can use microphone at a time!</string>
+    <string name="settings_audio_mic_summary">Microphone</string>
     <string name="settings_audio_mute_summary">Mute. No Audio track</string>
-    <string name="settings_audio_internal_summary">System audio output. Requires SCR audio driver.</string>
+    <string name="settings_audio_internal_summary">System audio output</string>
     <string name="settings_audio">Audio</string>
     <string name="settings_sampling_rate">Sampling rate</string>
 
@@ -244,6 +244,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="sale_title">Sale</string>
     <string name="sale_text">Buy SCR Pro now and save %1$d %%! This offer ends on %2$s.</string>
 
-    <string name="copyrights_statement">By using %s you agree that you are solely responsible for ensuring you do not violate third party copyright or other intellectual property rights.</string>
+    <string name="copyrights_statement">By using %1$s you agree that you are solely responsible for ensuring you do not violate third party copyright or other intellectual property rights.</string>
 
 </resources>
