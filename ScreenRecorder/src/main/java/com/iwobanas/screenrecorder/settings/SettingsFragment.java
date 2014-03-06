@@ -28,7 +28,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_FRAME_RATE = "frame_rate";
     public static final String KEY_VERTICAL_FRAMES = "vertical_frames";
     public static final String KEY_AUDIO_SOURCE = "audio_source";
-    public static final String KEY_AUDIO_DRIVER = "audio_driver";
     public static final String KEY_SAMPLING_RATE = "sampling_rate";
     public static final String KEY_HIDE_ICON = "hide_icon";
     public static final String KEY_SHOW_TOUCHES = "show_touches";
@@ -44,7 +43,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private ListPreference frameRatePreference;
     private CheckBoxPreference verticalFramesPreference;
     private ListPreference audioSourcePreference;
-    private Preference audioDriverPreference;
     private ListPreference samplingRatePreference;
     private CheckBoxPreference hideIconPreference;
     private CheckBoxPreference showTouchesPreference;
@@ -101,8 +99,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             audioSourcePreference.setEntries(R.array.audio_source_entries_internal);
             audioSourcePreference.setEntryValues(R.array.audio_source_values_internal);
         }
-        audioDriverPreference = findPreference(KEY_AUDIO_DRIVER);
-        audioDriverPreference.setOnPreferenceClickListener(this);
         samplingRatePreference = (ListPreference) findPreference(KEY_SAMPLING_RATE);
         samplingRatePreference.setOnPreferenceChangeListener(this);
 
@@ -146,11 +142,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         audioSourcePreference.setValue(settings.getAudioSource().name());
         audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource()));
-        audioDriverPreference.setSummary(formatAudioDriverSummary(settings.getAudioDriver().getInstallationStatus()));
         InstallationStatus installationStatus = settings.getAudioDriver().getInstallationStatus();
-        audioDriverPreference.setEnabled(settings.getAudioSource().equals(AudioSource.INTERNAL)
-                || (!installationStatus.equals(InstallationStatus.NOT_INSTALLED)
-                && !installationStatus.equals(InstallationStatus.INSTALLATION_FAILURE)));
         samplingRatePreference.setValue(settings.getSamplingRate().name());
         samplingRatePreference.setSummary(formatSamplingRateSummary());
         samplingRatePreference.setEnabled(settings.getAudioSource().equals(AudioSource.MIC));
@@ -280,24 +272,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return "";
     }
 
-    private int formatAudioDriverSummary(InstallationStatus installationStatus) {
-        switch (installationStatus) {
-            case NOT_INSTALLED:
-                return R.string.settings_audio_driver_not_installed;
-            case INSTALLING:
-                return R.string.settings_audio_driver_installing;
-            case INSTALLED:
-                return R.string.settings_audio_driver_installed;
-            case UNINSTALLING:
-                return R.string.settings_audio_driver_uninstalling;
-            case INSTALLATION_FAILURE:
-                return R.string.settings_audio_driver_installation_failure;
-            case OUTDATED:
-                return R.string.settings_audio_driver_outdated;
-        }
-        return R.string.settings_audio_driver_not_installed;
-    }
-
     private String formatSamplingRateSummary() {
         if (settings.getAudioSource().equals(AudioSource.INTERNAL)) {
             int rate = settings.getAudioDriver().getSamplingRate();
@@ -321,20 +295,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     private void showAudioDriverDialog() {
         new AudioDriverDialogFragment().show(getFragmentManager(), "audio_driver");
-    }
-
-    private void onAudioDriverClick() {
-        AudioDriver audioDriver = settings.getAudioDriver();
-        switch (audioDriver.getInstallationStatus()) {
-            case INSTALLED:
-            case OUTDATED:
-                audioDriver.uninstall();
-                break;
-            case NOT_INSTALLED:
-            case INSTALLATION_FAILURE:
-                showAudioDriverDialog();
-                break;
-        }
     }
 
     @Override
@@ -377,9 +337,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             settings.setVerticalFrames(selected);
         } else if (preference == audioSourcePreference) {
             AudioSource source = AudioSource.valueOf(valueString);
-            if (source == AudioSource.INTERNAL) {
-                showAudioDriverDialog();
-            }
             settings.setAudioSource(source);
             updateValues();
         } else if (preference == samplingRatePreference) {
@@ -409,8 +366,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         if (preference == outputDirPreference) {
             openOutputDirChooser();
             return true;
-        } else if (preference == audioDriverPreference) {
-            onAudioDriverClick();
         }
         return false;
     }

@@ -52,10 +52,6 @@
             android:key="audio_source"
             android:persistent="false"
             android:title="@string/settings_audio_source" />
-        <Preference
-            android:key="audio_driver"
-            android:persistent="false"
-            android:title="@string/settings_audio_driver" />
         <ListPreference
             android:entries="@array/sampling_rate_entries"
             android:entryValues="@array/sampling_rate_values"

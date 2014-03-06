@@ -311,6 +311,11 @@ public class Settings {
 
     public void setAudioSource(AudioSource audioSource) {
         this.audioSource = audioSource;
+        if (audioDriver.shouldInstall()) {
+            audioDriver.install();
+        } else if (audioSource != AudioSource.INTERNAL && audioDriver.shouldUninstall()) {
+            audioDriver.uninstall();
+        }
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(AUDIO_SOURCE, audioSource.name());
         settingsModified(editor);
