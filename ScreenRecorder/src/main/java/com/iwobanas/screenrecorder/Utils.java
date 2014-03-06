@@ -32,21 +32,27 @@ public class Utils {
     public static int findProcessByCommand(String command) {
         try {
             File proc = new File("/proc");
+            char[] cmdBuffer = new char[command.length()];
             for (String pid : proc.list()) {
                 if (!pid.matches("^[0-9]+$"))
                     continue;
-
-                String cmdline = null;
                 try {
-                    BufferedReader cmdReader = new BufferedReader(new FileReader("/proc/" + pid + "/cmdline"));
-                    cmdline = cmdReader.readLine();
+                    FileReader cmdReader = new FileReader("/proc/" + pid + "/cmdline");
+                    int length = cmdReader.read(cmdBuffer);
+                    cmdReader.close();
+                    if (length != command.length()) continue;
+                    boolean found = true;
+                    for (int i = 0; i < length; i++) {
+                        if (cmdBuffer[i] != command.charAt(i)) {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        return Integer.parseInt(pid);
+                    }
                 } catch (FileNotFoundException ignored) {
                 } catch (IOException ignored) {}
-
-
-                if (cmdline != null && cmdline.startsWith(command)) {
-                    return Integer.parseInt(pid);
-                }
             }
         } catch (SecurityException ignored) {}
         return -1;
