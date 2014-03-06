@@ -182,16 +182,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_audio">Audio</string>
     <string name="settings_sampling_rate">Sampling rate</string>
 
-    <string name="internal_audio_dialog_title">Audio driver installation</string>
-    <string name="internal_audio_dialog_message">
-        Internal audio recording is an experimental feature and requires installation of custom audio driver.
-        It is recommended to uninstall this driver after you are done with the recording.
-        You will be able to easily uninstall SCR Audio driver from SCR Settings.
-        If the installer crashes you may need to use ADB console or re-flash system partition to restore original audio drivers.
-        It is recommended to backup your system. You are proceeding AT YOUR OWN RISK.</string>
-    <string name="internal_audio_dialog_install">Install</string>
-    <string name="internal_audio_dialog_cancel">Cancel</string>
-
     <string name="settings_other_category">Other</string>
     <string name="settings_hide_icon">Hide notification icon</string>
     <string name="settings_show_touches">Show touches</string>

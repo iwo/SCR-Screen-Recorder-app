@@ -297,10 +297,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         startActivityForResult(intent, SELECT_OUTPUT_DIR);
     }
 
-    private void showAudioDriverDialog() {
-        new AudioDriverDialogFragment().show(getFragmentManager(), "audio_driver");
-    }
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String valueString = null;
