@@ -15,6 +15,8 @@ public class AudioDriver {
     private Set<OnInstallListener> listeners = new HashSet<OnInstallListener>();
     private InstallationStatus status = InstallationStatus.CHECKING;
     private int samplingRate = 0;
+    private boolean installScheduled = false;
+    private boolean uninstallScheduled = false;
 
     public AudioDriver(Context context) {
         this.context = context;
@@ -25,33 +27,46 @@ public class AudioDriver {
         return (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL
                 && (status == InstallationStatus.NOT_INSTALLED
                 || status == InstallationStatus.CHECKING
+                || status == InstallationStatus.UNINSTALLING
                 || status == InstallationStatus.UNSPECIFIED
                 || status == InstallationStatus.OUTDATED)
         );
     }
 
     public boolean isReady() {
-        return !shouldInstall()
-                || status == InstallationStatus.INSTALLED
-                || status == InstallationStatus.INSTALLATION_FAILURE;
+        return !shouldInstall() && status != InstallationStatus.UNINSTALLING && status != InstallationStatus.INSTALLING;
     }
 
     public void install() {
+        if (status == InstallationStatus.CHECKING || status == InstallationStatus.UNINSTALLING) {
+            Log.w(TAG, "Attempting to install when " + status + ". Scheduling installation.");
+            installScheduled = true;
+            uninstallScheduled = false;
+            return;
+        }
         if (status != InstallationStatus.NOT_INSTALLED && status != InstallationStatus.INSTALLATION_FAILURE) {
             Log.e(TAG, "Attempting to install in incorrect state: " + status);
+            return;
         }
         setInstallationStatus(InstallationStatus.INSTALLING);
         new InstallAsyncTask(context, this).execute();
     }
 
     public boolean shouldUninstall() {
-        return status == InstallationStatus.INSTALLED
+        return status == InstallationStatus.CHECKING
+                || status == InstallationStatus.INSTALLING
+                ||status == InstallationStatus.INSTALLED
                 || status == InstallationStatus.INSTALLATION_FAILURE
                 || status == InstallationStatus.UNSPECIFIED;
-        //TODO: handle CHECKING and INSTALLING
     }
 
     public void uninstall() {
+        if (status == InstallationStatus.CHECKING || status == InstallationStatus.INSTALLING) {
+            Log.w(TAG, "Attempting to uninstall when " + status + ". Scheduling uninstallation.");
+            installScheduled = false;
+            uninstallScheduled = true;
+            return;
+        }
         if (status != InstallationStatus.INSTALLED && status != InstallationStatus.OUTDATED) {
             Log.e(TAG, "Attempting to uninstall in incorrect state: " + status);
         }
@@ -74,9 +89,20 @@ public class AudioDriver {
     }
 
     protected void setInstallationStatus(InstallationStatus status) {
+        Log.v(TAG, status != null ? status.name() : "null");
         this.status = status;
-        for (OnInstallListener listener : listeners) {
-            listener.onInstall(AudioDriver.this.status);
+        if (installScheduled) {
+            installScheduled = false;
+            Log.v(TAG, "Starting scheduled install");
+            install();
+        } else if (uninstallScheduled) {
+            uninstallScheduled = false;
+            Log.v(TAG, "Starting scheduled uninstall");
+            uninstall();
+        } else {
+            for (OnInstallListener listener : listeners) {
+                listener.onInstall(AudioDriver.this.status);
+            }
         }
     }
 
