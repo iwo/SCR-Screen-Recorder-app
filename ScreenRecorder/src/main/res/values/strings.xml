@@ -245,5 +245,7 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="sale_text">Buy SCR Pro now and save %1$d %%! This offer ends on %2$s.</string>
 
     <string name="copyrights_statement">By using %1$s you agree that you are solely responsible for ensuring you do not violate third party copyright or other intellectual property rights.</string>
+    <string name="internal_audio_installation_error_title">Internal audio error</string>
+    <string name="internal_audio_installation_error_message">Can\'t enable internal audio. Please send a bug report to help me get yor device supported. Audio source will be set to %1$s.</string>
 
 </resources>

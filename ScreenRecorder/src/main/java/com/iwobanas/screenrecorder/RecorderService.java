@@ -29,6 +29,7 @@ import com.google.android.vending.licensing.ServerManagedPolicy;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
 import com.iwobanas.screenrecorder.rating.RatingController;
+import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
 
@@ -96,6 +97,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private boolean firstCommand = true;
     private boolean closing = false;
     private boolean destroyed = false;
+    private boolean settingsDisplayed = false;
 
     // Preferences
     private boolean mStopHelpDisplayed;
@@ -649,6 +651,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 mRecorderOverlay.hide();
+                settingsDisplayed = true;
 
                 Intent intent = new Intent(RecorderService.this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -703,10 +706,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (STOP_HELP_DISPLAYED_ACTION.equals(action)) {
             startRecording();
         } else if (TIMEOUT_DIALOG_CLOSED_ACTION.equals(action)) {
+            isTimeoutDisplayed = false;
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 buyPro();
             } else {
-                isTimeoutDisplayed = false;
                 mRecorderOverlay.show();
             }
         } else if (RESTART_MUTE_ACTION.equals(action)) {
@@ -721,12 +724,19 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else if (START_RECORDING_ACTION.equals(action)) {
             startRecordingWhenReady();
         } else if (ERROR_DIALOG_CLOSED_ACTION.equals(action)) {
-            reinitialize();
-            mRecorderOverlay.show();
+            if (state != RecorderServiceState.READY) {
+                reinitialize();
+            }
+            if (!settingsDisplayed) {
+                mRecorderOverlay.show();
+            }
         } else if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
         } else {
+            if (SETTINGS_CLOSED_ACTION.equals(action)) {
+                settingsDisplayed = false;
+            }
             if (mRatingController.shouldShow()) {
                 mRecorderOverlay.hide();
                 mRatingController.show();
@@ -824,6 +834,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public void onInstall(InstallationStatus status) {
         if (closing && (status == InstallationStatus.NOT_INSTALLED || status == InstallationStatus.UNSPECIFIED)) {
             stopSelf();
+        } else if (status == InstallationStatus.INSTALLATION_FAILURE) {
+            audioDriverInstallationFailure();
         } else if (status == InstallationStatus.INSTALLING) {
             setState(RecorderServiceState.INSTALLING_AUDIO);
         } else if (status == InstallationStatus.UNINSTALLING) {
@@ -831,6 +843,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else {
             checkReady();
         }
+    }
+
+    private void audioDriverInstallationFailure() {
+        Settings.getInstance().setAudioSource(AudioSource.MUTE);
+        String message = getString(R.string.internal_audio_installation_error_message, getString(R.string.settings_audio_mute));
+        displayErrorMessage(message, getString(R.string.internal_audio_installation_error_title), true, true, 2000);
     }
 
     private static enum RecorderServiceState {
