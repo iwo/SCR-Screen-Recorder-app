@@ -254,4 +254,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="sale_title">Sale</string>
     <string name="sale_text">Buy SCR Pro now and save %1$d %%! This offer ends on %2$s.</string>
 
+    <string name="copyrights_statement">By using %s you agree that you are solely responsible for ensuring you do not violate third party copyright or other intellectual property rights.</string>
+
 </resources>

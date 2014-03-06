@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:key="copyrights_statement"
+        android:selectable="false" />
     <PreferenceCategory android:title="@string/settings_video_category">
         <ListPreference
             android:entries="@array/video_encoder_entries"

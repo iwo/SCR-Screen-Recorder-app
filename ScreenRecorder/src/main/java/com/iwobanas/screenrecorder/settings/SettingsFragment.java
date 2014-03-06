@@ -21,6 +21,7 @@ import com.iwobanas.screenrecorder.audio.InstallationStatus;
 import java.io.File;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener, AudioDriver.OnInstallListener {
+    public static final String KEY_COPYRIGHTS_STATEMENT = "copyrights_statement";
     public static final String KEY_VIDEO_ENCODER = "video_encoder";
     public static final String KEY_RESOLUTION = "resolution";
     public static final String KEY_TRANSFORMATION = "transformation";
@@ -58,6 +59,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.settings);
+
+        String copyrightsStatement = getString(R.string.copyrights_statement, getString(R.string.app_name));
+        findPreference(KEY_COPYRIGHTS_STATEMENT).setSummary(copyrightsStatement);
 
         settings = Settings.getInstance();
 
