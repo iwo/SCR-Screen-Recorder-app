@@ -36,12 +36,7 @@ public class ShellCommand {
             Log.v(TAG, "Process created");
             new Thread(new ProcessStreamReader(process.getInputStream(), outputStringBuilder, outLogTag)).start();
             new Thread(new ProcessStreamReader(process.getErrorStream(), errorStringBuilder, errorLogTag)).start();
-            if (input != null) {
-                OutputStream inputStream = process.getOutputStream();
-                inputStream.write(input.getBytes());
-                inputStream.flush();
-                Log.v(TAG, "Input passed");
-            }
+            passInput();
             Log.v(TAG, "Waiting for process to exit");
             process.waitFor();
             executionCompleted = true;
@@ -50,6 +45,19 @@ public class ShellCommand {
             Log.e(TAG, "Exception in " + Arrays.toString(command), e);
         } catch (InterruptedException e) {
             Log.e(TAG, "Exception in " + Arrays.toString(command), e);
+        }
+    }
+
+    private void passInput() {
+        if (process != null && input != null) {
+            try {
+                OutputStream inputStream = process.getOutputStream();
+                inputStream.write(input.getBytes());
+                inputStream.flush();
+                Log.v(TAG, "Input passed");
+            } catch (IOException e) {
+                Log.w(TAG, "Error passing input: " + e.getMessage());
+            }
         }
     }
 
