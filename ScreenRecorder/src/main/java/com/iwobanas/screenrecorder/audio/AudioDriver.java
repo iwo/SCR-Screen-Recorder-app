@@ -67,8 +67,12 @@ public class AudioDriver {
             uninstallScheduled = true;
             return;
         }
-        if (status != InstallationStatus.INSTALLED && status != InstallationStatus.OUTDATED) {
+        if (status != InstallationStatus.INSTALLED
+                && status != InstallationStatus.OUTDATED
+                && status != InstallationStatus.INSTALLATION_FAILURE
+                && status != InstallationStatus.UNSPECIFIED) {
             Log.e(TAG, "Attempting to uninstall in incorrect state: " + status);
+            return;
         }
         setInstallationStatus(InstallationStatus.UNINSTALLING);
         new UninstallAsyncTask(context, this).execute();
