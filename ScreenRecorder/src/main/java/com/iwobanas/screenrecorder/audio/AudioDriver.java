@@ -44,10 +44,11 @@ public class AudioDriver {
         new InstallAsyncTask(context, this).execute();
     }
 
-    public void uninstallIfNeeded() {
-        if (status == InstallationStatus.INSTALLED || status == InstallationStatus.OUTDATED) {
-            uninstall();
-        }
+    public boolean shouldUninstall() {
+        return status == InstallationStatus.INSTALLED
+                || status == InstallationStatus.INSTALLATION_FAILURE
+                || status == InstallationStatus.UNSPECIFIED;
+        //TODO: handle CHECKING and INSTALLING
     }
 
     public void uninstall() {

@@ -94,6 +94,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private long mRecordingStartTime;
     private boolean mTaniosc = true;
     private boolean firstCommand = true;
+    private boolean closing = false;
     private boolean destroyed = false;
 
     // Preferences
@@ -258,7 +259,17 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void close() {
-        stopSelf();
+        closing = true;
+        if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
+            stopRecording();
+        }
+        startOnReady = false;
+        mRecorderOverlay.animateHide();
+        if (audioDriver.shouldUninstall()) {
+            audioDriver.uninstall();
+        } else {
+            stopSelf();
+        }
     }
 
     @Override
@@ -281,7 +292,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
             }
         } else if (audioDriver.shouldInstall()) {
-            setState(RecorderServiceState.INSTALLING_AUDIO);
             audioDriver.install();
         }
     }
@@ -749,7 +759,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mScreenOffReceiver.unregister();
         savePreferences();
         Settings.getInstance().restoreShowTouches();
-        audioDriver.uninstallIfNeeded();
+        if (audioDriver.shouldUninstall()) {
+            audioDriver.uninstall();
+        }
         audioDriver.removeInstallListener(this);
         destroyed = true;
     }
@@ -810,13 +822,14 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void onInstall(InstallationStatus status) {
-        if (status != InstallationStatus.INSTALLING && status != InstallationStatus.UNINSTALLING) {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    checkReady();
-                }
-            });
+        if (closing && (status == InstallationStatus.NOT_INSTALLED || status == InstallationStatus.UNSPECIFIED)) {
+            stopSelf();
+        } else if (status == InstallationStatus.INSTALLING) {
+            setState(RecorderServiceState.INSTALLING_AUDIO);
+        } else if (status == InstallationStatus.UNINSTALLING) {
+            setState(RecorderServiceState.UNINSTALLING_AUDIO);
+        } else {
+            checkReady();
         }
     }
 
