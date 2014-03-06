@@ -51,7 +51,6 @@ public class AudioDriverInstaller {
         this.context = context;
         localDir = new File(context.getFilesDir(), SCR_AUDIO_DIR);
         systemDir = new File(SYSTEM_LIB_HW);
-        //TODO: make sure that installer is executed after binary is extracted
         installer = new File(context.getFilesDir(), "screenrec");
     }
 
@@ -59,6 +58,7 @@ public class AudioDriverInstaller {
     private File localDir;
     private File systemDir;
     private File installer;
+    private boolean uninstallSuccess;
 
     public boolean install() {
         Log.v(TAG, "Installation started");
@@ -87,26 +87,22 @@ public class AudioDriverInstaller {
 
     public boolean uninstall() {
         Log.v(TAG, "Uninstall started");
-        try {
-            unmount();
-        } catch (InstallationException e) {
-            Log.e(TAG, "Unmount failed", e);
-            dumpState();
-        }
-        validateNotMounted();
-        try {
-            switchToSystemFiles();
-        } catch (InstallationException e) {
-            Log.e(TAG, "Uninstall failed", e);
-            dumpState();
-        }
+        uninstallSuccess = true;
+        unmount();
+        switchToSystemFiles();
         try {
             terminateMediaserver();
         } catch (InstallationException e) {
             Log.e(TAG, "Error restarting mediaserver", e);
         }
-        Log.v(TAG, "Uninstall completed");
-        return true; //TODO: catch errors and return false if needed
+        validateNotMounted();
+        if (uninstallSuccess) {
+            Log.v(TAG, "Uninstall completed");
+        } else {
+            Log.w(TAG, "Uninstall completed with errors");
+            dumpState();
+        }
+        return uninstallSuccess;
     }
 
     private void dumpState() {
@@ -457,16 +453,17 @@ public class AudioDriverInstaller {
         Utils.setGlobalReadable(localDir);
     }
 
-    private void switchToSystemFiles() throws InstallationException {
+    private void switchToSystemFiles() {
         applyOriginalPrimaryModules();
         applyOriginalConfigFiles();
     }
 
-    private void applyOriginalPrimaryModules() throws InstallationException {
+    private void applyOriginalPrimaryModules() {
         String[] systemFiles = localDir.list(ORIGINAL_PRIMARY_FILENAME_FILTER);
 
         if (systemFiles == null) {
-            throw new InstallationException("No system modules found");
+            uninstallError("No system modules found");
+            return;
         }
 
         for (String fileName : systemFiles) {
@@ -474,8 +471,7 @@ public class AudioDriverInstaller {
             File primary = new File(localDir, getPrimaryName(fileName));
 
             if (!Utils.copyFile(originalPrimary, primary)) {
-                //TODO: consider if we shouldn't continue with deinstallation on failures
-                throw new InstallationException("Error copying original module from " + originalPrimary.getAbsolutePath() + " to " + primary.getAbsolutePath());
+                uninstallError("Error copying original module from " + originalPrimary.getAbsolutePath() + " to " + primary.getAbsolutePath());
             }
             Utils.setGlobalReadable(primary);
         }
@@ -485,32 +481,39 @@ public class AudioDriverInstaller {
         return fileName.replaceFirst(ORIGINAL_PRIMARY_PREFIX, PRIMARY_PREFIX);
     }
 
-    private void applyOriginalConfigFiles() throws InstallationException {
+    private void uninstallError(String error) {
+        Log.e(TAG, error);
+        uninstallSuccess = false;
+    }
+
+    private void applyOriginalConfigFiles() {
         File localSystemConf = new File(localDir, LOCAL_SYSTEM_AUDIO_POLICY);
         File localVendorConf = new File(localDir, LOCAL_VENDOR_AUDIO_POLICY);
         File originalSystemConf = new File(localDir, ORIGINAL_SYSTEM_AUDIO_POLICY);
         File originalVendorConf = new File(localDir, ORIGINAL_VENDOR_AUDIO_POLICY);
 
-        //TODO: consider if we shouldn't continue with deinstallation on failures
         if (originalVendorConf.exists() && !Utils.copyFile(originalVendorConf, localVendorConf)) {
-            throw new InstallationException("Error copying config from " + originalVendorConf.getAbsolutePath() + " to " + localVendorConf.getAbsolutePath());
+            uninstallError("Error copying config from " + originalVendorConf.getAbsolutePath() + " to " + localVendorConf.getAbsolutePath());
         }
         Utils.setGlobalReadable(localVendorConf);
         if (originalSystemConf.exists() && !Utils.copyFile(originalSystemConf, localSystemConf)) {
-            throw new InstallationException("Error copying config from " + originalSystemConf.getAbsolutePath() + " to " + localSystemConf.getAbsolutePath());
+            uninstallError("Error copying config from " + originalSystemConf.getAbsolutePath() + " to " + localSystemConf.getAbsolutePath());
         }
         Utils.setGlobalReadable(localSystemConf);
     }
 
-    private void unmount() throws InstallationException {
+    private void unmount() {
         String commandInput = "unmount_audio\n";
         int result = runInstaller(commandInput);
         if (result != 0) {
-            throw new InstallationException("Unmount command failed with error code: " + result);
+            uninstallError("Unmount command failed with error code: " + result);
         }
     }
 
     private void validateNotMounted() {
+        if (isMounted()) {
+            Log.w(TAG, "Still mounted after restart");
+        }
     }
 
     public InstallationStatus checkStatus() {
