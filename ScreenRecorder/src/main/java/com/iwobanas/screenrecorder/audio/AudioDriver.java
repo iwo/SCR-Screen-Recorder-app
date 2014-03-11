@@ -44,7 +44,10 @@ public class AudioDriver {
             uninstallScheduled = false;
             return;
         }
-        if (status != InstallationStatus.NOT_INSTALLED && status != InstallationStatus.INSTALLATION_FAILURE) {
+        if (status != InstallationStatus.NOT_INSTALLED
+                && status != InstallationStatus.INSTALLATION_FAILURE
+                && status != InstallationStatus.UNSPECIFIED
+                && status != InstallationStatus.OUTDATED) {
             Log.e(TAG, "Attempting to install in incorrect state: " + status);
             return;
         }
