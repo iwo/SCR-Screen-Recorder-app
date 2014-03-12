@@ -9,6 +9,8 @@ import android.util.Log;
 
 import com.iwobanas.screenrecorder.Utils;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpGet;
 
 import java.io.IOException;
@@ -67,9 +69,17 @@ public abstract class StatsBaseAsyncTask extends AsyncTask<Void, Void, Void> {
 
         HttpGet get = new HttpGet(url);
         try {
-            client.execute(get);
+            HttpResponse response = client.execute(get);
+            if (response == null || response.getStatusLine() == null) {
+                Log.w(getTag(), "null response received");
+            } else if (response.getStatusLine().getStatusCode() != 200) {
+                StatusLine statusLine = response.getStatusLine();
+                Log.w(getTag(), "Response: " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase());
+            }
         } catch (IOException e) {
             Log.w(getTag(), "HTTP GET execution error", e);
+        } catch (SecurityException e) {
+            Log.w(getTag(), "Allow internet access to SCR to get best settings for your device!", e);
         }
         client.close();
         return null;
