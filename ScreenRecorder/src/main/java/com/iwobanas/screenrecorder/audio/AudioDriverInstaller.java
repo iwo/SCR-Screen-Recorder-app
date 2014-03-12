@@ -31,6 +31,7 @@ public class AudioDriverInstaller {
     private static final String SCR_VENDOR_AUDIO_POLICY = "scr_vendor_audio_policy.conf";
     private static final String LOCAL_SYSTEM_AUDIO_POLICY = "system_audio_policy.conf";
     private static final String LOCAL_VENDOR_AUDIO_POLICY = "vendor_audio_policy.conf";
+    private static final String MODULE_LOG = "scr_audio.log";
     private static final String MEDIASERVER_COMMAND = "/system/bin/mediaserver";
     private static final FilenameFilter PRIMARY_FILENAME_FILTER = new FilenameFilter() {
         @Override
@@ -140,8 +141,20 @@ public class AudioDriverInstaller {
 
     private void ensureSCRFilesValid() throws InstallationException {
         extractSCRModule();
+        createLogFile(MODULE_LOG);
         if (!isMounted()) {
             createConfigFiles();
+        }
+    }
+
+    private void createLogFile(String name) throws InstallationException {
+        File logFile = new File(localDir, name);
+        try {
+            logFile.createNewFile();
+            logFile.setReadable(true, false);
+            logFile.setWritable(true, false);
+        } catch (IOException e) {
+            throw new InstallationException("Can't create log file: " + logFile.getAbsolutePath(), e);
         }
     }
 
