@@ -17,6 +17,7 @@ public class AudioDriver {
     private int samplingRate = 0;
     private boolean installScheduled = false;
     private boolean uninstallScheduled = false;
+    private Long installId;
 
     public AudioDriver(Context context) {
         this.context = context;
@@ -51,8 +52,9 @@ public class AudioDriver {
             Log.e(TAG, "Attempting to install in incorrect state: " + status);
             return;
         }
+        installId = System.currentTimeMillis();
         setInstallationStatus(InstallationStatus.INSTALLING);
-        new InstallAsyncTask(context, this).execute();
+        new InstallAsyncTask(context, this, installId).execute();
     }
 
     public boolean shouldUninstall() {
@@ -77,8 +79,9 @@ public class AudioDriver {
             Log.e(TAG, "Attempting to uninstall in incorrect state: " + status);
             return;
         }
+        installId = System.currentTimeMillis();
         setInstallationStatus(InstallationStatus.UNINSTALLING);
-        new UninstallAsyncTask(context, this).execute();
+        new UninstallAsyncTask(context, this, installId).execute();
     }
 
     public int getSamplingRate() {

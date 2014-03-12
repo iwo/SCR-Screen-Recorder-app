@@ -4,11 +4,12 @@ import android.content.Context;
 
 import static com.iwobanas.screenrecorder.audio.InstallationStatus.INSTALLATION_FAILURE;
 import static com.iwobanas.screenrecorder.audio.InstallationStatus.INSTALLED;
+import static com.iwobanas.screenrecorder.audio.InstallationStatus.INSTALLING;
 
 public class InstallAsyncTask extends InstallationAsyncTask {
 
-    public InstallAsyncTask(Context context, AudioDriver audioDriver) {
-        super(context, audioDriver);
+    public InstallAsyncTask(Context context, AudioDriver audioDriver, long installId) {
+        super(context, audioDriver, installId, INSTALLING);
     }
 
     @Override

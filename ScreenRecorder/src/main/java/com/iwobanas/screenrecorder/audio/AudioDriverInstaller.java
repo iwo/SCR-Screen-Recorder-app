@@ -60,9 +60,11 @@ public class AudioDriverInstaller {
     private File systemDir;
     private File installer;
     private boolean uninstallSuccess;
+    private String errorDetails;
 
     public boolean install() {
         Log.v(TAG, "Installation started");
+        errorDetails = null;
         try {
             if (isSystemAlphaModuleInstalled()) {
                 uninstallSystemAlphaModule();
@@ -81,6 +83,11 @@ public class AudioDriverInstaller {
         } catch (InstallationException e) {
             Log.e(TAG, "Installation failed", e);
             dumpState();
+            errorDetails = e.getMessage();
+            Throwable cause = e.getCause();
+            if (cause != null && cause != e) {
+                errorDetails += " => " + cause.getMessage();
+            }
             return false;
         }
         return true;
@@ -89,6 +96,7 @@ public class AudioDriverInstaller {
     public boolean uninstall() {
         Log.v(TAG, "Uninstall started");
         uninstallSuccess = true;
+        errorDetails = null;
         unmount();
         switchToSystemFiles();
         try {
@@ -104,6 +112,10 @@ public class AudioDriverInstaller {
             dumpState();
         }
         return uninstallSuccess;
+    }
+
+    public String getErrorDetails() {
+        return errorDetails;
     }
 
     private void dumpState() {
@@ -497,6 +509,11 @@ public class AudioDriverInstaller {
     private void uninstallError(String error) {
         Log.e(TAG, error);
         uninstallSuccess = false;
+        if (errorDetails == null) {
+            errorDetails = error;
+        } else {
+            errorDetails += "; " + error;
+        }
     }
 
     private void applyOriginalConfigFiles() {
