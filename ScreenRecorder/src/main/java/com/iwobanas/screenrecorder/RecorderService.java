@@ -32,6 +32,7 @@ import com.iwobanas.screenrecorder.rating.RatingController;
 import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
+import com.iwobanas.screenrecorder.stats.RecordingStatsAsyncTask;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -351,8 +352,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void logStats(RecordingInfo recordingInfo) {
-        int appVersion = Utils.getAppVersion(this);
-        new SendStatsAsyncTask(getPackageName(), appVersion, getDeviceId(), recordingInfo).execute();
+        new RecordingStatsAsyncTask(this, recordingInfo).execute();
     }
 
     private void scanFile(File file) {
