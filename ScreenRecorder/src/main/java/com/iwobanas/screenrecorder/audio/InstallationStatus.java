@@ -7,6 +7,7 @@ public enum InstallationStatus {
     INSTALLED,
     UNINSTALLING,
     INSTALLATION_FAILURE,
+    UNSTABLE,
     UNSPECIFIED,
     OUTDATED
 }

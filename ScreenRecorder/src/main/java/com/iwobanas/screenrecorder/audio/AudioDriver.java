@@ -18,6 +18,7 @@ public class AudioDriver {
     private boolean installScheduled = false;
     private boolean uninstallScheduled = false;
     private Long installId;
+    private StabilityMonitorAsyncTask stabilityMonitor;
 
     public AudioDriver(Context context) {
         this.context = context;
@@ -62,6 +63,7 @@ public class AudioDriver {
                 || status == InstallationStatus.INSTALLING
                 ||status == InstallationStatus.INSTALLED
                 || status == InstallationStatus.INSTALLATION_FAILURE
+                || status == InstallationStatus.UNSTABLE
                 || status == InstallationStatus.UNSPECIFIED;
     }
 
@@ -75,9 +77,13 @@ public class AudioDriver {
         if (status != InstallationStatus.INSTALLED
                 && status != InstallationStatus.OUTDATED
                 && status != InstallationStatus.INSTALLATION_FAILURE
+                && status != InstallationStatus.UNSTABLE
                 && status != InstallationStatus.UNSPECIFIED) {
             Log.e(TAG, "Attempting to uninstall in incorrect state: " + status);
             return;
+        }
+        if (stabilityMonitor != null) {
+            stabilityMonitor.cancel(true);
         }
         installId = System.currentTimeMillis();
         setInstallationStatus(InstallationStatus.UNINSTALLING);
@@ -110,9 +116,19 @@ public class AudioDriver {
             Log.v(TAG, "Starting scheduled uninstall");
             uninstall();
         } else {
+            if (status == InstallationStatus.INSTALLED) {
+                stabilityMonitor = new StabilityMonitorAsyncTask(this);
+                stabilityMonitor.execute();
+            }
             for (OnInstallListener listener : listeners) {
                 listener.onInstall(AudioDriver.this.status);
             }
+        }
+    }
+
+    public void startRecording() {
+        if (stabilityMonitor != null) {
+            stabilityMonitor.cancel(true);
         }
     }
 

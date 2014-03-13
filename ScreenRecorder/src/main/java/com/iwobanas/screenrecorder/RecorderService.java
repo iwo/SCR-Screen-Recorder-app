@@ -185,6 +185,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (Settings.getInstance().getStopOnScreenOff()) {
             mScreenOffReceiver.register();
         }
+        audioDriver.startRecording();
         outputFile = getOutputFile();
         mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
         mRecordingStartTime = System.currentTimeMillis();
@@ -836,6 +837,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
             stopSelf();
         } else if (status == InstallationStatus.INSTALLATION_FAILURE) {
             audioDriverInstallationFailure();
+        } else if (status == InstallationStatus.UNSTABLE) {
+            audioDriverUnstable();
         } else if (status == InstallationStatus.INSTALLING) {
             setState(RecorderServiceState.INSTALLING_AUDIO);
         } else if (status == InstallationStatus.UNINSTALLING) {
@@ -849,6 +852,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
         Settings.getInstance().setAudioSource(AudioSource.MUTE);
         String message = getString(R.string.internal_audio_installation_error_message, getString(R.string.settings_audio_mute));
         displayErrorMessage(message, getString(R.string.internal_audio_installation_error_title), true, true, 2000);
+    }
+
+    private void audioDriverUnstable() {
+        Settings.getInstance().setAudioSource(AudioSource.MUTE);
+        String message = getString(R.string.internal_audio_unstable_message, getString(R.string.settings_audio_mute));
+        displayErrorMessage(message, getString(R.string.internal_audio_unstable_title), true, true, 2001);
     }
 
     private static enum RecorderServiceState {
