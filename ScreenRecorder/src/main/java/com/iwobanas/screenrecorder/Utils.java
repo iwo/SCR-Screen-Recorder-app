@@ -15,15 +15,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -32,27 +36,54 @@ public class Utils {
     public static int findProcessByCommand(String command) {
         try {
             File proc = new File("/proc");
-            char[] cmdBuffer = new char[command.length()];
-            for (String pid : proc.list()) {
-                if (!pid.matches("^[0-9]+$"))
-                    continue;
+
+            ByteBuffer cmdByteBuffer = ByteBuffer.allocate(command.length());
+            cmdByteBuffer.put(command.getBytes());
+            ByteBuffer procByteBuffer = ByteBuffer.allocate(command.length());
+            int length = command.length();
+
+            FilenameFilter pidFilter = new FilenameFilter() {
+                Matcher matcher = Pattern.compile("^\\d+$").matcher("");
+
+                @Override
+                public boolean accept(File dir, String filename) {
+                    matcher.reset(filename);
+                    return matcher.matches();
+                }
+            };
+
+            for (String pid : proc.list(pidFilter)) {
+                FileInputStream inputStream = null;
+                FileChannel fileChannel = null;
                 try {
-                    FileReader cmdReader = new FileReader("/proc/" + pid + "/cmdline");
-                    int length = cmdReader.read(cmdBuffer);
-                    cmdReader.close();
-                    if (length != command.length()) continue;
-                    boolean found = true;
-                    for (int i = 0; i < length; i++) {
-                        if (cmdBuffer[i] != command.charAt(i)) {
-                            found = false;
-                            break;
-                        }
+                    inputStream = new FileInputStream("/proc/" + pid + "/cmdline");
+                    fileChannel = inputStream.getChannel();
+                    procByteBuffer.rewind();
+                    if (fileChannel.read(procByteBuffer) != length) {
+                        continue;
                     }
-                    if (found) {
+
+                    cmdByteBuffer.rewind();
+                    procByteBuffer.rewind();
+
+                    if (cmdByteBuffer.compareTo(procByteBuffer) == 0) {
                         return Integer.parseInt(pid);
                     }
+
                 } catch (FileNotFoundException ignored) {
-                } catch (IOException ignored) {}
+                } catch (IOException ignored) {
+                } finally {
+                    try {
+                        if (inputStream != null) {
+                            inputStream.close();
+                        }
+                        if (fileChannel != null) {
+                            fileChannel.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         } catch (SecurityException ignored) {}
         return -1;
