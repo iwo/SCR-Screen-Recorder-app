@@ -1,21 +1,27 @@
 package com.iwobanas.screenrecorder.audio;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.Utils;
+import com.iwobanas.screenrecorder.stats.AudioInstallationStatsAsyncTask;
 
 public class StabilityMonitorAsyncTask extends AsyncTask<Void, Void, Boolean>{
     private static final String TAG = "scr_StabilityMonitor";
-    private AudioDriver audioDriver;
     private static final long MAX_EXEC_TIME = 20000000000l; // 20s
     private static final int MAX_RESTARTS = 2;
     private static final String MEDIA_SERVER_COMMAND = "/system/bin/mediaserver";
 
+    private final Context context;
+    private final Long installId;
+    private final AudioDriver audioDriver;
     private long startTime;
 
-    public StabilityMonitorAsyncTask(AudioDriver audioDriver) {
+    public StabilityMonitorAsyncTask(Context context, AudioDriver audioDriver, Long installId) {
         this.audioDriver = audioDriver;
+        this.context = context;
+        this.installId = installId;
     }
 
     @Override
@@ -70,6 +76,7 @@ public class StabilityMonitorAsyncTask extends AsyncTask<Void, Void, Boolean>{
         Log.v(TAG, "Completed");
         super.onPostExecute(stable);
         if (!stable) {
+            new AudioInstallationStatsAsyncTask(context, installId, InstallationStatus.UNSTABLE, null, 0).execute();
             audioDriver.setInstallationStatus(InstallationStatus.UNSTABLE);
         }
     }

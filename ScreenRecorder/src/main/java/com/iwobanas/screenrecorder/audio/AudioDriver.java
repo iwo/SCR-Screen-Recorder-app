@@ -117,7 +117,7 @@ public class AudioDriver {
             uninstall();
         } else {
             if (status == InstallationStatus.INSTALLED) {
-                stabilityMonitor = new StabilityMonitorAsyncTask(this);
+                stabilityMonitor = new StabilityMonitorAsyncTask(context, this, installId);
                 stabilityMonitor.execute();
             }
             for (OnInstallListener listener : listeners) {
