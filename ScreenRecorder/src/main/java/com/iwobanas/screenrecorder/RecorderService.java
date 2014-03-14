@@ -77,6 +77,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String LOUNCHER_ACTION = "scr.intent.action.LOUNCHER";
     private static final String TAG = "scr_RecorderService";
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
+    private static final String SHUT_DOWN_CORRECTLY = "SHUT_DOWN_CORRECTLY";
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
     // Licensing
     private static final byte[] LICENSE_SALT = new byte[]{95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47, 122};
@@ -99,6 +100,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private boolean closing = false;
     private boolean destroyed = false;
     private boolean settingsDisplayed = false;
+    private boolean displayShutDownError = false;
 
     // Preferences
     private boolean mStopHelpDisplayed;
@@ -107,6 +109,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public void onCreate() {
         EasyTracker.getInstance().setContext(getApplicationContext());
+        mHandler = new Handler();
 
         if (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT > 19) {
             displayErrorMessage(getString(R.string.android_version_error_message), getString(R.string.android_version_error_title), false, false, -1);
@@ -116,7 +119,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         audioDriver = Settings.getInstance().getAudioDriver();
         audioDriver.addInstallListener(this);
         mTaniosc = getResources().getBoolean(R.bool.taniosc);
-        mHandler = new Handler();
+        checkShutDownCorrectly();
 
         mRatingController = new RatingController(this);
 
@@ -738,7 +741,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
             if (SETTINGS_CLOSED_ACTION.equals(action)) {
                 settingsDisplayed = false;
             }
-            if (mRatingController.shouldShow()) {
+            if (displayShutDownError) {
+                shutDownError();
+            } else if (mRatingController.shouldShow()) {
                 mRecorderOverlay.hide();
                 mRatingController.show();
             } else if (mRecorderOverlay.isVisible() && !firstCommand) {
@@ -775,6 +780,31 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
         audioDriver.removeInstallListener(this);
         destroyed = true;
+        markShutDownCorrectly();
+    }
+
+    private void checkShutDownCorrectly() {
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
+        if (!preferences.getBoolean(SHUT_DOWN_CORRECTLY, true) && audioDriver.shouldInstall()) {
+            Settings.getInstance().setAudioSource(AudioSource.MUTE);
+            displayShutDownError = true;
+        }
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(SHUT_DOWN_CORRECTLY, false);
+        editor.commit();
+    }
+
+    private void markShutDownCorrectly() {
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(SHUT_DOWN_CORRECTLY, true);
+        editor.commit();
+    }
+
+    private void shutDownError() {
+        displayShutDownError = false;
+        String message = getString(R.string.internal_audio_disabled_message, getString(R.string.app_name));
+        displayErrorMessage(message, getString(R.string.internal_audio_disabled_title), true, false, 2002);
     }
 
     private void readPreferences() {
@@ -787,7 +817,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(STOP_HELP_DISPLAYED_PREFERENCE, mStopHelpDisplayed);
         editor.commit();
-
     }
 
     @Override
