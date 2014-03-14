@@ -81,6 +81,10 @@ public class DialogActivity extends Activity {
                         }
                     });
                 }
+
+                if (positiveLabel == null && negativeLabel == null) {
+                    builder.setNegativeButton(R.string.error_report_close, null);
+                }
             }
             restart = intent.getBooleanExtra(RESTART_EXTRA, false);
             restartAction = intent.getStringExtra(RESTART_ACTION_EXTRA);
