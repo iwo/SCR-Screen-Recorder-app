@@ -149,7 +149,8 @@ class RecorderProcess implements Runnable {
     private void setErrorState() {
         ProcessState previousState = state;
         setState(ProcessState.ERROR);
-        if (previousState != ProcessState.NEW && mediaServerRelatedError()) {
+        if (previousState != ProcessState.NEW  && previousState != ProcessState.INITIALIZING
+                && mediaServerRelatedError()) {
             killMediaServer();
         }
     }
