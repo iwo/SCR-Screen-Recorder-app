@@ -246,9 +246,9 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
 
     <string name="copyrights_statement">By using %1$s you agree that you are solely responsible for ensuring you do not violate third party copyright or other intellectual property rights.</string>
     <string name="internal_audio_installation_error_title">Internal audio error</string>
-    <string name="internal_audio_installation_error_message">Can\'t enable internal audio. Please send a bug report to help me get yor device supported. Audio source will be set to %1$s.</string>
+    <string name="internal_audio_installation_error_message">Can\'t enable internal audio. Please send a bug report to help me get your device supported. Audio source will be set to %1$s.</string>
     <string name="internal_audio_unstable_title">Internal audio unstable</string>
-    <string name="internal_audio_unstable_message">Internal audio stability issue detected. Please send a bug report to help me get yor device supported. Audio source will be set to %1$s.</string>
+    <string name="internal_audio_unstable_message">Internal audio stability issue detected. Please send a bug report to help me get your device supported. Audio source will be set to %1$s.</string>
     <string name="internal_audio_disabled_title">Internal audio disabled</string>
     <string name="internal_audio_disabled_message">Internal audio recording is switched off because %1$s didn\'t shut down correctly. You can re-enable it in Settings.</string>
 
