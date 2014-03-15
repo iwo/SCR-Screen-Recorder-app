@@ -24,8 +24,8 @@ Aplikacja jest dopiero tworzona, jest to wersja &lt;b&gt;beta&lt;/b&gt;, w zwią
     "</string>
 
     <string name="play_description_pro">"
-Aplikacja jest dopiero 
-tworzona, jest to wersja &lt;b&gt;beta&lt;/b&gt;, w związku z tym może 
+Aplikacja jest dopiero
+tworzona, jest to wersja &lt;b&gt;beta&lt;/b&gt;, w związku z tym może
 nie działać na wszystkich urządzeniach i ROMach. Przed zakupem zainstaluj&lt;b&gt; SCR Free&lt;/ b&gt;, aby upewnić się, że twoje urządzenie jest już obsługiwane. Jeśli napotkasz jakiekolwiek problemy proszę o kontakt na scr.screen.recorder@gmail.com i przekazanie możliwie dużo informacji o problemie. Pomoże mi to poprawić obsługę twojego urządzenia w przyszłych aktualizacjach.
     "</string>
 
@@ -164,24 +164,11 @@ zny.pl/2013/06/10/galaktyczny-poradnik-co-to-jest-root-tajniki-rootowania/"</str
     <string name="settings_audio_mute">"Brak"</string>
     <string name="settings_audio_internal">"Wyjście audio"</string>
     <string name="settings_audio_internal_experimental">"Wyjście audio (eksperymentalne)"</string>
-    <string name="settings_audio_mic_summary">"Mikrofon. Tylko jedna aplikacja może używać mikrofonu w tym samym czasie!"</string>
+    <string name="settings_audio_mic_summary">"Mikrofon"</string>
     <string name="settings_audio_mute_summary">"Wyciszone. Brak ścieżki audio"</string>
-    <string name="settings_audio_internal_summary">"Wyjście audio. Dołącz to społeczności Google+ \"SCR Alpha testy\" aby przetestować nagrywanie dźwięku wychodzącego."</string>
+    <string name="settings_audio_internal_summary">"Wyjście audio"</string>
     <string name="settings_audio">"Audio"</string>
     <string name="settings_sampling_rate">"Próbkowanie"</string>
-
-    <string name="settings_audio_driver_not_installed">"Sterownik audio SCR nie jest zainstalowany. Dotknij, aby zainstalować."</string>
-    <string name="settings_audio_driver_installing">"Instalacja sterownika SCR..."</string>
-    <string name="settings_audio_driver_installed">"Sterownik audio SCR zainstalowany. Dotknij, aby odinstalować."</string>
-    <string name="settings_audio_driver_uninstalling">"Odinstalowywanie sterownika SCR..."</string>
-    <string name="settings_audio_driver_installation_failure">"Instalacja sterownika SCR nie powiodło się. Dotknij, aby ponowić próbę."</string>
-    <string name="settings_audio_driver_outdated">"Stara wersja sterownik SCR. Dotknij, aby zaktualizować."</string>
-
-    <string name="internal_audio_dialog_title">"Instalacja sterownika audio"</string>
-    <string name="internal_audio_dialog_message">"
-        Wewnętrzne nagrywanie dźwięku jest funkcja eksperymentalna i wymaga instalacji niestandardowego sterownika audio. Zaleca się, aby odinstalować sterownik, po zakończeniu z nagraniem. Sterownika SCR będzie można łatwo odinstalować z Ustawień SCR. W razie awarii instalatora może zaistnieć konieczność użycia konsoli ADB lub flashowania partycji system w celu przywrócenia oryginalnego sterownika. Zalecane jest, aby wykonanie kopii zapasowej systemu. Instalujesz testowy sterownik NA WŁASNE RYZYKO."</string>
-    <string name="internal_audio_dialog_install">"Zainstaluj"</string>
-    <string name="internal_audio_dialog_cancel">"Anuluj"</string>
 
     <string name="settings_other_category">"Pozostałe"</string>
     <string name="settings_hide_icon">"Ukryj ikonę"</string>
@@ -233,12 +220,23 @@ internetowe oraz, że jesteś zalogowany do Google Play.
 
     <string name="notification_status_installing">"Inicjowanie"</string>
     <string name="notification_status_initializing">"Oczekiwanie na uprawnienia root"</string>
+    <string name="notification_status_installing_audio">"Instalacja sterownika audio"</string>
     <string name="notification_status_ready">"Gotowy"</string>
     <string name="notification_status_starting">"Uruchamianie"</string>
     <string name="notification_status_recording">"Nagranie"</string>
+    <string name="notification_status_error">"Błąd"</string>
     <string name="notification_status_stopping">"Zatrzymywanie"</string>
+    <string name="notification_status_uninstalling_audio">"Odinstalowywanie sterownika audio"</string>
 
     <string name="sale_title">"Promocja"</string>
-    <string name="sale_text">"Kup SCR Pro teraz i oszczędź %1$d %% ! Oferta kończy się %2$s ."</string>
+    <string name="sale_text">"Kup SCR Pro teraz i oszczędź %1$d %% ! Oferta kończy się  %2$s ."</string>
+
+    <string name="copyrights_statement">"Używając %1$s ponosisz pełną odpowiedzialność za ewentualne naruszenie praw autorskich lub innych praw własności intelektualnej."</string>
+    <string name="internal_audio_installation_error_title">"Błąd wyjścia audio"</string>
+    <string name="internal_audio_installation_error_message">"Nie powiodła się aktywacja nagrywania wyjścia audio. Wyślij raport o błędzie, abym mógł dodać obsługę Twojego urządzenia. Źródło dźwięku zostanie ustawione na %1$s ."</string>
+    <string name="internal_audio_unstable_title">"Błąd wyjścia audio"</string>
+    <string name="internal_audio_unstable_message">"Wykryto problem stabilności wyjścia audio. Wyślij raport o błędzie, abym mógł dodać obsługę Twojego urządzenia. Źródło dźwięku zostanie ustawione na %1$s ."</string>
+    <string name="internal_audio_disabled_title">"Wyjście audio wyłączone"</string>
+    <string name="internal_audio_disabled_message">"Nagrywanie wyjścia audio zostało wyłączone ponieważ %1$s nie został poprawnie zamknięty. Można ponownie je włączyć w Ustawieniach."</string>
 
 </resources>
