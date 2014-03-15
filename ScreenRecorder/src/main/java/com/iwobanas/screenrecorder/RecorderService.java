@@ -357,6 +357,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private void logStats(RecordingInfo recordingInfo) {
         new RecordingStatsAsyncTask(this, recordingInfo).execute();
+        if (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL) {
+            audioDriver.logStats(recordingInfo);
+        }
     }
 
     private void scanFile(File file) {

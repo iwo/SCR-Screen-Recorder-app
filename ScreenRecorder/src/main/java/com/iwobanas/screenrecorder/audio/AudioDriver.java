@@ -3,8 +3,10 @@ package com.iwobanas.screenrecorder.audio;
 import android.content.Context;
 import android.util.Log;
 
+import com.iwobanas.screenrecorder.RecordingInfo;
 import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
+import com.iwobanas.screenrecorder.stats.AudioModuleStatsAsyncTask;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -130,6 +132,10 @@ public class AudioDriver {
         if (stabilityMonitor != null) {
             stabilityMonitor.cancel(true);
         }
+    }
+
+    public void logStats(RecordingInfo recordingInfo) {
+        new AudioModuleStatsAsyncTask(context, recordingInfo).execute();
     }
 
     public void addInstallListener(OnInstallListener listener) {

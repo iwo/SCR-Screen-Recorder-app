@@ -15,6 +15,9 @@ import java.io.IOException;
 public class AudioDriverInstaller {
     private static final String TAG = "scr_adi";
 
+    public static final String SCR_AUDIO_DIR = "scr_audio";
+    public static final String MODULE_LOG = "scr_audio.log";
+
     private static final String PRIMARY_DEFAULT = "audio.primary.default.so";
     private static final String PRIMARY_PREFIX = "audio.primary.";
     private static final String ORIGINAL_PRIMARY_PREFIX = "audio.original_primary.";
@@ -22,7 +25,6 @@ public class AudioDriverInstaller {
     private static final String SYSTEM_LIB_HW = "/system/lib/hw";
     private static final String SCR_DIR_MARKER = "scr_dir";
     private static final String SYSTEM_FILES_COPIED_MARKER = "system_files_copied";
-    private static final String SCR_AUDIO_DIR = "scr_audio";
     private static final String SYSTEM_AUDIO_POLICY = "/system/etc/audio_policy.conf";
     private static final String VENDOR_AUDIO_POLICY = "/vendor/etc/audio_policy.conf";
     private static final String ORIGINAL_SYSTEM_AUDIO_POLICY = "original_system_audio_policy.conf";
@@ -31,7 +33,6 @@ public class AudioDriverInstaller {
     private static final String SCR_VENDOR_AUDIO_POLICY = "scr_vendor_audio_policy.conf";
     private static final String LOCAL_SYSTEM_AUDIO_POLICY = "system_audio_policy.conf";
     private static final String LOCAL_VENDOR_AUDIO_POLICY = "vendor_audio_policy.conf";
-    private static final String MODULE_LOG = "scr_audio.log";
     private static final String MEDIASERVER_COMMAND = "/system/bin/mediaserver";
     private static final FilenameFilter PRIMARY_FILENAME_FILTER = new FilenameFilter() {
         @Override
