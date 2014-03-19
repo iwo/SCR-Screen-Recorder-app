@@ -25,6 +25,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,7 +53,17 @@ public class Utils {
                 }
             };
 
-            for (String pid : proc.list(pidFilter)) {
+            String[] pidStrings = proc.list(pidFilter);
+            List<Integer> processIds = new ArrayList<Integer>(pidStrings.length);
+            for (int i = 0; i < pidStrings.length; i++) {
+                try {
+                    processIds.add(i, Integer.valueOf(pidStrings[i]));
+                } catch (NumberFormatException ignore) {
+                }
+            }
+            Collections.sort(processIds, Collections.reverseOrder());
+
+            for (int pid : processIds) {
                 FileInputStream inputStream = null;
                 FileChannel fileChannel = null;
                 try {
@@ -67,7 +78,7 @@ public class Utils {
                     procByteBuffer.rewind();
 
                     if (cmdByteBuffer.compareTo(procByteBuffer) == 0) {
-                        return Integer.parseInt(pid);
+                        return pid;
                     }
 
                 } catch (FileNotFoundException ignored) {
