@@ -284,19 +284,19 @@ public class AudioDriverInstaller {
         int pid = Utils.findProcessByCommand(MEDIASERVER_COMMAND);
         if (pid > 0) {
             Utils.sendTermSignal(pid, installer.getAbsolutePath());
-            if (!waitForProcessToStop(pid, 1000, 100)) {
+            if (!waitForProcessToStop(pid, 1000 * 1000000l, 100 * 1000000l)) {
                 Log.v(TAG, "mediaserver not terminating. killing");
                 Utils.sendKillSignal(pid, installer.getAbsolutePath());
             }
-            if (!waitForProcessToStop(pid, 500, 100)) {
+            if (!waitForProcessToStop(pid, 500 * 1000000l, 100 * 1000000l)) {
                 throw new InstallationException("Can't restart mediaserver");
             }
         }
     }
 
     private boolean waitForProcessToStop(int pid, long timeout, long checkFrequency) {
-        long startTime = System.currentTimeMillis();
-        while ((System.currentTimeMillis() - startTime) < timeout) {
+        long startTime = System.nanoTime();
+        while ((System.nanoTime() - startTime) < timeout) {
             if (!Utils.processExists(pid)) {
                 return true;
             }
@@ -308,9 +308,9 @@ public class AudioDriverInstaller {
     }
 
     private void waitForMediaserver() throws InstallationException {
-        long timeout = 3000;
-        long startTime = System.currentTimeMillis();
-        while ((System.currentTimeMillis() - startTime) < timeout) {
+        long timeout = 3000 * 1000000l;
+        long startTime = System.nanoTime();
+        while ((System.nanoTime() - startTime) < timeout) {
             if (Utils.findProcessByCommand(MEDIASERVER_COMMAND) > 0) {
                 return;
             }
