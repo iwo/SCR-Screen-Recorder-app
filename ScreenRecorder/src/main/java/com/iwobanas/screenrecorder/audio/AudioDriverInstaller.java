@@ -308,7 +308,7 @@ public class AudioDriverInstaller {
     }
 
     private void waitForMediaserver() throws InstallationException {
-        long timeout = 3000 * 1000000l;
+        long timeout = 7000 * 1000000l;
         long startTime = System.nanoTime();
         while ((System.nanoTime() - startTime) < timeout) {
             if (Utils.findProcessByCommand(MEDIASERVER_COMMAND) > 0) {
