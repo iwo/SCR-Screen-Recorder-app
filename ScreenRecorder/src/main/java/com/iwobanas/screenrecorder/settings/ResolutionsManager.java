@@ -33,7 +33,7 @@ public class ResolutionsManager {
     public ResolutionsManager(Context context) {
         Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
-        display.getRealMetrics(metrics);
+        display.getRealMetrics(metrics); //this method is present in older versions but is hidden
         height = Math.min(metrics.heightPixels, metrics.widthPixels);
         width = Math.max(metrics.heightPixels, metrics.widthPixels);
 
