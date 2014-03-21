@@ -12,15 +12,15 @@ SCR Grabadora de Pantalla Pro ★ root
     "</string>
 
     <string name="play_root_required">"
-&lt;b&gt; Sólo funcionará en dispositivos rooteados / jailbreakeados / desbloqueados! &lt;/ b&gt; &lt;br/&gt; No lo instale si el dispositivo no está rooteado."</string>
+&lt;b&gt;Sólo funcionará en dispositivos rooteados! &lt;/b&gt;&lt;br/&gt; No lo instale si el dispositivo no está rooteado."</string>
     <string name="play_description_main">"
-Registre grandes screencasts calidad directamente desde su teléfono o tableta! Screen Recorder SCR usa aceleración por hardware de codificación de vídeo para lograr la mejor calidad de grabación de pantalla en cualquier dispositivo. Es la única grabadora de vídeo en el mercado que admite el dispositivo Tegra incluyendo Nexus 7."</string>
+Grabe grandes screencasts de calidad directamente desde su teléfono o tableta! Screen Recorder SCR usa aceleración por hardware de codificación de vídeo para lograr la mejor calidad de grabación de pantalla en cualquier dispositivo. Es la única grabadora de vídeo en el mercado que admite el dispositivo Tegra incluyendo Nexus 7."</string>
     <string name="play_description_free">"
-Con &lt;b&gt; SCR gratuito &lt;/ b&gt; se puede grabar un máximo de 3 minutos screencasts y la marca de agua SCR se agrega a su video. Comprar &lt;b&gt; SCR Pro &lt;/ b&gt; para obtener la longitud screencast ilimitado sin marca de agua. Este es un BETA &lt;b&gt; temprano vista previa &lt;/ b&gt; la versión por lo que puede no funcionar en todos los dispositivos y las ROMs. Si tiene algún problema por favor repórtelo a scr.screen.recorder @ gmail.com para ayudarme a conseguir su dispositivo compatible.
+Con &lt;b&gt; SCR gratuito &lt;/b&gt; se puede grabar un máximo de 3 minutos screencasts y la marca de agua SCR se agrega a su video. Comprar &lt;b&gt; SCR Pro &lt;/ b&gt; para obtener la longitud screencast ilimitado sin marca de agua. Esta es una BETA &lt;b&gt; vista previa &lt;/b&gt; la versión por lo que puede no funcionar en todos los dispositivos y las ROMs. Si tiene algún problema por favor repórtelo a scr.screen.recorder@gmail.com para ayudarme a conseguir su dispositivo compatible.
     "</string>
 
     <string name="play_description_pro">"
-Este es un BETA &lt;b&gt; temprano vista previa &lt;/ b&gt; la versión por lo que puede no funcionar en todos los dispositivos y las ROMs. Antes de comprar considerar la prueba &lt;b&gt; SCR gratuito &lt;/ b&gt; para asegurarse de que su dispositivo ya es compatible. Si tiene algún problema por favor repórtelo a scr.screen.recorder @ gmail.com para ayudarme a conseguir su dispositivo compatible.
+Este es un BETA &lt;b&gt; vista previa &lt;/b&gt; la versión por lo que puede no funcionar en todos los dispositivos y las ROMs. Antes de comprar considerar la prueba &lt;b&gt; SCR gratuito &lt;/b&gt; para asegurarse de que su dispositivo ya es compatible. Si tiene algún problema por favor repórtelo a scr.screen.recorder@gmail.com para ayudarme a conseguir su dispositivo compatible.
     "</string>
 
     <string name="play_small_print">"
@@ -51,7 +51,7 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
 
     <string name="microphone_busy_error_title">"Micrófono ocupado"</string>
     <string name="microphone_busy_error_message">"
-        Sólo una aplicación puede utilizar el micrófono a la vez. Esta es una limitación del sistema Android. Cierre la otra aplicación que utiliza el micrófono (por ejemplo, Google! O Skype) o continuar con la grabación sin audio.
+        Sólo una aplicación puede utilizar el micrófono a la vez. Esta es una limitación del sistema Android. Cierre otra aplicación utiliza el micrófono (por ejemplo, Google! O Skype) o continuar con la grabación sin audio.
     "</string>
     <string name="microphone_busy_error_continue_mute">"Continuar sin sonido"</string>
 
@@ -147,7 +147,7 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_orientation_anticlockwise">"Girar en sentido contrario al reloj"</string>
 
     <string name="settings_vertical_frames">"Fotogramas verticales"</string>
-    <string name="settings_vertical_frames_warning">"Los reproductores de vídeo en muchos dispositivos no pueden reproducir los vídeos con los fotogramas verticales. Si esta opción está seleccionada, los metadatos de orientación se añaden al vídeo para que se muestre correctamente en el reproductor de Android, YouTube, etc"</string>
+    <string name="settings_vertical_frames_warning">"Los reproductores de vídeo en muchos dispositivos no pueden reproducir los vídeos con los marcos verticales. Incluso si esta opción está seleccionada metadatos orientación se añade a la de vídeo para que sea muestra correctamente en mora reproductor Android, YouTube, etc."</string>
     <string name="settings_vertical_frames_ok">"OK"</string>
     <string name="settings_vertical_frames_cancel">"Cancelar"</string>
 
@@ -157,24 +157,11 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_audio_mute">"Sin sonido"</string>
     <string name="settings_audio_internal">"Interno"</string>
     <string name="settings_audio_internal_experimental">"Interno (experimental)"</string>
-    <string name="settings_audio_mic_summary">"Micrófono. Sólo una aplicación puede utilizar el micrófono a la vez!"</string>
+    <string name="settings_audio_mic_summary">"Micrófono"</string>
     <string name="settings_audio_mute_summary">"Silencio. Sin Pista de audio"</string>
-    <string name="settings_audio_internal_summary">"La salida de audio. Conjunto \"pruebas SCR Alpha\" comunidad Google+ para probar la grabación de audio interno"</string>
+    <string name="settings_audio_internal_summary">"Salida de audio del sistema"</string>
     <string name="settings_audio">"Audio"</string>
     <string name="settings_sampling_rate">"Frecuencia de muestreo"</string>
-
-    <string name="settings_audio_driver_not_installed">"SCR controlador de audio no está instalado. Toque para instalar."</string>
-    <string name="settings_audio_driver_installing">"Instalando controlador de audio SCR..."</string>
-    <string name="settings_audio_driver_installed">"Controlador de audio SCR instalado. Toque para desinstalar."</string>
-    <string name="settings_audio_driver_uninstalling">"Desinstalando controlador de audio SCR..."</string>
-    <string name="settings_audio_driver_installation_failure">"La instalación del controlador de audio SCR falló. Toque para volver a intentarlo."</string>
-    <string name="settings_audio_driver_outdated">"La versión antigua del controlador de audio SCR instalado. Toque para actualizar."</string>
-
-    <string name="internal_audio_dialog_title">"Instalación del controlador de audio"</string>
-    <string name="internal_audio_dialog_message">"
-        La grabación de audio interno, es una característica experimental y requiere la instalación del controlador de audio personalizado. Se recomienda desinstalar este driver después de que haya terminado la grabación. Usted será capaz de desinstalar fácilmente el controlador de Audio SCR desde los ajustes de SCR. Si el instalador se bloquea, puede que tenga que utilizar la consola ADB o partición del sistema de re-flash para restaurar los controladores de audio originales. Se recomienda hacer copias de seguridad de su sistema desde un recovery. Usted está aceptando proceder BAJO SU PROPIO RIESGO."</string>
-    <string name="internal_audio_dialog_install">"Instalar"</string>
-    <string name="internal_audio_dialog_cancel">"Cancelar"</string>
 
     <string name="settings_other_category">"Otro"</string>
     <string name="settings_hide_icon">"Ocultar icono de notificación"</string>
@@ -226,12 +213,23 @@ acerca de un error. Siéntase libre de agregar cualquier comentario aquí."</str
 
     <string name="notification_status_installing">"Iniciando"</string>
     <string name="notification_status_initializing">"A la espera de acceso root"</string>
+    <string name="notification_status_installing_audio">"Instalación del controlador de audio"</string>
     <string name="notification_status_ready">"Listo"</string>
     <string name="notification_status_starting">"Comenzando"</string>
     <string name="notification_status_recording">"Grabando"</string>
+    <string name="notification_status_error">"Error"</string>
     <string name="notification_status_stopping">"Parando"</string>
+    <string name="notification_status_uninstalling_audio">"Desinstalación del controlador de sonido"</string>
 
     <string name="sale_title">"Venta"</string>
-    <string name="sale_text">"Comprar SCR Pro ahora y ahorre %1$d %% ! Esta oferta finaliza el %2$s ."</string>
+    <string name="sale_text">"Comprar SCR Pro ahora y ahorre %1$d %%! Esta oferta finaliza el %2$s."</string>
+
+    <string name="copyrights_statement">"Mediante el uso de %1$s usted acepta que usted es el único responsable de asegurarse de que no está violando los derechos de autor de terceros u otros derechos de propiedad intelectual."</string>
+    <string name="internal_audio_installation_error_title">"Error de audio interno"</string>
+    <string name="internal_audio_installation_error_message">"No se puede activar el audio interno. Por favor, envíe un informe de fallo para ayudarme a conseguir su dispositivo compatible. La fuente de audio se establecerá en %1$s."</string>
+    <string name="internal_audio_unstable_title">"Audio interno inestable"</string>
+    <string name="internal_audio_unstable_message">"Problema de estabilidad de audio interno detectado. Por favor, envíe un informe de fallo para ayudarme a conseguir su dispositivo compatible. La fuente de audio se establecerá en %1$s."</string>
+    <string name="internal_audio_disabled_title">"Audio interno deshabilitado"</string>
+    <string name="internal_audio_disabled_message">"Grabación de audio interno está apagado porque %1$s no se cerró correctamente. Puede volver a activarlo en Ajustes."</string>
 
 </resources>

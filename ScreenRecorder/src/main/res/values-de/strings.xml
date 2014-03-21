@@ -1,23 +1,23 @@
 <resources>
     <string name="free_app_name">"SCR Free"</string>
-    <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
+    <string name="free_app_full_name">"SCR-Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
 
     <string name="play_free_app_name">"
-SCR Screen Recorder Free ★ root
+SCRScreen Recorder Free ★ root
     "</string>
     <string name="play_pro_app_name">"
-SCR Screen Recorder Pro ★ root
+SCR Screen Recorder Pro ★ roota
     "</string>
 
     <string name="play_root_required">"
 &lt;b&gt; Funktioniert nur auf gerooteten / entsperrten Geräten! &lt;/b&gt; &lt;br/&gt; Nicht installieren, wenn Ihr Gerät nicht gerootet ist."</string>
     <string name="play_description_main">"
-Nehmen Sie qualitativ hochwertige Screencasts direkt auf Ihrem Handy oder Tablet auf!
+Nehmen Sie qualitativ hochwertige Bildschirmvideos direkt auf Ihrem Handy oder Tablet auf!
 
-SCR Screen Recorder nutzt Hardware-beschleunigte Videokodierung, um die beste Qualität bei Bildschirm-Aufnahmen auf jedem Gerät zu erreichen.
-Es ist die einzige Bildschirmaufnahme-App im Play Store, die Tegra-Geräte unterstützt (einschließlich des Nexus 7)."</string>
+SCR Screen Recorder nutzt Hardware beschleunigte Videokodierung um die beste Bildqualität auf jedem Gerät zu erreichen.
+Es ist der einzige Recorder im Play Store der Tegra-Geräte unterstützt (einschließlich des Nexus 7)."</string>
     <string name="play_description_free">"
 Mit &lt;b&gt; SCR Free &lt;/b&gt; können Sie maximal 3 Minuten lange Screencasts aufnehmen und das SCR Wasserzeichen wird Ihrem Video hinzugefügt.
 Kaufen Sie &lt;b&gt; SCR Pro &lt;/b&gt;, um Screencasts unbegrenzter Länge ohne Wasserzeichen aufzuzeichnen.
@@ -27,24 +27,25 @@ Wenn irgendwelche Probleme auftreten sollten, wenden Sie sich bitte an scr.scree
     "</string>
 
     <string name="play_description_pro">"
-Da dies ist eine frühe &lt;b&gt;BETA&lt;/b&gt;-Version ist kann es sein, dass die App nicht auf allen Geräten und ROMs funktioniert.
-Testen Sie vor dem Kauf &lt;b&gt;SCR Free&lt;/b&gt; um sicherzustellen, dass Ihr Gerät bereits unterstützt wird.
-Wenn irgendwelche Probleme auftreten sollten, wenden Sie sich bitte an scr.screen.recorder@gmail.com um mir zu helfen, Ihr Gerät zu unterstützen.
+Da dies eine frühe &lt;b&gt;BETA-Version&lt;/b&gt; ist, kann es sein dass die App nicht auf allen Geräten und ROM's funktioniert. Testen Sie &lt;b&gt;SCR Free&lt;/b&gt; vor dem Kauf, um sicherzustellen dass Ihr Gerät bereits unterstützt wird.
+Sollten irgendwelche Probleme auftreten, melden Sie diese bitte an scr.screen.recorder@gmail.com um mir zu helfen, Ihr Gerät zu unterstützen.
     "</string>
 
     <string name="play_small_print">"
-SCR Screen Recorder sammelt anonyme Nutzungsstatistiken, die dabei helfen Bugs zu finden und das Nutzungsverhalten der Benutzer zu analysieren. Diese Software verwendet unmodifizierten Code von FFmpeg 1.2, lizenziert unter der LGPL.
+SCR Screen Recorder sammelt anonyme Nutzungsstatistiken um dabei zu helfen, Bugs zu finden und um zu analysieren, wie Nutzer die App benutzen.
+Diese Software benutzt unmodifizierten Code von FFmpeg 1.2, lizenziert unter der LGPL.
     "</string>
 
     <string name="recording_saved_title">"SCR Aufnahme gespeichert"</string>
-    <string name="recording_saved_message">"Aufnahme zu %1$s gespeichert"</string>
+    <string name="recording_saved_message">"Aufnahme nach %1$s gespeichert"</string>
     <string name="recording_saved_toast">"Aufnahme nach %1$s gespeichert"</string>
     <string name="max_file_size_reached_toast">"Maximale Dateigröße erreicht. Aufnahme nach %1$s gespeichert."</string>
     <string name="start">"Start"</string>
     <string name="play">"Abspielen"</string>
 
     <string name="su_required_title">"Root-Zugriff erforderlich"</string>
-    <string name="su_required_message">"Um eine Bildschirmaufnahme-App auszuführen muss Ihr Handy/Tablet gerootet sein. Im Internet gibt es Root-Anleitungen für viele Geräte. Bitte kommen Sie wieder, wenn Sie damit fertig sind!"</string>
+    <string name="su_required_message">"Um eine Bildschirmaufnahme-App zu nutzen muss Ihr Handy/Tablet gerootet sein.
+Im Internet gibt es viele Anleitungen wie man verschiedene Geräte rootet. Bitte kommen Sie nach diesem Schritt wieder!"</string>
     <string name="su_required_help">"Was ist \"Rooten\"?"</string>
     <string name="su_required_help_link">"http://www.chip.de/news/Android-rooten-Vorteile-und-Nachteile_62681106.html"</string>
 
@@ -68,7 +69,7 @@ SCR Screen Recorder sammelt anonyme Nutzungsstatistiken, die dabei helfen Bugs z
     <string name="screen_protected_error_message">"Der Bildschirminhalt kann nicht aufgenommen werden, da eine andere App dies verhindert."</string>
 
     <string name="opengl_error_title">"GPU nicht unterstützt"</string>
-    <string name="opengl_error_message">"Ihre Grafikkarte wird noch nicht unterstützt. Wechseln Sie zur CPU-Kodierung oder zum Software Video-Kodierer.
+    <string name="opengl_error_message">"Ihre Grafikkarte wird noch nicht unterstützt. Ändern Sie die Bildtransformations-Einstellung auf CPU oder Software Videokodierer.
     "</string>
 
     <string name="audio_config_error_title">"Audio-Fehler"</string>
@@ -124,7 +125,7 @@ SCR Screen Recorder sammelt anonyme Nutzungsstatistiken, die dabei helfen Bugs z
     <string name="settings_resolution_half">"%1$dx%2$d - Halb"</string>
     <string name="settings_resolution_unstable">"(instabil)"</string>
 
-    <string name="settings_transformation">"Bildtransformation"</string>
+    <string name="settings_transformation">"Bild"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
@@ -147,9 +148,9 @@ SCR Screen Recorder sammelt anonyme Nutzungsstatistiken, die dabei helfen Bugs z
 
     <string name="settings_orientation">"Ausrichtung"</string>
     <string name="settings_orientation_description">"
-        Standardmäßig sind Video-Frames immer horizontal und Ausrichtungs-Metadaten werden zu Hochformat-Aufnahmen hinzugefügt.
-YouTube und der Standard Android-Videoplayer spielen Videos richtig ab, aber einige PC-Player (z.B. VLC) ignorieren sie und zeigen das Video im Querformat.
-Unten können Sie vertikale Frames aktivieren, aber Vorsicht: Viele Geräte können keine Videos mit vertikalen Frames aufnehmen/ abspielen!
+        Standardmäßig sind Videoframes immer horizontal und Ausrichtungs-Metadaten werden zu Aufnahmen im Hochformat hinzugefügt.
+YouTube und der Standard Android-Videoplayer spielen solche Videos richtig ab, aber einige PC-Player (z.B. VLC) ignorieren Ausrichtungs-Metadaten und stellen die Videos im Querformat dar.
+Unten können Sie vertikale Frames aktivieren, aber benutzen Sie diese Option mit Vorsicht, da viele Geräte damit nicht klarkommen.
     "</string>
     <string name="settings_orientation_auto">"Automatisch"</string>
     <string name="settings_orientation_portrait">"Hochformat"</string>
@@ -169,24 +170,11 @@ Sogar wenn diese Option nicht aktviert ist werden Ausrichtungs-Metadaten zum Vid
     <string name="settings_audio_mute">"Stumm"</string>
     <string name="settings_audio_internal">"Intern"</string>
     <string name="settings_audio_internal_experimental">"Intern (experimentell)"</string>
-    <string name="settings_audio_mic_summary">"Mikrofon (Das Mikrofon kann immer nur von einer App verwendet werden!)"</string>
+    <string name="settings_audio_mic_summary">"Mikrofon"</string>
     <string name="settings_audio_mute_summary">"Stumm (Keine Audio-Spur)"</string>
-    <string name="settings_audio_internal_summary">"Audio-Ausgang (Treten Sie der \"SCR Alpha Testing\" Community auf Google+ bei, um die Aufnahme des Audio-Ausgangs zu testen)"</string>
+    <string name="settings_audio_internal_summary">"System-Audioausgang"</string>
     <string name="settings_audio">"Audio"</string>
     <string name="settings_sampling_rate">"Abtastrate"</string>
-
-    <string name="settings_audio_driver_not_installed">"Der SCR Audio-Treiber ist nicht installiert. Tippen Sie, um ihn zu installieren."</string>
-    <string name="settings_audio_driver_installing">"SCR Audio-Treiber wird installiert..."</string>
-    <string name="settings_audio_driver_installed">"SCR Audio-Treiber ist installiert. Tippen Sie, um ihn zu deinstallieren."</string>
-    <string name="settings_audio_driver_uninstalling">"SCR Audio-Treiber wird deinstalliert..."</string>
-    <string name="settings_audio_driver_installation_failure">"Installation des SCR Audio-Treibers fehlgeschlagen. Tippen Sie, um es erneut zu versuchen."</string>
-    <string name="settings_audio_driver_outdated">"Eine alte Version des SCR Audio-Treibers ist installiert. Tippen Sie, um ihn zu aktualisieren."</string>
-
-    <string name="internal_audio_dialog_title">"Audio-Treiber Installation"</string>
-    <string name="internal_audio_dialog_message">"
-        Die Aufnahme des Audio-Ausgangs ist eine experimentelle Funktion und erfordert die Installation eines speziellen Audio-Treibers. Es wird empfohlen, den Treiber nach der Aufnahme wieder zu deinstallieren. Sie können den SCR Audio Treiber einfach in den SCR Einstellungen deinstallieren. Wenn die Installation fehlschlägt müssen Sie eventuell die ADB-Konsole nutzen oder die Systempartition neu flashen, um die originalen Audiotreiber wiederherzustellen."</string>
-    <string name="internal_audio_dialog_install">"Installieren"</string>
-    <string name="internal_audio_dialog_cancel">"Abbrechen"</string>
 
     <string name="settings_other_category">"Anderes"</string>
     <string name="settings_hide_icon">"Benachrichtigungsicon verstecken"</string>
@@ -228,7 +216,7 @@ Sogar wenn diese Option nicht aktviert ist werden Ausrichtungs-Metadaten zum Vid
     <string name="rating_rate_title">"Bewerten Sie %1$s"</string>
     <string name="rating_rate_message">"Wenn Sie %1$s mögen, nehmen Sie sich bitte einen Moment Zeit es zu bewerten. Vielen Dank für Ihre Unterstützung!"</string>
     <string name="rating_rate_now">"Bewerten Sie jetzt!"</string>
-    <string name="rating_remind">"Später erinneren"</string>
+    <string name="rating_remind">"Später erinnern"</string>
     <string name="rating_no_thanks">"Nein, danke."</string>
     <string name="rating_play_error">"Konnte Google Play nicht öffnen."</string>
 
@@ -237,12 +225,23 @@ Sogar wenn diese Option nicht aktviert ist werden Ausrichtungs-Metadaten zum Vid
 
     <string name="notification_status_installing">"Initialisierung"</string>
     <string name="notification_status_initializing">"Auf Root-Zugriff warten"</string>
+    <string name="notification_status_installing_audio">"Installation des Audio-Treibers"</string>
     <string name="notification_status_ready">"Bereit"</string>
     <string name="notification_status_starting">"Beginn"</string>
     <string name="notification_status_recording">"Aufnahme läuft..."</string>
+    <string name="notification_status_error">"Fehler"</string>
     <string name="notification_status_stopping">"Wird angehalten..."</string>
+    <string name="notification_status_uninstalling_audio">"Deinstallation des Audio-Treibers"</string>
 
     <string name="sale_title">"Angebot"</string>
     <string name="sale_text">"Kaufen Sie SCR Pro jetzt und sparen Sie %1$d %%! Dieses Angebot endet am %2$s."</string>
+
+    <string name="copyrights_statement">"Durch die Nutzung von %1$s bestätigen Sie dass Sie allein dafür verantwortlich sind, dass Sie nicht gegen Copyright-Rechte oder anderer intellektueller Besitztümer dritter verstoßen."</string>
+    <string name="internal_audio_installation_error_title">"Interner Audio-Fehler"</string>
+    <string name="internal_audio_installation_error_message">"Interne Audioaufnahme kann nicht aktiviert werden. Bitte senden Sie mir einen Fehlerbericht, um mir zu helfen Ihr Gerät zu unterstützen. Audioquelle wird auf %1$s gesetzt."</string>
+    <string name="internal_audio_unstable_title">"Interne Audioaufnahme instabil"</string>
+    <string name="internal_audio_unstable_message">"Stabilitätsproblem bei der internen Audioaufnahme erkannt. Bitte senden Sie mir einen Fehlerbericht, um mir zu helfen Ihr Gerät zu unterstützen. Audioquelle wird zu %1$s gesetzt."</string>
+    <string name="internal_audio_disabled_title">"Interne Audioaufnahme deaktiviert"</string>
+    <string name="internal_audio_disabled_message">"Interne Audio-Aufnahme wurde ausgeschaltet, weil %1$s nicht ordnungsgemäß heruntergefahren wurde. Sie können es in den Einstellungen wieder aktivieren."</string>
 
 </resources>

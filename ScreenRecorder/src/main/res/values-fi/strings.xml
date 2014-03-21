@@ -3,6 +3,33 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+
+    <string name="play_free_app_name">"
+SCR Screen Recorder Free ★ root
+    "</string>
+    <string name="play_pro_app_name">"
+SCR Screen Recorder Pro ★ root
+    "</string>
+
+    <string name="play_root_required">"
+&lt;b&gt; Toimii vain rootatuilla / jailbroketuilla / lukitsemattomilla laitteilla! &lt;/ b&gt; &lt;br/&gt; Älä asenna, jos laite ei ole rootattu."</string>
+    <string name="play_description_main">"
+Nauhoita tosi hyvänlaatuisia videoita suoraan puhelimestasi tai tabletistasi. 
+
+SCR Screen Recorder käyttää laitteistokiihdytettyä video koodausta saavuttaakseen parhaan mahdollisen laadun millä tahansa laitteella.
+Se on ainoa videon nauhoitussovellus  kaupassa mikä pystyy nauhoittamaan Tegra laitteilla muun muassa Nexus 7."</string>
+    <string name="play_description_free">"
+&lt;b&gt; SCR Freellä &lt;/ b&gt; voit nauhoittaa enintään 3 minuuttia videota ja SCR vesileima lisätään videon. Osta &lt;b&gt; SCR Pro &lt;/ b&gt; saadaksesi rajattoman videon pituuden ilman vesileimaa. Tämä on varhainen &lt;b&gt; BETA &lt;/ b&gt; versio, joten se ei välttämättä toimi kaikissa laitteissa ja ROMeissa. Jos sinulla on ongelmia ilmoita siitä scr.screen.recorder@gmail.com auttaa minua saamaan laitteesi tuetuksi.
+    "</string>
+
+    <string name="play_description_pro">"
+Tämä on varhainen &lt;b&gt; BETA &lt;/ b&gt; versio, joten se ei välttämättä toimi kaikissa laitteissa ja ROMeissa. Ennen kuin ostat Pron testaa &lt;b&gt; SCR Freellä &lt;/ b&gt; varmistaaksesi, että laite on jo tuettu. Jos sinulla on ongelmianilmoita siitä scr.screen.recorder@gmail.com auttaaksesi minua saamaan laitteesi tuetuksi.
+    "</string>
+
+    <string name="play_small_print">"
+SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittämään bugeja ja analysoida, miten käyttäjät käyttävät sovellusta. Tämä ohjelmisto käyttää modifioimatonta FFmpeg 1.2 koodia LGPL-lisensillä.
+    "</string>
+
     <string name="recording_saved_title">"SCR Videotiedosto Tallennettu"</string>
     <string name="recording_saved_message">"Videotiedosto tallennettu %1$s"</string>
     <string name="recording_saved_toast">"Videotiedosto tallennettu %1$s"</string>
@@ -11,7 +38,7 @@
     <string name="play">"Toista"</string>
 
     <string name="su_required_title">"Pääkäyttäjän eli root oikeudet tarvitaan"</string>
-    <string name="su_required_message">"Jotta voit käyttää jotakin näytönkaappaussovellusta sinun puhelimella/tabletilla pitää olla pääkäyttäjäoikeudet eli root.Netistä löytyy paljon ohjeita kuinka saada root eri laitteilla. Tule takaisin kun olet valmis!"</string>
+    <string name="su_required_message">"Jotta voit käyttää jotakin näytönkaappaussovellusta sinun puhelimella/tabletilla pitää olla pääkäyttäjäoikeudet eli root. Netistä löytyy paljon ohjeita kuinka saada root eri laitteilla. Tule takaisin kun olet valmis!"</string>
     <string name="su_required_help">"Mitä on ''roottaus''?"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
 
@@ -35,11 +62,20 @@
     <string name="screen_protected_error_message">"Näyttöä ei voida tallentaa, koska sovellus on merkinnyt näytön sisällön salatuksi."</string>
 
     <string name="opengl_error_title">"GPU ei tuettu"</string>
-    <string name="opengl_error_message">"Sinun grafiikkakorttia ei tueta vielä. Vaihda kuvanmuunnin asetukseksi CPU tai käyttä ohjelmisto videokoodekkia.
+    <string name="opengl_error_message">"Grafiikkakorttiasi ei tueta vielä. Vaihada Kuvanmuunnos asetukseksi CPU tai käyttä ohjelmistovideokooderia.
     "</string>
+
+    <string name="audio_config_error_title">"Äänivirhe"</string>
+    <string name="audio_config_error_message">"Tukematon äänikokoonpano. Kokeile vaihtaa SCR ääniasetuksia."</string>
 
     <string name="android_version_error_title">"Android-versiota ei tueta"</string>
     <string name="android_version_error_message">"Android-versiota ei tueta vielä."</string>
+
+    <string name="cpu_error_title">"CPU ei tueta"</string>
+    <string name="cpu_error_message">"Suorittimesi arkkitehtuuri ( %1$s ) ei ole tuettu %2$s ."</string>
+
+    <string name="installation_error_title">"Asennusvirhe"</string>
+    <string name="installation_error_message">"Ei voi asentaa tarvittavia tiedostoja. Varmista, että sinulla on jonkin verran vapaata tilaa laitteessa ja käynnistä uudelleen %1$s ."</string>
 
     <string name="help_stop_title">"Miten lopettaa"</string>
     <string name="help_stop_ok">"Tajusin!"</string>
@@ -105,7 +141,7 @@
 
     <string name="settings_orientation">"Suuntautuminen"</string>
     <string name="settings_orientation_description">"
-        Oletuksena videoruudut ovat aina vaakasuorassa ja kierto metatiedot lisätään pystytallennuksiin. YouTube ja Androidin oletusvideosoitin pelaa näitä videoita oikein, mutta jotkut PC-videosoittimet (esim. VLC) sivuuttavat kierto metatiedot ja näyttävät sen vaaka-asennossa. Voit ottaa pystykuvan päälle, mutta käyttä tätä vaihtoehtoa varoen, koska monet laitteet eivät voi \ 'tallentaa/toistaa videoita Pystykuvalla.
+        Oletuksena videokuvat ovat aina vaakasuorassa ja kierto metatiedot lisätään pystykuva videoihin. YouTube ja Androidvideosoitin näyttää videoita oikein, mutta jotkut PC-videosoittimet (esim. VLC) sivuuttavat kierto metatiedot ja näyttävät sen vaaka-asennossa. Voit ottaa pystykuvat alta, mutta käyttä tätä vaihtoehtoa varoen, koska monet laitteet ei voi nauhoittaa/toistaa pystykuvia.
     "</string>
     <string name="settings_orientation_auto">"Auto"</string>
     <string name="settings_orientation_portrait">"Pysty"</string>
@@ -119,39 +155,30 @@
     <string name="settings_vertical_frames_cancel">"Peruuta"</string>
 
     <string name="settings_audio_category">"Ääni"</string>
-    <string name="settings_audio_source">"Ääni"</string>
+    <string name="settings_audio_source">"Lähde"</string>
     <string name="settings_audio_mic">"Mikrofoni"</string>
     <string name="settings_audio_mute">"Mykistetty"</string>
     <string name="settings_audio_internal">"Sisäinen"</string>
     <string name="settings_audio_internal_experimental">"Sisäinen (kokeellinen)"</string>
-    <string name="settings_audio_mic_summary">"Mikrofoni. Vain yksi sovellus voi käyttää mikrofonia kerrallaan!"</string>
+    <string name="settings_audio_mic_summary">"Mikrofooni"</string>
     <string name="settings_audio_mute_summary">"Ilman ääntä. Ei Ääniraitaa"</string>
-    <string name="settings_audio_internal_summary">"Äänen ulostulo. Liity \"SCR Alpha testing\" Google+ yhteisössä testataksesi sisäistä äänen tallennusta."</string>
+    <string name="settings_audio_internal_summary">"Järjestelmä-äänen ulostulo"</string>
     <string name="settings_audio">"Ääni"</string>
     <string name="settings_sampling_rate">"Näytteenottotaajuus"</string>
 
-    <string name="settings_audio_driver_not_installed">"SCR ääniajuri ei ole asennettu. Kosketa asentaaksesi."</string>
-    <string name="settings_audio_driver_installing">"Asennetaan SCR ääniajuria ..."</string>
-    <string name="settings_audio_driver_installed">"SCR ääniajuri asennettu. Kosketa poistaaksesi."</string>
-    <string name="settings_audio_driver_uninstalling">"Poistetaan SCR ääniajuria ..."</string>
-    <string name="settings_audio_driver_installation_failure">"SCR ääniajurin asennus epäonnistui. Yritä uudelleen koskettamalla."</string>
-    <string name="settings_audio_driver_outdated">"Vanha versio SCR ääniajurista asennettu. Kosketa päivittääksesi."</string>
-
-    <string name="internal_audio_dialog_title">"Ääniajurin asennus"</string>
-    <string name="internal_audio_dialog_message">"
-        Sisäinen äänitys on kokeellinen ominaisuus ja vaatii oman ääniajurin asennuksen. On suositeltavaa poistaa tämän ajuri kun olet tehnyt tallennuksen. Voit helposti poistaa SCR ääniajurin SCR Asetuksista. Jos asennusohjelma kaatuu saatat joutua käyttämään ADB konsolia tai uudelleen flashätä järjestelmän osio palauttaaksesi alkuperäiset ääniajurit. On suositeltavaa tehdä ensin varmuuskopio. JATKAT OMALLA VASTUULLA."</string>
-    <string name="internal_audio_dialog_install">"Asentaa"</string>
-    <string name="internal_audio_dialog_cancel">"Peruutta"</string>
-
-    <string name="settings_other_category">"Muut"</string>
+    <string name="settings_other_category">"Muu"</string>
     <string name="settings_hide_icon">"Piilota ilmoituksen kuvake"</string>
     <string name="settings_show_touches">"Näytä kosketukset"</string>
-    <string name="settings_show_touches_summary">"Näytä visuaalista palautetta kosketuksessa. Voit myös aktivoida näkyvät kosketukset pysyvästi Android-asetukset =&gt; Kehittäjän Asetukset =&gt; Näytä kosketukset kautta"</string>
+    <string name="settings_show_touches_summary">"Näytä visuaalliset kosketukset. Voit myös aktivoida kosketus indikaattorit pysyvästi  Android-asetukset → Sovelluskehittäjien Asetukset → Näytä kosketukset kautta"</string>
     <string name="settings_output_dir">"Tallennusijainti"</string>
     <string name="settings_stop_when_screen_off">"Lopeta tallennus kun näyttö lukitaan"</string>
     <string name="settings_stop_when_screen_off_summary">"lopeta tallennus näytön sammutuksen jälkeen"</string>
     <string name="settings_color_fix">"Käännetty värikorjaus"</string>
-    <string name="settings_color_fix_summary">"Ota tämä asetus päälle, jos sininen ja punainen värit ovat toisin päin"</string>
+    <string name="settings_color_fix_summary">"Ota tämä asetus päälle, jos sininen ja punainen värit ovat päinvastoi"</string>
+
+    <string name="settings_zigzag_fix">"Siksak korjaus"</string>
+    <string name="settings_zigzag_fix_summary">"Valitse jos video sisältää satunnaisia värikkäitä raitoja"</string>
+    <string name="settings_zigzag_fix_cpu_only">"Käytettävissä vain CPU kuvanmuunnoksella"</string>
 
     <string name="directory_chooser_select">"Valitse \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Virkistä"</string>
@@ -159,7 +186,7 @@
     <string name="directory_chooser_new_title">"Uuden hakemiston nimi"</string>
     <string name="directory_chooser_new_ok">"OK"</string>
     <string name="directory_chooser_new_cancel">"Peruutta"</string>
-    <string name="directory_chooser_error_message">"Hakemistoon ei voi luoda. Varmista, että valittuun sijaintiin voi kirjoittaa  esim. SD-kortille."</string>
+    <string name="directory_chooser_error_message">"Hakemistoon ei voi luoda. Varmista, että valittuun sijaintiin voi kirjoittaa esim. SD-kortille."</string>
     <string name="directory_chooser_not_writable_title">"Valittu hakemisto ei ole kirjoitettavissa"</string>
     <string name="directory_chooser_not_writable_message">"Sovelluksella ei näytä olevan kirjoitusoikeuksia %1$s hakemistoon. Tämä voi aiheuttaa tallennuksen ongelmia."</string>
     <string name="directory_chooser_ignore">"Sivuutta"</string>
@@ -174,16 +201,37 @@
     <string name="error_report_report">"Ilmoita"</string>
     <string name="error_report_close">"Sulje"</string>
     <string name="error_report_text">"Kiinnitys sisältää yksityiskohtaisen järjestelmälokin ja myös tietoa virheestä. Voit vapaasti lisätä kommentteja täällä."</string>
-    <string name="error_report_chooser">"Lähetä virheraportti sähköpostissa"</string>
+    <string name="error_report_chooser">"Lähetä bugiraportti sähköpostissa"</string>
 
     <string name="rating_rate_title">"Arvostele %1$s"</string>
     <string name="rating_rate_message">"Jos pidit %1$s , käytä hetki arvostellessa se. Kiitos tuesta!"</string>
     <string name="rating_rate_now">"Arvostele nyt!"</string>
     <string name="rating_remind">"Muistuta myöhemmin"</string>
-    <string name="rating_no_thanks">"Kiitos ei"</string>
+    <string name="rating_no_thanks">"Ei kiitos"</string>
     <string name="rating_play_error">"Ei voitu avata Google Playtä."</string>
 
-    <string name="help_stop_message">"Lopeta tallennus lukitsemalla näyt ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
-    <string name="menu_send_bug_report">"Lähetä virheilmoitus"</string>
+    <string name="help_stop_message">"Lopeta tallennus lukitsemalla näytö ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
+    <string name="menu_send_bug_report">"Lähetä bugiraportti"</string>
+
+    <string name="notification_status_installing">"Alustetaan"</string>
+    <string name="notification_status_initializing">"Odotetaan pääkäyttäjän oikeuksia (root)"</string>
+    <string name="notification_status_installing_audio">"Asennetaan Ääniajuria"</string>
+    <string name="notification_status_ready">"Valmis"</string>
+    <string name="notification_status_starting">"Aloitetaan"</string>
+    <string name="notification_status_recording">"Nauhoitetaan"</string>
+    <string name="notification_status_error">"[Virhe]"</string>
+    <string name="notification_status_stopping">"Pysäytetään"</string>
+    <string name="notification_status_uninstalling_audio">"Poistetaan Ääniajuri"</string>
+
+    <string name="sale_title">"Myynti"</string>
+    <string name="sale_text">"Osta SCR Pro nyt ja säästä %1$d %% ! Tämä tarjous päättyy %2$s ."</string>
+
+    <string name="copyrights_statement">"Käyttämällä %1$s hyväksyt, että olet yksin vastuussa siitä, ettet riko kolmannen osapuolen tekijänoikeuksia tai muita immateriaalioikeuksia."</string>
+    <string name="internal_audio_installation_error_title">"Sisäinen ääni virhe"</string>
+    <string name="internal_audio_installation_error_message">"Ei voi käyttää sisäistä ääntä. Lähetä vikailmoitus auttaaksesi minua saamaan laitteesi tuetuisi. Äänilähde asetetaan %1$s ."</string>
+    <string name="internal_audio_unstable_title">"Sisäinen ääni epävakaa"</string>
+    <string name="internal_audio_unstable_message">"Sisäisen äänen vakausongelma havaittu. Lähetä vikailmoitus auttaaaksesi minua saamaan laitteesi tuetuksi. Äänilähde asetetaan %1$s ."</string>
+    <string name="internal_audio_disabled_title">"Sisäinen ääni pois käytöstä"</string>
+    <string name="internal_audio_disabled_message">"Sisäinen äänitys on kytketty pois päältä, koska %1$s ei sulkeutunut oikein. Voit laittaa sen uudelleen käyttöön Asetuksista."</string>
 
 </resources>

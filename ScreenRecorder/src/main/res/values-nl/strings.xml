@@ -14,22 +14,22 @@ SCR Screen Recorder Pro ★ root
     <string name="play_root_required">"
 &lt;b&gt;Werkt alleen op gerootte apparaten!&lt;/b&gt;&lt;br/&gt;Niet installeren als je apparaat niet geroot is."</string>
     <string name="play_description_main">"
-Neem video's van je scherm op met geweldige kwaliteit, direct vanaf je telefoon of tablet!
+Neem hoge kwaliteit video's op, direct vanaf je telefoon of tablet!
 
-SCR Screen Recorder gebruikt hardware-versnelde encoding om op elk apparaat schermopnames van geweldige kwaliteit te maken.
-Het is de enige screen recorder op de markt die Tegra apparaten, inclusief de Nexus 7 ondersteunt."</string>
+SCR Screen Recorder gebruikt hardwareversnelde video-encoding om de beste kwaliteit op elk apparaat te krijgen.
+Het is de enige video recorder die Tegra apparaten ondersteunt, dus ook de Nexus 7."</string>
     <string name="play_description_free">"
-Met &lt;b&gt;SCR Gratis&lt;/b&gt; kun je maximaal 3 minuten video opnemen en het SCR watermerk wordt toegevoegd aan je video. Koop &lt;b&gt;SCR Pro&lt;/b&gt; om onbeperke videolengte krijgen zonder watermerk. Dit is een vervroegde &lt;b&gt;BETA voorbeeld&lt;/b&gt; versie, dus het zou niet kunnen werken op alle apparaten en roms. Als je problemen hebt, meld dit dan bij scr.screen.recorder@gmail.com (Engels) om me te helpen met het ondersteunen van je apparaat.
+Met &lt;b&gt;SCR Free&lt;/b&gt; kun je maximaal 3 minuten video opnemen en het SCR watermerk wordt toegevoegd aan je video. Koop &lt;b&gt;SCR Pro&lt;/b&gt; om onbeperke videolengte krijgen zonder watermerk. Dit is een vervroegde &lt;b&gt;BETA voorbeeld&lt;/b&gt; versie, dus het zou niet kunnen werken op alle apparaten en roms. Als je problemen hebt, meld dit dan bij scr.screen.recorder@gmail.com (Engels) om me te helpen met het ondersteunen van je apparaat.
     "</string>
 
     <string name="play_description_pro">"
-Dit is een vervroegde &lt;b&gt;BETA voorbeeld&lt;/b&gt; versie, dus het zou niet kunnen werken op alle apparaten en roms.
-Voordat je de app koopt, probeer eerst &lt;b&gt;SCR Gratis&lt;/b&gt; om er zeker van te zijn dat je apparaat ondersteund wordt.
-Als je problemen hebt, meld dit dan bij scr.screen.recorder@gmail.com (Engels) om me te helpen met het ondersteunen van je apparaat.
+Dit is een vroege &lt;b&gt;BETA&lt;/b&gt; versie en zou niet op alle apparaten en ROMs kunnen werken.
+Voordat je de app koopt, probeer eerst &lt;b&gt;SCR Free&lt;/b&gt; om te testen of jouw apparaat wordt ondersteund.
+Als je problemen tegenkomt, maak er alsjeblieft een melding van bij scr.screen.recorder@gmail.com (Engels) zodat ik kan helpen jouw apparaat te ondersteunen.
     "</string>
 
     <string name="play_small_print">"
-SCR Screen Recorder verzamelt anonieme gebruiksstatistieken om bugs te vinden en te analyseren hoe gebruikers de app gebruiken.
+SCR Screen Recorder verzamelt anonieme gebruiksstatistieken om bugs op te sporen en te analyseren hoe gebruikers de app gebruiken.
 Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL licentie.
     "</string>
 
@@ -41,8 +41,8 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="play">"Afspelen"</string>
 
     <string name="su_required_title">"Root-toegang nodig"</string>
-    <string name="su_required_message">"Om een screen recorder app te gebruiken moet je telefoon/tablet geroot zijn.
-        Er zijn genoeg tutorials op het internet die uitleggen hoe je verschillende apparaten kunt rooten. Kom terug als je klaar bent!"</string>
+    <string name="su_required_message">"Om een screen recorder app op je telefoon / tablet te gebruiken, moet deze geroot zijn.
+        Op internet zijn voldoende tutorials die uitleggen hoe je verschillende apparaten moet rooten. Kom alsjeblieft terug als je klaar bent!"</string>
     <string name="su_required_help">"Wat is \"rooten\"?"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
 
@@ -68,7 +68,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
 
     <string name="opengl_error_title">"GPU niet ondersteund"</string>
     <string name="opengl_error_message">"Je grafische kaart wordt nog niet ondersteund.
-        Schakel beeldtransformatie over naar CPU of gebruik de software video encoder.
+        Verander de beeltransformatie instelling naar CPU of gebruik de software video encoder.
     "</string>
 
     <string name="audio_config_error_title">"Audio fout"</string>
@@ -115,7 +115,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_video_encoder_built_in_summary">"Ingebouwde Android %1$s encoder"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg software MPEG4-encoder"</string>
 
-    <string name="settings_resolution">"Resoluti"</string>
+    <string name="settings_resolution">"Resolutie"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
     <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
     <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp horizontaal"</string>
@@ -147,9 +147,11 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
 
     <string name="settings_orientation">"Oriëntatie"</string>
     <string name="settings_orientation_description">"
-        Video frames zijn standaard altijd horizontaal. Rotatie metadata wordt toegevoegd aan de verticale opnamen.
-        YouTube en de standaard Android-videospeler spelen dergelijke video's correct af, maar sommige PC-spelers (zoals VLC) negeren de rotatie metadata en spelen de video horizontaal af.
-        Je kunt verticale frames hieronder inschakelen, maar pas wel op, want veel apparaten kunnen geen video's met verticale frames opnemen/afspelen.
+        Normaal zijn videoframes altijd horizontaal en wordt er metadata toegevoegd om de video verticaal af te spelen.
+        YouTube en de standaard Android videospeler spelen deze video's goed af maar sommige PC spelers (zoals VLC)
+        negeren deze metadata en spelen de video horizontaal af.
+        Je kan verticale frames hieronder aanzetten, gebruik deze optie voorzichtig want veel apparaten kunnen geen
+        video's met verticale frames opnemen / afspelen.
     "</string>
     <string name="settings_orientation_auto">"Automatisch"</string>
     <string name="settings_orientation_portrait">"Verticaal"</string>
@@ -169,28 +171,11 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_audio_mute">"Geen"</string>
     <string name="settings_audio_internal">"Inter"</string>
     <string name="settings_audio_internal_experimental">"Intern (experimenteel)"</string>
-    <string name="settings_audio_mic_summary">"Microfoon. Slechts één app tegelijk kan de microfoon gebruiken!"</string>
+    <string name="settings_audio_mic_summary">"Microfoon"</string>
     <string name="settings_audio_mute_summary">"Dempen. Geen audiospoor"</string>
-    <string name="settings_audio_internal_summary">"Audio output. Wordt lid van de \"SCR Alpha testing\" Google+ community om interne audio-opname te testen"</string>
+    <string name="settings_audio_internal_summary">"Systeem audio uitgang"</string>
     <string name="settings_audio">"Geluid"</string>
     <string name="settings_sampling_rate">"Sampling rate"</string>
-
-    <string name="settings_audio_driver_not_installed">"SCR audio driver niet geïnstalleerd. Tik om te installeren."</string>
-    <string name="settings_audio_driver_installing">"SCR audio driver installeren..."</string>
-    <string name="settings_audio_driver_installed">"SCR audio driver geïnstalleerd. Tik om te verwijderen."</string>
-    <string name="settings_audio_driver_uninstalling">"SCR audio driver verwijderen..."</string>
-    <string name="settings_audio_driver_installation_failure">"SCR audio driver installatie is mislukt. Tik om opnieuw te proberen."</string>
-    <string name="settings_audio_driver_outdated">"Oude versie van SCR audio driver geïnstalleerd. Tik om te updaten"</string>
-
-    <string name="internal_audio_dialog_title">"Audio driver installatie"</string>
-    <string name="internal_audio_dialog_message">"
-        Interne audio-opname is een experimentele functie en vereist de installatie van een aangepaste audio driver.
-        Het wordt aanbevolen om deze driver te verwijderen nadat je klaar bent met de opname.
-        Je zult in staat zijn om de SCR Audio driver gemakkelijk te verwijderen via SCR instellingen.
-        Als het installatieprogramma crasht moet je mogelijk de ADB console gebruiken of je systeem partitie re-flashen om de originele audio drivers te herstellen.
-        Het wordt aanbevolen om een ​​reservekopie van je systeem te maken. Je gaat door OP EIGEN RISICO."</string>
-    <string name="internal_audio_dialog_install">"Installeren"</string>
-    <string name="internal_audio_dialog_cancel">"Annuleren"</string>
 
     <string name="settings_other_category">"Overig"</string>
     <string name="settings_hide_icon">"Pictogram in het systeemvak verbergen"</string>
@@ -241,12 +226,23 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
 
     <string name="notification_status_installing">"Initialiseren"</string>
     <string name="notification_status_initializing">"Wachten op root-toegang"</string>
+    <string name="notification_status_installing_audio">"Audio driver aan het installeren"</string>
     <string name="notification_status_ready">"Klaar"</string>
     <string name="notification_status_starting">"Aan het starten"</string>
     <string name="notification_status_recording">"Aan het opneme"</string>
+    <string name="notification_status_error">"Error"</string>
     <string name="notification_status_stopping">"Aan het stoppen"</string>
+    <string name="notification_status_uninstalling_audio">"Audio driver aan het verwijderen"</string>
 
     <string name="sale_title">"Uitverkoop"</string>
     <string name="sale_text">"Koop nu SCR Pro en bespaar %1$d %% ! Deze aanbieding eindigt op %2$s ."</string>
+
+    <string name="copyrights_statement">"Door het gebruik van %1$s ga je ermee akkoord dat jij alleen verantwoordelijk bent om er zeker van te zijn dat je geen copyrights van een derde partij of andere eigendomsrechten schendt."</string>
+    <string name="internal_audio_installation_error_title">"Interne audio fout"</string>
+    <string name="internal_audio_installation_error_message">"Kan de interne audio niet inschakelen. Stuur een bug report om me te helpen met het ondersteunen van je apparaat. Audiobron wordt ingesteld op %1$s ."</string>
+    <string name="internal_audio_unstable_title">"Interne audio instabiel"</string>
+    <string name="internal_audio_unstable_message">"Interne audio stabiliteits-probleem . Stuur een bug report om me te helpen met het ondersteunen van je apparaat. Audiobron wordt ingesteld op %1$s ."</string>
+    <string name="internal_audio_disabled_title">"Interne audio uitgeschakeld"</string>
+    <string name="internal_audio_disabled_message">"Interne audio-opname wordt uitgeschakeld omdat %1$s niet correct is afgesloten. Je kunt het weer inschakelen in Instellingen."</string>
 
 </resources>

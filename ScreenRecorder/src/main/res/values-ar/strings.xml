@@ -13,19 +13,15 @@ SCR Screen Recorder Pro ★ root
     "</string>
 
     <string name="play_root_required">"
-&lt;B&gt; التطبيق يعمل على أجهزة أندرويد التي تمتلك روت / التطبيق يعمل على أجهزة آيفون التي تمتلك جيلبريك / الأجهزة غير المقفلة ! &lt;/B&gt; &lt;BR/&gt; لا تقم بتثبيت التطبيق إذا كان جهازك لا يمتلك روت ."</string>
+&lt;B&gt; التطبيق يعمل على أجهزة أندرويد التي تمتلك روت / التطبيق يعمل على أجهزة آيفون التي تمتلك جيلبريك / التطبيق يعمل على الأجهزة غير المقفلة ! &lt;/B&gt; &lt;BR/&gt; لا تقم بتثبيت التطبيق إذا كان جهازك لا يمتلك روت أو جيلبريك ."</string>
     <string name="play_description_main">"
-تسجيل لقطات للشاشة بجودة كبيرة مباشرة من الهاتف أو الكمبيوتر اللوحي ! يستخدم SCR Screen Recorder ترميز الفيديو لتحقيق أفضل جودة لتسجيل الشاشة على أي جهاز . إنه مسجل الفيديو المتكامل بما في ذلك دعمه لنوع وحدة معالجة الرسومات Tegra على جهاز Nexus 7 ."</string>
+تسجيل قطات للشاشة نوعية كبيرة مباشرة من الهاتف أو الكمبيوتر اللوحي! يستخدم SCR شاشة مسجل الأجهزة تسارع ترميز الفيديو لتحقيق افضل شاشة تسجيل الجودة على أي جهاز. انها مسجل الفيديو فقط في السوق بما في ذلك دعم الجهاز تيجرا نيكزس 7."</string>
     <string name="play_description_free">"
-مع &lt;B&gt; SCR Free &lt;/B&gt; يمكنك تسجيل الشاشة لـ3 دقائق فقط ويتم إضافة علامة مائية على الفيديو الخاص بك .
-قم بشراء &lt;B&gt; SCR Pro &lt;/b&gt; للحصول على وقت غير محدود لتسجيل الشاشة مع عدم وجود العلامة المائية .
-
-هذا هو وقت اختبار إصدار &lt;b&gt; BETA &lt;/b&gt; لذلك قد لا يعمل التطبيق على جميع الأجهزة . إذا واجهت أي مشاكل يرجى إبلاغي عنها بإرسال رسالة إلى scr.screen.recorder@gmail.com لمساعدتي في دعم جهازك .
+مع &lt;B&gt; SCR الحرة &lt;/ B&gt; يمكنك تسجيل أقصى 3 دقائق قطات للشاشة ويتم إضافة علامة مائية على الفيديو الخاص بك SCR. شراء &lt;B&gt; SCR برو &lt;/ b&gt; لحصول غير محدود طول سكرينكست مع عدم وجود العلامة المائية. هذا هو مطلع على &lt;b&gt; معاينة BETA &lt;/ ب&gt; إصدار لذلك قد لا تعمل على جميع الأجهزة والمدمجة. إذا واجهت أي مشاكل يرجى الإبلاغ عنها في scr.screen.recorder @ gmail.com لمساعدتي في الحصول على الجهاز معتمد.
     "</string>
 
     <string name="play_description_pro">"
-هذا هو وقت اختبار إصدار &lt;b&gt; BETA &lt;/b&gt; لذلك قد لا يعمل التطبيق على جميع الأجهزة .
-قبل أن تشتري النسخة الاحترافية قم بتجربة &lt;B&gt; SCR Free &lt;/b&gt; للتأكد من أن جهازك معتمد بالفعل . إذا واجهت أي مشاكل يرجى إبلاغي عنها بإرسال رسالة إلى scr.screen.recorder@gmail.com لمساعدتي في دعم جهازك .
+هذا هو مطلع على &lt;b&gt; معاينة BETA &lt;/ ب&gt; إصدار لذلك قد لا تعمل على جميع الأجهزة والمدمجة. قبل أن تشتري النظر في اختبار &lt;B&gt; SCR الحرة &lt;/ b&gt; لتأكد من أن الجهاز معتمد بالفعل. إذا واجهت أي مشاكل يرجى الإبلاغ عنها في scr.screen.recorder @ gmail.com لمساعدتي في الحصول على الجهاز معتمد.
     "</string>
 
     <string name="play_small_print">"
@@ -56,7 +52,7 @@ SCR Screen Recorder Pro ★ root
 
     <string name="microphone_busy_error_title">"مكبر الصوت مُستخدم الآن"</string>
     <string name="microphone_busy_error_message">"
-        يمكن لتطبيق واحد فقط استخدام مكبر الصوت في وقت واحد . وهذا هو الحد الأقصى في نظام الأندرويد . قم بإغلاق التطبيقات الأخرى التي تستخدم مكبر الصوت ( مثل : Google Now أو Skype ) أو قم بالتسجيل بدون استخدام مكبر الصوت .
+        يمكن لتطبيق واحد فقط استخدام مكبر الصوت في وقت واحد . وهذا هو الحد الأقصى في نظام الأندرويد . قم بإغلاق التطبيقات الأخرى التي تستخدم مكبر الصوت ( مثل : Google Now أو Skype ) أو قم بالتسجيل دون استخدام مكبر الصوت .
     "</string>
     <string name="microphone_busy_error_continue_mute">"مواصلة كتم الصوت"</string>
 
@@ -64,7 +60,7 @@ SCR Screen Recorder Pro ★ root
     <string name="screen_protected_error_message">"يمكن / لا يمكن تسجيل الشاشة نظراً لتمييز بعض التطبيقات لمحتوى الشاشة على أنه محتوى آمن ."</string>
 
     <string name="opengl_error_title">"GPU غير مدعوم"</string>
-    <string name="opengl_error_message">"بطاقة الرسومات الخاصة بك غير مدعومة حتى الآن . قم بتبديل خيار تحوّل الصورة إلى CPU أو استخدم أحد أنواع ترميز الفيديو .
+    <string name="opengl_error_message">"لا يتم اعتماد بطاقة الرسومات الخاصة بك حتى الآن. التبديل صورة التحول إلى وضع وحدة المعالجة المركزية أو استخدام برامج الفيديو ترميز.
     "</string>
 
     <string name="audio_config_error_title">"خطأ في الصوت"</string>
@@ -143,7 +139,7 @@ SCR Screen Recorder Pro ★ root
 
     <string name="settings_orientation">"اتجاه"</string>
     <string name="settings_orientation_description">"
-        بشكل افتراضي ، إطارات الفيديو دائماً تكون أفقية ، ويتم إضافة البيانات الوصفية إلى التسجيلات العمودية . يوتيوب ومشغل الفيديو الافتراضي لنظام الأندرويد يعملان مثل أشرطة الفيديو بشكل صحيح ولكن بعض مشغلات الفيديو للحاسب الآلي ( مثل : VLC ) تتجاهل بيانات التعريف وتعرضها في الوضع الأفقي . يمكنك تمكين وضع الإطارات الرأسية أدناه ولكن استخدم هذا الوضع بحذر . كما يمكن / لا يمكن العديد من الأجهزة تسجيل الفيديو / تشغيل الفيديو في وضع الإطارات الرأسية .
+        افتراضيا إطارات الفيديو هي دائما الأفقي ويتم إضافة البيانات الوصفية التناوب الى التسجيلات صورة. يوتيوب والافتراضية الروبوت اعب يلعب الفيديو مثل مقاطع الفيديو بشكل صحيح ولكن بعض اللاعبين PC (على سبيل المثال VLC) تجاهل الفوقية التناوب وعرضه في وضع أفقي. يمكنك تمكين إطارات العمودي أدناه ولكن استخدام هذا الخيار بحذر كما يمكن أن العديد من الأجهزة \ 'ر تسجيل / تشغيل ملفات الفيديو مع إطارات عمودية.
     "</string>
     <string name="settings_orientation_auto">"تلقائي"</string>
     <string name="settings_orientation_portrait">"عمودي"</string>
@@ -162,24 +158,11 @@ SCR Screen Recorder Pro ★ root
     <string name="settings_audio_mute">"كتم الصوت"</string>
     <string name="settings_audio_internal">"داخلي"</string>
     <string name="settings_audio_internal_experimental">"داخلي ( تجريبي )"</string>
-    <string name="settings_audio_mic_summary">"مكبر الصوت . يمكن لتطبيق واحد فقط استخدام مكبر الصوت في وقت واحد !"</string>
+    <string name="settings_audio_mic_summary">"مكبر الصوت"</string>
     <string name="settings_audio_mute_summary">"كتم الصوت . لا يوجد مسار نزول افتراضي للصوت"</string>
-    <string name="settings_audio_internal_summary">"صوت داخلي . اشترك في مجتمع \"SCR Alpha testing\" على +Google لاختبار تسجيل الصوت الداخلي"</string>
+    <string name="settings_audio_internal_summary">"إخراج الصوت النظام"</string>
     <string name="settings_audio">"تسجيل الصوت"</string>
     <string name="settings_sampling_rate">"معدل أخذ العينات"</string>
-
-    <string name="settings_audio_driver_not_installed">"مساعد تشغيل الصوت لـSCR غير مثبت . اضغط فوق \" تثبيت \" لتثبيت البرنامج ."</string>
-    <string name="settings_audio_driver_installing">"جاري تثبيت مساعد تشغيل الصوت لـSCR ..."</string>
-    <string name="settings_audio_driver_installed">"مساعد تشغيل الصوت لـSCR تم تثبيته . اضغط فوق \" إلغاء التثبيت \" لإلغاء تثبيت مساعد تشغيل الصوت ."</string>
-    <string name="settings_audio_driver_uninstalling">"جاري إلغاء تثبيت مساعد تشغيل الصوت لـSCR ..."</string>
-    <string name="settings_audio_driver_installation_failure">"فشل تثبيت مساعد تشغيل الصوت لـSCR . اضغط لإعادة المحاولة ."</string>
-    <string name="settings_audio_driver_outdated">"إصدار قديم من مساعد تشغيل الصوت لـSCR مثبت . اضغط للتحديث ."</string>
-
-    <string name="internal_audio_dialog_title">"تثبيت مساعد تشغيل الصوت"</string>
-    <string name="internal_audio_dialog_message">"
-        تسجيل الصوت الداخلي هي ميزة جديدة تجريبية ، وتتطلب تثبيت مساعد تشغيل الصوت المخصص لها . فمن المستحسن إلغاء تثبيت مساعد تشغيل الصوت هذا بعد الانتهاء من تجربته والتسجيل به . سوف تكون قادراً على إلغاء تثبيت مساعد تشغيل الصوت لـSCR بسهولة من إعدادات SCR . إذا تعطل المثبت قد تحتاج لاستخدام وحدة التحكم ADB أو إعادة تركيب النظام لاستعادة مساعد تشغيل الصوت الأصلي . من المستحسن أخذ نسخة احتياطية للنظام الخاص بك . كل ذلك سيكون \" على مسؤوليتك الخاصة \" ."</string>
-    <string name="internal_audio_dialog_install">"تثبيت"</string>
-    <string name="internal_audio_dialog_cancel">"إلغاء"</string>
 
     <string name="settings_other_category">"أخرى"</string>
     <string name="settings_hide_icon">"إخفاء رمز التطبيق"</string>
@@ -230,12 +213,23 @@ SCR Screen Recorder Pro ★ root
 
     <string name="notification_status_installing">"تهيئة"</string>
     <string name="notification_status_initializing">"في انتظار الحصول على صلاحيات الروت"</string>
+    <string name="notification_status_installing_audio">"جاري تثبيت برنامج تشغيل الصوت"</string>
     <string name="notification_status_ready">"مستعد للتسجيل"</string>
     <string name="notification_status_starting">"جاري البدء بالتسجيل"</string>
     <string name="notification_status_recording">"جاري التسجيل"</string>
+    <string name="notification_status_error">"خطأ"</string>
     <string name="notification_status_stopping">"جاري إيقاف التسجيل"</string>
+    <string name="notification_status_uninstalling_audio">"جاري إلغاء تثبيت برنامج تشغيل الصوت"</string>
 
-    <string name="sale_title">"تخفيض"</string>
+    <string name="sale_title">"بيع"</string>
     <string name="sale_text">"قم بشراء SCR Pro الآن ووفر %1$d %% ! هذا العرض سينتهي في %2$s ."</string>
+
+    <string name="copyrights_statement">"باستخدامك لـ%1$s أنت توافق على أنك المسؤول عن ضمان أن لا تنتهك حقوق التأليف والنشر لطرف ثالث أو الحقوق الملكية الفكرية الأخرى ."</string>
+    <string name="internal_audio_installation_error_title">"خطأ في الصوت الداخلي"</string>
+    <string name="internal_audio_installation_error_message">"لا يمكن تمكين الصوت الداخلي . يرجى إرسال تقرير عن الخطأ لمساعدتي في دعم جهازك . سيتم تعيين مصدر الصوت إلى %1$s ."</string>
+    <string name="internal_audio_unstable_title">"الصوت الداخلي غير مستقر"</string>
+    <string name="internal_audio_unstable_message">"تم الكشف عن عدم الاستقرار للصوت الداخلي . يرجى إرسال تقرير عن الخطأ لمساعدتي في دعم جهازك . سيتم تعيين مصدر الصوت إلى %1$s ."</string>
+    <string name="internal_audio_disabled_title">"الصوت الداخلي معطل"</string>
+    <string name="internal_audio_disabled_message">"تم إيقاف تشغيل تسجيل الصوت الداخلي لأن %1$s لم تغلق بشكل صحيح . يمكنك إعادة تمكينه من الإعدادات ."</string>
 
 </resources>

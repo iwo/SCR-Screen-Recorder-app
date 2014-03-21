@@ -3,6 +3,30 @@
     <string name="free_app_full_name">"SCR Screen Recorder grátis"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+
+    <string name="play_free_app_name">"
+SCR Screen Recorder root ★ grátis
+    "</string>
+    <string name="play_pro_app_name">"
+SCR screen recorder Root Pro ★
+    "</string>
+
+    <string name="play_root_required">"
+&lt;b&gt; só funciona em dispositivos com root desbloqueados! &lt;/ b&gt; &lt;br/&gt; Não instale se o dispositivo não está com root."</string>
+    <string name="play_description_main">"
+Grave screencasts de grande qualidade diretamente de seu telefone ou tablet! SCR Screen Recorder usa aceleração de hardware de codificação de vídeo para obter melhor qualidade de gravação de tela em qualquer dispositivo. É o único gravador de vídeo no mercado apoiando dispositivo Tegra incluindo Nexus 7."</string>
+    <string name="play_description_free">"
+Com &lt;b&gt; SCR grátis &lt;/ b&gt; você pode gravar no máximo três minutos e screencasts a marca d'água SCR é adicionado ao seu vídeo. Comprar &lt;b&gt; SCR Pro &lt;/ b&gt; para obter comprimento screencast ilimitado sem marca de água. Este é um início de pré-visualização &lt;b&gt; BETA &lt;/ b&gt; versão por isso pode não funcionar em todos os dispositivos e ROMs. Se você encontrar quaisquer problemas, por favor denunciar-lo em scr.screen.recorder @ gmail.com para me ajudar a obter o seu dispositivo suportado.
+    "</string>
+
+    <string name="play_description_pro">"
+Este é um início de pré-visualização &lt;b&gt; BETA &lt;/ b&gt; versão por isso pode não funcionar em todos os dispositivos e ROMs. Antes de comprar considerar o teste &lt;b&gt; SCR grátis &lt;/ b&gt; para garantir que seu dispositivo já é suportado. Se você encontrar quaisquer problemas, por favor denunciar-lo em scr.screen.recorder@gmail.com para me ajudar a obter o seu dispositivo suportado.
+    "</string>
+
+    <string name="play_small_print">"
+SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros de pista e analisar como os usuários usam o aplicativo. Este software usa código de FFmpeg 1.2 sem modificações licenciado sob a LGPL.
+    "</string>
+
     <string name="recording_saved_title">"SCR Gravação salva"</string>
     <string name="recording_saved_message">"Gravação salva %1$s"</string>
     <string name="recording_saved_toast">"Gravação salva com sucesso"</string>
@@ -12,7 +36,7 @@
 
     <string name="su_required_title">"Acesso ao root é necessário"</string>
     <string name="su_required_message">"Para executar qualquer aplicativo gravador de tela do seu telefone / tablet precisa ter Root. Há tutoriais na Internet explicando como fazer root em diferentes dispositivos. Voltar quando estiver pronto!"</string>
-    <string name="su_required_help">"O que está \"torcendo\"?"</string>
+    <string name="su_required_help">"O que está \"acontecendo\"?"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
 
     <string name="error_dialog_title">"Algo deu errado :-("</string>
@@ -32,22 +56,31 @@
     <string name="microphone_busy_error_continue_mute">"Continuar mudo"</string>
 
     <string name="screen_protected_error_title">"Tela protegida"</string>
-    <string name="screen_protected_error_message">"A tela pode \ 't ser capturado porque algum aplicativo marcou o conteúdo da tela como seguro."</string>
+    <string name="screen_protected_error_message">"A tela pode ser capturado porque algum aplicativo marcou o conteúdo da tela como seguro."</string>
 
     <string name="opengl_error_title">"GPU não é suportado"</string>
     <string name="opengl_error_message">"Sua placa gráfica não é suportada ainda. Mudar transformação Imagem definir a CPU ou codificador de vídeo software uso.
     "</string>
 
+    <string name="audio_config_error_title">"Erro Áudio"</string>
+    <string name="audio_config_error_message">"Configuração de áudio não suportado. Tente alterar as configurações de áudio do SCR."</string>
+
     <string name="android_version_error_title">"Versão do Android não é suportado"</string>
     <string name="android_version_error_message">"Sua versão Android ainda não é suportado."</string>
 
+    <string name="cpu_error_title">"CPU não suportada"</string>
+    <string name="cpu_error_message">"Sua arquitetura de CPU ( %1$s ) não é suportada por %2$s ."</string>
+
+    <string name="installation_error_title">"Erro de instalação"</string>
+    <string name="installation_error_message">"Não é possível instalar os arquivos necessários. Verifique se você tem algum espaço livre no seu dispositivo e reinicie %1$s ."</string>
+
     <string name="help_stop_title">"Como parar"</string>
-    <string name="help_stop_ok">"Entendi!"</string>
+    <string name="help_stop_ok">"Peguei"</string>
 
     <string name="free_timeout_title">"Prazo expirado"</string>
     <string name="free_timeout_message">"Comprar SCR Screen Recorder Pro para obter tempo de gravação ilimitado e sem marca d'água no vídeo."</string>
     <string name="free_timeout_buy">"Comprar!"</string>
-    <string name="free_timeout_no_thanks">"Não, obrigado"</string>
+    <string name="free_timeout_no_thanks">"Não obrigado"</string>
     <string name="hide_icon_title">"Característica Pro"</string>
     <string name="hide_icon_message">"Comprar SCR Screen Recorder Pro para esconder marca d'água e ícone de notificação. Você terá tempo de gravação ilimitado!"</string>
 
@@ -55,14 +88,14 @@
     <string name="buy_error_message">"Por favor, procure por SCR Screen Recorder Pro em Google Play"</string>
 
     <string name="settings_activity_label">"Configurações SCR"</string>
-    <string name="settings_title">"Configurações"</string>
+    <string name="settings_title">"Configurações."</string>
     <string name="settings_ok">"Ok"</string>
-    <string name="settings_reset">"Restaurar padrões"</string>
+    <string name="settings_reset">"Restaurar padrão"</string>
     <string name="settings_cancel">"Cancelar"</string>
 
-    <string name="settings_video_category">"Vídeo"</string>
+    <string name="settings_video_category">"vídeo"</string>
 
-    <string name="settings_video_encoder">"Encoder"</string>
+    <string name="settings_video_encoder">"da direção"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
     <string name="settings_video_encoder_h263_unstable">"H263 (instável)"</string>
@@ -92,18 +125,18 @@
 
     <string name="settings_video_bitrate">"Bitrate"</string>
     <string name="settings_video_bitrate_summary">"em torno de %1$s , dependendo do codificador"</string>
-    <string name="settings_video_bitrate_default">"Omissão"</string>
+    <string name="settings_video_bitrate_default">"Padrão"</string>
 
 
     <string name="settings_frame_rate">"Taxa de quadros"</string>
     <string name="settings_frame_rate_max">"Máximo"</string>
-    <string name="settings_frame_rate_max_short">"Max"</string>
+    <string name="settings_frame_rate_max_short">"Máx"</string>
     <string name="settings_frame_rate_up_to">"Até %1$d fps"</string>
     <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"Até %1$d fps, limitado pelos recursos de hardware"</string>
     <string name="settings_frame_rate_max_summary">"Máxima permitida pelo hardware"</string>
 
-    <string name="settings_orientation">"Orientação"</string>
+    <string name="settings_orientation">"Orientação da página"</string>
     <string name="settings_orientation_description">"
         Por padrão quadros de vídeo são sempre horizontal e rotação de metadados é adicionado às gravações de retrato. YouTube e player de vídeo padrão Android desempenha tais vídeos corretamente, mas alguns jogadores de PC (por exemplo VLC) ignorar metadados rotação e exibi-lo no modo paisagem. Você pode ativar quadros verticais abaixo, mas usar esta opção com cuidado, pois muitos dispositivos pode \ 'recorde t / reproduzir vídeos com quadros verticais.
     "</string>
@@ -119,39 +152,30 @@
     <string name="settings_vertical_frames_cancel">"Cancelar"</string>
 
     <string name="settings_audio_category">"Audio"</string>
-    <string name="settings_audio_source">"Audio"</string>
+    <string name="settings_audio_source">"Fonte"</string>
     <string name="settings_audio_mic">"Microfone"</string>
     <string name="settings_audio_mute">"Mudo"</string>
     <string name="settings_audio_internal">"Interno"</string>
     <string name="settings_audio_internal_experimental">"Interno (experimental)"</string>
-    <string name="settings_audio_mic_summary">"Microfone. Apenas um aplicativo pode usar o microfone de cada vez!"</string>
+    <string name="settings_audio_mic_summary">"Microfone"</string>
     <string name="settings_audio_mute_summary">"Mudo. Nenhuma faixa de áudio"</string>
-    <string name="settings_audio_internal_summary">"Saída de áudio. \"O teste Alpha SCR\" Joint comunidade Google+ para testar a gravação de áudio interno"</string>
+    <string name="settings_audio_internal_summary">"Saída de áudio do sistema"</string>
     <string name="settings_audio">"Audio"</string>
     <string name="settings_sampling_rate">"Taxa de amostragem"</string>
-
-    <string name="settings_audio_driver_not_installed">"Driver de áudio SCR não instalado. Toque para instalar."</string>
-    <string name="settings_audio_driver_installing">"Instalando o driver de áudio SCR..."</string>
-    <string name="settings_audio_driver_installed">"Driver de áudio SCR instalado. Toque para desinstalar."</string>
-    <string name="settings_audio_driver_uninstalling">"Desinstalar driver de áudio SCR..."</string>
-    <string name="settings_audio_driver_installation_failure">"Instalação do driver de áudio SCR falhou. Toque para tentar novamente."</string>
-    <string name="settings_audio_driver_outdated">"Versão antiga do driver de áudio SCR instalado. Toque para atualizar."</string>
-
-    <string name="internal_audio_dialog_title">"Instalação do driver de áudio"</string>
-    <string name="internal_audio_dialog_message">"
-        Gravação de áudio interno é um recurso experimental e requer a instalação do driver de áudio personalizado. Recomenda-se desinstalar este driver depois que você é feito com a gravação. Você será capaz de desinstalar facilmente SCR driver de áudio a partir de Configurações SCR. Se o instalador falhar você pode precisar usar o console ADB ou partição do sistema re-flash para restaurar os drivers de áudio originais. Recomenda-se fazer backup de seu sistema. Você está procedendo POR SUA CONTA E RISCO."</string>
-    <string name="internal_audio_dialog_install">"Instalar"</string>
-    <string name="internal_audio_dialog_cancel">"Cancelar"</string>
 
     <string name="settings_other_category">"Outro"</string>
     <string name="settings_hide_icon">"Ocultar ícone de notificação"</string>
     <string name="settings_show_touches">"Mostrar toques"</string>
-    <string name="settings_show_touches_summary">"Mostrar feedback visual para toques. Você também pode ativar os indicadores de toque de forma permanente através de configurações do Android =&gt; Opções de Desenvolvimento =&gt; Mostrar toques"</string>
+    <string name="settings_show_touches_summary">"Mostrar feedback visual para toques. Você também pode ativar os indicadores de toque de forma permanente através de configurações do Android → Opções → Desenvolvedor Mostrar toques"</string>
     <string name="settings_output_dir">"Diretório de saída"</string>
     <string name="settings_stop_when_screen_off">"Parar na tela apagada"</string>
     <string name="settings_stop_when_screen_off_summary">"Gravação em Concluir após a tela está desligada"</string>
     <string name="settings_color_fix">"Correção de cor invertido"</string>
     <string name="settings_color_fix_summary">"Alternar esta opção se as cores azul e vermelho são invertidos"</string>
+
+    <string name="settings_zigzag_fix">"Correção Zigzag"</string>
+    <string name="settings_zigzag_fix_summary">"Selecione se a gravação contém listras coloridas aleatórias"</string>
+    <string name="settings_zigzag_fix_cpu_only">"Disponível apenas com CPU transformação da Imagem"</string>
 
     <string name="directory_chooser_select">"Selecione \" %1$s \""</string>
     <string name="directory_chooser_refresh">"Atualizar"</string>
@@ -162,9 +186,9 @@
     <string name="directory_chooser_error_message">"O diretório não pode ser criado. Certifique-se de escolher um local, por exemplo gravável cartão SD."</string>
     <string name="directory_chooser_not_writable_title">"Diretório selecionado não é gravável"</string>
     <string name="directory_chooser_not_writable_message">"A aplicação não parecem ter permissão de gravação para %1$s diretório. Isto pode causar problemas de gravação."</string>
-    <string name="directory_chooser_ignore">"Ignorar"</string>
+    <string name="directory_chooser_ignore">"me ignorar?"</string>
     <string name="directory_chooser_cancel">"Cancelar"</string>
-    <string name="directory_chooser_default">"Omissão"</string>
+    <string name="directory_chooser_default">"Padrão"</string>
 
     <string name="license_dont_allow">"Verificação de licença falhou. Certifique-se que sua conexão com a Internet está instalado e seu está conectado ao Google Play.
     "</string>
@@ -180,10 +204,31 @@
     <string name="rating_rate_message">"Se você gosta de usar %1$s , por favor, tome um momento para avaliá-lo. Obrigado pelo apoio!"</string>
     <string name="rating_rate_now">"Vota agora!"</string>
     <string name="rating_remind">"Lembrar mais tarde"</string>
-    <string name="rating_no_thanks">"Não, obrigado"</string>
+    <string name="rating_no_thanks">"nao, obrigado "</string>
     <string name="rating_play_error">"Não foi possível abrir o Google Play."</string>
 
     <string name="help_stop_message">"Para parar a gravação bloquear a tela e aguarde 2 segundos. Alternativamente, você pode simplesmente reabrir %1$s aplicativo."</string>
-    <string name="menu_send_bug_report">"Enviar relatório de erros"</string>
+    <string name="menu_send_bug_report">"Enviar relatório de erro"</string>
+
+    <string name="notification_status_installing">"Inicializando"</string>
+    <string name="notification_status_initializing">"À espera de acesso root"</string>
+    <string name="notification_status_installing_audio">"Instalando o driver de áudio"</string>
+    <string name="notification_status_ready">"Pronto"</string>
+    <string name="notification_status_starting">"Inicializando"</string>
+    <string name="notification_status_recording">"Registro"</string>
+    <string name="notification_status_error">"[error]"</string>
+    <string name="notification_status_stopping">"Paragem"</string>
+    <string name="notification_status_uninstalling_audio">"Desinstalar o driver de áudio"</string>
+
+    <string name="sale_title">"Venda"</string>
+    <string name="sale_text">"Comprar SCR Pro agora e salvar %1$d %% ! Esta oferta termina em %2$s ."</string>
+
+    <string name="copyrights_statement">"Ao usar %1$s você concorda que será o único responsável por garantir que você não violar os direitos autorais de terceiros ou outros direitos de propriedade intelectual."</string>
+    <string name="internal_audio_installation_error_title">"Erro de áudio interno"</string>
+    <string name="internal_audio_installation_error_message">"Não é possível ativar o áudio interno. Por favor, envie um relatório de bug para me ajudar a obter o seu dispositivo suportado. Fonte de áudio será definido para %1$s ."</string>
+    <string name="internal_audio_unstable_title">"Áudio interno instável"</string>
+    <string name="internal_audio_unstable_message">"Questão interna estabilidade áudio detectado. Por favor, envie um relatório de bug para me ajudar a obter o seu dispositivo suportado. Fonte de áudio será definido para %1$s ."</string>
+    <string name="internal_audio_disabled_title">"Áudio interno está desabilitada"</string>
+    <string name="internal_audio_disabled_message">"Gravação de áudio interno está desligado porque %1$s não foi encerrado corretamente. Você pode reativá-lo em Configurações."</string>
 
 </resources>
