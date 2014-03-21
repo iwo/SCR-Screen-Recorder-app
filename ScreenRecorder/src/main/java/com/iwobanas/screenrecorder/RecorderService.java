@@ -371,7 +371,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
         contentValues.put(MediaStore.Video.Media.DATE_ADDED, mRecordingStartTime / 1000);
         contentValues.put(MediaStore.Video.Media.DATE_MODIFIED, mRecordingStartTime / 1000);
 
-        getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
+        try {
+            getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Error inserting video content values", e);
+        }
     }
 
     private void notificationSaved() {
@@ -530,7 +534,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 String message = String.format(getString(R.string.startup_error_message),recordingInfo.exitValue);
-                displayErrorMessage(message, getString(R.string.error_dialog_title), false, true,recordingInfo.exitValue);
+                displayErrorMessage(message, getString(R.string.error_dialog_title), false, true, recordingInfo.exitValue);
             }
         });
         EasyTracker.getTracker().sendEvent(ERROR, STARTUP_ERROR, ERROR_ +recordingInfo.exitValue, null);
@@ -565,7 +569,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 logStats(recordingInfo);
             }
         });
-        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ +recordingInfo.exitValue, null);
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + recordingInfo.exitValue, null);
     }
 
     @Override
@@ -588,7 +592,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 String message = String.format(getString(R.string.output_file_error_message), outputFile);
-                displayErrorMessage(message, getString(R.string.output_file_error_title), true, false,recordingInfo.exitValue);
+                displayErrorMessage(message, getString(R.string.output_file_error_title), true, false, recordingInfo.exitValue);
                 logStats(recordingInfo);
             }
         });
@@ -649,7 +653,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 logStats(recordingInfo);
             }
         });
-        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ +recordingInfo.exitValue, null);
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + recordingInfo.exitValue, null);
     }
 
     @Override
