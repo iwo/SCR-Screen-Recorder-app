@@ -1,5 +1,6 @@
 package com.iwobanas.screenrecorder;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -11,11 +12,14 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
 
     IRecorderService service;
 
+    Context context;
+
     RecorderProcess process;
 
     private String executable;
 
-    public NativeProcessRunner(IRecorderService service) {
+    public NativeProcessRunner(Context context, IRecorderService service) {
+        this.context = context;
         this.service = service;
     }
 
@@ -34,7 +38,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         }
 
         if (process == null || process.isStopped()) {
-            process = new RecorderProcess(executable, this);
+            process = new RecorderProcess(context, executable, this);
             new Thread(process).start();
         } else {
             try {

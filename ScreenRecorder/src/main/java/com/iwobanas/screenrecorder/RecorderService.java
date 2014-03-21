@@ -85,7 +85,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private IScreenOverlay mWatermark = new WatermarkOverlay(this);
     private RecorderOverlay mRecorderOverlay = new RecorderOverlay(this, this);
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this, this);
-    private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this);
+    private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this, this);
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
     private RatingController mRatingController;
     private AudioDriver audioDriver;

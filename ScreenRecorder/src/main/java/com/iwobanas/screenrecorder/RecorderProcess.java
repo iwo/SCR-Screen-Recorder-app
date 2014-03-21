@@ -1,12 +1,17 @@
 package com.iwobanas.screenrecorder;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.util.Log;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.iwobanas.screenrecorder.audio.InstallationStatus;
 import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,6 +27,8 @@ class RecorderProcess implements Runnable {
 
     private final String TAG = "scr_RecorderProcess-" + instancesCount++;
 
+    private static final String AUDIO_CONFIG_FILE = "/system/lib/hw/scr_audio.conf";
+
     private Process process ;
 
     private OutputStream stdin;
@@ -29,6 +36,8 @@ class RecorderProcess implements Runnable {
     private InputStream stdout;
 
     private volatile ProcessState state = ProcessState.NEW;
+
+    private Context context;
 
     private String executable;
 
@@ -48,7 +57,8 @@ class RecorderProcess implements Runnable {
 
     private Timeout stopTimeout = new Timeout(10000, STOPPING_ERROR, STOP_TIMEOUT, 303);
 
-    public RecorderProcess(String executable, OnStateChangeListener onStateChangeListener) {
+    public RecorderProcess(Context context, String executable, OnStateChangeListener onStateChangeListener) {
+        this.context = context;
         this.executable = executable;
         this.onStateChangeListener = onStateChangeListener;
     }
@@ -241,6 +251,10 @@ class RecorderProcess implements Runnable {
         recordingInfo.rotation = rotation;
         Settings settings = Settings.getInstance();
         setState(ProcessState.STARTING);
+        if (settings.getAudioSource() == AudioSource.INTERNAL
+                && settings.getAudioDriver().getInstallationStatus() == InstallationStatus.INSTALLED) {
+            setVolumeGain();
+        }
         configureTimeout.start();
         startTimeout.start();
         runCommand(fixEmulatedStorageMapping(fileName));
@@ -268,6 +282,26 @@ class RecorderProcess implements Runnable {
         runCommand(String.valueOf(settings.getVideoEncoder()));
         runCommand(String.valueOf(settings.getVerticalFrames() ? 1 : 0));
         logSettings(settings, rotation);
+    }
+
+    private void setVolumeGain() {
+        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        int gain = 1;
+        double volume = (double) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) / (double) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        if (volume < 1.0 && volume > 0.001) {
+            gain = (int) (1.0/(volume * volume));
+        }
+        gain = Math.min(gain, 16);
+        Log.v(TAG, "Music volume " + volume + " setting gain to " + gain);
+        try {
+            File configFile = new File(AUDIO_CONFIG_FILE);
+            FileWriter fileWriter = new FileWriter(configFile);
+            fileWriter.write(String.valueOf(gain) + "\n");
+            fileWriter.close();
+            configFile.setReadable(true, false);
+        } catch (Exception e) {
+            Log.w(TAG, "Error setting audio gain", e);
+        }
     }
 
     private String fixEmulatedStorageMapping(String fileName) {
