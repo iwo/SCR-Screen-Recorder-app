@@ -336,10 +336,10 @@ public class Utils {
 
     private static void logDirectoryListing(String tag, File dir, String prefix) {
         String[] children = dir.list();
-        Arrays.sort(children);
         if (children == null) {
             Log.v(tag, prefix + " [empty]");
         } else {
+            Arrays.sort(children);
             for (String childName : children) {
                 File child = new File(dir, childName);
                 if (child.isDirectory()) {
