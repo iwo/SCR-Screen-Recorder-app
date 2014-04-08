@@ -16,22 +16,24 @@ import java.io.File;
 public class Settings {
     private static final String TAG = "scr_Settings";
     public static final int FFMPEG_MPEG_4_ENCODER = -2;
-    private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
-    private static final String AUDIO_SOURCE = "AUDIO_SOURCE";
-    private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
-    private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
-    private static final String FRAME_RATE = "FRAME_RATE";
-    private static final String TRANSFORMATION = "TRANSFORMATION";
-    private static final String SAMPLING_RATE = "SAMPLING_RATE";
-    private static final String VIDEO_BITRATE = "VIDEO_BITRATE";
-    private static final String COLOR_FIX = "COLOR_FIX";
-    private static final String HIDE_ICON = "HIDE_ICON";
-    private static final String SHOW_TOUCHES = "SHOW_TOUCHES";
-    private static final String STOP_ON_SCREEN_OFF = "STOP_ON_SCREEN_OFF";
-    private static final String OUTPUT_DIR = "OUTPUT_DIR";
-    private static final String OUTPUT_DIR_WRITABLE = "OUTPUT_DIR_WRITABLE";
-    private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
-    private static final String VERTICAL_FRAMES = "VERTICAL_FRAMES";
+    public static final String PREFERENCES_NAME = "ScreenRecorderSettings";
+    public static final String AUDIO_SOURCE = "AUDIO_SOURCE";
+    public static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
+    public static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
+    public static final String FRAME_RATE = "FRAME_RATE";
+    public static final String TRANSFORMATION = "TRANSFORMATION";
+    public static final String SAMPLING_RATE = "SAMPLING_RATE";
+    public static final String VIDEO_BITRATE = "VIDEO_BITRATE";
+    public static final String COLOR_FIX = "COLOR_FIX";
+    public static final String HIDE_ICON = "HIDE_ICON";
+    public static final String SHOW_TOUCHES = "SHOW_TOUCHES";
+    public static final String SHOW_CAMERA = "SHOW_CAMERA";
+    public static final String CAMERA_ALPHA = "CAMERA_ALPHA";
+    public static final String STOP_ON_SCREEN_OFF = "STOP_ON_SCREEN_OFF";
+    public static final String OUTPUT_DIR = "OUTPUT_DIR";
+    public static final String OUTPUT_DIR_WRITABLE = "OUTPUT_DIR_WRITABLE";
+    public static final String VIDEO_ENCODER = "VIDEO_ENCODER";
+    public static final String VERTICAL_FRAMES = "VERTICAL_FRAMES";
     private static final String SETTINGS_MODIFIED = "SETTINGS_MODIFIED";
     private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
     private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
@@ -60,6 +62,8 @@ public class Settings {
     private boolean defaultColorFix = false;
     private boolean hideIcon = false;
     private boolean showTouches = false;
+    private boolean showCamera = false;
+    private float cameraAlpha = 1.0f;
     private boolean stopOnScreenOff = true;
     private int videoEncoder = MediaRecorder.VideoEncoder.H264;
     private int defaultVideoEncoder = MediaRecorder.VideoEncoder.H264;
@@ -156,6 +160,9 @@ public class Settings {
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
 
         showTouches = preferences.getBoolean(SHOW_TOUCHES, false);
+
+        showCamera = preferences.getBoolean(SHOW_CAMERA, false);
+        cameraAlpha = preferences.getFloat(CAMERA_ALPHA, 1.0f);
 
         stopOnScreenOff = preferences.getBoolean(STOP_ON_SCREEN_OFF, true);
 
@@ -435,6 +442,28 @@ public class Settings {
         settingsModified(editor);
     }
 
+    public boolean getShowCamera() {
+        return showCamera;
+    }
+
+    public void setShowCamera(boolean showCamera) {
+        this.showCamera = showCamera;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(SHOW_CAMERA, showCamera);
+        settingsModified(editor);
+    }
+
+    public float getCameraAlpha() {
+        return cameraAlpha;
+    }
+
+    public void setCameraAlpha(float cameraAlpha) {
+        this.cameraAlpha = cameraAlpha;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putFloat(CAMERA_ALPHA, cameraAlpha);
+        settingsModified(editor);
+    }
+
     public boolean getStopOnScreenOff() {
         return stopOnScreenOff;
     }
@@ -525,6 +554,12 @@ public class Settings {
             showTouches = false;
         }
         editor.remove(SHOW_TOUCHES);
+
+        showCamera = false;
+        editor.remove(SHOW_CAMERA);
+
+        cameraAlpha = 1.0f;
+        editor.remove(CAMERA_ALPHA);
 
         stopOnScreenOff = true;
         editor.remove(STOP_ON_SCREEN_OFF);

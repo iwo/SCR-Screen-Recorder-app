@@ -64,6 +64,10 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
         return (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
     }
 
+    protected android.view.Display getDefaultDisplay() {
+        return getWindowManager().getDefaultDisplay();
+    }
+
     @Override
     public void hide() {
         if (!visible) {

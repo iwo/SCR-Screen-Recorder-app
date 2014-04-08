@@ -1,6 +1,7 @@
 package com.iwobanas.screenrecorder.audio;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.RecordingInfo;
@@ -120,7 +121,7 @@ public class AudioDriver {
         } else {
             if (status == InstallationStatus.INSTALLED) {
                 stabilityMonitor = new StabilityMonitorAsyncTask(context, this, installId);
-                stabilityMonitor.execute();
+                stabilityMonitor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
             for (OnInstallListener listener : listeners) {
                 listener.onInstall(AudioDriver.this.status);

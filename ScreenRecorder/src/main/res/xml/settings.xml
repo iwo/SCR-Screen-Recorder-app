@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scr="http://schemas.android.com/apk/res-auto">
     <Preference
         android:key="copyrights_statement"
         android:selectable="false" />
@@ -73,6 +74,19 @@
             android:persistent="false"
             android:summary="@string/settings_show_touches_summary"
             android:title="@string/settings_show_touches" />
+        <CheckBoxPreference
+            android:key="show_camera"
+            android:persistent="false"
+            android:summary="@string/settings_show_camera_summary"
+            android:title="@string/settings_show_camera" />
+        <com.iwobanas.screenrecorder.settings.SliderPreference
+            android:key="camera_alpha"
+            android:persistent="false"
+            android:summary="@string/settings_camera_alpha_summary"
+            android:title="@string/settings_camera_alpha_title"
+            android:dependency="show_camera"
+            scr:max="100"
+            scr:min="20" />
         <Preference
             android:key="output_dir"
             android:persistent="false"

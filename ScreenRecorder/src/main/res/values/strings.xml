@@ -252,4 +252,10 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="internal_audio_disabled_title">Internal audio disabled</string>
     <string name="internal_audio_disabled_message">Internal audio recording is switched off because %1$s didn\'t shut down correctly. You can re-enable it in Settings.</string>
 
+    <string name="settings_show_camera">Camera view</string>
+    <string name="settings_show_camera_summary">Display your image on top of recording</string>
+    <string name="settings_camera_alpha_title">Transparency</string>
+    <string name="settings_camera_alpha_summary">Camera view %1$d%% opaque</string>
+    <string name="settings_camera_alpha_summary_100">Camera view not transparent</string>
+
 </resources>

@@ -75,6 +75,9 @@ public class SettingsActivity extends Activity {
     protected void onResume() {
         super.onResume();
         Settings.getInstance().applyShowTouches();
+        Intent intent = new Intent(this, RecorderService.class);
+        intent.setAction(RecorderService.SETTINGS_OPENED_ACTION);
+        startService(intent);
     }
 
     @Override

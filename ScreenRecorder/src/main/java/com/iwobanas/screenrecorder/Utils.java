@@ -382,4 +382,14 @@ public class Utils {
         File procFile = new File("/proc", String.valueOf(pid));
         return procFile.exists();
     }
+
+    public static int waitForProcess(String command, long timeout) {
+        long timeoutNs = timeout * 1000000l;
+        long startTime = System.nanoTime();
+        int pid = -1;
+        while ((System.nanoTime() - startTime) < timeoutNs && pid < 0) {
+            pid = Utils.findProcessByCommand(command);
+        }
+        return pid;
+    }
 }

@@ -32,6 +32,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_SAMPLING_RATE = "sampling_rate";
     public static final String KEY_HIDE_ICON = "hide_icon";
     public static final String KEY_SHOW_TOUCHES = "show_touches";
+    public static final String KEY_SHOW_CAMERA = "show_camera";
+    public static final String KEY_CAMERA_ALPHA = "camera_alpha";
     public static final String KEY_OUTPUT_DIR = "output_dir";
     public static final String KEY_STOP_ON_SCREEN_OFF = "stop_on_screen_off";
     public static final String KEY_COLOR_FIX = "color_fix";
@@ -47,6 +49,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private ListPreference samplingRatePreference;
     private CheckBoxPreference hideIconPreference;
     private CheckBoxPreference showTouchesPreference;
+    private CheckBoxPreference showCameraPreference;
+    private SliderPreference cameraAlphaPreference;
     private Preference outputDirPreference;
     private CheckBoxPreference stopOnScreenOffPreference;
     private CheckBoxPreference colorFixPreference;
@@ -112,6 +116,12 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         showTouchesPreference = (CheckBoxPreference) findPreference(KEY_SHOW_TOUCHES);
         showTouchesPreference.setOnPreferenceChangeListener(this);
 
+        showCameraPreference = (CheckBoxPreference) findPreference(KEY_SHOW_CAMERA);
+        showCameraPreference.setOnPreferenceChangeListener(this);
+
+        cameraAlphaPreference = (SliderPreference) findPreference(KEY_CAMERA_ALPHA);
+        cameraAlphaPreference.setOnPreferenceChangeListener(this);
+
         outputDirPreference = findPreference(KEY_OUTPUT_DIR);
         outputDirPreference.setOnPreferenceClickListener(this);
 
@@ -153,9 +163,21 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         hideIconPreference.setChecked(settings.getHideIcon());
         showTouchesPreference.setChecked(settings.getShowTouches());
+        showCameraPreference.setChecked(settings.getShowCamera());
+        cameraAlphaPreference.setValue((int) (settings.getCameraAlpha() * 100));
+        cameraAlphaPreference.setSummary(formatCameraAlphaSummary());
         outputDirPreference.setSummary(settings.getOutputDir().getAbsolutePath());
         stopOnScreenOffPreference.setChecked(settings.getStopOnScreenOff());
         colorFixPreference.setChecked(settings.getColorFix());
+    }
+
+    private String formatCameraAlphaSummary() {
+        if (getActivity() == null) return "";
+        if (settings.getCameraAlpha() == 1.0f) {
+            return getString(R.string.settings_camera_alpha_summary_100);
+        }
+        int percentage = (int) (settings.getCameraAlpha() * 100);
+        return getString(R.string.settings_camera_alpha_summary, percentage);
     }
 
     private String formatVideoEncoderSummary(int videoEncoder) {
@@ -352,6 +374,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             }
         } else if (preference == showTouchesPreference) {
             settings.setShowTouches(selected);
+        } else if (preference == showCameraPreference) {
+            settings.setShowCamera(selected);
+        } else if (preference == cameraAlphaPreference) {
+            settings.setCameraAlpha(((Integer) newValue) / 100.0f);
+            cameraAlphaPreference.setSummary(formatCameraAlphaSummary());
         } else if (preference == stopOnScreenOffPreference) {
             settings.setStopOnScreenOff(selected);
         } else if (preference == colorFixPreference) {

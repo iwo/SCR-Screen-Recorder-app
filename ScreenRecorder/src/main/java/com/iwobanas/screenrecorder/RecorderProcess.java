@@ -29,6 +29,8 @@ class RecorderProcess implements Runnable {
 
     private static final String AUDIO_CONFIG_FILE = "/system/lib/hw/scr_audio.conf";
 
+    private static final String MEDIASERVER_COMMAND = "/system/bin/mediaserver";
+
     private Process process ;
 
     private OutputStream stdin;
@@ -439,7 +441,11 @@ class RecorderProcess implements Runnable {
 
     private void killMediaServer() {
         Log.d(TAG, "restartMediaServer");
-        killProcess("/system/bin/mediaserver");
+        CameraOverlay.releaseCamera();
+        killProcess(MEDIASERVER_COMMAND);
+        if (Utils.waitForProcess(MEDIASERVER_COMMAND, 7000) != -1) {
+            CameraOverlay.reconnectCamera();
+        }
     }
 
     private void killProcess(String command) {
@@ -449,11 +455,7 @@ class RecorderProcess implements Runnable {
             Log.e(TAG, command + " process not found");
             return;
         }
-        try {
-            Runtime.getRuntime().exec(new String[]{"su", "-c", "kill -9 " + pid});
-        } catch (IOException e) {
-            Log.e(TAG, "error killing " + command, e);
-        }
+        Utils.sendKillSignal(pid, executable);
     }
 
     public static interface OnStateChangeListener {
