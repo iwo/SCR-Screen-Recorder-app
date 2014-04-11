@@ -467,12 +467,14 @@ public class AudioDriverInstaller {
             if (!Utils.copyFile(scrVendorConf, scrSystemConf)) {
                 throw new InstallationException("Error copying policy file");
             }
-        } else {
+        } else if (systemConf.exists()) {
             try {
                 AudioPolicyUtils.fixPolicyFile(systemConf, scrSystemConf);
             } catch (IOException e) {
                 throw new InstallationException("Error creating policy file", e);
             }
+        } else if (Build.VERSION.SDK_INT <= 15) {
+            Log.w(TAG, "No policy file found");
         }
     }
 
