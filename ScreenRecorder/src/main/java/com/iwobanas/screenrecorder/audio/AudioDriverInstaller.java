@@ -233,7 +233,7 @@ public class AudioDriverInstaller {
     }
 
     private int runInstaller(String commandInput) {
-        ShellCommand command = new ShellCommand(new String[]{"su", "--mount-master", "-c", installer.getAbsolutePath()});
+        ShellCommand command = new ShellCommand(new String[]{"su", "--mount-master", "--context", "u:r:init:s0", "-c", installer.getAbsolutePath()});
         command.setInput(commandInput);
         command.execute();
         if (!command.getOutput().startsWith("ready")) {
