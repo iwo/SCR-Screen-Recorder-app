@@ -77,7 +77,11 @@ public class AudioPolicyUtils {
 
     public static int getMaxPrimarySamplingRate() {
         try {
-            List<ConfigLine> lines = getConfigLines(getPolicyFile());
+            File policyFile = getPolicyFile();
+            if (policyFile == null) {
+                return -1;
+            }
+            List<ConfigLine> lines = getConfigLines(policyFile);
             return getMaxPrimarySamplingRate(lines);
 
         } catch (Exception e) {
@@ -152,9 +156,9 @@ public class AudioPolicyUtils {
             return vendorConf;
         }
         if (!systemConf.exists()) {
-            Log.w(TAG, "No policy file found. Attempting to use: " + SYSTEM_AUDIO_POLICY);
+            Log.w(TAG, "No policy file found.");
         }
-        return systemConf;
+        return null;
     }
 
     static class ConfigLine {
