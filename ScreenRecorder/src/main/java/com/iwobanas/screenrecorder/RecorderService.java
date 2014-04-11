@@ -383,7 +383,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         try {
             getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             Log.e(TAG, "Error inserting video content values", e);
         }
     }

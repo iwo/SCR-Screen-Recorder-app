@@ -247,6 +247,7 @@ public class Utils {
             success = true;
         } catch (IOException e) {
             success = false;
+            Log.e(TAG, "Error copying file", e);
         } finally {
             if(source != null) {
                 try {
@@ -280,7 +281,20 @@ public class Utils {
         ShellCommand cmd = new ShellCommand(new String[]{"rm", "-rf", dir.getAbsolutePath()});
         cmd.setErrorLogTag("scr_deleteDir_error");
         cmd.execute();
-        return cmd.isExecutionCompleted() && cmd.exitValue() == 0;
+        return (cmd.isExecutionCompleted() && cmd.exitValue() == 0) || recursiveDelete(dir);
+    }
+
+    private static boolean recursiveDelete(File file) {
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (files != null) {
+                for (File f : files) {
+                    if (!recursiveDelete(f))
+                        return false;
+                }
+            }
+        }
+        return file.delete();
     }
 
     public static boolean copyDir(File sourceDir, File destinationDir) {

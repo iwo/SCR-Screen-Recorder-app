@@ -97,6 +97,7 @@ public class AudioDriver {
         if (samplingRate == 0) {
             samplingRate = AudioPolicyUtils.getMaxPrimarySamplingRate();
             if (samplingRate <= 0) {
+                //TODO: on ICS determine if 44.1kHz or 48kHz is used
                 samplingRate = 44100;
             }
         }

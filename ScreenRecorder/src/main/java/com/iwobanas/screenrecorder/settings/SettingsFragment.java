@@ -103,7 +103,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         audioSourcePreference = (ListPreference) findPreference(KEY_AUDIO_SOURCE);
         audioSourcePreference.setOnPreferenceChangeListener(this);
-        if (Build.VERSION.SDK_INT > 15 && Build.VERSION.SDK_INT != 17) {
+        if (Build.VERSION.SDK_INT != 17) {
             audioSourcePreference.setEntries(R.array.audio_source_entries_internal);
             audioSourcePreference.setEntryValues(R.array.audio_source_values_internal);
         }
