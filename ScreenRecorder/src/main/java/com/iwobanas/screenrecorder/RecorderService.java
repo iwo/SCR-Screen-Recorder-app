@@ -467,13 +467,28 @@ public class RecorderService extends Service implements IRecorderService, Licens
             @Override
             public void run() {
                 Intent intent = new Intent(RecorderService.this, DialogActivity.class);
-                intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.su_required_message));
                 intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.su_required_title));
-                intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.su_required_help));
-                Intent helpIntent = new Intent(Intent.ACTION_VIEW);
-                helpIntent.setData(Uri.parse(getString(R.string.su_required_help_link)));
-                helpIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, helpIntent);
+
+                Intent suIntent = Utils.findSuIntent(RecorderService.this);
+
+                if (suIntent == null) {
+                    intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.su_required_message));
+                    intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.su_required_help));
+                    Intent helpIntent = new Intent(Intent.ACTION_VIEW);
+                    helpIntent.setData(Uri.parse(getString(R.string.su_required_help_link)));
+                    helpIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, helpIntent);
+                } else {
+                    CharSequence suName = Utils.getAppName(RecorderService.this, suIntent);
+                    if (suName == null) {
+                        suName = getString(R.string.su_default_name);
+                    }
+                    String message = getString(R.string.su_denied_message, suName, getString(R.string.app_name));
+                    intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
+                    intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, suIntent);
+                    intent.putExtra(DialogActivity.POSITIVE_EXTRA, suName);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 stopSelf();

@@ -1,6 +1,10 @@
 package com.iwobanas.screenrecorder;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -395,5 +399,44 @@ public class Utils {
     public static boolean processExists(int pid) {
         File procFile = new File("/proc", String.valueOf(pid));
         return procFile.exists();
+    }
+
+    public static Intent findSuIntent(Context context) {
+        String[] names = new String[]{
+                "eu.chainfire.supersu/.MainActivity",
+                "com.android.settings/.cyanogenmod.superuser.MainActivity",
+                "com.koushikdutta.superuser/.MainActivity",
+                "com.mgyun.shua.su/.ui.SplashActivity",
+                "com.baidu.easyroot/.SplashActivity",
+                "com.noshufou.android.su/.Su",
+                "com.noshufou.android.su.elite/.Su",
+                "com.noshufou.android.su.elite/com.noshufou.android.su.Su"
+        };
+
+        PackageManager pm = context.getPackageManager();
+        try {
+            for (String name : names) {
+                ComponentName componentName = ComponentName.unflattenFromString(name);
+                Intent intent = Intent.makeMainActivity(componentName);
+                List<ResolveInfo> activities = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                if (activities != null && activities.size() > 0) {
+                    return intent;
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error detecting superuser app", e);
+        }
+        return null;
+    }
+
+    public static CharSequence getAppName(Context context, Intent intent) {
+        PackageManager pm = context.getPackageManager();
+        CharSequence name = null;
+        try {
+            name = pm.getApplicationLabel(intent.resolveActivityInfo(pm, 0).applicationInfo);
+        } catch (Exception e) {
+            Log.w(TAG, "Error fetching application name for intent " + intent, e);
+        }
+        return name;
     }
 }
