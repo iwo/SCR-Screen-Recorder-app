@@ -104,6 +104,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private boolean destroyed = false;
     private boolean settingsDisplayed = false;
     private boolean displayShutDownError = false;
+    private Toast cantStartToast;
 
     // Preferences
     private boolean mStopHelpDisplayed;
@@ -172,9 +173,13 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void startRecording() {
+        if (cantStartToast != null) {
+            cantStartToast.cancel();
+        }
         if (state != RecorderServiceState.READY) {
+            cantStartToast = Toast.makeText(this, getString(R.string.can_not_start_toast, getStatusString()), Toast.LENGTH_SHORT);
+            cantStartToast.show();
             return;
-            //TODO: indicate to the user that recorder is not ready e.g. grey out button
         }
         if (!mStopHelpDisplayed) {
             mRecorderOverlay.hide();

@@ -260,4 +260,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
         Please open %1$s and make sure you haven\'t accidentally denied root access to %2$s.</string>
     <string name="su_default_name">superuser</string>
 
+    <string name="can_not_start_toast">Can\'t start recording: %1$s</string>
+
 </resources>
