@@ -123,7 +123,8 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
             case 302: // start timeout
             case 213: // start() error
             case 227: // MEDIA_RECORDER_EVENT_ERROR
-            case 228: // MEDIA_RECORDER_TRACK_EVENT_ERROR
+            case 228: // MEDIA_RECORDER_TRACK_EVENT_ERROR - video
+            case 197: // MEDIA_RECORDER_TRACK_EVENT_ERROR - audio
             case 248: // MEDIA_RECORDER_EVENT_ERROR during startup
             case 249: // MEDIA_RECORDER_TRACK_EVENT_ERROR during startup
             case 242: // dequeueBuffer
