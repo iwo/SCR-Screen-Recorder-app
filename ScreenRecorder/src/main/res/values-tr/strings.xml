@@ -1,0 +1,243 @@
+<resources>
+    <string name="free_app_name">"SCR Ücretsiz"</string>
+    <string name="free_app_full_name">"SCR Screen Recorder Ücretsiz "</string>
+    <string name="pro_app_name">"SCR Pro"</string>
+    <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+
+    <string name="play_free_app_name">"
+SCR Screen Recorder Free ★ ROOT
+    "</string>
+    <string name="play_pro_app_name">"
+SCR Screen Recorder Pro ★ ROOT
+    "</string>
+
+    <string name="play_root_required">"
+&lt;b&gt;jailbreak kilidi sadece / rootlu / cihazlar ile çalışır!&lt;/ b&gt;&lt;br/&gt;Cihazınız rootlu değilse kurmayın."</string>
+    <string name="play_description_main">"
+Telefonunuzdan veya tabletinizden doğrudan yüksek kalitede screencasts kaydedin! 
+
+SCR Screen Recorder herhangi bir cihaz üzerinde en kaliteli ekran kayıt elde etmek için donanım hızlandırmalı video kodlaması kullanır.. Bu; Nexus 7 Tegra cihazını destekleyen piyasadaki tek video kaydedicidir. "</string>
+    <string name="play_description_free">"
+&lt;b&gt;SCR Ücretsiz&lt;/ b&gt;ile enyüksek 3 dakika screencasts kaydedilebilir ve SCR filigranı videoya eklenir. 
+&lt;b&gt;SCR Pro&lt;/ b&gt;satın aldığınızda, filigran eklenmez ve screencast sınırsız uzunluğunuda kaydeder. 
+
+Tüm cihazlar ve ROM üzerinde çalışmayabilir bu yüzden erken&lt;b&gt;BETA önizleme&lt;/ b&gt;sürümüdür. Eğer; herhangi bir sorun yaşarsanız cihazınızı desteğini almak için bana scr.screen.recorder@gmail.com adresine bildirin lütfen.
+    "</string>
+
+    <string name="play_description_pro">"
+Tüm cihazlar ve ROM üzerinde çalışmayabilir bu yüzden erken&lt;b&gt;BETA önizleme&lt;/ b&gt;sürümüdür. Satın almadan önce cihazınızın desteğinin olup olmadığını test etmek için&lt;b&gt;SCR Free&lt;/b&gt;test etmeyi düşünün. Eğer; herhangi bir sorun yaşarsanız cihazınızı desteğini almak için bana scr.screen.recorder@gmail.com adresine bildirin lütfen.
+    "</string>
+
+    <string name="play_small_print">"
+SCR Screen Recorder bug izi yardımcısı ile kullanıcıların uygulamayı nasıl kullandıklarını analiz ederek anonim kullanım istatistiklerini toplar. 
+Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır.
+    "</string>
+
+    <string name="recording_saved_title">"SCR Kaydı Kaydedildi"</string>
+    <string name="recording_saved_message">"%1$s kaydedilen kayıtlar tutuluyor"</string>
+    <string name="recording_saved_toast">"%1$s tutulan kaydedilmiş kayıtlar "</string>
+    <string name="max_file_size_reached_toast">"%1$s Enyüksek dosya boyutuna ulaşıldı."</string>
+    <string name="start">"Başlat "</string>
+    <string name="play">"Oynat"</string>
+
+    <string name="su_required_title">"Root erişimi gereklidir"</string>
+    <string name="su_required_message">"Herhangi bir telefon/tablet gibi cihazınızdan ekran kaydediciyi çalıştırmak için root erişimi gereklidir.
+İnternette farklı cihazlar için rootlamanın nasıl yapıldığını açıklayan bol dersler vardır. Bunu yaptığınızda lütfen tekrar bekleriz!"</string>
+    <string name="su_required_help">"\"rootlama\" nasıl yapılır?"</string>
+    <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
+
+    <string name="error_dialog_title">"Ciddi anlamda bir şeyler yanlış gitti :-( "</string>
+    <string name="startup_error_message">"Anonim hata raporu bize sorunu çözmeye yardımcı olmak için otomatik olarak gönderilir. Hata alıntısı S%1$d destek e-posta yoluyla bizimle temasa geçmeye çekinmeyin."</string>
+    <string name="recording_error_message">"Anonim hata raporu bize sorunu çözmeye yardımcı olmak için otomatik olarak gönderilir. Destek e-posta iktibas hatası R%1$d aracılığıyla  bizimle temasa geçmeye çekinmeyin."</string>
+
+    <string name="media_recorder_error_title">"Kaydedici hatası"</string>
+    <string name="media_recorder_error_message">"Çözünürlüğünü değiştirme veya GPU/CPU arasındaki görüntü dönüşümüne geçmeyi deneyin. Varsa diğer screencast uygulamalarını kaldırın. Sorun devam ederse hata alıntısı R%1$d destek e-posta yoluyla bizimle irtibata geçiniz ."</string>
+
+    <string name="output_file_error_title">"Video dosyası oluşturulamıyor"</string>
+    <string name="output_file_error_message">"SCR oluşturulamadı %1$s video dosyası. Seçilen çıkış dizini yazılabilir olduğunu ve SD Kart USB bağlantısı ile kilitli olmadığından emin olun."</string>
+
+    <string name="microphone_busy_error_title">"Mikrofon meşgul"</string>
+    <string name="microphone_busy_error_message">"
+        Uygulama için sadece bir sefer mikrofonu kullanabilirsiniz. Bu bir Android sistemi sınırlamasıdır. Mikrofonu (örn. Google veya Skype) kullanan diğer uygulamayı kapatın veya ses olmadan kayda devam edin.
+    "</string>
+    <string name="microphone_busy_error_continue_mute">"Sessiz Devam et"</string>
+
+    <string name="screen_protected_error_title">"Ekran korumalı"</string>
+    <string name="screen_protected_error_message">"Bazı uygulamaların ekran içeriği \’t güvenlik kilidi işaretli olduğundan ekran içeriğini yakalayabilir "</string>
+
+    <string name="opengl_error_title">"GPU desteklenmiyor"</string>
+    <string name="opengl_error_message">"Grafik kartınız henüz desteklenmiyor. Görüntü dönüştürme ayarlarından GPU veya video yazılım kodlayıcısı kullanın. 
+
+    "</string>
+
+    <string name="audio_config_error_title">"Ses hatası"</string>
+    <string name="audio_config_error_message">"Desteklenmeyen ses yapılandırması. SCR ses ayarlarını değiştirmeyi deneyin."</string>
+
+    <string name="android_version_error_title">"Android sürümü desteklenmiyor"</string>
+    <string name="android_version_error_message">"Android sürümünüz henüz desteklenmiyor."</string>
+
+    <string name="cpu_error_title">"CPU desteklenmiyor"</string>
+    <string name="cpu_error_message">"CPU mimarisi (%1$s) %2$s tarafından desteklenmiyor."</string>
+
+    <string name="installation_error_title">"Yükleme hatası"</string>
+    <string name="installation_error_message">"Gerekli dosyalar yüklenemiyor. Yeterli boş alan olduğuna emin olun ve cihazınızı yeniden başlatın %1$s."</string>
+
+    <string name="help_stop_title">"Nasıl durdurulur"</string>
+    <string name="help_stop_ok">"\"Anladım!\" "</string>
+
+    <string name="free_timeout_title">"Süre sınırlaması doldu"</string>
+    <string name="free_timeout_message">"SCR Screen Recorder Pro satın aldığınızda videolar üzerindeki filigran kaybolur. Böylece sınırsız video kaydı yaparak kullanırsınız. "</string>
+    <string name="free_timeout_buy">"Şimdi satın al!"</string>
+    <string name="free_timeout_no_thanks">"Hayır, teşekkürler"</string>
+    <string name="hide_icon_title">"Pro özellik"</string>
+    <string name="hide_icon_message">"SCR Screen Recorder Pro üzerindeki filigran ve bildirim simgesini gizlemek için Pro sürümü satın alın. Böylece sınırsız kayıt da yaparsınız! "</string>
+
+    <string name="buy_error_title">"Google Play açılamadı"</string>
+    <string name="buy_error_message">"SCR Screen Recorder Pro için lütfen Google Play'da arama yapın."</string>
+
+    <string name="settings_activity_label">"SCR Ayarları"</string>
+    <string name="settings_title">"Ayarlar"</string>
+    <string name="settings_ok">"Tamamam"</string>
+    <string name="settings_reset">"Varsayılanları geriyükle"</string>
+    <string name="settings_cancel">"İptal"</string>
+
+    <string name="settings_video_category">"Video"</string>
+
+    <string name="settings_video_encoder">"Encoder"</string>
+    <string name="settings_video_encoder_h264">"H264"</string>
+    <string name="settings_video_encoder_h263">"H263"</string>
+    <string name="settings_video_encoder_h263_unstable">"H263 (kararsız)"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
+    <string name="settings_video_encoder_default">"Otomatik "</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"MPEG-4 yazılımı (yavaş)"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"Android yerleşik %1$s kodlayıcısı"</string>
+    <string name="settings_video_encoder_ffmpeg_summary">"MPEG4 yazılımı FFmpeg kodlayıcısı"</string>
+
+    <string name="settings_resolution">"Çözünürlük"</string>
+    <string name="settings_resolution_short">"%1$dx%2$d"</string>
+    <string name="settings_resolution_p">"%2$dp - %1$dx%2$d  "</string>
+    <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp yatay"</string>
+    <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp dolgulu"</string>
+    <string name="settings_resolution_max">"%1$dx%2$d - Max"</string>
+    <string name="settings_resolution_half">"%1$dx%2$d - Yarım"</string>
+    <string name="settings_resolution_unstable">"(Kararsız)"</string>
+
+    <string name="settings_transformation">"Görüntü dönüştürme"</string>
+    <string name="settings_transformation_cpu">"CPU"</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_oes">"GPU+"</string>
+    <string name="settings_transformation_cpu_summary">"İşlemci üzerinden ekran görüntüsü işle (CPU)  "</string>
+    <string name="settings_transformation_gpu_summary">"Grafik kartı üzerinden ekran görüntüsü işle (%1$s) "</string>
+    <string name="settings_transformation_sw_summary">"Yazılım kodlayıcısı kullanılamaz"</string>
+
+    <string name="settings_video_bitrate">"Bitdeğeri"</string>
+    <string name="settings_video_bitrate_summary">"yaklaşık %1$s encoder bağlı olarak"</string>
+    <string name="settings_video_bitrate_default">"Varsayılan"</string>
+
+
+    <string name="settings_frame_rate">"Kare oranı"</string>
+    <string name="settings_frame_rate_max">"Enyüksek"</string>
+    <string name="settings_frame_rate_max_short">"Enyüksek"</string>
+    <string name="settings_frame_rate_up_to">"%1$d fps ye kadar"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
+    <string name="settings_frame_rate_summary">"Donanım özellikleri, %1$dfps ye kadar sınırlıdır"</string>
+    <string name="settings_frame_rate_max_summary">"Enyüksek donanım özellikleri kullanılır"</string>
+
+    <string name="settings_orientation">"Yönlendirme"</string>
+    <string name="settings_orientation_description">"
+        Varsayılan olarak video kareleri her zaman yatay ve dikey değişen kayıtları eklenir. YouTube ve varsayılan Android video oynatıcısı videoları doğru oynatır ama bazı PC oynatıcıları (örneğin VLC) meta değişimleri görüntülenmez ve sadece manzara modunda görüntülenir. Birçok cihaz dikey kare ile video oynatbilir/ 't kaydedebilir\ ama dikey çerçeveleri etkinleştirdiğinizde bu seçeneği dikkatli kullanın.
+    "</string>
+    <string name="settings_orientation_auto">"Otomatik"</string>
+    <string name="settings_orientation_portrait">"Dikey"</string>
+    <string name="settings_orientation_landscape">"Yatay"</string>
+    <string name="settings_orientation_clockwise">"Saat yönünde döndürün"</string>
+    <string name="settings_orientation_anticlockwise">"Saat yönünde tersine döndürün"</string>
+
+    <string name="settings_vertical_frames">"Dikey çerçeveler"</string>
+    <string name="settings_vertical_frames_warning">"Birçok cihaz üzerinde video oynatıcılar, dikey çerçeveli videoları oynatmaz. Youtube vb. video eklenmiş olsa bile meta veriler, bu seçenek seçili olduğu zaman varsayılan Android oynatıcısı ile istenmeyen bir uyum sağlar."</string>
+    <string name="settings_vertical_frames_ok">"Tamam"</string>
+    <string name="settings_vertical_frames_cancel">"İptal"</string>
+
+    <string name="settings_audio_category">"Ses"</string>
+    <string name="settings_audio_source">"Kaynak"</string>
+    <string name="settings_audio_mic">"Mikrofon"</string>
+    <string name="settings_audio_mute">"Sessiz"</string>
+    <string name="settings_audio_internal">"Dahili"</string>
+    <string name="settings_audio_internal_experimental">"Dahili (deneysel)"</string>
+    <string name="settings_audio_mic_summary">"Mikrofon"</string>
+    <string name="settings_audio_mute_summary">"Sessiz. Ses parçası yok "</string>
+    <string name="settings_audio_internal_summary">"Sistem ses çıkışı"</string>
+    <string name="settings_audio">"Ses"</string>
+    <string name="settings_sampling_rate">"Örnekleme oranı"</string>
+
+    <string name="settings_other_category">"Diğer "</string>
+    <string name="settings_hide_icon">"Bildirim simgesini gizle"</string>
+    <string name="settings_show_touches">"Dokunuşları göster"</string>
+    <string name="settings_show_touches_summary">"Dokunma etkileşimi için görsel geribildirimi göster. Ayrıca Android Ayarları → Geliştirici Seçenekleri → Dokunuşları göster seçeneğini işaretleyerek dokunma gösterimini kalıcı olarak etkinleştirebilirsiniz."</string>
+    <string name="settings_output_dir">"Çıktı dizini"</string>
+    <string name="settings_stop_when_screen_off">"Kapalı ekranda Dur"</string>
+    <string name="settings_stop_when_screen_off_summary">"Ekran kapandığında kayıt durdurulur"</string>
+    <string name="settings_color_fix">"Ters renkleri düzeltin "</string>
+    <string name="settings_color_fix_summary">"Eğer; Mavi ve Kırmızı renk ağırlıklı istiyorsanız bu seçeneğe geçiş yapın"</string>
+
+    <string name="settings_zigzag_fix">"Zigzag düzeltin"</string>
+    <string name="settings_zigzag_fix_summary">"Kayıtta rasgele renkli çizgiler içeriyorsa seçin"</string>
+    <string name="settings_zigzag_fix_cpu_only">"Sadece CPU Görüntü dönüşüm ile kullanılabilir"</string>
+
+    <string name="directory_chooser_select">"\"%1$s\" Seçin"</string>
+    <string name="directory_chooser_refresh">"Yenile"</string>
+    <string name="directory_chooser_new">"Yeni"</string>
+    <string name="directory_chooser_new_title">"Yeni dizin adı"</string>
+    <string name="directory_chooser_new_ok">"TAMAM"</string>
+    <string name="directory_chooser_new_cancel">"İptal"</string>
+    <string name="directory_chooser_error_message">"Dizin oluşturulamadı. Yazılabilir bir yer, örneğin SD Kart seçtiğinize emin olun."</string>
+    <string name="directory_chooser_not_writable_title">"Seçilen dizin yazılabilir değil"</string>
+    <string name="directory_chooser_not_writable_message">"Uygulamanın %1$s dizinine yazma izni yok gibi. Bu, kayıt sorunlarına yol açabilir."</string>
+    <string name="directory_chooser_ignore">"Yoksay"</string>
+    <string name="directory_chooser_cancel">"İptal"</string>
+    <string name="directory_chooser_default">"Varsayılan"</string>
+
+    <string name="license_dont_allow">"Lisans denetimi başarısız oldu. İnternet bağlantısı kurun ve Google Play'de oturum açtığınıza emin olun.
+    "</string>
+    <string name="license_error">"Lisans denetimi hatası. İnternet bağlantısı kurun ve Google Play'de oturum açtığınıza emin olun.
+    
+    "</string>
+
+    <string name="error_report_report">"Rapor"</string>
+    <string name="error_report_close">"Kapat"</string>
+    <string name="error_report_text">"Ek hata ile ilgili bilgiler de dahil olmak üzere ayrıntılı sistem günlüğünü içerir. Herhangi bir yorum eklemek için çekinmeyin. "</string>
+    <string name="error_report_chooser">"E-posta hata raporu ile"</string>
+
+    <string name="rating_rate_title">"%1$s Oyla"</string>
+    <string name="rating_rate_message">"Eğer %1$s kullanmaktan zevk aldıysanız, bunu değerlendirmek için bir dakikanızı ayırın lütfen. Desteğiniz için teşekkürler!"</string>
+    <string name="rating_rate_now">"Şimdi derecelendir! "</string>
+    <string name="rating_remind">"Daha sonra hatırlat"</string>
+    <string name="rating_no_thanks">"Hayır, teşekkürler"</string>
+    <string name="rating_play_error">"Google Play açılamadı."</string>
+
+    <string name="help_stop_message">"Kaydı durdurmak için ekranı kilitleyin ve 2 saniye bekleyin. Yada alteratif olarak %1$s uygulama simgesine dokunup tekrar açın. "</string>
+    <string name="menu_send_bug_report">"Hata raporu gönderin"</string>
+
+    <string name="notification_status_installing">"Başlatılıyor"</string>
+    <string name="notification_status_initializing">"Root erişimi için bekleniyor"</string>
+    <string name="notification_status_installing_audio">"Ses sürücülerinin kurulumu"</string>
+    <string name="notification_status_ready">"Hazır"</string>
+    <string name="notification_status_starting">"Başlatılıyor"</string>
+    <string name="notification_status_recording">"Kaydediliyor"</string>
+    <string name="notification_status_error">"Hata"</string>
+    <string name="notification_status_stopping">"Durduruluyor"</string>
+    <string name="notification_status_uninstalling_audio">"Ses sürücülerinin kaldırılması "</string>
+
+    <string name="sale_title">"Satış"</string>
+    <string name="sale_text">"Şimdi SCR Pro satın alın ve kaydedin %1$d %% tasarruf! Bu teklif %2$s biter."</string>
+
+    <string name="copyrights_statement">"%1$s kullanarak size üçüncü taraf telif hakkı veya diğer fikri mülkiyet haklarını ihlal etmediğini sağlamaktan da sorumlu olduğunu kabul edersiniz."</string>
+    <string name="internal_audio_installation_error_title">"Dahili ses hatası"</string>
+    <string name="internal_audio_installation_error_message">"Dahili ses etkinleştirmesi bulunamadı. Lütfen cihazınızı desteğine yardımcı olacak bir hata raporu gönderirseniz ses kaynağı %1$s olarak ayarlanır."</string>
+    <string name="internal_audio_unstable_title">"Kararsız Dahili ses"</string>
+    <string name="internal_audio_unstable_message">"Dahili ses istikrar sorunu algılandı. Bana Cihazınızı desteklemeye yardımcı olacak bir %1$s hata raporu gönderin. Ses kaynağı ayarlanacaktır."</string>
+    <string name="internal_audio_disabled_title">"Dahili ses devredışı"</string>
+    <string name="internal_audio_disabled_message">"Ses kaydı %1$s doğru kapatılamazsa dahili ses kaydı kapatılır. Siz Ayarlardan yeniden etkinleştirebilirsiniz."</string>
+
+</resources>

@@ -41,15 +41,17 @@ android {
 
         release {
             storeFile file("../../../.android/iwo-banas-release-key.keystore")
-            storePassword ""
+            storePassword System.console() == null ? "IDE build" : new String(System.console().readPassword("\n\$ Enter store password: "))
             keyAlias "iwo-banas-release"
-            keyPassword ""
+            keyPassword System.console() == null ? "IDE build" : new String(System.console().readPassword("\n\$ Enter key password: "))
         }
     }
 
     buildTypes {
         release {
             signingConfig signingConfigs.release
+            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
 }

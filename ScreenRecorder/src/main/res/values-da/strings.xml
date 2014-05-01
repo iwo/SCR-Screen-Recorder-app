@@ -144,7 +144,7 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="settings_orientation_portrait">"Portræt"</string>
     <string name="settings_orientation_landscape">"Landskab"</string>
     <string name="settings_orientation_clockwise">"roteres med uret,"</string>
-    <string name="settings_orientation_anticlockwise">"rotere mod uret"</string>
+    <string name="settings_orientation_anticlockwise">"roteres mod uret"</string>
 
     <string name="settings_vertical_frames">"Lodrette rammer"</string>
     <string name="settings_vertical_frames_warning">"Video spillere på mange enheder kan ikke afspille videoer med lodrette rammer. Selv hvis der er fravalgt orientering metadata føjes denne indstilling til den video, så den vises korrekt i standard Android-afspiller, YouTube osv."</string>

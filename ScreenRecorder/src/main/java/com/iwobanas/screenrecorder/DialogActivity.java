@@ -7,17 +7,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 
 import com.iwobanas.screenrecorder.settings.Settings;
 
 public class DialogActivity extends Activity {
+    private static final String TAG = "scr_DialogActivity";
     public static final String MESSAGE_EXTRA = "MESSAGE_EXTRA";
     public static final String TITLE_EXTRA = "TITLE_EXTRA";
     public static final String RESTART_EXTRA = "RESTART_EXTRA";
     public static final String POSITIVE_EXTRA = "POSITIVE_EXTRA";
     public static final String POSITIVE_INTENT_EXTRA = "POSITIVE_INTENT_EXTRA";
     public static final String NEGATIVE_EXTRA = "NEGATIVE_EXTRA";
+    public static final String NEGATIVE_INTENT_EXTRA = "NEGATIVE_INTENT_EXTRA";
     public static final String RESTART_ACTION_EXTRA = "RESTART_ACTION_EXTRA";
     public static final String REPORT_BUG_EXTRA = "REPORT_BUG_EXTRA";
     public static final String REPORT_BUG_ERROR_EXTRA = "REPORT_BUG_ERROR_EXTRA";
@@ -67,17 +70,29 @@ public class DialogActivity extends Activity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             positiveSelected = true;
                             if (positiveIntent != null) {
-                                startActivity(positiveIntent);
+                                try {
+                                    startActivity(positiveIntent);
+                                } catch (Exception e) {
+                                    Log.w(TAG, "Error starting activity", e);
+                                }
                             }
                         }
                     });
                 }
                 String negativeLabel = intent.getStringExtra(NEGATIVE_EXTRA);
                 if (negativeLabel != null) {
+                    final Intent negativeIntent = intent.getParcelableExtra(NEGATIVE_INTENT_EXTRA);
                     builder.setNegativeButton(negativeLabel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             negativeSelected = true;
+                            if (negativeIntent != null) {
+                                try {
+                                    startActivity(negativeIntent);
+                                } catch (Exception e) {
+                                    Log.w(TAG, "Error starting activity", e);
+                                }
+                            }
                         }
                     });
                 }

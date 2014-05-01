@@ -12,11 +12,11 @@ SCR screen recorder Root Pro ★
     "</string>
 
     <string name="play_root_required">"
-&lt;b&gt; só funciona em dispositivos com root desbloqueados! &lt;/ b&gt; &lt;br/&gt; Não instale se o dispositivo não está com root."</string>
+&lt;b&gt; só funciona em dispositivos com root! &lt;/ b&gt; &lt;br/&gt; Não instale se o dispositivo não está com root."</string>
     <string name="play_description_main">"
 Grave screencasts de grande qualidade diretamente de seu telefone ou tablet! SCR Screen Recorder usa aceleração de hardware de codificação de vídeo para obter melhor qualidade de gravação de tela em qualquer dispositivo. É o único gravador de vídeo no mercado apoiando dispositivo Tegra incluindo Nexus 7."</string>
     <string name="play_description_free">"
-Com &lt;b&gt; SCR grátis &lt;/ b&gt; você pode gravar no máximo três minutos e screencasts a marca d'água SCR é adicionado ao seu vídeo. Comprar &lt;b&gt; SCR Pro &lt;/ b&gt; para obter comprimento screencast ilimitado sem marca de água. Este é um início de pré-visualização &lt;b&gt; BETA &lt;/ b&gt; versão por isso pode não funcionar em todos os dispositivos e ROMs. Se você encontrar quaisquer problemas, por favor denunciar-lo em scr.screen.recorder @ gmail.com para me ajudar a obter o seu dispositivo suportado.
+Com &lt;b&gt; SCR grátis &lt;/ b&gt; você pode gravar no máximo três minutos e screencasts a marca d'água SCR é adicionado ao seu vídeo. Comprar &lt;b&gt; SCR Pro &lt;/ b&gt; para obter comprimento screencast ilimitado sem marca de água. Este é um início de pré-visualização &lt;b&gt; BETA &lt;/ b&gt; versão por isso pode não funcionar em todos os dispositivos e ROMs. Se você encontrar quaisquer problemas, por favor denunciar-lo em scr.screen.recorder@gmail.com para me ajudar a obter o seu dispositivo suportado.
     "</string>
 
     <string name="play_description_pro">"
@@ -35,7 +35,7 @@ SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros de
     <string name="play">"Tocar"</string>
 
     <string name="su_required_title">"Acesso ao root é necessário"</string>
-    <string name="su_required_message">"Para executar qualquer aplicativo gravador de tela do seu telefone / tablet precisa ter Root. Há tutoriais na Internet explicando como fazer root em diferentes dispositivos. Voltar quando estiver pronto!"</string>
+    <string name="su_required_message">"Para executar qualquer aplicativo gravador de tela do seu telefone/tablet precisa ter Root. Há tutoriais na Internet explicando como fazer root em diferentes dispositivos. Voltar quando estiver pronto!"</string>
     <string name="su_required_help">"O que está \"acontecendo\"?"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
 
@@ -44,25 +44,25 @@ SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros de
     <string name="recording_error_message">"O relatório de erro anônimo será enviado automaticamente para nos ajudar a resolver o problema. Sinta-se livre para entrar em contato via e-mail de apoio erro citando. S%1$d ."</string>
 
     <string name="media_recorder_error_title">"Erro na Gravação"</string>
-    <string name="media_recorder_error_message">"Tente alterar a resolução ou a mudança de transformação de imagem entre GPU / CPU. Desinstale outros aplicativos screencast se tiver algum. Se o problema persistir, por favor entrar em contato via e-mail citando o erro R %1$d ."</string>
+    <string name="media_recorder_error_message">"Tente alterar a resolução ou a mudança de transformação de imagem entre GPU/CPU. Desinstale outros aplicativos screencast se tiver algum. Se o problema persistir, por favor entrar em contato via e-mail citando o erro R %1$d ."</string>
 
     <string name="output_file_error_title">"Não é possível criar arquivo de vídeo"</string>
     <string name="output_file_error_message">"SCR não conseguiu criar %1$s arquivo de vídeo. Certifique-se de que o diretório de saída selecionado é gravável e que cartão SD não está bloqueado por conexão USB."</string>
 
     <string name="microphone_busy_error_title">"Microfone ocupado"</string>
     <string name="microphone_busy_error_message">"
-        Apenas uma aplicação pode usar microfone ao mesmo tempo. Essa é uma limitação do sistema Android. Feche outro aplicativo usando o microfone (por exemplo, o Google se ou Skype) ou continuar a gravação sem áudio.
+        Apenas uma aplicação pode usar microfone ao mesmo tempo. Essa é uma limitação do sistema Android. Feche outro aplicativo usando o microfone (por exemplo,o Google se ou Skype) ou continuar a gravação sem áudio.
     "</string>
     <string name="microphone_busy_error_continue_mute">"Continuar mudo"</string>
 
     <string name="screen_protected_error_title">"Tela protegida"</string>
     <string name="screen_protected_error_message">"A tela pode ser capturado porque algum aplicativo marcou o conteúdo da tela como seguro."</string>
 
-    <string name="opengl_error_title">"GPU não é suportado"</string>
+    <string name="opengl_error_title">"GPU não é suportada"</string>
     <string name="opengl_error_message">"Sua placa gráfica não é suportada ainda. Mudar transformação Imagem definir a CPU ou codificador de vídeo software uso.
     "</string>
 
-    <string name="audio_config_error_title">"Erro Áudio"</string>
+    <string name="audio_config_error_title">"Erro no áudio"</string>
     <string name="audio_config_error_message">"Configuração de áudio não suportado. Tente alterar as configurações de áudio do SCR."</string>
 
     <string name="android_version_error_title">"Versão do Android não é suportado"</string>
@@ -95,7 +95,7 @@ SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros de
 
     <string name="settings_video_category">"vídeo"</string>
 
-    <string name="settings_video_encoder">"da direção"</string>
+    <string name="settings_video_encoder">"Codificação de video"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
     <string name="settings_video_encoder_h263_unstable">"H263 (instável)"</string>
@@ -138,7 +138,7 @@ SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros de
 
     <string name="settings_orientation">"Orientação da página"</string>
     <string name="settings_orientation_description">"
-        Por padrão quadros de vídeo são sempre horizontal e rotação de metadados é adicionado às gravações de retrato. YouTube e player de vídeo padrão Android desempenha tais vídeos corretamente, mas alguns jogadores de PC (por exemplo VLC) ignorar metadados rotação e exibi-lo no modo paisagem. Você pode ativar quadros verticais abaixo, mas usar esta opção com cuidado, pois muitos dispositivos pode \ 'recorde t / reproduzir vídeos com quadros verticais.
+        Por padrão quadros de vídeo são sempre horizontal e rotação de metadados é adicionado às gravações de retrato. YouTube e player de vídeo padrão Android desempenha tais vídeos corretamente, mas alguns jogadores de PC (por exemplo VLC) ignorar metadados rotação e exibi-lo no modo paisagem. Você pode ativar quadros verticais abaixo, mas usar esta opção com cuidado, pois muitos dispositivos pode reproduzir vídeos com quadros verticais.
     "</string>
     <string name="settings_orientation_auto">"Automático"</string>
     <string name="settings_orientation_portrait">"Retrato"</string>
@@ -185,7 +185,7 @@ SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros de
     <string name="directory_chooser_new_cancel">"Cancelar"</string>
     <string name="directory_chooser_error_message">"O diretório não pode ser criado. Certifique-se de escolher um local, por exemplo gravável cartão SD."</string>
     <string name="directory_chooser_not_writable_title">"Diretório selecionado não é gravável"</string>
-    <string name="directory_chooser_not_writable_message">"A aplicação não parecem ter permissão de gravação para %1$s diretório. Isto pode causar problemas de gravação."</string>
+    <string name="directory_chooser_not_writable_message">"A aplicação não parecem ter permissão de gravação para %1$s diretório.Isto pode causar problemas de gravação."</string>
     <string name="directory_chooser_ignore">"me ignorar?"</string>
     <string name="directory_chooser_cancel">"Cancelar"</string>
     <string name="directory_chooser_default">"Padrão"</string>
@@ -196,7 +196,7 @@ SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros de
     "</string>
 
     <string name="error_report_report">"Relatório"</string>
-    <string name="error_report_close">"Perto"</string>
+    <string name="error_report_close">"fechar"</string>
     <string name="error_report_text">"O anexo contém o log do sistema detalhado, incluindo informações sobre um erro. Sinta-se livre para adicionar quaisquer comentários aqui."</string>
     <string name="error_report_chooser">"E-mail relatório de erro com"</string>
 

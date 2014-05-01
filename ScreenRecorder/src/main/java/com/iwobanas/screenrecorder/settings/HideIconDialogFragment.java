@@ -36,7 +36,7 @@ public class HideIconDialogFragment extends DialogFragment {
                     return;
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("market://details?id=com.iwobanas.screenrecorder.pro"));
+                intent.setData(Uri.parse("market://details?id=com.iwobanas.screenrecorder.pro&referrer=utm_source%3Ddialog%26utm_campaign%3Dhide_icon"));
                 try {
                     startActivity(intent);
                 } catch (ActivityNotFoundException e) {

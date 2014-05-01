@@ -209,13 +209,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="directory_chooser_cancel">Cancel</string>
     <string name="directory_chooser_default">Default</string>
 
-    <string name="license_dont_allow">License check failed. Make sure your Internet connection is up
-        and your\'re logged into Google Play.
-    </string>
-    <string name="license_error">License check error. Make sure your Internet connection is up
-        and your\'re logged into Google Play.
-    </string>
-
     <string name="error_report_report">Report</string>
     <string name="error_report_close">Close</string>
     <string name="error_report_text">The attachment contains detailed system log including information about an error. Feel free to add any comments here.</string>
@@ -251,6 +244,23 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="internal_audio_unstable_message">Internal audio stability issue detected. Please send a bug report to help me get your device supported. Audio source will be set to %1$s.</string>
     <string name="internal_audio_disabled_title">Internal audio disabled</string>
     <string name="internal_audio_disabled_message">Internal audio recording is switched off because %1$s didn\'t shut down correctly. You can re-enable it in Settings.</string>
+
+    <string name="license_title">License error</string>
+    <string name="license_not_licensed_message">Error verifying license. Please purchase SCR Pro through Google Play Store.</string>
+    <string name="license_retry_message">Error verifying license. Make sure your internet connection is up
+        and your\'re logged into Google Play Store. After the license is verified you can continue using SCR Pro offline.</string>
+    <string name="license_error_message">Error verifying license. Make sure you installed SCR Pro though Google Play.
+        If the problem persists clear data and cache of \"Google Play services\" and \"Google Play Store\" apps.
+    </string>
+    <string name="license_play_store">Play Store</string>
+    <string name="license_retry">Retry</string>
+    <string name="license_continue_as_free">Continue as Free</string>
+
+    <string name="su_denied_message">There is a problem with root access on your device.
+        Please open %1$s and make sure you haven\'t accidentally denied root access to %2$s.</string>
+    <string name="su_default_name">superuser</string>
+
+    <string name="can_not_start_toast">Can\'t start recording: %1$s</string>
 
     <string name="settings_show_camera">Camera view</string>
     <string name="settings_show_camera_summary">Display your image on top of recording</string>
