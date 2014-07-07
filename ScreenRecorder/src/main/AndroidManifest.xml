@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.iwobanas.screenrecorder"
-          android:versionCode="64"
+          android:versionCode="66"
           android:versionName="0.15.5-alpha">
 
     <uses-sdk android:minSdkVersion="15" android:maxSdkVersion="19"/>
