@@ -23,6 +23,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
@@ -140,6 +141,27 @@ public class Utils {
             appVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
         } catch (Exception ignored) {}
         return appVersion;
+    }
+
+    public static boolean isMiUi(Context context) {
+        String miuiVersion = getSystemProperty(context, "ro.miui.ui.version.code", "");
+        return miuiVersion != null && miuiVersion.length() > 0;
+    }
+
+    public static String getSystemProperty(Context context, String key, String def) {
+        try {
+            ClassLoader classLoader = context.getClassLoader();
+            Class<?> SystemProperties = classLoader.loadClass("android.os.SystemProperties");
+            Class[] paramTypes= new Class[2];
+            paramTypes[0]= String.class;
+            paramTypes[1]= String.class;
+            Method get = SystemProperties.getMethod("get", paramTypes);
+
+            return (String) get.invoke(SystemProperties, key, def);
+        } catch (Exception e) {
+            Log.w(TAG, "Can't access system property: " + key, e);
+        }
+        return def;
     }
 
     public static boolean checkDirWritable(File dir) {

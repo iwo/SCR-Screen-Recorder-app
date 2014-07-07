@@ -796,6 +796,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 mRecorderOverlay.hide();
                 mRatingController.show();
             } else if (mRecorderOverlay.isVisible() && !firstCommand) {
+                if (Utils.isMiUi(this)) {
+                    showMiUiPopupError();
+                }
                 mRecorderOverlay.highlightPosition();
             } else {
                 if (LOUNCHER_ACTION.equals(action) || NOTIFICATION_ACTION.equals(action)) {
@@ -857,6 +860,17 @@ public class RecorderService extends Service implements IRecorderService, Licens
         displayShutDownError = false;
         String message = getString(R.string.internal_audio_disabled_message, getString(R.string.app_name));
         displayErrorMessage(message, getString(R.string.internal_audio_disabled_title), true, false, 2002);
+    }
+
+    private void showMiUiPopupError() {
+        Log.w(TAG, "showMiUiPopupError");
+        Intent intent = new Intent(RecorderService.this, DialogActivity.class);
+        intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.miui_error_message, getString(R.string.app_name)));
+        intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.miui_error_title));
+        intent.putExtra(DialogActivity.RESTART_EXTRA, false);
+        intent.putExtra(DialogActivity.REPORT_BUG_EXTRA, false);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void readPreferences() {
