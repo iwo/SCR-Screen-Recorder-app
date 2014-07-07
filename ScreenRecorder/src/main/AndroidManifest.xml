@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.iwobanas.screenrecorder"
           android:versionCode="64"
-          android:versionName="0.15.4-alpha">
+          android:versionName="0.15.5-alpha">
 
     <uses-sdk android:minSdkVersion="15" android:maxSdkVersion="19"/>
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
