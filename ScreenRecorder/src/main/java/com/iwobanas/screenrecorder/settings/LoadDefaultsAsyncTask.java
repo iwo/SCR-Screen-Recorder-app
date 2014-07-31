@@ -8,17 +8,17 @@ import android.util.Log;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
-public class LoadDefaultsAsyncTask extends AsyncTask<Void, Void, Properties> {
+public class LoadDefaultsAsyncTask extends AsyncTask<Void, Void, JSONObject> {
     private static final String TAG = "scr_GetDefaultSettingsAsyncTask";
-    private static final String BASE_URL = "http://www.iwobanas.com/scr/defaults.php?";
+    private static final String BASE_URL = "http://www.iwobanas.com/scr/device_profile.php?";
 
     private Map<String, String> params = new HashMap<String, String>();
 
@@ -37,9 +37,8 @@ public class LoadDefaultsAsyncTask extends AsyncTask<Void, Void, Properties> {
     }
 
     @Override
-    protected Properties doInBackground(Void... voids) {
-        Properties properties = null;
-        AndroidHttpClient client = AndroidHttpClient.newInstance("SCR");
+    protected JSONObject doInBackground(Void... voids) {
+
         String url = BASE_URL;
 
         for (String key: params.keySet()) {
@@ -50,32 +49,46 @@ public class LoadDefaultsAsyncTask extends AsyncTask<Void, Void, Properties> {
             }
         }
 
-        HttpGet get = new HttpGet(url);
-        ResponseHandler<String> handler = new BasicResponseHandler();
-        String result;
+        String resultString;
         try {
-            result = client.execute(get, handler);
-            properties = new Properties();
-            properties.load(new StringReader(result));
+            HttpGet get = new HttpGet(url);
+            ResponseHandler<String> handler = new BasicResponseHandler();
+            AndroidHttpClient client = AndroidHttpClient.newInstance("SCR");
+            resultString = client.execute(get, handler);
+            client.close();
+
         } catch (Exception e) {
             Log.w(TAG, "HTTP GET execution error", e);
+            return null;
         }
-        client.close();
-        return properties;
+
+        JSONObject defaults = null;
+        try {
+            JSONObject profile = new JSONObject(resultString);
+            defaults = profile.getJSONObject("defaults");
+        } catch (JSONException e) {
+            Log.w(TAG, "Error parsing profile", e);
+        }
+
+        return defaults;
     }
 
     @Override
-    protected void onPostExecute(Properties properties) {
-        if (properties == null) return;
+    protected void onPostExecute(JSONObject defaults) {
+        if (defaults == null) return;
 
-        Settings.getInstance().updateDefaults(
-            properties.getProperty("resolution_width"),
-            properties.getProperty("resolution_height"),
-            properties.getProperty("transformation"),
-            properties.getProperty("video_bitrate"),
-            properties.getProperty("sampling_rate"),
-            properties.getProperty("color_fix"),
-            properties.getProperty("video_encoder")
-        );
+        try {
+            Settings.getInstance().updateDefaults(
+                defaults.has("resolution_width") ? defaults.getString("resolution_width"): null,
+                defaults.has("resolution_height") ? defaults.getString("resolution_height"): null,
+                defaults.has("transformation") ? defaults.getString("transformation"): null,
+                defaults.has("video_bitrate") ? defaults.getString("video_bitrate"): null,
+                defaults.has("sampling_rate") ? defaults.getString("sampling_rate"): null,
+                defaults.has("color_fix") ? defaults.getString("color_fix"): null,
+                defaults.has("video_encoder") ? defaults.getString("video_encoder"): null
+            );
+        } catch (JSONException e) {
+            Log.w(TAG, "Error parsing default settings", e);
+        }
     }
 }
