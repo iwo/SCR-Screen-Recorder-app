@@ -23,4 +23,13 @@ public enum SamplingRate {
     public String getLabel() {
         return label;
     }
+
+    public static SamplingRate getBySamplingRate(int samplingRate) {
+        for (SamplingRate rate : values()) {
+            if (rate.samplingRate == samplingRate) {
+                return rate;
+            }
+        }
+        throw new IllegalArgumentException("Invalid sampling rate: " + samplingRate);
+    }
 }
