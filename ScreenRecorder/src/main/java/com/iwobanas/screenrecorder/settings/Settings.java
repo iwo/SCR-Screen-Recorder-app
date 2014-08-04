@@ -3,6 +3,7 @@ package com.iwobanas.screenrecorder.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
@@ -33,15 +34,8 @@ public class Settings {
     private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
     private static final String VERTICAL_FRAMES = "VERTICAL_FRAMES";
     private static final String SETTINGS_MODIFIED = "SETTINGS_MODIFIED";
-    private static final String DEFAULT_RESOLUTION_WIDTH = "DEFAULT_RESOLUTION_WIDTH";
-    private static final String DEFAULT_RESOLUTION_HEIGHT = "DEFAULT_RESOLUTION_HEIGHT";
-    private static final String DEFAULT_TRANSFORMATION = "DEFAULT_TRANSFORMATION";
-    private static final String DEFAULT_SAMPLING_RATE = "DEFAULT_SAMPLING_RATE";
-    private static final String DEFAULT_VIDEO_BITRATE = "DEFAULT_VIDEO_BITRATE";
-    private static final String DEFAULT_COLOR_FIX = "DEFAULT_COLOR_FIX";
-    private static final String DEFAULT_VIDEO_ENCODER = "DEFAULT_VIDEO_ENCODER";
-    private static final String DEFAULTS_UPDATE_TIMESTAMP = "DEFAULTS_UPDATE_TIMESTAMP";
     private static final String APP_VERSION = "APP_VERSION";
+    private static final String BUILD_FINGERPRINT = "BUILD_FINGERPRINT";
     private static Settings instance;
     private SharedPreferences preferences;
     private AudioSource audioSource = AudioSource.MIC;
@@ -72,7 +66,10 @@ public class Settings {
     private AudioDriver audioDriver;
     private boolean settingsModified;
     private int appVersion;
+    private int previousAppVersion;
     private boolean appUpdated;
+    private boolean systemUpdated;
+    private DeviceProfile deviceProfile;
 
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -82,17 +79,19 @@ public class Settings {
         appVersion = Utils.getAppVersion(context);
         outputDirName = context.getString(R.string.output_dir);
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
-        readPreferences();
-        handleUpdate();
-        if (shouldUpdateDefaults()) {
-            new LoadDefaultsAsyncTask(appVersion).execute();
+        checkAppUpdate();
+        checkSystemUpdate();
+        new LoadDeviceProfileAsyncTask(this, context, appVersion, appUpdated, systemUpdated).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        // readPreferences(); will be called when device profile is loaded
+        if (appUpdated) {
+            handleAppUpdate();
         }
         validateOutputDir();
     }
 
     public static synchronized void initialize(Context context) {
         if (instance == null) {
-            instance = new Settings(context);
+            instance = new Settings(context.getApplicationContext());
         }
     }
 
@@ -109,12 +108,6 @@ public class Settings {
         String audioSource = preferences.getString(AUDIO_SOURCE, AudioSource.MIC.name());
         this.audioSource = AudioSource.valueOf(audioSource);
 
-        int defaultResolutionWidth = preferences.getInt(DEFAULT_RESOLUTION_WIDTH, -1);
-        if (defaultResolutionWidth != -1) {
-            int defaultResolutionHeight = preferences.getInt(DEFAULT_RESOLUTION_HEIGHT, 0);
-            defaultResolution = resolutionsManager.getResolution(defaultResolutionWidth, defaultResolutionHeight);
-        }
-
         int resolutionWidth = preferences.getInt(RESOLUTION_WIDTH, -1);
         if (resolutionWidth != -1) {
             int resolutionHeight = preferences.getInt(RESOLUTION_HEIGHT, 0);
@@ -123,34 +116,19 @@ public class Settings {
 
         frameRate = preferences.getInt(FRAME_RATE, 15);
 
-        String defaultTransformation = preferences.getString(DEFAULT_TRANSFORMATION, Transformation.GPU.name());
-        try {
-            this.defaultTransformation = Transformation.valueOf(defaultTransformation);
-        } catch (IllegalArgumentException e) {
-            this.defaultTransformation = Transformation.GPU;
-        }
-
-        String transformation = preferences.getString(TRANSFORMATION, defaultTransformation);
+        String transformation = preferences.getString(TRANSFORMATION, defaultTransformation.name());
         try {
             this.transformation = Transformation.valueOf(transformation);
         } catch (IllegalArgumentException e) {
             this.transformation = this.defaultTransformation;
         }
 
-        String defaultVideoBitrate = preferences.getString(DEFAULT_VIDEO_BITRATE, VideoBitrate.BITRATE_10_MBPS.name());
-        this.defaultVideoBitrate = VideoBitrate.valueOf(defaultVideoBitrate);
-
-        String videoBitrate = preferences.getString(VIDEO_BITRATE, defaultVideoBitrate);
+        String videoBitrate = preferences.getString(VIDEO_BITRATE, defaultVideoBitrate.name());
         this.videoBitrate = VideoBitrate.valueOf(videoBitrate);
 
-
-        String defaultSamplingRate = preferences.getString(DEFAULT_SAMPLING_RATE, SamplingRate.SAMPLING_RATE_16_KHZ.name());
-        this.defaultSamplingRate = SamplingRate.valueOf(defaultSamplingRate);
-
-        String samplingRate = preferences.getString(SAMPLING_RATE, defaultSamplingRate);
+        String samplingRate = preferences.getString(SAMPLING_RATE, defaultSamplingRate.name());
         this.samplingRate = SamplingRate.valueOf(samplingRate);
 
-        defaultColorFix = preferences.getBoolean(DEFAULT_COLOR_FIX, false);
         colorFix = preferences.getBoolean(COLOR_FIX, defaultColorFix);
 
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
@@ -163,28 +141,32 @@ public class Settings {
         outputDir = new File(outputDirPath);
         outputDirWritable = preferences.getBoolean(OUTPUT_DIR_WRITABLE, false);
 
-        defaultVideoEncoder = preferences.getInt(DEFAULT_VIDEO_ENCODER, MediaRecorder.VideoEncoder.H264);
         videoEncoder = preferences.getInt(VIDEO_ENCODER, defaultVideoEncoder);
 
         verticalFrames = preferences.getBoolean(VERTICAL_FRAMES, false);
     }
 
-    private void handleUpdate() {
-        int previousVersion = preferences.getInt(APP_VERSION, -1);
-        if (previousVersion == -1 || appVersion == previousVersion) return;
-
-        appUpdated = true;
+    private void checkAppUpdate() {
+        previousAppVersion = preferences.getInt(APP_VERSION, -1);
+        appUpdated = (previousAppVersion != -1 && previousAppVersion != appVersion);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(APP_VERSION, appVersion);
+        editor.commit();
+    }
 
-        if (appVersion == 17) {
-            if (transformation == Transformation.GPU && Build.VERSION.SDK_INT >= 18) {
-                editor.remove(TRANSFORMATION);
-                transformation = Transformation.OES;
-            }
-        }
+    private void checkSystemUpdate() {
+        String previousFingerprint = preferences.getString(BUILD_FINGERPRINT, null);
+        String fingerprint = Build.FINGERPRINT;
+        systemUpdated = (previousFingerprint != null && !previousFingerprint.equals(fingerprint));
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(BUILD_FINGERPRINT, fingerprint);
+        editor.commit();
+    }
 
-        if (previousVersion <= 24) {
+    private void handleAppUpdate() {
+        SharedPreferences.Editor editor = preferences.edit();
+
+        if (previousAppVersion <= 24) {
             if (preferences.contains(SHOW_TOUCHES)) {
                 if (!preferences.getBoolean(SHOW_TOUCHES, true)) {
                     showTouchesController.setShowTouches(false);
@@ -217,80 +199,49 @@ public class Settings {
         editor.commit();
     }
 
-    public void updateDefaults(String resolutionWidth, String resolutionHeight, String transformation,
-                               String videoBitrate, String samplingRate, String colorFix, String videoEncoder) {
-        if (resolutionWidth != null && resolutionWidth.length() > 0 &&
-            resolutionHeight != null && resolutionHeight.length() > 0) {
-            int w = Integer.parseInt(resolutionWidth);
-            int h = Integer.parseInt(resolutionHeight);
-            defaultResolution = resolutionsManager.getResolution(w, h);
-        }
-        if (transformation != null && transformation.length() > 0) {
-            try {
-                defaultTransformation = Transformation.valueOf(transformation);
-            } catch (IllegalArgumentException ignored) {}
-        }
-        if (videoBitrate != null && videoBitrate.length() > 0) {
-            for (VideoBitrate bitrate : VideoBitrate.values()) {
-                if (bitrate.getCommand().equals(videoBitrate)) {
-                    defaultVideoBitrate = bitrate;
-                    break;
-                }
-            }
-        }
-        if (samplingRate != null && samplingRate.length() > 0) {
-            for (SamplingRate rate : SamplingRate.values()) {
-                if (rate.getCommand().equals(samplingRate)) {
-                    defaultSamplingRate = rate;
-                    break;
-                }
-            }
-        }
-        if (colorFix != null && colorFix.length() > 0) {
-            defaultColorFix = Boolean.valueOf(colorFix);
-        }
-        if (videoEncoder != null && videoEncoder.length() > 0) {
-            try {
-                defaultVideoEncoder = Integer.parseInt(videoEncoder);
-            } catch (NumberFormatException ignored) {}
+    public void updateDefaults() {
+        if (deviceProfile == null) return;
+
+        boolean updated = false;
+
+        if (deviceProfile.getDefaultResolution() != null
+                && deviceProfile.getDefaultResolution() != defaultResolution) {
+            updated = true;
+            defaultResolution = deviceProfile.getDefaultResolution();
         }
 
-        saveDefaults();
-        readPreferences(); // refresh preferences to restore update defaults
-    }
-
-    private void saveDefaults() {
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putLong(DEFAULTS_UPDATE_TIMESTAMP, System.currentTimeMillis());
-        if (defaultResolution != null) {
-            editor.putInt(DEFAULT_RESOLUTION_WIDTH, defaultResolution.getWidth());
-            editor.putInt(DEFAULT_RESOLUTION_HEIGHT, defaultResolution.getHeight());
-        } else {
-            editor.remove(DEFAULT_RESOLUTION_WIDTH);
-            editor.remove(DEFAULT_RESOLUTION_HEIGHT);
+        if (deviceProfile.getDefaultTransformation() != null
+                && deviceProfile.getDefaultTransformation() != defaultTransformation) {
+            updated = true;
+            defaultTransformation = deviceProfile.getDefaultTransformation();
         }
 
-        if (defaultTransformation != null) {
-            editor.putString(DEFAULT_TRANSFORMATION, defaultTransformation.name());
-        } else {
-            editor.remove(DEFAULT_TRANSFORMATION);
+        if (deviceProfile.getDefaultVideoBitrate() != null
+                && deviceProfile.getDefaultVideoBitrate() != defaultVideoBitrate) {
+            updated = true;
+            defaultVideoBitrate = deviceProfile.getDefaultVideoBitrate();
         }
 
-        if (defaultVideoBitrate != null) {
-            editor.putString(DEFAULT_VIDEO_BITRATE, defaultVideoBitrate.name());
-        } else {
-            editor.remove(DEFAULT_VIDEO_BITRATE);
+        if (deviceProfile.getDefaultSamplingRate() != null
+                && deviceProfile.getDefaultSamplingRate() != defaultSamplingRate) {
+            updated = true;
+            defaultSamplingRate = deviceProfile.getDefaultSamplingRate();
         }
-        editor.putBoolean(DEFAULT_COLOR_FIX, defaultColorFix);
-        editor.putInt(DEFAULT_VIDEO_ENCODER, defaultVideoEncoder);
 
-        editor.commit();
-    }
+        if (deviceProfile.getDefaultColorFix() != defaultColorFix) {
+            updated = true;
+            defaultColorFix = deviceProfile.getDefaultColorFix();
+        }
 
-    private Boolean shouldUpdateDefaults() {
-        if (appUpdated) return true;
-        long time = System.currentTimeMillis() - preferences.getLong(DEFAULTS_UPDATE_TIMESTAMP, 0);
-        return (time > 24 * 60 * 60 * 1000);
+        if (deviceProfile.getDefaultVideoEncoder() != 0
+                && deviceProfile.getDefaultVideoEncoder() != defaultVideoEncoder) {
+            updated = true;
+            defaultVideoEncoder = deviceProfile.getDefaultVideoEncoder();
+        }
+
+        if (updated) {
+            readPreferences(); // refresh preferences to restore update defaults
+        }
     }
 
     private void settingsModified(SharedPreferences.Editor editor) {
@@ -344,6 +295,10 @@ public class Settings {
             editor.putInt(RESOLUTION_HEIGHT, resolution.getHeight());
             settingsModified(editor);
         }
+    }
+
+    public ResolutionsManager getResolutionsManager() {
+        return resolutionsManager;
     }
 
     public Resolution[] getResolutions() {
@@ -570,7 +525,7 @@ public class Settings {
     }
 
     public boolean statsBasedDefaults() {
-        return preferences.getLong(DEFAULTS_UPDATE_TIMESTAMP, 0) != 0;
+        return deviceProfile != null;
     }
 
     public void restoreShowTouches() {
@@ -587,6 +542,19 @@ public class Settings {
 
     public AudioDriver getAudioDriver() {
         return audioDriver;
+    }
+
+    public void setDeviceProfile(DeviceProfile deviceProfile) {
+        this.deviceProfile = deviceProfile;
+        if (deviceProfile != null) {
+            updateDefaults();
+        } else {
+            readPreferences();
+        }
+    }
+
+    public DeviceProfile getDeviceProfile() {
+        return deviceProfile;
     }
 }
 
