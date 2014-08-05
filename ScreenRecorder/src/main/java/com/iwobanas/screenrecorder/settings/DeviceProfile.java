@@ -126,4 +126,20 @@ public class DeviceProfile {
     public boolean getDefaultColorFix() {
         return defaultColorFix;
     }
+
+    public boolean hideResolution(Resolution resolution) {
+        return hideResolutions.contains(resolution);
+    }
+
+    public boolean hideVideoEncoder(Integer encoder) {
+        return hideVideoEncoders.contains(encoder);
+    }
+
+    public boolean hideTransformation(Transformation transformation) {
+        return hideTransformations.contains(transformation);
+    }
+
+    public boolean hideVideoBitrate(VideoBitrate bitrate) {
+        return hideVideoBitrates.contains(bitrate);
+    }
 }

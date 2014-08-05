@@ -107,12 +107,13 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_reset">Restore defaults</string>
     <string name="settings_cancel">Cancel</string>
 
+    <string name="settings_unstable">%1$s (unstable)</string>
+
     <string name="settings_video_category">Video</string>
 
     <string name="settings_video_encoder">Encoder</string>
     <string name="settings_video_encoder_h264">H264</string>
     <string name="settings_video_encoder_h263">H263</string>
-    <string name="settings_video_encoder_h263_unstable">H263 (unstable)</string>
     <string name="settings_video_encoder_mpeg_4_sp">MPEG-4 SP</string>
     <string name="settings_video_encoder_default">Auto</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4 (slow)</string>
@@ -127,7 +128,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_resolution_padding">%1$dx%2$d - %2$dp with padding</string>
     <string name="settings_resolution_max">%1$dx%2$d - Max</string>
     <string name="settings_resolution_half">%1$dx%2$d - Half</string>
-    <string name="settings_resolution_unstable">(unstable)</string>
 
     <string name="settings_transformation">Image transformation</string>
     <string name="settings_transformation_cpu">CPU</string>

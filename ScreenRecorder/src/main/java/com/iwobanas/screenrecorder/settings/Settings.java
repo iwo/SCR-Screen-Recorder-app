@@ -70,6 +70,7 @@ public class Settings {
     private boolean appUpdated;
     private boolean systemUpdated;
     private DeviceProfile deviceProfile;
+    private boolean hideUnstable;
 
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -555,6 +556,14 @@ public class Settings {
 
     public DeviceProfile getDeviceProfile() {
         return deviceProfile;
+    }
+
+    public boolean getHideUnstable() {
+        return hideUnstable;
+    }
+
+    public void setHideUnstable(boolean hideUnstable) {
+        this.hideUnstable = hideUnstable;
     }
 }
 
