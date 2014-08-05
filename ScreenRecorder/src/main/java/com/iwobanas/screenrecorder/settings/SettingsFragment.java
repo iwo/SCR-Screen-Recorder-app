@@ -176,8 +176,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             transformationPreference.setEntries(getTransformationEntries(transformations));
         }
 
-        videoBitratePreference.setEntryValues(getVideoBitrateEntryValues());
-        videoBitratePreference.setEntries(getVideoBitrateEntries());
+        ArrayList<VideoBitrate> videoBitrates = getVideoBitrates();
+        videoBitratePreference.setEntryValues(getVideoBitrateEntryValues(videoBitrates));
+        videoBitratePreference.setEntries(getVideoBitrateEntries(videoBitrates));
 
         if (Build.VERSION.SDK_INT < 18) {
             frameRatePreference.setEntryValues(R.array.frame_rate_values_no_oes);
@@ -340,21 +341,30 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return entry;
     }
 
-    private String[] getVideoBitrateEntryValues() {
-        VideoBitrate[] bitrates = VideoBitrate.values();
-        String[] entryValues = new String[bitrates.length];
-        for (int i = 0; i < bitrates.length; i++) {
-            entryValues[i] = bitrates[i].name();
+    private ArrayList<VideoBitrate> getVideoBitrates() {
+        ArrayList<VideoBitrate> bitrates = new ArrayList<VideoBitrate>(VideoBitrate.values().length);
+        for (VideoBitrate bitrate : VideoBitrate.values()) {
+            if (settings.getHideUnstable() && settings.getDeviceProfile() != null
+                    && settings.getDeviceProfile().hideVideoBitrate(bitrate))
+                continue;
+            bitrates.add(bitrate);
+        }
+        return bitrates;
+    }
+
+    private String[] getVideoBitrateEntryValues(ArrayList<VideoBitrate> bitrates) {
+        String[] entryValues = new String[bitrates.size()];
+        for (int i = 0; i < bitrates.size(); i++) {
+            entryValues[i] = bitrates.get(i).name();
         }
         return entryValues;
     }
 
-    private String[] getVideoBitrateEntries() {
-        VideoBitrate[] bitrates = VideoBitrate.values();
-        String[] entries = new String[bitrates.length];
-        for (int i = 0; i < bitrates.length; i++) {
-            entries[i] = bitrates[i].getLabel();
-            if (settings.getDeviceProfile() != null && settings.getDeviceProfile().hideVideoBitrate(bitrates[i])) {
+    private String[] getVideoBitrateEntries(ArrayList<VideoBitrate> bitrates) {
+        String[] entries = new String[bitrates.size()];
+        for (int i = 0; i < bitrates.size(); i++) {
+            entries[i] = bitrates.get(i).getLabel();
+            if (settings.getDeviceProfile() != null && settings.getDeviceProfile().hideVideoBitrate(bitrates.get(i))) {
                 entries[i] = getString(R.string.settings_unstable, entries[i]);
             }
         }
