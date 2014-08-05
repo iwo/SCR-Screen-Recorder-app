@@ -39,6 +39,7 @@ public class SettingsActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings, menu);
+        menu.findItem(R.id.settings_show_unstable).setChecked(!Settings.getInstance().getHideUnstable());
         return true;
     }
 
@@ -53,6 +54,13 @@ public class SettingsActivity extends Activity {
                 return true;
             case R.id.settings_send_bug_report:
                 sendBugReport();
+                return true;
+            case R.id.settings_show_unstable:
+                item.setChecked(!item.isChecked());
+                Settings.getInstance().setHideUnstable(!item.isChecked());
+                if (fragment != null) {
+                    fragment.updateEntries();
+                }
                 return true;
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
