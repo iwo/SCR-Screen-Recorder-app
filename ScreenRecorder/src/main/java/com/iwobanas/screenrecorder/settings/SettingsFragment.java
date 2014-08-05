@@ -152,7 +152,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     protected void updateEntries() {
 
         ArrayList<Integer> videoEncoders = getVideoEncoders();
-        if (settings.getHideUnstable() && videoEncoders.size() < 2 && findPreference(KEY_VIDEO_ENCODER) != null) {
+        if (!settings.getShowUnstable() && videoEncoders.size() < 2 && findPreference(KEY_VIDEO_ENCODER) != null) {
             videoCategory.removePreference(videoEncoderPreference);
         } else {
             if (findPreference(KEY_VIDEO_ENCODER) == null) {
@@ -167,7 +167,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         boolean softwareEncoderOnly = videoEncoders.size() == 1 && videoEncoders.get(0) == -2;
         ArrayList<Transformation> transformations = getTransformations();
-        if (settings.getHideUnstable() && (transformations.size() < 2 || softwareEncoderOnly)
+        if (!settings.getShowUnstable() && (transformations.size() < 2 || softwareEncoderOnly)
                 && findPreference(KEY_TRANSFORMATION) != null) {
             videoCategory.removePreference(transformationPreference);
         } else {
@@ -198,7 +198,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         ArrayList<Integer> encoders = new ArrayList<Integer>(allEncoders.length);
 
         for (Integer encoder : allEncoders) {
-            if (settings.getHideUnstable() && settings.getDeviceProfile() != null
+            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
                     && settings.getDeviceProfile().hideVideoEncoder(encoder))
                 continue;
             encoders.add(encoder);
@@ -245,7 +245,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         Resolution[] resolutions = settings.getResolutions();
         ArrayList<String> entries = new ArrayList<String>(resolutions.length);
         for (Resolution resolution : resolutions) {
-            if (settings.getHideUnstable() && settings.getDeviceProfile() != null
+            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
                     && settings.getDeviceProfile().hideResolution(resolution))
                 continue;
             entries.add(formatResolutionEntry(resolution));
@@ -265,7 +265,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         Resolution[] resolutions = settings.getResolutions();
         ArrayList<String> values = new ArrayList<String>(resolutions.length);
         for (Resolution resolution : resolutions) {
-            if (settings.getHideUnstable() && settings.getDeviceProfile() != null
+            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
                     && settings.getDeviceProfile().hideResolution(resolution))
                 continue;
             values.add(formatResolutionEntryValue(resolution));
@@ -300,7 +300,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 : new Transformation[]{Transformation.CPU, Transformation.GPU, Transformation.OES};
         ArrayList<Transformation> transformations = new ArrayList<Transformation>(allTransformations.length);
         for (Transformation transformation : allTransformations) {
-            if (settings.getHideUnstable() && settings.getDeviceProfile() != null
+            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
                     && settings.getDeviceProfile().hideTransformation(transformation))
                 continue;
             transformations.add(transformation);
@@ -346,7 +346,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private ArrayList<VideoBitrate> getVideoBitrates() {
         ArrayList<VideoBitrate> bitrates = new ArrayList<VideoBitrate>(VideoBitrate.values().length);
         for (VideoBitrate bitrate : VideoBitrate.values()) {
-            if (settings.getHideUnstable() && settings.getDeviceProfile() != null
+            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
                     && settings.getDeviceProfile().hideVideoBitrate(bitrate))
                 continue;
             bitrates.add(bitrate);

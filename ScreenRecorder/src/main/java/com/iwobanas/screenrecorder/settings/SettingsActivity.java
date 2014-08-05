@@ -39,7 +39,7 @@ public class SettingsActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings, menu);
-        menu.findItem(R.id.settings_show_unstable).setChecked(!Settings.getInstance().getHideUnstable());
+        menu.findItem(R.id.settings_show_unstable).setChecked(Settings.getInstance().getShowUnstable());
         return true;
     }
 
@@ -57,7 +57,7 @@ public class SettingsActivity extends Activity {
                 return true;
             case R.id.settings_show_unstable:
                 item.setChecked(!item.isChecked());
-                Settings.getInstance().setHideUnstable(!item.isChecked());
+                Settings.getInstance().setShowUnstable(item.isChecked());
                 if (fragment != null) {
                     fragment.updateEntries();
                 }

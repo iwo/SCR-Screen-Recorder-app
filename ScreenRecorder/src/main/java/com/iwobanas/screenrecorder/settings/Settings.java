@@ -33,7 +33,7 @@ public class Settings {
     private static final String OUTPUT_DIR_WRITABLE = "OUTPUT_DIR_WRITABLE";
     private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
     private static final String VERTICAL_FRAMES = "VERTICAL_FRAMES";
-    private static final String HIDE_UNSTABLE = "HIDE_UNSTABLE";
+    private static final String SHOW_UNSTABLE = "SHOW_UNSTABLE";
     private static final String SETTINGS_MODIFIED = "SETTINGS_MODIFIED";
     private static final String APP_VERSION = "APP_VERSION";
     private static final String BUILD_FINGERPRINT = "BUILD_FINGERPRINT";
@@ -71,7 +71,7 @@ public class Settings {
     private boolean appUpdated;
     private boolean systemUpdated;
     private DeviceProfile deviceProfile;
-    private boolean hideUnstable = true;
+    private boolean showUnstable = true;
 
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -147,7 +147,7 @@ public class Settings {
 
         verticalFrames = preferences.getBoolean(VERTICAL_FRAMES, false);
 
-        hideUnstable = preferences.getBoolean(HIDE_UNSTABLE, true);
+        showUnstable = preferences.getBoolean(SHOW_UNSTABLE, false);
     }
 
     private void checkAppUpdate() {
@@ -561,14 +561,14 @@ public class Settings {
         return deviceProfile;
     }
 
-    public boolean getHideUnstable() {
-        return hideUnstable;
+    public boolean getShowUnstable() {
+        return showUnstable;
     }
 
-    public void setHideUnstable(boolean hideUnstable) {
-        this.hideUnstable = hideUnstable;
+    public void setShowUnstable(boolean showUnstable) {
+        this.showUnstable = showUnstable;
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(HIDE_UNSTABLE, hideUnstable);
+        editor.putBoolean(SHOW_UNSTABLE, showUnstable);
         editor.commit();
     }
 }
