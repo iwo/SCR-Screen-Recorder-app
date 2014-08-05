@@ -165,8 +165,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         resolutionPreference.setEntryValues(getResolutionEntryValues());
         resolutionPreference.setEntries(getResolutionEntries());
 
+        boolean softwareEncoderOnly = videoEncoders.size() == 1 && videoEncoders.get(0) == -2;
         ArrayList<Transformation> transformations = getTransformations();
-        if (settings.getHideUnstable() && transformations.size() < 2 && findPreference(KEY_TRANSFORMATION) != null) {
+        if (settings.getHideUnstable() && (transformations.size() < 2 || softwareEncoderOnly)
+                && findPreference(KEY_TRANSFORMATION) != null) {
             videoCategory.removePreference(transformationPreference);
         } else {
             if (findPreference(KEY_TRANSFORMATION) == null) {
