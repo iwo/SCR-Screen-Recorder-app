@@ -60,6 +60,7 @@ public class SettingsActivity extends Activity {
                 Settings.getInstance().setShowUnstable(item.isChecked());
                 if (fragment != null) {
                     fragment.updateEntries();
+                    fragment.updateValues();
                 }
                 return true;
             // Respond to the action bar's Up/Home button

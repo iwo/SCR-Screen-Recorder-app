@@ -552,6 +552,7 @@ public class Settings {
         this.deviceProfile = deviceProfile;
         if (deviceProfile != null) {
             updateDefaults();
+            preventLockedUnstable();
         } else {
             readPreferences();
         }
@@ -559,6 +560,17 @@ public class Settings {
 
     public DeviceProfile getDeviceProfile() {
         return deviceProfile;
+    }
+
+    private void preventLockedUnstable() {
+        if (deviceProfile != null && !showUnstable) {
+            if (deviceProfile.getStableVideoEncoders().size() == 1 && deviceProfile.hideVideoEncoder(videoEncoder)) {
+                setVideoEncoder(deviceProfile.getStableVideoEncoders().get(0));
+            }
+            if (deviceProfile.getStableTransformations().size() == 1 && deviceProfile.hideTransformation(transformation)) {
+                setTransformation(deviceProfile.getStableTransformations().get(0));
+            }
+        }
     }
 
     public boolean getShowUnstable() {
@@ -570,6 +582,7 @@ public class Settings {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(SHOW_UNSTABLE, showUnstable);
         editor.commit();
+        preventLockedUnstable();
     }
 }
 

@@ -194,13 +194,15 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private ArrayList<Integer> getVideoEncoders() {
-        Integer[] allEncoders = Utils.isX86() ? new Integer[]{2, 3} : new Integer[]{2, -2, 3};
+        if (!settings.getShowUnstable() && settings.getDeviceProfile() != null)
+            return settings.getDeviceProfile().getStableVideoEncoders();
+
+        Integer[] allEncoders = Utils.isX86() ?
+                new Integer[]{MediaRecorder.VideoEncoder.H264, MediaRecorder.VideoEncoder.MPEG_4_SP}
+                : new Integer[]{MediaRecorder.VideoEncoder.H264, Settings.FFMPEG_MPEG_4_ENCODER, MediaRecorder.VideoEncoder.MPEG_4_SP};
         ArrayList<Integer> encoders = new ArrayList<Integer>(allEncoders.length);
 
         for (Integer encoder : allEncoders) {
-            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
-                    && settings.getDeviceProfile().hideVideoEncoder(encoder))
-                continue;
             encoders.add(encoder);
         }
         return encoders;
@@ -295,14 +297,14 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private ArrayList<Transformation> getTransformations() {
+        if (!settings.getShowUnstable() && settings.getDeviceProfile() != null)
+            return settings.getDeviceProfile().getStableTransformations();
+
         Transformation[] allTransformations = Build.VERSION.SDK_INT < 18 ?
                 new Transformation[]{Transformation.CPU, Transformation.GPU}
                 : new Transformation[]{Transformation.CPU, Transformation.GPU, Transformation.OES};
         ArrayList<Transformation> transformations = new ArrayList<Transformation>(allTransformations.length);
         for (Transformation transformation : allTransformations) {
-            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
-                    && settings.getDeviceProfile().hideTransformation(transformation))
-                continue;
             transformations.add(transformation);
         }
         return transformations;

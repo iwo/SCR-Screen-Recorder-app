@@ -1,5 +1,10 @@
 package com.iwobanas.screenrecorder.settings;
 
+import android.media.MediaRecorder;
+import android.os.Build;
+
+import com.iwobanas.screenrecorder.Utils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +38,9 @@ public class DeviceProfile {
     private Collection<Transformation> hideTransformations = new ArrayList<Transformation>();
     private Collection<VideoBitrate> hideVideoBitrates = new ArrayList<VideoBitrate>();
 
+    private ArrayList<Integer> stableVideoEncoders;
+    private ArrayList<Transformation> stableTransformations;
+
     public DeviceProfile(JSONObject json, ResolutionsManager resolutionsManager) throws JSONException {
         this.resolutionsManager = resolutionsManager;
         if (json.has(DEFAULTS)) {
@@ -42,6 +50,8 @@ public class DeviceProfile {
         if (json.has(BLACKLISTS)) {
             decodeBlacklists(json.getJSONObject(BLACKLISTS));
         }
+        validateBlackLists();
+        validateDefaults();
     }
 
     private void decodeDefaults(JSONObject defaults) throws JSONException {
@@ -103,6 +113,54 @@ public class DeviceProfile {
         }
     }
 
+    private void validateBlackLists() {
+        Integer[] allEncoders = Utils.isX86() ?
+                new Integer[]{MediaRecorder.VideoEncoder.H264, MediaRecorder.VideoEncoder.MPEG_4_SP}
+                : new Integer[]{MediaRecorder.VideoEncoder.H264, Settings.FFMPEG_MPEG_4_ENCODER, MediaRecorder.VideoEncoder.MPEG_4_SP};
+        stableVideoEncoders = new ArrayList<Integer>(allEncoders.length);
+
+        for (Integer encoder : allEncoders) {
+            if (!hideVideoEncoder(encoder))
+                stableVideoEncoders.add(encoder);
+        }
+
+        if (stableVideoEncoders.size() == 0) {
+            hideVideoEncoders.clear();
+            for (Integer encoder : allEncoders) {
+                stableVideoEncoders.add(encoder);
+            }
+        }
+
+        Transformation[] allTransformations = Build.VERSION.SDK_INT < 18 ?
+                new Transformation[]{Transformation.CPU, Transformation.GPU}
+                : new Transformation[]{Transformation.CPU, Transformation.GPU, Transformation.OES};
+        stableTransformations = new ArrayList<Transformation>(allTransformations.length);
+
+        for (Transformation transformation : allTransformations) {
+            if (!hideTransformation(transformation))
+                stableTransformations.add(transformation);
+        }
+
+        if (stableTransformations.size() == 0) {
+            hideTransformations.clear();
+            for (Transformation transformation : allTransformations) {
+                stableTransformations.add(transformation);
+            }
+        }
+    }
+
+    private void validateDefaults() {
+        // this is just a safety check. with a sane stats default settings should never be blacklisted
+
+        if (hideVideoEncoder(defaultVideoEncoder)) {
+            defaultVideoEncoder = stableVideoEncoders.get(0);
+        }
+
+        if (hideTransformation(defaultTransformation)) {
+            defaultTransformation = stableTransformations.get(0);
+        }
+    }
+
     public int getDefaultVideoEncoder() {
         return defaultVideoEncoder;
     }
@@ -141,5 +199,13 @@ public class DeviceProfile {
 
     public boolean hideVideoBitrate(VideoBitrate bitrate) {
         return hideVideoBitrates.contains(bitrate);
+    }
+
+    public ArrayList<Integer> getStableVideoEncoders() {
+        return stableVideoEncoders;
+    }
+
+    public ArrayList<Transformation> getStableTransformations() {
+        return stableTransformations;
     }
 }
