@@ -12,8 +12,14 @@
         android:showAsAction="never"
         android:title="@string/menu_send_bug_report" />
     <item
-        android:id="@+id/settings_show_unstable"
+        android:id="@+id/settings_show_advanced"
         android:orderInCategory="120"
+        android:showAsAction="never"
+        android:title="@string/menu_show_advanced"
+        android:checkable="true"/>
+    <item
+        android:id="@+id/settings_show_unstable"
+        android:orderInCategory="130"
         android:showAsAction="never"
         android:title="@string/menu_show_unstable"
         android:checkable="true"/>

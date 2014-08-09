@@ -34,6 +34,7 @@ public class Settings {
     private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
     private static final String VERTICAL_FRAMES = "VERTICAL_FRAMES";
     private static final String SHOW_UNSTABLE = "SHOW_UNSTABLE";
+    private static final String SHOW_ADVANCED = "SHOW_ADVANCED";
     private static final String SETTINGS_MODIFIED = "SETTINGS_MODIFIED";
     private static final String APP_VERSION = "APP_VERSION";
     private static final String BUILD_FINGERPRINT = "BUILD_FINGERPRINT";
@@ -71,7 +72,8 @@ public class Settings {
     private boolean appUpdated;
     private boolean systemUpdated;
     private DeviceProfile deviceProfile;
-    private boolean showUnstable = true;
+    private boolean showUnstable = false;
+    private boolean showAdvanced = false;
 
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -554,6 +556,15 @@ public class Settings {
         this.showUnstable = showUnstable;
         preferences.edit().putBoolean(SHOW_UNSTABLE, showUnstable).commit();
         preventLockedUnstable();
+    }
+
+    public boolean getShowAdvanced() {
+        return showAdvanced;
+    }
+
+    public void setShowAdvanced(boolean showAdvanced) {
+        this.showAdvanced = showAdvanced;
+        preferences.edit().putBoolean(SHOW_ADVANCED, showAdvanced).commit();
     }
 }
 

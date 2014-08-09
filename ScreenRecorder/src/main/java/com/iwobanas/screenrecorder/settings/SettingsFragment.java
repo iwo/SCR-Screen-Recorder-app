@@ -152,12 +152,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     protected void updateEntries() {
 
         ArrayList<Integer> videoEncoders = getVideoEncoders();
-        if (!settings.getShowUnstable() && videoEncoders.size() < 2 && findPreference(KEY_VIDEO_ENCODER) != null) {
-            videoCategory.removePreference(videoEncoderPreference);
-        } else {
-            if (findPreference(KEY_VIDEO_ENCODER) == null) {
-                videoCategory.addPreference(videoEncoderPreference);
-            }
+        if (addRemovePreference(videoEncoders.size() > 1, KEY_VIDEO_ENCODER, videoEncoderPreference, videoCategory)) {
             videoEncoderPreference.setEntryValues(getVideoEncoderEntryValues(videoEncoders));
             videoEncoderPreference.setEntries(getVideoEncoderEntries(videoEncoders));
         }
@@ -167,30 +162,41 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         boolean softwareEncoderOnly = videoEncoders.size() == 1 && videoEncoders.get(0) == -2;
         ArrayList<Transformation> transformations = getTransformations();
-        if (!settings.getShowUnstable() && (transformations.size() < 2 || softwareEncoderOnly)
-                && findPreference(KEY_TRANSFORMATION) != null) {
-            videoCategory.removePreference(transformationPreference);
-        } else {
-            if (findPreference(KEY_TRANSFORMATION) == null) {
-                videoCategory.addPreference(transformationPreference);
-            }
+
+        if (addRemovePreference(transformations.size() > 1 && !softwareEncoderOnly,
+                KEY_TRANSFORMATION, transformationPreference, videoCategory)) {
             transformationPreference.setEntryValues(getTransformationEntryValues(transformations));
             transformationPreference.setEntries(getTransformationEntries(transformations));
         }
 
-        ArrayList<VideoBitrate> videoBitrates = getVideoBitrates();
-        videoBitratePreference.setEntryValues(getVideoBitrateEntryValues(videoBitrates));
-        videoBitratePreference.setEntries(getVideoBitrateEntries(videoBitrates));
-
-        if (Build.VERSION.SDK_INT < 18) {
-            frameRatePreference.setEntryValues(R.array.frame_rate_values_no_oes);
+        if (addRemovePreference(settings.getShowAdvanced(), KEY_VIDEO_BITRATE, videoBitratePreference, videoCategory)) {
+            ArrayList<VideoBitrate> videoBitrates = getVideoBitrates();
+            videoBitratePreference.setEntryValues(getVideoBitrateEntryValues(videoBitrates));
+            videoBitratePreference.setEntries(getVideoBitrateEntries(videoBitrates));
         }
-        frameRatePreference.setEntries(getFrameRateEntries(frameRatePreference.getEntryValues()));
+
+        if (addRemovePreference(settings.getShowAdvanced(), KEY_FRAME_RATE, frameRatePreference, videoCategory)) {
+            if (Build.VERSION.SDK_INT < 18) {
+                frameRatePreference.setEntryValues(R.array.frame_rate_values_no_oes);
+            }
+            frameRatePreference.setEntries(getFrameRateEntries(frameRatePreference.getEntryValues()));
+        }
+
+        addRemovePreference(settings.getShowAdvanced(), KEY_VERTICAL_FRAMES, verticalFramesPreference, videoCategory);
 
         if (Build.VERSION.SDK_INT != 17) {
             audioSourcePreference.setEntries(R.array.audio_source_entries_internal);
             audioSourcePreference.setEntryValues(R.array.audio_source_values_internal);
         }
+    }
+
+    private boolean addRemovePreference(boolean add, String key, Preference preference, PreferenceCategory category) {
+        if (!add && category.findPreference(key) != null) {
+            category.removePreference(preference);
+        } else if (category.findPreference(key) == null) {
+            category.addPreference(preference);
+        }
+        return add;
     }
 
     private ArrayList<Integer> getVideoEncoders() {
