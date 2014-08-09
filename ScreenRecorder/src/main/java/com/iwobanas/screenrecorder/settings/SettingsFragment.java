@@ -78,7 +78,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         videoConfigPreference = (ListPreference) findPreference(KEY_VIDEO_CONFIG);
         videoConfigPreference.setOnPreferenceChangeListener(this);
-        videoConfigPreference.setTitle(getString(R.string.settings_video_config, Build.MODEL));
+        String title = getString(R.string.settings_video_config, Build.MODEL);
+        videoConfigPreference.setTitle(title);
+        videoConfigPreference.setDialogTitle(title);
 
         videoEncoderPreference = (ListPreference) findPreference(KEY_VIDEO_ENCODER);
         videoEncoderPreference.setOnPreferenceChangeListener(this);
