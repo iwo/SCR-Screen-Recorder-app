@@ -11,6 +11,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.text.Html;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
@@ -21,11 +22,14 @@ import com.iwobanas.screenrecorder.audio.InstallationStatus;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener, AudioDriver.OnInstallListener {
     public static final String KEY_COPYRIGHTS_STATEMENT = "copyrights_statement";
     public static final String KEY_VIDEO = "video";
+    public static final String KEY_VIDEO_CONFIG = "video_config";
     public static final String KEY_VIDEO_ENCODER = "video_encoder";
     public static final String KEY_RESOLUTION = "resolution";
     public static final String KEY_TRANSFORMATION = "transformation";
@@ -42,6 +46,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private static final int SELECT_OUTPUT_DIR = 1;
     private static final String TAG = "scr_SettingsFragment";
     private PreferenceCategory videoCategory;
+    private ListPreference videoConfigPreference;
     private ListPreference videoEncoderPreference;
     private ListPreference resolutionPreference;
     private ListPreference transformationPreference;
@@ -71,6 +76,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         settings = Settings.getInstance();
 
         videoCategory = (PreferenceCategory) findPreference(KEY_VIDEO);
+
+        videoConfigPreference = (ListPreference) findPreference(KEY_VIDEO_CONFIG);
+        videoConfigPreference.setOnPreferenceChangeListener(this);
+        videoConfigPreference.setTitle(getString(R.string.settings_video_config, Build.MODEL));
 
         videoEncoderPreference = (ListPreference) findPreference(KEY_VIDEO_ENCODER);
         videoEncoderPreference.setOnPreferenceChangeListener(this);
@@ -117,6 +126,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     protected void updateValues() {
+        updateSelectedVideoConfig();
+
         videoEncoderPreference.setValue(String.valueOf(settings.getVideoEncoder()));
         videoEncoderPreference.setSummary(formatVideoEncoderSummary(settings.getVideoEncoder()));
 
@@ -137,7 +148,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         audioSourcePreference.setValue(settings.getAudioSource().name());
         audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource()));
-        InstallationStatus installationStatus = settings.getAudioDriver().getInstallationStatus();
+
         samplingRatePreference.setValue(settings.getSamplingRate().name());
         samplingRatePreference.setSummary(formatSamplingRateSummary());
         samplingRatePreference.setEnabled(settings.getAudioSource().equals(AudioSource.MIC));
@@ -149,9 +160,38 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         colorFixPreference.setChecked(settings.getColorFix());
     }
 
+    private void updateSelectedVideoConfig() {
+        if (settings.getDeviceProfile() != null && settings.getDeviceProfile().getVideoConfigs().size() > 0) {
+            videoConfigPreference.setValue(getSelectedVideoConfigIndex());
+        }
+    }
+
+    private String getSelectedVideoConfigIndex() {
+        List<VideoConfig> configs = settings.getDeviceProfile().getVideoConfigs();
+        for (int i = 0; i < configs.size(); i++) {
+            VideoConfig config = configs.get(i);
+            if (config.getVideoEncoder() == settings.getVideoEncoder()
+                    && config.getResolution() == settings.getResolution()
+                    && config.getTransformation() == settings.getTransformation()
+                    && config.getVideoBitrate() == settings.getVideoBitrate())
+                return String.valueOf(i);
+        }
+        return null;
+    }
+
     protected void updateEntries() {
 
-        ArrayList<Integer> videoEncoders = getVideoEncoders();
+        if (settings.getDeviceProfile() != null && settings.getDeviceProfile().getVideoConfigs().size() > 0) {
+            videoConfigPreference.setEntries(getVideoConfigEntries());
+            videoConfigPreference.setEntryValues(getVideoConfigEntryValues());
+            videoConfigPreference.setEnabled(true);
+            videoConfigPreference.setSummary(R.string.settings_video_config_summary);
+        } else {
+            videoConfigPreference.setEnabled(false);
+            videoConfigPreference.setSummary(R.string.settings_video_config_summary_no_data);
+        }
+
+        List<Integer> videoEncoders = getVideoEncoders();
         if (addRemovePreference(videoEncoders.size() > 1, KEY_VIDEO_ENCODER, videoEncoderPreference, videoCategory)) {
             videoEncoderPreference.setEntryValues(getVideoEncoderEntryValues(videoEncoders));
             videoEncoderPreference.setEntries(getVideoEncoderEntries(videoEncoders));
@@ -161,7 +201,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         resolutionPreference.setEntries(getResolutionEntries());
 
         boolean softwareEncoderOnly = videoEncoders.size() == 1 && videoEncoders.get(0) == -2;
-        ArrayList<Transformation> transformations = getTransformations();
+        List<Transformation> transformations = getTransformations();
 
         if (addRemovePreference(transformations.size() > 1 && !softwareEncoderOnly,
                 KEY_TRANSFORMATION, transformationPreference, videoCategory)) {
@@ -190,6 +230,33 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         }
     }
 
+    private CharSequence[] getVideoConfigEntries() {
+        List<VideoConfig> configs = settings.getDeviceProfile().getVideoConfigs();
+        CharSequence[] entries = new CharSequence[configs.size()];
+        for (int i = 0; i < entries.length; i++) {
+            entries[i] = formatVideoConfig(configs.get(i));
+        }
+        return entries;
+    }
+
+    private CharSequence formatVideoConfig(VideoConfig videoConfig) {
+        return Html.fromHtml(
+                getString(R.string.settings_video_config_entry, videoConfig.getResolution().getWidth(), videoConfig.getResolution().getHeight(), videoConfig.getFrameRate()) +
+                        "<br/><small><font color=\"@android:secondary_text_dark\">" +
+                        formatVideoEncoderEntry(videoConfig.getVideoEncoder()) +
+                        (videoConfig.getVideoEncoder() == Settings.FFMPEG_MPEG_4_ENCODER ? "" : " " + formatTransformationEntry(videoConfig.getTransformation())) +
+                        "</font></small>"
+        );
+    }
+
+    private String[] getVideoConfigEntryValues() {
+        String[] indexes = new String[settings.getDeviceProfile().getVideoConfigs().size()];
+        for (int i = 0; i < indexes.length; i++) {
+            indexes[i] = String.valueOf(i);
+        }
+        return indexes;
+    }
+
     private boolean addRemovePreference(boolean add, String key, Preference preference, PreferenceCategory category) {
         if (!add && category.findPreference(key) != null) {
             category.removePreference(preference);
@@ -199,22 +266,18 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return add;
     }
 
-    private ArrayList<Integer> getVideoEncoders() {
+    private List<Integer> getVideoEncoders() {
         if (!settings.getShowUnstable() && settings.getDeviceProfile() != null)
             return settings.getDeviceProfile().getStableVideoEncoders();
 
         Integer[] allEncoders = Utils.isX86() ?
                 new Integer[]{MediaRecorder.VideoEncoder.H264, MediaRecorder.VideoEncoder.MPEG_4_SP}
                 : new Integer[]{MediaRecorder.VideoEncoder.H264, Settings.FFMPEG_MPEG_4_ENCODER, MediaRecorder.VideoEncoder.MPEG_4_SP};
-        ArrayList<Integer> encoders = new ArrayList<Integer>(allEncoders.length);
 
-        for (Integer encoder : allEncoders) {
-            encoders.add(encoder);
-        }
-        return encoders;
+        return Arrays.asList(allEncoders);
     }
 
-    private String[] getVideoEncoderEntryValues(ArrayList<Integer> videoEncoders) {
+    private String[] getVideoEncoderEntryValues(List<Integer> videoEncoders) {
         String[] entryValues = new String[videoEncoders.size()];
         for (int i = 0; i < videoEncoders.size(); i++) {
             entryValues[i] = String.valueOf(videoEncoders.get(i));
@@ -222,7 +285,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return entryValues;
     }
 
-    private String[] getVideoEncoderEntries(ArrayList<Integer> entryValues) {
+    private String[] getVideoEncoderEntries(List<Integer> entryValues) {
         String[] entries = new String[entryValues.size()];
         for (int i = 0; i < entryValues.size(); i++) {
             entries[i] = formatVideoEncoderEntry(entryValues.get(i));
@@ -302,21 +365,18 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return settings.getDefaultResolution();
     }
 
-    private ArrayList<Transformation> getTransformations() {
+    private List<Transformation> getTransformations() {
         if (!settings.getShowUnstable() && settings.getDeviceProfile() != null)
             return settings.getDeviceProfile().getStableTransformations();
 
         Transformation[] allTransformations = Build.VERSION.SDK_INT < 18 ?
                 new Transformation[]{Transformation.CPU, Transformation.GPU}
                 : new Transformation[]{Transformation.CPU, Transformation.GPU, Transformation.OES};
-        ArrayList<Transformation> transformations = new ArrayList<Transformation>(allTransformations.length);
-        for (Transformation transformation : allTransformations) {
-            transformations.add(transformation);
-        }
-        return transformations;
+
+        return Arrays.asList(allTransformations);
     }
 
-    private String[] getTransformationEntryValues(ArrayList<Transformation> transformations) {
+    private String[] getTransformationEntryValues(List<Transformation> transformations) {
         String[] entryValues = new String[transformations.size()];
         for (int i = 0; i < transformations.size(); i++) {
             entryValues[i] = transformations.get(i).name();
@@ -324,7 +384,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return entryValues;
     }
 
-    private String[] getTransformationEntries(ArrayList<Transformation> transformations) {
+    private String[] getTransformationEntries(List<Transformation> transformations) {
         String[] entries = new String[transformations.size()];
         for (int i = 0; i < transformations.size(); i++) {
             entries[i] = formatTransformationEntry(transformations.get(i));
@@ -476,7 +536,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String valueString = null;
-        Boolean selected = null;
+        Boolean selected = Boolean.FALSE;
         if (preference instanceof ListPreference) {
             valueString = (String) newValue;
         }
@@ -484,7 +544,16 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             selected = (Boolean) newValue;
         }
 
-        if (preference == videoEncoderPreference) {
+        if (preference == videoConfigPreference) {
+            int configIndex = Integer.parseInt(valueString);
+            VideoConfig videoConfig = settings.getDeviceProfile().getVideoConfigs().get(configIndex);
+            settings.setVideoEncoder(videoConfig.getVideoEncoder());
+            settings.setResolution(videoConfig.getResolution());
+            settings.setTransformation(videoConfig.getTransformation());
+            settings.setVideoBitrate(videoConfig.getVideoBitrate());
+            updateValues();
+
+        } else if (preference == videoEncoderPreference) {
             int videoEncoder = Integer.parseInt(valueString);
             settings.setVideoEncoder(videoEncoder);
             updateValues();
@@ -493,16 +562,19 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             Resolution resolution = findResolution(valueString);
             settings.setResolution(resolution);
             preference.setSummary(formatResolutionEntry(resolution));
+            updateSelectedVideoConfig();
 
         } else if (preference == transformationPreference) {
             Transformation transformation = Transformation.valueOf(valueString);
             settings.setTransformation(transformation);
             preference.setSummary(formatTransformationSummary(transformation));
+            updateSelectedVideoConfig();
 
         } else if (preference == videoBitratePreference) {
             VideoBitrate bitrate = VideoBitrate.valueOf(valueString);
             settings.setVideoBitrate(bitrate);
             preference.setSummary(formatVideoBitrateSummary(bitrate));
+            updateSelectedVideoConfig();
 
         } else if (preference == frameRatePreference) {
             int frameRate = Integer.parseInt(valueString);

@@ -116,8 +116,7 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_video_encoder_h263">H263</string>
     <string name="settings_video_encoder_mpeg_4_sp">MPEG-4 SP</string>
     <string name="settings_video_encoder_default">Auto</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4 (slow)</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">SW MPEG-4</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4</string>
     <string name="settings_video_encoder_built_in_summary">Android built-in %1$s encoder</string>
     <string name="settings_video_encoder_ffmpeg_summary">FFmpeg software MPEG4 encoder</string>
 
@@ -195,6 +194,11 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_zigzag_fix">Zigzag fix</string>
     <string name="settings_zigzag_fix_summary">Select if the recording contains random colourful stripes</string>
     <string name="settings_zigzag_fix_cpu_only">Available only with CPU Image transformation</string>
+
+    <string name="settings_video_config">%1$s presets</string>
+    <string name="settings_video_config_entry">%1$dx%2$d ~ %3$.0ffps</string>
+    <string name="settings_video_config_summary">Based on usage statistics</string>
+    <string name="settings_video_config_summary_no_data">Couldn\'t download statistics</string>
 
     <string name="directory_chooser_select">Select \"%1$s\"</string>
     <string name="directory_chooser_refresh">Refresh</string>

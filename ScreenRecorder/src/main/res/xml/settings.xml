@@ -5,6 +5,10 @@
         android:selectable="false" />
     <PreferenceCategory android:key="video" android:title="@string/settings_video_category">
         <ListPreference
+            android:key="video_config"
+            android:persistent="false" />
+
+        <ListPreference
             android:key="video_encoder"
             android:persistent="false"
             android:summary="@string/settings_video_encoder_built_in_summary"

@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder.settings;
 
 import android.media.MediaRecorder;
 import android.os.Build;
+import android.util.Log;
 
 import com.iwobanas.screenrecorder.Utils;
 
@@ -10,11 +11,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class DeviceProfile {
 
-    public static final String BLACKLISTS = "blacklists";
+    private static final String TAG = "scr_DeviceProfile";
+    private static final String BLACKLISTS = "blacklists";
+    private static final String RESOLUTION = "resolution";
     private static final String VIDEO_ENCODER = "video_encoder";
     private static final String RESOLUTION_WIDTH = "resolution_width";
     private static final String RESOLUTION_HEIGHT = "resolution_height";
@@ -23,7 +28,8 @@ public class DeviceProfile {
     private static final String COLOR_FIX = "color_fix";
     private static final String SAMPLING_RATE = "sampling_rate";
     private static final String DEFAULTS = "defaults";
-    public static final String RESOLUTION = "resolution";
+    private static final String VIDEO_CONFIGS = "video_configs";
+    private static final String FRAME_RATE = "frame_rate";
     private ResolutionsManager resolutionsManager;
 
     private int defaultVideoEncoder;
@@ -38,8 +44,10 @@ public class DeviceProfile {
     private Collection<Transformation> hideTransformations = new ArrayList<Transformation>();
     private Collection<VideoBitrate> hideVideoBitrates = new ArrayList<VideoBitrate>();
 
-    private ArrayList<Integer> stableVideoEncoders;
-    private ArrayList<Transformation> stableTransformations;
+    private List<VideoConfig> videoConfigs = new ArrayList<VideoConfig>();
+
+    private List<Integer> stableVideoEncoders;
+    private List<Transformation> stableTransformations;
 
     public DeviceProfile(JSONObject json, ResolutionsManager resolutionsManager) throws JSONException {
         this.resolutionsManager = resolutionsManager;
@@ -50,8 +58,40 @@ public class DeviceProfile {
         if (json.has(BLACKLISTS)) {
             decodeBlacklists(json.getJSONObject(BLACKLISTS));
         }
+
+        if (json.has(VIDEO_CONFIGS)) {
+            decodeVideoConfigs(json.getJSONArray(VIDEO_CONFIGS));
+        }
         validateBlackLists();
         validateDefaults();
+    }
+
+    private void decodeVideoConfigs(JSONArray jsonConfigs) {
+        videoConfigs = new ArrayList<VideoConfig>(jsonConfigs.length());
+
+        for (int i = 0; i < jsonConfigs.length(); i++) {
+            try {
+                JSONObject jsonConfig = jsonConfigs.getJSONObject(i);
+                Resolution resolution = resolutionsManager.getResolution(
+                        jsonConfig.getJSONObject(RESOLUTION).getInt(RESOLUTION_WIDTH),
+                        jsonConfig.getJSONObject(RESOLUTION).getInt(RESOLUTION_HEIGHT)
+                );
+                if (resolution == null)
+                    continue;
+
+                videoConfigs.add(
+                        new VideoConfig(
+                                jsonConfig.getInt(VIDEO_ENCODER),
+                                resolution,
+                                Transformation.valueOf(jsonConfig.getString(TRANSFORMATION)),
+                                VideoBitrate.getByBitrate(jsonConfig.getInt(VIDEO_BITRATE)),
+                                jsonConfig.getDouble(FRAME_RATE)
+                        )
+                );
+            } catch (Exception e) {
+                Log.w(TAG, "Error parsing video configs", e);
+            }
+        }
     }
 
     private void decodeDefaults(JSONObject defaults) throws JSONException {
@@ -126,9 +166,7 @@ public class DeviceProfile {
 
         if (stableVideoEncoders.size() == 0) {
             hideVideoEncoders.clear();
-            for (Integer encoder : allEncoders) {
-                stableVideoEncoders.add(encoder);
-            }
+            stableVideoEncoders = Arrays.asList(allEncoders);
         }
 
         Transformation[] allTransformations = Build.VERSION.SDK_INT < 18 ?
@@ -143,9 +181,7 @@ public class DeviceProfile {
 
         if (stableTransformations.size() == 0) {
             hideTransformations.clear();
-            for (Transformation transformation : allTransformations) {
-                stableTransformations.add(transformation);
-            }
+            stableTransformations = Arrays.asList(allTransformations);
         }
     }
 
@@ -201,11 +237,15 @@ public class DeviceProfile {
         return hideVideoBitrates.contains(bitrate);
     }
 
-    public ArrayList<Integer> getStableVideoEncoders() {
+    public List<Integer> getStableVideoEncoders() {
         return stableVideoEncoders;
     }
 
-    public ArrayList<Transformation> getStableTransformations() {
+    public List<Transformation> getStableTransformations() {
         return stableTransformations;
+    }
+
+    public List<VideoConfig> getVideoConfigs() {
+        return videoConfigs;
     }
 }
