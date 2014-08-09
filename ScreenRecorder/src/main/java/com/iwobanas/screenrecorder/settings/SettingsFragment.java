@@ -61,7 +61,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private CheckBoxPreference stopOnScreenOffPreference;
     private CheckBoxPreference colorFixPreference;
     private Settings settings;
-    private boolean outputDirChooserOpen = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -529,7 +528,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         Intent intent = new Intent(getActivity(), DirectoryChooserActivity.class);
         intent.setData(Uri.fromFile(Settings.getInstance().getOutputDir()));
         intent.putExtra(DirectoryChooserActivity.DEFAULT_DIR_EXTRA, Settings.getInstance().getDefaultOutputDir().getAbsolutePath());
-        outputDirChooserOpen = true;
         startActivityForResult(intent, SELECT_OUTPUT_DIR);
     }
 
@@ -622,7 +620,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SELECT_OUTPUT_DIR) {
-            outputDirChooserOpen = false;
             if (resultCode == Activity.RESULT_OK) {
                 settings.setOutputDir(new File(data.getData().getPath()));
                 outputDirPreference.setSummary(settings.getOutputDir().getAbsolutePath());
