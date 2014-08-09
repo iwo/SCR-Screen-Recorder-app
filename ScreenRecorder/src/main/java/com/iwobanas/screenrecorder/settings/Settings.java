@@ -153,18 +153,14 @@ public class Settings {
     private void checkAppUpdate() {
         previousAppVersion = preferences.getInt(APP_VERSION, -1);
         appUpdated = (previousAppVersion != -1 && previousAppVersion != appVersion);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(APP_VERSION, appVersion);
-        editor.commit();
+        preferences.edit().putInt(APP_VERSION, appVersion).commit();
     }
 
     private void checkSystemUpdate() {
         String previousFingerprint = preferences.getString(BUILD_FINGERPRINT, null);
         String fingerprint = Build.FINGERPRINT;
         systemUpdated = (previousFingerprint != null && !previousFingerprint.equals(fingerprint));
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BUILD_FINGERPRINT, fingerprint);
-        editor.commit();
+        preferences.edit().putString(BUILD_FINGERPRINT, fingerprint).commit();
     }
 
     private void handleAppUpdate() {
@@ -271,9 +267,7 @@ public class Settings {
         } else if (audioSource != AudioSource.INTERNAL && audioDriver.shouldUninstall()) {
             audioDriver.uninstall();
         }
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(AUDIO_SOURCE, audioSource.name());
-        settingsModified(editor);
+        settingsModified(preferences.edit().putString(AUDIO_SOURCE, audioSource.name()));
     }
 
     public boolean getTemporaryMute() {
@@ -297,7 +291,10 @@ public class Settings {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt(RESOLUTION_WIDTH, resolution.getWidth());
             editor.putInt(RESOLUTION_HEIGHT, resolution.getHeight());
-            settingsModified(editor);
+            settingsModified(preferences.edit()
+                            .putInt(RESOLUTION_WIDTH, resolution.getWidth())
+                            .putInt(RESOLUTION_HEIGHT, resolution.getHeight())
+            );
         }
     }
 
@@ -322,9 +319,7 @@ public class Settings {
 
     public void setFrameRate(int value) {
         frameRate = value;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(FRAME_RATE, frameRate);
-        settingsModified(editor);
+        settingsModified(preferences.edit().putInt(FRAME_RATE, frameRate));
     }
 
     public Transformation getTransformation() {
@@ -333,9 +328,7 @@ public class Settings {
 
     public void setTransformation(Transformation transformation) {
         this.transformation = transformation;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(TRANSFORMATION, transformation.name());
-        settingsModified(editor);
+        settingsModified(preferences.edit().putString(TRANSFORMATION, transformation.name()));
     }
 
     public SamplingRate getSamplingRate() {
@@ -344,9 +337,7 @@ public class Settings {
 
     public void setSamplingRate(SamplingRate samplingRate) {
         this.samplingRate = samplingRate;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(SAMPLING_RATE, samplingRate.name());
-        settingsModified(editor);
+        settingsModified(preferences.edit().putString(SAMPLING_RATE, samplingRate.name()));
     }
 
     public VideoBitrate getVideoBitrate() {
@@ -355,9 +346,7 @@ public class Settings {
 
     public void setVideoBitrate(VideoBitrate videoBitrate) {
         this.videoBitrate = videoBitrate;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(VIDEO_BITRATE, videoBitrate.name());
-        settingsModified(editor);
+        settingsModified(preferences.edit().putString(VIDEO_BITRATE, videoBitrate.name()));
     }
 
     public boolean getColorFix() {
@@ -366,9 +355,7 @@ public class Settings {
 
     public void setColorFix(boolean colorFix) {
         this.colorFix = colorFix;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(COLOR_FIX, colorFix);
-        settingsModified(editor);
+        settingsModified(preferences.edit().putBoolean(COLOR_FIX, colorFix));
     }
 
     public boolean getHideIcon() {
@@ -377,9 +364,7 @@ public class Settings {
 
     public void setHideIcon(boolean hideIcon) {
         this.hideIcon = hideIcon;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(HIDE_ICON, hideIcon);
-        settingsModified(editor);
+        settingsModified(preferences.edit().putBoolean(HIDE_ICON, hideIcon));
     }
 
     public boolean getShowTouches() {
@@ -389,9 +374,7 @@ public class Settings {
     public void setShowTouches(boolean showTouches) {
         this.showTouches = showTouches;
         showTouchesController.setShowTouches(showTouches);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(SHOW_TOUCHES, showTouches);
-        settingsModified(editor);
+        settingsModified(preferences.edit().putBoolean(SHOW_TOUCHES, showTouches));
     }
 
     public boolean getStopOnScreenOff() {
@@ -400,9 +383,7 @@ public class Settings {
 
     public void setStopOnScreenOff(boolean stopOnScreenOff) {
         this.stopOnScreenOff = stopOnScreenOff;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(STOP_ON_SCREEN_OFF, stopOnScreenOff);
-        settingsModified(editor);
+        settingsModified(preferences.edit().putBoolean(STOP_ON_SCREEN_OFF, stopOnScreenOff));
     }
 
     public int getVideoEncoder() {
@@ -415,9 +396,7 @@ public class Settings {
             videoEncoder = MediaRecorder.VideoEncoder.H264;
         }
         this.videoEncoder = videoEncoder;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(VIDEO_ENCODER, videoEncoder);
-        settingsModified(editor);
+        settingsModified(preferences.edit().putInt(VIDEO_ENCODER, videoEncoder));
     }
 
     public File getOutputDir() {
@@ -429,10 +408,7 @@ public class Settings {
 
     public void setOutputDir(File outputDir) {
         this.outputDir = outputDir;
-
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(OUTPUT_DIR, outputDir.getAbsolutePath());
-        settingsModified(editor);
+        settingsModified(preferences.edit().putString(OUTPUT_DIR, outputDir.getAbsolutePath()));
     }
 
     public File getDefaultOutputDir() {
@@ -441,10 +417,7 @@ public class Settings {
 
     public void setVerticalFrames(boolean verticalFrames) {
         this.verticalFrames = verticalFrames;
-
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(VERTICAL_FRAMES, verticalFrames);
-        settingsModified(editor);
+        settingsModified(preferences.edit().putBoolean(VERTICAL_FRAMES, verticalFrames));
     }
 
     public boolean getVerticalFrames() {
@@ -579,9 +552,7 @@ public class Settings {
 
     public void setShowUnstable(boolean showUnstable) {
         this.showUnstable = showUnstable;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(SHOW_UNSTABLE, showUnstable);
-        editor.commit();
+        preferences.edit().putBoolean(SHOW_UNSTABLE, showUnstable).commit();
         preventLockedUnstable();
     }
 }
