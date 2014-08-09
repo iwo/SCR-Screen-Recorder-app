@@ -85,7 +85,7 @@ public class Settings {
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
         checkAppUpdate();
         checkSystemUpdate();
-        new LoadDeviceProfileAsyncTask(this, context, appVersion, appUpdated, systemUpdated).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        loadDeviceProfileIfNeeded(context);
         // readPreferences(); will be called when device profile is loaded
         if (appUpdated) {
             handleAppUpdate();
@@ -96,6 +96,8 @@ public class Settings {
     public static synchronized void initialize(Context context) {
         if (instance == null) {
             instance = new Settings(context.getApplicationContext());
+        } else {
+            instance.loadDeviceProfileIfNeeded(context.getApplicationContext());
         }
     }
 
@@ -150,6 +152,12 @@ public class Settings {
         verticalFrames = preferences.getBoolean(VERTICAL_FRAMES, false);
 
         showUnstable = preferences.getBoolean(SHOW_UNSTABLE, false);
+    }
+
+    private void loadDeviceProfileIfNeeded(Context context) {
+        if (deviceProfile == null) {
+            new LoadDeviceProfileAsyncTask(this, context, appVersion, appUpdated, systemUpdated).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }
     }
 
     private void checkAppUpdate() {
