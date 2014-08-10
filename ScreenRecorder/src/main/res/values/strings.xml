@@ -200,6 +200,9 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_video_config_summary">Based on usage statistics</string>
     <string name="settings_video_config_summary_no_data">Couldn\'t download statistics</string>
 
+    <string name="device_profile_download_error_toast">Couldn\'t download recommended settings. Make sure you\'re online.</string>
+    <string name="device_profile_downloaded_toast">Recommended settings downloaded</string>
+
     <string name="directory_chooser_select">Select \"%1$s\"</string>
     <string name="directory_chooser_refresh">Refresh</string>
     <string name="directory_chooser_new">New</string>

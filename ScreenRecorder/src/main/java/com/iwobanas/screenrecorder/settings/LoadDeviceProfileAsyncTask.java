@@ -5,7 +5,9 @@ import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.Utils;
 
 import org.apache.http.client.ResponseHandler;
@@ -29,11 +31,13 @@ public class LoadDeviceProfileAsyncTask extends AsyncTask<Void, Void, DeviceProf
 
     private Map<String, String> params = new HashMap<String, String>();
     private Settings settings;
+    private Context context;
 
     private File cacheFile;
 
     public LoadDeviceProfileAsyncTask(Settings settings, Context context, int appVersion, boolean appUpdated, boolean systemUpdated) {
         this.settings = settings;
+        this.context = context;
         params.put("app_version", String.valueOf(appVersion));
 
         cacheFile = new File(context.getFilesDir(), DEVICE_PROFILE_FILE_NAME);
@@ -152,6 +156,11 @@ public class LoadDeviceProfileAsyncTask extends AsyncTask<Void, Void, DeviceProf
 
     @Override
     protected void onPostExecute(DeviceProfile profile) {
+        if (profile == null) {
+            Toast.makeText(context, R.string.device_profile_download_error_toast, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(context, R.string.device_profile_downloaded_toast, Toast.LENGTH_SHORT).show();
+        }
         settings.setDeviceProfile(profile);
     }
 }
