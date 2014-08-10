@@ -74,8 +74,8 @@ public class DeviceProfile {
             try {
                 JSONObject jsonConfig = jsonConfigs.getJSONObject(i);
                 Resolution resolution = resolutionsManager.getResolution(
-                        jsonConfig.getJSONObject(RESOLUTION).getInt(RESOLUTION_WIDTH),
-                        jsonConfig.getJSONObject(RESOLUTION).getInt(RESOLUTION_HEIGHT)
+                        jsonConfig.getInt(RESOLUTION_WIDTH),
+                        jsonConfig.getInt(RESOLUTION_HEIGHT)
                 );
                 if (resolution == null)
                     continue;
