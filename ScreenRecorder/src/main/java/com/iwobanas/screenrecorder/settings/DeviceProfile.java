@@ -30,6 +30,7 @@ public class DeviceProfile {
     private static final String DEFAULTS = "defaults";
     private static final String VIDEO_CONFIGS = "video_configs";
     private static final String FRAME_RATE = "frame_rate";
+    private static final String STABILITY = "stability";
     private ResolutionsManager resolutionsManager;
 
     private int defaultVideoEncoder;
@@ -85,8 +86,8 @@ public class DeviceProfile {
                                 resolution,
                                 Transformation.valueOf(jsonConfig.getString(TRANSFORMATION)),
                                 VideoBitrate.getByBitrate(jsonConfig.getInt(VIDEO_BITRATE)),
-                                jsonConfig.getDouble(FRAME_RATE)
-                        )
+                                jsonConfig.getDouble(FRAME_RATE),
+                                jsonConfig.getInt(STABILITY))
                 );
             } catch (Exception e) {
                 Log.w(TAG, "Error parsing video configs", e);

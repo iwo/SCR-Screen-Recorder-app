@@ -245,8 +245,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 getString(R.string.settings_video_config_entry, videoConfig.getResolution().getWidth(), videoConfig.getResolution().getHeight(), videoConfig.getFrameRate()) +
                         "<br/><small><font color=\"@android:secondary_text_dark\">" +
                         formatVideoEncoderEntry(videoConfig.getVideoEncoder()) +
-                        (videoConfig.getVideoEncoder() == Settings.FFMPEG_MPEG_4_ENCODER ? "" : " " + formatTransformationEntry(videoConfig.getTransformation())) +
-                        "</font></small>"
+                        (videoConfig.getVideoEncoder() == Settings.FFMPEG_MPEG_4_ENCODER ? "" : "&emsp;" + formatTransformationEntry(videoConfig.getTransformation())) +
+                        "&emsp;" + getString(R.string.settings_video_config_entry_stability, videoConfig.getStability()) +"</font></small>"
         );
     }
 

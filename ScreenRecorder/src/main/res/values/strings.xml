@@ -197,6 +197,7 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
 
     <string name="settings_video_config">%1$s presets</string>
     <string name="settings_video_config_entry">%1$dx%2$d ~ %3$.0ffps</string>
+    <string name="settings_video_config_entry_stability">%1$d%% stable</string>
     <string name="settings_video_config_summary">Based on usage statistics</string>
     <string name="settings_video_config_summary_no_data">Couldn\'t download statistics</string>
 
