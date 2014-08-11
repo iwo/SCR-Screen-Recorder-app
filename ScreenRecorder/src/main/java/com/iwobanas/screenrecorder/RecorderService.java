@@ -273,7 +273,17 @@ public class RecorderService extends Service implements IRecorderService, Licens
         intent.setDataAndType(uri, "video/*");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Log.w(TAG, "Couldn't play video file, attempting with different mime type", e);
+            intent.setDataAndType(uri, "video/mp4");
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException ee) {
+                Log.e(TAG, "Couldn't play video file", ee);
+            }
+        }
     }
 
     @Override
