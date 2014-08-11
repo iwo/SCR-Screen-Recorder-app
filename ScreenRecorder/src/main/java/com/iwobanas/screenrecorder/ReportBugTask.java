@@ -18,7 +18,7 @@ public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
     private static final String TAG = "scr_ReportBugTask";
 
     public ReportBugTask(Context context, int errorCode) {
-        this.context = context;
+        this.context = context.getApplicationContext();
         this.errorCode = errorCode;
     }
 
@@ -62,6 +62,7 @@ public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
         if (exitValue != 0) {
             return;
         }
+        EasyTracker.getInstance().setContext(context); // for some reason context sometimes wasn't set here
         EasyTracker.getTracker().sendEvent(ACTION, BUG, REPORT, null);
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent.setType("text/plain");
