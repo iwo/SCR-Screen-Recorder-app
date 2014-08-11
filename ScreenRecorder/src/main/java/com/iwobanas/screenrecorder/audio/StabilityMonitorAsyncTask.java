@@ -74,8 +74,7 @@ public class StabilityMonitorAsyncTask extends AsyncTask<Void, Void, Boolean>{
     @Override
     protected void onPostExecute(Boolean stable) {
         Log.v(TAG, "Completed");
-        super.onPostExecute(stable);
-        if (!stable) {
+        if (stable != null && !stable) {
             new AudioInstallationStatsAsyncTask(context, installId, InstallationStatus.UNSTABLE, null, 0).execute();
             audioDriver.setInstallationStatus(InstallationStatus.UNSTABLE);
         }
