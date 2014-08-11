@@ -249,4 +249,8 @@ public class DeviceProfile {
     public List<VideoConfig> getVideoConfigs() {
         return videoConfigs;
     }
+
+    public boolean isHighEndDevice() {
+        return videoConfigs.size() > 0 && videoConfigs.get(0).getFrameRate() > 15.0;
+    }
 }

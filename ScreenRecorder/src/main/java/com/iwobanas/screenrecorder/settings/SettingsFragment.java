@@ -217,8 +217,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         }
 
         if (addRemovePreference(settings.getShowAdvanced(), KEY_FRAME_RATE, frameRatePreference, videoCategory)) {
-            if (Build.VERSION.SDK_INT < 18) {
-                frameRatePreference.setEntryValues(R.array.frame_rate_values_no_oes);
+            if (Build.VERSION.SDK_INT < 18 || (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isHighEndDevice())) {
+                frameRatePreference.setEntryValues(R.array.frame_rate_values_lo_end);
             }
             frameRatePreference.setEntries(getFrameRateEntries(frameRatePreference.getEntryValues()));
         }

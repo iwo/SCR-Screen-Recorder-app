@@ -3,8 +3,8 @@
 
     <string-array name="frame_rate_values" translatable="false">
         <item>-1</item>
+        <item>60</item>
         <item>50</item>
-        <item>40</item>
         <item>30</item>
         <item>25</item>
         <item>20</item>
@@ -13,7 +13,7 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="frame_rate_values_no_oes" translatable="false">
+    <string-array name="frame_rate_values_lo_end" translatable="false">
         <item>-1</item>
         <item>30</item>
         <item>25</item>
