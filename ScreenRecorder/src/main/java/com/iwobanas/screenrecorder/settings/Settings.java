@@ -45,7 +45,8 @@ public class Settings {
     private Resolution resolution;
     private Resolution defaultResolution;
     private ResolutionsManager resolutionsManager;
-    private int frameRate = 15;
+    private int defaultFrameRate = 30;
+    private int frameRate = defaultFrameRate;
     private Transformation transformation = Transformation.GPU;
     private Transformation defaultTransformation = Transformation.GPU;
     private SamplingRate defaultSamplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
@@ -120,7 +121,7 @@ public class Settings {
             resolution = resolutionsManager.getResolution(resolutionWidth, resolutionHeight);
         }
 
-        frameRate = preferences.getInt(FRAME_RATE, 15);
+        frameRate = preferences.getInt(FRAME_RATE, defaultFrameRate);
 
         String transformation = preferences.getString(TRANSFORMATION, defaultTransformation.name());
         try {
@@ -185,6 +186,13 @@ public class Settings {
             } else {
                 showTouches = true;
                 editor.putBoolean(SHOW_TOUCHES, true);
+            }
+        }
+
+        if (previousAppVersion <= 66) {
+            if (frameRate == 15) {
+                editor.remove(FRAME_RATE);
+                frameRate = defaultFrameRate;
             }
         }
 
@@ -445,7 +453,7 @@ public class Settings {
         editor.remove(RESOLUTION_WIDTH);
         editor.remove(RESOLUTION_HEIGHT);
 
-        frameRate = 15;
+        frameRate = defaultFrameRate;
         editor.remove(FRAME_RATE);
 
         transformation = defaultTransformation;
@@ -490,7 +498,7 @@ public class Settings {
     public boolean currentEqualsDefault() {
         return audioSource == AudioSource.MIC
                 && getResolution() == getDefaultResolution()
-                && frameRate == 15
+                && frameRate == defaultFrameRate
                 && transformation == defaultTransformation
                 && samplingRate == defaultSamplingRate
                 && videoBitrate == defaultVideoBitrate
