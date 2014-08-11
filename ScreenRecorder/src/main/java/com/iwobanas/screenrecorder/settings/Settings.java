@@ -541,6 +541,9 @@ public class Settings {
     }
 
     public void setDeviceProfile(DeviceProfile deviceProfile) {
+        if (this.deviceProfile != null && deviceProfile == null)
+            return;
+
         this.deviceProfile = deviceProfile;
         if (deviceProfile != null) {
             updateDefaults();
