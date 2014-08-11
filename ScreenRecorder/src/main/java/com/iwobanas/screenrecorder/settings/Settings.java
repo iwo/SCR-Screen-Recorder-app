@@ -151,6 +151,7 @@ public class Settings {
 
         verticalFrames = preferences.getBoolean(VERTICAL_FRAMES, false);
 
+        showAdvanced = preferences.getBoolean(SHOW_ADVANCED, false);
         showUnstable = preferences.getBoolean(SHOW_UNSTABLE, false);
     }
 
