@@ -21,11 +21,11 @@ public class AnalyticsExceptionParser extends StandardExceptionParser {
         StringBuilder descriptionBuilder = new StringBuilder();
         descriptionBuilder.append(cause.getClass().getSimpleName());
         if (element != null) {
-            descriptionBuilder.append(String.format(" (@%s:%s:%s)", element.getClassName(), element.getMethodName(), element.getLineNumber()));
+            descriptionBuilder.append(String.format(" at %s.%s(SourceFile:%s)", element.getClassName(), element.getMethodName(), element.getLineNumber()));
         }
 
         if (threadName != null) {
-            descriptionBuilder.append(String.format(" {%s}", threadName.replaceAll("[0-9]*", "XX")));
+            descriptionBuilder.append(String.format(" {%s}", threadName.replaceAll("\\d+", "XX")));
         }
 
         return descriptionBuilder.toString();

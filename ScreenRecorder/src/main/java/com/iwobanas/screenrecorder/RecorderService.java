@@ -22,6 +22,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.ExceptionParser;
+import com.google.analytics.tracking.android.ExceptionReporter;
 import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
@@ -115,8 +117,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public void onCreate() {
         EasyTracker.getInstance().setContext(getApplicationContext());
-        List<String> packages = Arrays.asList( "com.iwobanas", "com.google.android.vending");
-        EasyTracker.getTracker().setExceptionParser(new AnalyticsExceptionParser(getApplicationContext(), packages));
+        initializeExceptionParser();
         mHandler = new Handler();
 
         if (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT > 19) {
@@ -141,6 +142,17 @@ public class RecorderService extends Service implements IRecorderService, Licens
             checkLicense();
         }
         Log.v(TAG, "Service initialized. version: " + Utils.getAppVersion(this));
+    }
+
+    private void initializeExceptionParser() {
+        List<String> packages = Arrays.asList( "com.iwobanas", "com.google.android.vending");
+        ExceptionParser exceptionParser = new AnalyticsExceptionParser(getApplicationContext(), packages);
+        EasyTracker.getTracker().setExceptionParser(exceptionParser);
+        Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+        if (uncaughtExceptionHandler instanceof ExceptionReporter) {
+            ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
+            exceptionReporter.setExceptionParser(exceptionParser);
+        }
     }
 
     private void installExecutable() {
