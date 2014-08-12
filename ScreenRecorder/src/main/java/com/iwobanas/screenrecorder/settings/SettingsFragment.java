@@ -225,7 +225,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         addRemovePreference(settings.getShowAdvanced(), KEY_VERTICAL_FRAMES, verticalFramesPreference, videoCategory);
 
-        if (Build.VERSION.SDK_INT == 19) {
+        if (Build.VERSION.SDK_INT == 17) {
             CharSequence[] entries = audioSourcePreference.getEntries();
             entries[2] = Html.fromHtml(getString(R.string.settings_audio_internal_experimental) +
                             "<br/><small><font color=\"@android:secondary_text_dark\">" +
