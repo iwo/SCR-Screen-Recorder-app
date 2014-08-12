@@ -14,9 +14,18 @@ public enum VideoBitrate {
     private int bitrate;
     private String label;
 
-    VideoBitrate(int samplingRate, String label) {
-        this.bitrate = samplingRate;
+    VideoBitrate(int bitrate, String label) {
+        this.bitrate = bitrate;
         this.label = label;
+    }
+
+    public static VideoBitrate getByBitrate(int bitrate) {
+        for (VideoBitrate videoBitrate : values()) {
+            if (videoBitrate.bitrate == bitrate) {
+                return videoBitrate;
+            }
+        }
+        throw new IllegalArgumentException("Invalid video bitrate: " + bitrate);
     }
 
     public String getCommand() {

@@ -3,6 +3,7 @@
 .idea/libraries/*
 gen
 out
+build
 local.properties
 .gradle
 ScreenRecorder/build

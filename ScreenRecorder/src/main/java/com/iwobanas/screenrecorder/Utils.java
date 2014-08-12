@@ -11,6 +11,7 @@ import android.util.Log;
 import android.util.TypedValue;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.EOFException;
@@ -460,6 +461,43 @@ public class Utils {
             Log.w(TAG, "Error fetching application name for intent " + intent, e);
         }
         return name;
+    }
+
+    public static String readFileToString(File file) throws IOException {
+        InputStream in = null;
+        byte[] bytes = null;
+        try {
+            in = new FileInputStream(file);
+            bytes = new byte[(int) file.length()];
+            int len = bytes.length;
+            int total = 0;
+
+            while (total < len) {
+                int result = in.read(bytes, total, len - total);
+                if (result == -1) {
+                    break;
+                }
+                total += result;
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+        return new String(bytes);
+    }
+
+    public static void writeStringToFile(File file, String string) throws IOException {
+        BufferedOutputStream os = null;
+        try {
+            os = new BufferedOutputStream(new FileOutputStream(file));
+            os.write(string.getBytes());
+            os.flush();
+        } finally {
+            if (os != null) {
+                os.close();
+            }
+        }
     }
 
     public static int waitForProcess(String command, long timeout) {

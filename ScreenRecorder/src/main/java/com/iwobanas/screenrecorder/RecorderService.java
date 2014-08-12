@@ -37,7 +37,9 @@ import com.iwobanas.screenrecorder.stats.RecordingStatsAsyncTask;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static com.iwobanas.screenrecorder.Tracker.ACTION;
 import static com.iwobanas.screenrecorder.Tracker.AUDIO;
@@ -115,6 +117,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public void onCreate() {
         EasyTracker.getInstance().setContext(getApplicationContext());
+        List<String> packages = Arrays.asList( "com.iwobanas", "com.google.android.vending");
+        EasyTracker.getTracker().setExceptionParser(new AnalyticsExceptionParser(getApplicationContext(), packages));
         mHandler = new Handler();
 
         if (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT > 19) {
@@ -277,7 +281,17 @@ public class RecorderService extends Service implements IRecorderService, Licens
         intent.setDataAndType(uri, "video/*");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Log.w(TAG, "Couldn't play video file, attempting with different mime type", e);
+            intent.setDataAndType(uri, "video/mp4");
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException ee) {
+                Log.e(TAG, "Couldn't play video file", ee);
+            }
+        }
     }
 
     @Override

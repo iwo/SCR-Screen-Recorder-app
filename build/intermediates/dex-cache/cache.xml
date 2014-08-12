@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/home/iwo/AndroidStudioProjects/ScreenRecorderProject/ScreenRecorder/build/intermediates/pre-dexed/free/debug/android-support-v4-8f0939d05db0a604fb062815d3f64e19c2f01fc8.jar"
+        jar="/home/iwo/AndroidStudioProjects/ScreenRecorderProject/ScreenRecorder/libs/android-support-v4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="bd6479f5dd592790607e0504e66e0f31c2b4d308"/>
+    <item
+        dex="/home/iwo/AndroidStudioProjects/ScreenRecorderProject/ScreenRecorder/build/intermediates/pre-dexed/free/debug/libGoogleAnalyticsV2-76bed63ca1e33db1aebf0b94f2ca74eb46ce89c6.jar"
+        jar="/home/iwo/AndroidStudioProjects/ScreenRecorderProject/ScreenRecorder/libs/libGoogleAnalyticsV2.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="9a148f9153424671460bb55e985c16d4747144f3"/>
+
+</pre-dex-items>

@@ -1,79 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <string-array name="video_encoder_entries">
-        <item>@string/settings_video_encoder_h264</item>
-        <item>@string/settings_video_encoder_ffmpeg_mpeg_4</item>
-        <item>@string/settings_video_encoder_mpeg_4_sp</item>
-    </string-array>
-
-    <string-array name="video_encoder_values" translatable="false">
-        <item>2</item>
-        <item>-2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="video_encoder_entries_no_sw">
-        <item>@string/settings_video_encoder_h264</item>
-        <item>@string/settings_video_encoder_mpeg_4_sp</item>
-    </string-array>
-
-    <string-array name="video_encoder_values_no_sw" translatable="false">
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="transformation_entries">
-        <item>@string/settings_transformation_cpu</item>
-        <item>@string/settings_transformation_gpu</item>
-        <item>@string/settings_transformation_oes</item>
-    </string-array>
-
-    <string-array name="transformation_values" translatable="false">
-        <item>CPU</item>
-        <item>GPU</item>
-        <item>OES</item>
-    </string-array>
-
-    <string-array name="transformation_entries_no_oes">
-        <item>@string/settings_transformation_cpu</item>
-        <item>@string/settings_transformation_gpu</item>
-    </string-array>
-
-    <string-array name="transformation_values_no_oes" translatable="false">
-        <item>CPU</item>
-        <item>GPU</item>
-    </string-array>
-
-    <string-array name="video_bitrate_entries" translatable="false">
-        <!-- TODO: localize "Auto" string -->
-        <item>Auto</item>
-        <item>500kbps</item>
-        <item>1Mbps</item>
-        <item>2Mbps</item>
-        <item>3Mbps</item>
-        <item>5Mbps</item>
-        <item>10Mbps</item>
-        <item>15Mbps</item>
-        <item>30Mbps</item>
-    </string-array>
-
-    <string-array name="video_bitrate_values" translatable="false">
-        <item>BITRATE_AUTO</item>
-        <item>BITRATE_500_KBPS</item>
-        <item>BITRATE_1_MBPS</item>
-        <item>BITRATE_2_MBPS</item>
-        <item>BITRATE_3_MBPS</item>
-        <item>BITRATE_5_MBPS</item>
-        <item>BITRATE_10_MBPS</item>
-        <item>BITRATE_15_MBPS</item>
-        <item>BITRATE_30_MBPS</item>
-    </string-array>
-
     <string-array name="frame_rate_values" translatable="false">
         <item>-1</item>
+        <item>60</item>
         <item>50</item>
-        <item>40</item>
         <item>30</item>
         <item>25</item>
         <item>20</item>
@@ -82,7 +13,7 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="frame_rate_values_no_oes" translatable="false">
+    <string-array name="frame_rate_values_lo_end" translatable="false">
         <item>-1</item>
         <item>30</item>
         <item>25</item>
@@ -95,41 +26,27 @@
     <string-array name="audio_source_entries">
         <item>@string/settings_audio_mute</item>
         <item>@string/settings_audio_mic</item>
-    </string-array>
-
-    <string-array name="audio_source_values" translatable="false">
-        <item>MUTE</item>
-        <item>MIC</item>
-    </string-array>
-
-    <string-array name="audio_source_entries_internal">
-        <item>@string/settings_audio_mute</item>
-        <item>@string/settings_audio_mic</item>
         <item>@string/settings_audio_internal_experimental</item>
     </string-array>
 
-    <string-array name="audio_source_values_internal">
+    <string-array name="audio_source_values" translatable="false">
         <item>MUTE</item>
         <item>MIC</item>
         <item>INTERNAL</item>
     </string-array>
 
     <string-array name="sampling_rate_entries" translatable="false">
-        <item>8kHz</item>
         <item>16kHz</item>
         <item>32kHz</item>
         <item>44.1kHz</item>
         <item>48kHz</item>
-        <item>96kHz</item>
     </string-array>
 
     <string-array name="sampling_rate_values" translatable="false">
-        <item>SAMPLING_RATE_8_KHZ</item>
         <item>SAMPLING_RATE_16_KHZ</item>
         <item>SAMPLING_RATE_32_KHZ</item>
         <item>SAMPLING_RATE_44_KHZ</item>
         <item>SAMPLING_RATE_48_KHZ</item>
-        <item>SAMPLING_RATE_96_KHZ</item>
     </string-array>
 
 </resources>

@@ -107,16 +107,16 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_reset">Restore defaults</string>
     <string name="settings_cancel">Cancel</string>
 
+    <string name="settings_unstable">%1$s (unstable)</string>
+
     <string name="settings_video_category">Video</string>
 
     <string name="settings_video_encoder">Encoder</string>
     <string name="settings_video_encoder_h264">H264</string>
     <string name="settings_video_encoder_h263">H263</string>
-    <string name="settings_video_encoder_h263_unstable">H263 (unstable)</string>
     <string name="settings_video_encoder_mpeg_4_sp">MPEG-4 SP</string>
     <string name="settings_video_encoder_default">Auto</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4 (slow)</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">SW MPEG-4</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4</string>
     <string name="settings_video_encoder_built_in_summary">Android built-in %1$s encoder</string>
     <string name="settings_video_encoder_ffmpeg_summary">FFmpeg software MPEG4 encoder</string>
 
@@ -127,7 +127,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_resolution_padding">%1$dx%2$d - %2$dp with padding</string>
     <string name="settings_resolution_max">%1$dx%2$d - Max</string>
     <string name="settings_resolution_half">%1$dx%2$d - Half</string>
-    <string name="settings_resolution_unstable">(unstable)</string>
 
     <string name="settings_transformation">Image transformation</string>
     <string name="settings_transformation_cpu">CPU</string>
@@ -176,6 +175,8 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_audio_mute">Mute</string>
     <string name="settings_audio_internal">Internal</string>
     <string name="settings_audio_internal_experimental">Internal (experimental)</string>
+    <string name="settings_audio_internal_not_supported">Not supported on %1$s</string>
+    <string name="settings_audio_internal_incompatible">Not compatible with your audio driver</string>
     <string name="settings_audio_mic_summary">Microphone</string>
     <string name="settings_audio_mute_summary">Mute. No Audio track</string>
     <string name="settings_audio_internal_summary">System audio output</string>
@@ -195,6 +196,15 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_zigzag_fix">Zigzag fix</string>
     <string name="settings_zigzag_fix_summary">Select if the recording contains random colourful stripes</string>
     <string name="settings_zigzag_fix_cpu_only">Available only with CPU Image transformation</string>
+
+    <string name="settings_video_config">%1$s presets</string>
+    <string name="settings_video_config_entry">%1$dx%2$d ~ %3$.0ffps</string>
+    <string name="settings_video_config_entry_stability">%1$d%% stable</string>
+    <string name="settings_video_config_summary">Based on usage statistics</string>
+    <string name="settings_video_config_summary_no_data">Couldn\'t download statistics</string>
+
+    <string name="device_profile_download_error_toast">Couldn\'t download recommended settings. Make sure you\'re online.</string>
+    <string name="device_profile_downloaded_toast">Recommended settings downloaded</string>
 
     <string name="directory_chooser_select">Select \"%1$s\"</string>
     <string name="directory_chooser_refresh">Refresh</string>
@@ -223,6 +233,8 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
 
     <string name="help_stop_message">To stop recording lock the screen and wait 2 seconds. Alternatively you can simply reopen %1$s app.</string>
     <string name="menu_send_bug_report">Send bug report</string>
+    <string name="menu_show_unstable">Show unstable</string>
+    <string name="menu_show_advanced">Show advanced</string>
 
     <string name="notification_status_installing">Initializing</string>
     <string name="notification_status_initializing">Waiting for root access</string>

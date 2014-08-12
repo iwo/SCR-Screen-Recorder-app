@@ -4,10 +4,12 @@
     <Preference
         android:key="copyrights_statement"
         android:selectable="false" />
-    <PreferenceCategory android:title="@string/settings_video_category">
+    <PreferenceCategory android:key="video" android:title="@string/settings_video_category">
         <ListPreference
-            android:entries="@array/video_encoder_entries"
-            android:entryValues="@array/video_encoder_values"
+            android:key="video_config"
+            android:persistent="false" />
+
+        <ListPreference
             android:key="video_encoder"
             android:persistent="false"
             android:summary="@string/settings_video_encoder_built_in_summary"
@@ -19,8 +21,6 @@
             android:title="@string/settings_resolution" />
 
         <ListPreference
-            android:entries="@array/transformation_entries"
-            android:entryValues="@array/transformation_values"
             android:key="transformation"
             android:persistent="false"
             android:summary="@string/settings_transformation_cpu_summary"
@@ -28,8 +28,6 @@
 
 
         <ListPreference
-            android:entries="@array/video_bitrate_entries"
-            android:entryValues="@array/video_bitrate_values"
             android:key="video_bitrate"
             android:persistent="false"
             android:title="@string/settings_video_bitrate" />

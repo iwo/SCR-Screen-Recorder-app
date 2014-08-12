@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.text.Html;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
@@ -19,9 +21,15 @@ import com.iwobanas.screenrecorder.audio.AudioDriver;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener, AudioDriver.OnInstallListener {
     public static final String KEY_COPYRIGHTS_STATEMENT = "copyrights_statement";
+    public static final String KEY_VIDEO = "video";
+    public static final String KEY_VIDEO_CONFIG = "video_config";
     public static final String KEY_VIDEO_ENCODER = "video_encoder";
     public static final String KEY_RESOLUTION = "resolution";
     public static final String KEY_TRANSFORMATION = "transformation";
@@ -39,6 +47,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_COLOR_FIX = "color_fix";
     private static final int SELECT_OUTPUT_DIR = 1;
     private static final String TAG = "scr_SettingsFragment";
+    private PreferenceCategory videoCategory;
+    private ListPreference videoConfigPreference;
     private ListPreference videoEncoderPreference;
     private ListPreference resolutionPreference;
     private ListPreference transformationPreference;
@@ -55,7 +65,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private CheckBoxPreference stopOnScreenOffPreference;
     private CheckBoxPreference colorFixPreference;
     private Settings settings;
-    private boolean outputDirChooserOpen = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,33 +78,27 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         settings = Settings.getInstance();
 
+        videoCategory = (PreferenceCategory) findPreference(KEY_VIDEO);
+
+        videoConfigPreference = (ListPreference) findPreference(KEY_VIDEO_CONFIG);
+        videoConfigPreference.setOnPreferenceChangeListener(this);
+        String title = getString(R.string.settings_video_config, Build.MODEL);
+        videoConfigPreference.setTitle(title);
+        videoConfigPreference.setDialogTitle(title);
+
         videoEncoderPreference = (ListPreference) findPreference(KEY_VIDEO_ENCODER);
         videoEncoderPreference.setOnPreferenceChangeListener(this);
-        if (Utils.isX86()) {
-            videoEncoderPreference.setEntries(R.array.video_encoder_entries_no_sw);
-            videoEncoderPreference.setEntryValues(R.array.video_encoder_values_no_sw);
-        }
 
         resolutionPreference = (ListPreference) findPreference(KEY_RESOLUTION);
         resolutionPreference.setOnPreferenceChangeListener(this);
-        resolutionPreference.setEntries(getResolutionEntries());
-        resolutionPreference.setEntryValues(getResolutionEntryValues());
 
         transformationPreference = (ListPreference) findPreference(KEY_TRANSFORMATION);
-        if (Build.VERSION.SDK_INT < 18) {
-            transformationPreference.setEntries(R.array.transformation_entries_no_oes);
-            transformationPreference.setEntryValues(R.array.transformation_values_no_oes);
-        }
         transformationPreference.setOnPreferenceChangeListener(this);
 
         videoBitratePreference = (ListPreference) findPreference(KEY_VIDEO_BITRATE);
         videoBitratePreference.setOnPreferenceChangeListener(this);
 
         frameRatePreference = (ListPreference) findPreference(KEY_FRAME_RATE);
-        if (Build.VERSION.SDK_INT < 18) {
-            frameRatePreference.setEntryValues(R.array.frame_rate_values_no_oes);
-        }
-        frameRatePreference.setEntries(getFrameRateEntries(frameRatePreference.getEntryValues()));
         frameRatePreference.setOnPreferenceChangeListener(this);
 
         verticalFramesPreference = (CheckBoxPreference) findPreference(KEY_VERTICAL_FRAMES);
@@ -103,10 +106,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         audioSourcePreference = (ListPreference) findPreference(KEY_AUDIO_SOURCE);
         audioSourcePreference.setOnPreferenceChangeListener(this);
-        if (Build.VERSION.SDK_INT != 17) {
-            audioSourcePreference.setEntries(R.array.audio_source_entries_internal);
-            audioSourcePreference.setEntryValues(R.array.audio_source_values_internal);
-        }
+
         samplingRatePreference = (ListPreference) findPreference(KEY_SAMPLING_RATE);
         samplingRatePreference.setOnPreferenceChangeListener(this);
 
@@ -132,10 +132,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         colorFixPreference.setOnPreferenceChangeListener(this);
 
         settings.getAudioDriver().addInstallListener(this);
+        updateEntries();
         updateValues();
     }
 
     protected void updateValues() {
+        updateSelectedVideoConfig();
+
         videoEncoderPreference.setValue(String.valueOf(settings.getVideoEncoder()));
         videoEncoderPreference.setSummary(formatVideoEncoderSummary(settings.getVideoEncoder()));
 
@@ -156,7 +159,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         audioSourcePreference.setValue(settings.getAudioSource().name());
         audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource()));
-        InstallationStatus installationStatus = settings.getAudioDriver().getInstallationStatus();
+
         samplingRatePreference.setValue(settings.getSamplingRate().name());
         samplingRatePreference.setSummary(formatSamplingRateSummary());
         samplingRatePreference.setEnabled(settings.getAudioSource().equals(AudioSource.MIC));
@@ -171,57 +174,201 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         colorFixPreference.setChecked(settings.getColorFix());
     }
 
-    private String formatCameraAlphaSummary() {
-        if (getActivity() == null) return "";
-        if (settings.getCameraAlpha() == 1.0f) {
-            return getString(R.string.settings_camera_alpha_summary_100);
+    private void updateSelectedVideoConfig() {
+        if (settings.getDeviceProfile() != null && settings.getDeviceProfile().getVideoConfigs().size() > 0) {
+            videoConfigPreference.setValue(getSelectedVideoConfigIndex());
         }
-        int percentage = (int) (settings.getCameraAlpha() * 100);
-        return getString(R.string.settings_camera_alpha_summary, percentage);
     }
 
-    private String formatVideoEncoderSummary(int videoEncoder) {
-        switch (videoEncoder) {
-            case Settings.FFMPEG_MPEG_4_ENCODER:
-                return getString(R.string.settings_video_encoder_ffmpeg_summary);
-            case MediaRecorder.VideoEncoder.H264:
-                return String.format(getString(
-                        R.string.settings_video_encoder_built_in_summary),
-                        getString(R.string.settings_video_encoder_h264));
-            case MediaRecorder.VideoEncoder.MPEG_4_SP:
-                return String.format(getString(
-                        R.string.settings_video_encoder_built_in_summary),
-                        getString(R.string.settings_video_encoder_mpeg_4_sp));
+    private String getSelectedVideoConfigIndex() {
+        List<VideoConfig> configs = settings.getDeviceProfile().getVideoConfigs();
+        for (int i = 0; i < configs.size(); i++) {
+            VideoConfig config = configs.get(i);
+            if (config.getVideoEncoder() == settings.getVideoEncoder()
+                    && config.getResolution() == settings.getResolution()
+                    && config.getTransformation() == settings.getTransformation()
+                    && config.getVideoBitrate() == settings.getVideoBitrate())
+                return String.valueOf(i);
         }
-        return "";
+        return null;
     }
 
-    private CharSequence[] getResolutionEntries() {
-        Resolution[] resolutions = settings.getResolutions();
-        String[] entries = new String[resolutions.length];
-        for (int i = 0; i < resolutions.length; i++) {
-            Resolution resolution = resolutions[i];
-            entries[i] = formatResolutionEntry(resolution);
+    protected void updateEntries() {
+
+        if (settings.getDeviceProfile() != null && settings.getDeviceProfile().getVideoConfigs().size() > 0) {
+            videoConfigPreference.setEntries(getVideoConfigEntries());
+            videoConfigPreference.setEntryValues(getVideoConfigEntryValues());
+            videoConfigPreference.setEnabled(true);
+            videoConfigPreference.setSummary(R.string.settings_video_config_summary);
+        } else {
+            videoConfigPreference.setEnabled(false);
+            videoConfigPreference.setSummary(R.string.settings_video_config_summary_no_data);
+        }
+
+        List<Integer> videoEncoders = getVideoEncoders();
+        if (addRemovePreference(videoEncoders.size() > 1, KEY_VIDEO_ENCODER, videoEncoderPreference, videoCategory)) {
+            videoEncoderPreference.setEntryValues(getVideoEncoderEntryValues(videoEncoders));
+            videoEncoderPreference.setEntries(getVideoEncoderEntries(videoEncoders));
+        }
+
+        resolutionPreference.setEntryValues(getResolutionEntryValues());
+        resolutionPreference.setEntries(getResolutionEntries());
+
+        boolean softwareEncoderOnly = videoEncoders.size() == 1 && videoEncoders.get(0) == -2;
+        List<Transformation> transformations = getTransformations();
+
+        if (addRemovePreference(transformations.size() > 1 && !softwareEncoderOnly,
+                KEY_TRANSFORMATION, transformationPreference, videoCategory)) {
+            transformationPreference.setEntryValues(getTransformationEntryValues(transformations));
+            transformationPreference.setEntries(getTransformationEntries(transformations));
+        }
+
+        if (addRemovePreference(settings.getShowAdvanced(), KEY_VIDEO_BITRATE, videoBitratePreference, videoCategory)) {
+            ArrayList<VideoBitrate> videoBitrates = getVideoBitrates();
+            videoBitratePreference.setEntryValues(getVideoBitrateEntryValues(videoBitrates));
+            videoBitratePreference.setEntries(getVideoBitrateEntries(videoBitrates));
+        }
+
+        if (addRemovePreference(settings.getShowAdvanced(), KEY_FRAME_RATE, frameRatePreference, videoCategory)) {
+            if (Build.VERSION.SDK_INT < 18 || (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isHighEndDevice())) {
+                frameRatePreference.setEntryValues(R.array.frame_rate_values_lo_end);
+            }
+            frameRatePreference.setEntries(getFrameRateEntries(frameRatePreference.getEntryValues()));
+        }
+
+        addRemovePreference(settings.getShowAdvanced(), KEY_VERTICAL_FRAMES, verticalFramesPreference, videoCategory);
+
+        if (Build.VERSION.SDK_INT == 17) {
+            CharSequence[] entries = audioSourcePreference.getEntries();
+            entries[2] = Html.fromHtml(getString(R.string.settings_audio_internal_experimental) +
+                            "<br/><small><font color=\"@android:secondary_text_dark\">" +
+                            getString(R.string.settings_audio_internal_not_supported, Build.VERSION.RELEASE) +
+                            "</font></small>"
+            );
+            audioSourcePreference.setEntries(entries);
+        } else if (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isInternalAudioStable()) {
+            CharSequence[] entries = audioSourcePreference.getEntries();
+            entries[2] = Html.fromHtml(getString(R.string.settings_audio_internal_experimental) +
+                            "<br/><small><font color=\"@android:secondary_text_dark\">" +
+                            getString(R.string.settings_audio_internal_incompatible) +
+                            "</font></small>"
+            );
+            audioSourcePreference.setEntries(entries);
+        }
+    }
+
+    private CharSequence[] getVideoConfigEntries() {
+        List<VideoConfig> configs = settings.getDeviceProfile().getVideoConfigs();
+        CharSequence[] entries = new CharSequence[configs.size()];
+        for (int i = 0; i < entries.length; i++) {
+            entries[i] = formatVideoConfig(configs.get(i));
         }
         return entries;
     }
 
+    private CharSequence formatVideoConfig(VideoConfig videoConfig) {
+        return Html.fromHtml(
+                getString(R.string.settings_video_config_entry, videoConfig.getResolution().getWidth(), videoConfig.getResolution().getHeight(), videoConfig.getFrameRate()) +
+                        "<br/><small><font color=\"@android:secondary_text_dark\">" +
+                        formatVideoEncoderEntry(videoConfig.getVideoEncoder()) +
+                        (videoConfig.getVideoEncoder() == Settings.FFMPEG_MPEG_4_ENCODER ? "" : "&emsp;" + formatTransformationEntry(videoConfig.getTransformation())) +
+                        "&emsp;" + getString(R.string.settings_video_config_entry_stability, videoConfig.getStability()) +"</font></small>"
+        );
+    }
+
+    private String[] getVideoConfigEntryValues() {
+        String[] indexes = new String[settings.getDeviceProfile().getVideoConfigs().size()];
+        for (int i = 0; i < indexes.length; i++) {
+            indexes[i] = String.valueOf(i);
+        }
+        return indexes;
+    }
+
+    private boolean addRemovePreference(boolean add, String key, Preference preference, PreferenceCategory category) {
+        if (!add && category.findPreference(key) != null) {
+            category.removePreference(preference);
+        } else if (category.findPreference(key) == null) {
+            category.addPreference(preference);
+        }
+        return add;
+    }
+
+    private List<Integer> getVideoEncoders() {
+        if (!settings.getShowUnstable() && settings.getDeviceProfile() != null)
+            return settings.getDeviceProfile().getStableVideoEncoders();
+
+        Integer[] allEncoders = Utils.isX86() ?
+                new Integer[]{MediaRecorder.VideoEncoder.H264, MediaRecorder.VideoEncoder.MPEG_4_SP}
+                : new Integer[]{MediaRecorder.VideoEncoder.H264, Settings.FFMPEG_MPEG_4_ENCODER, MediaRecorder.VideoEncoder.MPEG_4_SP};
+
+        return Arrays.asList(allEncoders);
+    }
+
+    private String[] getVideoEncoderEntryValues(List<Integer> videoEncoders) {
+        String[] entryValues = new String[videoEncoders.size()];
+        for (int i = 0; i < videoEncoders.size(); i++) {
+            entryValues[i] = String.valueOf(videoEncoders.get(i));
+        }
+        return entryValues;
+    }
+
+    private String[] getVideoEncoderEntries(List<Integer> entryValues) {
+        String[] entries = new String[entryValues.size()];
+        for (int i = 0; i < entryValues.size(); i++) {
+            entries[i] = formatVideoEncoderEntry(entryValues.get(i));
+        }
+        return entries;
+    }
+
+    private String formatVideoEncoderEntry(int encoder) {
+        String entry = null;
+        switch (encoder) {
+            case -2:
+                entry = getString(R.string.settings_video_encoder_ffmpeg_mpeg_4);
+                break;
+            case 2:
+                entry = getString(R.string.settings_video_encoder_h264);
+                break;
+            case 3:
+                entry = getString(R.string.settings_video_encoder_mpeg_4_sp);
+                break;
+        }
+        if (settings.getDeviceProfile() != null && settings.getDeviceProfile().hideVideoEncoder(encoder)) {
+            entry = getString(R.string.settings_unstable, entry);
+        }
+        return entry;
+    }
+
+    private CharSequence[] getResolutionEntries() {
+        Resolution[] resolutions = settings.getResolutions();
+        ArrayList<String> entries = new ArrayList<String>(resolutions.length);
+        for (Resolution resolution : resolutions) {
+            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
+                    && settings.getDeviceProfile().hideResolution(resolution))
+                continue;
+            entries.add(formatResolutionEntry(resolution));
+        }
+        return entries.toArray(new String[entries.size()]);
+    }
+
     private String formatResolutionEntry(Resolution r) {
         String entry = String.format(getString(r.getLabelId(), r.getWidth(), r.getHeight()));
-        if (r.getHeight() > 720) {
-            entry += " " + getString(R.string.settings_resolution_unstable);
+        if (settings.getDeviceProfile() != null && settings.getDeviceProfile().hideResolution(r)) {
+            entry = getString(R.string.settings_unstable, entry);
         }
         return entry;
     }
 
     private CharSequence[] getResolutionEntryValues() {
         Resolution[] resolutions = settings.getResolutions();
-        String[] values = new String[resolutions.length];
-        for (int i = 0; i < resolutions.length; i++) {
-            Resolution resolution = resolutions[i];
-            values[i] = formatResolutionEntryValue(resolution);
+        ArrayList<String> values = new ArrayList<String>(resolutions.length);
+        for (Resolution resolution : resolutions) {
+            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
+                    && settings.getDeviceProfile().hideResolution(resolution))
+                continue;
+            values.add(formatResolutionEntryValue(resolution));
         }
-        return values;
+        return values.toArray(new String[values.size()]);
     }
 
     private String formatResolutionEntryValue(Resolution r) {
@@ -243,6 +390,100 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         }
         Log.w(TAG, "Resolution ont found " + resolution);
         return settings.getDefaultResolution();
+    }
+
+    private List<Transformation> getTransformations() {
+        if (!settings.getShowUnstable() && settings.getDeviceProfile() != null)
+            return settings.getDeviceProfile().getStableTransformations();
+
+        Transformation[] allTransformations = Build.VERSION.SDK_INT < 18 ?
+                new Transformation[]{Transformation.CPU, Transformation.GPU}
+                : new Transformation[]{Transformation.CPU, Transformation.GPU, Transformation.OES};
+
+        return Arrays.asList(allTransformations);
+    }
+
+    private String[] getTransformationEntryValues(List<Transformation> transformations) {
+        String[] entryValues = new String[transformations.size()];
+        for (int i = 0; i < transformations.size(); i++) {
+            entryValues[i] = transformations.get(i).name();
+        }
+        return entryValues;
+    }
+
+    private String[] getTransformationEntries(List<Transformation> transformations) {
+        String[] entries = new String[transformations.size()];
+        for (int i = 0; i < transformations.size(); i++) {
+            entries[i] = formatTransformationEntry(transformations.get(i));
+        }
+        return entries;
+    }
+
+    private String formatTransformationEntry(Transformation transformation) {
+        String entry = null;
+        switch (transformation) {
+            case CPU:
+                entry = getString(R.string.settings_transformation_cpu);
+                break;
+            case GPU:
+                entry = getString(R.string.settings_transformation_gpu);
+                break;
+            case OES:
+                entry = getString(R.string.settings_transformation_oes);
+                break;
+        }
+        if (settings.getDeviceProfile() != null && settings.getDeviceProfile().hideTransformation(transformation)) {
+            entry = getString(R.string.settings_unstable, entry);
+        }
+        return entry;
+    }
+
+    private ArrayList<VideoBitrate> getVideoBitrates() {
+        ArrayList<VideoBitrate> bitrates = new ArrayList<VideoBitrate>(VideoBitrate.values().length);
+        for (VideoBitrate bitrate : VideoBitrate.values()) {
+            if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
+                    && settings.getDeviceProfile().hideVideoBitrate(bitrate))
+                continue;
+            bitrates.add(bitrate);
+        }
+        return bitrates;
+    }
+
+    private String[] getVideoBitrateEntryValues(ArrayList<VideoBitrate> bitrates) {
+        String[] entryValues = new String[bitrates.size()];
+        for (int i = 0; i < bitrates.size(); i++) {
+            entryValues[i] = bitrates.get(i).name();
+        }
+        return entryValues;
+    }
+
+    private String[] getVideoBitrateEntries(ArrayList<VideoBitrate> bitrates) {
+        String[] entries = new String[bitrates.size()];
+        for (int i = 0; i < bitrates.size(); i++) {
+            entries[i] = bitrates.get(i).getLabel();
+            if (settings.getDeviceProfile() != null && settings.getDeviceProfile().hideVideoBitrate(bitrates.get(i))) {
+                entries[i] = getString(R.string.settings_unstable, entries[i]);
+            }
+        }
+        return entries;
+    }
+
+    private String formatVideoEncoderSummary(int videoEncoder) {
+        switch (videoEncoder) {
+            case Settings.FFMPEG_MPEG_4_ENCODER:
+                return getString(R.string.settings_video_encoder_ffmpeg_summary);
+            case MediaRecorder.VideoEncoder.H264:
+                return String.format(getString(
+                                R.string.settings_video_encoder_built_in_summary),
+                        getString(R.string.settings_video_encoder_h264)
+                );
+            case MediaRecorder.VideoEncoder.MPEG_4_SP:
+                return String.format(getString(
+                                R.string.settings_video_encoder_built_in_summary),
+                        getString(R.string.settings_video_encoder_mpeg_4_sp)
+                );
+        }
+        return "";
     }
 
     private String formatTransformationSummary(Transformation transformation) {
@@ -311,18 +552,26 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return settings.getSamplingRate().getLabel();
     }
 
+    private String formatCameraAlphaSummary() {
+        if (getActivity() == null) return "";
+        if (settings.getCameraAlpha() == 1.0f) {
+            return getString(R.string.settings_camera_alpha_summary_100);
+        }
+        int percentage = (int) (settings.getCameraAlpha() * 100);
+        return getString(R.string.settings_camera_alpha_summary, percentage);
+    }
+
     private void openOutputDirChooser() {
         Intent intent = new Intent(getActivity(), DirectoryChooserActivity.class);
         intent.setData(Uri.fromFile(Settings.getInstance().getOutputDir()));
         intent.putExtra(DirectoryChooserActivity.DEFAULT_DIR_EXTRA, Settings.getInstance().getDefaultOutputDir().getAbsolutePath());
-        outputDirChooserOpen = true;
         startActivityForResult(intent, SELECT_OUTPUT_DIR);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String valueString = null;
-        Boolean selected = null;
+        Boolean selected = Boolean.FALSE;
         if (preference instanceof ListPreference) {
             valueString = (String) newValue;
         }
@@ -330,7 +579,16 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             selected = (Boolean) newValue;
         }
 
-        if (preference == videoEncoderPreference) {
+        if (preference == videoConfigPreference) {
+            int configIndex = Integer.parseInt(valueString);
+            VideoConfig videoConfig = settings.getDeviceProfile().getVideoConfigs().get(configIndex);
+            settings.setVideoEncoder(videoConfig.getVideoEncoder());
+            settings.setResolution(videoConfig.getResolution());
+            settings.setTransformation(videoConfig.getTransformation());
+            settings.setVideoBitrate(videoConfig.getVideoBitrate());
+            updateValues();
+
+        } else if (preference == videoEncoderPreference) {
             int videoEncoder = Integer.parseInt(valueString);
             settings.setVideoEncoder(videoEncoder);
             updateValues();
@@ -339,16 +597,19 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             Resolution resolution = findResolution(valueString);
             settings.setResolution(resolution);
             preference.setSummary(formatResolutionEntry(resolution));
+            updateSelectedVideoConfig();
 
         } else if (preference == transformationPreference) {
             Transformation transformation = Transformation.valueOf(valueString);
             settings.setTransformation(transformation);
             preference.setSummary(formatTransformationSummary(transformation));
+            updateSelectedVideoConfig();
 
         } else if (preference == videoBitratePreference) {
             VideoBitrate bitrate = VideoBitrate.valueOf(valueString);
             settings.setVideoBitrate(bitrate);
             preference.setSummary(formatVideoBitrateSummary(bitrate));
+            updateSelectedVideoConfig();
 
         } else if (preference == frameRatePreference) {
             int frameRate = Integer.parseInt(valueString);
@@ -358,9 +619,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         } else if (preference == verticalFramesPreference) {
             settings.setVerticalFrames(selected);
         } else if (preference == audioSourcePreference) {
-            AudioSource source = AudioSource.valueOf(valueString);
-            settings.setAudioSource(source);
-            updateValues();
+            if (Build.VERSION.SDK_INT != 17) {
+                AudioSource source = AudioSource.valueOf(valueString);
+                settings.setAudioSource(source);
+                updateValues();
+            } else {
+                return false;
+            }
         } else if (preference == samplingRatePreference) {
             SamplingRate rate = SamplingRate.valueOf(valueString);
             settings.setSamplingRate(rate);
@@ -401,7 +666,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SELECT_OUTPUT_DIR) {
-            outputDirChooserOpen = false;
             if (resultCode == Activity.RESULT_OK) {
                 settings.setOutputDir(new File(data.getData().getPath()));
                 outputDirPreference.setSummary(settings.getOutputDir().getAbsolutePath());
