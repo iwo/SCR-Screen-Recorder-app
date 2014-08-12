@@ -31,6 +31,7 @@ public class DeviceProfile {
     private static final String VIDEO_CONFIGS = "video_configs";
     private static final String FRAME_RATE = "frame_rate";
     private static final String STABILITY = "stability";
+    private static final String INTERNAL_AUDIO_STABLE = "internal_audio_stable";
     private ResolutionsManager resolutionsManager;
 
     private int defaultVideoEncoder;
@@ -39,6 +40,7 @@ public class DeviceProfile {
     private VideoBitrate defaultVideoBitrate;
     private SamplingRate defaultSamplingRate;
     private boolean defaultColorFix;
+    private boolean internalAudioStable;
 
     private Collection<Integer> hideVideoEncoders = new ArrayList<Integer>(3);
     private Collection<Resolution> hideResolutions = new ArrayList<Resolution>();
@@ -63,6 +65,9 @@ public class DeviceProfile {
         if (json.has(VIDEO_CONFIGS)) {
             decodeVideoConfigs(json.getJSONArray(VIDEO_CONFIGS));
         }
+
+        internalAudioStable = !json.has(INTERNAL_AUDIO_STABLE) || json.getBoolean(INTERNAL_AUDIO_STABLE);
+
         validateBlackLists();
         validateDefaults();
     }
@@ -252,5 +257,9 @@ public class DeviceProfile {
 
     public boolean isHighEndDevice() {
         return videoConfigs.size() > 0 && videoConfigs.get(0).getFrameRate() > 15.0;
+    }
+
+    public boolean isInternalAudioStable() {
+        return internalAudioStable;
     }
 }

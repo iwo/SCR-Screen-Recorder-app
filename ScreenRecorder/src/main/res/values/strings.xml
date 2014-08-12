@@ -175,6 +175,8 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_audio_mute">Mute</string>
     <string name="settings_audio_internal">Internal</string>
     <string name="settings_audio_internal_experimental">Internal (experimental)</string>
+    <string name="settings_audio_internal_not_supported">Not supported on %1$s</string>
+    <string name="settings_audio_internal_incompatible">Not compatible with your audio driver</string>
     <string name="settings_audio_mic_summary">Microphone</string>
     <string name="settings_audio_mute_summary">Mute. No Audio track</string>
     <string name="settings_audio_internal_summary">System audio output</string>

@@ -225,9 +225,22 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         addRemovePreference(settings.getShowAdvanced(), KEY_VERTICAL_FRAMES, verticalFramesPreference, videoCategory);
 
-        if (Build.VERSION.SDK_INT != 17) {
-            audioSourcePreference.setEntries(R.array.audio_source_entries_internal);
-            audioSourcePreference.setEntryValues(R.array.audio_source_values_internal);
+        if (Build.VERSION.SDK_INT == 19) {
+            CharSequence[] entries = audioSourcePreference.getEntries();
+            entries[2] = Html.fromHtml(getString(R.string.settings_audio_internal_experimental) +
+                            "<br/><small><font color=\"@android:secondary_text_dark\">" +
+                            getString(R.string.settings_audio_internal_not_supported, Build.VERSION.RELEASE) +
+                            "</font></small>"
+            );
+            audioSourcePreference.setEntries(entries);
+        } else if (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isInternalAudioStable()) {
+            CharSequence[] entries = audioSourcePreference.getEntries();
+            entries[2] = Html.fromHtml(getString(R.string.settings_audio_internal_experimental) +
+                            "<br/><small><font color=\"@android:secondary_text_dark\">" +
+                            getString(R.string.settings_audio_internal_incompatible) +
+                            "</font></small>"
+            );
+            audioSourcePreference.setEntries(entries);
         }
     }
 
@@ -584,9 +597,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         } else if (preference == verticalFramesPreference) {
             settings.setVerticalFrames(selected);
         } else if (preference == audioSourcePreference) {
-            AudioSource source = AudioSource.valueOf(valueString);
-            settings.setAudioSource(source);
-            updateValues();
+            if (Build.VERSION.SDK_INT != 17) {
+                AudioSource source = AudioSource.valueOf(valueString);
+                settings.setAudioSource(source);
+                updateValues();
+            } else {
+                return false;
+            }
         } else if (preference == samplingRatePreference) {
             SamplingRate rate = SamplingRate.valueOf(valueString);
             settings.setSamplingRate(rate);
