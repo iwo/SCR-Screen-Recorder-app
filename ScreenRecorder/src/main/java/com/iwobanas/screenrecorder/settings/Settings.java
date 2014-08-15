@@ -506,7 +506,7 @@ public class Settings {
                 && !hideIcon
                 && !showTouches
                 && stopOnScreenOff
-                && outputDir.equals(defaultOutputDir)
+                && defaultOutputDir.equals(outputDir)
                 && videoEncoder == defaultVideoEncoder
                 && !verticalFrames;
     }
