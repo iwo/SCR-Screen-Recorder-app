@@ -429,7 +429,13 @@ public class RecorderService extends Service implements IRecorderService, Licens
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        mNotificationManager.notify(0, mBuilder.build());
+        try {
+            mNotificationManager.notify(0, mBuilder.build());
+        } catch (SecurityException e) {
+            // Android 4.1.2 issue
+            // could be fixed by adding <uses-permission android:name="android.permission.WAKE_LOCK" />
+            Log.w(TAG, "Couldn't display notification", e);
+        }
     }
 
     private void displayStopHelp() {
