@@ -610,7 +610,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             preference.setSummary(rate.getLabel());
         } else if (preference == hideIconPreference) {
             if (getResources().getBoolean(R.bool.taniosc)) {
-                new HideIconDialogFragment().show(getFragmentManager(), "hideWatermark");
+                try {
+                    new HideIconDialogFragment().show(getFragmentManager(), "hideWatermark");
+                } catch (IllegalStateException e) {
+                    Log.w(TAG, "Couldn't display dialog fragment. Is it already added?", e);
+                }
                 return false;
             } else {
                 settings.setHideIcon(selected);
