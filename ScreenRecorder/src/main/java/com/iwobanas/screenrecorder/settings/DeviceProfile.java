@@ -194,7 +194,7 @@ public class DeviceProfile {
     private void validateDefaults() {
         // this is just a safety check. with a sane stats default settings should never be blacklisted
 
-        if (hideVideoEncoder(defaultVideoEncoder)) {
+        if (hideVideoEncoder(defaultVideoEncoder) || (Utils.isX86() && defaultVideoEncoder == Settings.FFMPEG_MPEG_4_ENCODER)) {
             defaultVideoEncoder = stableVideoEncoders.get(0);
         }
 
