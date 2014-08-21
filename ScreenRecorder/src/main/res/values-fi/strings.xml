@@ -182,7 +182,7 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_zigzag_fix_cpu_only">"Käytettävissä vain CPU kuvanmuunnoksella"</string>
 
     <string name="settings_video_config">"%1$s esiasetukset"</string>
-    <string name="settings_video_config_entry">"%1$d x %2$d ~% 3 $ .0ffps"</string>
+    <string name="settings_video_config_entry">"%1$d x %2$d ~%3$.0ffps"</string>
     <string name="settings_video_config_entry_stability">"%1$d %% vakaa"</string>
     <string name="settings_video_config_summary">"Käyttötilastojen perusteela"</string>
     <string name="settings_video_config_summary_no_data">"Ei voitu ladata tilastoja"</string>

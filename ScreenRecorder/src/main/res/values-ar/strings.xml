@@ -186,7 +186,7 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
     <string name="settings_zigzag_fix_cpu_only">"تحوّل الصورة متوفر فقط مع CPU"</string>
 
     <string name="settings_video_config">"%1$s الإعدادات المسبقة"</string>
-    <string name="settings_video_config_entry">"%1$dx%2$d ~٪ 3 $ .0ffps"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~%3$.0ffps"</string>
     <string name="settings_video_config_entry_stability">"%1$d %% مستقر"</string>
     <string name="settings_video_config_summary">"استناداً إلى إحصائيات الاستخدام"</string>
     <string name="settings_video_config_summary_no_data">"لا يمكن تحميل الإحصائيات"</string>
