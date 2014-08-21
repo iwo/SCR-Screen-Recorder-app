@@ -372,14 +372,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void reportRecordingStats(RecordingInfo recordingInfo) {
-        long sizeK = outputFile.length() / 1024l;
-        long sizeM = sizeK / 1024l;
-        long time = (System.currentTimeMillis() - mRecordingStartTime) / 1000l;
-        EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, sizeM);
-        EasyTracker.getTracker().sendEvent(STATS, RECORDING, TIME, time);
-        recordingInfo.size = (int) sizeK;
-        recordingInfo.time = (int) time;
         logStats(recordingInfo);
+
+        long sizeM = recordingInfo.size / 1024l;
+        EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, sizeM);
+        EasyTracker.getTracker().sendEvent(STATS, RECORDING, TIME, (long) recordingInfo.time);
     }
 
     public void scanOutputAndNotify(int toastId) {
@@ -390,6 +387,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void logStats(RecordingInfo recordingInfo) {
+        recordingInfo.size = (int) (outputFile.length() / 1024l);
+        recordingInfo.time = (int) ((System.currentTimeMillis() - mRecordingStartTime) / 1000l);
         new RecordingStatsAsyncTask(this, recordingInfo).execute();
         if (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL) {
             audioDriver.logStats(recordingInfo);
