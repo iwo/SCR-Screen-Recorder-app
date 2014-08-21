@@ -30,9 +30,9 @@ Acesta este o versiune &lt;b&gt; BETA &lt;/ b&gt; deci exista posibilitatea sa n
 SCR Screen Recorder colectează statistici anonime de utilizare pentru a ajuta la urmarirea bug-urilor si sa analizam modul în care utilizatorii folosesc aplicația. Acest software utilizează codul FFmpeg 1.2 nemodificat sub licența LGPL.
     "</string>
 
-    <string name="recording_saved_title">"Inregistrare SCR salvata"</string>
+    <string name="recording_saved_title">"Inregistrare SCR salvat"</string>
     <string name="recording_saved_message">"Inregistrare salvata la %1$s"</string>
-    <string name="recording_saved_toast">"Inregistrare salvata la %1$s"</string>
+    <string name="recording_saved_toast">"Inregistrare salvata la  %1$s"</string>
     <string name="max_file_size_reached_toast">"Marimea maxima a fisierului a fost atinsa. Inregistrare salvata la %1$s"</string>
     <string name="start">"Start"</string>
     <string name="play">"Redare"</string>
@@ -82,7 +82,7 @@ SCR Screen Recorder colectează statistici anonime de utilizare pentru a ajuta l
 
     <string name="free_timeout_title">"Limita de timp atinsa"</string>
     <string name="free_timeout_message">"Cumpăra SCR Screen Recorder Pro pentru a obține un timp de înregistrare nelimitat și fara logo pe video."</string>
-    <string name="free_timeout_buy">"Cumpara acum!"</string>
+    <string name="free_timeout_buy">"Cumpara acum! "</string>
     <string name="free_timeout_no_thanks">"Nu, mulţumesc!"</string>
     <string name="hide_icon_title">"Optiune Pro "</string>
     <string name="hide_icon_message">"Cumpăra SCR Screen Recorder Pro pentru a ascunde logo-ul și pictograma de notificare. Veți obține, de asemenea, un timp de înregistrare nelimitat!"</string>
@@ -94,18 +94,18 @@ SCR Screen Recorder colectează statistici anonime de utilizare pentru a ajuta l
     <string name="settings_title">"Setări"</string>
     <string name="settings_ok">"OK"</string>
     <string name="settings_reset">"Restaurare setări implicite"</string>
-    <string name="settings_cancel">"Anulează"</string>
+    <string name="settings_cancel">"Anuleaza"</string>
 
-    <string name="settings_video_category">"Video"</string>
+    <string name="settings_unstable">"%1$s (instabil)"</string>
+
+    <string name="settings_video_category">"Video "</string>
 
     <string name="settings_video_encoder">"Encoder"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (instabil)"</string>
-    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"Automat"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software-ul MPEG-4 (lent)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP "</string>
+    <string name="settings_video_encoder_default">"Automat "</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Encoder inclus in Android %1$s "</string>
     <string name="settings_video_encoder_ffmpeg_summary">"Encoder MPEG4 software FFmpeg "</string>
 
@@ -115,8 +115,7 @@ SCR Screen Recorder colectează statistici anonime de utilizare pentru a ajuta l
     <string name="settings_resolution_horizontal">"%1$d x %2$d - %1$d p orizontal"</string>
     <string name="settings_resolution_padding">"%1$d x %2$d - %2$d p cu umplere"</string>
     <string name="settings_resolution_max">"%1$d x %2$d - Maxim"</string>
-    <string name="settings_resolution_half">"%1$d x %2$d - Jumătate"</string>
-    <string name="settings_resolution_unstable">"(Instabil) "</string>
+    <string name="settings_resolution_half">"%1$d x %2$d - Jumătate "</string>
 
     <string name="settings_transformation">"Transformarea imaginii"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
@@ -124,7 +123,7 @@ SCR Screen Recorder colectează statistici anonime de utilizare pentru a ajuta l
     <string name="settings_transformation_oes">"GPU +"</string>
     <string name="settings_transformation_cpu_summary">"Procesează imaginea de pe ecran pe procesor (CPU)"</string>
     <string name="settings_transformation_gpu_summary">"Procesează imaginea de pe ecran pe placa video ( %1$s )"</string>
-    <string name="settings_transformation_sw_summary">"Software encoder indisponibil"</string>
+    <string name="settings_transformation_sw_summary">"Software encoder ndisponibil"</string>
 
     <string name="settings_video_bitrate">"Bitrate"</string>
     <string name="settings_video_bitrate_summary">"Aproximativ %1$s în funcție de encoder"</string>
@@ -145,7 +144,7 @@ SCR Screen Recorder colectează statistici anonime de utilizare pentru a ajuta l
 YouTube și player video Android implicit, redau astfel de clipuri video în mod corect, dar unele programe de PC (de exemplu, VLC) ignoră metadatele de rotație și le afișează în modul peisaj. Puteți activa ramele verticale de mai jos, dar utilizaţi această opțiune cu precauție, deoarece multe dispozitive nu pot înregistra / reda clipuri video cu rame verticale.
 
     "</string>
-    <string name="settings_orientation_auto">"Automat"</string>
+    <string name="settings_orientation_auto">"Automat "</string>
     <string name="settings_orientation_portrait">"Portret"</string>
     <string name="settings_orientation_landscape">"Peisaj"</string>
     <string name="settings_orientation_clockwise">"Rotiti în sensul acelor de ceasornic"</string>
@@ -162,6 +161,8 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="settings_audio_mute">"Mut"</string>
     <string name="settings_audio_internal">"Intern"</string>
     <string name="settings_audio_internal_experimental">"Intern (experimental)"</string>
+    <string name="settings_audio_internal_not_supported">"Nu este suportat pe %1$s"</string>
+    <string name="settings_audio_internal_incompatible">"Nu este compatibil cu driver-ul audio al dumneavoastra"</string>
     <string name="settings_audio_mic_summary">"Microfon"</string>
     <string name="settings_audio_mute_summary">"Mut. Nici un canal audio"</string>
     <string name="settings_audio_internal_summary">"Ieșire sistem audio"</string>
@@ -182,7 +183,16 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="settings_zigzag_fix_summary">"Selectați dacă înregistrarea conține dungi colorate aleatorii"</string>
     <string name="settings_zigzag_fix_cpu_only">"Disponibil numai cu transformarea de imagine cu CPU"</string>
 
-    <string name="directory_chooser_select">"Selectați \" %1$s \""</string>
+    <string name="settings_video_config">"%1$s predefinite"</string>
+    <string name="settings_video_config_entry">"%1$d x %2$d ~%3$.0ffps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d %% stabil"</string>
+    <string name="settings_video_config_summary">"Bazat pe statistici ale utilizarii"</string>
+    <string name="settings_video_config_summary_no_data">"Nu s-au putut descărca statistici"</string>
+
+    <string name="device_profile_download_error_toast">"Nu s-au putut descărca setările recomandate. Asigurați-vă că sunteți online."</string>
+    <string name="device_profile_downloaded_toast">"Setările recomandate au fost descărcate"</string>
+
+    <string name="directory_chooser_select">"Selectați \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Actualizare"</string>
     <string name="directory_chooser_new">"Nou"</string>
     <string name="directory_chooser_new_title">"Nume nou pentru director"</string>
@@ -195,7 +205,7 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="directory_chooser_cancel">"Anulează"</string>
     <string name="directory_chooser_default">"Implicit"</string>
 
-    <string name="error_report_report">"Raport"</string>
+    <string name="error_report_report">"Raportjn"</string>
     <string name="error_report_close">"Închideți"</string>
     <string name="error_report_text">"Atasamentul conține un jurnal de sistem detaliat, inclusiv informații cu privire la o eroare. Simțiți-vă liber să adăugați alte comentarii aici."</string>
     <string name="error_report_chooser">"Raport de eroare prin e-mail cu"</string>
@@ -209,6 +219,8 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
 
     <string name="help_stop_message">"Pentru a opri înregistrarea închideţi ecranul și așteptați 2 secunde. Alternativ, puteți pur și simplu redeschide aplicaţia %1$s ."</string>
     <string name="menu_send_bug_report">"Trimite raport despre bug"</string>
+    <string name="menu_show_unstable">"Arata instabilitatea"</string>
+    <string name="menu_show_advanced">"Arată setari avansate"</string>
 
     <string name="notification_status_installing">"Inițializare"</string>
     <string name="notification_status_initializing">"Așteptare pentru acces drepturi de admin"</string>
@@ -244,5 +256,14 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="su_default_name">"superuser"</string>
 
     <string name="can_not_start_toast">"Nu pot porni înregistrarea: %1$s"</string>
+
+    <string name="settings_show_camera">"Imaginea din camera video"</string>
+    <string name="settings_show_camera_summary">"Afișați imaginea dumneavoastra deasupra inregistrarii"</string>
+    <string name="settings_camera_alpha_title">"Transparența "</string>
+    <string name="settings_camera_alpha_summary">"Imaginea din camera video %1$d %% opaca"</string>
+    <string name="settings_camera_alpha_summary_100">"Imaginea din camera video nu este transparenta"</string>
+
+    <string name="miui_error_message">"Dacă nu puteți vedea fereastra plutitoare %1$s duceti-va la setarile MiUi ale aplicatiei și bifati \"Arată ferestre pop-up\" pentru %1$s."</string>
+    <string name="miui_error_title">"Dezactivati Pop-up-ul MIUI?"</string>
 
 </resources>

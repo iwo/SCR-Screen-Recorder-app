@@ -1,5 +1,5 @@
 <resources>
-    <string name="free_app_name">"SCR gratis"</string>
+    <string name="free_app_name">"SCR Gratis"</string>
     <string name="free_app_full_name">"SCR Screen Recorder Gratis"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
@@ -27,27 +27,27 @@ Dette er en tidlig &lt;b&gt; betaudgave &lt;/ b&gt; version, så det virker mås
 SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analysere, hvordan brugerne anvender applikationen. Denne software bruger umodificeret kode FFmpeg 1.2 licenseret under LGPL.
     "</string>
 
-    <string name="recording_saved_title">"SCR Recording er gemt"</string>
-    <string name="recording_saved_message">"Optagelse gemt i %1$s"</string>
-    <string name="recording_saved_toast">"Optagelse gemt i %1$s"</string>
-    <string name="max_file_size_reached_toast">"Maks filstørrelse nået. Optagelse gemt i %1$s"</string>
+    <string name="recording_saved_title">"SCR optagelse er gemt"</string>
+    <string name="recording_saved_message">"Optagelse gemt til %1$s"</string>
+    <string name="recording_saved_toast">"Optagelse gemt til %1$s"</string>
+    <string name="max_file_size_reached_toast">"Maks filstørrelse nået. Optagelse gemt til %1$s"</string>
     <string name="start">"Start"</string>
     <string name="play">"Afspil"</string>
 
-    <string name="su_required_title">"Der kræves root-adgang"</string>
+    <string name="su_required_title">"Der kræves root adgang"</string>
     <string name="su_required_message">"For at køre enhver skærm optager app din telefon / tablet skal være rodfæstet. Der er masser tutorials på internettet forklarer, hvordan man rooter forskellige enheder. kom tilbage, når du er færdig!"</string>
     <string name="su_required_help">"Hvad er \"root\"?"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
 
     <string name="error_dialog_title">"Noget gik alvorligt galt :-("</string>
-    <string name="startup_error_message">"Den anonyme fejlrapport vil automatisk blive sendt til at hjælpe os løse problemet. Du er velkommen til at komme i kontakt via support e-mail citere fejl S %1$d ."</string>
-    <string name="recording_error_message">"Den anonyme fejlrapport vil automatisk blive sendt til at hjælpe os løse problemet. Du er velkommen til at komme i kontakt via support e-mail citere fejl R %1$d ."</string>
+    <string name="startup_error_message">"Den anonyme fejlrapport vil automatisk blive sendt til at hjælpe os løse problemet. Du er velkommen til at komme i kontakt via support e-mail citere fejl S%1$d ."</string>
+    <string name="recording_error_message">"Den anonyme fejlrapport vil automatisk blive sendt til at hjælpe os løse problemet. Du er velkommen til at komme i kontakt via support e-mail citere fejl R%1$d ."</string>
 
     <string name="media_recorder_error_title">"Optager fejl"</string>
-    <string name="media_recorder_error_message">"Prøv at ændre opløsning eller skifte billede transformation mellem GPU / CPU. Venligst afinstallere andre screencast programmer, hvis du har nogen. Hvis problemet fortsætter kan du komme i kontakt via support e-mail citere fejl R %1$d ."</string>
+    <string name="media_recorder_error_message">"Prøv at ændre opløsning eller skifte billede transformation mellem GPU / CPU. Venligst afinstallere andre screencast programmer, hvis du har nogen. Hvis problemet fortsætter, kan du komme i kontakt via support e-mail citere fejl R %1$d ."</string>
 
     <string name="output_file_error_title">"Kan ikke oprette videofil"</string>
-    <string name="output_file_error_message">"SCR var i stand til at skabe %1$s videofil. Sørg for, at valgte udgang mappe er skrivbar og at SD-kortet er ikke låst af USB-forbindelse."</string>
+    <string name="output_file_error_message">"SCR var i stand til at skabe %1$s videofil. Sørg for, at valgte output mappe er skrivbar og at SD-kortet er ikke låst af USB-forbindelse."</string>
 
     <string name="microphone_busy_error_title">"Mikrofon er travlt"</string>
     <string name="microphone_busy_error_message">"
@@ -66,23 +66,23 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="audio_config_error_message">"Ikke-understøttet audio konfiguration. Prøv at ændre SCR lydindstillinger."</string>
 
     <string name="android_version_error_title">"Android-version understøttes ikke"</string>
-    <string name="android_version_error_message">"Din Android version er ikke understøttet endnu."</string>
+    <string name="android_version_error_message">"Din Android-version understøttes ikke endnu."</string>
 
     <string name="cpu_error_title">"CPU ikke understøttet"</string>
-    <string name="cpu_error_message">"Din CPU-arkitektur ( %1$s ) er ikke understøttet af %2$s ."</string>
+    <string name="cpu_error_message">"Din CPU arkitektur ( %1$s ) er ikke understøttet af %2$s ."</string>
 
-    <string name="installation_error_title">"Installation fejl"</string>
-    <string name="installation_error_message">"Kan ikke installere de nødvendige filer. Sørg for at have nogle ledig plads på din enhed og genstart %1$s ."</string>
+    <string name="installation_error_title">"Installationsfejl"</string>
+    <string name="installation_error_message">"Kan ikke installere de nødvendige filer. Sørg for at du har nogle fri plads på din enhed og genstart %1$s ."</string>
 
     <string name="help_stop_title">"Hvordan man kan stoppe"</string>
     <string name="help_stop_ok">"Fik det!"</string>
 
     <string name="free_timeout_title">"Tidsfrist udløbet"</string>
-    <string name="free_timeout_message">"Køb SCR Screen Recorder Pro til at få ubegrænset optagetid og ingen vandmærke på video."</string>
+    <string name="free_timeout_message">"Køb SCR Screen Recorder Pro til at få ubegrænset optagetid og ingen vandmærke på videoen."</string>
     <string name="free_timeout_buy">"Køb nu!"</string>
     <string name="free_timeout_no_thanks">"Nej tak"</string>
     <string name="hide_icon_title">"Pro-funktion"</string>
-    <string name="hide_icon_message">"Køb SCR Screen Recorder Pro til at skjule vandmærke og ikon meddelelse. Du får ubegrænset optagetid så godt!"</string>
+    <string name="hide_icon_message">"Køb SCR Screen Recorder Pro til at skjule vandmærke og notifikation ikon. Du får ubegrænset optagetid så godt!"</string>
 
     <string name="buy_error_title">"Google Play fejl"</string>
     <string name="buy_error_message">"Søg efter SCR Screen Recorder Pro i Google Play"</string>
@@ -93,17 +93,17 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="settings_reset">"Gendan standarder"</string>
     <string name="settings_cancel">"Annuller"</string>
 
+    <string name="settings_unstable">"%1$s (ustabil)"</string>
+
     <string name="settings_video_category">"Video"</string>
 
     <string name="settings_video_encoder">"Enkoder"</string>
-    <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (ustabil)"</string>
+    <string name="settings_video_encoder_h264">"H.264"</string>
+    <string name="settings_video_encoder_h263">"H.263"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
     <string name="settings_video_encoder_default">"Automatisk"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 (langsom)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
-    <string name="settings_video_encoder_built_in_summary">"Android indbygget %1$s encoder"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"Android indbyggede %1$s encoder"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg software MPEG4 encoder"</string>
 
     <string name="settings_resolution">"Opløsning"</string>
@@ -112,8 +112,7 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="settings_resolution_horizontal">"%1$d x %2$d - %1$d p vandret"</string>
     <string name="settings_resolution_padding">"%1$d x %2$d - %2$d p med polstring"</string>
     <string name="settings_resolution_max">"%1$d x %2$d - Max"</string>
-    <string name="settings_resolution_half">"%1$d x %2$d - Halvdelen"</string>
-    <string name="settings_resolution_unstable">"(Ustabil)"</string>
+    <string name="settings_resolution_half">"%1$d x %2$d - Halv"</string>
 
     <string name="settings_transformation">"Billede transformation"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
@@ -124,17 +123,17 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="settings_transformation_sw_summary">"Ikke tilgængelig i software enkoder"</string>
 
     <string name="settings_video_bitrate">"Bithastighed"</string>
-    <string name="settings_video_bitrate_summary">"omkring %1$s , afhængigt af encoder"</string>
+    <string name="settings_video_bitrate_summary">"omkring %1$s afhængigt af encoder"</string>
     <string name="settings_video_bitrate_default">"Standard"</string>
 
 
-    <string name="settings_frame_rate">"Frame rate"</string>
+    <string name="settings_frame_rate">"Billedfrekvens"</string>
     <string name="settings_frame_rate_max">"Maksimum"</string>
     <string name="settings_frame_rate_max_short">"Max"</string>
     <string name="settings_frame_rate_up_to">"Op til %1$d fps"</string>
     <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"Op til %1$d fps, begrænset af hardware kapaciteter"</string>
-    <string name="settings_frame_rate_max_summary">"Maksimalt tilladt af hardware"</string>
+    <string name="settings_frame_rate_max_summary">"Maksimalt tilladte af hardware"</string>
 
     <string name="settings_orientation">"Orientering"</string>
     <string name="settings_orientation_description">"
@@ -143,24 +142,26 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="settings_orientation_auto">"Automatisk"</string>
     <string name="settings_orientation_portrait">"Portræt"</string>
     <string name="settings_orientation_landscape">"Landskab"</string>
-    <string name="settings_orientation_clockwise">"roteres med uret,"</string>
+    <string name="settings_orientation_clockwise">"roteres med uret"</string>
     <string name="settings_orientation_anticlockwise">"roteres mod uret"</string>
 
     <string name="settings_vertical_frames">"Lodrette rammer"</string>
-    <string name="settings_vertical_frames_warning">"Video spillere på mange enheder kan ikke afspille videoer med lodrette rammer. Selv hvis der er fravalgt orientering metadata føjes denne indstilling til den video, så den vises korrekt i standard Android-afspiller, YouTube osv."</string>
+    <string name="settings_vertical_frames_warning">"Video spillere på mange enheder kan ikke afspille videoer med lodrette rammer. Selv hvis man fravalgt orientering metadata tilføjet denne indstilling til video, så den vises korrekt i standard Android-afspiller, YouTube etc."</string>
     <string name="settings_vertical_frames_ok">"OK"</string>
     <string name="settings_vertical_frames_cancel">"Annuller"</string>
 
-    <string name="settings_audio_category">"Audio"</string>
+    <string name="settings_audio_category">"Lyd"</string>
     <string name="settings_audio_source">"Kilde"</string>
     <string name="settings_audio_mic">"Mikrofon"</string>
     <string name="settings_audio_mute">"Lydløs"</string>
     <string name="settings_audio_internal">"Intern"</string>
     <string name="settings_audio_internal_experimental">"Intern (eksperimentel)"</string>
+    <string name="settings_audio_internal_not_supported">"Ikke understøttet på %1$s"</string>
+    <string name="settings_audio_internal_incompatible">"Ikke kompatibel med din lyd driver"</string>
     <string name="settings_audio_mic_summary">"Mikrofon"</string>
-    <string name="settings_audio_mute_summary">"Mute. Ingen lyd spor"</string>
+    <string name="settings_audio_mute_summary">"Lydløs. Ingen lyd spor"</string>
     <string name="settings_audio_internal_summary">"System lydudgang"</string>
-    <string name="settings_audio">"Audio"</string>
+    <string name="settings_audio">"Lyd"</string>
     <string name="settings_sampling_rate">"Samplings hastighed"</string>
 
     <string name="settings_other_category">"Andet"</string>
@@ -174,28 +175,32 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="settings_color_fix_summary">"Slå denne mulighed, hvis blå og røde farver er omvendt"</string>
 
     <string name="settings_zigzag_fix">"Zigzag fix"</string>
-    <string name="settings_zigzag_fix_summary">"Vælg, om optagelsen indeholder tilfældige farverige striber"</string>
+    <string name="settings_zigzag_fix_summary">"Vælg om optagelsen indeholder tilfældige farverige striber"</string>
     <string name="settings_zigzag_fix_cpu_only">"Findes kun med CPU Billede transformation"</string>
 
-    <string name="directory_chooser_select">"Vælg \" %1$s \""</string>
+    <string name="settings_video_config">"%1$s forudindstillinger"</string>
+    <string name="settings_video_config_entry">"%1$d x %2$d ~ %3$.0ffps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d %% stabil"</string>
+    <string name="settings_video_config_summary">"Baseret på brugsstatistikker"</string>
+    <string name="settings_video_config_summary_no_data">"Kunne ikke hente statistik"</string>
+
+    <string name="device_profile_download_error_toast">"Kunne ikke hente de anbefalede indstillinger. Sørg for at du er online."</string>
+    <string name="device_profile_downloaded_toast">"Anbefalede indstillinger downloadet"</string>
+
+    <string name="directory_chooser_select">"Vælg \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Opdatér"</string>
     <string name="directory_chooser_new">"Ny"</string>
-    <string name="directory_chooser_new_title">"Nyt bibliotek navn"</string>
+    <string name="directory_chooser_new_title">"Nyt mappenavn"</string>
     <string name="directory_chooser_new_ok">"OK"</string>
     <string name="directory_chooser_new_cancel">"Annuller"</string>
-    <string name="directory_chooser_error_message">"Kan ikke oprettes bibliotek. Sørg for at vælge en skrivbar placering f.eks SD-kort."</string>
+    <string name="directory_chooser_error_message">"Kan ikke oprettes bibliotek. Sørg for at vælge en skrivbar sted fx SD-kort."</string>
     <string name="directory_chooser_not_writable_title">"Valgt mappe er ikke skrivbar"</string>
     <string name="directory_chooser_not_writable_message">"Applikationen synes ikke at have skriverettigheder til %1$s bibliotek. Dette kan medføre optagelse problemer."</string>
     <string name="directory_chooser_ignore">"Ignorér"</string>
     <string name="directory_chooser_cancel">"Annuller"</string>
     <string name="directory_chooser_default">"Standard"</string>
 
-    <string name="license_dont_allow">"Licens mislykkedes. Sørg for, at din internetforbindelse er op og du er logget ind på Google Play.
-    "</string>
-    <string name="license_error">"Licens kontrol fejl. Sørg for, at din internetforbindelse er op og du er logget ind på Google Play.
-    "</string>
-
-    <string name="error_report_report">"Rapport"</string>
+    <string name="error_report_report">"Anmeld"</string>
     <string name="error_report_close">"Luk"</string>
     <string name="error_report_text">"Den vedhæftede fil indeholder detaljeret system log, herunder oplysninger om en fejl. Du er velkommen til at tilføje eventuelle kommentarer her."</string>
     <string name="error_report_chooser">"E-mail fejlrapport med"</string>
@@ -209,10 +214,12 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
 
     <string name="help_stop_message">"For at stoppe optagelsen, lås skærmen og vent 2 sekunder. Alternativt kan du blot genåbne %1$s appen."</string>
     <string name="menu_send_bug_report">"Send fejlrapport"</string>
+    <string name="menu_show_unstable">"Vis ustabil"</string>
+    <string name="menu_show_advanced">"Vis avancerede"</string>
 
     <string name="notification_status_installing">"Initialiserer"</string>
     <string name="notification_status_initializing">"Venter på root-adgang"</string>
-    <string name="notification_status_installing_audio">"Installation Lyd driver"</string>
+    <string name="notification_status_installing_audio">"Installation L driver"</string>
     <string name="notification_status_ready">"Klar"</string>
     <string name="notification_status_starting">"Start"</string>
     <string name="notification_status_recording">"Optagelse"</string>
@@ -221,14 +228,37 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="notification_status_uninstalling_audio">"Afinstallation Lyd driver"</string>
 
     <string name="sale_title">"Salg"</string>
-    <string name="sale_text">"Køb SCR Pro nu og spar %1$d %% ! Dette tilbud slutter på %2$s ."</string>
+    <string name="sale_text">"Køb SCR Pro nu og spar %1$d %% ! Dette tilbud udløber om %2$s ."</string>
 
-    <string name="copyrights_statement">"Ved at bruge %1$s du accepterer, at du alene er ansvarlig for at sikre, at du ikke overtræder tredjeparts ophavsret eller andre immaterielle rettigheder."</string>
-    <string name="internal_audio_installation_error_title">"Intern audio fejl"</string>
-    <string name="internal_audio_installation_error_message">"Kan ikke aktivere intern lyd. Send venligst en fejlrapport til at hjælpe mig med at få din enhed understøttes. Lydkilde vil blive sat til %1$s ."</string>
+    <string name="copyrights_statement">"Ved at bruge %1$s du accepterer, at du alene er ansvarlig for at sikre, at du ikke krænker tredjemands ophavsret eller andre immaterielle rettigheder."</string>
+    <string name="internal_audio_installation_error_title">"Intern lyd fejl"</string>
+    <string name="internal_audio_installation_error_message">"Kan ikke aktivere intern lyd. Send venligst en fejlrapport for at hjælpe mig med at få enheden understøttes. Lydkilde vil blive sat til %1$s ."</string>
     <string name="internal_audio_unstable_title">"Intern lyd ustabil"</string>
-    <string name="internal_audio_unstable_message">"Intern audio stabilitet problem opdaget. Send venligst en fejlrapport til at hjælpe mig med at få din enhed understøttes. Lydkilde vil blive sat til %1$s ."</string>
+    <string name="internal_audio_unstable_message">"Intern lyd stabilitet problem opdaget. Send venligst en fejlrapport for at hjælpe mig med at få enheden understøttes. Lydkilde vil blive sat til %1$s ."</string>
     <string name="internal_audio_disabled_title">"Intern lyd deaktiveret"</string>
-    <string name="internal_audio_disabled_message">"Intern lydoptagelse er slukket, fordi %1$s ikke lukket korrekt. Du kan genaktivere den i Indstillinger."</string>
+    <string name="internal_audio_disabled_message">"Intern lydoptagelse er slukket, fordi %1$s ikke lukket korrekt. Du kan aktivere den igen i Indstillinger."</string>
+
+    <string name="license_title">"Licens fejl"</string>
+    <string name="license_not_licensed_message">"Fejl kontrollere licens. Venligst købe SCR Pro via Google Play Store."</string>
+    <string name="license_retry_message">"Fejl kontrollere licens. Sørg for, at din internetforbindelse er op og din er logget ind på Google Play Store. Når licensen er verificeret, kan du fortsætte med at bruge SCR Pro offline."</string>
+    <string name="license_error_message">"Fejl kontrollere licens. Sørg for at du har installeret SCR Pro selvom Google Play. Hvis problemet fortsætter klare data og cache \"Google Play-tjenester\" og \"Google Play Butik\" apps.
+    "</string>
+    <string name="license_play_store">"Play Butik"</string>
+    <string name="license_retry">"Prøv igen"</string>
+    <string name="license_continue_as_free">"Fortsætte som gratis"</string>
+
+    <string name="su_denied_message">"Der er et problem med root-adgang på din enhed. Venligst åbne %1$s og sørg for at du ikke har et uheld nægtet root-adgang til %2$s ."</string>
+    <string name="su_default_name">"superbruger"</string>
+
+    <string name="can_not_start_toast">"Kan ikke starte optagelsen: %1$s"</string>
+
+    <string name="settings_show_camera">"Kamera udsigt"</string>
+    <string name="settings_show_camera_summary">"Vis dit billede på toppen af ​​optagelse"</string>
+    <string name="settings_camera_alpha_title">"Gennemsigtighed"</string>
+    <string name="settings_camera_alpha_summary">"Kamera udsigt %1$d %% uigennemsigtig"</string>
+    <string name="settings_camera_alpha_summary_100">"Kamera visning ikke gennemsigtige"</string>
+
+    <string name="miui_error_message">"Hvis du ikke kan se %1$s flydende vindue gå til MIUI apps indstillinger og aktivere \"Vis popup-vinduer\" for %1$s ."</string>
+    <string name="miui_error_title">"MIUI popups deaktiveret?"</string>
 
 </resources>

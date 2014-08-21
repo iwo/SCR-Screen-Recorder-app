@@ -27,7 +27,7 @@ Este es un BETA &lt;b&gt; vista previa &lt;/b&gt; la versión por lo que puede n
 Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bichos de la pista y analizar cómo los usuarios utilizan la aplicación. Este software utiliza código no modificada de FFmpeg 1.2 licenciado bajo la LGPL.
     "</string>
 
-    <string name="recording_saved_title">"SCR Grabación Guardado"</string>
+    <string name="recording_saved_title">"SCR Grabación Guardada"</string>
     <string name="recording_saved_message">"Grabación guardada en %1$s"</string>
     <string name="recording_saved_toast">"Grabación guardada en %1$s"</string>
     <string name="max_file_size_reached_toast">"Tamaño máximo de archivo alcanzado. Grabación guardada en %1$s"</string>
@@ -93,16 +93,16 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_reset">"Restaurar valores predeterminados"</string>
     <string name="settings_cancel">"Cancelar"</string>
 
+    <string name="settings_unstable">"%1$s (inestable)"</string>
+
     <string name="settings_video_category">"Vídeo"</string>
 
     <string name="settings_video_encoder">"Codificador"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (inestable)"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
     <string name="settings_video_encoder_default">"Auto"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 (lento)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Android codificador incorporado %1$s"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg MPEG4 software codificador"</string>
 
@@ -113,7 +113,6 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp con padding"</string>
     <string name="settings_resolution_max">"%1$dx%2$d - Max"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - Media"</string>
-    <string name="settings_resolution_unstable">"(Inestable)"</string>
 
     <string name="settings_transformation">"Transformación de la imagen"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
@@ -157,6 +156,8 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_audio_mute">"Sin sonido"</string>
     <string name="settings_audio_internal">"Interno"</string>
     <string name="settings_audio_internal_experimental">"Interno (experimental)"</string>
+    <string name="settings_audio_internal_not_supported">"No es compatible con %1$s"</string>
+    <string name="settings_audio_internal_incompatible">"No es compatible con el driver de sonido"</string>
     <string name="settings_audio_mic_summary">"Micrófono"</string>
     <string name="settings_audio_mute_summary">"Silencio. Sin Pista de audio"</string>
     <string name="settings_audio_internal_summary">"Salida de audio del sistema"</string>
@@ -177,6 +178,15 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_zigzag_fix_summary">"Seleccione si la grabación contiene rayas de colores aleatorios"</string>
     <string name="settings_zigzag_fix_cpu_only">"Disponible sólo con la transformación de la imagen de la CPU"</string>
 
+    <string name="settings_video_config">"%1$s presets"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0ffps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d%% estable"</string>
+    <string name="settings_video_config_summary">"Con base en las estadísticas de uso"</string>
+    <string name="settings_video_config_summary_no_data">"No se han podido descargar las estadísticas"</string>
+
+    <string name="device_profile_download_error_toast">"No se han podido descargar los ajustes recomendados. Asegúrese de que usted está en línea."</string>
+    <string name="device_profile_downloaded_toast">"Ajustes recomendados descargados"</string>
+
     <string name="directory_chooser_select">"Seleccione \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Actualizar"</string>
     <string name="directory_chooser_new">"Nuevo"</string>
@@ -189,11 +199,6 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="directory_chooser_ignore">"Ignorar"</string>
     <string name="directory_chooser_cancel">"Cancelar"</string>
     <string name="directory_chooser_default">"Defecto"</string>
-
-    <string name="license_dont_allow">"Error de comprobación de licencia. Asegúrese de que su conexión a Internet es correcta y estás conectado a Google Play.
-    "</string>
-    <string name="license_error">"Error de comprobación de licencia. Asegúrese de que su conexión a Internet es correcta y estás conectado a Google Play.
-    "</string>
 
     <string name="error_report_report">"Informe"</string>
     <string name="error_report_close">"Cerrar"</string>
@@ -210,6 +215,8 @@ acerca de un error. Siéntase libre de agregar cualquier comentario aquí."</str
 
     <string name="help_stop_message">"Para detener la grabación, bloquea la pantalla y espera 2 segundos. Alternativamente, usted puede simplemente volver reabrir la aplicación %1$s ."</string>
     <string name="menu_send_bug_report">"Enviar informe de error"</string>
+    <string name="menu_show_unstable">"Mostrar inestabls"</string>
+    <string name="menu_show_advanced">"Mostrar avanzado"</string>
 
     <string name="notification_status_installing">"Iniciando"</string>
     <string name="notification_status_initializing">"A la espera de acceso root"</string>
@@ -231,5 +238,28 @@ acerca de un error. Siéntase libre de agregar cualquier comentario aquí."</str
     <string name="internal_audio_unstable_message">"Problema de estabilidad de audio interno detectado. Por favor, envíe un informe de fallo para ayudarme a conseguir su dispositivo compatible. La fuente de audio se establecerá en %1$s."</string>
     <string name="internal_audio_disabled_title">"Audio interno deshabilitado"</string>
     <string name="internal_audio_disabled_message">"Grabación de audio interno está apagado porque %1$s no se cerró correctamente. Puede volver a activarlo en Ajustes."</string>
+
+    <string name="license_title">"Error de licencia"</string>
+    <string name="license_not_licensed_message">"Error al verificar la licencia. Por favor, compra SCR Pro a través de Google Play Store."</string>
+    <string name="license_retry_message">"Error al verificar la licencia. Asegúrese de que su conexión a Internet está en marcha y tu estás conectado a Google Play Store. Después de verificar la licencia se puede seguir utilizando SCR Pro offline."</string>
+    <string name="license_error_message">"Error al verificar la licencia. Asegúrese de que ha instalado SCR Pro aunque Google Play. Si el problema persiste datos claros y caché de los \"servicios de Google Play\" y \"Google Play Store\" aplicaciones.
+    "</string>
+    <string name="license_play_store">"Play Store"</string>
+    <string name="license_retry">"Intentar de nuevo"</string>
+    <string name="license_continue_as_free">"Continuar como gratuito"</string>
+
+    <string name="su_denied_message">"Hay un problema con el acceso root en el dispositivo. Por favor, abrir %1$s y hacer el acceso root Compruebe que no ha negado accidentalmente a %2$s."</string>
+    <string name="su_default_name">"superusuario"</string>
+
+    <string name="can_not_start_toast">"No se puede iniciar la grabación: %1$s"</string>
+
+    <string name="settings_show_camera">"Vista de cámara"</string>
+    <string name="settings_show_camera_summary">"Muestre la imagen en la parte superior de la grabación"</string>
+    <string name="settings_camera_alpha_title">"Transparencia"</string>
+    <string name="settings_camera_alpha_summary">"Cámara de visión %1$d%% opaca"</string>
+    <string name="settings_camera_alpha_summary_100">"Vista de la cámara no es transparente"</string>
+
+    <string name="miui_error_message">"Si no puede ver %1$s ventana flotante ir a MIUI apps ajustes y activar \"Mostrar las ventanas emergentes\" para %1$s."</string>
+    <string name="miui_error_title">"Popups MIUI desactivados?"</string>
 
 </resources>

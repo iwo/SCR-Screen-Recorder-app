@@ -96,16 +96,16 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_reset">"Palauta oletusarvot"</string>
     <string name="settings_cancel">"Peruutta"</string>
 
+    <string name="settings_unstable">"%1$s (epävakaa)"</string>
+
     <string name="settings_video_category">"Video"</string>
 
     <string name="settings_video_encoder">"Kodeekki"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (epävakaa)"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
     <string name="settings_video_encoder_default">"Auto"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Laite MPEG-4 (hidas)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Ohjelmisto MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Androidin sisäänrakennettu %1$s Kodeekki"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg ohjelmisto MPEG4 kodeekki"</string>
 
@@ -116,7 +116,6 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp pysty"</string>
     <string name="settings_resolution_max">"%1$dx%2$d - Maksimi"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - Puoli"</string>
-    <string name="settings_resolution_unstable">"(Epävakaa)"</string>
 
     <string name="settings_transformation">"Kuvan muunnin"</string>
     <string name="settings_transformation_cpu">"CPU "</string>
@@ -139,7 +138,7 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_frame_rate_summary">"Jopa %1$d fps, rajoitettu laitteiston takia"</string>
     <string name="settings_frame_rate_max_summary">"Suurin sallittu laitteistolla"</string>
 
-    <string name="settings_orientation">"Suuntautuminen"</string>
+    <string name="settings_orientation">"Suunta"</string>
     <string name="settings_orientation_description">"
         Oletuksena videokuvat ovat aina vaakasuorassa ja kierto metatiedot lisätään pystykuva videoihin. YouTube ja Androidvideosoitin näyttää videoita oikein, mutta jotkut PC-videosoittimet (esim. VLC) sivuuttavat kierto metatiedot ja näyttävät sen vaaka-asennossa. Voit ottaa pystykuvat alta, mutta käyttä tätä vaihtoehtoa varoen, koska monet laitteet ei voi nauhoittaa/toistaa pystykuvia.
     "</string>
@@ -152,14 +151,16 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_vertical_frames">"Pystykuvat"</string>
     <string name="settings_vertical_frames_warning">"Videosoittimet useissa laitteissa eivät voi toistaa videoita pystykuvilla. Vaikka tämä vaihtoehto on valitsematta kierto metatiedot lisätään videon niin, että se näkyy oikein oletuksena Androidsoittimessa, YouTube jne."</string>
     <string name="settings_vertical_frames_ok">"OK"</string>
-    <string name="settings_vertical_frames_cancel">"Peruuta"</string>
+    <string name="settings_vertical_frames_cancel">"Peruutta"</string>
 
     <string name="settings_audio_category">"Ääni"</string>
     <string name="settings_audio_source">"Lähde"</string>
-    <string name="settings_audio_mic">"Mikrofoni"</string>
+    <string name="settings_audio_mic">"Mikrofooni"</string>
     <string name="settings_audio_mute">"Mykistetty"</string>
     <string name="settings_audio_internal">"Sisäinen"</string>
     <string name="settings_audio_internal_experimental">"Sisäinen (kokeellinen)"</string>
+    <string name="settings_audio_internal_not_supported">"Ei tueta %1$s"</string>
+    <string name="settings_audio_internal_incompatible">"Ei yhteensopiva ääniajurisi kanssa"</string>
     <string name="settings_audio_mic_summary">"Mikrofooni"</string>
     <string name="settings_audio_mute_summary">"Ilman ääntä. Ei Ääniraitaa"</string>
     <string name="settings_audio_internal_summary">"Järjestelmä-äänen ulostulo"</string>
@@ -180,6 +181,15 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_zigzag_fix_summary">"Valitse jos video sisältää satunnaisia värikkäitä raitoja"</string>
     <string name="settings_zigzag_fix_cpu_only">"Käytettävissä vain CPU kuvanmuunnoksella"</string>
 
+    <string name="settings_video_config">"%1$s esiasetukset"</string>
+    <string name="settings_video_config_entry">"%1$d x %2$d ~% 3 $ .0ffps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d %% vakaa"</string>
+    <string name="settings_video_config_summary">"Käyttötilastojen perusteela"</string>
+    <string name="settings_video_config_summary_no_data">"Ei voitu ladata tilastoja"</string>
+
+    <string name="device_profile_download_error_toast">"Ei voitu ladata suositeltuja asetuksia. Varmista, että olet verkossa."</string>
+    <string name="device_profile_downloaded_toast">"Suositellut asetukset ladattu"</string>
+
     <string name="directory_chooser_select">"Valitse \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Virkistä"</string>
     <string name="directory_chooser_new">"Uusi"</string>
@@ -192,11 +202,6 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="directory_chooser_ignore">"Sivuutta"</string>
     <string name="directory_chooser_cancel">"Peruutta"</string>
     <string name="directory_chooser_default">"Oletusarvo"</string>
-
-    <string name="license_dont_allow">"Lisenssin tarkistus epäonnistui. Varmista, että Internet-yhteys on muodostettu ja olet kirjautunut Google Playhyn.
-    "</string>
-    <string name="license_error">"LIsenssin tarkistus epäonnistui. Varmista, että Internet-yhteys on muodostettu ja olet kirjautunut Google Playhyn.
-    "</string>
 
     <string name="error_report_report">"Ilmoita"</string>
     <string name="error_report_close">"Sulje"</string>
@@ -212,6 +217,8 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
 
     <string name="help_stop_message">"Lopeta tallennus lukitsemalla näytö ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
     <string name="menu_send_bug_report">"Lähetä bugiraportti"</string>
+    <string name="menu_show_unstable">"Näytä epävakaa"</string>
+    <string name="menu_show_advanced">"Näytä lisää"</string>
 
     <string name="notification_status_installing">"Alustetaan"</string>
     <string name="notification_status_initializing">"Odotetaan pääkäyttäjän oikeuksia (root)"</string>
@@ -219,19 +226,42 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="notification_status_ready">"Valmis"</string>
     <string name="notification_status_starting">"Aloitetaan"</string>
     <string name="notification_status_recording">"Nauhoitetaan"</string>
-    <string name="notification_status_error">"[Virhe]"</string>
+    <string name="notification_status_error">"Virhe"</string>
     <string name="notification_status_stopping">"Pysäytetään"</string>
     <string name="notification_status_uninstalling_audio">"Poistetaan Ääniajuri"</string>
 
-    <string name="sale_title">"Myynti"</string>
+    <string name="sale_title">"Alennus"</string>
     <string name="sale_text">"Osta SCR Pro nyt ja säästä %1$d %% ! Tämä tarjous päättyy %2$s ."</string>
 
-    <string name="copyrights_statement">"Käyttämällä %1$s hyväksyt, että olet yksin vastuussa siitä, ettet riko kolmannen osapuolen tekijänoikeuksia tai muita immateriaalioikeuksia."</string>
+    <string name="copyrights_statement">"Käyttäen %1$s hyväksyt, että olet yksin vastuussa siitä, ettet loukkaa kolmannen osapuolen tekijänoikeuksia tai muita immateriaalioikeuksia."</string>
     <string name="internal_audio_installation_error_title">"Sisäinen ääni virhe"</string>
     <string name="internal_audio_installation_error_message">"Ei voi käyttää sisäistä ääntä. Lähetä vikailmoitus auttaaksesi minua saamaan laitteesi tuetuisi. Äänilähde asetetaan %1$s ."</string>
     <string name="internal_audio_unstable_title">"Sisäinen ääni epävakaa"</string>
     <string name="internal_audio_unstable_message">"Sisäisen äänen vakausongelma havaittu. Lähetä vikailmoitus auttaaaksesi minua saamaan laitteesi tuetuksi. Äänilähde asetetaan %1$s ."</string>
     <string name="internal_audio_disabled_title">"Sisäinen ääni pois käytöstä"</string>
     <string name="internal_audio_disabled_message">"Sisäinen äänitys on kytketty pois päältä, koska %1$s ei sulkeutunut oikein. Voit laittaa sen uudelleen käyttöön Asetuksista."</string>
+
+    <string name="license_title">"Lisenssi virhe"</string>
+    <string name="license_not_licensed_message">"Virhe tarkistaessa lisenssiä. Hanki SCR Pro Google Play Kaupasta."</string>
+    <string name="license_retry_message">"Virhe tarkistaessa lisenssiä. Varmista, että internet-yhteys on päällä ja olet kirjautunut Google Play Kauppaan. Kun lisenssi on varmennettu, voit jatkaa SCR Pron käyttöä ilman nettiä."</string>
+    <string name="license_error_message">"Virhe tarkastaessa lisenssiä. Varmista, että olet asentanut SCR Pron Google Play Kaupan kautta. Jos ongelma ei poistu puhdista tiedot ja välimuisti \"Google Play palveluista\" ja \"Google Play Kaupan\" sovelluksista.
+    "</string>
+    <string name="license_play_store">"Play Kauppa"</string>
+    <string name="license_retry">"Yritä uudelleen"</string>
+    <string name="license_continue_as_free">"Jatka Free versiolla"</string>
+
+    <string name="su_denied_message">"Tuli ongelma pääkäyttäjän oikeuksien pyytämisessä laitteestasi. Avaa %1$s ja varmista, että et ole vahingossa kieltänyt pääkäyttäjän oikeuksia %2$s ."</string>
+    <string name="su_default_name">"pääkäyttäjä"</string>
+
+    <string name="can_not_start_toast">"Ei voi aloittaa tallennusta: %1$s"</string>
+
+    <string name="settings_show_camera">"Kameranäkymä"</string>
+    <string name="settings_show_camera_summary">"Näytä kameran kuva videon reunalla"</string>
+    <string name="settings_camera_alpha_title">"Läpinäkyvyys"</string>
+    <string name="settings_camera_alpha_summary">"Kameranäkymä %1$d %% läpinäkymätön"</string>
+    <string name="settings_camera_alpha_summary_100">"Kameranäkymä ei ole läpinäkyvä"</string>
+
+    <string name="miui_error_message">"Jos et näe %1$s kelluvaa ikkunaa menne MIUI sovellusten asetuksiin ja salli \"Näytä ponnahdusikkunoita\"  %1$s ."</string>
+    <string name="miui_error_title">"MIUI ponnahdusikkunat pois käytössä?"</string>
 
 </resources>
