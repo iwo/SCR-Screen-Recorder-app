@@ -43,8 +43,7 @@ SCR Screen Recorder zbiera anonimowe statystyki w celu naprawy błędów oraz an
     <string name="su_required_title">"Wymagane uprawnienie Root"</string>
     <string name="su_required_message">"Wszystkie programy nagrywające zawartość ekranu telefonu lub tabletu wymagają uprawnień root. Instrukcję jak \"zrootować\" twoje urządzenie można znaleźć w Internecie."</string>
     <string name="su_required_help">"Co to jest \"Root\"?"</string>
-    <string name="su_required_help_link">"http://galaktyc
-zny.pl/2013/06/10/galaktyczny-poradnik-co-to-jest-root-tajniki-rootowania/"</string>
+    <string name="su_required_help_link">"http://galaktyczny.pl/2013/06/10/galaktyczny-poradnik-co-to-jest-root-tajniki-rootowania/"</string>
 
     <string name="error_dialog_title">"Wystąpił błąd :-("</string>
     <string name="startup_error_message">"Anonimowa informacja o błędzie została automatycznie wysłana do autora programu. Jeżeli problem będzie się powtarzał prosimy o kontakt mailowy i podanie numeru błędu S%1$d."</string>
