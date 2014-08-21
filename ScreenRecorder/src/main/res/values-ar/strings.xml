@@ -15,13 +15,17 @@ SCR Screen Recorder Pro ★ root
     <string name="play_root_required">"
 &lt;B&gt; التطبيق يعمل على أجهزة أندرويد التي تمتلك روت / التطبيق يعمل على أجهزة آيفون التي تمتلك جيلبريك / التطبيق يعمل على الأجهزة غير المقفلة ! &lt;/B&gt; &lt;BR/&gt; لا تقم بتثبيت التطبيق إذا كان جهازك لا يمتلك روت أو جيلبريك ."</string>
     <string name="play_description_main">"
-تسجيل قطات للشاشة نوعية كبيرة مباشرة من الهاتف أو الكمبيوتر اللوحي! يستخدم SCR شاشة مسجل الأجهزة تسارع ترميز الفيديو لتحقيق افضل شاشة تسجيل الجودة على أي جهاز. انها مسجل الفيديو فقط في السوق بما في ذلك دعم الجهاز تيجرا نيكزس 7."</string>
+تسجيل لقطات للشاشة بجودة كبيرة مباشرة من الهاتف أو الكمبيوتر اللوحي ! يستخدم SCR Screen Recorder ترميز الفيديو لتحقيق أفضل جودة لتسجيل الشاشة على أي جهاز . إنه مسجل الفيديو المتكامل بما في ذلك دعمه لنوع وحدة معالجة الرسومات Tegra على جهاز Nexus 7 ."</string>
     <string name="play_description_free">"
-مع &lt;B&gt; SCR الحرة &lt;/ B&gt; يمكنك تسجيل أقصى 3 دقائق قطات للشاشة ويتم إضافة علامة مائية على الفيديو الخاص بك SCR. شراء &lt;B&gt; SCR برو &lt;/ b&gt; لحصول غير محدود طول سكرينكست مع عدم وجود العلامة المائية. هذا هو مطلع على &lt;b&gt; معاينة BETA &lt;/ ب&gt; إصدار لذلك قد لا تعمل على جميع الأجهزة والمدمجة. إذا واجهت أي مشاكل يرجى الإبلاغ عنها في scr.screen.recorder @ gmail.com لمساعدتي في الحصول على الجهاز معتمد.
+مع &lt;b&gt;SCR Free&lt;/b&gt; يمكنك تسجيل الشاشة لـ3 دقائق فقط ويتم إضافة علامة مائية على الفيديو الخاص بك .
+قم بشراء &lt;b&gt;SCR Pro&lt;/b&gt; للحصول على وقت غير محدود لتسجيل الشاشة مع عدم وجود العلامة المائية .
+
+هذا هو وقت اختبار إصدار &lt;b&gt;BETA&lt;/b&gt; لذلك قد لا يعمل التطبيق على جميع الأجهزة والأنظمة . إذا واجهت أية مشاكل يرجى إبلاغي عنها بإرسال رسالة إلى scr.screen.recorder@gmail.com لمساعدتي في دعم جهازك ونظامك .
     "</string>
 
     <string name="play_description_pro">"
-هذا هو مطلع على &lt;b&gt; معاينة BETA &lt;/ ب&gt; إصدار لذلك قد لا تعمل على جميع الأجهزة والمدمجة. قبل أن تشتري النظر في اختبار &lt;B&gt; SCR الحرة &lt;/ b&gt; لتأكد من أن الجهاز معتمد بالفعل. إذا واجهت أي مشاكل يرجى الإبلاغ عنها في scr.screen.recorder @ gmail.com لمساعدتي في الحصول على الجهاز معتمد.
+هذا هو وقت اختبار إصدار &lt;b&gt;BETA&lt;/b&gt; لذلك قد لا يعمل التطبيق على جميع الأجهزة والأنظمة .
+قبل أن تشتري &lt;b&gt;SCR Pro&lt;/b&gt; قم بتجربة &lt;b&gt;SCR Free&lt;/b&gt; للتأكد من أن جهازك ونظامك معتمدان بالفعل . إذا واجهت أية مشاكل يرجى إبلاغي عنها بإرسال رسالة إلى scr.screen.recorder@gmail.com لمساعدتي في دعم جهازك ونظامك .
     "</string>
 
     <string name="play_small_print">"
@@ -38,7 +42,9 @@ SCR Screen Recorder Pro ★ root
     <string name="su_required_title">"يتطلب صلاحيات روت (Root)"</string>
     <string name="su_required_message">"للبدء في تسجيل الشاشة سيحتاج هاتفك إلى صلاحيات روت (Root) . هناك الكثير من الدروس على شبكة الإنترنت تشرح كيفية الحصول على صلاحيات روت (Root) لنوع هاتفك . يرجى منك العودة من حيث بدأت !"</string>
     <string name="su_required_help">"ماهو \" الروت \" ؟"</string>
-    <string name="su_required_help_link">"https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
+    <string name="su_required_help_link">"En: http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/
+
+Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
 
     <string name="error_dialog_title">"حدث خطأ ما :-("</string>
     <string name="startup_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني S%1$d ."</string>
@@ -50,7 +56,7 @@ SCR Screen Recorder Pro ★ root
     <string name="output_file_error_title">"لا يمكن إنشاء ملف الفيديو"</string>
     <string name="output_file_error_message">"مسجل الشاشة غير قادر على إنشاء %1$s ملف الفيديو . تأكد من مسار الحفظ المحدد للفيديو وأن بطاقة SD غير مؤمنة بواسطة اتصال USB ."</string>
 
-    <string name="microphone_busy_error_title">"مكبر الصوت مُستخدم الآن"</string>
+    <string name="microphone_busy_error_title">"مكبر الصوت مستخدم الآن"</string>
     <string name="microphone_busy_error_message">"
         يمكن لتطبيق واحد فقط استخدام مكبر الصوت في وقت واحد . وهذا هو الحد الأقصى في نظام الأندرويد . قم بإغلاق التطبيقات الأخرى التي تستخدم مكبر الصوت ( مثل : Google Now أو Skype ) أو قم بالتسجيل دون استخدام مكبر الصوت .
     "</string>
@@ -60,7 +66,7 @@ SCR Screen Recorder Pro ★ root
     <string name="screen_protected_error_message">"يمكن / لا يمكن تسجيل الشاشة نظراً لتمييز بعض التطبيقات لمحتوى الشاشة على أنه محتوى آمن ."</string>
 
     <string name="opengl_error_title">"GPU غير مدعوم"</string>
-    <string name="opengl_error_message">"لا يتم اعتماد بطاقة الرسومات الخاصة بك حتى الآن. التبديل صورة التحول إلى وضع وحدة المعالجة المركزية أو استخدام برامج الفيديو ترميز.
+    <string name="opengl_error_message">"بطاقة الرسومات الخاصة بك غير مدعومة حتى الآن . قم بتبديل خيار تحوّل الصورة إلى CPU أو استخدم أحد أنواع ترميز الفيديو .
     "</string>
 
     <string name="audio_config_error_title">"خطأ في الصوت"</string>
@@ -85,8 +91,8 @@ SCR Screen Recorder Pro ★ root
     <string name="hide_icon_title">"هذه الميزة متوفرة لـSCR Pro فقط"</string>
     <string name="hide_icon_message">"يجب عليك شراء SCR Screen Recorder Pro لإخفاء العلامة المائية التي تكون على الفيديو وإخفاء رمز التطبيق . ستحصل كذلك على وقت غير محدود للتسجيل !"</string>
 
-    <string name="buy_error_title">"خطأ في تشغيل سوق Google Play"</string>
-    <string name="buy_error_message">"الرجاء البحث عن SCR Screen Recorder Pro في سوق Google Play"</string>
+    <string name="buy_error_title">"خطأ في تشغيل متجر Google Play"</string>
+    <string name="buy_error_message">"الرجاء البحث عن SCR Screen Recorder Pro في متجر Google Play"</string>
 
     <string name="settings_activity_label">"إعدادات SCR"</string>
     <string name="settings_title">"إعدادات"</string>
@@ -94,16 +100,16 @@ SCR Screen Recorder Pro ★ root
     <string name="settings_reset">"استعادة الافتراضيات"</string>
     <string name="settings_cancel">"إلغاء"</string>
 
+    <string name="settings_unstable">"%1$s ( غير مستقر )"</string>
+
     <string name="settings_video_category">"فيديو"</string>
 
     <string name="settings_video_encoder">"التشفير"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 ( غير مستقرة )"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
     <string name="settings_video_encoder_default">"تلقائي"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 ( بطيئة )"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"برنامج MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"دمج خاصية %1$s مع التشفير"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg software MPEG4 encoder"</string>
 
@@ -114,7 +120,6 @@ SCR Screen Recorder Pro ★ root
     <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp مع الملء"</string>
     <string name="settings_resolution_max">"%1$dx%2$d - الحد الأقصى"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - النصف"</string>
-    <string name="settings_resolution_unstable">"( غير مستقر )"</string>
 
     <string name="settings_transformation">"تحوّل الصورة"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
@@ -129,7 +134,7 @@ SCR Screen Recorder Pro ★ root
     <string name="settings_video_bitrate_default">"الافتراضي"</string>
 
 
-    <string name="settings_frame_rate">"معدل الإطار"</string>
+    <string name="settings_frame_rate">"معدل الإطارات"</string>
     <string name="settings_frame_rate_max">"الحد الأقصى"</string>
     <string name="settings_frame_rate_max_short">"الحد الأقصى"</string>
     <string name="settings_frame_rate_up_to">"%1$d إطار في الثانية"</string>
@@ -139,7 +144,7 @@ SCR Screen Recorder Pro ★ root
 
     <string name="settings_orientation">"اتجاه"</string>
     <string name="settings_orientation_description">"
-        افتراضيا إطارات الفيديو هي دائما الأفقي ويتم إضافة البيانات الوصفية التناوب الى التسجيلات صورة. يوتيوب والافتراضية الروبوت اعب يلعب الفيديو مثل مقاطع الفيديو بشكل صحيح ولكن بعض اللاعبين PC (على سبيل المثال VLC) تجاهل الفوقية التناوب وعرضه في وضع أفقي. يمكنك تمكين إطارات العمودي أدناه ولكن استخدام هذا الخيار بحذر كما يمكن أن العديد من الأجهزة \ 'ر تسجيل / تشغيل ملفات الفيديو مع إطارات عمودية.
+        بشكل افتراضي ، إطارات الفيديو دائماً تكون أفقية ، ويتم إضافة البيانات الوصفية إلى التسجيلات العمودية . يوتيوب ومشغل الفيديو الافتراضي لنظام الأندرويد يعملان مثل أشرطة الفيديو بشكل صحيح ولكن بعض مشغلات الفيديو للحاسب الآلي ( مثل : VLC ) تتجاهل بيانات التعريف وتعرضها في الوضع الأفقي . يمكنك تمكين وضع الإطارات الرأسية أدناه ولكن استخدم هذا الوضع بحذر . كما يمكن / لا يمكن العديد من الأجهزة تسجيل الفيديو / تشغيل الفيديو في وضع الإطارات الرأسية .
     "</string>
     <string name="settings_orientation_auto">"تلقائي"</string>
     <string name="settings_orientation_portrait">"عمودي"</string>
@@ -158,9 +163,11 @@ SCR Screen Recorder Pro ★ root
     <string name="settings_audio_mute">"كتم الصوت"</string>
     <string name="settings_audio_internal">"داخلي"</string>
     <string name="settings_audio_internal_experimental">"داخلي ( تجريبي )"</string>
+    <string name="settings_audio_internal_not_supported">"غير معتمد على %1$s"</string>
+    <string name="settings_audio_internal_incompatible">"غير متوافق مع برنامج تشغيل الصوت الخاص بك"</string>
     <string name="settings_audio_mic_summary">"مكبر الصوت"</string>
     <string name="settings_audio_mute_summary">"كتم الصوت . لا يوجد مسار نزول افتراضي للصوت"</string>
-    <string name="settings_audio_internal_summary">"إخراج الصوت النظام"</string>
+    <string name="settings_audio_internal_summary">"نظام إخراج الصوت"</string>
     <string name="settings_audio">"تسجيل الصوت"</string>
     <string name="settings_sampling_rate">"معدل أخذ العينات"</string>
 
@@ -178,6 +185,15 @@ SCR Screen Recorder Pro ★ root
     <string name="settings_zigzag_fix_summary">"حدد هذا الخيار إذا كان التسجيل يحتوي على أشرطة ملونة عشوائية"</string>
     <string name="settings_zigzag_fix_cpu_only">"تحوّل الصورة متوفر فقط مع CPU"</string>
 
+    <string name="settings_video_config">"%1$s الإعدادات المسبقة"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~%3$.0ffps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d %% مستقر"</string>
+    <string name="settings_video_config_summary">"استناداً إلى إحصائيات الاستخدام"</string>
+    <string name="settings_video_config_summary_no_data">"لا يمكن تحميل الإحصائيات"</string>
+
+    <string name="device_profile_download_error_toast">"لا يمكن تحميل الإعدادات الموصى بها . تأكد من أنك متصل بالإنترنت ."</string>
+    <string name="device_profile_downloaded_toast">"تم تحميل الإعدادات الموصى بها"</string>
+
     <string name="directory_chooser_select">"حدد \"%1$s\""</string>
     <string name="directory_chooser_refresh">"تحديث"</string>
     <string name="directory_chooser_new">"جديد"</string>
@@ -191,14 +207,9 @@ SCR Screen Recorder Pro ★ root
     <string name="directory_chooser_cancel">"إلغاء"</string>
     <string name="directory_chooser_default">"الافتراضي"</string>
 
-    <string name="license_dont_allow">"فشل التحقق من الترخيص . تأكد من اتصال الإنترنت الخاص بك وتأكد أنك قمت بتسجيل الدخول إلى سوق Google Play .
-    "</string>
-    <string name="license_error">"خطأ التحقق من الترخيص . تأكد من اتصال الإنترنت الخاص بك وتأكد أنك قمت بتسجيل الدخول إلى سوق Google Play .
-    "</string>
-
     <string name="error_report_report">"تقرير"</string>
     <string name="error_report_close">"إغلاق"</string>
-    <string name="error_report_text">"المرفق يحتوي على سجل النظام مفصلاً بما في ذلك معلومات حول الخطأ . لا تتردد في إضافة أي تعليقات هنا ."</string>
+    <string name="error_report_text">"المرفق يحتوي على سجل النظام مفصلاً بما في ذلك معلومات حول الخطأ . لا تتردد في إضافة أية تعليقات هنا ."</string>
     <string name="error_report_chooser">"إرسال تقرير عن الخطأ بواسطة البريد الإلكتروني"</string>
 
     <string name="rating_rate_title">"معدل %1$s"</string>
@@ -206,12 +217,14 @@ SCR Screen Recorder Pro ★ root
     <string name="rating_rate_now">"تقييم التطبيق الآن !"</string>
     <string name="rating_remind">"ذكرني لاحقاً"</string>
     <string name="rating_no_thanks">"لا ، شكراً"</string>
-    <string name="rating_play_error">"لا يمكن فتح سوق Google Play "</string>
+    <string name="rating_play_error">"لا يمكن فتح متجر Google Play "</string>
 
     <string name="help_stop_message">"لإيقاف التسجيل قم بإغلاق الشاشة وانتظر ثانيتين . بدلاً من ذلك يمكنك ببساطة إعادة فتح تطبيق %1$s ."</string>
     <string name="menu_send_bug_report">"إرسال تقرير عن خطأ ما"</string>
+    <string name="menu_show_unstable">"إظهار الإعدادات الغير مستقرة"</string>
+    <string name="menu_show_advanced">"إظهار الإعدادات المتقدمة"</string>
 
-    <string name="notification_status_installing">"تهيئة"</string>
+    <string name="notification_status_installing">"جاري التهيئة"</string>
     <string name="notification_status_initializing">"في انتظار الحصول على صلاحيات الروت"</string>
     <string name="notification_status_installing_audio">"جاري تثبيت برنامج تشغيل الصوت"</string>
     <string name="notification_status_ready">"مستعد للتسجيل"</string>
@@ -221,15 +234,38 @@ SCR Screen Recorder Pro ★ root
     <string name="notification_status_stopping">"جاري إيقاف التسجيل"</string>
     <string name="notification_status_uninstalling_audio">"جاري إلغاء تثبيت برنامج تشغيل الصوت"</string>
 
-    <string name="sale_title">"بيع"</string>
+    <string name="sale_title">"تخفيض"</string>
     <string name="sale_text">"قم بشراء SCR Pro الآن ووفر %1$d %% ! هذا العرض سينتهي في %2$s ."</string>
 
     <string name="copyrights_statement">"باستخدامك لـ%1$s أنت توافق على أنك المسؤول عن ضمان أن لا تنتهك حقوق التأليف والنشر لطرف ثالث أو الحقوق الملكية الفكرية الأخرى ."</string>
     <string name="internal_audio_installation_error_title">"خطأ في الصوت الداخلي"</string>
-    <string name="internal_audio_installation_error_message">"لا يمكن تمكين الصوت الداخلي . يرجى إرسال تقرير عن الخطأ لمساعدتي في دعم جهازك . سيتم تعيين مصدر الصوت إلى %1$s ."</string>
+    <string name="internal_audio_installation_error_message">"لا يمكن تفعيل الصوت الداخلي . يرجى إرسال تقرير عن الخطأ لمساعدتي في دعم جهازك . سيتم تعيين مصدر الصوت إلى %1$s ."</string>
     <string name="internal_audio_unstable_title">"الصوت الداخلي غير مستقر"</string>
     <string name="internal_audio_unstable_message">"تم الكشف عن عدم الاستقرار للصوت الداخلي . يرجى إرسال تقرير عن الخطأ لمساعدتي في دعم جهازك . سيتم تعيين مصدر الصوت إلى %1$s ."</string>
-    <string name="internal_audio_disabled_title">"الصوت الداخلي معطل"</string>
+    <string name="internal_audio_disabled_title">"تم تعطيل الصوت الداخلي"</string>
     <string name="internal_audio_disabled_message">"تم إيقاف تشغيل تسجيل الصوت الداخلي لأن %1$s لم تغلق بشكل صحيح . يمكنك إعادة تمكينه من الإعدادات ."</string>
+
+    <string name="license_title">"خطأ في الترخيص"</string>
+    <string name="license_not_licensed_message">"خطأ في التحقق من الترخيص . يرجى شراء SCR Pro من خلال متجر Google Play ."</string>
+    <string name="license_retry_message">"خطأ في التحقق من الترخيص . تأكد من اتصال الإنترنت الخاص بك وقم بتسجيل الدخول إلى متجر Google Play . بعد أن يتم التحقق من الترخيص يمكنك الاستمرار باستخدام SCR Pro دون اتصال ."</string>
+    <string name="license_error_message">"خطأ في التحقق من الترخيص . تأكد من تثبيت SCR Pro من خلال متجر Google Play . إذا استمرت المشكلة قم بمسح البيانات ومسح ذاكرة التخزين المؤقت لكل من التطبيقات التالية : \" خدمات Google Play \" و \" متجر Google Play \" .
+    "</string>
+    <string name="license_play_store">"متجر Play"</string>
+    <string name="license_retry">"إعادة المحاولة"</string>
+    <string name="license_continue_as_free">"مواصلة استخدام الميزات المجانية"</string>
+
+    <string name="su_denied_message">"هناك مشكلة في الحصول على صلاحيات الروت على الجهاز الخاص بك . الرجاء فتح %1$s والقيام بتأكيد الحصول على صلاحيات الروت لصالح %2$s ."</string>
+    <string name="su_default_name">"المستخدم المتميز"</string>
+
+    <string name="can_not_start_toast">"لا يمكن بدء التسجيل : %1$s"</string>
+
+    <string name="settings_show_camera">"عرض الكاميرا"</string>
+    <string name="settings_show_camera_summary">"عرض الصور الخاصة بك على رأس التسجيل"</string>
+    <string name="settings_camera_alpha_title">"الشفافية"</string>
+    <string name="settings_camera_alpha_summary">"عرض الكاميرا %1$d %% مبهم"</string>
+    <string name="settings_camera_alpha_summary_100">"عرض الكاميرا غير شفاف"</string>
+
+    <string name="miui_error_message">"إذا كنت لا تستطيع رؤية %1$s النافذة العائمة اذهب إلى إعدادات وتطبيقات MIUI وقم بتمكين \" إظهار النوافذ المنبثقة \" لـ %1$s ."</string>
+    <string name="miui_error_title">"النوافذ المنبثقة لـMIUI معطلة ؟"</string>
 
 </resources>

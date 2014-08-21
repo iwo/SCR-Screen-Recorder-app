@@ -51,7 +51,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="recording_error_message">"Het anonieme foutenrapport wordt automatisch opgestuurd om ons te helpen met het oplossen van het probleem. Neem gerust contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
 
     <string name="media_recorder_error_title">"Opname fout"</string>
-    <string name="media_recorder_error_message">"Probeer de resolutie te veranderen of wissel de beeldtransformatie tussen GPU/CPU. Verwijder andere screencast toepassingen als je die hebt. Als het probleem zich blijft voordoen, neem dan contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
+    <string name="media_recorder_error_message">"Probeer de resolutie te veranderen of wissel de beeldomzetting tussen GPU/CPU. Verwijder andere screencast toepassingen als u die heeft. Als het probleem zich blijft voordoen, neem dan contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
 
     <string name="output_file_error_title">"Kan het video-bestand niet aanmaken"</string>
     <string name="output_file_error_message">"SCR kon het video-bestand %1$s niet aanmaken. Zorg ervoor dat de geselecteerde map beschrijfbaar is en dat de SD-kaart niet door de USB-aansluiting is geblokkeerd."</string>
@@ -61,13 +61,13 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
         Slechts één app tegelijk kan de microfoon gebruiken. Dit is een beperking van Android.
         Sluit andere apps die de microfoon gebruiken af (bijv. Google Now of Skype) of ga door met opnemen zonder geluid.
     "</string>
-    <string name="microphone_busy_error_continue_mute">"Doorgaan Zonder Geluid"</string>
+    <string name="microphone_busy_error_continue_mute">"Doorgaan zonder geluid"</string>
 
     <string name="screen_protected_error_title">"Scherm beschermd"</string>
     <string name="screen_protected_error_message">"Het scherm kan niet worden opgenomen omdat sommige apps de inhoud op het scherm als beveiligd hebben gemarkeerd."</string>
 
     <string name="opengl_error_title">"GPU niet ondersteund"</string>
-    <string name="opengl_error_message">"Je grafische kaart wordt nog niet ondersteund.
+    <string name="opengl_error_message">"Uw grafische kaart wordt nog niet ondersteund.
         Verander de beeltransformatie instelling naar CPU of gebruik de software video encoder.
     "</string>
 
@@ -75,13 +75,13 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="audio_config_error_message">"Niet-ondersteunde audio-configuratie. Probeer de audio instellingen van SCR aan te passen."</string>
 
     <string name="android_version_error_title">"Android-versie niet ondersteund"</string>
-    <string name="android_version_error_message">"Je Android-versie wordt nog niet ondersteund."</string>
+    <string name="android_version_error_message">"Uw Android-versie wordt nog niet ondersteund."</string>
 
     <string name="cpu_error_title">"CPU niet ondersteund"</string>
-    <string name="cpu_error_message">"Je CPU architectuur (%1$s) wordt niet ondersteund door %2$s."</string>
+    <string name="cpu_error_message">"Uw CPU architectuur (%1$s) wordt niet ondersteund door %2$s."</string>
 
     <string name="installation_error_title">"Installatie fout"</string>
-    <string name="installation_error_message">"Kan benodigde bestanden niet installeren. Zorg ervoor dat je wat vrije ruimte op je apparaat hebt en herstart %1$s."</string>
+    <string name="installation_error_message">"Kan benodigde bestanden niet installeren. Zorg ervoor dat u wat vrije ruimte op uw apparaat hebt en herstart %1$s."</string>
 
     <string name="help_stop_title">"Hoe stop je de opname"</string>
     <string name="help_stop_ok">"Ik snap het!"</string>
@@ -91,27 +91,27 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="free_timeout_buy">"Koop nu!"</string>
     <string name="free_timeout_no_thanks">"Nee, bedankt"</string>
     <string name="hide_icon_title">"Pro-functie"</string>
-    <string name="hide_icon_message">"Koop SCR Screen Recorder Pro om het watermerk en het meldingspictogram te verbergen. Je krijgt ook onbeperkte opnametijd!"</string>
+    <string name="hide_icon_message">"Koop SCR Screen Recorder Pro om het watermerk en het meldingspictogram te verbergen. U krijgt ook onbeperkte opnametijd!"</string>
 
     <string name="buy_error_title">"Google Play fout"</string>
     <string name="buy_error_message">"Zoek aub voor SCR Screen Recorder Pro in Google Play"</string>
 
     <string name="settings_activity_label">"SCR Instellingen"</string>
     <string name="settings_title">"Instellingen"</string>
-    <string name="settings_ok">"Ok"</string>
+    <string name="settings_ok">"OK"</string>
     <string name="settings_reset">"Herstel standaardinstellingen"</string>
     <string name="settings_cancel">"Annuleren"</string>
+
+    <string name="settings_unstable">"%1$s (instabiel)"</string>
 
     <string name="settings_video_category">"Video"</string>
 
     <string name="settings_video_encoder">"Encoder"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (onstabiel)"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
     <string name="settings_video_encoder_default">"Automatisch"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 (langzaam)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Ingebouwde Android %1$s encoder"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg software MPEG4-encoder"</string>
 
@@ -122,9 +122,8 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp met padding"</string>
     <string name="settings_resolution_max">"%1$dx%2$d - Max"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - Half"</string>
-    <string name="settings_resolution_unstable">"(instabiel)"</string>
 
-    <string name="settings_transformation">"Beeldtransformatie"</string>
+    <string name="settings_transformation">"Beeldomzetting"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
@@ -132,7 +131,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_transformation_gpu_summary">"Beeld verwerken op de grafische kaart (%1$s)"</string>
     <string name="settings_transformation_sw_summary">"Niet beschikbaar in de software-encoder"</string>
 
-    <string name="settings_video_bitrate">"Bitsnelheid"</string>
+    <string name="settings_video_bitrate">"Bitrate"</string>
     <string name="settings_video_bitrate_summary">"ongeveer %1$s, afhankelijk van de encoder"</string>
     <string name="settings_video_bitrate_default">"Standaard"</string>
 
@@ -150,7 +149,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
         Normaal zijn videoframes altijd horizontaal en wordt er metadata toegevoegd om de video verticaal af te spelen.
         YouTube en de standaard Android videospeler spelen deze video's goed af maar sommige PC spelers (zoals VLC)
         negeren deze metadata en spelen de video horizontaal af.
-        Je kan verticale frames hieronder aanzetten, gebruik deze optie voorzichtig want veel apparaten kunnen geen
+        U kunt verticale frames hieronder aanzetten, gebruik deze optie voorzichtig want veel apparaten kunnen geen
         video's met verticale frames opnemen / afspelen.
     "</string>
     <string name="settings_orientation_auto">"Automatisch"</string>
@@ -162,7 +161,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_vertical_frames">"Verticale frames"</string>
     <string name="settings_vertical_frames_warning">"Videospelers op veel apparaten kunnen geen video's met verticale frames afspelen.
         Zelfs als deze optie niet geselecteerd is word er oriëntatie metadata toegevoegd aan de video zodat het correct wordt weergegeven in de standaard Android-speler, YouTube etc."</string>
-    <string name="settings_vertical_frames_ok">"Ok"</string>
+    <string name="settings_vertical_frames_ok">"OK"</string>
     <string name="settings_vertical_frames_cancel">"Annuleren"</string>
 
     <string name="settings_audio_category">"Geluid"</string>
@@ -171,6 +170,8 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_audio_mute">"Geen"</string>
     <string name="settings_audio_internal">"Inter"</string>
     <string name="settings_audio_internal_experimental">"Intern (experimenteel)"</string>
+    <string name="settings_audio_internal_not_supported">"Niet ondersteund op %1$s"</string>
+    <string name="settings_audio_internal_incompatible">"Niet compatibel met uw audio-driver"</string>
     <string name="settings_audio_mic_summary">"Microfoon"</string>
     <string name="settings_audio_mute_summary">"Dempen. Geen audiospoor"</string>
     <string name="settings_audio_internal_summary">"Systeem audio uitgang"</string>
@@ -180,7 +181,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_other_category">"Overig"</string>
     <string name="settings_hide_icon">"Pictogram in het systeemvak verbergen"</string>
     <string name="settings_show_touches">"Aanrakingen weergeven"</string>
-    <string name="settings_show_touches_summary">"Toon visuele feedback voor aanrakingen. Je kunt dit permanent activeren via Instellingen → Opties voor ontwikkelaars → Aanraakbewerkingen weergeven"</string>
+    <string name="settings_show_touches_summary">"Toon visuele feedback voor aanrakingen. U kunt dit permanent activeren via Instellingen → Opties voor ontwikkelaars → Aanraakbewerkingen weergeven"</string>
     <string name="settings_output_dir">"Opslag map"</string>
     <string name="settings_stop_when_screen_off">"Stop als het scherm uit gaat"</string>
     <string name="settings_stop_when_screen_off_summary">"Opname stopt nadat het scherm wordt uitgeschakeld"</string>
@@ -188,14 +189,23 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_color_fix_summary">"Schakel deze optie in als de blauwe en rode kleuren zijn omgekeerd"</string>
 
     <string name="settings_zigzag_fix">"Zigzag fix"</string>
-    <string name="settings_zigzag_fix_summary">"Selecteer als je opname willekeurig gekleurde strepen heeft"</string>
-    <string name="settings_zigzag_fix_cpu_only">"Alleen beschikbaar met CPU beeldtransformatie"</string>
+    <string name="settings_zigzag_fix_summary">"Selecteer als uw opname willekeurig gekleurde strepen heeft"</string>
+    <string name="settings_zigzag_fix_cpu_only">"Alleen beschikbaar met CPU beeldomzetting"</string>
+
+    <string name="settings_video_config">"%1$s presets"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0ffps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d %% stabiel"</string>
+    <string name="settings_video_config_summary">"Gebaseerd op gebruiksstatistieken"</string>
+    <string name="settings_video_config_summary_no_data">"Kon geen statistieken downloaden"</string>
+
+    <string name="device_profile_download_error_toast">"Kon geen aanbevolen instellingen downloaden. Zorg ervoor dat u een internetverbinding heeft."</string>
+    <string name="device_profile_downloaded_toast">"Aanbevolen instellingen gedownload"</string>
 
     <string name="directory_chooser_select">"Selecteer \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Vernieuwen"</string>
     <string name="directory_chooser_new">"Nieuw"</string>
     <string name="directory_chooser_new_title">"Nieuwe naam voor map"</string>
-    <string name="directory_chooser_new_ok">"Ok"</string>
+    <string name="directory_chooser_new_ok">"OK"</string>
     <string name="directory_chooser_new_cancel">"Annuleren"</string>
     <string name="directory_chooser_error_message">"Map kan niet worden aangemaakt. Zorg ervoor dat u een beschrijfbare locatie kiest, bijv. SD-kaart."</string>
     <string name="directory_chooser_not_writable_title">"Geselecteerde map is niet beschrijfbaar"</string>
@@ -204,25 +214,22 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="directory_chooser_cancel">"Annuleren"</string>
     <string name="directory_chooser_default">"Standaard"</string>
 
-    <string name="license_dont_allow">"Licentie check mislukt. Zorg ervoor dat je een internetverbinding hebt en dat je bent ingelogd bij Google Play.
-    "</string>
-    <string name="license_error">"Licentie check fout. Zorg ervoor dat je een internetverbinding hebt en dat je bent ingelogd bij Google Play.
-    "</string>
-
     <string name="error_report_report">"Rapport"</string>
     <string name="error_report_close">"Sluiten"</string>
-    <string name="error_report_text">"De bijlage bevat een gedetailleerd systeem logbestand met onder andere informatie over een fout. Voeg een reactie toe als je dat wilt."</string>
+    <string name="error_report_text">"De bijlage bevat een gedetailleerd systeem logbestand met onder andere informatie over een fout. Voeg een reactie toe als u dat wilt."</string>
     <string name="error_report_chooser">"E-mail foutenrapport met"</string>
 
     <string name="rating_rate_title">"Beoordeling %1$s"</string>
-    <string name="rating_rate_message">"Als je %1$s met plezier gebruikt, neem dan even de tijd om het te beoordelen. Bedankt voor je steun!"</string>
+    <string name="rating_rate_message">"Als u %1$s met plezier gebruikt, neem dan even de tijd om het te beoordelen. Bedankt voor uw steun!"</string>
     <string name="rating_rate_now">"Beoordeel nu!"</string>
     <string name="rating_remind">"Herinner me later"</string>
     <string name="rating_no_thanks">"Nee, bedankt"</string>
     <string name="rating_play_error">"Kan Google Play niet openen."</string>
 
-    <string name="help_stop_message">"Om te stoppen met de opname vergrendel het scherm en wacht 2 seconden. Als alternatief kan je de %1$s app heropenen."</string>
+    <string name="help_stop_message">"Om te stoppen met de opname vergrendel het scherm en wacht 2 seconden. Als alternatief kan u de %1$s app heropenen."</string>
     <string name="menu_send_bug_report">"Stuur bug report"</string>
+    <string name="menu_show_unstable">"Onstabiel"</string>
+    <string name="menu_show_advanced">"Toon geavanceerd"</string>
 
     <string name="notification_status_installing">"Initialiseren"</string>
     <string name="notification_status_initializing">"Wachten op root-toegang"</string>
@@ -237,12 +244,38 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="sale_title">"Uitverkoop"</string>
     <string name="sale_text">"Koop nu SCR Pro en bespaar %1$d %% ! Deze aanbieding eindigt op %2$s ."</string>
 
-    <string name="copyrights_statement">"Door het gebruik van %1$s ga je ermee akkoord dat jij alleen verantwoordelijk bent om er zeker van te zijn dat je geen copyrights van een derde partij of andere eigendomsrechten schendt."</string>
+    <string name="copyrights_statement">"Door het gebruik van %1$s gaat u ermee akkoord dat u alleen verantwoordelijk bent om er zeker van te zijn dat u geen copyrights van een derde partij of andere eigendomsrechten schendt."</string>
     <string name="internal_audio_installation_error_title">"Interne audio fout"</string>
-    <string name="internal_audio_installation_error_message">"Kan de interne audio niet inschakelen. Stuur een bug report om me te helpen met het ondersteunen van je apparaat. Audiobron wordt ingesteld op %1$s ."</string>
+    <string name="internal_audio_installation_error_message">"Kan de interne audio niet inschakelen. Stuur een bug report om me te helpen het ondersteunen van uw apparaat. Audiobron wordt ingesteld op %1$s ."</string>
     <string name="internal_audio_unstable_title">"Interne audio instabiel"</string>
-    <string name="internal_audio_unstable_message">"Interne audio stabiliteits-probleem . Stuur een bug report om me te helpen met het ondersteunen van je apparaat. Audiobron wordt ingesteld op %1$s ."</string>
+    <string name="internal_audio_unstable_message">"Interne audio stabiliteits-probleem . Stuur een bug report om me te helpen met het ondersteunen van uw apparaat. Audiobron wordt ingesteld op %1$s ."</string>
     <string name="internal_audio_disabled_title">"Interne audio uitgeschakeld"</string>
-    <string name="internal_audio_disabled_message">"Interne audio-opname wordt uitgeschakeld omdat %1$s niet correct is afgesloten. Je kunt het weer inschakelen in Instellingen."</string>
+    <string name="internal_audio_disabled_message">"Interne audio-opname wordt uitgeschakeld omdat %1$s niet correct is afgesloten. U kunt het weer inschakelen in Instellingen."</string>
+
+    <string name="license_title">"Licentie fout"</string>
+    <string name="license_not_licensed_message">"Fout bij het verifiëren van licentie. Koop SCR Pro alstublieft via de Play Store."</string>
+    <string name="license_retry_message">"Fout bij het verifiëren van licentie. Zorg ervoor dat u verbinding met internet heeft
+        en dat u bent ingelogd bij de Google Play Store. Nadat deze licentie is geverifieerd kunt u SCR Pro offline gebruiken."</string>
+    <string name="license_error_message">"Fout bij het verifiëren van licentie. Zorg ervoor dat u SCR Pro via Google Play installeert.
+        Als dit probleem aanhoudt, verwijder dan de gegevens en de cache van \"Google Play Services\" en \"Google Play Store\"
+    "</string>
+    <string name="license_play_store">"Play Store"</string>
+    <string name="license_retry">"Probeer opnieuw"</string>
+    <string name="license_continue_as_free">"Ga verder met de gratis versie"</string>
+
+    <string name="su_denied_message">"Er is een probleem met de roottoegang op uw apparaat.
+        Open %1$s en controleer of u roottoegang voor %2$s niet per ongeluk heeft geweigerd."</string>
+    <string name="su_default_name">"superuser"</string>
+
+    <string name="can_not_start_toast">"Kan de opname niet starten: %1$s"</string>
+
+    <string name="settings_show_camera">"Camerabeeld"</string>
+    <string name="settings_show_camera_summary">"Laat uw camerabeeld bovenop de opname zien"</string>
+    <string name="settings_camera_alpha_title">"Transparantie"</string>
+    <string name="settings_camera_alpha_summary">"Camerabeeld %1$d%% doorzichtig."</string>
+    <string name="settings_camera_alpha_summary_100">"Camerabeeld niet doorzichtig"</string>
+
+    <string name="miui_error_message">"Als u %1$s zwevende venster niet ziet, ga naar MiUi apps instellingen en zet \"Toon popup vensters\" voor %1$s aan."</string>
+    <string name="miui_error_title">"MiUi popups uitgeschakeld?"</string>
 
 </resources>

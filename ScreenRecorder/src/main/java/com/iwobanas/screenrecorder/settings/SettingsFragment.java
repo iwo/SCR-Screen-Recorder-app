@@ -232,6 +232,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         if (addRemovePreference(settings.getShowAdvanced(), KEY_FRAME_RATE, frameRatePreference, videoCategory)) {
             if (Build.VERSION.SDK_INT < 18 || (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isHighEndDevice())) {
                 frameRatePreference.setEntryValues(R.array.frame_rate_values_lo_end);
+            } else {
+                frameRatePreference.setEntryValues(R.array.frame_rate_values);
             }
             frameRatePreference.setEntries(getFrameRateEntries(frameRatePreference.getEntryValues()));
         }
@@ -632,7 +634,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             preference.setSummary(rate.getLabel());
         } else if (preference == hideIconPreference) {
             if (getResources().getBoolean(R.bool.taniosc)) {
-                new HideIconDialogFragment().show(getFragmentManager(), "hideWatermark");
+                try {
+                    new HideIconDialogFragment().show(getFragmentManager(), "hideWatermark");
+                } catch (IllegalStateException e) {
+                    Log.w(TAG, "Couldn't display dialog fragment. Is it already added?", e);
+                }
                 return false;
             } else {
                 settings.setHideIcon(selected);

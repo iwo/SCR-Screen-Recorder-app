@@ -55,7 +55,7 @@ SCR Screen Recorder собирает анонимную статистику д�
     <string name="recording_error_message">"Чтобы помочь нам решить проблему, будет отправлено анонимное сообщение об ошибке. Не стесняйтесь связаться через поддержку по электронной почте с указанием ошибки R%1$d."</string>
 
     <string name="media_recorder_error_title">"Ошибка записи"</string>
-    <string name="media_recorder_error_message">"Попробуйте изменить настройки записи. Пожалуйста удалите другие скринкаст–приложения и перезагрузите устройство. Если проблема не устраняется, свяжитесь с нами через поддержку по электронной почте. R%1$d"</string>
+    <string name="media_recorder_error_message">"Попробуйте изменить разрешение или способ обработки изображения (GPU/CPU). Удалите другие приложения видеозахвата экрана, если таковые имеются. Если проблема не устраняется, свяжитесь через почту поддержки со ссылкой на ошибку R%1$d"</string>
 
     <string name="output_file_error_title">"Не удается создать видеофайл"</string>
     <string name="output_file_error_message">"SCR не удалось создать видеофайл %1$s. Убедитесь, что выбран выходной каталог для записи и SD-карта не заблокирована подключением через USB."</string>
@@ -106,16 +106,16 @@ SCR Screen Recorder собирает анонимную статистику д�
     <string name="settings_reset">"Сброс"</string>
     <string name="settings_cancel">"Отмена"</string>
 
+    <string name="settings_unstable">"%1$s (нестабильно)"</string>
+
     <string name="settings_video_category">"Видео"</string>
 
     <string name="settings_video_encoder">"Кодер"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (нестабильно)"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
     <string name="settings_video_encoder_default">"Авто"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Программный MPEG-4 (медленно)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Программный MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Встроенный кодер Android %1$s"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg программный кодер MPEG4"</string>
 
@@ -126,7 +126,6 @@ SCR Screen Recorder собирает анонимную статистику д�
     <string name="settings_resolution_padding">"%1$dх%2$d - %2$dp с полями"</string>
     <string name="settings_resolution_max">"%1$dх%2$d - максимум"</string>
     <string name="settings_resolution_half">"%1$dх%2$d - половина"</string>
-    <string name="settings_resolution_unstable">"(нестабильно)"</string>
 
     <string name="settings_transformation">"Обработка изображения"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
@@ -175,6 +174,8 @@ SCR Screen Recorder собирает анонимную статистику д�
     <string name="settings_audio_mute">"Без звука"</string>
     <string name="settings_audio_internal">"Внутренний"</string>
     <string name="settings_audio_internal_experimental">"Внутренний (эксперимент)"</string>
+    <string name="settings_audio_internal_not_supported">"Не поддерживается на %1$s"</string>
+    <string name="settings_audio_internal_incompatible">"Не совместим с драйвером звука"</string>
     <string name="settings_audio_mic_summary">"Микрофон"</string>
     <string name="settings_audio_mute_summary">"Тихо (без звуковой дорожки)"</string>
     <string name="settings_audio_internal_summary">"Системный аудио выход"</string>
@@ -195,6 +196,15 @@ SCR Screen Recorder собирает анонимную статистику д�
     <string name="settings_zigzag_fix_summary">"Используйте если в записи присутствуют случайные цветные полосы"</string>
     <string name="settings_zigzag_fix_cpu_only">"Доступно только при обработке изображения процессором"</string>
 
+    <string name="settings_video_config">"Пресеты %1$s"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0ffps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d%% стабильно"</string>
+    <string name="settings_video_config_summary">"На основе статистики использования"</string>
+    <string name="settings_video_config_summary_no_data">"Не удалось загрузить статистики"</string>
+
+    <string name="device_profile_download_error_toast">"Не удается загрузить рекомендуемые настройки. Убедитесь, что вы в сети."</string>
+    <string name="device_profile_downloaded_toast">"Рекомендуемые настройки загружены"</string>
+
     <string name="directory_chooser_select">"Выбрать \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Обновить"</string>
     <string name="directory_chooser_new">"Новый"</string>
@@ -207,11 +217,6 @@ SCR Screen Recorder собирает анонимную статистику д�
     <string name="directory_chooser_ignore">"Игнорировать"</string>
     <string name="directory_chooser_cancel">"Отмена"</string>
     <string name="directory_chooser_default">"Умолчание"</string>
-
-    <string name="license_dont_allow">"Не удалось проверить лицензию. Убедитесь, что есть соединение с интернетом, и вы вошли в Google Play.
-    "</string>
-    <string name="license_error">"Не удалось проверить лицензию. Убедитесь, что есть соединение с интернетом, и вы вошли в Google Play.
-    "</string>
 
     <string name="error_report_report">"Отчет"</string>
     <string name="error_report_close">"Закрыть"</string>
@@ -227,14 +232,16 @@ SCR Screen Recorder собирает анонимную статистику д�
 
     <string name="help_stop_message">"Для остановки записи заблокируйте экран и подождите 2 секунды. В качестве альтернативы можно просто открыть приложение %1$s."</string>
     <string name="menu_send_bug_report">"Сообщить об ошибке"</string>
+    <string name="menu_show_unstable">"Показать нестабильные"</string>
+    <string name="menu_show_advanced">"Показать расширенные"</string>
 
-    <string name="notification_status_installing">"Инициализация"</string>
+    <string name="notification_status_installing">"Инициализация..."</string>
     <string name="notification_status_initializing">"Ожидание доступа root"</string>
     <string name="notification_status_installing_audio">"Установка аудио драйвера"</string>
     <string name="notification_status_ready">"Готов"</string>
     <string name="notification_status_starting">"Запуск"</string>
     <string name="notification_status_recording">"Запись"</string>
-    <string name="notification_status_error">"[ошибка]"</string>
+    <string name="notification_status_error">"Ошибка"</string>
     <string name="notification_status_stopping">"Остановка"</string>
     <string name="notification_status_uninstalling_audio">"Удаление аудио драйвера"</string>
 
@@ -248,5 +255,31 @@ SCR Screen Recorder собирает анонимную статистику д�
     <string name="internal_audio_unstable_message">"Обнаружена проблема стабильности внутреннего звука. Пожалуйста, отправьте отчет об ошибке, это поможет мне в устранении проблем поддержки для вашего устройства. Источник звука будет переключен на %1$s."</string>
     <string name="internal_audio_disabled_title">"Внутренний звук отключен"</string>
     <string name="internal_audio_disabled_message">"Внутренняя запись отключена из-за некорректного завершения работы %1$s. Вы можете повторно включить ее в настройках."</string>
+
+    <string name="license_title">"Ошибка лицензии"</string>
+    <string name="license_not_licensed_message">"Ошибка проверки лицензии. Пожалуйста, приобретите SCR Pro через Google Play Store."</string>
+    <string name="license_retry_message">"Не удалось проверить лицензию. Убедитесь, что есть соединение с интернетом
+        и вы вошли в Google Play Store. После проверки вы сможете продолжить пользоваться SCR Pro в автономном режиме."</string>
+    <string name="license_error_message">"Ошибка проверки лицензии. Убедитесь, что вы установили SCR Pro через Google Play.
+        Если проблема сохраняется, попробуйте очистить данные и кэш приложений \"Google Play services\" и \"Google Play Store\".
+    "</string>
+    <string name="license_play_store">"Play Store"</string>
+    <string name="license_retry">"Повторить"</string>
+    <string name="license_continue_as_free">"Продолжить бесплатно"</string>
+
+    <string name="su_denied_message">"На устройстве есть проблема доступа с правами root.
+        Откройте %1$s и убедитесь, что вы случайно не отказали в доступе для %2$s."</string>
+    <string name="su_default_name">"суперпользователь"</string>
+
+    <string name="can_not_start_toast">"Не удается начать запись: %1$s"</string>
+
+    <string name="settings_show_camera">"Окно камеры"</string>
+    <string name="settings_show_camera_summary">"Показать свое изображение поверх записи"</string>
+    <string name="settings_camera_alpha_title">"Видимость окна"</string>
+    <string name="settings_camera_alpha_summary">"непрозрачность %1$d%%"</string>
+    <string name="settings_camera_alpha_summary_100">"непрозрачность 100%"</string>
+
+    <string name="miui_error_message">"Если вы не видите плавающее окно %1$s, зайдите в настройки приложений MiUi и включите \"Показать всплывающие окна\" для %1$s."</string>
+    <string name="miui_error_title">"Всплывающие окна отключены?"</string>
 
 </resources>

@@ -103,17 +103,17 @@ Im Internet gibt es viele Anleitungen wie man verschiedene Geräte rootet. Bitte
     <string name="settings_reset">"Standardeinstellungen wiederherstellen"</string>
     <string name="settings_cancel">"Abbrechen"</string>
 
+    <string name="settings_unstable">"%1$s (instabil)"</string>
+
     <string name="settings_video_category">"Video"</string>
 
     <string name="settings_video_encoder">"Kodierer"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
     <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (instabil)"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
     <string name="settings_video_encoder_default">"Automatisch"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4 (langsam)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
-    <string name="settings_video_encoder_built_in_summary">"Android Built-In %1$s Kodierer"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4"</string>
+    <string name="settings_video_encoder_built_in_summary">"In Android eingebauter %1$s Kodierer"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg Software MPEG4-Kodierer"</string>
 
     <string name="settings_resolution">"Auflösung"</string>
@@ -123,13 +123,12 @@ Im Internet gibt es viele Anleitungen wie man verschiedene Geräte rootet. Bitte
     <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp mit Rand"</string>
     <string name="settings_resolution_max">"%1$dx%2$d - Komplett"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - Halb"</string>
-    <string name="settings_resolution_unstable">"(instabil)"</string>
 
-    <string name="settings_transformation">"Bild"</string>
+    <string name="settings_transformation">"Bild Transformation"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_transformation_cpu_summary">"Bild mit der CPU verarbeiten"</string>
+    <string name="settings_transformation_cpu_summary">"Bild mit Prozessor verarbeiten (CPU)"</string>
     <string name="settings_transformation_gpu_summary">"Bild mit der Grafikkarte verarbeiten (%1$s)"</string>
     <string name="settings_transformation_sw_summary">"Nicht verfügbar beim Software-Kodierer"</string>
 
@@ -160,7 +159,7 @@ Unten können Sie vertikale Frames aktivieren, aber benutzen Sie diese Option mi
 
     <string name="settings_vertical_frames">"Vertikale Frames"</string>
     <string name="settings_vertical_frames_warning">"Videoplayer auf vielen Geräten spielen keine Videos mit vertikalen Frames ab.
-Sogar wenn diese Option nicht aktviert ist werden Ausrichtungs-Metadaten zum Video hinzugefügt, sodass der Standard Android-Player und YouTube es richtig anzeigen."</string>
+Auch wenn diese Option deaktviert ist werden Ausrichtungs-Metadaten zum Video hinzugefügt, sodass der Standard Android-Player und YouTube es richtig anzeigen."</string>
     <string name="settings_vertical_frames_ok">"OK"</string>
     <string name="settings_vertical_frames_cancel">"Abbrechen"</string>
 
@@ -170,6 +169,8 @@ Sogar wenn diese Option nicht aktviert ist werden Ausrichtungs-Metadaten zum Vid
     <string name="settings_audio_mute">"Stumm"</string>
     <string name="settings_audio_internal">"Intern"</string>
     <string name="settings_audio_internal_experimental">"Intern (experimentell)"</string>
+    <string name="settings_audio_internal_not_supported">"Auf %1$s nicht unterstützt"</string>
+    <string name="settings_audio_internal_incompatible">"Nicht kompatibel mit Ihrem Audiotreiber"</string>
     <string name="settings_audio_mic_summary">"Mikrofon"</string>
     <string name="settings_audio_mute_summary">"Stumm (Keine Audio-Spur)"</string>
     <string name="settings_audio_internal_summary">"System-Audioausgang"</string>
@@ -181,14 +182,23 @@ Sogar wenn diese Option nicht aktviert ist werden Ausrichtungs-Metadaten zum Vid
     <string name="settings_show_touches">"Berührungen sichtbar machen"</string>
     <string name="settings_show_touches_summary">"Zeigt visuelles Feedback bei Berührungen. Sie können die Berührungs-Indikatoren auch permanent aktivieren (Einstellungen→Entwickleroptionen→Berührungen anzeigen)"</string>
     <string name="settings_output_dir">"Ausgabeverzeichnis"</string>
-    <string name="settings_stop_when_screen_off">"Stop bei Bildschirm aus"</string>
+    <string name="settings_stop_when_screen_off">"Beenden bei abgeschaltetem Bildschirm"</string>
     <string name="settings_stop_when_screen_off_summary">"Die Aufnahme wird beendet, wenn der Bildschirm ausgeschaltet wird"</string>
     <string name="settings_color_fix">"Invertierte Farben-Korrektur"</string>
     <string name="settings_color_fix_summary">"Aktivieren Sie diese Einstellung, wenn blaue und rote Farben invertiert werden"</string>
 
     <string name="settings_zigzag_fix">"Zickzack-Korrektur"</string>
     <string name="settings_zigzag_fix_summary">"Wählen Sie diese Einstellung, wenn zufällige bunte Streifen in den Aufnahmen sichtbar sind."</string>
-    <string name="settings_zigzag_fix_cpu_only">"Nur mit CPU-Bildtransformation"</string>
+    <string name="settings_zigzag_fix_cpu_only">"Nur mit CPU-Bildtransformation verfügbar"</string>
+
+    <string name="settings_video_config">"%1$s Voreinstellungen"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0ffps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d%% stabil"</string>
+    <string name="settings_video_config_summary">"Basierend auf Nutzungsstatistiken"</string>
+    <string name="settings_video_config_summary_no_data">"Statistiken konnte nicht heruntergeladen werden"</string>
+
+    <string name="device_profile_download_error_toast">"Das Herunterladen der empfohlenen Einstellungen schlug fehl. Stellen Sie sicher, dass Sie online sind."</string>
+    <string name="device_profile_downloaded_toast">"Empfohlene Einstellungen heruntergeladen"</string>
 
     <string name="directory_chooser_select">"Wählen Sie \"%1$s\""</string>
     <string name="directory_chooser_refresh">"Aktualisieren"</string>
@@ -202,11 +212,6 @@ Sogar wenn diese Option nicht aktviert ist werden Ausrichtungs-Metadaten zum Vid
     <string name="directory_chooser_ignore">"Ignorieren"</string>
     <string name="directory_chooser_cancel">"Abbrechen"</string>
     <string name="directory_chooser_default">"Standard"</string>
-
-    <string name="license_dont_allow">"Lizenz-Überprüfung fehlgeschlagen. Stellen Sie sicher, dass eine Internetverbindung besteht und dass Sie in Google Play angemeldet sind.
-    "</string>
-    <string name="license_error">"Lizenz-Überprüfungs-Fehler. Stellen Sie sicher, dass eine Internetverbindung besteht und dass Sie in Google Play angemeldet sind.
-    "</string>
 
     <string name="error_report_report">"Bericht"</string>
     <string name="error_report_close">"Schließen"</string>
@@ -222,12 +227,14 @@ Sogar wenn diese Option nicht aktviert ist werden Ausrichtungs-Metadaten zum Vid
 
     <string name="help_stop_message">"Um die Aufnahme zu stoppen, schalten Sie den Bildschirm aus und warten Sie 2 Sekunden. Alternativ können Sie %1$s auch neu öffnen."</string>
     <string name="menu_send_bug_report">"Fehlerbericht senden"</string>
+    <string name="menu_show_unstable">"Instabile Einstellungen"</string>
+    <string name="menu_show_advanced">"Erweiterte Einstellungen"</string>
 
     <string name="notification_status_installing">"Initialisierung"</string>
     <string name="notification_status_initializing">"Auf Root-Zugriff warten"</string>
     <string name="notification_status_installing_audio">"Installation des Audio-Treibers"</string>
     <string name="notification_status_ready">"Bereit"</string>
-    <string name="notification_status_starting">"Beginn"</string>
+    <string name="notification_status_starting">"Wird gestartet"</string>
     <string name="notification_status_recording">"Aufnahme läuft..."</string>
     <string name="notification_status_error">"Fehler"</string>
     <string name="notification_status_stopping">"Wird angehalten..."</string>
@@ -236,12 +243,36 @@ Sogar wenn diese Option nicht aktviert ist werden Ausrichtungs-Metadaten zum Vid
     <string name="sale_title">"Angebot"</string>
     <string name="sale_text">"Kaufen Sie SCR Pro jetzt und sparen Sie %1$d %%! Dieses Angebot endet am %2$s."</string>
 
-    <string name="copyrights_statement">"Durch die Nutzung von %1$s bestätigen Sie dass Sie allein dafür verantwortlich sind, dass Sie nicht gegen Copyright-Rechte oder anderer intellektueller Besitztümer dritter verstoßen."</string>
+    <string name="copyrights_statement">"Durch die Nutzung von %1$s bestätigen Sie, dass Sie allein dafür verantwortlich sind, dass nicht gegen Copyright-Rechte oder andere intellektuelle Besitztümer Dritter verstoßen wird."</string>
     <string name="internal_audio_installation_error_title">"Interner Audio-Fehler"</string>
     <string name="internal_audio_installation_error_message">"Interne Audioaufnahme kann nicht aktiviert werden. Bitte senden Sie mir einen Fehlerbericht, um mir zu helfen Ihr Gerät zu unterstützen. Audioquelle wird auf %1$s gesetzt."</string>
     <string name="internal_audio_unstable_title">"Interne Audioaufnahme instabil"</string>
-    <string name="internal_audio_unstable_message">"Stabilitätsproblem bei der internen Audioaufnahme erkannt. Bitte senden Sie mir einen Fehlerbericht, um mir zu helfen Ihr Gerät zu unterstützen. Audioquelle wird zu %1$s gesetzt."</string>
+    <string name="internal_audio_unstable_message">"Stabilitätsproblem bei der internen Audioaufnahme erkannt. Bitte senden Sie einen Fehlerbericht an mich um mir dabei zu helfen, Ihr Gerät zu unterstützen. Audioquelle wird zu %1$s gesetzt."</string>
     <string name="internal_audio_disabled_title">"Interne Audioaufnahme deaktiviert"</string>
     <string name="internal_audio_disabled_message">"Interne Audio-Aufnahme wurde ausgeschaltet, weil %1$s nicht ordnungsgemäß heruntergefahren wurde. Sie können es in den Einstellungen wieder aktivieren."</string>
+
+    <string name="license_title">"Lizenzfehler
+"</string>
+    <string name="license_not_licensed_message">"Fehler bei der Überprüfung der Lizenz. Bitte kaufen SCR Pro bei Google Play."</string>
+    <string name="license_retry_message">"Fehler bei der Überprüfung der Lizenz. Stellen Sie sicher, dass eine Verbindung zum Internet besteht und Sie in Google Play angemeldet sind. Nachdem die Lizenz überprüft wurde können Sie SCR Pro offline weiternutzen."</string>
+    <string name="license_error_message">"Fehler bei der Überprüfung der Lizenz. Stellen Sie sicher, dass Sie SCR Pro über Google Play installiert haben. Wenn das Problem weiterhin auftritt, löschen Sie die App-Daten und den Cache der \"Google Play Services\" und \"Google Play Store\" Apps.
+    "</string>
+    <string name="license_play_store">"Play Store"</string>
+    <string name="license_retry">"Erneut versuchen"</string>
+    <string name="license_continue_as_free">"Als Free-Version fortfahren"</string>
+
+    <string name="su_denied_message">"Es gibt ein Problem mit Root-Zugriff auf Ihrem Gerät. Bitte öffnen Sie %1$s und stellen Sie sicher, dass Sie nicht versehentlich den Root-Zugriff für %2$s verweigert haben."</string>
+    <string name="su_default_name">"Superuser"</string>
+
+    <string name="can_not_start_toast">"Aufnahme kann nicht gestartet werden: %1$s"</string>
+
+    <string name="settings_show_camera">"Kamera-Ansicht"</string>
+    <string name="settings_show_camera_summary">"Blenden Sie Ihr Bild über der Aufnahme ein"</string>
+    <string name="settings_camera_alpha_title">"Transparenz"</string>
+    <string name="settings_camera_alpha_summary">"Kamera-Ansicht %1$d%% undurchsichtig"</string>
+    <string name="settings_camera_alpha_summary_100">"Kamera-Ansicht nicht transparent"</string>
+
+    <string name="miui_error_message">"Wenn Sie %1$s schwebendes Bild nicht sehen, aktivieren Sie \"Zeige Popup Bilder\"  für %1$s in den MiUi Einstellungen."</string>
+    <string name="miui_error_title">"MIUI Popups deaktiviert?"</string>
 
 </resources>

@@ -22,6 +22,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.ExceptionParser;
+import com.google.analytics.tracking.android.ExceptionReporter;
 import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
@@ -117,8 +119,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public void onCreate() {
         EasyTracker.getInstance().setContext(getApplicationContext());
-        List<String> packages = Arrays.asList( "com.iwobanas", "com.google.android.vending");
-        EasyTracker.getTracker().setExceptionParser(new AnalyticsExceptionParser(getApplicationContext(), packages));
+        initializeExceptionParser();
         mHandler = new Handler();
 
         if (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT > 19) {
@@ -146,6 +147,17 @@ public class RecorderService extends Service implements IRecorderService, Licens
             checkLicense();
         }
         Log.v(TAG, "Service initialized. version: " + Utils.getAppVersion(this));
+    }
+
+    private void initializeExceptionParser() {
+        List<String> packages = Arrays.asList( "com.iwobanas", "com.google.android.vending");
+        ExceptionParser exceptionParser = new AnalyticsExceptionParser(getApplicationContext(), packages);
+        EasyTracker.getTracker().setExceptionParser(exceptionParser);
+        Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+        if (uncaughtExceptionHandler instanceof ExceptionReporter) {
+            ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
+            exceptionReporter.setExceptionParser(exceptionParser);
+        }
     }
 
     private void installExecutable() {
@@ -370,14 +382,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void reportRecordingStats(RecordingInfo recordingInfo) {
-        long sizeK = outputFile.length() / 1024l;
-        long sizeM = sizeK / 1024l;
-        long time = (System.currentTimeMillis() - mRecordingStartTime) / 1000l;
-        EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, sizeM);
-        EasyTracker.getTracker().sendEvent(STATS, RECORDING, TIME, time);
-        recordingInfo.size = (int) sizeK;
-        recordingInfo.time = (int) time;
         logStats(recordingInfo);
+
+        long sizeM = recordingInfo.size / 1024l;
+        EasyTracker.getTracker().sendEvent(STATS, RECORDING, SIZE, sizeM);
+        EasyTracker.getTracker().sendEvent(STATS, RECORDING, TIME, (long) recordingInfo.time);
     }
 
     public void scanOutputAndNotify(int toastId) {
@@ -388,6 +397,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void logStats(RecordingInfo recordingInfo) {
+        recordingInfo.size = (int) (outputFile.length() / 1024l);
+        recordingInfo.time = (int) ((System.currentTimeMillis() - mRecordingStartTime) / 1000l);
         new RecordingStatsAsyncTask(this, recordingInfo).execute();
         if (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL) {
             audioDriver.logStats(recordingInfo);
@@ -427,7 +438,13 @@ public class RecorderService extends Service implements IRecorderService, Licens
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        mNotificationManager.notify(0, mBuilder.build());
+        try {
+            mNotificationManager.notify(0, mBuilder.build());
+        } catch (SecurityException e) {
+            // Android 4.1.2 issue
+            // could be fixed by adding <uses-permission android:name="android.permission.WAKE_LOCK" />
+            Log.w(TAG, "Couldn't display notification", e);
+        }
     }
 
     private void displayStopHelp() {
