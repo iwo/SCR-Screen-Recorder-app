@@ -621,8 +621,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         } else if (preference == verticalFramesPreference) {
             settings.setVerticalFrames(selected);
         } else if (preference == audioSourcePreference) {
-            if (Build.VERSION.SDK_INT != 17) {
-                AudioSource source = AudioSource.valueOf(valueString);
+            AudioSource source = AudioSource.valueOf(valueString);
+            if (source != AudioSource.INTERNAL || Build.VERSION.SDK_INT != 17) {
                 settings.setAudioSource(source);
                 updateValues();
             } else {

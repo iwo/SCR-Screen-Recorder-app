@@ -397,7 +397,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void logStats(RecordingInfo recordingInfo) {
-        recordingInfo.size = (int) (outputFile.length() / 1024l);
+        if (outputFile != null) { // I can't figure out when it's null but analytics shows NPE here
+            recordingInfo.size = (int) (outputFile.length() / 1024l);
+        }
         recordingInfo.time = (int) ((System.currentTimeMillis() - mRecordingStartTime) / 1000l);
         new RecordingStatsAsyncTask(this, recordingInfo).execute();
         if (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL) {
