@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.iwobanas.screenrecorder"
-          android:versionCode="1701"
-          android:versionName="0.17.1-alpha">
+          android:versionCode="1702"
+          android:versionName="0.17.2-alpha">
 
     <uses-sdk android:minSdkVersion="15" android:maxSdkVersion="19"/>
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
