@@ -3,6 +3,7 @@ package com.iwobanas.screenrecorder.stats;
 import android.content.Context;
 
 import com.iwobanas.screenrecorder.RecordingInfo;
+import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
 import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
@@ -26,6 +27,7 @@ public class RecordingStatsAsyncTask extends StatsBaseAsyncTask {
         params.put("adjusted_rotation", String.valueOf(recordingInfo.adjustedRotation));
         params.put("vertical_input", String.valueOf(recordingInfo.verticalInput));
         params.put("rotate_view", String.valueOf(recordingInfo.rotateView));
+        params.put("front_camera", formatBoolean(Utils.hasFrontFacingCamera(context)));
     }
 
     @Override
@@ -52,6 +54,7 @@ public class RecordingStatsAsyncTask extends StatsBaseAsyncTask {
         params.put("defaults_core", formatBoolean(s.coreEqualsDefault()));
         params.put("defaults_stats", formatBoolean(s.statsBasedDefaults()));
         params.put("settings_modified", formatBoolean(s.areSettingsModified()));
+        params.put("camera_view", formatBoolean(s.areSettingsModified()));
     }
 
     @Override
