@@ -54,7 +54,7 @@ public class RecordingStatsAsyncTask extends StatsBaseAsyncTask {
         params.put("defaults_core", formatBoolean(s.coreEqualsDefault()));
         params.put("defaults_stats", formatBoolean(s.statsBasedDefaults()));
         params.put("settings_modified", formatBoolean(s.areSettingsModified()));
-        params.put("camera_view", formatBoolean(s.areSettingsModified()));
+        params.put("camera_view", formatBoolean(s.getShowCamera()));
     }
 
     @Override
