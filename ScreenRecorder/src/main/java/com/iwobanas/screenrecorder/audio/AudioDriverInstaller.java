@@ -142,7 +142,7 @@ public class AudioDriverInstaller {
             return true; // we can't do more checking if mounted
         }
 
-        return configFilesValid() && Utils.allFilesCopied(systemDir, localDir);
+        return configFilesValid() && Utils.allFilesCopied(systemDir, localDir, true);
     }
 
     private boolean configFilesValid() {
@@ -382,7 +382,7 @@ public class AudioDriverInstaller {
     }
 
     private void copySystemModules() throws InstallationException {
-        if (!Utils.copyDir(systemDir, localDir)) {
+        if (!Utils.copyDir(systemDir, localDir, true)) {
             throw new InstallationException("Error copying modules directory");
         }
 

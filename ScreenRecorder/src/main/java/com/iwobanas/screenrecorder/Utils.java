@@ -231,6 +231,10 @@ public class Utils {
     }
 
     public static boolean filesEqual(File fileA, File fileB) {
+        return filesEqual(fileA, fileB, false);
+    }
+
+    public static boolean filesEqual(File fileA, File fileB, boolean ignorePermissions) {
         if (!fileA.exists() || !fileB.exists() || fileA.length() != fileB.length()) {
             return false;
         }
@@ -240,7 +244,7 @@ public class Utils {
             streamB = new BufferedInputStream(new FileInputStream(fileB));
             return streamsEqual(streamA, streamB);
         } catch (IOException e) {
-            return false;
+            return  (ignorePermissions && (!fileA.canRead() || !fileB.canRead()));
         }
     }
 
@@ -263,7 +267,10 @@ public class Utils {
     }
 
     public static boolean copyFile(File sourceFile, File destFile) {
+        return copyFile(sourceFile, destFile, false);
+    }
 
+    public static boolean copyFile(File sourceFile, File destFile, boolean ignorePermissions) {
 
         FileChannel source = null;
         FileChannel destination = null;
@@ -278,8 +285,13 @@ public class Utils {
             destination.transferFrom(source, 0, source.size());
             success = true;
         } catch (IOException e) {
-            success = false;
-            Log.e(TAG, "Error copying file", e);
+            if ((ignorePermissions && !sourceFile.canRead())) {
+                Log.v(TAG, "Error copying file", e);
+                success = true;
+            } else {
+                success = false;
+                Log.e(TAG, "Error copying file", e);
+            }
         } finally {
             if(source != null) {
                 try {
@@ -295,13 +307,13 @@ public class Utils {
         return success;
     }
 
-    public static boolean allFilesCopied(File sourceDir, File destinationDir) {
+    public static boolean allFilesCopied(File sourceDir, File destinationDir, boolean ignorePermissions) {
         String[] fileNames = sourceDir.list();
         if (fileNames != null) {
             for (String fileName : fileNames) {
                 File src = new File(sourceDir, fileName);
                 File dst = new File(destinationDir, fileName);
-                if ((src.isDirectory() && !allFilesCopied(src, dst)) || !filesEqual(src, dst)) {
+                if ((src.isDirectory() && !allFilesCopied(src, dst, ignorePermissions)) || !filesEqual(src, dst, ignorePermissions)) {
                     return false;
                 }
             }
@@ -329,7 +341,7 @@ public class Utils {
         return file.delete();
     }
 
-    public static boolean copyDir(File sourceDir, File destinationDir) {
+    public static boolean copyDir(File sourceDir, File destinationDir, boolean ignorePermissions) {
         if (!destinationDir.exists()) {
             if (!destinationDir.mkdirs()) {
                 Log.w(TAG, "Can't create directory: " + destinationDir);
@@ -341,7 +353,7 @@ public class Utils {
             for (String fileName : fileNames) {
                 File src = new File(sourceDir, fileName);
                 File dst = new File(destinationDir, fileName);
-                if ((src.isDirectory() && !copyDir(src, dst)) || !copyFile(src, dst)) {
+                if ((src.isDirectory() && !copyDir(src, dst, ignorePermissions)) || !copyFile(src, dst, ignorePermissions)) {
                     return false;
                 }
             }
