@@ -1,6 +1,7 @@
 package com.iwobanas.screenrecorder.settings;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -38,10 +39,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_VERTICAL_FRAMES = "vertical_frames";
     public static final String KEY_AUDIO_SOURCE = "audio_source";
     public static final String KEY_SAMPLING_RATE = "sampling_rate";
-    public static final String KEY_HIDE_ICON = "hide_icon";
-    public static final String KEY_SHOW_TOUCHES = "show_touches";
+    public static final String KEY_OTHER = "other";
     public static final String KEY_SHOW_CAMERA = "show_camera";
     public static final String KEY_CAMERA_ALPHA = "camera_alpha";
+    public static final String KEY_HIDE_ICON = "hide_icon";
+    public static final String KEY_SHOW_TOUCHES = "show_touches";
     public static final String KEY_OUTPUT_DIR = "output_dir";
     public static final String KEY_STOP_ON_SCREEN_OFF = "stop_on_screen_off";
     public static final String KEY_COLOR_FIX = "color_fix";
@@ -57,10 +59,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private CheckBoxPreference verticalFramesPreference;
     private ListPreference audioSourcePreference;
     private ListPreference samplingRatePreference;
+    private PreferenceCategory otherCategory;
+    private SliderPreference cameraAlphaPreference;
+    private CheckBoxPreference showCameraPreference;
     private CheckBoxPreference hideIconPreference;
     private CheckBoxPreference showTouchesPreference;
-    private CheckBoxPreference showCameraPreference;
-    private SliderPreference cameraAlphaPreference;
     private Preference outputDirPreference;
     private CheckBoxPreference stopOnScreenOffPreference;
     private CheckBoxPreference colorFixPreference;
@@ -110,17 +113,18 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         samplingRatePreference = (ListPreference) findPreference(KEY_SAMPLING_RATE);
         samplingRatePreference.setOnPreferenceChangeListener(this);
 
-        hideIconPreference = (CheckBoxPreference) findPreference(KEY_HIDE_ICON);
-        hideIconPreference.setOnPreferenceChangeListener(this);
-
-        showTouchesPreference = (CheckBoxPreference) findPreference(KEY_SHOW_TOUCHES);
-        showTouchesPreference.setOnPreferenceChangeListener(this);
-
+        otherCategory = (PreferenceCategory) findPreference(KEY_OTHER);
         showCameraPreference = (CheckBoxPreference) findPreference(KEY_SHOW_CAMERA);
         showCameraPreference.setOnPreferenceChangeListener(this);
 
         cameraAlphaPreference = (SliderPreference) findPreference(KEY_CAMERA_ALPHA);
         cameraAlphaPreference.setOnPreferenceChangeListener(this);
+
+        hideIconPreference = (CheckBoxPreference) findPreference(KEY_HIDE_ICON);
+        hideIconPreference.setOnPreferenceChangeListener(this);
+
+        showTouchesPreference = (CheckBoxPreference) findPreference(KEY_SHOW_TOUCHES);
+        showTouchesPreference.setOnPreferenceChangeListener(this);
 
         outputDirPreference = findPreference(KEY_OUTPUT_DIR);
         outputDirPreference.setOnPreferenceClickListener(this);
@@ -134,6 +138,14 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         settings.getAudioDriver().addInstallListener(this);
         updateEntries();
         updateValues();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Context context = getActivity();
+        addRemovePreference(Utils.hasFrontFacingCamera(context), KEY_SHOW_CAMERA, showCameraPreference, otherCategory);
+        addRemovePreference(Utils.hasFrontFacingCamera(context), KEY_CAMERA_ALPHA, cameraAlphaPreference, otherCategory);
     }
 
     protected void updateValues() {

@@ -73,7 +73,7 @@
             android:title="@string/settings_sampling_rate" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_other_category">
+    <PreferenceCategory android:key="other" android:title="@string/settings_other_category">
         <CheckBoxPreference
             android:key="show_camera"
             android:persistent="false"
