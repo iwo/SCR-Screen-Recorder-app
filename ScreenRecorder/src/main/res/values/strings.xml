@@ -274,11 +274,11 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
 
     <string name="can_not_start_toast">Can\'t start recording: %1$s</string>
 
-    <string name="settings_show_camera">Camera view</string>
-    <string name="settings_show_camera_summary">Display your image on top of recording</string>
+    <string name="settings_show_camera">Face Cam</string>
+    <string name="settings_show_camera_summary">Camera image on top of recording</string>
     <string name="settings_camera_alpha_title">Transparency</string>
-    <string name="settings_camera_alpha_summary">Camera view %1$d%% opaque</string>
-    <string name="settings_camera_alpha_summary_100">Camera view not transparent</string>
+    <string name="settings_camera_alpha_summary">Face Cam %1$d%% opaque</string>
+    <string name="settings_camera_alpha_summary_100">Face Cam not transparent</string>
 
     <string name="miui_error_message">If you can\'t see %1$s floating window go to MiUi apps settings and enable \"Show popup windows\" for %1$s.</string>
     <string name="miui_error_title">MiUi popups disabled?</string>

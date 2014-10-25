@@ -75,6 +75,19 @@
 
     <PreferenceCategory android:title="@string/settings_other_category">
         <CheckBoxPreference
+            android:key="show_camera"
+            android:persistent="false"
+            android:summary="@string/settings_show_camera_summary"
+            android:title="@string/settings_show_camera" />
+        <com.iwobanas.screenrecorder.settings.SliderPreference
+            android:dependency="show_camera"
+            android:key="camera_alpha"
+            android:persistent="false"
+            android:summary="@string/settings_camera_alpha_summary"
+            android:title="@string/settings_camera_alpha_title"
+            scr:max="100"
+            scr:min="20" />
+        <CheckBoxPreference
             android:key="hide_icon"
             android:persistent="false"
             android:title="@string/settings_hide_icon" />
@@ -83,19 +96,6 @@
             android:persistent="false"
             android:summary="@string/settings_show_touches_summary"
             android:title="@string/settings_show_touches" />
-        <CheckBoxPreference
-            android:key="show_camera"
-            android:persistent="false"
-            android:summary="@string/settings_show_camera_summary"
-            android:title="@string/settings_show_camera" />
-        <com.iwobanas.screenrecorder.settings.SliderPreference
-            android:key="camera_alpha"
-            android:persistent="false"
-            android:summary="@string/settings_camera_alpha_summary"
-            android:title="@string/settings_camera_alpha_title"
-            android:dependency="show_camera"
-            scr:max="100"
-            scr:min="20" />
         <Preference
             android:key="output_dir"
             android:persistent="false"
