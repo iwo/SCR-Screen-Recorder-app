@@ -78,6 +78,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String DIALOG_CLOSED_ACTION = "scr.intent.action.DIALOG_CLOSED";
     public static final String RATING_DIALOG_CLOSED_ACTION = "scr.intent.action.RATING_DIALOG_CLOSED";
     public static final String SETTINGS_CLOSED_ACTION = "scr.intent.action.SETTINGS_CLOSED";
+    public static final String SETTINGS_OPENED_ACTION = "scr.intent.action.SETTINGS_OPENED";
     public static final String ERROR_DIALOG_CLOSED_ACTION = "scr.intent.action.ERROR_DIALOG_CLOSED";
     public static final String NOTIFICATION_ACTION = "scr.intent.action.NOTIFICATION";
     public static final String LOUNCHER_ACTION = "scr.intent.action.LOUNCHER";
@@ -90,6 +91,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmOZqTyb4AOB4IEWZiXd0SRYyJ2Y0xu1FBDmxvQqFG+D1wMJMKPxJlMNYwwS3AYjGgzhJzdWFd+oMaRV5uD9BWinHXyUppIrQcHfINv1J9VuwQnVQVYDG+EEiKOAGnnOLhg5EaJ5bdpvRyMLpD3wz9qcIx1YC99/TJC+ACABrhCfkc+U9hKyNe0m4C7DHBEW4SIq22bC1vPOw5KgbdruFxRoQiYU3GE7o8/fH37Vk9Rc+75QrtNYsJ9W0Vm7f2brN+lVwnQVEfsRVBr4k+yHVDVdo82SQfiUo6Q6d0S3HMCqMeRe8UQxGpPxRpE75cADR3LyyduRJ4+KJHPuY38AEAQIDAQAB";
     private IScreenOverlay mWatermark = new WatermarkOverlay(this);
     private RecorderOverlay mRecorderOverlay = new RecorderOverlay(this, this);
+    private CameraOverlay mCameraOverlay;
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this, this);
     private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this, this);
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
@@ -129,6 +131,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         audioDriver.addInstallListener(this);
         mTaniosc = getResources().getBoolean(R.bool.taniosc);
         checkShutDownCorrectly();
+
+        mCameraOverlay = new CameraOverlay(this);
+        mCameraOverlay.applySettings();
 
         mRatingController = new RatingController(this);
 
@@ -204,6 +209,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
         setState(RecorderServiceState.STARTING);
         mRecorderOverlay.hide();
+        mCameraOverlay.setTouchable(false);
         if (mTaniosc) {
             mWatermark.show();
             mTimeController.start();
@@ -275,10 +281,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
         setState(RecorderServiceState.STOPPING);
         mNativeProcessRunner.stop();
         mTimeController.reset();
+        mCameraOverlay.setTouchable(true);
     }
 
     private void playVideo(Uri uri) {
         mRecorderOverlay.hide();
+        mCameraOverlay.hide();
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
@@ -306,6 +314,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
         startOnReady = false;
         mRecorderOverlay.animateHide();
+        mCameraOverlay.hide();
         if (audioDriver.shouldUninstall()) {
             audioDriver.uninstall();
         } else {
@@ -359,6 +368,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (!isTimeoutDisplayed) {
             mRecorderOverlay.animateShow();
         }
+        mCameraOverlay.setTouchable(true);
     }
 
     private void reinitialize() {
@@ -823,7 +833,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
             if (SETTINGS_CLOSED_ACTION.equals(action)) {
                 settingsDisplayed = false;
             }
-            if (displayShutDownError) {
+            if (SETTINGS_OPENED_ACTION.equals(action)) {
+                settingsDisplayed = true;
+                if (mRecorderOverlay.isVisible()) {
+                    mRecorderOverlay.hide();
+                }
+            } else if (displayShutDownError) {
                 shutDownError();
             } else if (mRatingController.shouldShow()) {
                 mRecorderOverlay.hide();
@@ -840,6 +855,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                     mRecorderOverlay.show();
                 }
             }
+            mCameraOverlay.applySettings();
         }
         firstCommand = false;
         return START_NOT_STICKY;
@@ -857,6 +873,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
         startOnReady = false;
         mWatermark.hide();
         mWatermark.onDestroy();
+        mCameraOverlay.hide();
+        mCameraOverlay.onDestroy();
         mRecorderOverlay.animateHide();
         mRecorderOverlay.onDestroy();
         mNativeProcessRunner.destroy();

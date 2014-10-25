@@ -2,9 +2,7 @@ package com.iwobanas.screenrecorder;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,15 +10,12 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 
 public class RecorderOverlay extends AbstractScreenOverlay {
-    private static final String TAG = "scr_RecorderOverlay";
-    private static final String RECORDER_OVERLAY_POSITION_X = "RECORDER_OVERLAY_POSITION_X";
-    private static final String RECORDER_OVERLAY_POSITION_Y = "RECORDER_OVERLAY_POSITION_Y";
-    private static final String RECORDER_OVERLAY_GRAVITY = "RECORDER_OVERLAY_GRAVITY";
-    private static final String SCR_UI_PREFERENCES = "scr_ui";
-    private IRecorderService mService;
+    private static final String RECORDER_OVERLAY = "RECORDER_OVERLAY";
 
+    private IRecorderService mService;
     private ImageButton mSettingsButton;
     private WindowManager.LayoutParams layoutParams;
+    private OverlayPositionPersister positionPersister;
 
     public RecorderOverlay(Context context, IRecorderService service) {
         super(context);
@@ -102,25 +97,16 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             layoutParams.setTitle(getContext().getString(R.string.app_name));
             layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-            SharedPreferences preferences = getContext().getSharedPreferences(SCR_UI_PREFERENCES, Context.MODE_PRIVATE);
-            layoutParams.x = preferences.getInt(RECORDER_OVERLAY_POSITION_X, 0);
-            layoutParams.y = preferences.getInt(RECORDER_OVERLAY_POSITION_Y, 0);
-            layoutParams.gravity = preferences.getInt(RECORDER_OVERLAY_GRAVITY, Gravity.CENTER);
-            Log.v(TAG, "Initializing window position to " + layoutParams.x + ":" + layoutParams.y);
+            layoutParams.gravity = Gravity.CENTER;
+            positionPersister = new OverlayPositionPersister(getContext(), RECORDER_OVERLAY, layoutParams);
         }
         return layoutParams;
     }
 
     @Override
     public void onDestroy() {
-        if (layoutParams != null) {
-            SharedPreferences preferences = getContext().getSharedPreferences(SCR_UI_PREFERENCES, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt(RECORDER_OVERLAY_POSITION_X, layoutParams.x);
-            editor.putInt(RECORDER_OVERLAY_POSITION_Y, layoutParams.y);
-            editor.putInt(RECORDER_OVERLAY_GRAVITY, layoutParams.gravity);
-            editor.commit();
+        if (positionPersister != null) {
+            positionPersister.persistPosition();
         }
     }
 

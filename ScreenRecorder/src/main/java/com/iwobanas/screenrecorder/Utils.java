@@ -256,6 +256,11 @@ public class Utils {
         return Build.CPU_ABI.contains("arm");
     }
 
+    public static boolean hasFrontFacingCamera(Context context) {
+        PackageManager pm = context.getPackageManager();
+        return  pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+    }
+
     public static float dipToPixels(Context context, float dipValue) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
@@ -510,5 +515,15 @@ public class Utils {
                 os.close();
             }
         }
+    }
+
+    public static int waitForProcess(String command, long timeout) {
+        long timeoutNs = timeout * 1000000l;
+        long startTime = System.nanoTime();
+        int pid = -1;
+        while ((System.nanoTime() - startTime) < timeoutNs && pid < 0) {
+            pid = Utils.findProcessByCommand(command);
+        }
+        return pid;
     }
 }

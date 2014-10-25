@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
+import com.iwobanas.screenrecorder.CameraOverlay;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.ShellCommand;
 import com.iwobanas.screenrecorder.Utils;
@@ -102,6 +103,12 @@ public class AudioDriverInstaller {
         switchToSystemFiles();
         try {
             terminateMediaserver();
+        } catch (InstallationException e) {
+            Log.e(TAG, "Error restarting mediaserver", e);
+        }
+        try {
+            waitForMediaserver();
+            CameraOverlay.reconnectCamera();
         } catch (InstallationException e) {
             Log.e(TAG, "Error restarting mediaserver", e);
         }
@@ -278,9 +285,11 @@ public class AudioDriverInstaller {
     private void restartMediaserver() throws InstallationException {
         terminateMediaserver();
         waitForMediaserver();
+        CameraOverlay.reconnectCamera();
     }
 
     private void terminateMediaserver() throws InstallationException {
+        CameraOverlay.releaseCamera(); // a dirty hack to prevent camera locking on Nexus 4 4.4.2
         int pid = Utils.findProcessByCommand(MEDIASERVER_COMMAND);
         if (pid > 0) {
             Utils.sendTermSignal(pid, installer.getAbsolutePath());
@@ -309,14 +318,9 @@ public class AudioDriverInstaller {
     }
 
     private void waitForMediaserver() throws InstallationException {
-        long timeout = 7000 * 1000000l;
-        long startTime = System.nanoTime();
-        while ((System.nanoTime() - startTime) < timeout) {
-            if (Utils.findProcessByCommand(MEDIASERVER_COMMAND) > 0) {
-                return;
-            }
+        if (Utils.waitForProcess(MEDIASERVER_COMMAND, 7000) == -1) {
+            throw new InstallationException("mediaserver not appearing");
         }
-        throw new InstallationException("mediaserver not appearing");
     }
 
     private void initializeDir() throws InstallationException {

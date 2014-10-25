@@ -16,8 +16,6 @@ import java.io.File;
 
 public class Settings {
     private static final String TAG = "scr_Settings";
-    public static final int FFMPEG_MPEG_4_ENCODER = -2;
-    private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
     private static final String AUDIO_SOURCE = "AUDIO_SOURCE";
     private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
@@ -38,6 +36,12 @@ public class Settings {
     private static final String SETTINGS_MODIFIED = "SETTINGS_MODIFIED";
     private static final String APP_VERSION = "APP_VERSION";
     private static final String BUILD_FINGERPRINT = "BUILD_FINGERPRINT";
+
+    public static final String PREFERENCES_NAME = "ScreenRecorderSettings";
+    public static final int FFMPEG_MPEG_4_ENCODER = -2;
+    public static final String SHOW_CAMERA = "SHOW_CAMERA";
+    public static final String CAMERA_ALPHA = "CAMERA_ALPHA";
+
     private static Settings instance;
     private SharedPreferences preferences;
     private AudioSource audioSource = AudioSource.MIC;
@@ -57,6 +61,8 @@ public class Settings {
     private boolean defaultColorFix = false;
     private boolean hideIcon = false;
     private boolean showTouches = false;
+    private boolean showCamera = false;
+    private float cameraAlpha = 1.0f;
     private boolean stopOnScreenOff = true;
     private int videoEncoder = MediaRecorder.VideoEncoder.H264;
     private int defaultVideoEncoder = MediaRecorder.VideoEncoder.H264;
@@ -141,6 +147,9 @@ public class Settings {
         hideIcon = preferences.getBoolean(HIDE_ICON, false);
 
         showTouches = preferences.getBoolean(SHOW_TOUCHES, false);
+
+        showCamera = preferences.getBoolean(SHOW_CAMERA, false);
+        cameraAlpha = preferences.getFloat(CAMERA_ALPHA, 1.0f);
 
         stopOnScreenOff = preferences.getBoolean(STOP_ON_SCREEN_OFF, true);
 
@@ -396,6 +405,28 @@ public class Settings {
         settingsModified(preferences.edit().putBoolean(SHOW_TOUCHES, showTouches));
     }
 
+    public boolean getShowCamera() {
+        return showCamera;
+    }
+
+    public void setShowCamera(boolean showCamera) {
+        this.showCamera = showCamera;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(SHOW_CAMERA, showCamera);
+        settingsModified(editor);
+    }
+
+    public float getCameraAlpha() {
+        return cameraAlpha;
+    }
+
+    public void setCameraAlpha(float cameraAlpha) {
+        this.cameraAlpha = cameraAlpha;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putFloat(CAMERA_ALPHA, cameraAlpha);
+        settingsModified(editor);
+    }
+
     public boolean getStopOnScreenOff() {
         return stopOnScreenOff;
     }
@@ -476,6 +507,12 @@ public class Settings {
             showTouches = false;
         }
         editor.remove(SHOW_TOUCHES);
+
+        showCamera = false;
+        editor.remove(SHOW_CAMERA);
+
+        cameraAlpha = 1.0f;
+        editor.remove(CAMERA_ALPHA);
 
         stopOnScreenOff = true;
         editor.remove(STOP_ON_SCREEN_OFF);
