@@ -66,6 +66,8 @@ public class AudioDriverInstaller {
 
     public boolean install() {
         Log.v(TAG, "Installation started");
+        // camera should be turned off during mediaserver restart to avoid lock down on Nexus 4
+        CameraOverlay.releaseCamera();
         errorDetails = null;
         try {
             if (isSystemAlphaModuleInstalled()) {
@@ -91,24 +93,22 @@ public class AudioDriverInstaller {
                 errorDetails += " => " + cause.getMessage();
             }
             return false;
+        } finally {
+            CameraOverlay.reconnectCamera();
         }
         return true;
     }
 
     public boolean uninstall() {
         Log.v(TAG, "Uninstall started");
+        // camera should be turned off during mediaserver restart to avoid lock down on Nexus 4
+        CameraOverlay.releaseCamera();
         uninstallSuccess = true;
         errorDetails = null;
         unmount();
         switchToSystemFiles();
         try {
-            terminateMediaserver();
-        } catch (InstallationException e) {
-            Log.e(TAG, "Error restarting mediaserver", e);
-        }
-        try {
-            waitForMediaserver();
-            CameraOverlay.reconnectCamera();
+            restartMediaserver();
         } catch (InstallationException e) {
             Log.e(TAG, "Error restarting mediaserver", e);
         }
@@ -119,6 +119,7 @@ public class AudioDriverInstaller {
             Log.w(TAG, "Uninstall completed with errors");
             dumpState();
         }
+        CameraOverlay.reconnectCamera();
         return uninstallSuccess;
     }
 
@@ -285,11 +286,9 @@ public class AudioDriverInstaller {
     private void restartMediaserver() throws InstallationException {
         terminateMediaserver();
         waitForMediaserver();
-        CameraOverlay.reconnectCamera();
     }
 
     private void terminateMediaserver() throws InstallationException {
-        CameraOverlay.releaseCamera(); // a dirty hack to prevent camera locking on Nexus 4 4.4.2
         int pid = Utils.findProcessByCommand(MEDIASERVER_COMMAND);
         if (pid > 0) {
             Utils.sendTermSignal(pid, installer.getAbsolutePath());
