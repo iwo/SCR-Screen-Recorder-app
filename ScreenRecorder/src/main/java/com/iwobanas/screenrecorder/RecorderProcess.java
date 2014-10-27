@@ -289,7 +289,7 @@ class RecorderProcess implements Runnable {
     private void setVolumeGain() {
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         int gain = 1;
-        double volume = (double) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) / (double) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        double volume = (double) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) / (1.0 + audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
         if (volume < 1.0 && volume > 0.001) {
             gain = (int) (1.0/(volume * volume));
         }
