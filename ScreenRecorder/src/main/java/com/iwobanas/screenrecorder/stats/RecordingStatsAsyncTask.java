@@ -5,7 +5,6 @@ import android.content.Context;
 import com.iwobanas.screenrecorder.RecordingInfo;
 import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
-import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
 
 import java.io.File;
@@ -36,7 +35,7 @@ public class RecordingStatsAsyncTask extends StatsBaseAsyncTask {
 
         Settings s = Settings.getInstance();
         String audioSource = s.getAudioSource().name();
-        if (s.getAudioSource() == AudioSource.INTERNAL
+        if (s.getAudioSource().getRequiresDriver()
                 && s.getAudioDriver().getInstallationStatus() != InstallationStatus.INSTALLED) {
             audioSource = "ERROR";
         }

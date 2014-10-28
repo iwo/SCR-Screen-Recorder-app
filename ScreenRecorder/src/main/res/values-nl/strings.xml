@@ -169,9 +169,9 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_audio_mic">"Microfoon"</string>
     <string name="settings_audio_mute">"Geen"</string>
     <string name="settings_audio_internal">"Inter"</string>
-    <string name="settings_audio_internal_experimental">"Intern (experimenteel)"</string>
-    <string name="settings_audio_internal_not_supported">"Niet ondersteund op %1$s"</string>
-    <string name="settings_audio_internal_incompatible">"Niet compatibel met uw audio-driver"</string>
+    <string name="settings_audio_experimental">"Experimenteel"</string>
+    <string name="settings_audio_not_supported">"Niet ondersteund op %1$s"</string>
+    <string name="settings_audio_incompatible">"Niet compatibel met uw audio-driver"</string>
     <string name="settings_audio_mic_summary">"Microfoon"</string>
     <string name="settings_audio_mute_summary">"Dempen. Geen audiospoor"</string>
     <string name="settings_audio_internal_summary">"Systeem audio uitgang"</string>

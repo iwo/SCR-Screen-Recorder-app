@@ -155,9 +155,9 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_audio_mic">"Micrófono"</string>
     <string name="settings_audio_mute">"Sin sonido"</string>
     <string name="settings_audio_internal">"Interno"</string>
-    <string name="settings_audio_internal_experimental">"Interno (experimental)"</string>
-    <string name="settings_audio_internal_not_supported">"No es compatible con %1$s"</string>
-    <string name="settings_audio_internal_incompatible">"No es compatible con el driver de sonido"</string>
+    <string name="settings_audio_experimental">"Experimental"</string>
+    <string name="settings_audio_not_supported">"No es compatible con %1$s"</string>
+    <string name="settings_audio_incompatible">"No es compatible con el driver de sonido"</string>
     <string name="settings_audio_mic_summary">"Micrófono"</string>
     <string name="settings_audio_mute_summary">"Silencio. Sin Pista de audio"</string>
     <string name="settings_audio_internal_summary">"Salida de audio del sistema"</string>

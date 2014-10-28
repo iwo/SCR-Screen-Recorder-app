@@ -161,9 +161,9 @@ SCR Screen Recorder zbiera anonimowe statystyki w celu naprawy błędów oraz an
     <string name="settings_audio_mic">"Mikrofon"</string>
     <string name="settings_audio_mute">"Brak"</string>
     <string name="settings_audio_internal">"Wyjście audio"</string>
-    <string name="settings_audio_internal_experimental">"Wyjście audio (eksperymentalne)"</string>
-    <string name="settings_audio_internal_not_supported">"Nie kompatybilne z %1$s"</string>
-    <string name="settings_audio_internal_incompatible">"Nie kompatybilne z twoimi sterownikami audio"</string>
+    <string name="settings_audio_experimental">"Eksperymentalne"</string>
+    <string name="settings_audio_not_supported">"Nie kompatybilne z %1$s"</string>
+    <string name="settings_audio_incompatible">"Nie kompatybilne z twoimi sterownikami audio"</string>
     <string name="settings_audio_mic_summary">"Mikrofon"</string>
     <string name="settings_audio_mute_summary">"Wyciszone. Brak ścieżki audio"</string>
     <string name="settings_audio_internal_summary">"Wyjście audio"</string>

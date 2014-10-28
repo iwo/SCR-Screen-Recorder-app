@@ -168,9 +168,9 @@ Auch wenn diese Option deaktviert ist werden Ausrichtungs-Metadaten zum Video hi
     <string name="settings_audio_mic">"Mikrofon"</string>
     <string name="settings_audio_mute">"Stumm"</string>
     <string name="settings_audio_internal">"Intern"</string>
-    <string name="settings_audio_internal_experimental">"Intern (experimentell)"</string>
-    <string name="settings_audio_internal_not_supported">"Auf %1$s nicht unterstützt"</string>
-    <string name="settings_audio_internal_incompatible">"Nicht kompatibel mit Ihrem Audiotreiber"</string>
+    <string name="settings_audio_experimental">"experimentell"</string>
+    <string name="settings_audio_not_supported">"Auf %1$s nicht unterstützt"</string>
+    <string name="settings_audio_incompatible">"Nicht kompatibel mit Ihrem Audiotreiber"</string>
     <string name="settings_audio_mic_summary">"Mikrofon"</string>
     <string name="settings_audio_mute_summary">"Stumm (Keine Audio-Spur)"</string>
     <string name="settings_audio_internal_summary">"System-Audioausgang"</string>

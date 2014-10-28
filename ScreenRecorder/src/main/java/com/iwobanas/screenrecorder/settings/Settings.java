@@ -292,7 +292,7 @@ public class Settings {
         this.audioSource = audioSource;
         if (audioDriver.shouldInstall()) {
             audioDriver.install();
-        } else if (audioSource != AudioSource.INTERNAL && audioDriver.shouldUninstall()) {
+        } else if (!audioSource.getRequiresDriver() && audioDriver.shouldUninstall()) {
             audioDriver.uninstall();
         }
         settingsModified(preferences.edit().putString(AUDIO_SOURCE, audioSource.name()));

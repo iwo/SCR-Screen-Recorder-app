@@ -144,7 +144,7 @@ SCR 스크린 레코더는 모든 장치에서 최고 품질의 화면 녹화를
     <string name="settings_audio_mic">"마이크"</string>
     <string name="settings_audio_mute">"음소거"</string>
     <string name="settings_audio_internal">"내부의"</string>
-    <string name="settings_audio_internal_experimental">"내부 (실험)"</string>
+    <string name="settings_audio_experimental">"실험"</string>
     <string name="settings_audio_mic_summary">"마이크"</string>
     <string name="settings_audio_mute_summary">"음소거. 오디오 트랙이 없습니다"</string>
     <string name="settings_audio_internal_summary">"시스템의 오디오 출력"</string>

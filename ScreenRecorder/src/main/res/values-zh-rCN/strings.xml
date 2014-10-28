@@ -113,9 +113,9 @@
     <string name="settings_audio">录制音频</string>
     <string name="settings_audio_category">音频</string>
     <string name="settings_audio_internal">内置</string>
-    <string name="settings_audio_internal_experimental">内置（测试）</string>
-    <string name="settings_audio_internal_incompatible">不兼容您的音频驱动</string>
-    <string name="settings_audio_internal_not_supported">不支持 %1$s</string>
+    <string name="settings_audio_experimental">测试</string>
+    <string name="settings_audio_incompatible">不兼容您的音频驱动</string>
+    <string name="settings_audio_not_supported">不支持 %1$s</string>
     <string name="settings_audio_internal_summary">系统音频输出</string>
     <string name="settings_audio_mic">麦克风</string>
     <string name="settings_audio_mic_summary">通过麦克风录音，同一时间只能有一款应用使用麦克风！</string>

@@ -160,9 +160,9 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="settings_audio_mic">"Microfon"</string>
     <string name="settings_audio_mute">"Mut"</string>
     <string name="settings_audio_internal">"Intern"</string>
-    <string name="settings_audio_internal_experimental">"Intern (experimental)"</string>
-    <string name="settings_audio_internal_not_supported">"Nu este suportat pe %1$s"</string>
-    <string name="settings_audio_internal_incompatible">"Nu este compatibil cu driver-ul audio al dumneavoastra"</string>
+    <string name="settings_audio_experimental">"Experimental"</string>
+    <string name="settings_audio_not_supported">"Nu este suportat pe %1$s"</string>
+    <string name="settings_audio_incompatible">"Nu este compatibil cu driver-ul audio al dumneavoastra"</string>
     <string name="settings_audio_mic_summary">"Microfon"</string>
     <string name="settings_audio_mute_summary">"Mut. Nici un canal audio"</string>
     <string name="settings_audio_internal_summary">"Ieșire sistem audio"</string>

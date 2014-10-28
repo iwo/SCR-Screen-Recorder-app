@@ -155,9 +155,9 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="settings_audio_mic">"Mikrofon"</string>
     <string name="settings_audio_mute">"Lydløs"</string>
     <string name="settings_audio_internal">"Intern"</string>
-    <string name="settings_audio_internal_experimental">"Intern (eksperimentel)"</string>
-    <string name="settings_audio_internal_not_supported">"Ikke understøttet på %1$s"</string>
-    <string name="settings_audio_internal_incompatible">"Ikke kompatibel med din lyd driver"</string>
+    <string name="settings_audio_experimental">"Eksperimentel"</string>
+    <string name="settings_audio_not_supported">"Ikke understøttet på %1$s"</string>
+    <string name="settings_audio_incompatible">"Ikke kompatibel med din lyd driver"</string>
     <string name="settings_audio_mic_summary">"Mikrofon"</string>
     <string name="settings_audio_mute_summary">"Lydløs. Ingen lyd spor"</string>
     <string name="settings_audio_internal_summary">"System lydudgang"</string>

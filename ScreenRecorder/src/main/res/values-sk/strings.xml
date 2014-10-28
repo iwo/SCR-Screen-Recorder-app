@@ -164,9 +164,9 @@ zvislými rámami.
     <string name="settings_audio_mic">"Mikrofón"</string>
     <string name="settings_audio_mute">"Stlmiť"</string>
     <string name="settings_audio_internal">"Interný"</string>
-    <string name="settings_audio_internal_experimental">"Interný (experimentálne)"</string>
-    <string name="settings_audio_internal_not_supported">"Nie je podporované na %1$s"</string>
-    <string name="settings_audio_internal_incompatible">"Nie je kompatibilné s vaším zvukovým ovládačom"</string>
+    <string name="settings_audio_experimental">"Experimentálne"</string>
+    <string name="settings_audio_not_supported">"Nie je podporované na %1$s"</string>
+    <string name="settings_audio_incompatible">"Nie je kompatibilné s vaším zvukovým ovládačom"</string>
     <string name="settings_audio_mic_summary">"Mikrofón"</string>
     <string name="settings_audio_mute_summary">"Stlmené. Žiadna zvuková stopa"</string>
     <string name="settings_audio_internal_summary">"Systémový zvukový výstup"</string>

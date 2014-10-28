@@ -158,9 +158,9 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_audio_mic">"Mikrofooni"</string>
     <string name="settings_audio_mute">"Mykistetty"</string>
     <string name="settings_audio_internal">"Sisäinen"</string>
-    <string name="settings_audio_internal_experimental">"Sisäinen (kokeellinen)"</string>
-    <string name="settings_audio_internal_not_supported">"Ei tueta %1$s"</string>
-    <string name="settings_audio_internal_incompatible">"Ei yhteensopiva ääniajurisi kanssa"</string>
+    <string name="settings_audio_experimental">"Kokeellinen"</string>
+    <string name="settings_audio_not_supported">"Ei tueta %1$s"</string>
+    <string name="settings_audio_incompatible">"Ei yhteensopiva ääniajurisi kanssa"</string>
     <string name="settings_audio_mic_summary">"Mikrofooni"</string>
     <string name="settings_audio_mute_summary">"Ilman ääntä. Ei Ääniraitaa"</string>
     <string name="settings_audio_internal_summary">"Järjestelmä-äänen ulostulo"</string>

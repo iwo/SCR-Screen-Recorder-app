@@ -252,23 +252,33 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         addRemovePreference(settings.getShowAdvanced(), KEY_VERTICAL_FRAMES, verticalFramesPreference, videoCategory);
 
-        if (Build.VERSION.SDK_INT == 17) {
-            CharSequence[] entries = audioSourcePreference.getEntries();
-            entries[2] = Html.fromHtml(getString(R.string.settings_audio_internal_experimental) +
-                            "<br/><small><font color=\"@android:secondary_text_dark\">" +
-                            getString(R.string.settings_audio_internal_not_supported, Build.VERSION.RELEASE) +
-                            "</font></small>"
-            );
-            audioSourcePreference.setEntries(entries);
-        } else if (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isInternalAudioStable()) {
-            CharSequence[] entries = audioSourcePreference.getEntries();
-            entries[2] = Html.fromHtml(getString(R.string.settings_audio_internal_experimental) +
-                            "<br/><small><font color=\"@android:secondary_text_dark\">" +
-                            getString(R.string.settings_audio_internal_incompatible) +
-                            "</font></small>"
-            );
-            audioSourcePreference.setEntries(entries);
+        CharSequence[] mainEntries = getResources().getStringArray(R.array.audio_source_entries);
+        CharSequence[] entries = new CharSequence[mainEntries.length];
+        CharSequence[] entryValues = audioSourcePreference.getEntryValues();
+        for (int i = 0; i < mainEntries.length; i++) {
+            AudioSource audioSource = AudioSource.valueOf(entryValues[i].toString());
+            if (audioSource.getRequiresDriver()) {
+                if (Build.VERSION.SDK_INT == 17) {
+                    entries[i] = getTwoLineEntry(mainEntries[i], getString(R.string.settings_audio_not_supported, Build.VERSION.RELEASE));
+                } else if (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isInternalAudioStable()) {
+                    entries[i] = getTwoLineEntry(mainEntries[i], getString(R.string.settings_audio_incompatible, Build.VERSION.RELEASE));
+                } else {
+                    entries[i] = getTwoLineEntry(mainEntries[i], audioSource == AudioSource.MIX ?
+                                    getString(R.string.settings_audio_use_headphones) :
+                                    getString(R.string.settings_audio_experimental)
+                    );
+                }
+            } else {
+                entries[i] = mainEntries[i];
+            }
         }
+        audioSourcePreference.setEntries(entries);
+    }
+
+    private CharSequence getTwoLineEntry(CharSequence firstLine, CharSequence secondLine) {
+        return Html.fromHtml(
+                firstLine + "<br/><small><font color=\"@android:secondary_text_dark\">" + secondLine + "</font></small>"
+        );
     }
 
     private CharSequence[] getVideoConfigEntries() {
@@ -281,12 +291,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private CharSequence formatVideoConfig(VideoConfig videoConfig) {
-        return Html.fromHtml(
-                getString(R.string.settings_video_config_entry, videoConfig.getResolution().getWidth(), videoConfig.getResolution().getHeight(), videoConfig.getFrameRate()) +
-                        "<br/><small><font color=\"@android:secondary_text_dark\">" +
-                        formatVideoEncoderEntry(videoConfig.getVideoEncoder()) +
+        return getTwoLineEntry(
+                getString(R.string.settings_video_config_entry, videoConfig.getResolution().getWidth(), videoConfig.getResolution().getHeight(), videoConfig.getFrameRate()),
+                formatVideoEncoderEntry(videoConfig.getVideoEncoder()) +
                         (videoConfig.getVideoEncoder() == Settings.FFMPEG_MPEG_4_ENCODER ? "" : "&emsp;" + formatTransformationEntry(videoConfig.getTransformation())) +
-                        "&emsp;" + getString(R.string.settings_video_config_entry_stability, videoConfig.getStability()) +"</font></small>"
+                        "&emsp;" + getString(R.string.settings_video_config_entry_stability, videoConfig.getStability())
         );
     }
 
@@ -549,12 +558,14 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 return getString(R.string.settings_audio_mute_summary);
             case INTERNAL:
                 return getString(R.string.settings_audio_internal_summary);
+            case MIX:
+                return getString(R.string.settings_audio_mix_summary);
         }
         return "";
     }
 
     private String formatSamplingRateSummary() {
-        if (settings.getAudioSource().equals(AudioSource.INTERNAL)) {
+        if (settings.getAudioSource().getRequiresDriver()) {
             int rate = settings.getAudioDriver().getSamplingRate();
             for (SamplingRate r : SamplingRate.values()) {
                 if (r.getCommand().equals(String.valueOf(rate))) {
@@ -634,7 +645,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             settings.setVerticalFrames(selected);
         } else if (preference == audioSourcePreference) {
             AudioSource source = AudioSource.valueOf(valueString);
-            if (source != AudioSource.INTERNAL || Build.VERSION.SDK_INT != 17) {
+            if (!source.getRequiresDriver() || Build.VERSION.SDK_INT != 17) {
                 settings.setAudioSource(source);
                 updateValues();
             } else {

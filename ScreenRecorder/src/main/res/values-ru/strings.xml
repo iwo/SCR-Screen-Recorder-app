@@ -173,9 +173,9 @@ SCR Screen Recorder собирает анонимную статистику д�
     <string name="settings_audio_mic">"Микрофон"</string>
     <string name="settings_audio_mute">"Без звука"</string>
     <string name="settings_audio_internal">"Внутренний"</string>
-    <string name="settings_audio_internal_experimental">"Внутренний (эксперимент)"</string>
-    <string name="settings_audio_internal_not_supported">"Не поддерживается на %1$s"</string>
-    <string name="settings_audio_internal_incompatible">"Не совместим с драйвером звука"</string>
+    <string name="settings_audio_experimental">"эксперимент"</string>
+    <string name="settings_audio_not_supported">"Не поддерживается на %1$s"</string>
+    <string name="settings_audio_incompatible">"Не совместим с драйвером звука"</string>
     <string name="settings_audio_mic_summary">"Микрофон"</string>
     <string name="settings_audio_mute_summary">"Тихо (без звуковой дорожки)"</string>
     <string name="settings_audio_internal_summary">"Системный аудио выход"</string>

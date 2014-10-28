@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.RecordingInfo;
-import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.stats.AudioModuleStatsAsyncTask;
 
@@ -29,7 +28,7 @@ public class AudioDriver {
     }
 
     public boolean shouldInstall() {
-        return (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL
+        return (Settings.getInstance().getAudioSource().getRequiresDriver()
                 && (status == InstallationStatus.NOT_INSTALLED
                 || status == InstallationStatus.CHECKING
                 || status == InstallationStatus.UNINSTALLING

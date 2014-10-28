@@ -153,7 +153,7 @@ SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行�
     <string name="settings_audio_mic">"麥克風"</string>
     <string name="settings_audio_mute">"靜音"</string>
     <string name="settings_audio_internal">"內部音訊"</string>
-    <string name="settings_audio_internal_experimental">"內部音訊(實驗性功能)"</string>
+    <string name="settings_audio_experimental">"實驗性功能"</string>
     <string name="settings_audio_mic_summary">"麥克風。一次只能有一個應用程式使用麥克風！"</string>
     <string name="settings_audio_mute_summary">"靜音。無音軌"</string>
     <string name="settings_audio_internal_summary">"音訊輸出。加入Google+ 的“SCR 開發測試”社群來參加內部錄音測試。"</string>

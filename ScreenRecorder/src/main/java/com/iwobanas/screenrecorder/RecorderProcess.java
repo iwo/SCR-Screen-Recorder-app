@@ -253,9 +253,9 @@ class RecorderProcess implements Runnable {
         recordingInfo.rotation = rotation;
         Settings settings = Settings.getInstance();
         setState(ProcessState.STARTING);
-        if (settings.getAudioSource() == AudioSource.INTERNAL
+        if (settings.getAudioSource().getRequiresDriver()
                 && settings.getAudioDriver().getInstallationStatus() == InstallationStatus.INSTALLED) {
-            setVolumeGain();
+            configureAudioDriver(settings);
         }
         configureTimeout.start();
         startTimeout.start();
@@ -276,7 +276,7 @@ class RecorderProcess implements Runnable {
         runCommand(settings.getTransformation().name());
         runCommand(settings.getColorFix() ? "BGRA" : "RGBA");
         runCommand(settings.getVideoBitrate().getCommand());
-        if (settings.getAudioSource().equals(AudioSource.INTERNAL)) {
+        if (settings.getAudioSource().getRequiresDriver()) {
             runCommand(String.valueOf(settings.getAudioDriver().getSamplingRate()));
         } else {
             runCommand(settings.getSamplingRate().getCommand());
@@ -286,7 +286,20 @@ class RecorderProcess implements Runnable {
         logSettings(settings, rotation);
     }
 
-    private void setVolumeGain() {
+    private void configureAudioDriver(Settings settings) {
+        try {
+            String mixMic = settings.getAudioSource() == AudioSource.MIX ? "1" : "0";
+            File configFile = new File(AUDIO_CONFIG_FILE);
+            FileWriter fileWriter = new FileWriter(configFile);
+            fileWriter.write(String.valueOf(getVolumeGain()) + " " + mixMic + "\n");
+            fileWriter.close();
+            configFile.setReadable(true, false);
+        } catch (Exception e) {
+            Log.w(TAG, "Error setting audio gain", e);
+        }
+    }
+
+    private int getVolumeGain() {
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         int gain = 1;
         double volume = (double) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) / (1.0 + audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
@@ -295,15 +308,7 @@ class RecorderProcess implements Runnable {
         }
         gain = Math.min(gain, 16);
         Log.v(TAG, "Music volume " + volume + " setting gain to " + gain);
-        try {
-            File configFile = new File(AUDIO_CONFIG_FILE);
-            FileWriter fileWriter = new FileWriter(configFile);
-            fileWriter.write(String.valueOf(gain) + "\n");
-            fileWriter.close();
-            configFile.setReadable(true, false);
-        } catch (Exception e) {
-            Log.w(TAG, "Error setting audio gain", e);
-        }
+        return gain;
     }
 
     private String fixEmulatedStorageMapping(String fileName) {

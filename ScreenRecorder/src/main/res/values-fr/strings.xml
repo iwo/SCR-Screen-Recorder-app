@@ -156,7 +156,7 @@ SCR Screen Recorder collecte des statistiques d'utilisation anonymes pour aider 
     <string name="settings_audio_mic">"Microphone"</string>
     <string name="settings_audio_mute">"Muet"</string>
     <string name="settings_audio_internal">"Interne"</string>
-    <string name="settings_audio_internal_experimental">"Interne (expérimental)"</string>
+    <string name="settings_audio_experimental">"Expérimental"</string>
     <string name="settings_audio_mic_summary">"Microphone"</string>
     <string name="settings_audio_mute_summary">"Muet. Aucune piste audio"</string>
     <string name="settings_audio_internal_summary">"Sortie Audio du système"</string>

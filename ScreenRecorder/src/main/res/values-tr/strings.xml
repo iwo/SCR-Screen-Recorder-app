@@ -164,7 +164,7 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
     <string name="settings_audio_mic">"Mikrofon"</string>
     <string name="settings_audio_mute">"Sessiz"</string>
     <string name="settings_audio_internal">"Dahili"</string>
-    <string name="settings_audio_internal_experimental">"Dahili (deneysel)"</string>
+    <string name="settings_audio_experimental">"Deneysel"</string>
     <string name="settings_audio_mic_summary">"Mikrofon"</string>
     <string name="settings_audio_mute_summary">"Sessiz. Ses parçası yok "</string>
     <string name="settings_audio_internal_summary">"Sistem ses çıkışı"</string>

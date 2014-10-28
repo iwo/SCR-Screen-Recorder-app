@@ -402,6 +402,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
         recordingInfo.time = (int) ((System.currentTimeMillis() - mRecordingStartTime) / 1000l);
         new RecordingStatsAsyncTask(this, recordingInfo).execute();
+        //TODO: verify how to log INTERNAL_MIX stats
         if (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL) {
             audioDriver.logStats(recordingInfo);
         }

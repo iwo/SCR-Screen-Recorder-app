@@ -156,9 +156,9 @@ SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros ac
     <string name="settings_audio_mic">"Microfone"</string>
     <string name="settings_audio_mute">"Mudo"</string>
     <string name="settings_audio_internal">"Consistência "</string>
-    <string name="settings_audio_internal_experimental">"Interno (experimental)"</string>
-    <string name="settings_audio_internal_not_supported">"Não suportado no %1$s"</string>
-    <string name="settings_audio_internal_incompatible">"Não é compatível com o seu driver de áudio"</string>
+    <string name="settings_audio_experimental">"Experimental"</string>
+    <string name="settings_audio_not_supported">"Não suportado no %1$s"</string>
+    <string name="settings_audio_incompatible">"Não é compatível com o seu driver de áudio"</string>
     <string name="settings_audio_mic_summary">"Microfone"</string>
     <string name="settings_audio_mute_summary">"Mute. Nenhuma faixa de áudio"</string>
     <string name="settings_audio_internal_summary">"Saída de áudio do sistema"</string>
