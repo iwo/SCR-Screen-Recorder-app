@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.iwobanas.screenrecorder.RecordingInfo;
 import com.iwobanas.screenrecorder.audio.AudioDriverInstaller;
+import com.iwobanas.screenrecorder.settings.Settings;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,6 +26,12 @@ public class AudioModuleStatsAsyncTask extends StatsBaseAsyncTask {
         super(context);
         this.context = context;
         this.recordingInfo = recordingInfo;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        params.put("audio_source", Settings.getInstance().getAudioSource().name());
     }
 
     @Override
