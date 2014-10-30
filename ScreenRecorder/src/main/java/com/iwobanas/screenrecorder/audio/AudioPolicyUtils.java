@@ -157,8 +157,9 @@ public class AudioPolicyUtils {
         }
         if (!systemConf.exists()) {
             Log.w(TAG, "No policy file found.");
+            return null;
         }
-        return null;
+        return systemConf;
     }
 
     static class ConfigLine {
