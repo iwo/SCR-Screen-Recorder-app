@@ -53,6 +53,8 @@ public class AudioModuleStatsAsyncTask extends StatsBaseAsyncTask {
             params.put("recording_id", new File(recordingInfo.fileName).getName());
         }
 
+        params.put("req_sample_rate", Settings.getInstance().getSamplingRate().getCommand());
+
         try {
             params.put("frames_read", validateLong(logEntry[1]));
             params.put("sample_rate", validateLong(logEntry[2]));
@@ -69,6 +71,7 @@ public class AudioModuleStatsAsyncTask extends StatsBaseAsyncTask {
             params.put("delays", validateInt(logEntry[13]));
             params.put("overflows", validateInt(logEntry[14]));
             params.put("excess", validateInt(logEntry[15]));
+            params.put("out_sample_rate", validateInt(logEntry[16]));
 
             super.doInBackground(voids);
         } catch (NumberFormatException e) {
@@ -84,7 +87,7 @@ public class AudioModuleStatsAsyncTask extends StatsBaseAsyncTask {
             return null;
         }
         String[] tokens = logLine.split("\\s+");
-        if (tokens == null || tokens.length != 16) {
+        if (tokens.length != 17) {
             Log.d(TAG, "Incorrect log data received \"" + logLine + "\"");
             return null;
         }
@@ -142,11 +145,13 @@ public class AudioModuleStatsAsyncTask extends StatsBaseAsyncTask {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private String validateInt(String string) {
         Integer.parseInt(string);
         return string;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private String validateLong(String string) {
         Long.parseLong(string);
         return string;
