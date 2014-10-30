@@ -22,6 +22,7 @@ public class Settings {
     private static final String FRAME_RATE = "FRAME_RATE";
     private static final String TRANSFORMATION = "TRANSFORMATION";
     private static final String SAMPLING_RATE = "SAMPLING_RATE";
+    private static final String INTERNAL_SAMPLING_RATE = "INTERNAL_SAMPLING_RATE";
     private static final String VIDEO_BITRATE = "VIDEO_BITRATE";
     private static final String COLOR_FIX = "COLOR_FIX";
     private static final String HIDE_ICON = "HIDE_ICON";
@@ -55,6 +56,7 @@ public class Settings {
     private Transformation defaultTransformation = Transformation.GPU;
     private SamplingRate defaultSamplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
     private SamplingRate samplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
+    private SamplingRate internalSamplingRate = null;
     private VideoBitrate defaultVideoBitrate = VideoBitrate.BITRATE_10_MBPS;
     private VideoBitrate videoBitrate = VideoBitrate.BITRATE_10_MBPS;
     private boolean colorFix = false;
@@ -141,6 +143,11 @@ public class Settings {
 
         String samplingRate = preferences.getString(SAMPLING_RATE, defaultSamplingRate.name());
         this.samplingRate = SamplingRate.valueOf(samplingRate);
+
+        String internalSamplingRate = preferences.getString(INTERNAL_SAMPLING_RATE, null);
+        if (internalSamplingRate != null) {
+            this.internalSamplingRate = SamplingRate.valueOf(internalSamplingRate);
+        }
 
         colorFix = preferences.getBoolean(COLOR_FIX, defaultColorFix);
 
@@ -360,12 +367,27 @@ public class Settings {
     }
 
     public SamplingRate getSamplingRate() {
-        return samplingRate;
+        if (getAudioSource().getRequiresDriver()) {
+            if (internalSamplingRate == null) {
+                if (audioDriver.getSamplingRate() > 0) {
+                    SamplingRate.getBySamplingRate(audioDriver.getSamplingRate());
+                }
+                return SamplingRate.SAMPLING_RATE_44_KHZ;
+            }
+            return internalSamplingRate;
+        } else {
+            return samplingRate;
+        }
     }
 
     public void setSamplingRate(SamplingRate samplingRate) {
-        this.samplingRate = samplingRate;
-        settingsModified(preferences.edit().putString(SAMPLING_RATE, samplingRate.name()));
+        if (getAudioSource().getRequiresDriver()) {
+            this.internalSamplingRate = samplingRate;
+            settingsModified(preferences.edit().putString(INTERNAL_SAMPLING_RATE, internalSamplingRate.name()));
+        } else {
+            this.samplingRate = samplingRate;
+            settingsModified(preferences.edit().putString(SAMPLING_RATE, samplingRate.name()));
+        }
     }
 
     public VideoBitrate getVideoBitrate() {
@@ -492,6 +514,9 @@ public class Settings {
 
         samplingRate = defaultSamplingRate;
         editor.remove(SAMPLING_RATE);
+
+        internalSamplingRate = null;
+        editor.remove(INTERNAL_SAMPLING_RATE);
 
         videoBitrate = defaultVideoBitrate;
         editor.remove(VIDEO_BITRATE);

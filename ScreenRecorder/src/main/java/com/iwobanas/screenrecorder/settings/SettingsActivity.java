@@ -50,6 +50,7 @@ public class SettingsActivity extends Activity {
             case R.id.settings_restore_defaults:
                 Settings.getInstance().restoreDefault();
                 if (fragment != null) {
+                    fragment.updateEntries();
                     fragment.updateValues();
                 }
                 return true;

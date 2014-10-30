@@ -174,7 +174,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         samplingRatePreference.setValue(settings.getSamplingRate().name());
         samplingRatePreference.setSummary(formatSamplingRateSummary());
-        samplingRatePreference.setEnabled(settings.getAudioSource().equals(AudioSource.MIC));
+        samplingRatePreference.setEnabled(!settings.getAudioSource().equals(AudioSource.MUTE));
 
         hideIconPreference.setChecked(settings.getHideIcon());
         showTouchesPreference.setChecked(settings.getShowTouches());
@@ -273,6 +273,43 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             }
         }
         audioSourcePreference.setEntries(entries);
+
+        updateSamplingRate();
+    }
+
+    private void updateSamplingRate() {
+        AudioSource audioSource = Settings.getInstance().getAudioSource();
+        if (audioSource.getRequiresDriver()) {
+            int outSamplingRate = Settings.getInstance().getAudioDriver().getSamplingRate();
+            ArrayList<SamplingRate> samplingRates = new ArrayList<SamplingRate>(3);
+            for (SamplingRate samplingRate : SamplingRate.values()) {
+                if ((outSamplingRate % samplingRate.getSamplingRate()) == 0
+                        && outSamplingRate / samplingRate.getSamplingRate() <= 4) {
+                    samplingRates.add(samplingRate);
+                }
+            }
+            samplingRatePreference.setEntryValues(getSamplingRateEntryValues(samplingRates));
+            samplingRatePreference.setEntries(getSamplingRateEntries(samplingRates));
+        } else {
+            samplingRatePreference.setEntryValues(getSamplingRateEntryValues(SamplingRate.STANDARD));
+            samplingRatePreference.setEntries(getSamplingRateEntries(SamplingRate.STANDARD));
+        }
+    }
+
+    private CharSequence[] getSamplingRateEntryValues(List<SamplingRate> samplingRates) {
+        String[] entryValues = new String[samplingRates.size()];
+        for (int i = 0; i < entryValues.length; i++) {
+            entryValues[i] = samplingRates.get(i).name();
+        }
+        return entryValues;
+    }
+
+    private CharSequence[] getSamplingRateEntries(List<SamplingRate> samplingRates) {
+        String[] entries = new String[samplingRates.size()];
+        for (int i = 0; i < entries.length; i++) {
+            entries[i] = samplingRates.get(i).getLabel();
+        }
+        return entries;
     }
 
     private CharSequence getTwoLineEntry(CharSequence firstLine, CharSequence secondLine) {
@@ -310,7 +347,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private boolean addRemovePreference(boolean add, String key, Preference preference, PreferenceCategory category) {
         if (!add && category.findPreference(key) != null) {
             category.removePreference(preference);
-        } else if (category.findPreference(key) == null) {
+        } else if (add && category.findPreference(key) == null) {
             category.addPreference(preference);
         }
         return add;
@@ -565,15 +602,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private String formatSamplingRateSummary() {
-        if (settings.getAudioSource().getRequiresDriver()) {
-            int rate = settings.getAudioDriver().getSamplingRate();
-            for (SamplingRate r : SamplingRate.values()) {
-                if (r.getCommand().equals(String.valueOf(rate))) {
-                    return r.getLabel();
-                }
-            }
-            return String.valueOf(rate / 1000) + "kHz";
-        }
         return settings.getSamplingRate().getLabel();
     }
 
@@ -647,6 +675,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             AudioSource source = AudioSource.valueOf(valueString);
             if (!source.getRequiresDriver() || Build.VERSION.SDK_INT != 17) {
                 settings.setAudioSource(source);
+                updateSamplingRate();
                 updateValues();
             } else {
                 return false;

@@ -276,11 +276,7 @@ class RecorderProcess implements Runnable {
         runCommand(settings.getTransformation().name());
         runCommand(settings.getColorFix() ? "BGRA" : "RGBA");
         runCommand(settings.getVideoBitrate().getCommand());
-        if (settings.getAudioSource().getRequiresDriver()) {
-            runCommand(String.valueOf(settings.getAudioDriver().getSamplingRate()));
-        } else {
-            runCommand(settings.getSamplingRate().getCommand());
-        }
+        runCommand(settings.getSamplingRate().getCommand());
         runCommand(String.valueOf(settings.getVideoEncoder()));
         runCommand(String.valueOf(settings.getVerticalFrames() ? 1 : 0));
         logSettings(settings, rotation);
