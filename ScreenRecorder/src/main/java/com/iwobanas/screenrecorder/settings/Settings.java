@@ -370,7 +370,7 @@ public class Settings {
         if (getAudioSource().getRequiresDriver()) {
             if (internalSamplingRate == null) {
                 if (audioDriver.getSamplingRate() > 0) {
-                    SamplingRate.getBySamplingRate(audioDriver.getSamplingRate());
+                    return SamplingRate.getBySamplingRate(audioDriver.getSamplingRate());
                 }
                 return SamplingRate.SAMPLING_RATE_44_KHZ;
             }
