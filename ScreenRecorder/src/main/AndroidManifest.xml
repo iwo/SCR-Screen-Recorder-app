@@ -4,7 +4,7 @@
           android:versionCode="1903"
           android:versionName="0.19.3-alpha">
 
-    <uses-sdk android:minSdkVersion="15" android:maxSdkVersion="19"/>
+    <uses-sdk android:minSdkVersion="15" android:maxSdkVersion="20"/>
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
