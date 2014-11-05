@@ -122,7 +122,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         initializeExceptionParser();
         mHandler = new Handler();
 
-        if (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT > 20) {
+        if (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT == 20 || Build.VERSION.SDK_INT > 21) {
             displayErrorMessage(getString(R.string.android_version_error_message), getString(R.string.android_version_error_title), false, false, -1);
         }
 
@@ -402,7 +402,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
         recordingInfo.time = (int) ((System.currentTimeMillis() - mRecordingStartTime) / 1000l);
         new RecordingStatsAsyncTask(this, recordingInfo).execute();
-        if (Settings.getInstance().getAudioSource().getRequiresDriver()) {
+        if (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL) {
             audioDriver.logStats(recordingInfo);
         }
     }
