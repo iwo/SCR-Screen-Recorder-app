@@ -77,7 +77,7 @@ public class AudioModuleStatsAsyncTask extends StatsBaseAsyncTask {
             return null;
         }
         String[] tokens = logLine.split("\\s+");
-        if (tokens == null || tokens.length != 16) {
+        if (tokens == null || tokens.length != 17) {
             Log.d(TAG, "Incorrect log data received \"" + logLine + "\"");
             return null;
         }

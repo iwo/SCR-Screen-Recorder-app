@@ -298,7 +298,7 @@ class RecorderProcess implements Runnable {
         try {
             File configFile = new File(AUDIO_CONFIG_FILE);
             FileWriter fileWriter = new FileWriter(configFile);
-            fileWriter.write(String.valueOf(gain) + "\n");
+            fileWriter.write(String.valueOf(gain) + " 0\n");
             fileWriter.close();
             configFile.setReadable(true, false);
         } catch (Exception e) {
