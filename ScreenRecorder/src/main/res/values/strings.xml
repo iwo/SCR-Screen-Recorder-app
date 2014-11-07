@@ -287,4 +287,7 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="miui_error_message">If you can\'t see %1$s floating window go to MiUi apps settings and enable \"Show popup windows\" for %1$s.</string>
     <string name="miui_error_title">MiUi popups disabled?</string>
 
+    <string name="projection_deny_error_message">You need to tap START NOW for recording to work.</string>
+    <string name="projection_deny_error_title">Can\'t access screen</string>
+
 </resources>

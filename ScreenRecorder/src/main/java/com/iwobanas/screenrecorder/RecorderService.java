@@ -82,6 +82,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String ERROR_DIALOG_CLOSED_ACTION = "scr.intent.action.ERROR_DIALOG_CLOSED";
     public static final String NOTIFICATION_ACTION = "scr.intent.action.NOTIFICATION";
     public static final String LOUNCHER_ACTION = "scr.intent.action.LOUNCHER";
+
+    public static final String SET_PROJECTION_ACTION = "scr.intent.action.SET_PROJECTION";
+    public static final String PROJECTION_DATA_EXTRA = "projection_data";
+    public static final String PROJECTION_DENY_ACTION = "scr.intent.action.PROJECTION_DENY";
+
     private static final String TAG = "scr_RecorderService";
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
     private static final String SHUT_DOWN_CORRECTLY = "SHUT_DOWN_CORRECTLY";
@@ -97,7 +102,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private CameraOverlay mCameraOverlay;
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this, this);
     private NativeProcessRunner mNativeProcessRunner;
-    private PresentationThreadRunner presentationThreadRunner;
+    private ProjectionThreadRunner projectionThreadRunner;
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
     private RatingController mRatingController;
     private AudioDriver audioDriver;
@@ -152,7 +157,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             mNativeProcessRunner = new NativeProcessRunner(this, this);
             installExecutable();
         } else {
-            presentationThreadRunner = new PresentationThreadRunner(this, this);
+            projectionThreadRunner = new ProjectionThreadRunner(this, this);
         }
 
         mRecorderOverlay.animateShow();
@@ -238,7 +243,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (root) {
             mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
         } else {
-            presentationThreadRunner.start(outputFile.getAbsolutePath());
+            projectionThreadRunner.start(outputFile.getAbsolutePath());
         }
         mRecordingStartTime = System.currentTimeMillis();
 
@@ -301,7 +306,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (root) {
             mNativeProcessRunner.stop();
         } else {
-            presentationThreadRunner.stop();
+            projectionThreadRunner.stop();
         }
         mTimeController.reset();
         mCameraOverlay.setTouchable(true);
@@ -814,12 +819,26 @@ public class RecorderService extends Service implements IRecorderService, Licens
         return intent;
     }
 
+
+    private void denyProjectionError() {
+        setState(RecorderServiceState.READY);
+        displayErrorMessage(
+                getString(R.string.projection_deny_error_message),
+                getString(R.string.projection_deny_error_title),
+                true, false, 510);
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground();
         String action = intent.getAction();
         if (STOP_HELP_DISPLAYED_ACTION.equals(action)) {
             startRecording();
+        } else if (SET_PROJECTION_ACTION.equals(action)) {
+            Intent data = intent.getParcelableExtra(PROJECTION_DATA_EXTRA);
+            projectionThreadRunner.setProjectionData(data);
+        } else if (PROJECTION_DENY_ACTION.equals(action)) {
+            denyProjectionError();
         } else if (TIMEOUT_DIALOG_CLOSED_ACTION.equals(action)) {
             isTimeoutDisplayed = false;
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
@@ -912,7 +931,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (root) {
             mNativeProcessRunner.destroy();
         } else {
-            presentationThreadRunner.destroy();
+            projectionThreadRunner.destroy();
         }
         mScreenOffReceiver.unregister();
         savePreferences();

@@ -35,4 +35,8 @@ public enum VideoBitrate {
     public String getLabel() {
         return label;
     }
+
+    public int getBitrate() {
+        return bitrate;
+    }
 }

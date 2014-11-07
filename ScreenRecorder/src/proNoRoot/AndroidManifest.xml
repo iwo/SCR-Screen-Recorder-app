@@ -11,6 +11,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:taskAffinity="">
-
+        <activity
+            android:name=".MediaProjectionActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Transparent" />
     </application>
 </manifest>
