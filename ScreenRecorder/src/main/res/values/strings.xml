@@ -4,6 +4,10 @@
     <string name="free_app_full_name">SCR Screen Recorder Free</string>
     <string name="pro_app_name">SCR Pro</string>
     <string name="pro_app_full_name">SCR Screen Recorder Pro</string>
+    <string name="free_app_no_root_name">SCR 5+ Free</string>
+    <string name="free_app_no_root_full_name">SCR Screen Recorder 5+ Free</string>
+    <string name="pro_app_no_root_name">SCR 5+ Pro</string>
+    <string name="pro_app_no_root_full_name">SCR Screen Recorder 5+ Pro</string>
 
     <string name="play_free_app_name">
 SCR Screen Recorder Free ★ root

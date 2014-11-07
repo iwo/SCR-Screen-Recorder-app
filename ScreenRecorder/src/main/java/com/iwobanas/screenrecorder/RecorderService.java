@@ -86,14 +86,18 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
     private static final String SHUT_DOWN_CORRECTLY = "SHUT_DOWN_CORRECTLY";
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
+
+    // quick and dirty hack to keep this state global
+    public static boolean root;
+
     // Licensing
     private static final byte[] LICENSE_SALT = new byte[]{95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47, 122};
-    private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmOZqTyb4AOB4IEWZiXd0SRYyJ2Y0xu1FBDmxvQqFG+D1wMJMKPxJlMNYwwS3AYjGgzhJzdWFd+oMaRV5uD9BWinHXyUppIrQcHfINv1J9VuwQnVQVYDG+EEiKOAGnnOLhg5EaJ5bdpvRyMLpD3wz9qcIx1YC99/TJC+ACABrhCfkc+U9hKyNe0m4C7DHBEW4SIq22bC1vPOw5KgbdruFxRoQiYU3GE7o8/fH37Vk9Rc+75QrtNYsJ9W0Vm7f2brN+lVwnQVEfsRVBr4k+yHVDVdo82SQfiUo6Q6d0S3HMCqMeRe8UQxGpPxRpE75cADR3LyyduRJ4+KJHPuY38AEAQIDAQAB";
     private IScreenOverlay mWatermark = new WatermarkOverlay(this);
     private RecorderOverlay mRecorderOverlay = new RecorderOverlay(this, this);
     private CameraOverlay mCameraOverlay;
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this, this);
-    private NativeProcessRunner mNativeProcessRunner = new NativeProcessRunner(this, this);
+    private NativeProcessRunner mNativeProcessRunner;
+    private PresentationThreadRunner presentationThreadRunner;
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
     private RatingController mRatingController;
     private AudioDriver audioDriver;
@@ -122,7 +126,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         initializeExceptionParser();
         mHandler = new Handler();
 
-        if (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT == 20 || Build.VERSION.SDK_INT > 21) {
+        root = getResources().getBoolean(R.bool.root);
+
+        if (root && (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT == 20 || Build.VERSION.SDK_INT > 21)) {
             displayErrorMessage(getString(R.string.android_version_error_message), getString(R.string.android_version_error_title), false, false, -1);
         }
 
@@ -130,7 +136,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
         audioDriver = Settings.getInstance().getAudioDriver();
         audioDriver.addInstallListener(this);
         mTaniosc = getResources().getBoolean(R.bool.taniosc);
-        checkShutDownCorrectly();
+
+        if (root) {
+            checkShutDownCorrectly();
+        }
 
         mCameraOverlay = new CameraOverlay(this);
         mCameraOverlay.applySettings();
@@ -138,7 +147,13 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mRatingController = new RatingController(this);
 
         readPreferences();
-        installExecutable();
+
+        if (root) {
+            mNativeProcessRunner = new NativeProcessRunner(this, this);
+            installExecutable();
+        } else {
+            presentationThreadRunner = new PresentationThreadRunner(this, this);
+        }
 
         mRecorderOverlay.animateShow();
         reinitialize();
@@ -220,7 +235,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
         audioDriver.startRecording();
         outputFile = getOutputFile();
-        mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
+        if (root) {
+            mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
+        } else {
+            presentationThreadRunner.start(outputFile.getAbsolutePath());
+        }
         mRecordingStartTime = System.currentTimeMillis();
 
         EasyTracker.getTracker().sendEvent(ACTION, START, START, null);
@@ -279,7 +298,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public void stopRecording() {
         setState(RecorderServiceState.STOPPING);
-        mNativeProcessRunner.stop();
+        if (root) {
+            mNativeProcessRunner.stop();
+        } else {
+            presentationThreadRunner.stop();
+        }
         mTimeController.reset();
         mCameraOverlay.setTouchable(true);
     }
@@ -324,12 +347,16 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public synchronized void setReady() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                checkReady();
-            }
-        });
+        if (root) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    checkReady();
+                }
+            });
+        } else {
+            setState(RecorderServiceState.READY);
+        }
     }
 
     private void checkReady() {
@@ -375,10 +402,14 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mTimeController.reset();
         mScreenOffReceiver.unregister();
 
-        if (state != RecorderServiceState.INSTALLING) {
-            setState(RecorderServiceState.INITIALIZING);
+        if (root) {
+            if (state != RecorderServiceState.INSTALLING) {
+                setState(RecorderServiceState.INITIALIZING);
+            }
+            mNativeProcessRunner.initialize();
+        } else {
+            setState(RecorderServiceState.READY);
         }
-        mNativeProcessRunner.initialize();
     }
 
     private void reportRecordingStats(RecordingInfo recordingInfo) {
@@ -775,6 +806,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private Intent getPlayStoreIntent(String campaignName) {
+        //TODO:update with new package Id
         String uri = "market://details?id=com.iwobanas.screenrecorder.pro&referrer=utm_source%3Ddialog%26utm_campaign%3D" + campaignName;
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(uri));
@@ -877,7 +909,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mCameraOverlay.onDestroy();
         mRecorderOverlay.animateHide();
         mRecorderOverlay.onDestroy();
-        mNativeProcessRunner.destroy();
+        if (root) {
+            mNativeProcessRunner.destroy();
+        } else {
+            presentationThreadRunner.destroy();
+        }
         mScreenOffReceiver.unregister();
         savePreferences();
         Settings.getInstance().restoreShowTouches();
@@ -947,7 +983,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             mChecker = new LicenseChecker(
                     this, new ServerManagedPolicy(this,
                     new AESObfuscator(LICENSE_SALT, getPackageName(), deviceId)),
-                    LICENSE_KEY
+                    LicenseInfo.getLicenseKey()
             );
         }
 

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.iwobanas.screenrecorder"
-          android:versionCode="1802"
-          android:versionName="0.18.2-beta">
+          package="com.iwobanas.screenrecorder">
 
-    <uses-sdk android:minSdkVersion="15" android:maxSdkVersion="21"/>
-    <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
