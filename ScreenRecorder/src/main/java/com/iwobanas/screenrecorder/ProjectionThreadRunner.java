@@ -18,7 +18,6 @@ public class ProjectionThreadRunner {
     private Context context;
     private MediaProjection mediaProjection;
     private ProjectionThread currentThread;
-    private String fileName;
     private MediaProjection.Callback mediaProjectionCallback = new MediaProjection.Callback() {
         @Override
         public void onStop() {
@@ -28,6 +27,7 @@ public class ProjectionThreadRunner {
             }
         }
     };
+    private String fileName;
     private Handler handler;
 
     public ProjectionThreadRunner(Context context, IRecorderService service) {
@@ -44,23 +44,26 @@ public class ProjectionThreadRunner {
         if (mediaProjection != null) {
             mediaProjection.registerCallback(mediaProjectionCallback, handler);
         }
-        start(fileName);
+        currentThread = new ProjectionThread(mediaProjection, service);
+        currentThread.startRecording(new File(fileName));
     }
 
     public void start(String fileName) {
         Log.i(TAG, "start deviceId: " + service.getDeviceId());
         this.fileName = fileName;
-        if (mediaProjection == null) {
-            Intent intent = new Intent(context, MediaProjectionActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-            return;
-        }
+
         if (currentThread != null) {
             currentThread.destroy();
         }
-        currentThread = new ProjectionThread(mediaProjection, service);
-        currentThread.startRecording(new File(fileName));
+
+        if (mediaProjection != null) {
+            mediaProjection.unregisterCallback(mediaProjectionCallback);
+            mediaProjection = null;
+        }
+        Intent intent = new Intent(context, MediaProjectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+        return;
     }
 
     public void stop() {

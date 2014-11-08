@@ -385,6 +385,10 @@ public class ProjectionThread implements Runnable {
                 muxer = null;
             }
 
+            if (mediaProjection != null) {
+                mediaProjection.stop();
+                mediaProjection = null;
+            }
             if (virtualDisplay != null) {
                 try {
                     virtualDisplay.release();
