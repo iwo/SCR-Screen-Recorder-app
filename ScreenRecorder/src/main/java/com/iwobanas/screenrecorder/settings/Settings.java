@@ -93,7 +93,9 @@ public class Settings {
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
         checkAppUpdate();
         checkSystemUpdate();
-        loadDeviceProfileIfNeeded(context);
+        if (context.getResources().getBoolean(R.bool.root)) {
+            loadDeviceProfileIfNeeded(context);
+        }
         // readPreferences(); will be called when device profile is loaded
         if (appUpdated) {
             handleAppUpdate();
