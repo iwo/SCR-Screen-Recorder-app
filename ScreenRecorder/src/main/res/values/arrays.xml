@@ -38,6 +38,16 @@
         <item>INTERNAL</item>
     </string-array>
 
+    <string-array name="audio_source_entries_no_root">
+        <item>@string/settings_audio_mute</item>
+        <item>@string/settings_audio_mic</item>
+    </string-array>
+
+    <string-array name="audio_source_values_no_root" translatable="false">
+        <item>MUTE</item>
+        <item>MIC</item>
+    </string-array>
+
     <string-array name="sampling_rate_entries" translatable="false">
         <item>16kHz</item>
         <item>32kHz</item>

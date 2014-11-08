@@ -17,6 +17,7 @@ import android.util.Log;
 
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
+import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
@@ -207,14 +208,16 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     protected void updateEntries() {
 
-        if (settings.getDeviceProfile() != null && settings.getDeviceProfile().getVideoConfigs().size() > 0) {
-            videoConfigPreference.setEntries(getVideoConfigEntries());
-            videoConfigPreference.setEntryValues(getVideoConfigEntryValues());
-            videoConfigPreference.setEnabled(true);
-            videoConfigPreference.setSummary(R.string.settings_video_config_summary);
-        } else {
-            videoConfigPreference.setEnabled(false);
-            videoConfigPreference.setSummary(R.string.settings_video_config_summary_no_data);
+        if (addRemovePreference(RecorderService.root, KEY_VIDEO_CONFIG, videoConfigPreference, videoCategory)) {
+            if (settings.getDeviceProfile() != null && settings.getDeviceProfile().getVideoConfigs().size() > 0) {
+                videoConfigPreference.setEntries(getVideoConfigEntries());
+                videoConfigPreference.setEntryValues(getVideoConfigEntryValues());
+                videoConfigPreference.setEnabled(true);
+                videoConfigPreference.setSummary(R.string.settings_video_config_summary);
+            } else {
+                videoConfigPreference.setEnabled(false);
+                videoConfigPreference.setSummary(R.string.settings_video_config_summary_no_data);
+            }
         }
 
         List<Integer> videoEncoders = getVideoEncoders();
@@ -229,13 +232,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         boolean softwareEncoderOnly = videoEncoders.size() == 1 && videoEncoders.get(0) == -2;
         List<Transformation> transformations = getTransformations();
 
-        if (addRemovePreference(transformations.size() > 1 && !softwareEncoderOnly,
+        if (addRemovePreference(RecorderService.root && transformations.size() > 1 && !softwareEncoderOnly,
                 KEY_TRANSFORMATION, transformationPreference, videoCategory)) {
             transformationPreference.setEntryValues(getTransformationEntryValues(transformations));
             transformationPreference.setEntries(getTransformationEntries(transformations));
         }
 
-        if (addRemovePreference(settings.getShowAdvanced(), KEY_VIDEO_BITRATE, videoBitratePreference, videoCategory)) {
+        if (addRemovePreference(!RecorderService.root || settings.getShowAdvanced(), KEY_VIDEO_BITRATE, videoBitratePreference, videoCategory)) {
             ArrayList<VideoBitrate> videoBitrates = getVideoBitrates();
             videoBitratePreference.setEntryValues(getVideoBitrateEntryValues(videoBitrates));
             videoBitratePreference.setEntries(getVideoBitrateEntries(videoBitrates));
@@ -252,7 +255,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         addRemovePreference(settings.getShowAdvanced(), KEY_VERTICAL_FRAMES, verticalFramesPreference, videoCategory);
 
-        if (Build.VERSION.SDK_INT == 17) {
+        if (!RecorderService.root) {
+            audioSourcePreference.setEntries(getResources().getStringArray(R.array.audio_source_entries_no_root));
+            audioSourcePreference.setEntryValues(getResources().getStringArray(R.array.audio_source_values_no_root));
+        } else if (Build.VERSION.SDK_INT == 17) {
             CharSequence[] entries = audioSourcePreference.getEntries();
             entries[2] = Html.fromHtml(getString(R.string.settings_audio_internal_experimental) +
                             "<br/><small><font color=\"@android:secondary_text_dark\">" +
@@ -269,6 +275,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             );
             audioSourcePreference.setEntries(entries);
         }
+
+        addRemovePreference(RecorderService.root, KEY_COLOR_FIX, colorFixPreference, otherCategory);
     }
 
     private CharSequence[] getVideoConfigEntries() {
@@ -311,7 +319,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         if (!settings.getShowUnstable() && settings.getDeviceProfile() != null)
             return settings.getDeviceProfile().getStableVideoEncoders();
 
-        Integer[] allEncoders = Utils.isX86() ?
+        Integer[] allEncoders = (!RecorderService.root || Utils.isX86()) ?
                 new Integer[]{MediaRecorder.VideoEncoder.H264, MediaRecorder.VideoEncoder.MPEG_4_SP}
                 : new Integer[]{MediaRecorder.VideoEncoder.H264, Settings.FFMPEG_MPEG_4_ENCODER, MediaRecorder.VideoEncoder.MPEG_4_SP};
 
@@ -457,6 +465,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         for (VideoBitrate bitrate : VideoBitrate.values()) {
             if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
                     && settings.getDeviceProfile().hideVideoBitrate(bitrate))
+                continue;
+            if (!RecorderService.root && (bitrate == VideoBitrate.BITRATE_AUTO || bitrate == VideoBitrate.BITRATE_30_MBPS))
                 continue;
             bitrates.add(bitrate);
         }

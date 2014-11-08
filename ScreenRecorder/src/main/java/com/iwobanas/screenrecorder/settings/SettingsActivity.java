@@ -38,6 +38,9 @@ public class SettingsActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if (!RecorderService.root) {
+            return false;
+        }
         getMenuInflater().inflate(R.menu.settings, menu);
         menu.findItem(R.id.settings_show_advanced).setChecked(Settings.getInstance().getShowAdvanced());
         menu.findItem(R.id.settings_show_unstable).setChecked(Settings.getInstance().getShowUnstable());

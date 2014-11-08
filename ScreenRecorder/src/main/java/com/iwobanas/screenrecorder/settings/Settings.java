@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.R;
+import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
 
@@ -166,7 +167,7 @@ public class Settings {
     }
 
     private void loadDeviceProfileIfNeeded(Context context) {
-        if (deviceProfile == null) {
+        if (RecorderService.root && deviceProfile == null) {
             new LoadDeviceProfileAsyncTask(this, context, appVersion, appUpdated, systemUpdated).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
