@@ -170,16 +170,7 @@ public class ProjectionThread implements Runnable {
                         break;
                     }
 
-                    if ((bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) != 0) {
-                        /**
-                         * The codec config data was pulled out and fed to the muxer
-                         * when we got the INFO_OUTPUT_FORMAT_CHANGED status. Ignore
-                         * it.
-                         */
-                        bufferInfo.size = 0;
-                    }
-
-                    if (bufferInfo.size != 0) {
+                    if (bufferInfo.size != 0 && (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == 0) {
                         if (!muxerStarted) {
                             throw new RuntimeException("muxer hasn't started");
                         }
@@ -189,7 +180,6 @@ public class ProjectionThread implements Runnable {
                             startTimestampInitialized = true;
                         }
                         bufferInfo.presentationTimeUs = System.nanoTime() / 1000 - startTimestampUs;
-
                         muxer.writeSampleData(videoTrackIndex, encodedData, bufferInfo);
                     }
 

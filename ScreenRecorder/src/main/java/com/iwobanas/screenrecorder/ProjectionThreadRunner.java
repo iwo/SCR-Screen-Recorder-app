@@ -19,10 +19,21 @@ public class ProjectionThreadRunner {
     private MediaProjection mediaProjection;
     private ProjectionThread currentThread;
     private String fileName;
+    private MediaProjection.Callback mediaProjectionCallback = new MediaProjection.Callback() {
+        @Override
+        public void onStop() {
+            mediaProjection = null;
+            if (currentThread != null) {
+                currentThread.stopRecording();
+            }
+        }
+    };
+    private Handler handler;
 
     public ProjectionThreadRunner(Context context, IRecorderService service) {
         this.context = context;
         this.service = service;
+        handler = new Handler();
     }
 
     public void setProjectionData(Intent data) {
@@ -31,12 +42,7 @@ public class ProjectionThreadRunner {
 
         mediaProjection = mediaProjectionManager.getMediaProjection(Activity.RESULT_OK, data);
         if (mediaProjection != null) {
-            mediaProjection.registerCallback(new MediaProjection.Callback() {
-                @Override
-                public void onStop() {
-                    mediaProjection = null;
-                }
-            }, new Handler());
+            mediaProjection.registerCallback(mediaProjectionCallback, handler);
         }
         start(fileName);
     }
