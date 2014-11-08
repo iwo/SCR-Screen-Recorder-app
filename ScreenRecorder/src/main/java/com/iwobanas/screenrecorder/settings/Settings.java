@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.R;
-import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
 
@@ -83,6 +82,8 @@ public class Settings {
     private boolean showUnstable = false;
     private boolean showAdvanced = false;
 
+    private boolean root;
+
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         resolutionsManager = new ResolutionsManager(context);
@@ -93,9 +94,8 @@ public class Settings {
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
         checkAppUpdate();
         checkSystemUpdate();
-        if (context.getResources().getBoolean(R.bool.root)) {
-            loadDeviceProfileIfNeeded(context);
-        }
+        root = context.getResources().getBoolean(R.bool.root);
+        loadDeviceProfileIfNeeded(context);
         // readPreferences(); will be called when device profile is loaded
         if (appUpdated) {
             handleAppUpdate();
@@ -169,7 +169,7 @@ public class Settings {
     }
 
     private void loadDeviceProfileIfNeeded(Context context) {
-        if (RecorderService.root && deviceProfile == null) {
+        if (root && deviceProfile == null) {
             new LoadDeviceProfileAsyncTask(this, context, appVersion, appUpdated, systemUpdated).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
