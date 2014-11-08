@@ -146,13 +146,22 @@ public class LicenseChecker implements ServiceConnection {
             if (mService == null) {
                 Log.i(TAG, "Binding to licensing service.");
                 try {
-                    boolean bindResult = mContext
+                    // explicit Intent, safe
+                    Intent serviceIntent = new Intent(ILicensingService.class.getName());
+                    serviceIntent.setPackage("com.android.vending");
+
+                    boolean bindResult = mContext.bindService(
+                            serviceIntent,
+                            this,  // ServiceConnection.
+                            Context.BIND_AUTO_CREATE);
+
+                    /*boolean bindResult = mContext
                             .bindService(
                                     new Intent(
                                             new String(
                                                     Base64.decode("Y29tLmFuZHJvaWQudmVuZGluZy5saWNlbnNpbmcuSUxpY2Vuc2luZ1NlcnZpY2U="))),
                                     this, // ServiceConnection.
-                                    Context.BIND_AUTO_CREATE);
+                                    Context.BIND_AUTO_CREATE);*/
 
                     if (bindResult) {
                         mPendingChecks.offer(validator);
@@ -162,9 +171,9 @@ public class LicenseChecker implements ServiceConnection {
                     }
                 } catch (SecurityException e) {
                     callback.applicationError(LicenseCheckerCallback.ERROR_MISSING_PERMISSION);
-                } catch (Base64DecoderException e) {
+                }/* catch (Base64DecoderException e) {
                     e.printStackTrace();
-                }
+                }*/
             } else {
                 mPendingChecks.offer(validator);
                 runChecks();
