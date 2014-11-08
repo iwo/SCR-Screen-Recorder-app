@@ -4,6 +4,8 @@
     android:versionCode="1"
     android:versionName="0.0.1-beta">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <uses-sdk android:minSdkVersion="21" />
 
     <application
