@@ -52,7 +52,7 @@ public class DialogActivity extends Activity {
             builder.setMessage(intent.getStringExtra(MESSAGE_EXTRA));
             builder.setTitle(intent.getStringExtra(TITLE_EXTRA));
             builder.setIcon(R.drawable.ic_launcher);
-            if (intent.getBooleanExtra(REPORT_BUG_EXTRA, false)) {
+            if (RecorderService.root && intent.getBooleanExtra(REPORT_BUG_EXTRA, false)) {
                 final int errorCode = intent.getIntExtra(REPORT_BUG_ERROR_EXTRA, -1);
                 builder.setPositiveButton(R.string.error_report_report, new DialogInterface.OnClickListener() {
                     @Override
