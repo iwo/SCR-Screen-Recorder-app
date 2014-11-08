@@ -139,10 +139,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         Settings.initialize(this);
         audioDriver = Settings.getInstance().getAudioDriver();
-        audioDriver.addInstallListener(this);
         mTaniosc = getResources().getBoolean(R.bool.taniosc);
 
         if (root) {
+            audioDriver.addInstallListener(this);
             checkShutDownCorrectly();
         }
 
@@ -941,7 +941,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mScreenOffReceiver.unregister();
         savePreferences();
         Settings.getInstance().restoreShowTouches();
-        if (audioDriver.shouldUninstall()) {
+        if (root && audioDriver.shouldUninstall()) {
             audioDriver.uninstall();
         }
         audioDriver.removeInstallListener(this);
