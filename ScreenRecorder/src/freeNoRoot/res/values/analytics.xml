@@ -3,7 +3,7 @@
     <!-- https://developers.google.com/analytics/devguides/collection/android/v2/parameters -->
 
     <!--Replace placeholder ID with your tracking ID-->
-    <string name="ga_trackingId">UA-41916238-1</string>
+    <string name="ga_trackingId">UA-41916238-3</string>
 
     <!--Enable automatic exception tracking-->
     <bool name="ga_reportUncaughtExceptions">true</bool>
