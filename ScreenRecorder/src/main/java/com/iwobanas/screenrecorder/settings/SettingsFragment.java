@@ -34,6 +34,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_VIDEO_CONFIG = "video_config";
     public static final String KEY_VIDEO_ENCODER = "video_encoder";
     public static final String KEY_RESOLUTION = "resolution";
+    public static final String KEY_ORIENTATION = "orientation";
     public static final String KEY_TRANSFORMATION = "transformation";
     public static final String KEY_VIDEO_BITRATE = "video_bitrate";
     public static final String KEY_FRAME_RATE = "frame_rate";
@@ -54,6 +55,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private ListPreference videoConfigPreference;
     private ListPreference videoEncoderPreference;
     private ListPreference resolutionPreference;
+    private ListPreference orientationPreference;
     private ListPreference transformationPreference;
     private ListPreference videoBitratePreference;
     private ListPreference frameRatePreference;
@@ -95,6 +97,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         resolutionPreference = (ListPreference) findPreference(KEY_RESOLUTION);
         resolutionPreference.setOnPreferenceChangeListener(this);
+
+        orientationPreference = (ListPreference) findPreference(KEY_ORIENTATION);
+        orientationPreference.setOnPreferenceChangeListener(this);
 
         transformationPreference = (ListPreference) findPreference(KEY_TRANSFORMATION);
         transformationPreference.setOnPreferenceChangeListener(this);
@@ -158,6 +163,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         resolutionPreference.setValue(formatResolutionEntryValue(settings.getResolution()));
         resolutionPreference.setSummary(formatResolutionEntry(settings.getResolution()));
 
+        orientationPreference.setValue(settings.getOrientation().name());
+        orientationPreference.setSummary(formatOrientationSummary(settings.getOrientation()));
+
         transformationPreference.setValue(settings.getTransformation().name());
         transformationPreference.setSummary(formatTransformationSummary(settings.getTransformation()));
         transformationPreference.setEnabled(settings.getVideoEncoder() >= 0);
@@ -185,6 +193,12 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         outputDirPreference.setSummary(settings.getOutputDir().getAbsolutePath());
         stopOnScreenOffPreference.setChecked(settings.getStopOnScreenOff());
         colorFixPreference.setChecked(settings.getColorFix());
+    }
+
+    private String formatOrientationSummary(Orientation orientation) {
+        return orientation == Orientation.LANDSCAPE ?
+                getString(R.string.settings_orientation_landscape)
+                : getString(R.string.settings_orientation_portrait);
     }
 
     private void updateSelectedVideoConfig() {
@@ -622,6 +636,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             settings.setResolution(resolution);
             preference.setSummary(formatResolutionEntry(resolution));
             updateSelectedVideoConfig();
+
+        } else if (preference == orientationPreference) {
+            Orientation orientation = Orientation.valueOf(valueString);
+            settings.setOrientation(orientation);
+            preference.setSummary(formatOrientationSummary(orientation));
 
         } else if (preference == transformationPreference) {
             Transformation transformation = Transformation.valueOf(valueString);

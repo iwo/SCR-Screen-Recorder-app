@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Surface;
 
 import com.iwobanas.screenrecorder.settings.AudioSource;
+import com.iwobanas.screenrecorder.settings.Orientation;
 import com.iwobanas.screenrecorder.settings.Resolution;
 import com.iwobanas.screenrecorder.settings.Settings;
 
@@ -100,8 +101,17 @@ public class ProjectionThread implements Runnable {
                 videoMime = MediaFormat.MIMETYPE_VIDEO_AVC;
         }
         Resolution resolution = s.getResolution();
-        videoWidth = resolution.getVideoWidth();
-        videoHeight = resolution.getVideoHeight();
+        if (s.getOrientation() == Orientation.LANDSCAPE) {
+            videoWidth = resolution.getVideoWidth();
+            videoHeight = resolution.getVideoHeight();
+            recordingInfo.verticalInput = 1;
+            recordingInfo.rotateView = 1;
+        } else {
+            videoWidth = resolution.getVideoHeight();
+            videoHeight = resolution.getVideoWidth();
+            recordingInfo.verticalInput = 1;
+            recordingInfo.rotateView = 0;
+        }
 
         videoBitrate = s.getVideoBitrate().getBitrate();
         frameRate = s.getFrameRate();

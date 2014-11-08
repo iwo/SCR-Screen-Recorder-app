@@ -19,6 +19,7 @@ public class Settings {
     private static final String AUDIO_SOURCE = "AUDIO_SOURCE";
     private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
+    private static final String ORIENTATION = "ORIENTATION";
     private static final String FRAME_RATE = "FRAME_RATE";
     private static final String TRANSFORMATION = "TRANSFORMATION";
     private static final String SAMPLING_RATE = "SAMPLING_RATE";
@@ -49,6 +50,7 @@ public class Settings {
     private Resolution resolution;
     private Resolution defaultResolution;
     private ResolutionsManager resolutionsManager;
+    private Orientation orientation = Orientation.LANDSCAPE;
     private int defaultFrameRate = 30;
     private int frameRate = defaultFrameRate;
     private Transformation transformation = Transformation.GPU;
@@ -95,8 +97,12 @@ public class Settings {
         checkAppUpdate();
         checkSystemUpdate();
         root = context.getResources().getBoolean(R.bool.root);
-        loadDeviceProfileIfNeeded(context);
-        // readPreferences(); will be called when device profile is loaded
+        if (root) {
+            loadDeviceProfileIfNeeded(context);
+            // readPreferences(); will be called when device profile is loaded
+        } else {
+            readPreferences();
+        }
         if (appUpdated) {
             handleAppUpdate();
         }
@@ -128,6 +134,13 @@ public class Settings {
         if (resolutionWidth != -1) {
             int resolutionHeight = preferences.getInt(RESOLUTION_HEIGHT, 0);
             resolution = resolutionsManager.getResolution(resolutionWidth, resolutionHeight);
+        }
+
+        String orientation = preferences.getString(ORIENTATION, Orientation.LANDSCAPE.name());
+        try {
+            this.orientation = Orientation.valueOf(orientation);
+        } catch (IllegalArgumentException e) {
+            this.orientation = Orientation.LANDSCAPE;
         }
 
         frameRate = preferences.getInt(FRAME_RATE, defaultFrameRate);
@@ -344,6 +357,15 @@ public class Settings {
         return resolutionsManager.getDefaultResolution();
     }
 
+    public Orientation getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(Orientation orientation) {
+        this.orientation = orientation;
+        settingsModified(preferences.edit().putString(ORIENTATION, orientation.name()));
+    }
+
     public int getFrameRate() {
         return frameRate;
     }
@@ -486,6 +508,9 @@ public class Settings {
         resolution = getDefaultResolution();
         editor.remove(RESOLUTION_WIDTH);
         editor.remove(RESOLUTION_HEIGHT);
+
+        orientation = Orientation.LANDSCAPE;
+        editor.remove(ORIENTATION);
 
         frameRate = defaultFrameRate;
         editor.remove(FRAME_RATE);
