@@ -42,10 +42,11 @@ public class ProjectionThreadRunner {
 
         mediaProjection = mediaProjectionManager.getMediaProjection(Activity.RESULT_OK, data);
         if (mediaProjection != null) {
-            mediaProjection.registerCallback(mediaProjectionCallback, handler);
+            //disable callback as it doesn't work anyways
+            //mediaProjection.registerCallback(mediaProjectionCallback, handler);
+            currentThread = new ProjectionThread(mediaProjection, service);
+            currentThread.startRecording(new File(fileName));
         }
-        currentThread = new ProjectionThread(mediaProjection, service);
-        currentThread.startRecording(new File(fileName));
     }
 
     public void start(String fileName) {
@@ -57,7 +58,8 @@ public class ProjectionThreadRunner {
         }
 
         if (mediaProjection != null) {
-            mediaProjection.unregisterCallback(mediaProjectionCallback);
+            //disable callback as it doesn't work anyways
+            //mediaProjection.unregisterCallback(mediaProjectionCallback);
             mediaProjection = null;
         }
         Intent intent = new Intent(context, MediaProjectionActivity.class);
