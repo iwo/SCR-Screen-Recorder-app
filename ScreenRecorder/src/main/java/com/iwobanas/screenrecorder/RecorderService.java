@@ -812,7 +812,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private Intent getPlayStoreIntent(String campaignName) {
         //TODO:update with new package Id
-        String uri = "market://details?id=com.iwobanas.screenrecorder.pro&referrer=utm_source%3Ddialog%26utm_campaign%3D" + campaignName;
+        String uri;
+        if (root) {
+            uri = "market://details?id=com.iwobanas.screenrecorder.pro&referrer=utm_source%3Ddialog%26utm_campaign%3D" + campaignName;
+        } else {
+            uri = "market://details?id=com.iwobanas.screenrecorder.noroot.pro&referrer=utm_source%3Ddialog%26utm_campaign%3D" + campaignName;
+        }
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(uri));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
