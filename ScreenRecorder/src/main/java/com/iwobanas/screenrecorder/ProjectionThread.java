@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.media.AudioFormat;
@@ -15,6 +16,7 @@ import android.media.projection.MediaProjection;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Surface;
 
 import com.iwobanas.screenrecorder.settings.AudioSource;
@@ -106,7 +108,8 @@ public class ProjectionThread implements Runnable {
                 videoMime = MediaFormat.MIMETYPE_VIDEO_AVC;
         }
         Resolution resolution = s.getResolution();
-        if (s.getOrientation() == Orientation.LANDSCAPE) {
+        Orientation orientation = s.getOrientation() == Orientation.AUTO ? getOrientation() : s.getOrientation();
+        if (orientation == Orientation.LANDSCAPE) {
             videoWidth = resolution.getVideoWidth();
             videoHeight = resolution.getVideoHeight();
             recordingInfo.verticalInput = 1;
@@ -483,4 +486,17 @@ public class ProjectionThread implements Runnable {
         destroyed = true;
     }
 
+    public Orientation getOrientation() {
+        Point s;
+        try {
+            DisplayManager displayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
+            Display display = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
+            s = new Point();
+            display.getSize(s);
+        } catch (Exception e) {
+            Log.w(TAG, "Error retrieving screen orientation");
+            return Orientation.LANDSCAPE;
+        }
+        return s.x > s.y ? Orientation.LANDSCAPE : Orientation.PORTRAIT;
+    }
 }

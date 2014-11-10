@@ -196,9 +196,15 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private String formatOrientationSummary(Orientation orientation) {
-        return orientation == Orientation.LANDSCAPE ?
-                getString(R.string.settings_orientation_landscape)
-                : getString(R.string.settings_orientation_portrait);
+        switch (orientation) {
+            case AUTO:
+                return getString(R.string.settings_orientation_auto);
+            case LANDSCAPE:
+                return getString(R.string.settings_orientation_landscape);
+            case PORTRAIT:
+                return getString(R.string.settings_orientation_portrait);
+        }
+        return "";
     }
 
     private void updateSelectedVideoConfig() {

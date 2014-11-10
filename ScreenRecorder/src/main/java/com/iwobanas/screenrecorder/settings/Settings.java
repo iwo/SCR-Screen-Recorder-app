@@ -50,7 +50,7 @@ public class Settings {
     private Resolution resolution;
     private Resolution defaultResolution;
     private ResolutionsManager resolutionsManager;
-    private Orientation orientation = Orientation.LANDSCAPE;
+    private Orientation orientation = Orientation.AUTO;
     private int defaultFrameRate = 30;
     private int frameRate = defaultFrameRate;
     private Transformation transformation = Transformation.GPU;
@@ -136,7 +136,7 @@ public class Settings {
             resolution = resolutionsManager.getResolution(resolutionWidth, resolutionHeight);
         }
 
-        String orientation = preferences.getString(ORIENTATION, Orientation.LANDSCAPE.name());
+        String orientation = preferences.getString(ORIENTATION, Orientation.AUTO.name());
         try {
             this.orientation = Orientation.valueOf(orientation);
         } catch (IllegalArgumentException e) {
@@ -509,7 +509,7 @@ public class Settings {
         editor.remove(RESOLUTION_WIDTH);
         editor.remove(RESOLUTION_HEIGHT);
 
-        orientation = Orientation.LANDSCAPE;
+        orientation = Orientation.AUTO;
         editor.remove(ORIENTATION);
 
         frameRate = defaultFrameRate;
