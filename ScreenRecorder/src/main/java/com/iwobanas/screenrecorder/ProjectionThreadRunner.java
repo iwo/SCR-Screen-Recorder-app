@@ -44,7 +44,7 @@ public class ProjectionThreadRunner {
         if (mediaProjection != null) {
             //disable callback as it doesn't work anyways
             //mediaProjection.registerCallback(mediaProjectionCallback, handler);
-            currentThread = new ProjectionThread(mediaProjection, service);
+            currentThread = new ProjectionThread(mediaProjection, context, service);
             currentThread.startRecording(new File(fileName));
         }
     }
@@ -57,15 +57,14 @@ public class ProjectionThreadRunner {
             currentThread.destroy();
         }
 
-        if (mediaProjection != null) {
-            //disable callback as it doesn't work anyways
-            //mediaProjection.unregisterCallback(mediaProjectionCallback);
-            mediaProjection = null;
+        if (mediaProjection == null) {
+            Intent intent = new Intent(context, MediaProjectionActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            return;
         }
-        Intent intent = new Intent(context, MediaProjectionActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-        return;
+        currentThread = new ProjectionThread(mediaProjection, context, service);
+        currentThread.startRecording(new File(fileName));
     }
 
     public void stop() {
@@ -79,7 +78,12 @@ public class ProjectionThreadRunner {
     public void destroy() {
         Log.d(TAG, "destroy()");
         if (currentThread != null) {
-            currentThread.stopRecording();
+            currentThread.destroy();
+        } else if (mediaProjection != null) {
+            try {
+                mediaProjection.stop();
+            } catch (Exception ignore) {
+            }
         }
     }
 }

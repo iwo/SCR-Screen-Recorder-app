@@ -1,5 +1,7 @@
 package com.iwobanas.screenrecorder;
 
+import android.content.Context;
+import android.content.Intent;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.media.AudioFormat;
@@ -38,6 +40,7 @@ public class ProjectionThread implements Runnable {
     private boolean muxerStarted;
     private boolean startTimestampInitialized;
     private long startTimestampUs;
+    private Context context;
     private IRecorderService service;
     private Handler handler;
     private Thread audioRecordThread;
@@ -75,8 +78,9 @@ public class ProjectionThread implements Runnable {
         }
     };
 
-    public ProjectionThread(MediaProjection mediaProjection, IRecorderService service) {
+    public ProjectionThread(MediaProjection mediaProjection, Context context, IRecorderService service) {
         this.mediaProjection = mediaProjection;
+        this.context = context.getApplicationContext();
         this.service = service;
         handler = new Handler();
     }
@@ -137,8 +141,9 @@ public class ProjectionThread implements Runnable {
         videoEncoder.configure(encoderFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
         surface = videoEncoder.createInputSurface();
         videoEncoder.start();
+    }
 
-
+    private void setupVirtualDisplay() {
         virtualDisplay = mediaProjection.createVirtualDisplay("SCR Screen Recorder",
                 videoWidth, videoHeight, DisplayMetrics.DENSITY_HIGH,
                 DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
@@ -153,11 +158,6 @@ public class ProjectionThread implements Runnable {
         audioEncoder = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_AUDIO_AAC);
         audioEncoder.configure(encoderFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
         audioEncoder.start();
-
-        virtualDisplay = mediaProjection.createVirtualDisplay("SCR Screen Recorder",
-                videoWidth, videoHeight, DisplayMetrics.DENSITY_HIGH,
-                DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-                surface, displayCallback, handler);
     }
 
 
@@ -254,6 +254,27 @@ public class ProjectionThread implements Runnable {
             } catch (Exception e) {
                 Log.e(TAG, "video error", e);
                 recordingInfo.exitValue = 501;
+                if (!destroyed)
+                    service.startupError(recordingInfo);
+                return;
+            }
+
+            try {
+                setupVirtualDisplay();
+            } catch (SecurityException e) {
+                try {
+                    videoEncoder.stop();
+                    videoEncoder.release();
+                } catch (Exception ee) {
+                    Log.w(TAG, "Error stopping video encoder", ee);
+                }
+                Intent intent = new Intent(context, MediaProjectionActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                return;
+            } catch (Exception e) {
+                Log.e(TAG, "virtual display error", e);
+                recordingInfo.exitValue = 513;
                 if (!destroyed)
                     service.startupError(recordingInfo);
                 return;
@@ -390,10 +411,7 @@ public class ProjectionThread implements Runnable {
                 muxer = null;
             }
 
-            if (mediaProjection != null) {
-                mediaProjection.stop();
-                mediaProjection = null;
-            }
+
             if (virtualDisplay != null) {
                 try {
                     virtualDisplay.release();
@@ -447,6 +465,13 @@ public class ProjectionThread implements Runnable {
             if (!destroyed)
                 service.recordingError(recordingInfo);
         }
+
+        if (destroyed && mediaProjection != null) {
+            try {
+                mediaProjection.stop();
+            } catch (Exception ignore) {
+            }
+        }
     }
 
     public void stopRecording() {
@@ -454,6 +479,7 @@ public class ProjectionThread implements Runnable {
     }
 
     public void destroy() {
+        stopRecording();
         destroyed = true;
     }
 
