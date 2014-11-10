@@ -894,9 +894,13 @@ public class RecorderService extends Service implements IRecorderService, Licens
                     mRecorderOverlay.show();
                 }
             }
-        } else if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
+        } else if (state == RecorderServiceState.RECORDING || (root && state == RecorderServiceState.STARTING)) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
+        } else if (state == RecorderServiceState.STARTING) { // non-root permission dialog closed by home button
+            Intent projectionIntent = new Intent(this, MediaProjectionActivity.class);
+            projectionIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(projectionIntent);
         } else {
             if (SETTINGS_CLOSED_ACTION.equals(action)) {
                 settingsDisplayed = false;
