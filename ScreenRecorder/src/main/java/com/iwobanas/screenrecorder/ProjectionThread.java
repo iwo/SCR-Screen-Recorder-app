@@ -57,6 +57,7 @@ public class ProjectionThread implements Runnable {
     private RecordingInfo recordingInfo;
 
     private volatile boolean stopped;
+    private volatile boolean audioStopped;
     private volatile boolean asyncError;
     private volatile boolean destroyed;
 
@@ -186,7 +187,7 @@ public class ProjectionThread implements Runnable {
                     return;
                 }
                 try {
-                    while (true) {
+                    while (!audioStopped) {
                         int index = audioEncoder.dequeueInputBuffer(10000);
                         if (index < 0) {
                             continue;
@@ -216,6 +217,10 @@ public class ProjectionThread implements Runnable {
                             service.recordingError(recordingInfo);
                         asyncError = true;
                     }
+                } finally {
+                    audioRecord.stop();
+                    audioRecord.release();
+                    audioRecord = null;
                 }
             }
         });
@@ -415,13 +420,13 @@ public class ProjectionThread implements Runnable {
                 videoEncoder = null;
             }
 
-            if (audioRecord != null) {
+            if (audioRecordThread != null) {
+                audioStopped = true;
+
                 try {
-                    audioRecord.release();
-                } catch (Exception e) {
-                    Log.w(TAG, "Error stopping AudioRecord", e);
+                    audioRecordThread.join();
+                } catch (InterruptedException ignore) {
                 }
-                audioRecord = null;
             }
 
             if (audioEncoder != null) {
