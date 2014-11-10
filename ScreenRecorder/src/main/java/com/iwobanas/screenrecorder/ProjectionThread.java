@@ -484,8 +484,14 @@ public class ProjectionThread implements Runnable {
     }
 
     public void destroy() {
-        stopRecording();
         destroyed = true;
+        if (!stopped) {
+            stopRecording();
+        } else {
+            // there is a slim chance that thread hasn't completed yet
+            // but premature projection closing shouldn't cause issues
+            mediaProjection.stop();
+        }
     }
 
     private void setError(int errorCode) {
