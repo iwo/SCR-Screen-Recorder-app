@@ -62,6 +62,9 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="media_recorder_error_title">Recorder error</string>
     <string name="media_recorder_error_message">Try changing resolution or switching image transformation between GPU/CPU. Please uninstall other screencast applications if you have any. If the problem persists please get in touch via support email quoting error R%1$d.</string>
 
+    <string name="video_codec_error_title">Incompatible Video Settings</string>
+    <string name="video_codec_error_message">Try reducing resolution or video bitrate. Note that on some devices portrait video orientation works only with lower resolutions. If the problem persists please get in touch via support email quoting error R%1$d.</string>
+
     <string name="output_file_error_title">Can\'t create video file</string>
     <string name="output_file_error_message">SCR was unable to create %1$s video file. Make sure that selected output directory is writable and that SD Card is not locked by USB connection.</string>
 

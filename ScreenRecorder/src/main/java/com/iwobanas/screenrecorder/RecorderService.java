@@ -643,6 +643,18 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     @Override
+    public void videoCodecError(final RecordingInfo recordingInfo) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String message = String.format(getString(R.string.video_codec_error_message),recordingInfo.exitValue);
+                displayErrorMessage(message, getString(R.string.video_codec_error_title), false, true, recordingInfo.exitValue);
+            }
+        });
+        EasyTracker.getTracker().sendEvent(ERROR, STARTUP_ERROR, ERROR_ +recordingInfo.exitValue, null);
+    }
+
+    @Override
     public void recordingError(final RecordingInfo recordingInfo) {
         mHandler.post(new Runnable() {
             @Override

@@ -258,7 +258,7 @@ public class ProjectionThread implements Runnable {
                 Log.e(TAG, "video error", e);
                 setError(501);
                 if (!destroyed)
-                    service.startupError(recordingInfo);
+                    service.videoCodecError(recordingInfo);
                 return;
             }
 
