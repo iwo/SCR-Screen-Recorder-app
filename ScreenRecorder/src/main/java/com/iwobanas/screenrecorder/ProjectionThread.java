@@ -183,7 +183,7 @@ public class ProjectionThread implements Runnable {
                 try {
                     audioRecord.startRecording();
                 } catch (Exception e) {
-                    recordingInfo.exitValue = 506;
+                    setError(506);
                     if (!destroyed)
                         service.microphoneBusyError(recordingInfo);
                     asyncError = true;
@@ -198,7 +198,7 @@ public class ProjectionThread implements Runnable {
                         ByteBuffer inputBuffer = audioEncoder.getInputBuffer(index);
                         if (inputBuffer == null) {
                             if (!stopped) {
-                                recordingInfo.exitValue = 512;
+                                setError(512);
                                 if (!destroyed)
                                     service.recordingError(recordingInfo);
                                 asyncError = true;
@@ -215,7 +215,7 @@ public class ProjectionThread implements Runnable {
                 } catch (Exception e) {
                     if (!stopped) {
                         Log.e(TAG, "Audio error", e);
-                        recordingInfo.exitValue = 511;
+                        setError(511);
                         if (!destroyed)
                             service.recordingError(recordingInfo);
                         asyncError = true;
@@ -256,7 +256,7 @@ public class ProjectionThread implements Runnable {
                 setupVideoCodec();
             } catch (Exception e) {
                 Log.e(TAG, "video error", e);
-                recordingInfo.exitValue = 501;
+                setError(501);
                 if (!destroyed)
                     service.startupError(recordingInfo);
                 return;
@@ -277,7 +277,7 @@ public class ProjectionThread implements Runnable {
                 return;
             } catch (Exception e) {
                 Log.e(TAG, "virtual display error", e);
-                recordingInfo.exitValue = 513;
+                setError(513);
                 if (!destroyed)
                     service.startupError(recordingInfo);
                 return;
@@ -288,7 +288,7 @@ public class ProjectionThread implements Runnable {
                     setupAudioCodec();
                 } catch (Exception e) {
                     Log.e(TAG, "audio error", e);
-                    recordingInfo.exitValue = 505;
+                    setError(505);
                     if (!destroyed)
                         service.startupError(recordingInfo);
                     return;
@@ -298,7 +298,7 @@ public class ProjectionThread implements Runnable {
                     setupAudioRecord();
                 } catch (Exception e) {
                     Log.e(TAG, "AudioRecord error", e);
-                    recordingInfo.exitValue = 507;
+                    setError(507);
                     if (!destroyed)
                         service.audioConfigError(recordingInfo);
                     return;
@@ -310,7 +310,7 @@ public class ProjectionThread implements Runnable {
                         MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
             } catch (Exception e) {
                 Log.e(TAG, "Muxer error", e);
-                recordingInfo.exitValue = 201;
+                setError(201);
                 if (!destroyed)
                     service.outputFileError(recordingInfo);
                 return;
@@ -328,11 +328,12 @@ public class ProjectionThread implements Runnable {
 
                 if (hasAudio) {
                     encoderStatus = audioEncoder.dequeueOutputBuffer(bufferInfo, 0);
+                    //noinspection StatementWithEmptyBody
                     if (encoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER) {
                         // no input frames... continue to video
                     } else if (encoderStatus == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
                         if (muxerStarted) {
-                            recordingInfo.exitValue = 508;
+                            setError(508);
                             break;
                         }
                         audioTrackIndex = muxer.addTrack(audioEncoder.getOutputFormat());
@@ -343,7 +344,7 @@ public class ProjectionThread implements Runnable {
                         // Normal flow: get output encoded buffer, send to muxer.
                         ByteBuffer encodedData = audioEncoder.getOutputBuffer(encoderStatus);
                         if (encodedData == null) {
-                            recordingInfo.exitValue = 509;
+                            setError(509);
                             break;
                         }
 
@@ -358,18 +359,19 @@ public class ProjectionThread implements Runnable {
                         audioEncoder.releaseOutputBuffer(encoderStatus, false);
 
                         if ((bufferInfo.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
-                            recordingInfo.exitValue = 510;
+                            setError(510);
                             break;
                         }
                     }
                 }
 
                 encoderStatus = videoEncoder.dequeueOutputBuffer(bufferInfo, 20000);
+                //noinspection StatementWithEmptyBody
                 if (encoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER) {
                     // no input frames... wait
                 } else if (encoderStatus == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
                     if (muxerStarted) {
-                        recordingInfo.exitValue = 502;
+                        setError(502);
                         break;
                     }
                     videoTrackIndex = muxer.addTrack(videoEncoder.getOutputFormat());
@@ -380,7 +382,7 @@ public class ProjectionThread implements Runnable {
                     // Normal flow: get output encoded buffer, send to muxer.
                     ByteBuffer encodedData = videoEncoder.getOutputBuffer(encoderStatus);
                     if (encodedData == null) {
-                        recordingInfo.exitValue = 503;
+                        setError(503);
                         break;
                     }
 
@@ -396,14 +398,14 @@ public class ProjectionThread implements Runnable {
                     videoEncoder.releaseOutputBuffer(encoderStatus, false);
 
                     if ((bufferInfo.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
-                        recordingInfo.exitValue = 503;
+                        setError(503);
                         break;
                     }
                 }
             }
         } catch (Throwable throwable) {
             Log.e(TAG, "Recording error", throwable);
-            recordingInfo.exitValue = 504;
+            setError(504);
         } finally {
             if (muxer != null) {
                 try {
@@ -484,6 +486,12 @@ public class ProjectionThread implements Runnable {
     public void destroy() {
         stopRecording();
         destroyed = true;
+    }
+
+    private void setError(int errorCode) {
+        if (recordingInfo != null && recordingInfo.exitValue == -1) {
+            recordingInfo.exitValue = errorCode;
+        }
     }
 
     public Orientation getOrientation() {
