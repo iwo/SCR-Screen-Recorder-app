@@ -392,8 +392,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public void scanOutputAndNotify(int toastId) {
         String message = String.format(getString(toastId), outputFile.getName());
         Toast.makeText(RecorderService.this, message, Toast.LENGTH_LONG).show();
-        scanFile(outputFile);
-        notificationSaved();
+        notificationSaved(scanFile(outputFile));
     }
 
     private void logStats(RecordingInfo recordingInfo) {
@@ -407,7 +406,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
     }
 
-    private void scanFile(File file) {
+    private Uri scanFile(File file) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.Video.Media.TITLE, file.getName());
         contentValues.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4");
@@ -417,13 +416,14 @@ public class RecorderService extends Service implements IRecorderService, Licens
         contentValues.put(MediaStore.Video.Media.DATE_MODIFIED, mRecordingStartTime / 1000);
 
         try {
-            getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
+            return getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
         } catch (Exception e) {
             Log.e(TAG, "Error inserting video content values", e);
+            return Uri.fromFile(file);
         }
     }
 
-    private void notificationSaved() {
+    private void notificationSaved(Uri uri) {
         String message = String.format(getString(R.string.recording_saved_message), outputFile.getName());
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
@@ -433,9 +433,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         Intent playIntent = new Intent(this, RecorderService.class);
         playIntent.setAction(PLAY_ACTION);
-        playIntent.setData(Uri.fromFile(outputFile));
+        playIntent.setData(uri);
         mBuilder.setContentIntent(PendingIntent.getService(this, 0, playIntent, PendingIntent.FLAG_ONE_SHOT));
         mBuilder.setAutoCancel(true);
+        mBuilder.addAction(R.drawable.ic_menu_share, getString(R.string.notification_action_share), getSharePendingIntent(uri));
 
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -447,6 +448,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
             // could be fixed by adding <uses-permission android:name="android.permission.WAKE_LOCK" />
             Log.w(TAG, "Couldn't display notification", e);
         }
+    }
+
+    private PendingIntent getSharePendingIntent(Uri uri) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("video/*");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        Intent chooserIntent = Intent.createChooser(shareIntent, null);
+        chooserIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        return PendingIntent.getActivity(this, 0, chooserIntent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
     private void displayStopHelp() {

@@ -287,4 +287,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="lollipop_dialog_message">Would you like to test my new no-root screen recorder app? It utilizes official Android 5.0 screen capture API and native hardware video encoders.</string>
     <string name="lollipop_dialog_try_now">Try now</string>
 
+    <string name="notification_action_share">Share</string>
+
 </resources>
