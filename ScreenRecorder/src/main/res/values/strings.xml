@@ -293,4 +293,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="projection_deny_error_message">You need to tap START NOW for recording to work.</string>
     <string name="projection_deny_error_title">Can\'t access screen</string>
 
+    <string name="notification_action_share">Share</string>
+
 </resources>
