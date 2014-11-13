@@ -434,8 +434,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         Intent playIntent = new Intent(this, RecorderService.class);
         playIntent.setAction(PLAY_ACTION);
         playIntent.setData(uri);
-        mBuilder.setContentIntent(PendingIntent.getService(this, 0, playIntent, PendingIntent.FLAG_ONE_SHOT));
-        mBuilder.setAutoCancel(true);
+        mBuilder.setContentIntent(PendingIntent.getService(this, 0, playIntent, PendingIntent.FLAG_CANCEL_CURRENT));
         mBuilder.addAction(R.drawable.ic_menu_share, getString(R.string.notification_action_share), getSharePendingIntent(uri));
 
         NotificationManager mNotificationManager =
