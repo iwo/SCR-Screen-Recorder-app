@@ -321,6 +321,7 @@ public class ProjectionThread implements Runnable {
             }
 
             MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
+            long lastAudioTimestampUs = -1;
 
             while (!stopped && !asyncError) {
 
@@ -348,11 +349,9 @@ public class ProjectionThread implements Runnable {
                             break;
                         }
 
-                        if (bufferInfo.size != 0 && (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == 0) {
-                            if (!muxerStarted) {
-                                throw new RuntimeException("muxer hasn't started");
-                            }
-
+                        if (bufferInfo.presentationTimeUs > lastAudioTimestampUs
+                                && muxerStarted && bufferInfo.size != 0 && (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == 0) {
+                            lastAudioTimestampUs = bufferInfo.presentationTimeUs;
                             muxer.writeSampleData(audioTrackIndex, encodedData, bufferInfo);
                         }
 
@@ -386,11 +385,7 @@ public class ProjectionThread implements Runnable {
                         break;
                     }
 
-                    if (bufferInfo.size != 0 && (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == 0) {
-                        if (!muxerStarted) {
-                            throw new RuntimeException("muxer hasn't started");
-                        }
-
+                    if (muxerStarted && bufferInfo.size != 0 && (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == 0) {
                         bufferInfo.presentationTimeUs = getPresentationTimeUs();
                         muxer.writeSampleData(videoTrackIndex, encodedData, bufferInfo);
                     }
