@@ -97,6 +97,8 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             layoutParams.setTitle(getContext().getString(R.string.app_name));
             layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            if (!RecorderService.root)
+                layoutParams.y = -200; // offset so that overlay doesn't cover permission dialog
             layoutParams.gravity = Gravity.CENTER;
             positionPersister = new OverlayPositionPersister(getContext(), RECORDER_OVERLAY, layoutParams);
         }

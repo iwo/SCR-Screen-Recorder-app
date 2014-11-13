@@ -29,6 +29,7 @@ public class ProjectionThreadRunner {
     };
     private String fileName;
     private Handler handler;
+    private boolean started;
 
     public ProjectionThreadRunner(Context context, IRecorderService service) {
         this.context = context;
@@ -44,23 +45,34 @@ public class ProjectionThreadRunner {
         if (mediaProjection != null) {
             //disable callback as it doesn't work anyways
             //mediaProjection.registerCallback(mediaProjectionCallback, handler);
-            currentThread = new ProjectionThread(mediaProjection, context, service);
-            currentThread.startRecording(new File(fileName));
+            if (started) {
+                start(fileName);
+            } else {
+                service.setReady();
+            }
+        }
+    }
+
+    public void initialize() {
+        started = false;
+        if (mediaProjection == null) {
+            requestMediaProjection();
+        } else {
+            service.setReady();
         }
     }
 
     public void start(String fileName) {
         Log.i(TAG, "start deviceId: " + service.getDeviceId());
         this.fileName = fileName;
+        started = true;
 
         if (currentThread != null) {
             currentThread.destroy();
         }
 
         if (mediaProjection == null) {
-            Intent intent = new Intent(context, MediaProjectionActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            requestMediaProjection();
             return;
         }
         currentThread = new ProjectionThread(mediaProjection, context, service);
@@ -68,6 +80,7 @@ public class ProjectionThreadRunner {
     }
 
     public void stop() {
+        started = false;
         if (currentThread == null) {
             Log.e(TAG, "No active thread to stop!");
             return;
@@ -77,13 +90,21 @@ public class ProjectionThreadRunner {
 
     public void destroy() {
         Log.d(TAG, "destroy()");
+        started = false;
         if (currentThread != null) {
             currentThread.destroy();
-        } else if (mediaProjection != null) {
+        }
+        if (mediaProjection != null) {
             try {
                 mediaProjection.stop();
             } catch (Exception ignore) {
             }
         }
+    }
+
+    private void requestMediaProjection() {
+        Intent intent = new Intent(context, MediaProjectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }

@@ -217,7 +217,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (cantStartToast != null) {
             cantStartToast.cancel();
         }
-        if (state != RecorderServiceState.READY) {
+        if (!root && state == RecorderServiceState.INITIALIZING) {
+            projectionThreadRunner.initialize(); // request initialization again
+            startRecordingWhenReady();
+            return;
+        } else if (state != RecorderServiceState.READY) {
             cantStartToast = Toast.makeText(this, getString(R.string.can_not_start_toast, getStatusString()), Toast.LENGTH_SHORT);
             cantStartToast.show();
             return;
@@ -352,20 +356,16 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public synchronized void setReady() {
-        if (root) {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    checkReady();
-                }
-            });
-        } else {
-            setState(RecorderServiceState.READY);
-        }
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                checkReady();
+            }
+        });
     }
 
     private void checkReady() {
-        if (mNativeProcessRunner.isReady() && audioDriver.isReady()) {
+        if (!root || (mNativeProcessRunner.isReady() && audioDriver.isReady())) {
             setState(RecorderServiceState.READY);
             if (startOnReady) {
                 startOnReady = false;
@@ -407,13 +407,14 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mTimeController.reset();
         mScreenOffReceiver.unregister();
 
+        if (!root || state != RecorderServiceState.INSTALLING) {
+            setState(RecorderServiceState.INITIALIZING);
+        }
+
         if (root) {
-            if (state != RecorderServiceState.INSTALLING) {
-                setState(RecorderServiceState.INITIALIZING);
-            }
             mNativeProcessRunner.initialize();
         } else {
-            setState(RecorderServiceState.READY);
+            projectionThreadRunner.initialize();
         }
     }
 
@@ -539,7 +540,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private CharSequence getStatusString() {
         switch (state) {
             case INITIALIZING:
-                return getString(R.string.notification_status_initializing);
+                return root ? getString(R.string.notification_status_initializing) : getString(R.string.notification_status_initializing_no_root);
             case INSTALLING:
                 return getString(R.string.notification_status_installing);
             case INSTALLING_AUDIO:
@@ -870,6 +871,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             Intent data = intent.getParcelableExtra(PROJECTION_DATA_EXTRA);
             projectionThreadRunner.setProjectionData(data);
         } else if (PROJECTION_DENY_ACTION.equals(action)) {
+            startOnReady = false;
             denyProjectionError();
         } else if (TIMEOUT_DIALOG_CLOSED_ACTION.equals(action)) {
             isTimeoutDisplayed = false;
