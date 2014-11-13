@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Orientation;
 import com.iwobanas.screenrecorder.settings.Resolution;
@@ -70,13 +71,19 @@ public class ProjectionThread implements Runnable {
         @Override
         public void onPaused() {
             super.onPaused();
-            stopRecording();
+            if (!stopped) {
+                setError(515);
+                asyncError = true;
+            }
         }
 
         @Override
         public void onStopped() {
             super.onStopped();
-            stopRecording();
+            if (!stopped) {
+                setError(514);
+                asyncError = true;
+            }
         }
     };
 
@@ -187,6 +194,7 @@ public class ProjectionThread implements Runnable {
                     if (!destroyed)
                         service.microphoneBusyError(recordingInfo);
                     asyncError = true;
+                    EasyTracker.getTracker().sendException("projection", e, false);
                     return;
                 }
                 try {
@@ -219,6 +227,7 @@ public class ProjectionThread implements Runnable {
                         if (!destroyed)
                             service.recordingError(recordingInfo);
                         asyncError = true;
+                        EasyTracker.getTracker().sendException("projection", e, false);
                     }
                 } finally {
                     audioRecord.stop();
@@ -250,6 +259,8 @@ public class ProjectionThread implements Runnable {
     @Override
     public void run() {
 
+        int errorCodeHack = 504;
+
         try {
 
             try {
@@ -259,6 +270,7 @@ public class ProjectionThread implements Runnable {
                 setError(501);
                 if (!destroyed)
                     service.videoCodecError(recordingInfo);
+                EasyTracker.getTracker().sendException("projection", e, false);
                 return;
             }
 
@@ -274,12 +286,14 @@ public class ProjectionThread implements Runnable {
                 Intent intent = new Intent(context, MediaProjectionActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+                EasyTracker.getTracker().sendException("projection", e, false);
                 return;
             } catch (Exception e) {
                 Log.e(TAG, "virtual display error", e);
                 setError(513);
                 if (!destroyed)
                     service.startupError(recordingInfo);
+                EasyTracker.getTracker().sendException("projection", e, false);
                 return;
             }
 
@@ -291,6 +305,7 @@ public class ProjectionThread implements Runnable {
                     setError(505);
                     if (!destroyed)
                         service.startupError(recordingInfo);
+                    EasyTracker.getTracker().sendException("projection", e, false);
                     return;
                 }
 
@@ -301,6 +316,7 @@ public class ProjectionThread implements Runnable {
                     setError(507);
                     if (!destroyed)
                         service.audioConfigError(recordingInfo);
+                    EasyTracker.getTracker().sendException("projection", e, false);
                     return;
                 }
             }
@@ -313,6 +329,7 @@ public class ProjectionThread implements Runnable {
                 setError(201);
                 if (!destroyed)
                     service.outputFileError(recordingInfo);
+                EasyTracker.getTracker().sendException("projection", e, false);
                 return;
             }
 
@@ -326,23 +343,28 @@ public class ProjectionThread implements Runnable {
             while (!stopped && !asyncError) {
 
                 int encoderStatus;
+                errorCodeHack = 504;
 
                 if (hasAudio) {
+                    errorCodeHack = 516;
                     encoderStatus = audioEncoder.dequeueOutputBuffer(bufferInfo, 0);
                     //noinspection StatementWithEmptyBody
                     if (encoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER) {
                         // no input frames... continue to video
                     } else if (encoderStatus == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
-                        if (muxerStarted) {
+                        if (audioTrackIndex > 0) {
                             setError(508);
                             break;
                         }
+                        errorCodeHack = 517;
                         audioTrackIndex = muxer.addTrack(audioEncoder.getOutputFormat());
+                        errorCodeHack = 518;
                         startMuxerIfSetUp();
                     } else if (encoderStatus < 0) {
                         Log.w(TAG, "unexpected result from audio encoder.dequeueOutputBuffer: " + encoderStatus);
                     } else {
-                        // Normal flow: get output encoded buffer, send to muxer.
+
+                        errorCodeHack = 519;
                         ByteBuffer encodedData = audioEncoder.getOutputBuffer(encoderStatus);
                         if (encodedData == null) {
                             setError(509);
@@ -352,9 +374,11 @@ public class ProjectionThread implements Runnable {
                         if (bufferInfo.presentationTimeUs > lastAudioTimestampUs
                                 && muxerStarted && bufferInfo.size != 0 && (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == 0) {
                             lastAudioTimestampUs = bufferInfo.presentationTimeUs;
+                            errorCodeHack = 520;
                             muxer.writeSampleData(audioTrackIndex, encodedData, bufferInfo);
                         }
 
+                        errorCodeHack = 521;
                         audioEncoder.releaseOutputBuffer(encoderStatus, false);
 
                         if ((bufferInfo.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
@@ -364,32 +388,45 @@ public class ProjectionThread implements Runnable {
                     }
                 }
 
-                encoderStatus = videoEncoder.dequeueOutputBuffer(bufferInfo, 20000);
+                if (hasAudio && videoTrackIndex >= 0 && audioTrackIndex < 0)
+                    continue; // wait for audio config before processing any video data frames
+
+                errorCodeHack = 522;
+                encoderStatus = videoEncoder.dequeueOutputBuffer(bufferInfo, 10000);
                 //noinspection StatementWithEmptyBody
                 if (encoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER) {
-                    // no input frames... wait
+                    // no input frames... go back to audio
                 } else if (encoderStatus == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
-                    if (muxerStarted) {
+                    if (videoTrackIndex > 0) {
                         setError(502);
                         break;
                     }
+                    errorCodeHack = 523;
                     videoTrackIndex = muxer.addTrack(videoEncoder.getOutputFormat());
+                    errorCodeHack = 524;
                     startMuxerIfSetUp();
                 } else if (encoderStatus < 0) {
                     Log.w(TAG, "unexpected result from encoder.dequeueOutputBuffer: " + encoderStatus);
                 } else {
-                    // Normal flow: get output encoded buffer, send to muxer.
+
+                    errorCodeHack = 525;
                     ByteBuffer encodedData = videoEncoder.getOutputBuffer(encoderStatus);
                     if (encodedData == null) {
                         setError(503);
                         break;
                     }
 
-                    if (muxerStarted && bufferInfo.size != 0 && (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == 0) {
+                    if (bufferInfo.size != 0 && (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == 0) {
+                        //Bundle params = new Bundle(1);
+                        //params.putInt(MediaCodec.PARAMETER_KEY_REQUEST_SYNC_FRAME, 0);
+                        //videoEncoder.setParameters(params);
                         bufferInfo.presentationTimeUs = getPresentationTimeUs();
+                        //Log.v(TAG, "video " + bufferInfo.presentationTimeUs / 1000 + " " + bufferInfo.size + "    " + (bufferInfo.flags & MediaCodec.BUFFER_FLAG_KEY_FRAME));
+                        errorCodeHack = 526;
                         muxer.writeSampleData(videoTrackIndex, encodedData, bufferInfo);
                     }
 
+                    errorCodeHack = 527;
                     videoEncoder.releaseOutputBuffer(encoderStatus, false);
 
                     if ((bufferInfo.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
@@ -400,13 +437,15 @@ public class ProjectionThread implements Runnable {
             }
         } catch (Throwable throwable) {
             Log.e(TAG, "Recording error", throwable);
-            setError(504);
+            EasyTracker.getTracker().sendException("projection", throwable, false);
+            setError(errorCodeHack);
         } finally {
             if (muxer != null) {
                 try {
                     muxer.release();
                 } catch (Exception e) {
                     Log.w(TAG, "Error stopping muxer", e);
+                    EasyTracker.getTracker().sendException("projection", e, false);
                 }
                 muxer = null;
             }
@@ -417,6 +456,7 @@ public class ProjectionThread implements Runnable {
                     virtualDisplay.release();
                 } catch (Exception e) {
                     Log.w(TAG, "Error stopping display", e);
+                    EasyTracker.getTracker().sendException("projection", e, false);
                 }
                 virtualDisplay = null;
             }
@@ -425,6 +465,7 @@ public class ProjectionThread implements Runnable {
                     surface.release();
                 } catch (Exception e) {
                     Log.w(TAG, "Error stopping surface", e);
+                    EasyTracker.getTracker().sendException("projection", e, false);
                 }
                 surface = null;
             }
@@ -434,6 +475,7 @@ public class ProjectionThread implements Runnable {
                     videoEncoder.release();
                 } catch (Exception e) {
                     Log.w(TAG, "Error stopping video encoder", e);
+                    EasyTracker.getTracker().sendException("projection", e, false);
                 }
                 videoEncoder = null;
             }
@@ -453,17 +495,18 @@ public class ProjectionThread implements Runnable {
                     audioEncoder.release();
                 } catch (Exception e) {
                     Log.w(TAG, "Error stopping audio encoder", e);
+                    EasyTracker.getTracker().sendException("projection", e, false);
                 }
                 audioEncoder = null;
             }
         }
 
-        if (stopped) {
-            if (!destroyed)
+        if (!destroyed) {
+            if (recordingInfo.exitValue == -1) {
                 service.recordingFinished(recordingInfo);
-        } else {
-            if (!destroyed)
+            } else {
                 service.recordingError(recordingInfo);
+            }
         }
     }
 
@@ -491,6 +534,7 @@ public class ProjectionThread implements Runnable {
             display.getSize(s);
         } catch (Exception e) {
             Log.w(TAG, "Error retrieving screen orientation");
+            EasyTracker.getTracker().sendException("projection", e, false);
             return Orientation.LANDSCAPE;
         }
         return s.x > s.y ? Orientation.LANDSCAPE : Orientation.PORTRAIT;

@@ -652,6 +652,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             public void run() {
                 String message = String.format(getString(R.string.startup_error_message),recordingInfo.exitValue);
                 displayErrorMessage(message, getString(R.string.error_dialog_title), false, true, recordingInfo.exitValue);
+                logStats(recordingInfo);
             }
         });
         EasyTracker.getTracker().sendEvent(ERROR, STARTUP_ERROR, ERROR_ +recordingInfo.exitValue, null);
