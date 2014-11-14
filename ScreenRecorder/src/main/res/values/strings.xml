@@ -55,6 +55,9 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="startup_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error S%1$d.</string>
     <string name="recording_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error R%1$d.</string>
 
+    <string name="selinux_error_title">Root access error</string>
+    <string name="selinux_error_message">There is a problem with SELinux configuration on your device. Make sure your device is properly rooted and switch SELinux to permissive mode if possible.</string>
+
     <string name="media_recorder_error_title">Recorder error</string>
     <string name="media_recorder_error_message">Try changing resolution or switching image transformation between GPU/CPU. Please uninstall other screencast applications if you have any. If the problem persists please get in touch via support email quoting error R%1$d.</string>
 
