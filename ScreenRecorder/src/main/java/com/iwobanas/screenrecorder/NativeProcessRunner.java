@@ -1,6 +1,7 @@
 package com.iwobanas.screenrecorder;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -121,6 +122,11 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         logError(recordingInfo.exitValue);
         switch (recordingInfo.exitValue) {
             case 302: // start timeout
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    service.selinuxError(recordingInfo);
+                    break;
+                }
+                // else fallback to mediaRecorderError()
             case 213: // start() error
             case 227: // MEDIA_RECORDER_EVENT_ERROR
             case 228: // MEDIA_RECORDER_TRACK_EVENT_ERROR - video

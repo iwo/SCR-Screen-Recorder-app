@@ -14,6 +14,7 @@ public interface IRecorderService {
     void installationError();
     void startupError(RecordingInfo recordingInfo);
     void recordingError(RecordingInfo recordingInfo);
+    void selinuxError(RecordingInfo recordingInfo);
     void mediaRecorderError(RecordingInfo recordingInfo);
     void maxFileSizeReached(RecordingInfo recordingInfo);
     void outputFileError(RecordingInfo recordingInfo);

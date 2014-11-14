@@ -637,6 +637,18 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     @Override
+    public void selinuxError(final RecordingInfo recordingInfo) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                displayErrorMessage(getString(R.string.selinux_error_message), getString(R.string.selinux_error_title), true, true, recordingInfo.exitValue);
+                logStats(recordingInfo);
+            }
+        });
+        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + recordingInfo.exitValue, null);
+    }
+
+    @Override
     public void mediaRecorderError(final RecordingInfo recordingInfo) {
         mHandler.post(new Runnable() {
             @Override
