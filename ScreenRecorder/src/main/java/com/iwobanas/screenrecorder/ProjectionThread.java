@@ -1,5 +1,6 @@
 package com.iwobanas.screenrecorder;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -13,6 +14,7 @@ import android.media.MediaFormat;
 import android.media.MediaMuxer;
 import android.media.MediaRecorder;
 import android.media.projection.MediaProjection;
+import android.os.Build;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -29,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class ProjectionThread implements Runnable {
 
     private static final String TAG = "scr_ProjectionThread";
