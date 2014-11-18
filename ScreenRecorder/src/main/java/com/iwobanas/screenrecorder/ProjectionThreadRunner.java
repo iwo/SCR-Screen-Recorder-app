@@ -13,7 +13,7 @@ import android.util.Log;
 import java.io.File;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-public class ProjectionThreadRunner {
+public class ProjectionThreadRunner implements IRecordingProcess {
     private static final String TAG = "scr_PresentationProcessRunner";
 
 
@@ -49,7 +49,7 @@ public class ProjectionThreadRunner {
             //disable callback as it doesn't work anyways
             //mediaProjection.registerCallback(mediaProjectionCallback, handler);
             if (started) {
-                start(fileName);
+                start(fileName, null);
             } else {
                 service.setReady();
             }
@@ -65,7 +65,13 @@ public class ProjectionThreadRunner {
         }
     }
 
-    public void start(String fileName) {
+    @Override
+    public boolean isReady() {
+        return mediaProjection != null;
+    }
+
+    @Override
+    public void start(String fileName, String ignored) {
         Log.i(TAG, "start deviceId: " + service.getDeviceId());
         this.fileName = fileName;
         started = true;

@@ -101,8 +101,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private RecorderOverlay mRecorderOverlay = new RecorderOverlay(this, this);
     private CameraOverlay mCameraOverlay;
     private ScreenOffReceiver mScreenOffReceiver = new ScreenOffReceiver(this, this);
-    private NativeProcessRunner mNativeProcessRunner;
-    private ProjectionThreadRunner projectionThreadRunner;
+    private IRecordingProcess mNativeProcessRunner;
+    private IRecordingProcess projectionThreadRunner;
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
     private RatingController mRatingController;
     private AudioDriver audioDriver;
@@ -190,7 +190,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
             public void run() {
                 if (destroyed) return;
                 setState(RecorderServiceState.INITIALIZING);
-                mNativeProcessRunner.initialize(executable);
+
+                //TODO: move installation to native process
+                ((NativeProcessRunner) mNativeProcessRunner).initialize(executable);
             }
         });
     }
@@ -247,7 +249,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (root) {
             mNativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
         } else {
-            projectionThreadRunner.start(outputFile.getAbsolutePath());
+            projectionThreadRunner.start(outputFile.getAbsolutePath(), getRotation());
         }
         mRecordingStartTime = System.currentTimeMillis();
 
@@ -869,7 +871,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
             startRecording();
         } else if (SET_PROJECTION_ACTION.equals(action)) {
             Intent data = intent.getParcelableExtra(PROJECTION_DATA_EXTRA);
-            projectionThreadRunner.setProjectionData(data);
+            //TODO: decide if it's more elegant to set this data through service or through static field
+            ((ProjectionThreadRunner) projectionThreadRunner).setProjectionData(data);
         } else if (PROJECTION_DENY_ACTION.equals(action)) {
             startOnReady = false;
             denyProjectionError();
