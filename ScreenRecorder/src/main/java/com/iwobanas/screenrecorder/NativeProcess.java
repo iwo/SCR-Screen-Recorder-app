@@ -21,7 +21,7 @@ import java.util.TimerTask;
 
 import static com.iwobanas.screenrecorder.Tracker.*;
 
-class RecorderProcess implements Runnable {
+class NativeProcess implements Runnable {
 
     private static int instancesCount = 0;
 
@@ -37,7 +37,7 @@ class RecorderProcess implements Runnable {
 
     private InputStream stdout;
 
-    private volatile ProcessState state = ProcessState.NEW;
+    private volatile RecordingProcessState state = RecordingProcessState.NEW;
 
     private Context context;
 
@@ -59,7 +59,7 @@ class RecorderProcess implements Runnable {
 
     private Timeout stopTimeout = new Timeout(10000, STOPPING_ERROR, STOP_TIMEOUT, 303);
 
-    public RecorderProcess(Context context, String executable, OnStateChangeListener onStateChangeListener) {
+    public NativeProcess(Context context, String executable, OnStateChangeListener onStateChangeListener) {
         this.context = context;
         this.executable = executable;
         this.onStateChangeListener = onStateChangeListener;
@@ -67,7 +67,7 @@ class RecorderProcess implements Runnable {
 
     @Override
     public void run() {
-        setState(ProcessState.INITIALIZING);
+        setState(RecordingProcessState.INITIALIZING);
         try {
             Log.d(TAG, "Starting native process");
             process = Runtime.getRuntime()
@@ -88,7 +88,7 @@ class RecorderProcess implements Runnable {
                 if (status != null) {
                     checkStatus("ready", status, 304);
 
-                    setState(ProcessState.READY);
+                    setState(RecordingProcessState.READY);
 
                     status = reader.readLine();
                     checkStatus("configured", status, 305);
@@ -101,7 +101,7 @@ class RecorderProcess implements Runnable {
                     checkStatus("recording", status, 306);
                     startTimeout.cancel();
 
-                    setState(ProcessState.RECORDING);
+                    setState(RecordingProcessState.RECORDING);
 
                     status = reader.readLine();
                     parseFps(status);
@@ -137,20 +137,20 @@ class RecorderProcess implements Runnable {
         }
 
         if (destroying && (recordingInfo.exitValue == 200 || recordingInfo.exitValue == 222)) {
-            setState(ProcessState.FINISHED);
+            setState(RecordingProcessState.FINISHED);
         } else if (exitValueOverride != null) {
             if (recordingInfo.exitValue < 165) {
                 recordingInfo.exitValue = exitValueOverride;
             }
             setErrorState();
-        } else if (state == ProcessState.STOPPING) {
+        } else if (state == RecordingProcessState.STOPPING) {
             if (recordingInfo.exitValue == 0) {
                 recordingInfo.exitValue = -1; // use -1 as "success" for backward compatibility
             } else {
                 Log.e(TAG, "Unexpected exit value: " + recordingInfo.exitValue);
                 recordingInfo.exitValue += 1000;
             }
-            setState(ProcessState.FINISHED);
+            setState(RecordingProcessState.FINISHED);
         } else {
             setErrorState();
         }
@@ -159,9 +159,9 @@ class RecorderProcess implements Runnable {
     }
 
     private void setErrorState() {
-        ProcessState previousState = state;
-        setState(ProcessState.ERROR);
-        if (previousState != ProcessState.NEW  && previousState != ProcessState.INITIALIZING
+        RecordingProcessState previousState = state;
+        setState(RecordingProcessState.ERROR);
+        if (previousState != RecordingProcessState.NEW  && previousState != RecordingProcessState.INITIALIZING
                 && mediaServerRelatedError()) {
             killMediaServer();
         }
@@ -229,22 +229,22 @@ class RecorderProcess implements Runnable {
         }
     }
 
-    private void setState(ProcessState state) {
+    private void setState(RecordingProcessState state) {
         Log.d(TAG, "setState " + state);
-        ProcessState previousState = this.state;
+        RecordingProcessState previousState = this.state;
         this.state = state;
         if (!destroying && onStateChangeListener != null) {
             onStateChangeListener.onStateChange(this, state, previousState, recordingInfo);
         }
     }
 
-    public ProcessState getState() {
+    public RecordingProcessState getState() {
         return state;
     }
 
     public void startRecording(String fileName, String rotation) {
         Log.i(TAG, "startRecording " + fileName);
-        if (state != ProcessState.READY) {
+        if (state != RecordingProcessState.READY) {
             Log.e(TAG, "Can't start recording in current state: " + state);
             //TODO: add error handling
             return;
@@ -252,7 +252,7 @@ class RecorderProcess implements Runnable {
         recordingInfo.fileName = fileName;
         recordingInfo.rotation = rotation;
         Settings settings = Settings.getInstance();
-        setState(ProcessState.STARTING);
+        setState(RecordingProcessState.STARTING);
         if (settings.getAudioSource() == AudioSource.INTERNAL
                 && settings.getAudioDriver().getInstallationStatus() == InstallationStatus.INSTALLED) {
             setVolumeGain();
@@ -336,12 +336,12 @@ class RecorderProcess implements Runnable {
 
     public void stopRecording() {
         Log.d(TAG, "stopRecording");
-        if (state != ProcessState.RECORDING) {
+        if (state != RecordingProcessState.RECORDING) {
             Log.e(TAG, "Can't stop recording in current state: " + state);
             //TODO: add error handling
             return;
         }
-        setState(ProcessState.STOPPING);
+        setState(RecordingProcessState.STOPPING);
         runCommand("stop");
         stopTimeout.start();
     }
@@ -361,7 +361,7 @@ class RecorderProcess implements Runnable {
         }
 
         public void start() {
-            synchronized (RecorderProcess.this) {
+            synchronized (NativeProcess.this) {
                 if (timer != null) {
                     Log.e(TAG, "Timeout already started");
                     return;
@@ -383,7 +383,7 @@ class RecorderProcess implements Runnable {
         }
 
         public void cancel() {
-            synchronized (RecorderProcess.this) {
+            synchronized (NativeProcess.this) {
                 if (timer != null) {
                     timer.cancel();
                     timer = null;
@@ -403,11 +403,11 @@ class RecorderProcess implements Runnable {
     }
 
     public boolean isStopped() {
-        return state == ProcessState.FINISHED || state == ProcessState.ERROR;
+        return state == RecordingProcessState.FINISHED || state == RecordingProcessState.ERROR;
     }
 
     public boolean isRecording() {
-        return state == ProcessState.STARTING || state == ProcessState.RECORDING;
+        return state == RecordingProcessState.STARTING || state == RecordingProcessState.RECORDING;
     }
 
     public void destroy() {
@@ -459,18 +459,7 @@ class RecorderProcess implements Runnable {
     }
 
     public static interface OnStateChangeListener {
-        void onStateChange(RecorderProcess target, ProcessState state, ProcessState previousState, RecordingInfo recordingInfo);
-    }
-
-    public static enum ProcessState {
-        NEW,
-        INITIALIZING,
-        READY,
-        STARTING,
-        RECORDING,
-        STOPPING,
-        FINISHED,
-        ERROR
+        void onStateChange(NativeProcess target, RecordingProcessState state, RecordingProcessState previousState, RecordingInfo recordingInfo);
     }
 
     class ErrorStreamReader implements Runnable {

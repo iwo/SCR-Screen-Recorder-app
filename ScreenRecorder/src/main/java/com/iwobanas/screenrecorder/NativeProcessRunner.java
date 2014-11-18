@@ -7,14 +7,14 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 import static com.iwobanas.screenrecorder.Tracker.*;
 
-public class NativeProcessRunner implements RecorderProcess.OnStateChangeListener {
+public class NativeProcessRunner implements NativeProcess.OnStateChangeListener {
     private static final String TAG = "scr_NativeProcessRunner";
 
     IRecorderService service;
 
     Context context;
 
-    RecorderProcess process;
+    NativeProcess process;
 
     private String executable;
 
@@ -38,7 +38,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
         }
 
         if (process == null || process.isStopped()) {
-            process = new RecorderProcess(context, executable, this);
+            process = new NativeProcess(context, executable, this);
             new Thread(process).start();
         } else {
             try {
@@ -55,7 +55,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
     }
 
     public boolean isReady() {
-        return process != null && process.getState() == RecorderProcess.ProcessState.READY;
+        return process != null && process.getState() == RecordingProcessState.READY;
     }
 
     public void destroy() {
@@ -72,7 +72,7 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
     }
 
     @Override
-    public void onStateChange(RecorderProcess target, RecorderProcess.ProcessState state, RecorderProcess.ProcessState previousState, RecordingInfo recordingInfo) {
+    public void onStateChange(NativeProcess target, RecordingProcessState state, RecordingProcessState previousState, RecordingInfo recordingInfo) {
         if (target != process) {
             Log.w(TAG, "received state update from old process");
             return;
@@ -88,10 +88,10 @@ public class NativeProcessRunner implements RecorderProcess.OnStateChangeListene
                 service.recordingFinished(recordingInfo);
                 break;
             case ERROR:
-                if (previousState == RecorderProcess.ProcessState.RECORDING
-                    || previousState == RecorderProcess.ProcessState.STARTING
-                    || previousState == RecorderProcess.ProcessState.STOPPING
-                    || previousState == RecorderProcess.ProcessState.FINISHED) {
+                if (previousState == RecordingProcessState.RECORDING
+                    || previousState == RecordingProcessState.STARTING
+                    || previousState == RecordingProcessState.STOPPING
+                    || previousState == RecordingProcessState.FINISHED) {
                     handleRecordingError(recordingInfo);
                 } else {
                     handleStartupError(recordingInfo);
