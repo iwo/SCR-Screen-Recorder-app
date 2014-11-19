@@ -37,7 +37,7 @@ class NativeProcess implements Runnable {
 
     private InputStream stdout;
 
-    private volatile RecordingProcessState state = RecordingProcessState.NEW;
+    private volatile ProcessState state = ProcessState.NEW;
 
     private Context context;
 
@@ -67,7 +67,7 @@ class NativeProcess implements Runnable {
 
     @Override
     public void run() {
-        setState(RecordingProcessState.INITIALIZING);
+        setState(ProcessState.INITIALIZING);
         try {
             Log.d(TAG, "Starting native process");
             process = Runtime.getRuntime()
@@ -88,7 +88,7 @@ class NativeProcess implements Runnable {
                 if (status != null) {
                     checkStatus("ready", status, 304);
 
-                    setState(RecordingProcessState.READY);
+                    setState(ProcessState.READY);
 
                     status = reader.readLine();
                     checkStatus("configured", status, 305);
@@ -101,7 +101,7 @@ class NativeProcess implements Runnable {
                     checkStatus("recording", status, 306);
                     startTimeout.cancel();
 
-                    setState(RecordingProcessState.RECORDING);
+                    setState(ProcessState.RECORDING);
 
                     status = reader.readLine();
                     parseFps(status);
@@ -137,20 +137,20 @@ class NativeProcess implements Runnable {
         }
 
         if (destroying && (recordingInfo.exitValue == 200 || recordingInfo.exitValue == 222)) {
-            setState(RecordingProcessState.FINISHED);
+            setState(ProcessState.FINISHED);
         } else if (exitValueOverride != null) {
             if (recordingInfo.exitValue < 165) {
                 recordingInfo.exitValue = exitValueOverride;
             }
             setErrorState();
-        } else if (state == RecordingProcessState.STOPPING) {
+        } else if (state == ProcessState.STOPPING) {
             if (recordingInfo.exitValue == 0) {
                 recordingInfo.exitValue = -1; // use -1 as "success" for backward compatibility
             } else {
                 Log.e(TAG, "Unexpected exit value: " + recordingInfo.exitValue);
                 recordingInfo.exitValue += 1000;
             }
-            setState(RecordingProcessState.FINISHED);
+            setState(ProcessState.FINISHED);
         } else {
             setErrorState();
         }
@@ -159,9 +159,9 @@ class NativeProcess implements Runnable {
     }
 
     private void setErrorState() {
-        RecordingProcessState previousState = state;
-        setState(RecordingProcessState.ERROR);
-        if (previousState != RecordingProcessState.NEW  && previousState != RecordingProcessState.INITIALIZING
+        ProcessState previousState = state;
+        setState(ProcessState.ERROR);
+        if (previousState != ProcessState.NEW  && previousState != ProcessState.INITIALIZING
                 && mediaServerRelatedError()) {
             killMediaServer();
         }
@@ -229,22 +229,22 @@ class NativeProcess implements Runnable {
         }
     }
 
-    private void setState(RecordingProcessState state) {
+    private void setState(ProcessState state) {
         Log.d(TAG, "setState " + state);
-        RecordingProcessState previousState = this.state;
+        ProcessState previousState = this.state;
         this.state = state;
         if (!destroying && onStateChangeListener != null) {
             onStateChangeListener.onStateChange(this, state, previousState, recordingInfo);
         }
     }
 
-    public RecordingProcessState getState() {
+    public ProcessState getState() {
         return state;
     }
 
     public void startRecording(String fileName, String rotation) {
         Log.i(TAG, "startRecording " + fileName);
-        if (state != RecordingProcessState.READY) {
+        if (state != ProcessState.READY) {
             Log.e(TAG, "Can't start recording in current state: " + state);
             //TODO: add error handling
             return;
@@ -252,7 +252,7 @@ class NativeProcess implements Runnable {
         recordingInfo.fileName = fileName;
         recordingInfo.rotation = rotation;
         Settings settings = Settings.getInstance();
-        setState(RecordingProcessState.STARTING);
+        setState(ProcessState.STARTING);
         if (settings.getAudioSource() == AudioSource.INTERNAL
                 && settings.getAudioDriver().getInstallationStatus() == InstallationStatus.INSTALLED) {
             setVolumeGain();
@@ -336,12 +336,12 @@ class NativeProcess implements Runnable {
 
     public void stopRecording() {
         Log.d(TAG, "stopRecording");
-        if (state != RecordingProcessState.RECORDING) {
+        if (state != ProcessState.RECORDING) {
             Log.e(TAG, "Can't stop recording in current state: " + state);
             //TODO: add error handling
             return;
         }
-        setState(RecordingProcessState.STOPPING);
+        setState(ProcessState.STOPPING);
         runCommand("stop");
         stopTimeout.start();
     }
@@ -403,11 +403,11 @@ class NativeProcess implements Runnable {
     }
 
     public boolean isStopped() {
-        return state == RecordingProcessState.FINISHED || state == RecordingProcessState.ERROR;
+        return state == ProcessState.FINISHED || state == ProcessState.ERROR;
     }
 
     public boolean isRecording() {
-        return state == RecordingProcessState.STARTING || state == RecordingProcessState.RECORDING;
+        return state == ProcessState.STARTING || state == ProcessState.RECORDING;
     }
 
     public void destroy() {
@@ -459,7 +459,18 @@ class NativeProcess implements Runnable {
     }
 
     public static interface OnStateChangeListener {
-        void onStateChange(NativeProcess target, RecordingProcessState state, RecordingProcessState previousState, RecordingInfo recordingInfo);
+        void onStateChange(NativeProcess target, ProcessState state, ProcessState previousState, RecordingInfo recordingInfo);
+    }
+
+    public static enum ProcessState {
+        NEW,
+        INITIALIZING,
+        READY,
+        STARTING,
+        RECORDING,
+        STOPPING,
+        FINISHED,
+        ERROR
     }
 
     class ErrorStreamReader implements Runnable {

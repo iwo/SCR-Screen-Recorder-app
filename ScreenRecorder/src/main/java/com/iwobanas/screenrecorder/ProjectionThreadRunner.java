@@ -13,11 +13,9 @@ import android.util.Log;
 import java.io.File;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-public class ProjectionThreadRunner implements IRecordingProcess {
+public class ProjectionThreadRunner extends AbstractRecordingProcess implements IRecordingProcess {
     private static final String TAG = "scr_PresentationProcessRunner";
 
-
-    private IRecorderService service;
     private Context context;
     private MediaProjection mediaProjection;
     private ProjectionThread currentThread;
@@ -32,11 +30,9 @@ public class ProjectionThreadRunner implements IRecordingProcess {
     };
     private String fileName;
     private Handler handler;
-    private boolean started;
 
-    public ProjectionThreadRunner(Context context, IRecorderService service) {
+    public ProjectionThreadRunner(Context context) {
         this.context = context;
-        this.service = service;
         handler = new Handler();
     }
 
@@ -48,33 +44,27 @@ public class ProjectionThreadRunner implements IRecordingProcess {
         if (mediaProjection != null) {
             //disable callback as it doesn't work anyways
             //mediaProjection.registerCallback(mediaProjectionCallback, handler);
-            if (started) {
+            if (getState() == RecordingProcessState.STARTING) {
                 start(fileName, null);
             } else {
-                service.setReady();
+                setState(RecordingProcessState.READY, null);
             }
         }
     }
 
     public void initialize() {
-        started = false;
         if (mediaProjection == null) {
             requestMediaProjection();
+            setState(RecordingProcessState.INITIALIZING, null);
         } else {
-            service.setReady();
+            setState(RecordingProcessState.READY, null);
         }
     }
 
     @Override
-    public boolean isReady() {
-        return mediaProjection != null;
-    }
-
-    @Override
     public void start(String fileName, String ignored) {
-        Log.i(TAG, "start deviceId: " + service.getDeviceId());
         this.fileName = fileName;
-        started = true;
+        setState(RecordingProcessState.STARTING, null);
 
         if (currentThread != null) {
             currentThread.destroy();
@@ -84,12 +74,11 @@ public class ProjectionThreadRunner implements IRecordingProcess {
             requestMediaProjection();
             return;
         }
-        currentThread = new ProjectionThread(mediaProjection, context, service);
+        currentThread = new ProjectionThread(mediaProjection, context, this);
         currentThread.startRecording(new File(fileName));
     }
 
     public void stop() {
-        started = false;
         if (currentThread == null) {
             Log.e(TAG, "No active thread to stop!");
             return;
@@ -99,7 +88,7 @@ public class ProjectionThreadRunner implements IRecordingProcess {
 
     public void destroy() {
         Log.d(TAG, "destroy()");
-        started = false;
+        setState(RecordingProcessState.DESTROYED, null);
         if (currentThread != null) {
             currentThread.destroy();
         }

@@ -48,17 +48,14 @@ import static com.iwobanas.screenrecorder.Tracker.AUDIO;
 import static com.iwobanas.screenrecorder.Tracker.BUY;
 import static com.iwobanas.screenrecorder.Tracker.BUY_ERROR;
 import static com.iwobanas.screenrecorder.Tracker.ERROR;
-import static com.iwobanas.screenrecorder.Tracker.ERROR_;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE_ALLOW_;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE_DONT_ALLOW_;
 import static com.iwobanas.screenrecorder.Tracker.LICENSE_ERROR_;
 import static com.iwobanas.screenrecorder.Tracker.RECORDING;
-import static com.iwobanas.screenrecorder.Tracker.RECORDING_ERROR;
 import static com.iwobanas.screenrecorder.Tracker.SETTINGS;
 import static com.iwobanas.screenrecorder.Tracker.SIZE;
 import static com.iwobanas.screenrecorder.Tracker.START;
-import static com.iwobanas.screenrecorder.Tracker.STARTUP_ERROR;
 import static com.iwobanas.screenrecorder.Tracker.STATS;
 import static com.iwobanas.screenrecorder.Tracker.STOP;
 import static com.iwobanas.screenrecorder.Tracker.STOP_DESTROY;
@@ -66,7 +63,7 @@ import static com.iwobanas.screenrecorder.Tracker.STOP_ICON;
 import static com.iwobanas.screenrecorder.Tracker.TIME;
 import static com.iwobanas.screenrecorder.Tracker.TIMEOUT_DIALOG;
 
-public class RecorderService extends Service implements IRecorderService, LicenseCheckerCallback, AudioDriver.OnInstallListener {
+public class RecorderService extends Service implements IRecorderService, LicenseCheckerCallback, AudioDriver.OnInstallListener, IRecordingProcess.RecordingProcessObserver {
 
     public static final String STOP_HELP_DISPLAYED_ACTION = "scr.intent.action.STOP_HELP_DISPLAYED";
     public static final String TIMEOUT_DIALOG_CLOSED_ACTION = "scr.intent.action.TIMEOUT_DIALOG_CLOSED";
@@ -106,6 +103,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private RecordingTimeController mTimeController = new RecordingTimeController(this);
     private RatingController mRatingController;
     private AudioDriver audioDriver;
+    private ErrorDialogHelper errorDialogHelper;
     private Handler mHandler;
     private File outputFile;
     private RecorderServiceState state = RecorderServiceState.INSTALLING;
@@ -133,6 +131,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         root = getResources().getBoolean(R.bool.root);
 
+        errorDialogHelper = new ErrorDialogHelper(this);
+
         if (root && (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT == 20 || Build.VERSION.SDK_INT > 21)) {
             displayErrorMessage(getString(R.string.android_version_error_message), getString(R.string.android_version_error_title), false, false, -1);
         }
@@ -154,10 +154,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
         readPreferences();
 
         if (root) {
-            mNativeProcessRunner = new NativeProcessRunner(this, this);
+            mNativeProcessRunner = new NativeProcessRunner(this);
+            mNativeProcessRunner.addObserver(this);
             installExecutable();
         } else {
-            projectionThreadRunner = new ProjectionThreadRunner(this, this);
+            projectionThreadRunner = new ProjectionThreadRunner(this);
+            projectionThreadRunner.addObserver(this);
         }
 
         mRecorderOverlay.animateShow();
@@ -197,17 +199,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         });
     }
 
-    @Override
-    public void recordingStarted() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                setState(RecorderServiceState.RECORDING);
-            }
-        });
-    }
-
     private void setState(RecorderServiceState state) {
+        if (this.state == state)
+            return;
         this.state = state;
         if (!destroyed) {
             startForeground();
@@ -233,6 +227,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             displayStopHelp();
             return;
         }
+        Log.i(TAG, "start deviceId: " + getDeviceId());
         setState(RecorderServiceState.STARTING);
         mRecorderOverlay.hide();
         mCameraOverlay.setTouchable(false);
@@ -357,13 +352,51 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     @Override
-    public synchronized void setReady() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
+    public void onStateChange(IRecordingProcess process, RecordingProcessState state, RecordingInfo recordingInfo) {
+        switch (state) {
+            case READY:
+                //TODO: handle both native and projection running at the same time
                 checkReady();
+                break;
+            case STARTING:
+                setState(RecorderServiceState.STARTING);
+                break;
+            case RECORDING:
+                setState(RecorderServiceState.RECORDING);
+                break;
+            case STOPPING:
+                setState(RecorderServiceState.STOPPING);
+                break;
+            case FINISHED:
+                recordingFinished(recordingInfo);
+                break;
+            case MAX_FILE_SIZE_REACHED:
+                maxFileSizeReached(recordingInfo);
+                break;
+            case MICROPHONE_BUSY_ERROR:
+                reinitialize(); // reinitialize so that we're ready to start another recording
+                //TODO: make sure that recording saved notification is not displayed in this case
+                break;
+        }
+
+        if (state.isError()) {
+            errorDialogHelper.onStateChange(process, state, recordingInfo);
+            if (recordingInfo != null) {
+                logStats(recordingInfo);
             }
-        });
+            if (mRatingController != null) {
+                mRatingController.resetSuccessCount();
+            }
+            if (state.isCritical()) {
+                stopSelf();
+            } else {
+                closeForError();
+            }
+
+            if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
+                scanOutputAndNotify(R.string.recording_saved_toast);
+            }
+        }
     }
 
     private void checkReady() {
@@ -380,21 +413,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
     }
 
-    @Override
-    public void recordingFinished(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                scanOutputAndNotify(R.string.recording_saved_toast);
-                reportRecordingStats(recordingInfo);
-                reinitializeView();
-                reinitialize();
-                mRatingController.increaseSuccessCount();
-            }
-        });
+    private void recordingFinished(final RecordingInfo recordingInfo) {
+        scanOutputAndNotify(R.string.recording_saved_toast);
+        reportRecordingStats(recordingInfo);
+        reinitializeView();
+        reinitialize();
+        mRatingController.increaseSuccessCount();
     }
 
-    private synchronized void reinitializeView() {
+    private void reinitializeView() {
         if (mTaniosc) {
             mWatermark.hide();
         }
@@ -562,230 +589,33 @@ public class RecorderService extends Service implements IRecorderService, Licens
         return "";
     }
 
-    @Override
-    public void suRequired() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(RecorderService.this, DialogActivity.class);
-                intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.su_required_title));
-
-                Intent suIntent = Utils.findSuIntent(RecorderService.this);
-
-                if (suIntent == null) {
-                    intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.su_required_message));
-                    intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.su_required_help));
-                    Intent helpIntent = new Intent(Intent.ACTION_VIEW);
-                    helpIntent.setData(Uri.parse(getString(R.string.su_required_help_link)));
-                    helpIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, helpIntent);
-                } else {
-                    CharSequence suName = Utils.getAppName(RecorderService.this, suIntent);
-                    if (suName == null) {
-                        suName = getString(R.string.su_default_name);
-                    }
-                    String message = getString(R.string.su_denied_message, suName, getString(R.string.app_name));
-                    intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
-                    intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, suIntent);
-                    intent.putExtra(DialogActivity.POSITIVE_EXTRA, suName);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                }
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                stopSelf();
-            }
-        });
-    }
-
-    @Override
-    public void cpuNotSupportedError() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                String message = String.format(getString(R.string.cpu_error_message), Build.CPU_ABI, getString(R.string.app_name));
-                displayErrorMessage(message, getString(R.string.cpu_error_title), false, false, -1);
-            }
-        });
-    }
-
-    @Override
-    public void installationError() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                String message = String.format(getString(R.string.installation_error_message), getString(R.string.app_name));
-                displayErrorMessage(message, getString(R.string.installation_error_title), false, false, -1);
-            }
-        });
-    }
-
-    //TODO: review when service should really be restarted
 
     private void displayErrorMessage(final String message, final String title, final boolean restart, boolean report, int errorCode) {
-        Intent intent = new Intent(RecorderService.this, DialogActivity.class);
-        intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
-        intent.putExtra(DialogActivity.TITLE_EXTRA, title);
-        intent.putExtra(DialogActivity.RESTART_EXTRA, restart);
-        intent.putExtra(DialogActivity.RESTART_ACTION_EXTRA, ERROR_DIALOG_CLOSED_ACTION);
-        intent.putExtra(DialogActivity.REPORT_BUG_EXTRA, report);
-        intent.putExtra(DialogActivity.REPORT_BUG_ERROR_EXTRA, errorCode);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        Log.w(TAG, "displayErrorMessage: " + message);
+        errorDialogHelper.showError(message, title, restart, report, errorCode);
         if (mRatingController != null) {
             mRatingController.resetSuccessCount();
         }
-
         if (restart) {
-            mWatermark.hide();
-            mRecorderOverlay.hide();
-            Settings.getInstance().restoreShowTouches();
-            mTimeController.reset();
-            mScreenOffReceiver.unregister();
+            closeForError();
         } else {
             stopSelf();
         }
     }
 
-    @Override
-    public void startupError(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                String message = String.format(getString(R.string.startup_error_message),recordingInfo.exitValue);
-                displayErrorMessage(message, getString(R.string.error_dialog_title), false, true, recordingInfo.exitValue);
-                logStats(recordingInfo);
-            }
-        });
-        EasyTracker.getTracker().sendEvent(ERROR, STARTUP_ERROR, ERROR_ +recordingInfo.exitValue, null);
+    private void closeForError() {
+        mWatermark.hide();
+        mRecorderOverlay.hide();
+        Settings.getInstance().restoreShowTouches();
+        mTimeController.reset();
+        mScreenOffReceiver.unregister();
     }
 
-    @Override
-    public void videoCodecError(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                String message = String.format(getString(R.string.video_codec_error_message),recordingInfo.exitValue);
-                displayErrorMessage(message, getString(R.string.video_codec_error_title), false, true, recordingInfo.exitValue);
-            }
-        });
-        EasyTracker.getTracker().sendEvent(ERROR, STARTUP_ERROR, ERROR_ +recordingInfo.exitValue, null);
-    }
-
-    @Override
-    public void recordingError(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                String message = String.format(getString(R.string.recording_error_message),recordingInfo.exitValue);
-                displayErrorMessage(message, getString(R.string.error_dialog_title), true, true,recordingInfo.exitValue);
-                if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
-                    scanOutputAndNotify(R.string.recording_saved_toast);
-                }
-                logStats(recordingInfo);
-            }
-        });
-        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + recordingInfo.exitValue, null);
-    }
-
-    @Override
-    public void mediaRecorderError(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                String message = String.format(getString(R.string.media_recorder_error_message),recordingInfo.exitValue);
-                displayErrorMessage(message, getString(R.string.media_recorder_error_title), true, true,recordingInfo.exitValue);
-                if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
-                    scanOutputAndNotify(R.string.recording_saved_toast);
-                }
-                logStats(recordingInfo);
-            }
-        });
-        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + recordingInfo.exitValue, null);
-    }
-
-    @Override
-    public void maxFileSizeReached(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                scanOutputAndNotify(R.string.max_file_size_reached_toast);
-                reportRecordingStats(recordingInfo);
-                reinitializeView();
-                mRatingController.increaseSuccessCount();
-                reinitialize();
-            }
-        });
-    }
-
-    @Override
-    public void outputFileError(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                String message = String.format(getString(R.string.output_file_error_message), outputFile);
-                displayErrorMessage(message, getString(R.string.output_file_error_title), true, false, recordingInfo.exitValue);
-                logStats(recordingInfo);
-            }
-        });
-        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ +recordingInfo.exitValue, null);
-    }
-
-    @Override
-    public void microphoneBusyError(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(RecorderService.this, DialogActivity.class);
-                intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.microphone_busy_error_message));
-                intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.microphone_busy_error_title));
-                intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.microphone_busy_error_continue_mute));
-                intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.settings_cancel));
-                intent.putExtra(DialogActivity.RESTART_EXTRA, true);
-                intent.putExtra(DialogActivity.RESTART_ACTION_EXTRA, RESTART_MUTE_ACTION);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                logStats(recordingInfo);
-                reinitialize();
-            }
-        });
-        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + recordingInfo.exitValue, null);
-    }
-
-    @Override
-    public void openGlError(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                displayErrorMessage(getString(R.string.opengl_error_message), getString(R.string.opengl_error_title), true, true,recordingInfo.exitValue);
-                logStats(recordingInfo);
-            }
-        });
-        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ +recordingInfo.exitValue, null);
-    }
-
-    @Override
-    public void secureSurfaceError(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                displayErrorMessage(getString(R.string.screen_protected_error_message), getString(R.string.screen_protected_error_title), true, false, recordingInfo.exitValue);
-                logStats(recordingInfo);
-            }
-        });
-        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ +recordingInfo.exitValue, null);
-    }
-
-    @Override
-    public void audioConfigError(final RecordingInfo recordingInfo) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                displayErrorMessage(getString(R.string.audio_config_error_message), getString(R.string.audio_config_error_title), true, false,recordingInfo.exitValue);
-                logStats(recordingInfo);
-            }
-        });
-        EasyTracker.getTracker().sendEvent(ERROR, RECORDING_ERROR, ERROR_ + recordingInfo.exitValue, null);
+    private void maxFileSizeReached(final RecordingInfo recordingInfo) {
+        scanOutputAndNotify(R.string.max_file_size_reached_toast);
+        reportRecordingStats(recordingInfo);
+        reinitializeView();
+        mRatingController.increaseSuccessCount();
+        reinitialize();
     }
 
     @Override
@@ -823,8 +653,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         });
     }
 
-    @Override
-    public String getDeviceId() {
+    private String getDeviceId() {
         return Secure.getString(getContentResolver(), Secure.ANDROID_ID);
     }
 

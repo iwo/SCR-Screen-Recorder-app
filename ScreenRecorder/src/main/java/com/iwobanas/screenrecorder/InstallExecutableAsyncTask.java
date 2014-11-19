@@ -32,7 +32,9 @@ public class InstallExecutableAsyncTask extends AsyncTask<Void, Void, Boolean> {
             } else if (Utils.isX86()) {
                 Utils.extractResource(context, R.raw.screenrec_x86, executable);
             } else {
-                service.cpuNotSupportedError();
+
+                //TODO: move installation to native process and handle errors
+                //service.cpuNotSupportedError();
                 return false;
             }
 
@@ -42,7 +44,7 @@ public class InstallExecutableAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
         } catch (IOException e) {
             Log.e(TAG, "Can't install native executable", e);
-            service.installationError();
+            //service.installationError();
             EasyTracker.getTracker().sendEvent(ERROR, INSTALLATION_ERROR, INSTALLATION_ERROR, null);
             EasyTracker.getTracker().sendException(Thread.currentThread().getName(), e, false);
             return false;
