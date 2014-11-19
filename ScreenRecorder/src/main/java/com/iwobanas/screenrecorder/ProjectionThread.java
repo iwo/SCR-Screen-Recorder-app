@@ -135,6 +135,11 @@ public class ProjectionThread implements Runnable {
         frameRate = s.getFrameRate();
 
         hasAudio = s.getAudioSource() != AudioSource.MUTE;
+        if (s.getTemporaryMute()) {
+            Log.v(TAG, "Audio muted for this recording");
+            hasAudio = false;
+            s.setTemporaryMute(false);
+        }
         sampleRate = s.getSamplingRate().getSamplingRate();
 
         new Thread(this).start();
@@ -214,7 +219,15 @@ public class ProjectionThread implements Runnable {
                         }
                         inputBuffer.clear();
                         int read = audioRecord.read(inputBuffer, inputBuffer.capacity());
-                        if (read == AudioRecord.ERROR_INVALID_OPERATION) {
+                        if (read < 0) {
+                            if (!stopped) {
+                                if (read == AudioRecord.ERROR_INVALID_OPERATION) {
+                                    setError(RecordingProcessState.MICROPHONE_BUSY_ERROR, 528);
+                                } else {
+                                    setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, 529);
+                                }
+                                asyncError = true;
+                            }
                             break;
                         }
                         audioEncoder.queueInputBuffer(index, 0, read, getPresentationTimeUs(), 0);
