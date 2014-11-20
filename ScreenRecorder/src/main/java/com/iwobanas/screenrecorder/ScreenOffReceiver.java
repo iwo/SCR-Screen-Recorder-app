@@ -10,39 +10,39 @@ import static com.iwobanas.screenrecorder.Tracker.*;
 
 public class ScreenOffReceiver extends android.content.BroadcastReceiver {
 
-    private IRecorderService mService;
+    private IRecorderService service;
 
-    private Context mContext;
+    private Context context;
 
-    private boolean mIsRegistered;
+    private boolean isRegistered;
 
     public ScreenOffReceiver(IRecorderService service, Context context) {
-        mService = service;
-        mContext = context;
+        this.service = service;
+        this.context = context;
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        mService.stopRecording();
+        service.stopRecording();
         EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_SCREEN, null);
     }
 
 
     public void register() {
-        if (mIsRegistered) {
+        if (isRegistered) {
             return;
         }
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
-        mContext.registerReceiver(this, intentFilter);
-        mIsRegistered = true;
+        context.registerReceiver(this, intentFilter);
+        isRegistered = true;
     }
 
     public void unregister() {
-        if (!mIsRegistered) {
+        if (!isRegistered) {
             return;
         }
-        mContext.unregisterReceiver(this);
-        mIsRegistered = false;
+        context.unregisterReceiver(this);
+        isRegistered = false;
     }
 
 }
