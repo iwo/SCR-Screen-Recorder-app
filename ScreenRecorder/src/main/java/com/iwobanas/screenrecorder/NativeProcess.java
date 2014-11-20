@@ -68,6 +68,12 @@ class NativeProcess implements Runnable {
     @Override
     public void run() {
         setState(ProcessState.INITIALIZING);
+
+        installExecutable();
+        if (state != ProcessState.INITIALIZING) {
+            return;
+        }
+
         try {
             Log.d(TAG, "Starting native process");
             process = Runtime.getRuntime()
@@ -156,6 +162,30 @@ class NativeProcess implements Runnable {
         }
 
         Log.d(TAG, "Return value: " + recordingInfo.exitValue);
+    }
+
+    private void installExecutable() {
+        File file = new File(context.getFilesDir(), "screenrec");
+        try {
+            if (Utils.isArm()) {
+                Utils.extractResource(context, R.raw.screenrec, file);
+            } else if (Utils.isX86()) {
+                Utils.extractResource(context, R.raw.screenrec_x86, file);
+            } else {
+                setState(ProcessState.CPU_NOT_SUPPORTED_ERROR);
+                return;
+            }
+
+            if (!file.setExecutable(true, false)) {
+                Log.w(TAG, "Can't set executable property on " + file.getAbsolutePath());
+            }
+
+        } catch (IOException e) {
+            Log.e(TAG, "Can't install native executable", e);
+            setState(ProcessState.INSTALLATION_ERROR);
+            EasyTracker.getTracker().sendEvent(ERROR, INSTALLATION_ERROR, INSTALLATION_ERROR, null);
+            EasyTracker.getTracker().sendException(Thread.currentThread().getName(), e, false);
+        }
     }
 
     private void setErrorState() {
@@ -300,7 +330,9 @@ class NativeProcess implements Runnable {
             FileWriter fileWriter = new FileWriter(configFile);
             fileWriter.write(String.valueOf(gain) + " 0\n");
             fileWriter.close();
-            configFile.setReadable(true, false);
+            if (!configFile.setReadable(true, false)) {
+                Log.w(TAG, "Error setting read permission on " + configFile.getAbsolutePath());
+            }
         } catch (Exception e) {
             Log.w(TAG, "Error setting audio gain", e);
         }
@@ -470,6 +502,8 @@ class NativeProcess implements Runnable {
         RECORDING,
         STOPPING,
         FINISHED,
+        CPU_NOT_SUPPORTED_ERROR,
+        INSTALLATION_ERROR,
         ERROR
     }
 

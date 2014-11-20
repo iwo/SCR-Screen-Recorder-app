@@ -243,7 +243,6 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="menu_show_unstable">Show unstable</string>
     <string name="menu_show_advanced">Show advanced</string>
 
-    <string name="notification_status_installing">Initializing</string>
     <string name="notification_status_initializing">Waiting for root access</string>
     <string name="notification_status_initializing_no_root">Waiting for screen capture access</string>
     <string name="notification_status_installing_audio">Installing Audio driver</string>

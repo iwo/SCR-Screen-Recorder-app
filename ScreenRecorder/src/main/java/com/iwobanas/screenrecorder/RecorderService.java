@@ -106,7 +106,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private ErrorDialogHelper errorDialogHelper;
     private Handler mHandler;
     private File outputFile;
-    private RecorderServiceState state = RecorderServiceState.INSTALLING;
+    private RecorderServiceState state = RecorderServiceState.INITIALIZING;
     private boolean isTimeoutDisplayed;
     private boolean startOnReady;
     private long mRecordingStartTime;
@@ -156,7 +156,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (root) {
             mNativeProcessRunner = new NativeProcessRunner(this);
             mNativeProcessRunner.addObserver(this);
-            installExecutable();
         } else {
             projectionThreadRunner = new ProjectionThreadRunner(this);
             projectionThreadRunner.addObserver(this);
@@ -180,23 +179,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             ExceptionReporter exceptionReporter = (ExceptionReporter) uncaughtExceptionHandler;
             exceptionReporter.setExceptionParser(exceptionParser);
         }
-    }
-
-    private void installExecutable() {
-        new InstallExecutableAsyncTask(this, this).execute();
-    }
-
-    public void executableInstalled(final String executable) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (destroyed) return;
-                setState(RecorderServiceState.INITIALIZING);
-
-                //TODO: move installation to native process
-                ((NativeProcessRunner) mNativeProcessRunner).initialize(executable);
-            }
-        });
     }
 
     private void setState(RecorderServiceState state) {
@@ -436,9 +418,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         mTimeController.reset();
         mScreenOffReceiver.unregister();
 
-        if (!root || state != RecorderServiceState.INSTALLING) {
-            setState(RecorderServiceState.INITIALIZING);
-        }
+        setState(RecorderServiceState.INITIALIZING);
 
         if (root) {
             mNativeProcessRunner.initialize();
@@ -569,8 +549,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         switch (state) {
             case INITIALIZING:
                 return root ? getString(R.string.notification_status_initializing) : getString(R.string.notification_status_initializing_no_root);
-            case INSTALLING:
-                return getString(R.string.notification_status_installing);
             case INSTALLING_AUDIO:
                 return getString(R.string.notification_status_installing_audio);
             case READY:
@@ -1003,7 +981,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private static enum RecorderServiceState {
-        INSTALLING,
         INITIALIZING,
         INSTALLING_AUDIO,
         READY,

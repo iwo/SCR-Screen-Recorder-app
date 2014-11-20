@@ -5,8 +5,6 @@ public interface IRecorderService {
     void stopRecording();
     void close();
 
-    void executableInstalled(String executable);
-
     void showSettings();
     void showTimeoutDialog();
 }
