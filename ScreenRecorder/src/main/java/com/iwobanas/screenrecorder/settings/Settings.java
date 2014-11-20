@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
+import com.iwobanas.screenrecorder.BuildConfig;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
@@ -96,7 +97,7 @@ public class Settings {
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
         checkAppUpdate();
         checkSystemUpdate();
-        root = context.getResources().getBoolean(R.bool.root);
+        root = BuildConfig.FLAVOR_permissions.equals("root");
         if (root) {
             loadDeviceProfileIfNeeded(context);
             // readPreferences(); will be called when device profile is loaded

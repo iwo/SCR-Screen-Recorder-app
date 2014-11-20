@@ -15,6 +15,7 @@ import android.preference.PreferenceFragment;
 import android.text.Html;
 import android.util.Log;
 
+import com.iwobanas.screenrecorder.BuildConfig;
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
@@ -680,7 +681,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             settings.setSamplingRate(rate);
             preference.setSummary(rate.getLabel());
         } else if (preference == hideIconPreference) {
-            if (getResources().getBoolean(R.bool.taniosc)) {
+            if (BuildConfig.FLAVOR_price.equals("free")) {
                 try {
                     new HideIconDialogFragment().show(getFragmentManager(), "hideWatermark");
                 } catch (IllegalStateException e) {

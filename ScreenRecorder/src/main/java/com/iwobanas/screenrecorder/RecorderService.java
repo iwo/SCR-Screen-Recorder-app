@@ -111,7 +111,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private boolean isTimeoutDisplayed;
     private boolean startOnReady;
     private long recordingStartTime;
-    private boolean taniosc = true;
+    private boolean free = true;
     private boolean retryLicenseCheck = false;
     private boolean firstCommand = true;
     private boolean closing = false;
@@ -130,7 +130,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         initializeExceptionParser();
         handler = new Handler();
 
-        root = getResources().getBoolean(R.bool.root);
+        root = BuildConfig.FLAVOR_permissions.equals("root");
 
         errorDialogHelper = new ErrorDialogHelper(this);
 
@@ -140,7 +140,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         Settings.initialize(this);
         audioDriver = Settings.getInstance().getAudioDriver();
-        taniosc = getResources().getBoolean(R.bool.taniosc);
+        free = BuildConfig.FLAVOR_price.startsWith("f"); // free
 
         if (root) {
             audioDriver.addInstallListener(this);
@@ -165,7 +165,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         recorderOverlay.animateShow();
         reinitialize();
 
-        if (!taniosc) {
+        if (!free) {
             checkLicense();
         }
         Log.v(TAG, "Service initialized. version: " + Utils.getAppVersion(this));
@@ -214,7 +214,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         setState(RecorderServiceState.STARTING);
         recorderOverlay.hide();
         cameraOverlay.setTouchable(false);
-        if (taniosc) {
+        if (free) {
             watermarkOverlay.show();
             recordingTimeController.start();
         }
@@ -405,7 +405,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void reinitializeView() {
-        if (taniosc) {
+        if (free) {
             watermarkOverlay.hide();
         }
         Settings.getInstance().restoreShowTouches();
@@ -530,7 +530,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
         builder.setContentText(getStatusString());
 
-        if (!taniosc && Settings.getInstance().getHideIcon()) {
+        if (!free && Settings.getInstance().getHideIcon()) {
             builder.setSmallIcon(R.drawable.transparent);
             builder.setPriority(NotificationCompat.PRIORITY_MIN);
         } else {
@@ -868,7 +868,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         if (retryLicenseCheck) {
             retryLicenseCheck = false;
-            taniosc = false;
+            free = false;
             if (state != RecorderServiceState.RECORDING && state != RecorderServiceState.STARTING) {
                 recorderOverlay.show();
             }
@@ -894,7 +894,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             }
 
         }
-        taniosc = true;
+        free = true;
         if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             watermarkOverlay.show();
             recordingTimeController.start();
@@ -907,7 +907,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         Log.w(TAG, "err3: " + errorCode);
         displayNotLicensedDialog(R.string.license_error_message, R.string.license_play_store, "license_error");
 
-        taniosc = true;
+        free = true;
         if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             watermarkOverlay.show();
             recordingTimeController.start();
