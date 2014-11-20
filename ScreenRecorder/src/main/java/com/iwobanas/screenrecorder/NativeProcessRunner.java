@@ -14,8 +14,6 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
 
     NativeProcess process;
 
-    private String executable;
-
     public NativeProcessRunner(Context context) {
         this.context = context;
     }
@@ -29,13 +27,10 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
     }
 
     public void initialize() {
-        if (executable == null) {
-            return;
-        }
 
         if (process == null || process.isStopped()) {
             setState(RecordingProcessState.INITIALIZING, null);
-            process = new NativeProcess(context, executable, this);
+            process = new NativeProcess(context, this);
             new Thread(process).start();
         } else {
             try {
@@ -44,11 +39,6 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
                 Log.e(TAG, "Can't initialize process in state: " + process.getState(), e);
             }
         }
-    }
-
-    public void initialize(String executable) {
-        this.executable = executable;
-        initialize();
     }
 
     public void destroy() {
@@ -84,6 +74,12 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
             case FINISHED:
                 setState(RecordingProcessState.FINISHED, recordingInfo);
                 initialize();
+                break;
+            case CPU_NOT_SUPPORTED_ERROR:
+                setState(RecordingProcessState.CPU_NOT_SUPPORTED_ERROR, null);
+                break;
+            case INSTALLATION_ERROR:
+                setState(RecordingProcessState.INSTALLATION_ERROR, null);
                 break;
             case ERROR:
                 if (previousState == NativeProcess.ProcessState.RECORDING

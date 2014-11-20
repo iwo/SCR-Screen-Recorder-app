@@ -59,9 +59,8 @@ class NativeProcess implements Runnable {
 
     private Timeout stopTimeout = new Timeout(10000, STOPPING_ERROR, STOP_TIMEOUT, 303);
 
-    public NativeProcess(Context context, String executable, OnStateChangeListener onStateChangeListener) {
+    public NativeProcess(Context context, OnStateChangeListener onStateChangeListener) {
         this.context = context;
-        this.executable = executable;
         this.onStateChangeListener = onStateChangeListener;
     }
 
@@ -167,6 +166,7 @@ class NativeProcess implements Runnable {
     private void installExecutable() {
         File file = new File(context.getFilesDir(), "screenrec");
         try {
+            executable = file.getAbsolutePath();
             if (Utils.isArm()) {
                 Utils.extractResource(context, R.raw.screenrec, file);
             } else if (Utils.isX86()) {
