@@ -126,6 +126,9 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4</string>
     <string name="settings_video_encoder_built_in_summary">Android built-in %1$s encoder</string>
     <string name="settings_video_encoder_ffmpeg_summary">FFmpeg software MPEG4 encoder</string>
+    <string name="settings_video_encoder_no_root_h264">H264 (no root)</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">MPEG-4 (no root)</string>
+    <string name="settings_video_encoder_mpeg_4">MPEG-4</string>
 
     <string name="settings_resolution">Resolution</string>
     <string name="settings_resolution_short">%1$dx%2$d</string>

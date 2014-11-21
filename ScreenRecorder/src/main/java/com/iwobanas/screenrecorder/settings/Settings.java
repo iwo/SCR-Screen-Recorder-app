@@ -2,7 +2,6 @@ package com.iwobanas.screenrecorder.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
@@ -40,7 +39,6 @@ public class Settings {
     private static final String BUILD_FINGERPRINT = "BUILD_FINGERPRINT";
 
     public static final String PREFERENCES_NAME = "ScreenRecorderSettings";
-    public static final int FFMPEG_MPEG_4_ENCODER = -2;
     public static final String SHOW_CAMERA = "SHOW_CAMERA";
     public static final String CAMERA_ALPHA = "CAMERA_ALPHA";
 
@@ -67,8 +65,8 @@ public class Settings {
     private boolean showCamera = false;
     private float cameraAlpha = 1.0f;
     private boolean stopOnScreenOff = true;
-    private int videoEncoder = MediaRecorder.VideoEncoder.H264;
-    private int defaultVideoEncoder = MediaRecorder.VideoEncoder.H264;
+    private int videoEncoder = VideoEncoder.H264;
+    private int defaultVideoEncoder = VideoEncoder.H264;
     private boolean verticalFrames = false;
     private File outputDir;
     private File defaultOutputDir;
@@ -467,9 +465,9 @@ public class Settings {
     }
 
     public void setVideoEncoder(int videoEncoder) {
-        if (Utils.isX86() && videoEncoder == FFMPEG_MPEG_4_ENCODER) {
+        if (Utils.isX86() && VideoEncoder.isSoftware(videoEncoder)) {
             Log.w(TAG, "Software encoder is not supported on x86 platform, resetting to H264");
-            videoEncoder = MediaRecorder.VideoEncoder.H264;
+            videoEncoder = VideoEncoder.H264;
         }
         this.videoEncoder = videoEncoder;
         settingsModified(preferences.edit().putInt(VIDEO_ENCODER, videoEncoder));

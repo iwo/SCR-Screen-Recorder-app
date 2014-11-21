@@ -26,6 +26,7 @@ import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Orientation;
 import com.iwobanas.screenrecorder.settings.Resolution;
 import com.iwobanas.screenrecorder.settings.Settings;
+import com.iwobanas.screenrecorder.settings.VideoEncoder;
 
 import java.io.File;
 import java.io.IOException;
@@ -107,10 +108,12 @@ public class ProjectionThread implements Runnable {
         Settings s = Settings.getInstance();
 
         switch (s.getVideoEncoder()) {
-            case MediaRecorder.VideoEncoder.H264:
+            case VideoEncoder.H264:
+            case VideoEncoder.NO_ROOT_H264:
                 videoMime = MediaFormat.MIMETYPE_VIDEO_AVC;
                 break;
-            case MediaRecorder.VideoEncoder.MPEG_4_SP:
+            case VideoEncoder.MPEG_4_SP:
+            case VideoEncoder.NO_ROOT_MPEG_4:
                 videoMime = MediaFormat.MIMETYPE_VIDEO_MPEG4;
                 break;
             default:

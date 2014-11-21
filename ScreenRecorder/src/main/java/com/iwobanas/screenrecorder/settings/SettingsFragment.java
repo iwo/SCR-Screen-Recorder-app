@@ -3,7 +3,6 @@ package com.iwobanas.screenrecorder.settings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -314,7 +313,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 getString(R.string.settings_video_config_entry, videoConfig.getResolution().getWidth(), videoConfig.getResolution().getHeight(), videoConfig.getFrameRate()) +
                         "<br/><small><font color=\"@android:secondary_text_dark\">" +
                         formatVideoEncoderEntry(videoConfig.getVideoEncoder()) +
-                        (videoConfig.getVideoEncoder() == Settings.FFMPEG_MPEG_4_ENCODER ? "" : "&emsp;" + formatTransformationEntry(videoConfig.getTransformation())) +
+                        (videoConfig.getVideoEncoder() == VideoEncoder.FFMPEG_MPEG_4 ? "" : "&emsp;" + formatTransformationEntry(videoConfig.getTransformation())) +
                         "&emsp;" + getString(R.string.settings_video_config_entry_stability, videoConfig.getStability()) +"</font></small>"
         );
     }
@@ -340,11 +339,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         if (!settings.getShowUnstable() && settings.getDeviceProfile() != null)
             return settings.getDeviceProfile().getStableVideoEncoders();
 
-        Integer[] allEncoders = (!RecorderService.root || Utils.isX86()) ?
-                new Integer[]{MediaRecorder.VideoEncoder.H264, MediaRecorder.VideoEncoder.MPEG_4_SP}
-                : new Integer[]{MediaRecorder.VideoEncoder.H264, Settings.FFMPEG_MPEG_4_ENCODER, MediaRecorder.VideoEncoder.MPEG_4_SP};
-
-        return Arrays.asList(allEncoders);
+        return Arrays.asList(VideoEncoder.getAllSupportedEncoders(!RecorderService.root));
     }
 
     private String[] getVideoEncoderEntryValues(List<Integer> videoEncoders) {
@@ -366,14 +361,24 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private String formatVideoEncoderEntry(int encoder) {
         String entry = null;
         switch (encoder) {
-            case -2:
+            case VideoEncoder.FFMPEG_MPEG_4:
                 entry = getString(R.string.settings_video_encoder_ffmpeg_mpeg_4);
                 break;
-            case 2:
+            case VideoEncoder.H264:
                 entry = getString(R.string.settings_video_encoder_h264);
                 break;
-            case 3:
+            case VideoEncoder.MPEG_4_SP:
                 entry = getString(R.string.settings_video_encoder_mpeg_4_sp);
+                break;
+            case VideoEncoder.NO_ROOT_H264:
+                entry = getString(RecorderService.root ?
+                        R.string.settings_video_encoder_no_root_h264
+                        : R.string.settings_video_encoder_h264);
+                break;
+            case VideoEncoder.NO_ROOT_MPEG_4:
+                entry = getString(RecorderService.root ?
+                        R.string.settings_video_encoder_no_root_mpeg_4
+                        : R.string.settings_video_encoder_mpeg_4);
                 break;
         }
         if (settings.getDeviceProfile() != null && settings.getDeviceProfile().hideVideoEncoder(encoder)) {
@@ -515,18 +520,25 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     private String formatVideoEncoderSummary(int videoEncoder) {
         switch (videoEncoder) {
-            case Settings.FFMPEG_MPEG_4_ENCODER:
+            case VideoEncoder.FFMPEG_MPEG_4:
                 return getString(R.string.settings_video_encoder_ffmpeg_summary);
-            case MediaRecorder.VideoEncoder.H264:
-                return String.format(getString(
-                                R.string.settings_video_encoder_built_in_summary),
-                        getString(R.string.settings_video_encoder_h264)
+            case VideoEncoder.H264:
+                return getString(R.string.settings_video_encoder_built_in_summary,
+                        getString(R.string.settings_video_encoder_h264));
+            case VideoEncoder.MPEG_4_SP:
+                return getString(R.string.settings_video_encoder_built_in_summary,
+                        getString(R.string.settings_video_encoder_mpeg_4_sp));
+            case VideoEncoder.NO_ROOT_H264:
+                return getString(R.string.settings_video_encoder_built_in_summary, getString(
+                                RecorderService.root ?
+                                        R.string.settings_video_encoder_no_root_h264
+                                        : R.string.settings_video_encoder_h264)
                 );
-            case MediaRecorder.VideoEncoder.MPEG_4_SP:
-                return String.format(getString(
-                                R.string.settings_video_encoder_built_in_summary),
-                        getString(R.string.settings_video_encoder_mpeg_4_sp)
-                );
+            case VideoEncoder.NO_ROOT_MPEG_4:
+                return getString(R.string.settings_video_encoder_built_in_summary, getString(
+                        RecorderService.root ?
+                                R.string.settings_video_encoder_no_root_mpeg_4
+                                : R.string.settings_video_encoder_mpeg_4));
         }
         return "";
     }
