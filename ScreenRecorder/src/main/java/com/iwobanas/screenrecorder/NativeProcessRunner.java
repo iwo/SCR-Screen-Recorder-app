@@ -87,10 +87,10 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
                     || previousState == NativeProcess.ProcessState.STOPPING
                     || previousState == NativeProcess.ProcessState.FINISHED) {
                     handleRecordingError(recordingInfo);
+                    initialize();
                 } else {
                     handleStartupError(recordingInfo);
                 }
-                initialize();
                 break;
             default:
                 break;
