@@ -1,17 +1,20 @@
 package com.iwobanas.screenrecorder;
 
 import android.os.Handler;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class AbstractRecordingProcess implements IRecordingProcess {
 
+    private final String logTag;
     private Handler handler;
     private Collection<RecordingProcessObserver> observers = new ArrayList<RecordingProcessObserver>(5);
     private volatile RecordingProcessState state;
 
-    protected AbstractRecordingProcess() {
+    protected AbstractRecordingProcess(String logTag) {
+        this.logTag = logTag;
         handler = new Handler();
     }
 
@@ -51,6 +54,7 @@ public abstract class AbstractRecordingProcess implements IRecordingProcess {
     }
 
     protected void setState(RecordingProcessState state, RecordingInfo recordingInfo) {
+        Log.v(logTag, state.name());
         this.state = state;
         notifyObservers(state, recordingInfo);
     }

@@ -15,6 +15,7 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
     NativeProcess process;
 
     public NativeProcessRunner(Context context) {
+        super(TAG);
         this.context = context;
     }
 

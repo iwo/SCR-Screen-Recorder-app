@@ -32,6 +32,7 @@ public class ProjectionThreadRunner extends AbstractRecordingProcess implements 
     private Handler handler;
 
     public ProjectionThreadRunner(Context context) {
+        super(TAG);
         this.context = context;
         handler = new Handler();
     }
@@ -54,9 +55,11 @@ public class ProjectionThreadRunner extends AbstractRecordingProcess implements 
 
     public void initialize() {
         if (mediaProjection == null) {
+            Log.v(TAG, "Display projection dialog");
             requestMediaProjection();
             setState(RecordingProcessState.INITIALIZING, null);
         } else {
+            Log.v(TAG, "Projection already initialized");
             setState(RecordingProcessState.READY, null);
         }
     }

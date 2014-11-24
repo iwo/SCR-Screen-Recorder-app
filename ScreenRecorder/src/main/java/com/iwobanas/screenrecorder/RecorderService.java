@@ -108,6 +108,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private RecorderServiceState state = RecorderServiceState.INITIALIZING;
     private boolean isTimeoutDisplayed;
     private boolean startOnReady;
+    private boolean projectionDenied;
     private long recordingStartTime;
     private boolean free = true;
     private boolean retryLicenseCheck = false;
@@ -178,6 +179,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private void setState(RecorderServiceState state) {
         if (this.state == state)
             return;
+        Log.v(TAG, state.name());
         this.state = state;
         if (!destroyed) {
             startForeground();
@@ -195,6 +197,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
 
         if (state == RecorderServiceState.INITIALIZING && useProjection()) {
+            projectionDenied = false;
             projectionThreadRunner.initialize(); // request initialization again
             startRecordingWhenReady();
             return;
@@ -336,10 +339,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void onStateChange(IRecordingProcess process, RecordingProcessState state, RecordingInfo recordingInfo) {
+
         switch (state) {
             case READY:
-                //TODO: handle both native and projection running at the same time
-                checkReady();
+                nextInitializationStep();
                 break;
             case STARTING:
                 setState(RecorderServiceState.STARTING);
@@ -382,18 +385,59 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
     }
 
-    private void checkReady() {
-        if (((useProjection() && projectionThreadRunner.isReady()) || (!useProjection() && nativeProcessRunner.isReady()))
-                && audioDriver.isReady()) {
+    private void nextInitializationStep() {
+        boolean root = Settings.getInstance().isRootEnabled();
+        if (root && !nativeProcessRunner.isReady()) {
+            nativeProcessRunner.initialize();
+        } else if (root && audioDriver.getInstallationStatus() == InstallationStatus.NEW) {
+            audioDriver.check();
+        } else if (root && audioDriver.shouldInstall()) {
+            audioDriver.install();
+        } else if (useProjection() && projectionDenied) {
+            Log.w(TAG, "Not progressing with initialization because last projection request was cancelled");
+        } else if (useProjection() && !projectionThreadRunner.isReady()) {
+            projectionThreadRunner.initialize();
+        } else {
             setState(RecorderServiceState.READY);
             if (startOnReady) {
                 startOnReady = false;
-
                 startRecording();
-
             }
-        } else if (nativeProcessRunner.isReady() && audioDriver.shouldInstall()) {
-            audioDriver.install();
+        }
+    }
+
+    @Override
+    public void onInstall(InstallationStatus status) {
+        switch (status) {
+            case NEW:
+            case CHECKING:
+                break;
+
+            case INSTALLING:
+                setState(RecorderServiceState.INSTALLING_AUDIO);
+                break;
+
+            case INSTALLATION_FAILURE:
+                audioDriverInstallationFailure();
+                break;
+
+            case UNSTABLE:
+                audioDriverUnstable();
+                break;
+
+            case UNINSTALLING:
+                setState(RecorderServiceState.UNINSTALLING_AUDIO);
+                break;
+
+            case NOT_INSTALLED:
+            case UNSPECIFIED:
+                if (closing) {
+                    stopSelf();
+                    return;
+                } // else fall through
+            case INSTALLED:
+            case OUTDATED:
+                nextInitializationStep();
         }
     }
 
@@ -422,13 +466,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         setState(RecorderServiceState.INITIALIZING);
 
-        if (useProjection() && !projectionThreadRunner.isReady()) {
-            projectionThreadRunner.initialize();
-        }
-
-        if (Settings.getInstance().isRootEnabled() && !nativeProcessRunner.isReady()) {
-            nativeProcessRunner.initialize();
-        }
+        nextInitializationStep();
     }
 
     private void reportRecordingStats(RecordingInfo recordingInfo) {
@@ -667,7 +705,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
 
     private void denyProjectionError() {
-        setState(RecorderServiceState.READY);
+        projectionDenied = true;
         displayErrorMessage(
                 getString(R.string.projection_deny_error_message),
                 getString(R.string.projection_deny_error_title),
@@ -685,7 +723,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             //TODO: decide if it's more elegant to set this data through service or through static field
             ((ProjectionThreadRunner) projectionThreadRunner).setProjectionData(data);
         } else if (PROJECTION_DENY_ACTION.equals(action)) {
-            startOnReady = false;
             denyProjectionError();
         } else if (TIMEOUT_DIALOG_CLOSED_ACTION.equals(action)) {
             isTimeoutDisplayed = false;
@@ -727,10 +764,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             }
         } else if (ENABLE_ROOT_ACTION.equals(action)) {
             reinitialize();
-        } else if (useProjection() && state == RecorderServiceState.STARTING) { // non-root permission dialog closed by home button
-            Intent projectionIntent = new Intent(this, MediaProjectionActivity.class);
-            projectionIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(projectionIntent);
         } else if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
@@ -952,23 +985,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 recorderOverlay.hide();
             }
         });
-    }
-
-    @Override
-    public void onInstall(InstallationStatus status) {
-        if (closing && (status == InstallationStatus.NOT_INSTALLED || status == InstallationStatus.UNSPECIFIED)) {
-            stopSelf();
-        } else if (status == InstallationStatus.INSTALLATION_FAILURE) {
-            audioDriverInstallationFailure();
-        } else if (status == InstallationStatus.UNSTABLE) {
-            audioDriverUnstable();
-        } else if (status == InstallationStatus.INSTALLING) {
-            setState(RecorderServiceState.INSTALLING_AUDIO);
-        } else if (status == InstallationStatus.UNINSTALLING) {
-            setState(RecorderServiceState.UNINSTALLING_AUDIO);
-        } else {
-            checkReady();
-        }
     }
 
     private void audioDriverInstallationFailure() {

@@ -158,7 +158,7 @@ public class ProjectionThread implements Runnable {
         encoderFormat.setInteger(MediaFormat.KEY_REPEAT_PREVIOUS_FRAME_AFTER, 1000000);
         encoderFormat.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 5);
 
-        videoEncoder = MediaCodec.createEncoderByType(videoMime);
+        videoEncoder = MediaCodec.createEncoderByType(videoMime); //FIXME: hangs here after restarting between root/no-root with internal audio
         videoEncoder.configure(encoderFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
         surface = videoEncoder.createInputSurface();
         videoEncoder.start();
@@ -293,6 +293,7 @@ public class ProjectionThread implements Runnable {
                 } catch (Exception ee) {
                     Log.w(TAG, "Error stopping video encoder", ee);
                 }
+                Log.v(TAG, "Requesting new media projection");
                 Intent intent = new Intent(context, MediaProjectionActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
