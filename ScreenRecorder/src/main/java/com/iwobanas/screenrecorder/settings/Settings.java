@@ -302,6 +302,9 @@ public class Settings {
     }
 
     public AudioSource getAudioSource() {
+        if (!isRootEnabled() && audioSource != AudioSource.MUTE) {
+            return AudioSource.MIC;
+        }
         return audioSource;
     }
 
@@ -463,6 +466,9 @@ public class Settings {
     }
 
     public int getVideoEncoder() {
+        if (!isRootEnabled() && !VideoEncoder.isNoRoot(videoEncoder)) {
+            return VideoEncoder.getNoRootVariant(videoEncoder);
+        }
         return videoEncoder;
     }
 
@@ -654,7 +660,7 @@ public class Settings {
     }
 
     public boolean isNoRootVideoEncoder() {
-        return VideoEncoder.isNoRoot(getVideoEncoder());
+        return !isRootEnabled() || VideoEncoder.isNoRoot(getVideoEncoder());
     }
 
     public boolean isRootFlavor() {
