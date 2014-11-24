@@ -54,6 +54,16 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
         There are plenty tutorials on the Internet explaining how to root different devices. Pleas come back when you are done!</string>
     <string name="su_required_help">What\'s "rooting"?</string>
     <string name="su_required_help_link">http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/</string>
+    <string name="su_required_lollipop_message">To use full potential of %1$s your device needs to be rooted.
+        Android 5.0 allows basic screen recording without root (no internal audio). Check it out by downloading lightweight %2$s or switching to No-root mode.
+    </string>
+    <string name="su_required_lollipop_denied_message">If your device is rooted please open %1$s and make sure you haven\'t accidentally denied root access to %2$s.</string>
+    <string name="su_required_no_root_mode">No-root mode</string>
+
+    <string name="settings_no_root_only">Only for no root encoders</string>
+    <string name="settings_root_only">Only for root encoders</string>
+    <string name="settings_no_root_mode">No-root mode</string>
+    <string name="settings_no_root_mode_summary">Tap to request root access and enable all features</string>
 
     <string name="error_dialog_title">Something went seriously wrong :-(</string>
     <string name="startup_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error S%1$d.</string>

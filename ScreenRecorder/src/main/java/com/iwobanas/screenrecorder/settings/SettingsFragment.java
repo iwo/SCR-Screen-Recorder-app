@@ -11,6 +11,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceGroup;
 import android.text.Html;
 import android.util.Log;
 
@@ -30,6 +31,7 @@ import java.util.List;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener, AudioDriver.OnInstallListener {
     public static final String KEY_COPYRIGHTS_STATEMENT = "copyrights_statement";
+    public static final String KEY_NO_ROOT_MODE = "no_root_mode";
     public static final String KEY_VIDEO = "video";
     public static final String KEY_VIDEO_CONFIG = "video_config";
     public static final String KEY_VIDEO_ENCODER = "video_encoder";
@@ -51,6 +53,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_COLOR_FIX = "color_fix";
     private static final int SELECT_OUTPUT_DIR = 1;
     private static final String TAG = "scr_SettingsFragment";
+    private Preference noRootModePreference;
     private PreferenceCategory videoCategory;
     private ListPreference videoConfigPreference;
     private ListPreference videoEncoderPreference;
@@ -83,6 +86,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         findPreference(KEY_COPYRIGHTS_STATEMENT).setSummary(copyrightsStatement);
 
         settings = Settings.getInstance();
+
+        noRootModePreference = findPreference(KEY_NO_ROOT_MODE);
+        noRootModePreference.setOnPreferenceClickListener(this);
 
         videoCategory = (PreferenceCategory) findPreference(KEY_VIDEO);
 
@@ -157,6 +163,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     protected void updateValues() {
         updateSelectedVideoConfig();
 
+        videoConfigPreference.setEnabled(settings.isRootEnabled());
+
         videoEncoderPreference.setValue(String.valueOf(settings.getVideoEncoder()));
         videoEncoderPreference.setSummary(formatVideoEncoderSummary(settings.getVideoEncoder()));
 
@@ -165,18 +173,21 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         orientationPreference.setValue(settings.getOrientation().name());
         orientationPreference.setSummary(formatOrientationSummary(settings.getOrientation()));
+        orientationPreference.setEnabled(settings.isNoRootVideoEncoder());
 
         transformationPreference.setValue(settings.getTransformation().name());
         transformationPreference.setSummary(formatTransformationSummary(settings.getTransformation()));
-        transformationPreference.setEnabled(settings.getVideoEncoder() >= 0);
+        transformationPreference.setEnabled(!settings.isNoRootVideoEncoder() && settings.getVideoEncoder() >= 0);
 
         videoBitratePreference.setValue(settings.getVideoBitrate().name());
         videoBitratePreference.setSummary(formatVideoBitrateSummary(settings.getVideoBitrate()));
 
         frameRatePreference.setValue(String.valueOf(settings.getFrameRate()));
         frameRatePreference.setSummary(formatFrameRateSummary(settings.getFrameRate()));
+        frameRatePreference.setEnabled(!settings.isNoRootVideoEncoder());
 
         verticalFramesPreference.setChecked(settings.getVerticalFrames());
+        verticalFramesPreference.setEnabled(!settings.isNoRootVideoEncoder());
 
         audioSourcePreference.setValue(settings.getAudioSource().name());
         audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource()));
@@ -193,9 +204,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         outputDirPreference.setSummary(settings.getOutputDir().getAbsolutePath());
         stopOnScreenOffPreference.setChecked(settings.getStopOnScreenOff());
         colorFixPreference.setChecked(settings.getColorFix());
+        colorFixPreference.setEnabled(!settings.isNoRootVideoEncoder());
     }
 
     private String formatOrientationSummary(Orientation orientation) {
+        if (!settings.isNoRootVideoEncoder()) {
+            return getString(R.string.settings_no_root_only);
+        }
         switch (orientation) {
             case AUTO:
                 return getString(R.string.settings_orientation_auto);
@@ -228,7 +243,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     protected void updateEntries() {
 
-        if (addRemovePreference(RecorderService.root, KEY_VIDEO_CONFIG, videoConfigPreference, videoCategory)) {
+        addRemovePreference(settings.isRootFlavor() && !settings.isRootEnabled(), KEY_NO_ROOT_MODE, noRootModePreference, getPreferenceScreen());
+
+        if (addRemovePreference(settings.isRootFlavor(), KEY_VIDEO_CONFIG, videoConfigPreference, videoCategory)) {
             if (settings.getDeviceProfile() != null && settings.getDeviceProfile().getVideoConfigs().size() > 0) {
                 videoConfigPreference.setEntries(getVideoConfigEntries());
                 videoConfigPreference.setEntryValues(getVideoConfigEntryValues());
@@ -252,13 +269,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         boolean softwareEncoderOnly = videoEncoders.size() == 1 && videoEncoders.get(0) == -2;
         List<Transformation> transformations = getTransformations();
 
-        if (addRemovePreference(RecorderService.root && transformations.size() > 1 && !softwareEncoderOnly,
+        if (addRemovePreference(settings.isRootFlavor() && transformations.size() > 1 && !softwareEncoderOnly,
                 KEY_TRANSFORMATION, transformationPreference, videoCategory)) {
             transformationPreference.setEntryValues(getTransformationEntryValues(transformations));
             transformationPreference.setEntries(getTransformationEntries(transformations));
         }
 
-        if (addRemovePreference(!RecorderService.root || settings.getShowAdvanced(), KEY_VIDEO_BITRATE, videoBitratePreference, videoCategory)) {
+        if (addRemovePreference(!settings.isRootFlavor() || settings.getShowAdvanced(), KEY_VIDEO_BITRATE, videoBitratePreference, videoCategory)) {
             ArrayList<VideoBitrate> videoBitrates = getVideoBitrates();
             videoBitratePreference.setEntryValues(getVideoBitrateEntryValues(videoBitrates));
             videoBitratePreference.setEntries(getVideoBitrateEntries(videoBitrates));
@@ -275,7 +292,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         addRemovePreference(settings.getShowAdvanced(), KEY_VERTICAL_FRAMES, verticalFramesPreference, videoCategory);
 
-        if (!RecorderService.root) {
+        if (!settings.isRootFlavor()) {
             audioSourcePreference.setEntries(getResources().getStringArray(R.array.audio_source_entries_no_root));
             audioSourcePreference.setEntryValues(getResources().getStringArray(R.array.audio_source_values_no_root));
         } else if (Build.VERSION.SDK_INT == 17) {
@@ -296,7 +313,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             audioSourcePreference.setEntries(entries);
         }
 
-        addRemovePreference(RecorderService.root, KEY_COLOR_FIX, colorFixPreference, otherCategory);
+        addRemovePreference(settings.isRootFlavor(), KEY_COLOR_FIX, colorFixPreference, otherCategory);
     }
 
     private CharSequence[] getVideoConfigEntries() {
@@ -326,7 +343,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return indexes;
     }
 
-    private boolean addRemovePreference(boolean add, String key, Preference preference, PreferenceCategory category) {
+    private boolean addRemovePreference(boolean add, String key, Preference preference, PreferenceGroup category) {
         if (!add && category.findPreference(key) != null) {
             category.removePreference(preference);
         } else if (category.findPreference(key) == null) {
@@ -339,7 +356,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         if (!settings.getShowUnstable() && settings.getDeviceProfile() != null)
             return settings.getDeviceProfile().getStableVideoEncoders();
 
-        return Arrays.asList(VideoEncoder.getAllSupportedEncoders(!RecorderService.root));
+        return Arrays.asList(VideoEncoder.getAllSupportedEncoders(!settings.isRootEnabled()));
     }
 
     private String[] getVideoEncoderEntryValues(List<Integer> videoEncoders) {
@@ -371,12 +388,12 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 entry = getString(R.string.settings_video_encoder_mpeg_4_sp);
                 break;
             case VideoEncoder.NO_ROOT_H264:
-                entry = getString(RecorderService.root ?
+                entry = getString(settings.isRootFlavor() ?
                         R.string.settings_video_encoder_no_root_h264
                         : R.string.settings_video_encoder_h264);
                 break;
             case VideoEncoder.NO_ROOT_MPEG_4:
-                entry = getString(RecorderService.root ?
+                entry = getString(settings.isRootFlavor() ?
                         R.string.settings_video_encoder_no_root_mpeg_4
                         : R.string.settings_video_encoder_mpeg_4);
                 break;
@@ -492,7 +509,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             if (!settings.getShowUnstable() && settings.getDeviceProfile() != null
                     && settings.getDeviceProfile().hideVideoBitrate(bitrate))
                 continue;
-            if (!RecorderService.root && (bitrate == VideoBitrate.BITRATE_AUTO || bitrate == VideoBitrate.BITRATE_30_MBPS))
+            if (!settings.isRootFlavor() && (bitrate == VideoBitrate.BITRATE_AUTO || bitrate == VideoBitrate.BITRATE_30_MBPS))
                 continue;
             bitrates.add(bitrate);
         }
@@ -530,13 +547,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                         getString(R.string.settings_video_encoder_mpeg_4_sp));
             case VideoEncoder.NO_ROOT_H264:
                 return getString(R.string.settings_video_encoder_built_in_summary, getString(
-                                RecorderService.root ?
+                                settings.isRootFlavor() ?
                                         R.string.settings_video_encoder_no_root_h264
                                         : R.string.settings_video_encoder_h264)
                 );
             case VideoEncoder.NO_ROOT_MPEG_4:
                 return getString(R.string.settings_video_encoder_built_in_summary, getString(
-                        RecorderService.root ?
+                        settings.isRootFlavor() ?
                                 R.string.settings_video_encoder_no_root_mpeg_4
                                 : R.string.settings_video_encoder_mpeg_4));
         }
@@ -544,8 +561,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private String formatTransformationSummary(Transformation transformation) {
-        if (settings.getVideoEncoder() < 0) {
+        if (VideoEncoder.isSoftware(settings.getVideoEncoder())) {
             return getString(R.string.settings_transformation_sw_summary);
+        }
+        if (settings.isNoRootVideoEncoder()) {
+            return getString(R.string.settings_root_only);
         }
         switch (transformation) {
             case CPU:
@@ -578,7 +598,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private String formatFrameRateSummary(int frameRate) {
-        if (frameRate == -1) {
+        if (settings.isNoRootVideoEncoder() || frameRate == -1) {
             return getString(R.string.settings_frame_rate_max_summary);
         }
         return String.format(getString(R.string.settings_frame_rate_summary), frameRate);
@@ -725,7 +745,23 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             openOutputDirChooser();
             return true;
         }
+        if (preference == noRootModePreference) {
+            enableRoot();
+            updateEntries();
+            updateValues();
+            return true;
+        }
         return false;
+    }
+
+    private void enableRoot() {
+        settings.setRootEnabled(true);
+        Activity activity = getActivity();
+        if (activity != null) {
+            Intent serviceIntent = new Intent(activity, RecorderService.class);
+            serviceIntent.setAction(RecorderService.ENABLE_ROOT_ACTION);
+            activity.startService(serviceIntent);
+        }
     }
 
     @Override

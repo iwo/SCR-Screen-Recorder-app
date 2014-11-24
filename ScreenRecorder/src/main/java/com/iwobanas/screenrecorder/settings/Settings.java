@@ -41,6 +41,7 @@ public class Settings {
     public static final String PREFERENCES_NAME = "ScreenRecorderSettings";
     public static final String SHOW_CAMERA = "SHOW_CAMERA";
     public static final String CAMERA_ALPHA = "CAMERA_ALPHA";
+    public static final String ROOT_ENABLED = "ROOT_ENABLED";
 
     private static Settings instance;
     private SharedPreferences preferences;
@@ -82,8 +83,8 @@ public class Settings {
     private DeviceProfile deviceProfile;
     private boolean showUnstable = false;
     private boolean showAdvanced = false;
-
-    private boolean root;
+    private boolean rootEnabled = true;
+    private boolean rootFlavor = true;
 
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -95,8 +96,8 @@ public class Settings {
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
         checkAppUpdate();
         checkSystemUpdate();
-        root = BuildConfig.FLAVOR_permissions.equals("root");
-        if (root) {
+        rootFlavor = BuildConfig.FLAVOR_permissions.equals("root");
+        if (isRootFlavor()) {
             loadDeviceProfileIfNeeded(context);
             // readPreferences(); will be called when device profile is loaded
         } else {
@@ -178,10 +179,11 @@ public class Settings {
 
         showAdvanced = preferences.getBoolean(SHOW_ADVANCED, false);
         showUnstable = preferences.getBoolean(SHOW_UNSTABLE, false);
+        rootEnabled = preferences.getBoolean(ROOT_ENABLED, true);
     }
 
     private void loadDeviceProfileIfNeeded(Context context) {
-        if (root && deviceProfile == null) {
+        if (isRootFlavor() && deviceProfile == null) {
             new LoadDeviceProfileAsyncTask(this, context, appVersion, appUpdated, systemUpdated).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
@@ -649,6 +651,23 @@ public class Settings {
     public void setShowAdvanced(boolean showAdvanced) {
         this.showAdvanced = showAdvanced;
         preferences.edit().putBoolean(SHOW_ADVANCED, showAdvanced).commit();
+    }
+
+    public boolean isNoRootVideoEncoder() {
+        return VideoEncoder.isNoRoot(getVideoEncoder());
+    }
+
+    public boolean isRootFlavor() {
+        return rootFlavor;
+    }
+
+    public boolean isRootEnabled() {
+        return rootFlavor && rootEnabled;
+    }
+
+    public void setRootEnabled(boolean rootEnabled) {
+        this.rootEnabled = rootEnabled;
+        preferences.edit().putBoolean(ROOT_ENABLED, rootEnabled).commit();
     }
 }
 

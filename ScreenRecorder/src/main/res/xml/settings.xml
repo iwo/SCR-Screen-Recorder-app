@@ -4,6 +4,10 @@
     <Preference
         android:key="copyrights_statement"
         android:selectable="false" />
+    <Preference
+        android:key="no_root_mode"
+        android:title="@string/settings_no_root_mode"
+        android:summary="@string/settings_no_root_mode_summary" />
     <PreferenceCategory android:key="video" android:title="@string/settings_video_category">
         <ListPreference
             android:entries="@array/empty_array"
@@ -27,20 +31,12 @@
             android:title="@string/settings_resolution" />
 
         <ListPreference
-            android:entries="@array/orientation_entries"
-            android:entryValues="@array/orientation_values"
-            android:key="orientation"
-            android:persistent="false"
-            android:title="@string/settings_orientation" />
-
-        <ListPreference
             android:entries="@array/empty_array"
             android:entryValues="@array/empty_array"
             android:key="transformation"
             android:persistent="false"
             android:summary="@string/settings_transformation_cpu_summary"
             android:title="@string/settings_transformation" />
-
 
         <ListPreference
             android:entries="@array/empty_array"
@@ -56,6 +52,13 @@
             android:persistent="false"
             android:summary="@string/settings_frame_rate_summary"
             android:title="@string/settings_frame_rate" />
+
+        <ListPreference
+            android:entries="@array/orientation_entries"
+            android:entryValues="@array/orientation_values"
+            android:key="orientation"
+            android:persistent="false"
+            android:title="@string/settings_orientation" />
 
         <CheckBoxPreference
             android:key="vertical_frames"

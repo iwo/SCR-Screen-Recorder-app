@@ -79,6 +79,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String ERROR_DIALOG_CLOSED_ACTION = "scr.intent.action.ERROR_DIALOG_CLOSED";
     public static final String NOTIFICATION_ACTION = "scr.intent.action.NOTIFICATION";
     public static final String LOUNCHER_ACTION = "scr.intent.action.LOUNCHER";
+    public static final String ENABLE_ROOT_ACTION = "scr.intent.action.ENABLE_ROOT_ACTION";
 
     public static final String SET_PROJECTION_ACTION = "scr.intent.action.SET_PROJECTION";
     public static final String PROJECTION_DATA_EXTRA = "projection_data";
@@ -88,9 +89,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
     private static final String SHUT_DOWN_CORRECTLY = "SHUT_DOWN_CORRECTLY";
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
-
-    // quick and dirty hack to keep this state global
-    public static boolean root;
 
     // Licensing
     private static final byte[] LICENSE_SALT = new byte[]{95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47, 122};
@@ -130,22 +128,20 @@ public class RecorderService extends Service implements IRecorderService, Licens
         initializeExceptionParser();
         handler = new Handler();
 
-        root = BuildConfig.FLAVOR_permissions.equals("root");
-
         errorDialogHelper = new ErrorDialogHelper(this);
+        Settings.initialize(this);
+        Settings s = Settings.getInstance();
 
-        if (root && (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT == 20 || Build.VERSION.SDK_INT > 21)) {
+        //TODO: allow switching to non-root mode from this dialog as well
+        if (s.isRootFlavor() && (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT == 20 || Build.VERSION.SDK_INT > 21)) {
             displayErrorMessage(getString(R.string.android_version_error_message), getString(R.string.android_version_error_title), false, false, -1);
         }
 
-        Settings.initialize(this);
-        audioDriver = Settings.getInstance().getAudioDriver();
         free = BuildConfig.FLAVOR_price.startsWith("f"); // free
 
-        if (root) {
-            audioDriver.addInstallListener(this);
-            checkShutDownCorrectly();
-        }
+        audioDriver = Settings.getInstance().getAudioDriver();
+        audioDriver.addInstallListener(this);
+        checkShutDownCorrectly();
 
         cameraOverlay = new CameraOverlay(this);
         cameraOverlay.applySettings();
@@ -154,13 +150,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         readPreferences();
 
-        if (root) {
-            nativeProcessRunner = new NativeProcessRunner(this);
-            nativeProcessRunner.addObserver(this);
-        } else {
-            projectionThreadRunner = new ProjectionThreadRunner(this);
-            projectionThreadRunner.addObserver(this);
-        }
+        nativeProcessRunner = new NativeProcessRunner(this);
+        nativeProcessRunner.addObserver(this);
+        projectionThreadRunner = new ProjectionThreadRunner(this);
+        projectionThreadRunner.addObserver(this);
 
         recorderOverlay.animateShow();
         reinitialize();
@@ -191,16 +184,23 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
     }
 
+    private boolean useProjection() {
+        return Settings.getInstance().isNoRootVideoEncoder();
+    }
+
     @Override
     public void startRecording() {
         if (cantStartToast != null) {
             cantStartToast.cancel();
         }
-        if (!root && state == RecorderServiceState.INITIALIZING) {
+
+        if (state == RecorderServiceState.INITIALIZING && useProjection()) {
             projectionThreadRunner.initialize(); // request initialization again
             startRecordingWhenReady();
             return;
-        } else if (state != RecorderServiceState.READY) {
+        }
+
+        if (state != RecorderServiceState.READY) {
             cantStartToast = Toast.makeText(this, getString(R.string.can_not_start_toast, getStatusString()), Toast.LENGTH_SHORT);
             cantStartToast.show();
             return;
@@ -224,10 +224,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
         audioDriver.startRecording();
         outputFile = getOutputFile();
-        if (root) {
-            nativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
-        } else {
+        if (useProjection()) {
             projectionThreadRunner.start(outputFile.getAbsolutePath(), getRotation());
+        } else {
+            nativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
         }
         recordingStartTime = System.currentTimeMillis();
 
@@ -287,10 +287,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public void stopRecording() {
         setState(RecorderServiceState.STOPPING);
-        if (root) {
-            nativeProcessRunner.stop();
-        } else {
+        if (useProjection()) {
             projectionThreadRunner.stop();
+        } else {
+            nativeProcessRunner.stop();
         }
         recordingTimeController.reset();
         cameraOverlay.setTouchable(true);
@@ -383,7 +383,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void checkReady() {
-        if (!root || (nativeProcessRunner.isReady() && audioDriver.isReady())) {
+        if (((useProjection() && projectionThreadRunner.isReady()) || (!useProjection() && nativeProcessRunner.isReady()))
+                && audioDriver.isReady()) {
             setState(RecorderServiceState.READY);
             if (startOnReady) {
                 startOnReady = false;
@@ -391,7 +392,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 startRecording();
 
             }
-        } else if (audioDriver.shouldInstall()) {
+        } else if (nativeProcessRunner.isReady() && audioDriver.shouldInstall()) {
             audioDriver.install();
         }
     }
@@ -421,10 +422,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         setState(RecorderServiceState.INITIALIZING);
 
-        if (root) {
-            nativeProcessRunner.initialize();
-        } else {
+        if (useProjection() && !projectionThreadRunner.isReady()) {
             projectionThreadRunner.initialize();
+        }
+
+        if (Settings.getInstance().isRootEnabled() && !nativeProcessRunner.isReady()) {
+            nativeProcessRunner.initialize();
         }
     }
 
@@ -549,7 +552,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private CharSequence getStatusString() {
         switch (state) {
             case INITIALIZING:
-                return root ? getString(R.string.notification_status_initializing) : getString(R.string.notification_status_initializing_no_root);
+                return useProjection() ? getString(R.string.notification_status_initializing_no_root) : getString(R.string.notification_status_initializing);
             case INSTALLING_AUDIO:
                 return getString(R.string.notification_status_installing_audio);
             case READY:
@@ -651,7 +654,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private Intent getPlayStoreIntent(String campaignName) {
         //TODO:update with new package Id
         String uri;
-        if (root) {
+        if (Settings.getInstance().isRootFlavor()) {
             uri = "market://details?id=com.iwobanas.screenrecorder.pro&referrer=utm_source%3Ddialog%26utm_campaign%3D" + campaignName;
         } else {
             uri = "market://details?id=com.iwobanas.screenrecorder.noroot.pro&referrer=utm_source%3Ddialog%26utm_campaign%3D" + campaignName;
@@ -722,13 +725,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
                     recorderOverlay.show();
                 }
             }
-        } else if (state == RecorderServiceState.RECORDING || (root && state == RecorderServiceState.STARTING)) {
-            stopRecording();
-            EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
-        } else if (state == RecorderServiceState.STARTING) { // non-root permission dialog closed by home button
+        } else if (ENABLE_ROOT_ACTION.equals(action)) {
+            reinitialize();
+        } else if (useProjection() && state == RecorderServiceState.STARTING) { // non-root permission dialog closed by home button
             Intent projectionIntent = new Intent(this, MediaProjectionActivity.class);
             projectionIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(projectionIntent);
+        } else if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
+            stopRecording();
+            EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_ICON, null);
         } else {
             if (SETTINGS_CLOSED_ACTION.equals(action)) {
                 settingsDisplayed = false;
@@ -777,15 +782,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
         cameraOverlay.onDestroy();
         recorderOverlay.animateHide();
         recorderOverlay.onDestroy();
-        if (root) {
-            nativeProcessRunner.destroy();
-        } else {
-            projectionThreadRunner.destroy();
-        }
+        nativeProcessRunner.destroy();
+        projectionThreadRunner.destroy();
         screenOffReceiver.unregister();
         savePreferences();
         Settings.getInstance().restoreShowTouches();
-        if (root && audioDriver.shouldUninstall()) {
+        if (audioDriver.shouldUninstall()) {
             audioDriver.uninstall();
         }
         audioDriver.removeInstallListener(this);

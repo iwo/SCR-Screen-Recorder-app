@@ -38,7 +38,7 @@ public class SettingsActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!RecorderService.root) {
+        if (!Settings.getInstance().isRootFlavor()) {
             return false;
         }
         getMenuInflater().inflate(R.menu.settings, menu);

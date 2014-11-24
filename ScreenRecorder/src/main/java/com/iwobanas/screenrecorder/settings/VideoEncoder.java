@@ -38,7 +38,7 @@ public class VideoEncoder {
     }
 
     public static boolean isNoRoot(int encoder) {
-        return encoder >= 0;
+        return encoder >= 100;
     }
 
 }

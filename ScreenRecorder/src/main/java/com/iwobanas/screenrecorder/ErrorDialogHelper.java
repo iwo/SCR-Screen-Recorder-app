@@ -130,8 +130,30 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
     private void showSuError() {
         Intent intent = createDialogIntent(getString(R.string.su_required_title));
         Intent suIntent = Utils.findSuIntent(context);
+        CharSequence suName = null;
+        if (suIntent != null) {
+            suName = Utils.getAppName(context, suIntent);
+            if (suName == null) {
+                suName = getString(R.string.su_default_name);
+            }
+        }
 
-        if (suIntent == null) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            String message = getString(R.string.su_required_lollipop_message, getString(R.string.app_name), getString(R.string.pro_app_no_root_name));
+            if (suIntent != null) {
+                message += " " + getString(R.string.su_required_lollipop_denied_message, suName, getString(R.string.app_name));
+                intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, suIntent);
+                intent.putExtra(DialogActivity.POSITIVE_EXTRA, suName);
+            }
+            intent.putExtra(DialogActivity.NEUTRAL_EXTRA, getString(R.string.su_required_no_root_mode));
+            Intent noRootModeIntent = new Intent(context, NoRootModeActivity.class);
+            noRootModeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            noRootModeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(DialogActivity.NEUTRAL_INTENT_EXTRA, noRootModeIntent);
+            intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.pro_app_no_root_name));
+            intent.putExtra(DialogActivity.NEGATIVE_INTENT_EXTRA, getNoRootPlayStoreIntent());
+            intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
+        } else if (suIntent == null) {
             intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.su_required_message));
             intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.su_required_help));
             Intent helpIntent = new Intent(Intent.ACTION_VIEW);
@@ -139,16 +161,20 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
             helpIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, helpIntent);
         } else {
-            CharSequence suName = Utils.getAppName(context, suIntent);
-            if (suName == null) {
-                suName = getString(R.string.su_default_name);
-            }
             String message = getString(R.string.su_denied_message, suName, getString(R.string.app_name));
             intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
             intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, suIntent);
             intent.putExtra(DialogActivity.POSITIVE_EXTRA, suName);
         }
         context.startActivity(intent);
+    }
+
+    private Intent getNoRootPlayStoreIntent() {
+        String uri = "market://details?id=com.iwobanas.screenrecorder.noroot.pro&referrer=utm_source%3Ddialog%26utm_campaign%3DsuDialog";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(uri));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
     }
 
     public void showMicrophoneBusyError(RecordingInfo recordingInfo) {
