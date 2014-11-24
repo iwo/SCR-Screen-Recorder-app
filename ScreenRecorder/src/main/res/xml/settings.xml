@@ -47,7 +47,7 @@
 
         <ListPreference
             android:entries="@array/empty_array"
-            android:entryValues="@array/frame_rate_values"
+            android:entryValues="@array/empty_array"
             android:key="frame_rate"
             android:persistent="false"
             android:summary="@string/settings_frame_rate_summary"
