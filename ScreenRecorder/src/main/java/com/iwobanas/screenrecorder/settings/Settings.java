@@ -38,7 +38,8 @@ public class Settings {
     private static final String APP_VERSION = "APP_VERSION";
     private static final String BUILD_FINGERPRINT = "BUILD_FINGERPRINT";
 
-    public static final String PREFERENCES_NAME = "ScreenRecorderSettings";
+    private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
+
     public static final String SHOW_CAMERA = "SHOW_CAMERA";
     public static final String CAMERA_ALPHA = "CAMERA_ALPHA";
     public static final String ROOT_ENABLED = "ROOT_ENABLED";
@@ -674,6 +675,14 @@ public class Settings {
     public void setRootEnabled(boolean rootEnabled) {
         this.rootEnabled = rootEnabled;
         preferences.edit().putBoolean(ROOT_ENABLED, rootEnabled).commit();
+    }
+
+    public void registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+        preferences.registerOnSharedPreferenceChangeListener(listener);
+    }
+
+    public void unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+        preferences.unregisterOnSharedPreferenceChangeListener(listener);
     }
 }
 

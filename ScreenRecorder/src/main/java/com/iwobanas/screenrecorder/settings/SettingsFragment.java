@@ -3,6 +3,7 @@ package com.iwobanas.screenrecorder.settings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener, AudioDriver.OnInstallListener {
+public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener, AudioDriver.OnInstallListener, SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String KEY_COPYRIGHTS_STATEMENT = "copyrights_statement";
     public static final String KEY_NO_ROOT_MODE = "no_root_mode";
     public static final String KEY_VIDEO = "video";
@@ -86,6 +87,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         findPreference(KEY_COPYRIGHTS_STATEMENT).setSummary(copyrightsStatement);
 
         settings = Settings.getInstance();
+        settings.registerOnSharedPreferenceChangeListener(this);
 
         noRootModePreference = findPreference(KEY_NO_ROOT_MODE);
         noRootModePreference.setOnPreferenceClickListener(this);
@@ -778,11 +780,20 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     @Override
     public void onDestroy() {
         super.onDestroy();
+        settings.unregisterOnSharedPreferenceChangeListener(this);
         settings.getAudioDriver().removeInstallListener(this);
     }
 
     @Override
     public void onInstall(InstallationStatus status) {
         updateValues();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (Settings.ROOT_ENABLED.equals(key)) {
+            updateEntries();
+            updateValues();
+        }
     }
 }
