@@ -749,8 +749,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         }
         if (preference == noRootModePreference) {
             enableRoot();
-            updateEntries();
-            updateValues();
             return true;
         }
         return false;
