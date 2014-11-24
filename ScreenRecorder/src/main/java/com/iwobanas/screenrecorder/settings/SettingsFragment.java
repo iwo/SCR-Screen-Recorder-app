@@ -348,7 +348,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private boolean addRemovePreference(boolean add, String key, Preference preference, PreferenceGroup category) {
         if (!add && category.findPreference(key) != null) {
             category.removePreference(preference);
-        } else if (category.findPreference(key) == null) {
+        } else if (add && category.findPreference(key) == null) {
             category.addPreference(preference);
         }
         return add;
