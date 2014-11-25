@@ -160,6 +160,7 @@ public class ProjectionThread implements Runnable {
 
         videoEncoder = MediaCodec.createEncoderByType(videoMime); //FIXME: hangs here after restarting between root/no-root with internal audio
         videoEncoder.configure(encoderFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
+        Log.v(TAG, "Selected codec: " + videoEncoder.getName());
         surface = videoEncoder.createInputSurface();
         videoEncoder.start();
     }
@@ -445,9 +446,16 @@ public class ProjectionThread implements Runnable {
         } finally {
             if (muxer != null) {
                 try {
-                    muxer.release();
+                    muxer.stop();
                 } catch (Exception e) {
                     Log.w(TAG, "Error stopping muxer", e);
+                    setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, 530);
+                    EasyTracker.getTracker().sendException("projection", e, false);
+                }
+                try {
+                    muxer.release();
+                } catch (Exception e) {
+                    Log.w(TAG, "Error releasing muxer", e);
                     EasyTracker.getTracker().sendException("projection", e, false);
                 }
                 muxer = null;
