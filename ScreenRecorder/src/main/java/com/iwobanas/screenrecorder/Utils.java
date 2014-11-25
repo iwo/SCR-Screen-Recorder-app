@@ -526,4 +526,13 @@ public class Utils {
         }
         return pid;
     }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public static void logStackTrace(String tag, String message) {
+        try {
+            throw new RuntimeException();
+        } catch (RuntimeException e) {
+            Log.v(TAG, message, e);
+        }
+    }
 }

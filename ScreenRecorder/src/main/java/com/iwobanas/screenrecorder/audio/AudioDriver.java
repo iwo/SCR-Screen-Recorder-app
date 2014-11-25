@@ -15,7 +15,7 @@ public class AudioDriver {
     private static final String TAG = "scr_AudioDriver";
     private Context context;
     private Set<OnInstallListener> listeners = new HashSet<OnInstallListener>();
-    private InstallationStatus status = InstallationStatus.CHECKING;
+    private InstallationStatus status = InstallationStatus.NEW;
     private int samplingRate = 0;
     private boolean installScheduled = false;
     private boolean uninstallScheduled = false;
@@ -24,12 +24,19 @@ public class AudioDriver {
 
     public AudioDriver(Context context) {
         this.context = context;
-        new CheckInstallationAsyncTask(context, this).execute();
+    }
+
+    public void check() {
+        if (status == InstallationStatus.NEW) {
+            setInstallationStatus(InstallationStatus.CHECKING);
+            new CheckInstallationAsyncTask(context, this).execute();
+        }
     }
 
     public boolean shouldInstall() {
         return (Settings.getInstance().getAudioSource().getRequiresDriver()
                 && (status == InstallationStatus.NOT_INSTALLED
+                || status == InstallationStatus.NEW
                 || status == InstallationStatus.CHECKING
                 || status == InstallationStatus.UNINSTALLING
                 || status == InstallationStatus.UNSPECIFIED
@@ -37,12 +44,8 @@ public class AudioDriver {
         );
     }
 
-    public boolean isReady() {
-        return !shouldInstall() && status != InstallationStatus.UNINSTALLING && status != InstallationStatus.INSTALLING;
-    }
-
     public void install() {
-        if (status == InstallationStatus.CHECKING || status == InstallationStatus.UNINSTALLING) {
+        if (status == InstallationStatus.NEW || status == InstallationStatus.CHECKING || status == InstallationStatus.UNINSTALLING) {
             Log.w(TAG, "Attempting to install when " + status + ". Scheduling installation.");
             installScheduled = true;
             uninstallScheduled = false;

@@ -12,14 +12,14 @@ import android.widget.ImageButton;
 public class RecorderOverlay extends AbstractScreenOverlay {
     private static final String RECORDER_OVERLAY = "RECORDER_OVERLAY";
 
-    private IRecorderService mService;
-    private ImageButton mSettingsButton;
+    private IRecorderService service;
+    private ImageButton settingsButton;
     private WindowManager.LayoutParams layoutParams;
     private OverlayPositionPersister positionPersister;
 
     public RecorderOverlay(Context context, IRecorderService service) {
         super(context);
-        mService = service;
+        this.service = service;
     }
 
     public void highlightPosition() {
@@ -47,7 +47,7 @@ public class RecorderOverlay extends AbstractScreenOverlay {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mService.startRecording();
+                service.startRecording();
             }
         });
 
@@ -66,11 +66,11 @@ public class RecorderOverlay extends AbstractScreenOverlay {
         });
         view.setOnTouchListener(dragListener);
 
-        mSettingsButton = (ImageButton) view.findViewById(R.id.settings_button);
-        mSettingsButton.setOnClickListener(new View.OnClickListener() {
+        settingsButton = (ImageButton) view.findViewById(R.id.settings_button);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mService.showSettings();
+                service.showSettings();
             }
         });
 
@@ -78,7 +78,7 @@ public class RecorderOverlay extends AbstractScreenOverlay {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mService.close();
+                service.close();
             }
         });
         return view;
@@ -97,6 +97,7 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             layoutParams.setTitle(getContext().getString(R.string.app_name));
             layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            layoutParams.y = -200; // offset so that overlay doesn't cover permission dialog
             layoutParams.gravity = Gravity.CENTER;
             positionPersister = new OverlayPositionPersister(getContext(), RECORDER_OVERLAY, layoutParams);
         }

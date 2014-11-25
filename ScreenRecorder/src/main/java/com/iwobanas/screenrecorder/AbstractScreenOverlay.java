@@ -10,14 +10,14 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
 
     private static final String TAG = "scr_AbstractScreenOverlay";
 
-    private Context mContext;
+    private Context context;
 
-    private View mView;
+    private View view;
 
     private boolean visible = false;
 
     public AbstractScreenOverlay(Context context) {
-        mContext = context;
+        this.context = context;
     }
 
     protected abstract View createView();
@@ -29,25 +29,25 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
             return;
         }
         try {
-            getWindowManager().updateViewLayout(mView, getLayoutParams());
+            getWindowManager().updateViewLayout(view, getLayoutParams());
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Error updating layout", e);
         }
     }
 
     protected LayoutInflater getLayoutInflater() {
-        return (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     protected Context getContext() {
-        return mContext;
+        return context;
     }
 
     protected View getView() {
-        if (mView == null) {
-            mView = createView();
+        if (view == null) {
+            view = createView();
         }
-        return mView;
+        return view;
     }
 
     @Override
@@ -61,7 +61,7 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
     }
 
     private WindowManager getWindowManager() {
-        return (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        return (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     }
 
     protected android.view.Display getDefaultDisplay() {
@@ -73,7 +73,7 @@ public abstract class AbstractScreenOverlay implements IScreenOverlay {
         if (!visible) {
             return;
         }
-        getWindowManager().removeView(mView);
+        getWindowManager().removeView(view);
         visible = false;
     }
 

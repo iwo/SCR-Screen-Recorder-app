@@ -21,7 +21,7 @@ import java.util.TimerTask;
 
 import static com.iwobanas.screenrecorder.Tracker.*;
 
-class RecorderProcess implements Runnable {
+class NativeProcess implements Runnable {
 
     private static int instancesCount = 0;
 
@@ -59,15 +59,20 @@ class RecorderProcess implements Runnable {
 
     private Timeout stopTimeout = new Timeout(10000, STOPPING_ERROR, STOP_TIMEOUT, 303);
 
-    public RecorderProcess(Context context, String executable, OnStateChangeListener onStateChangeListener) {
+    public NativeProcess(Context context, OnStateChangeListener onStateChangeListener) {
         this.context = context;
-        this.executable = executable;
         this.onStateChangeListener = onStateChangeListener;
     }
 
     @Override
     public void run() {
         setState(ProcessState.INITIALIZING);
+
+        installExecutable();
+        if (state != ProcessState.INITIALIZING) {
+            return;
+        }
+
         try {
             Log.d(TAG, "Starting native process");
             process = Runtime.getRuntime()
@@ -156,6 +161,31 @@ class RecorderProcess implements Runnable {
         }
 
         Log.d(TAG, "Return value: " + recordingInfo.exitValue);
+    }
+
+    private void installExecutable() {
+        File file = new File(context.getFilesDir(), "screenrec");
+        try {
+            executable = file.getAbsolutePath();
+            if (Utils.isArm()) {
+                Utils.extractResource(context, R.raw.screenrec, file);
+            } else if (Utils.isX86()) {
+                Utils.extractResource(context, R.raw.screenrec_x86, file);
+            } else {
+                setState(ProcessState.CPU_NOT_SUPPORTED_ERROR);
+                return;
+            }
+
+            if (!file.setExecutable(true, false)) {
+                Log.w(TAG, "Can't set executable property on " + file.getAbsolutePath());
+            }
+
+        } catch (IOException e) {
+            Log.e(TAG, "Can't install native executable", e);
+            setState(ProcessState.INSTALLATION_ERROR);
+            EasyTracker.getTracker().sendEvent(ERROR, INSTALLATION_ERROR, INSTALLATION_ERROR, null);
+            EasyTracker.getTracker().sendException(Thread.currentThread().getName(), e, false);
+        }
     }
 
     private void setErrorState() {
@@ -289,7 +319,9 @@ class RecorderProcess implements Runnable {
             FileWriter fileWriter = new FileWriter(configFile);
             fileWriter.write(String.valueOf(getVolumeGain()) + " " + mixMic + "\n");
             fileWriter.close();
-            configFile.setReadable(true, false);
+            if (!configFile.setReadable(true, false)) {
+                Log.w(TAG, "Error setting read permission on " + configFile.getAbsolutePath());
+            }
         } catch (Exception e) {
             Log.w(TAG, "Error setting audio gain", e);
         }
@@ -362,7 +394,7 @@ class RecorderProcess implements Runnable {
         }
 
         public void start() {
-            synchronized (RecorderProcess.this) {
+            synchronized (NativeProcess.this) {
                 if (timer != null) {
                     Log.e(TAG, "Timeout already started");
                     return;
@@ -384,7 +416,7 @@ class RecorderProcess implements Runnable {
         }
 
         public void cancel() {
-            synchronized (RecorderProcess.this) {
+            synchronized (NativeProcess.this) {
                 if (timer != null) {
                     timer.cancel();
                     timer = null;
@@ -460,7 +492,7 @@ class RecorderProcess implements Runnable {
     }
 
     public static interface OnStateChangeListener {
-        void onStateChange(RecorderProcess target, ProcessState state, ProcessState previousState, RecordingInfo recordingInfo);
+        void onStateChange(NativeProcess target, ProcessState state, ProcessState previousState, RecordingInfo recordingInfo);
     }
 
     public static enum ProcessState {
@@ -471,6 +503,8 @@ class RecorderProcess implements Runnable {
         RECORDING,
         STOPPING,
         FINISHED,
+        CPU_NOT_SUPPORTED_ERROR,
+        INSTALLATION_ERROR,
         ERROR
     }
 

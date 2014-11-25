@@ -35,7 +35,6 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
 
     private static CameraOverlay activeInstance;
 
-    private final SharedPreferences settingsPreferences;
     int screenPortion = 4; // 1/4 of the longer edge of the screen
     private WindowManager.LayoutParams layoutParams;
     private Camera camera;
@@ -66,8 +65,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
 
     public CameraOverlay(Context context) {
         super(context);
-        settingsPreferences = getContext().getSharedPreferences(Settings.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        settingsPreferences.registerOnSharedPreferenceChangeListener(this);
+        Settings.getInstance().registerOnSharedPreferenceChangeListener(this);
         handler = new Handler() {
 
             @Override
@@ -354,7 +352,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
             positionPersister.persistPosition();
         }
 
-        settingsPreferences.unregisterOnSharedPreferenceChangeListener(this);
+        Settings.getInstance().unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @Override
