@@ -24,6 +24,10 @@ public enum SamplingRate {
         return label;
     }
 
+    public int getSamplingRate() {
+        return samplingRate;
+    }
+
     public static SamplingRate getBySamplingRate(int samplingRate) {
         for (SamplingRate rate : values()) {
             if (rate.samplingRate == samplingRate) {

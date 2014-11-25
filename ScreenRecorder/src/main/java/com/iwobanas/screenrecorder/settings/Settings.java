@@ -2,12 +2,12 @@ package com.iwobanas.screenrecorder.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
+import com.iwobanas.screenrecorder.BuildConfig;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
@@ -19,6 +19,7 @@ public class Settings {
     private static final String AUDIO_SOURCE = "AUDIO_SOURCE";
     private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
+    private static final String ORIENTATION = "ORIENTATION";
     private static final String FRAME_RATE = "FRAME_RATE";
     private static final String TRANSFORMATION = "TRANSFORMATION";
     private static final String SAMPLING_RATE = "SAMPLING_RATE";
@@ -37,10 +38,11 @@ public class Settings {
     private static final String APP_VERSION = "APP_VERSION";
     private static final String BUILD_FINGERPRINT = "BUILD_FINGERPRINT";
 
-    public static final String PREFERENCES_NAME = "ScreenRecorderSettings";
-    public static final int FFMPEG_MPEG_4_ENCODER = -2;
+    private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
+
     public static final String SHOW_CAMERA = "SHOW_CAMERA";
     public static final String CAMERA_ALPHA = "CAMERA_ALPHA";
+    public static final String ROOT_ENABLED = "ROOT_ENABLED";
 
     private static Settings instance;
     private SharedPreferences preferences;
@@ -49,6 +51,7 @@ public class Settings {
     private Resolution resolution;
     private Resolution defaultResolution;
     private ResolutionsManager resolutionsManager;
+    private Orientation orientation = Orientation.AUTO;
     private int defaultFrameRate = 30;
     private int frameRate = defaultFrameRate;
     private Transformation transformation = Transformation.GPU;
@@ -64,8 +67,8 @@ public class Settings {
     private boolean showCamera = false;
     private float cameraAlpha = 1.0f;
     private boolean stopOnScreenOff = true;
-    private int videoEncoder = MediaRecorder.VideoEncoder.H264;
-    private int defaultVideoEncoder = MediaRecorder.VideoEncoder.H264;
+    private int videoEncoder = VideoEncoder.H264;
+    private int defaultVideoEncoder = VideoEncoder.H264;
     private boolean verticalFrames = false;
     private File outputDir;
     private File defaultOutputDir;
@@ -81,6 +84,8 @@ public class Settings {
     private DeviceProfile deviceProfile;
     private boolean showUnstable = false;
     private boolean showAdvanced = false;
+    private boolean rootEnabled = true;
+    private boolean rootFlavor = true;
 
     private Settings(Context context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -92,8 +97,13 @@ public class Settings {
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
         checkAppUpdate();
         checkSystemUpdate();
-        loadDeviceProfileIfNeeded(context);
-        // readPreferences(); will be called when device profile is loaded
+        rootFlavor = BuildConfig.FLAVOR_permissions.equals("root");
+        if (isRootFlavor()) {
+            loadDeviceProfileIfNeeded(context);
+            // readPreferences(); will be called when device profile is loaded
+        } else {
+            readPreferences();
+        }
         if (appUpdated) {
             handleAppUpdate();
         }
@@ -125,6 +135,13 @@ public class Settings {
         if (resolutionWidth != -1) {
             int resolutionHeight = preferences.getInt(RESOLUTION_HEIGHT, 0);
             resolution = resolutionsManager.getResolution(resolutionWidth, resolutionHeight);
+        }
+
+        String orientation = preferences.getString(ORIENTATION, Orientation.AUTO.name());
+        try {
+            this.orientation = Orientation.valueOf(orientation);
+        } catch (IllegalArgumentException e) {
+            this.orientation = Orientation.LANDSCAPE;
         }
 
         frameRate = preferences.getInt(FRAME_RATE, defaultFrameRate);
@@ -163,10 +180,11 @@ public class Settings {
 
         showAdvanced = preferences.getBoolean(SHOW_ADVANCED, false);
         showUnstable = preferences.getBoolean(SHOW_UNSTABLE, false);
+        rootEnabled = preferences.getBoolean(ROOT_ENABLED, true);
     }
 
     private void loadDeviceProfileIfNeeded(Context context) {
-        if (deviceProfile == null) {
+        if (isRootFlavor() && deviceProfile == null) {
             new LoadDeviceProfileAsyncTask(this, context, appVersion, appUpdated, systemUpdated).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
@@ -285,6 +303,9 @@ public class Settings {
     }
 
     public AudioSource getAudioSource() {
+        if (!isRootEnabled() && audioSource != AudioSource.MUTE) {
+            return AudioSource.MIC;
+        }
         return audioSource;
     }
 
@@ -339,6 +360,15 @@ public class Settings {
             return defaultResolution;
         }
         return resolutionsManager.getDefaultResolution();
+    }
+
+    public Orientation getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(Orientation orientation) {
+        this.orientation = orientation;
+        settingsModified(preferences.edit().putString(ORIENTATION, orientation.name()));
     }
 
     public int getFrameRate() {
@@ -437,13 +467,19 @@ public class Settings {
     }
 
     public int getVideoEncoder() {
+        if (!isRootEnabled() && !VideoEncoder.isNoRoot(videoEncoder)) {
+            return VideoEncoder.getNoRootVariant(videoEncoder);
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP && VideoEncoder.isNoRoot(videoEncoder)) {
+            return VideoEncoder.getRootVariant(videoEncoder);
+        }
         return videoEncoder;
     }
 
     public void setVideoEncoder(int videoEncoder) {
-        if (Utils.isX86() && videoEncoder == FFMPEG_MPEG_4_ENCODER) {
+        if (Utils.isX86() && VideoEncoder.isSoftware(videoEncoder)) {
             Log.w(TAG, "Software encoder is not supported on x86 platform, resetting to H264");
-            videoEncoder = MediaRecorder.VideoEncoder.H264;
+            videoEncoder = VideoEncoder.H264;
         }
         this.videoEncoder = videoEncoder;
         settingsModified(preferences.edit().putInt(VIDEO_ENCODER, videoEncoder));
@@ -483,6 +519,9 @@ public class Settings {
         resolution = getDefaultResolution();
         editor.remove(RESOLUTION_WIDTH);
         editor.remove(RESOLUTION_HEIGHT);
+
+        orientation = Orientation.AUTO;
+        editor.remove(ORIENTATION);
 
         frameRate = defaultFrameRate;
         editor.remove(FRAME_RATE);
@@ -622,6 +661,31 @@ public class Settings {
     public void setShowAdvanced(boolean showAdvanced) {
         this.showAdvanced = showAdvanced;
         preferences.edit().putBoolean(SHOW_ADVANCED, showAdvanced).commit();
+    }
+
+    public boolean isNoRootVideoEncoder() {
+        return !isRootEnabled() || VideoEncoder.isNoRoot(getVideoEncoder());
+    }
+
+    public boolean isRootFlavor() {
+        return rootFlavor;
+    }
+
+    public boolean isRootEnabled() {
+        return rootFlavor && rootEnabled;
+    }
+
+    public void setRootEnabled(boolean rootEnabled) {
+        this.rootEnabled = rootEnabled;
+        preferences.edit().putBoolean(ROOT_ENABLED, rootEnabled).commit();
+    }
+
+    public void registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+        preferences.registerOnSharedPreferenceChangeListener(listener);
+    }
+
+    public void unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+        preferences.unregisterOnSharedPreferenceChangeListener(listener);
     }
 }
 

@@ -22,13 +22,48 @@ android {
         targetSdkVersion 19
     }
 
+    flavorDimensions "permissions", "price"
+
     productFlavors {
         free {
-            packageName "com.iwobanas.screenrecorder.free"
+            flavorDimension "price"
         }
 
         pro {
-            packageName "com.iwobanas.screenrecorder.pro"
+            flavorDimension "price"
+        }
+
+        root {
+            flavorDimension "permissions"
+        }
+
+        noRoot {
+            flavorDimension "permissions"
+            minSdkVersion 21
+            targetSdkVersion 21
+        }
+    }
+
+    // A slightly hacky way to assign app id's to flavors combinations
+    // applicationIdSufix should be added to flavor
+    // http://stackoverflow.com/questions/26547559/how-to-set-different-applicationid-for-each-flavor-combination-using-flavordimen/26585241#26585241
+    android.variantFilter { variant ->
+        def flavorString = ""
+        def flavors = variant.getFlavors()
+        for (int i = 0; i < flavors.size(); i++) {
+            flavorString += flavors[i].name;
+        }
+        if(flavorString.equalsIgnoreCase("rootFree")) {
+            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.free"
+        }
+        if(flavorString.equalsIgnoreCase("rootPro")) {
+            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.pro"
+        }
+        if(flavorString.equalsIgnoreCase("noRootFree")) {
+            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.noroot.free"
+        }
+        if(flavorString.equalsIgnoreCase("noRootPro")) {
+            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.noroot.pro"
         }
     }
 

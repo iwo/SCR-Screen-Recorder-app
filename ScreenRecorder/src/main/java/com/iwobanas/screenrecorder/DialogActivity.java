@@ -19,6 +19,8 @@ public class DialogActivity extends Activity {
     public static final String RESTART_EXTRA = "RESTART_EXTRA";
     public static final String POSITIVE_EXTRA = "POSITIVE_EXTRA";
     public static final String POSITIVE_INTENT_EXTRA = "POSITIVE_INTENT_EXTRA";
+    public static final String NEUTRAL_EXTRA = "NEUTRAL_EXTRA";
+    public static final String NEUTRAL_INTENT_EXTRA = "NEUTRAL_INTENT_EXTRA";
     public static final String NEGATIVE_EXTRA = "NEGATIVE_EXTRA";
     public static final String NEGATIVE_INTENT_EXTRA = "NEGATIVE_INTENT_EXTRA";
     public static final String RESTART_ACTION_EXTRA = "RESTART_ACTION_EXTRA";
@@ -41,6 +43,8 @@ public class DialogActivity extends Activity {
 
         private boolean positiveSelected;
 
+        private boolean neutralSelected;
+
         private boolean negativeSelected;
 
         @Override
@@ -52,7 +56,7 @@ public class DialogActivity extends Activity {
             builder.setMessage(intent.getStringExtra(MESSAGE_EXTRA));
             builder.setTitle(intent.getStringExtra(TITLE_EXTRA));
             builder.setIcon(R.drawable.ic_launcher);
-            if (intent.getBooleanExtra(REPORT_BUG_EXTRA, false)) {
+            if (Settings.getInstance().isRootEnabled() && intent.getBooleanExtra(REPORT_BUG_EXTRA, false)) {
                 final int errorCode = intent.getIntExtra(REPORT_BUG_ERROR_EXTRA, -1);
                 builder.setPositiveButton(R.string.error_report_report, new DialogInterface.OnClickListener() {
                     @Override
@@ -72,6 +76,23 @@ public class DialogActivity extends Activity {
                             if (positiveIntent != null) {
                                 try {
                                     startActivity(positiveIntent);
+                                } catch (Exception e) {
+                                    Log.w(TAG, "Error starting activity", e);
+                                }
+                            }
+                        }
+                    });
+                }
+                String neutralLabel = intent.getStringExtra(NEUTRAL_EXTRA);
+                if (neutralLabel != null) {
+                    final Intent neutralIntent = intent.getParcelableExtra(NEUTRAL_INTENT_EXTRA);
+                    builder.setNeutralButton(neutralLabel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            neutralSelected = true;
+                            if (neutralIntent != null) {
+                                try {
+                                    startActivity(neutralIntent);
                                 } catch (Exception e) {
                                     Log.w(TAG, "Error starting activity", e);
                                 }
@@ -118,6 +139,7 @@ public class DialogActivity extends Activity {
                     intent.setAction(RecorderService.DIALOG_CLOSED_ACTION);
                 }
                 intent.putExtra(POSITIVE_EXTRA, positiveSelected);
+                intent.putExtra(NEUTRAL_EXTRA, neutralSelected);
                 intent.putExtra(NEGATIVE_EXTRA, negativeSelected);
                 activity.startService(intent);
             }

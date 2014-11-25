@@ -1,6 +1,5 @@
 package com.iwobanas.screenrecorder.settings;
 
-import android.media.MediaRecorder;
 import android.os.Build;
 import android.util.Log;
 
@@ -160,9 +159,7 @@ public class DeviceProfile {
     }
 
     private void validateBlackLists() {
-        Integer[] allEncoders = Utils.isX86() ?
-                new Integer[]{MediaRecorder.VideoEncoder.H264, MediaRecorder.VideoEncoder.MPEG_4_SP}
-                : new Integer[]{MediaRecorder.VideoEncoder.H264, Settings.FFMPEG_MPEG_4_ENCODER, MediaRecorder.VideoEncoder.MPEG_4_SP};
+        Integer[] allEncoders = VideoEncoder.getAllSupportedEncoders(false);
         stableVideoEncoders = new ArrayList<Integer>(allEncoders.length);
 
         for (Integer encoder : allEncoders) {
@@ -194,7 +191,7 @@ public class DeviceProfile {
     private void validateDefaults() {
         // this is just a safety check. with a sane stats default settings should never be blacklisted
 
-        if (hideVideoEncoder(defaultVideoEncoder) || (Utils.isX86() && defaultVideoEncoder == Settings.FFMPEG_MPEG_4_ENCODER)) {
+        if (hideVideoEncoder(defaultVideoEncoder) || (Utils.isX86() && VideoEncoder.isSoftware(defaultVideoEncoder))) {
             defaultVideoEncoder = stableVideoEncoders.get(0);
         }
 

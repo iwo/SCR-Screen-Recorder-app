@@ -4,6 +4,10 @@
     <string name="free_app_full_name">SCR Screen Recorder Free</string>
     <string name="pro_app_name">SCR Pro</string>
     <string name="pro_app_full_name">SCR Screen Recorder Pro</string>
+    <string name="free_app_no_root_name">SCR 5+ Free</string>
+    <string name="free_app_no_root_full_name">SCR Screen Recorder 5+ Free</string>
+    <string name="pro_app_no_root_name">SCR 5+ Pro</string>
+    <string name="pro_app_no_root_full_name">SCR Screen Recorder 5+ Pro</string>
 
     <string name="play_free_app_name">
 SCR Screen Recorder Free ★ root
@@ -50,6 +54,16 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
         There are plenty tutorials on the Internet explaining how to root different devices. Pleas come back when you are done!</string>
     <string name="su_required_help">What\'s "rooting"?</string>
     <string name="su_required_help_link">http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/</string>
+    <string name="su_required_lollipop_message">To use full potential of %1$s your device needs to be rooted.
+        Android 5.0 allows basic screen recording without root (no internal audio). Check it out by downloading lightweight %2$s or switching to No-root mode.
+    </string>
+    <string name="su_required_lollipop_denied_message">If your device is rooted please open %1$s and make sure you haven\'t accidentally denied root access to %2$s.</string>
+    <string name="su_required_no_root_mode">No-root mode</string>
+
+    <string name="settings_no_root_only">Only for no root encoders</string>
+    <string name="settings_root_only">Only for root encoders</string>
+    <string name="settings_no_root_mode">No-root mode</string>
+    <string name="settings_no_root_mode_summary">Tap to request root access and enable all features</string>
 
     <string name="error_dialog_title">Something went seriously wrong :-(</string>
     <string name="startup_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error S%1$d.</string>
@@ -60,6 +74,9 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
 
     <string name="media_recorder_error_title">Recorder error</string>
     <string name="media_recorder_error_message">Try changing resolution or switching image transformation between GPU/CPU. Please uninstall other screencast applications if you have any. If the problem persists please get in touch via support email quoting error R%1$d.</string>
+
+    <string name="video_codec_error_title">Incompatible Video Settings</string>
+    <string name="video_codec_error_message">Try reducing resolution or video bitrate. Note that on some devices portrait video orientation works only with lower resolutions. If the problem persists please get in touch via support email quoting error R%1$d.</string>
 
     <string name="output_file_error_title">Can\'t create video file</string>
     <string name="output_file_error_message">SCR was unable to create %1$s video file. Make sure that selected output directory is writable and that SD Card is not locked by USB connection.</string>
@@ -122,6 +139,9 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4</string>
     <string name="settings_video_encoder_built_in_summary">Android built-in %1$s encoder</string>
     <string name="settings_video_encoder_ffmpeg_summary">FFmpeg software MPEG4 encoder</string>
+    <string name="settings_video_encoder_no_root_h264">H264 (no root)</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">MPEG-4 (no root)</string>
+    <string name="settings_video_encoder_mpeg_4">MPEG-4</string>
 
     <string name="settings_resolution">Resolution</string>
     <string name="settings_resolution_short">%1$dx%2$d</string>
@@ -239,8 +259,8 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="menu_show_unstable">Show unstable</string>
     <string name="menu_show_advanced">Show advanced</string>
 
-    <string name="notification_status_installing">Initializing</string>
     <string name="notification_status_initializing">Waiting for root access</string>
+    <string name="notification_status_initializing_no_root">Waiting for screen capture access</string>
     <string name="notification_status_installing_audio">Installing Audio driver</string>
     <string name="notification_status_ready">Ready</string>
     <string name="notification_status_starting">Starting</string>
@@ -291,5 +311,8 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="lollipop_dialog_try_now">Try now</string>
 
     <string name="notification_action_share">Share</string>
+
+    <string name="projection_deny_error_message">You need to tap START NOW for recording to work.</string>
+    <string name="projection_deny_error_title">Can\'t access screen</string>
 
 </resources>
