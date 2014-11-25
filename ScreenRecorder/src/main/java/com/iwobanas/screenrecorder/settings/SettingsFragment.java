@@ -294,7 +294,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         addRemovePreference(settings.getShowAdvanced(), KEY_VERTICAL_FRAMES, verticalFramesPreference, videoCategory);
 
-        if (!settings.isRootFlavor()) {
+        if (!settings.isRootEnabled()) {
             audioSourcePreference.setEntries(getResources().getStringArray(R.array.audio_source_entries_no_root));
             audioSourcePreference.setEntryValues(getResources().getStringArray(R.array.audio_source_values_no_root));
         } else if (Build.VERSION.SDK_INT == 17) {
