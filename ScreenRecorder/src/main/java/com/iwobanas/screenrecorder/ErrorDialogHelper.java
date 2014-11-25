@@ -99,6 +99,12 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
                 title = getString(R.string.audio_config_error_title);
                 report = false;
                 break;
+
+            case SELINUX_ERROR:
+                message = getString(R.string.selinux_error_message);
+                title = getString(R.string.selinux_error_title);
+                report = false;
+                break;
         }
 
         showError(message, title, !state.isCritical(), report, recordingInfo == null ? -1 : recordingInfo.exitValue);

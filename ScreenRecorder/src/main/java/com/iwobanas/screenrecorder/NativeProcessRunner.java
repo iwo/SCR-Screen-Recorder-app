@@ -119,7 +119,7 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
         switch (recordingInfo.exitValue) {
             case 302: // start timeout
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    service.selinuxError(recordingInfo);
+                    setState(RecordingProcessState.SELINUX_ERROR, recordingInfo);
                     break;
                 }
                 // else fallback to mediaRecorderError()

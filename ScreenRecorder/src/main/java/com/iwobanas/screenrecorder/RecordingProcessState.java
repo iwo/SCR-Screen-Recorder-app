@@ -25,7 +25,8 @@ public enum RecordingProcessState {
     MICROPHONE_BUSY_ERROR(true),
     OPEN_GL_ERROR(true),
     SECURE_SURFACE_ERROR(true),
-    AUDIO_CONFIG_ERROR(true),;
+    AUDIO_CONFIG_ERROR(true),
+    SELINUX_ERROR(true),;
 
     private boolean error;
     private boolean critical;
