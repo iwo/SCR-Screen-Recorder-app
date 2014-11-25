@@ -343,6 +343,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public void onStateChange(IRecordingProcess process, RecordingProcessState state, RecordingInfo recordingInfo) {
 
         switch (state) {
+            case INITIALIZING:
+                setState(RecorderServiceState.INITIALIZING);
+                break;
             case READY:
                 nextInitializationStep();
                 break;
