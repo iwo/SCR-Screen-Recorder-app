@@ -153,8 +153,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         nativeProcessRunner = new NativeProcessRunner(this);
         nativeProcessRunner.addObserver(this);
-        projectionThreadRunner = new ProjectionThreadRunner(this);
-        projectionThreadRunner.addObserver(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            projectionThreadRunner = new ProjectionThreadRunner(this);
+            projectionThreadRunner.addObserver(this);
+        }
 
         recorderOverlay.animateShow();
         reinitialize();
@@ -816,7 +818,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         recorderOverlay.animateHide();
         recorderOverlay.onDestroy();
         nativeProcessRunner.destroy();
-        projectionThreadRunner.destroy();
+        if (projectionThreadRunner != null) {
+            projectionThreadRunner.destroy();
+        }
         screenOffReceiver.unregister();
         savePreferences();
         Settings.getInstance().restoreShowTouches();

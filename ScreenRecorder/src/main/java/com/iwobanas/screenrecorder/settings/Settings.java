@@ -470,6 +470,9 @@ public class Settings {
         if (!isRootEnabled() && !VideoEncoder.isNoRoot(videoEncoder)) {
             return VideoEncoder.getNoRootVariant(videoEncoder);
         }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP && VideoEncoder.isNoRoot(videoEncoder)) {
+            return VideoEncoder.getRootVariant(videoEncoder);
+        }
         return videoEncoder;
     }
 

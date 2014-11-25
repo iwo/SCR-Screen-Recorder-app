@@ -47,4 +47,14 @@ public class VideoEncoder {
 
         return NO_ROOT_H264;
     }
+
+    public static int getRootVariant(int videoEncoder) {
+        if (!isNoRoot(videoEncoder))
+            return videoEncoder;
+
+        if (videoEncoder == NO_ROOT_MPEG_4)
+            return MPEG_4_SP;
+
+        return H264;
+    }
 }
