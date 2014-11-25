@@ -523,8 +523,8 @@ public class ProjectionThread implements Runnable {
     }
 
     public void destroy() {
-        stopped = true;
         destroyed = true;
+        stopped = true;
     }
 
     private void setState(RecordingProcessState state) {
