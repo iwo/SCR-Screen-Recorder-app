@@ -307,7 +307,7 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="miui_error_title">MiUi popups disabled?</string>
 
     <string name="lollipop_dialog_title">Lollipop</string>
-    <string name="lollipop_dialog_message">Would you like to test my new no-root screen recorder app? It utilizes official Android 5.0 screen capture API and native hardware video encoders.</string>
+    <string name="lollipop_dialog_message">Would you like to test SCR 5+, my new, lightweight, no-root screen recorder app? It utilizes official Android 5.0 screen capture API and microphone audio recording.</string>
     <string name="lollipop_dialog_try_now">Try now</string>
 
     <string name="projection_deny_error_message">You need to tap START NOW for recording to work.</string>
