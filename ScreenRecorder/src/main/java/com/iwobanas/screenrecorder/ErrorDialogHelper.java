@@ -139,7 +139,7 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            String message = getString(R.string.su_required_lollipop_message, getString(R.string.app_name), getString(R.string.pro_app_no_root_name));
+            String message = getString(R.string.su_required_lollipop_message, getString(R.string.app_name), getString(R.string.free_app_no_root_name));
             if (suIntent != null) {
                 message += " " + getString(R.string.su_required_lollipop_denied_message, suName, getString(R.string.app_name));
                 intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, suIntent);
@@ -150,7 +150,7 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
             noRootModeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             noRootModeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(DialogActivity.NEUTRAL_INTENT_EXTRA, noRootModeIntent);
-            intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.pro_app_no_root_name));
+            intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.free_app_no_root_name));
             intent.putExtra(DialogActivity.NEGATIVE_INTENT_EXTRA, getNoRootPlayStoreIntent());
             intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
         } else if (suIntent == null) {
@@ -170,7 +170,7 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
     }
 
     private Intent getNoRootPlayStoreIntent() {
-        String uri = "market://details?id=com.iwobanas.screenrecorder.noroot.pro&referrer=utm_source%3Ddialog%26utm_campaign%3DsuDialog";
+        String uri = "market://details?id=com.iwobanas.screenrecorder.noroot.free&referrer=utm_source%3Ddialog%26utm_campaign%3DsuDialog";
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(uri));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
