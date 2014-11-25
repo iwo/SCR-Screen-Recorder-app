@@ -711,10 +711,14 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private void denyProjectionError() {
         projectionDenied = true;
-        displayErrorMessage(
-                getString(R.string.projection_deny_error_message),
-                getString(R.string.projection_deny_error_title),
-                true, false, 510);
+        if (startOnReady) {
+            displayErrorMessage(
+                    getString(R.string.projection_deny_error_message),
+                    getString(R.string.projection_deny_error_title),
+                    true, false, 510);
+        } else {
+            Toast.makeText(this, R.string.projection_deny_error_message, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
