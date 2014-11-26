@@ -282,6 +282,8 @@ public class ProjectionThread implements Runnable {
 
             lockPreventingHack();
 
+            Settings.getInstance().updateAudioDriverConfig();
+
             try {
                 setupVideoCodec();
             } catch (Exception e) {

@@ -687,6 +687,12 @@ public class Settings {
     public void unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
         preferences.unregisterOnSharedPreferenceChangeListener(listener);
     }
+
+    public void updateAudioDriverConfig() {
+        if (audioSource == AudioSource.INTERNAL) {
+            audioDriver.updateConfig();
+        }
+    }
 }
 
 
