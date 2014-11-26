@@ -1,6 +1,8 @@
 package com.iwobanas.screenrecorder;
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -36,6 +38,8 @@ import java.nio.ByteBuffer;
 public class ProjectionThread implements Runnable {
 
     private static final String TAG = "scr_ProjectionThread";
+
+    private static int mediaServerPid = -1;
 
     private final ProjectionThreadRunner runner;
     private MediaProjection mediaProjection;
@@ -276,6 +280,8 @@ public class ProjectionThread implements Runnable {
 
         try {
 
+            lockPreventingHack();
+
             try {
                 setupVideoCodec();
             } catch (Exception e) {
@@ -514,6 +520,22 @@ public class ProjectionThread implements Runnable {
 
         if (!destroyed && recordingInfo.exitValue == -1) {
             setState(RecordingProcessState.FINISHED);
+        }
+    }
+
+    private void lockPreventingHack() {
+        int pid = Utils.findProcessByCommand("/system/bin/mediaserver");
+        if (mediaServerPid > 0 && pid > 0 && mediaServerPid != pid) {
+            Log.w(TAG, "ms restart detected " + mediaServerPid + " " + pid);
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent restartIntent = new Intent(context, RecorderService.class);
+            restartIntent.setAction(RecorderService.START_RECORDING_ACTION);
+            PendingIntent restartPendingIntent = PendingIntent.getService(context, 0, restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+            alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, restartPendingIntent);
+            context.getSharedPreferences(RecorderService.PREFERENCES_NAME, 0).edit().putBoolean("SHUT_DOWN_CORRECTLY", true).commit();
+            android.os.Process.killProcess(android.os.Process.myPid());
+        } else {
+            mediaServerPid = pid;
         }
     }
 
