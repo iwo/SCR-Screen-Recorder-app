@@ -34,7 +34,7 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
             setState(RecordingProcessState.INITIALIZING, null);
             process = new NativeProcess(context, this);
             new Thread(process).start();
-        } else {
+        } else if (process.getState() != NativeProcess.ProcessState.INITIALIZING && process.getState() != NativeProcess.ProcessState.READY) {
             try {
                 throw new IllegalStateException();
             } catch (IllegalStateException e) {

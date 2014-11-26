@@ -1,17 +1,14 @@
 package com.iwobanas.screenrecorder;
 
 import android.content.Context;
-import android.media.AudioManager;
 import android.util.Log;
 
 import com.google.analytics.tracking.android.EasyTracker;
-import com.iwobanas.screenrecorder.audio.InstallationStatus;
 import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,8 +23,6 @@ class NativeProcess implements Runnable {
     private static int instancesCount = 0;
 
     private final String TAG = "scr_RecorderProcess-" + instancesCount++;
-
-    private static final String AUDIO_CONFIG_FILE = "/system/lib/hw/scr_audio.conf";
 
     private static final String MEDIASERVER_COMMAND = "/system/bin/mediaserver";
 
@@ -283,10 +278,7 @@ class NativeProcess implements Runnable {
         recordingInfo.rotation = rotation;
         Settings settings = Settings.getInstance();
         setState(ProcessState.STARTING);
-        if (settings.getAudioSource().getRequiresDriver()
-                && settings.getAudioDriver().getInstallationStatus() == InstallationStatus.INSTALLED) {
-            configureAudioDriver(settings);
-        }
+        settings.updateAudioDriverConfig();
         configureTimeout.start();
         startTimeout.start();
         runCommand(fixEmulatedStorageMapping(fileName));
@@ -306,37 +298,14 @@ class NativeProcess implements Runnable {
         runCommand(settings.getTransformation().name());
         runCommand(settings.getColorFix() ? "BGRA" : "RGBA");
         runCommand(settings.getVideoBitrate().getCommand());
-        runCommand(settings.getSamplingRate().getCommand());
+        if (settings.getAudioSource().equals(AudioSource.INTERNAL)) {
+            runCommand(String.valueOf(settings.getAudioDriver().getSamplingRate()));
+        } else {
+            runCommand(settings.getSamplingRate().getCommand());
+        }
         runCommand(String.valueOf(settings.getVideoEncoder()));
         runCommand(String.valueOf(settings.getVerticalFrames() ? 1 : 0));
         logSettings(settings, rotation);
-    }
-
-    private void configureAudioDriver(Settings settings) {
-        try {
-            String mixMic = settings.getAudioSource() == AudioSource.MIX ? "1" : "0";
-            File configFile = new File(AUDIO_CONFIG_FILE);
-            FileWriter fileWriter = new FileWriter(configFile);
-            fileWriter.write(String.valueOf(getVolumeGain()) + " " + mixMic + "\n");
-            fileWriter.close();
-            if (!configFile.setReadable(true, false)) {
-                Log.w(TAG, "Error setting read permission on " + configFile.getAbsolutePath());
-            }
-        } catch (Exception e) {
-            Log.w(TAG, "Error setting audio gain", e);
-        }
-    }
-
-    private int getVolumeGain() {
-        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        int gain = 1;
-        double volume = (double) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) / (1.0 + audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-        if (volume < 1.0 && volume > 0.001) {
-            gain = (int) (1.0/(volume * volume));
-        }
-        gain = Math.min(gain, 16);
-        Log.v(TAG, "Music volume " + volume + " setting gain to " + gain);
-        return gain;
     }
 
     private String fixEmulatedStorageMapping(String fileName) {
