@@ -24,12 +24,12 @@ public class VideoEncoder {
             return new Integer[]{H264, FFMPEG_MPEG_4, MPEG_4_SP};
         } else {
             if (noRootOnly) {
-                return new Integer[]{NO_ROOT_H264, NO_ROOT_MPEG_4};
+                return new Integer[]{NO_ROOT_H264};
             }
             if (Utils.isX86()) {
-                return new Integer[]{NO_ROOT_H264, NO_ROOT_MPEG_4, H264, MPEG_4_SP};
+                return new Integer[]{NO_ROOT_H264, H264, MPEG_4_SP};
             }
-            return new Integer[]{NO_ROOT_H264, NO_ROOT_MPEG_4, H264, FFMPEG_MPEG_4, MPEG_4_SP};
+            return new Integer[]{NO_ROOT_H264, H264, FFMPEG_MPEG_4, MPEG_4_SP};
         }
     }
 
@@ -42,8 +42,7 @@ public class VideoEncoder {
     }
 
     public static int getNoRootVariant(int videoEncoder) {
-        if (videoEncoder == MPEG_4_SP)
-            return NO_ROOT_MPEG_4;
+        // don't return NO_ROOT_MPEG_4 for now as it doesn't work on current 5.0 releases
 
         return NO_ROOT_H264;
     }
