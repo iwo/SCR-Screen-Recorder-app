@@ -4,9 +4,6 @@ import android.os.Handler;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import static com.iwobanas.screenrecorder.Tracker.*;
 
 public class RecordingTimeController {
@@ -16,8 +13,21 @@ public class RecordingTimeController {
 
     private IRecorderService service;
     private Handler handler;
-    private Timer dialogTimer;
-    private Timer timer;
+
+    private final Runnable showDialogRunnable = new Runnable() {
+        @Override
+        public void run() {
+            service.showTimeoutDialog();
+        }
+    };
+
+    private final Runnable stopRecordingRunnable = new Runnable() {
+        @Override
+        public void run() {
+            service.stopRecording();
+            EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_TIME, null);
+        }
+    };
 
     public RecordingTimeController(IRecorderService service) {
         this.service = service;
@@ -25,37 +35,12 @@ public class RecordingTimeController {
     }
 
     public void start() {
-        dialogTimer = new Timer();
-        dialogTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                service.showTimeoutDialog();
-            }
-        }, DIALOG_TIMEOUT);
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                service.stopRecording();
-                EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_TIME, null);
-            }
-        }, TIMEOUT);
+        handler.postDelayed(showDialogRunnable, DIALOG_TIMEOUT);
+        handler.postDelayed(stopRecordingRunnable, TIMEOUT);
     }
 
     public void reset() {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (dialogTimer != null) {
-                    dialogTimer.cancel();
-                    dialogTimer = null;
-                }
-                if (timer != null) {
-                    timer.cancel();
-                    timer = null;
-                }
-
-            }
-        });
+        handler.removeCallbacks(showDialogRunnable);
+        handler.removeCallbacks(stopRecordingRunnable);
     }
 }
