@@ -79,10 +79,7 @@ public class ProjectionThread implements Runnable {
         @Override
         public void onPaused() {
             super.onPaused();
-            if (!stopped) {
-                setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, 515);
-                asyncError = true;
-            }
+            Log.v(TAG, "Display paused");
         }
 
         @Override
