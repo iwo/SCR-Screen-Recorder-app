@@ -372,7 +372,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         if (state.isError()) {
             errorDialogHelper.onStateChange(process, state, recordingInfo);
-            if (recordingInfo != null) {
+            if (recordingInfo != null && !state.isCritical()) {
                 logStats(recordingInfo);
             }
             if (ratingController != null) {
