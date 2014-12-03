@@ -11,9 +11,9 @@ import static com.iwobanas.screenrecorder.Tracker.*;
 public class NativeProcessRunner extends AbstractRecordingProcess implements NativeProcess.OnStateChangeListener {
     private static final String TAG = "scr_NativeProcessRunner";
 
-    Context context;
-
-    NativeProcess process;
+    private Context context;
+    private NativeProcess process;
+    private volatile boolean destroyed;
 
     public NativeProcessRunner(Context context) {
         super(TAG);
@@ -30,11 +30,13 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
 
     public void initialize() {
 
-        if (process == null || process.isStopped()) {
+        if (process == null || process.getState() == NativeProcess.ProcessState.DEAD) {
             setState(RecordingProcessState.INITIALIZING, null);
             process = new NativeProcess(context, this);
             new Thread(process).start();
-        } else if (process.getState() != NativeProcess.ProcessState.INITIALIZING && process.getState() != NativeProcess.ProcessState.READY) {
+        } else if (process.getState() != NativeProcess.ProcessState.FINISHED
+                && process.getState() != NativeProcess.ProcessState.INITIALIZING
+                && process.getState() != NativeProcess.ProcessState.READY) {
             try {
                 throw new IllegalStateException();
             } catch (IllegalStateException e) {
@@ -45,13 +47,8 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
 
     public void destroy() {
         Log.d(TAG, "destroy()");
-        if (process == null || process.isStopped()) {
-            return;
-        }
-
-        if (process.isRecording()) {
-            process.stopRecording();
-        } else {
+        destroyed = true;
+        if (process != null) {
             process.destroy();
         }
     }
@@ -75,7 +72,6 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
                 break;
             case FINISHED:
                 setState(RecordingProcessState.FINISHED, recordingInfo);
-                initialize();
                 break;
             case CPU_NOT_SUPPORTED_ERROR:
                 setState(RecordingProcessState.CPU_NOT_SUPPORTED_ERROR, null);
@@ -89,9 +85,15 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
                     || previousState == NativeProcess.ProcessState.STOPPING
                     || previousState == NativeProcess.ProcessState.FINISHED) {
                     handleRecordingError(recordingInfo);
-                    initialize();
                 } else {
                     handleStartupError(recordingInfo);
+                }
+                break;
+            case DONE:
+            case DEAD:
+                if (!destroyed && !getState().isCritical()) {
+                    process = null;
+                    initialize();
                 }
                 break;
             default:
