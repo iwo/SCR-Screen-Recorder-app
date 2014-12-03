@@ -32,6 +32,7 @@ class NativeProcess implements Runnable {
     private OnStateChangeListener onStateChangeListener;
     private RecordingInfo recordingInfo = new RecordingInfo();
     private boolean destroying = false;
+    private String suVersion;
 
     public NativeProcess(Context context, OnStateChangeListener onStateChangeListener) {
         this.context = context;
@@ -119,11 +120,14 @@ class NativeProcess implements Runnable {
                 parseFps(line);
             } else if (line.startsWith("error ")) {
                 parseError(line);
+            } else if (line.startsWith("su version ")) {
+                suVersion = line.substring("su version ".length());
+                Log.v(TAG, "su version: " + suVersion);
             } else if (line.startsWith("command success ")) {
 
             } else if (line.startsWith("command error ")) {
 
-            } else {
+            } else if (line.length() > 0) {
                 Log.e(TAG, "Unexpected update: " + line);
             }
         } catch (IOException e) {
