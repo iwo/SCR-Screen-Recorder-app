@@ -2,7 +2,6 @@ package com.iwobanas.screenrecorder.stats;
 
 import android.content.Context;
 
-import com.iwobanas.screenrecorder.ShellCommand;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
 
 public class AudioInstallationStatsAsyncTask extends StatsBaseAsyncTask {
@@ -17,17 +16,6 @@ public class AudioInstallationStatsAsyncTask extends StatsBaseAsyncTask {
         if (time > 0) {
             params.put("install_time", String.valueOf(time));
         }
-    }
-
-    @Override
-    protected Void doInBackground(Void... voids) {
-        ShellCommand suv = new ShellCommand(new String[]{"su", "-v"});
-        suv.execute();
-        ShellCommand suV = new ShellCommand(new String[]{"su", "-V"});
-        suV.execute();
-        params.put("su_version", suv.getOutput());
-        params.put("su_v", suV.getOutput());
-        return super.doInBackground(voids);
     }
 
     @Override

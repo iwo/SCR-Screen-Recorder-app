@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.iwobanas.screenrecorder.Tracker.*;
 
-class NativeProcess implements Runnable {
+class NativeProcess implements Runnable, INativeCommandRunner {
 
     private static final String MEDIASERVER_COMMAND = "/system/bin/mediaserver";
     private static AtomicInteger threadNumber = new AtomicInteger(0);
@@ -123,10 +123,8 @@ class NativeProcess implements Runnable {
             } else if (line.startsWith("su version ")) {
                 suVersion = line.substring("su version ".length());
                 Log.v(TAG, "su version: " + suVersion);
-            } else if (line.startsWith("command success ")) {
-
-            } else if (line.startsWith("command error ")) {
-
+            } else if (line.startsWith("command result ")) {
+                parseCommandResult(line);
             } else if (line.length() > 0) {
                 Log.e(TAG, "Unexpected update: " + line);
             }
@@ -190,6 +188,21 @@ class NativeProcess implements Runnable {
         }
     }
 
+    private void parseCommandResult(String resultLine) {
+        int separatorIdx = resultLine.indexOf(":");
+        if (separatorIdx < 0) {
+            separatorIdx = 0;
+        }
+        String command = resultLine.substring(separatorIdx + 1);
+        int result;
+        try {
+            result = Integer.valueOf(resultLine.substring("command result ".length(), separatorIdx));
+        } catch (NumberFormatException e) {
+            result = -1000;
+        }
+        NativeCommands.getInstance().notifyCommandResult(command, result);
+    }
+
     private void parseError(String errorString) {
         int exitValue;
         try {
@@ -244,6 +257,9 @@ class NativeProcess implements Runnable {
         Log.d(TAG, "setState " + state);
         ProcessState previousState = this.state;
         this.state = state;
+        if (state == ProcessState.READY) {
+            NativeCommands.getInstance().setCommandRunner(this);
+        }
         if (!destroying && onStateChangeListener != null) {
             onStateChangeListener.onStateChange(this, state, previousState, recordingInfo);
         }
@@ -333,7 +349,13 @@ class NativeProcess implements Runnable {
         runCommand("stop");
     }
 
-    private void runCommand(String command) {
+    @Override
+    public String getSuVersion() {
+        return suVersion;
+    }
+
+    @Override
+    public void runCommand(String command) {
         try {
             outputWriter.write(command + "\n");
             outputWriter.flush();
@@ -371,7 +393,7 @@ class NativeProcess implements Runnable {
             Log.e(TAG, command + " process not found");
             return;
         }
-        Utils.sendKillSignal(pid, executable);
+        NativeCommands.getInstance().killSignal(pid);
     }
 
     public static interface OnStateChangeListener {
