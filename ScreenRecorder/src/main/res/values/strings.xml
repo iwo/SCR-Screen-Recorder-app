@@ -306,7 +306,7 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="miui_error_message">If you can\'t see %1$s floating window go to MiUi apps settings and enable \"Show popup windows\" for %1$s.</string>
     <string name="miui_error_title">MiUi popups disabled?</string>
 
-    <string name="lollipop_dialog_title">Lollipop</string>
+    <string name="lollipop_dialog_title">Try SCR 5+</string>
     <string name="lollipop_dialog_message">Would you like to test SCR 5+, my new, lightweight, no-root screen recorder app? It utilizes official Android 5.0 screen capture API and microphone audio recording.</string>
     <string name="lollipop_dialog_try_now">Try now</string>
 
