@@ -69,6 +69,7 @@ public class ProjectionThread implements Runnable {
     private int sampleRate;
     private boolean hasAudio;
     private RecordingInfo recordingInfo;
+    private Thread recordingThread;
 
     private volatile boolean stopped;
     private volatile boolean audioStopped;
@@ -146,7 +147,8 @@ public class ProjectionThread implements Runnable {
         }
         sampleRate = s.getSamplingRate().getSamplingRate();
 
-        new Thread(this).start();
+        recordingThread = new Thread(this);
+        recordingThread.start();
     }
 
     private void setupVideoCodec() throws IOException {
@@ -574,5 +576,27 @@ public class ProjectionThread implements Runnable {
             return Orientation.LANDSCAPE;
         }
         return s.x > s.y ? Orientation.LANDSCAPE : Orientation.PORTRAIT;
+    }
+
+    private void forceStop() {
+        stopped = true;
+        audioStopped = true;
+        asyncError = true;
+        if (recordingThread != null) {
+            recordingThread.interrupt();
+        }
+        if (audioRecordThread != null) {
+            audioRecordThread.interrupt();
+        }
+    }
+
+    public void startTimeout() {
+        setError(RecordingProcessState.MEDIA_RECORDER_ERROR, 302);
+        forceStop();
+    }
+
+    public void stopTimeout() {
+        setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, 303);
+        forceStop();
     }
 }

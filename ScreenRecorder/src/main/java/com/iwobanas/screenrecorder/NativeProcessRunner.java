@@ -16,7 +16,7 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
     private volatile boolean destroyed;
 
     public NativeProcessRunner(Context context) {
-        super(TAG);
+        super(TAG, 10000, 10000);
         this.context = context;
     }
 
@@ -26,6 +26,24 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
 
     public void stop() {
         process.stopRecording();
+    }
+
+    @Override
+    public void startTimeout() {
+        if (process == null) {
+            Log.w(TAG, "Timeout for non-existent process");
+        }
+        Log.w(TAG, "Start timeout");
+        process.startTimeout();
+    }
+
+    @Override
+    public void stopTimeout() {
+        if (process == null) {
+            Log.w(TAG, "Timeout for non-existent process");
+        }
+        Log.w(TAG, "Stop timeout");
+        process.stopTimeout();
     }
 
     public void initialize() {
@@ -61,6 +79,9 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
         }
 
         switch (state) {
+            case NEW:
+            case INITIALIZING:
+                break;
             case READY:
                 setState(RecordingProcessState.READY, recordingInfo);
                 break;
@@ -69,6 +90,9 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
                 break;
             case RECORDING:
                 setState(RecordingProcessState.RECORDING, recordingInfo);
+                break;
+            case STOPPING:
+                setState(RecordingProcessState.STOPPING, recordingInfo);
                 break;
             case FINISHED:
                 setState(RecordingProcessState.FINISHED, recordingInfo);

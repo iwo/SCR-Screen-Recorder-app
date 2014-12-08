@@ -144,10 +144,18 @@ class NativeProcess implements Runnable, INativeCommandRunner {
         }
     }
 
-    //TODO: fix mediaserver restarts
-    private void setErrorState() {
+    private void setErrorState(int exitValue) {
         ProcessState previousState = state;
-        setState(ProcessState.ERROR);
+        if (previousState != ProcessState.ERROR) {
+            recordingInfo.exitValue = exitValue;
+            setState(ProcessState.ERROR);
+        } else {
+            if (exitValue != recordingInfo.exitValue) {
+                Log.w(TAG, "Exit value already set to " + recordingInfo.exitValue + " not updating to " + exitValue);
+            }
+            return;
+        }
+
         if (previousState != ProcessState.NEW && previousState != ProcessState.INITIALIZING
                 && mediaServerRelatedError()) {
             killMediaServer();
@@ -211,15 +219,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
             exitValue = 257;
         }
 
-        if (state != ProcessState.ERROR) {
-            recordingInfo.exitValue = exitValue;
-            setState(ProcessState.ERROR);
-        } else {
-            if (exitValue != recordingInfo.exitValue) {
-                Log.w(TAG, "Exit value already set to " + recordingInfo.exitValue + " not updating to " + exitValue);
-            }
-        }
-
+        setErrorState(exitValue);
     }
 
     private void parseState(String stateLine) {
@@ -394,6 +394,20 @@ class NativeProcess implements Runnable, INativeCommandRunner {
             return;
         }
         NativeCommands.getInstance().killSignal(pid);
+    }
+
+    private void forceStop() {
+        runCommand("force_stop");
+    }
+
+    public void startTimeout() {
+        forceStop();
+        setErrorState(302);
+    }
+
+    public void stopTimeout() {
+        forceStop();
+        setErrorState(303);
     }
 
     public static interface OnStateChangeListener {

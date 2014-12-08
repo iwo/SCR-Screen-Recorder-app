@@ -7,6 +7,8 @@ public interface IRecordingProcess {
 
     void start(String fileName, String rotation);
     void stop();
+    void startTimeout();
+    void stopTimeout();
     void destroy();
 
     void addObserver(RecordingProcessObserver observer);
