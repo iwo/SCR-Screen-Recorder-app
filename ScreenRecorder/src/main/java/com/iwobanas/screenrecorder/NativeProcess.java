@@ -197,18 +197,20 @@ class NativeProcess implements Runnable, INativeCommandRunner {
     }
 
     private void parseCommandResult(String resultLine) {
-        int separatorIdx = resultLine.indexOf(":");
-        if (separatorIdx < 0) {
-            separatorIdx = 0;
+        String[] tokens = resultLine.split("\\|");
+        if (tokens.length < 4) {
+            Log.e(TAG, "invalid command result format: " + resultLine);
         }
-        String command = resultLine.substring(separatorIdx + 1);
         int result;
+        int requestId;
         try {
-            result = Integer.valueOf(resultLine.substring("command result ".length(), separatorIdx));
+            requestId = Integer.valueOf(tokens[1]);
+            result = Integer.valueOf(tokens[2]);
         } catch (NumberFormatException e) {
+            requestId = -1;
             result = -1000;
         }
-        NativeCommands.getInstance().notifyCommandResult(command, result);
+        NativeCommands.getInstance().notifyCommandResult(requestId, result);
     }
 
     private void parseError(String errorString) {
@@ -355,7 +357,11 @@ class NativeProcess implements Runnable, INativeCommandRunner {
     }
 
     @Override
-    public void runCommand(String command) {
+    public void runCommand(String command, int requestId, String args) {
+        runCommand(command + " " + requestId + " " + args);
+    }
+
+    private void runCommand(String command) {
         try {
             outputWriter.write(command + "\n");
             outputWriter.flush();

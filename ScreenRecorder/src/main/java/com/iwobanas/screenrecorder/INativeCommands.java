@@ -10,5 +10,5 @@ public interface INativeCommands {
     int unmountAudioMaster();
     int logcat(String path);
     void setCommandRunner(INativeCommandRunner runner);
-    void notifyCommandResult(String command, int result);
+    void notifyCommandResult(int requestId, int result);
 }
