@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="1909"
-    android:versionName="0.19.9-alpha">
+    android:versionCode="1910"
+    android:versionName="0.19.10-alpha">
 
     <uses-sdk
         android:maxSdkVersion="21"
