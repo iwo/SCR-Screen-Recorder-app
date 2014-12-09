@@ -220,8 +220,8 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="menu_show_unstable">"Näytä epävakaa"</string>
     <string name="menu_show_advanced">"Näytä lisää"</string>
 
-    <string name="notification_status_installing">"Alustetaan"</string>
-    <string name="notification_status_initializing">"Odotetaan pääkäyttäjän oikeuksia (root)"</string>
+    <string name="notification_status_initializing">"Alustetaan"</string>
+    <string name="notification_status_waiting_for_root">"Odotetaan pääkäyttäjän oikeuksia (root)"</string>
     <string name="notification_status_installing_audio">"Asennetaan Ääniajuria"</string>
     <string name="notification_status_ready">"Valmis"</string>
     <string name="notification_status_starting">"Aloitetaan"</string>

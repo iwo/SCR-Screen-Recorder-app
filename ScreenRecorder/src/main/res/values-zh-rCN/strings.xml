@@ -72,8 +72,8 @@
     <string name="miui_error_message">若您没看到“%1$s”浮动窗口，请进入 MIUI 的应用设置并启用“%1$s”的“显示弹窗”选项。</string>
     <string name="miui_error_title">MIUI 弹窗被禁用了？</string>
     <string name="notification_status_error">出错</string>
-    <string name="notification_status_initializing">正在等待授予 ROOT 权限</string>
-    <string name="notification_status_installing">正在初始化</string>
+    <string name="notification_status_waiting_for_root">正在等待授予 ROOT 权限</string>
+    <string name="notification_status_initializing">正在初始化</string>
     <string name="notification_status_installing_audio">正在安装音频驱动</string>
     <string name="notification_status_ready">准备就绪</string>
     <string name="notification_status_recording">正在录制</string>

@@ -231,8 +231,8 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="menu_show_unstable">"Onstabiel"</string>
     <string name="menu_show_advanced">"Toon geavanceerd"</string>
 
-    <string name="notification_status_installing">"Initialiseren"</string>
-    <string name="notification_status_initializing">"Wachten op root-toegang"</string>
+    <string name="notification_status_initializing">"Initialiseren"</string>
+    <string name="notification_status_waiting_for_root">"Wachten op root-toegang"</string>
     <string name="notification_status_installing_audio">"Audio driver aan het installeren"</string>
     <string name="notification_status_ready">"Klaar"</string>
     <string name="notification_status_starting">"Aan het starten"</string>

@@ -219,8 +219,8 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
     <string name="help_stop_message">"Kaydı durdurmak için ekranı kilitleyin ve 2 saniye bekleyin. Yada alteratif olarak %1$s uygulama simgesine dokunup tekrar açın. "</string>
     <string name="menu_send_bug_report">"Hata raporu gönderin"</string>
 
-    <string name="notification_status_installing">"Başlatılıyor"</string>
-    <string name="notification_status_initializing">"Root erişimi için bekleniyor"</string>
+    <string name="notification_status_initializing">"Başlatılıyor"</string>
+    <string name="notification_status_waiting_for_root">"Root erişimi için bekleniyor"</string>
     <string name="notification_status_installing_audio">"Ses sürücülerinin kurulumu"</string>
     <string name="notification_status_ready">"Hazır"</string>
     <string name="notification_status_starting">"Başlatılıyor"</string>
