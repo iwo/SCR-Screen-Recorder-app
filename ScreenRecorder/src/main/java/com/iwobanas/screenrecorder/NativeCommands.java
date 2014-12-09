@@ -62,6 +62,10 @@ public class NativeCommands implements INativeCommands {
 
     //TODO: implement proper commands queue
     private int runAsyncCommand(String command, String args, long timeout) {
+        if (runner == null) {
+            return -30;
+        }
+
         resultCountdownLatch = new CountDownLatch(1);
         lastCommandRequestId = nextRequestId.getAndIncrement();
         runner.runCommand(command, lastCommandRequestId, args);
