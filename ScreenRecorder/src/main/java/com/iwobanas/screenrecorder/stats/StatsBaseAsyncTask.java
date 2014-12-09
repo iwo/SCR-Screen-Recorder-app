@@ -7,6 +7,7 @@ import android.os.Build;
 import android.provider.Settings.Secure;
 import android.util.Log;
 
+import com.iwobanas.screenrecorder.NativeCommands;
 import com.iwobanas.screenrecorder.Utils;
 
 import org.apache.http.HttpResponse;
@@ -27,6 +28,7 @@ public abstract class StatsBaseAsyncTask extends AsyncTask<Void, Void, Void> {
         params.put("package_name", context.getPackageName());
         params.put("app_version", String.valueOf(Utils.getAppVersion(context)));
         params.put("device_id", Secure.getString(context.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID));
+        params.put("su_version", NativeCommands.getInstance().getSuVersion());
     }
 
     @Override

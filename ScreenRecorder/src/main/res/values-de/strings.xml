@@ -230,8 +230,8 @@ Auch wenn diese Option deaktviert ist werden Ausrichtungs-Metadaten zum Video hi
     <string name="menu_show_unstable">"Instabile Einstellungen"</string>
     <string name="menu_show_advanced">"Erweiterte Einstellungen"</string>
 
-    <string name="notification_status_installing">"Initialisierung"</string>
-    <string name="notification_status_initializing">"Auf Root-Zugriff warten"</string>
+    <string name="notification_status_initializing">"Initialisierung"</string>
+    <string name="notification_status_waiting_for_root">"Auf Root-Zugriff warten"</string>
     <string name="notification_status_installing_audio">"Installation des Audio-Treibers"</string>
     <string name="notification_status_ready">"Bereit"</string>
     <string name="notification_status_starting">"Wird gestartet"</string>

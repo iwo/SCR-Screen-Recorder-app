@@ -218,8 +218,8 @@ acerca de un error. Siéntase libre de agregar cualquier comentario aquí."</str
     <string name="menu_show_unstable">"Mostrar inestabls"</string>
     <string name="menu_show_advanced">"Mostrar avanzado"</string>
 
-    <string name="notification_status_installing">"Iniciando"</string>
-    <string name="notification_status_initializing">"A la espera de acceso root"</string>
+    <string name="notification_status_initializing">"Iniciando"</string>
+    <string name="notification_status_waiting_for_root">"A la espera de acceso root"</string>
     <string name="notification_status_installing_audio">"Instalación del controlador de audio"</string>
     <string name="notification_status_ready">"Listo"</string>
     <string name="notification_status_starting">"Comenzando"</string>

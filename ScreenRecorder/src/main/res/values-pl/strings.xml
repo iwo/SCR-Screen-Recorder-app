@@ -223,8 +223,8 @@ SCR Screen Recorder zbiera anonimowe statystyki w celu naprawy błędów oraz an
     <string name="menu_show_unstable">"Pokaż niestabilne"</string>
     <string name="menu_show_advanced">"Pokaż zaawansowane"</string>
 
-    <string name="notification_status_installing">"Inicjowanie"</string>
-    <string name="notification_status_initializing">"Oczekiwanie na uprawnienia root"</string>
+    <string name="notification_status_initializing">"Inicjowanie"</string>
+    <string name="notification_status_waiting_for_root">"Oczekiwanie na uprawnienia root"</string>
     <string name="notification_status_installing_audio">"Instalacja sterownika audio "</string>
     <string name="notification_status_ready">"Gotowy"</string>
     <string name="notification_status_starting">"Uruchamianie"</string>

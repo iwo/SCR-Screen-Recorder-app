@@ -54,7 +54,7 @@ android {
             flavorString += flavors[i].name;
         }
         if(flavorString.equalsIgnoreCase("rootFree")) {
-            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.free"
+            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.free2"
         }
         if(flavorString.equalsIgnoreCase("rootPro")) {
             variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.pro"

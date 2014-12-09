@@ -32,7 +32,7 @@ public class ProjectionThreadRunner extends AbstractRecordingProcess implements 
     private Handler handler;
 
     public ProjectionThreadRunner(Context context) {
-        super(TAG);
+        super(TAG, 3000, 3000);
         this.context = context;
         handler = new Handler();
     }
@@ -87,6 +87,26 @@ public class ProjectionThreadRunner extends AbstractRecordingProcess implements 
             return;
         }
         currentThread.stopRecording();
+    }
+
+    @Override
+    public void startTimeout() {
+        if (currentThread == null) {
+            Log.e(TAG, "Timeout with o active thread!");
+            return;
+        }
+        Log.w(TAG, "Start timeout");
+        currentThread.startTimeout();
+    }
+
+    @Override
+    public void stopTimeout() {
+        if (currentThread == null) {
+            Log.e(TAG, "Timeout with o active thread!");
+            return;
+        }
+        Log.w(TAG, "Stop timeout");
+        currentThread.stopTimeout();
     }
 
     public void destroy() {

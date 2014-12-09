@@ -218,8 +218,8 @@ SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros ac
     <string name="menu_show_unstable">"Mostrar instável"</string>
     <string name="menu_show_advanced">"Mostrar Avançado"</string>
 
-    <string name="notification_status_installing">"Inicializando"</string>
-    <string name="notification_status_initializing">"À espera de acesso root"</string>
+    <string name="notification_status_initializing">"Inicializando"</string>
+    <string name="notification_status_waiting_for_root">"À espera de acesso root"</string>
     <string name="notification_status_installing_audio">"Instalando o driver de áudio"</string>
     <string name="notification_status_ready">"Pronto"</string>
     <string name="notification_status_starting">"Inicializando"</string>

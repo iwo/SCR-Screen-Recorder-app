@@ -20,7 +20,8 @@ public class RecorderActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         Settings.initialize(this);
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT == 21 && !getSharedPreferences(PREFERENCES_NAME, 0).getBoolean(LOLLIPOP_MESSAGE, false)) {
+        if (Build.VERSION.SDK_INT == 21 && Settings.getInstance().isRootFlavor() &&
+                !getSharedPreferences(PREFERENCES_NAME, 0).getBoolean(LOLLIPOP_MESSAGE, false)) {
             getSharedPreferences(PREFERENCES_NAME, 0).edit().putBoolean(LOLLIPOP_MESSAGE, true).apply();
             new LollipopDialogFragment().show(getFragmentManager(), LOLLIPOP_DIALOG_TAG);
         } else if (getFragmentManager().findFragmentByTag(LOLLIPOP_DIALOG_TAG) == null) { // handle configuration changes

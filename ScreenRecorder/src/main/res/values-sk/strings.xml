@@ -226,8 +226,8 @@ zvislými rámami.
     <string name="menu_show_unstable">"Zobraziť nestabilné"</string>
     <string name="menu_show_advanced">"Zobraziť pokročilé"</string>
 
-    <string name="notification_status_installing">"Inicializácia"</string>
-    <string name="notification_status_initializing">"Čakanie na root prístup"</string>
+    <string name="notification_status_initializing">"Inicializácia"</string>
+    <string name="notification_status_waiting_for_root">"Čakanie na root prístup"</string>
     <string name="notification_status_installing_audio">"Inštalácia zvukového ovládača"</string>
     <string name="notification_status_ready">"Pripravené"</string>
     <string name="notification_status_starting">"Spúšťanie"</string>

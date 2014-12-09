@@ -205,8 +205,8 @@ SCR Screen Recorder collecte des statistiques d'utilisation anonymes pour aider 
     <string name="help_stop_message">"Pour arrêter l'enregistrement verrouiller l'écran et attendez 2 secondes. Sinon, vous pouvez simplement rouvrir l'application %1$s ."</string>
     <string name="menu_send_bug_report">"Envoyer un rapport de Bug"</string>
 
-    <string name="notification_status_installing">"Initialisation en cours..."</string>
-    <string name="notification_status_initializing">"En attente de l'accès ROOT"</string>
+    <string name="notification_status_initializing">"Initialisation en cours..."</string>
+    <string name="notification_status_waiting_for_root">"En attente de l'accès ROOT"</string>
     <string name="notification_status_installing_audio">"Installation du pilote audio"</string>
     <string name="notification_status_ready">"Prêt"</string>
     <string name="notification_status_starting">"en cours de démarrage"</string>

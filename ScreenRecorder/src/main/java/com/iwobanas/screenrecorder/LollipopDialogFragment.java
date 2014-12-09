@@ -22,6 +22,7 @@ public class LollipopDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
 
         builder.setTitle(R.string.lollipop_dialog_title);
+        builder.setIcon(R.drawable.ic_launcher);
         builder.setMessage(R.string.lollipop_dialog_message);
         builder.setPositiveButton(R.string.lollipop_dialog_try_now, new DialogInterface.OnClickListener() {
             @Override

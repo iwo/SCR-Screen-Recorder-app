@@ -217,8 +217,8 @@ SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行�
     <string name="help_stop_message">"我們得停止錄製並鎖定螢幕再稍等約 2 秒。或是您也可以簡單地重新開啟 %1$s 應用程式"</string>
     <string name="menu_send_bug_report">"寄送錯誤報告"</string>
 
-    <string name="notification_status_installing">"初始化"</string>
-    <string name="notification_status_initializing">"等待root存取權限"</string>
+    <string name="notification_status_initializing">"初始化"</string>
+    <string name="notification_status_waiting_for_root">"等待root存取權限"</string>
     <string name="notification_status_ready">"就緒"</string>
     <string name="notification_status_starting">"正在開始"</string>
     <string name="notification_status_recording">"錄影中"</string>

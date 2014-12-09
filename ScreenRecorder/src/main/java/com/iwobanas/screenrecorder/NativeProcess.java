@@ -12,47 +12,27 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.io.OutputStreamWriter;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.iwobanas.screenrecorder.Tracker.*;
 
-class NativeProcess implements Runnable {
-
-    private static int instancesCount = 0;
-
-    private final String TAG = "scr_RecorderProcess-" + instancesCount++;
+class NativeProcess implements Runnable, INativeCommandRunner {
 
     private static final String MEDIASERVER_COMMAND = "/system/bin/mediaserver";
+    private static AtomicInteger threadNumber = new AtomicInteger(0);
+    private final String TAG = "scr_RecorderProcess-" + threadNumber.get();
 
-    private Process process ;
-
-    private OutputStream stdin;
-
-    private InputStream stdout;
-
+    private Process process;
+    private OutputStreamWriter outputWriter;
+    private BufferedReader inputReader;
     private volatile ProcessState state = ProcessState.NEW;
-
     private Context context;
-
     private String executable;
-
     private OnStateChangeListener onStateChangeListener;
-
-    private Integer exitValueOverride;
-
     private RecordingInfo recordingInfo = new RecordingInfo();
-
     private boolean destroying = false;
-
-    private volatile boolean forceKilled = false;
-
-    private Timeout configureTimeout = new Timeout(3000, RECORDING_ERROR, CONFIGURE_TIMEOUT, 301);
-
-    private Timeout startTimeout = new Timeout(10000, RECORDING_ERROR, START_TIMEOUT, 302);
-
-    private Timeout stopTimeout = new Timeout(10000, STOPPING_ERROR, STOP_TIMEOUT, 303);
+    private String suVersion;
 
     public NativeProcess(Context context, OnStateChangeListener onStateChangeListener) {
         this.context = context;
@@ -61,101 +41,24 @@ class NativeProcess implements Runnable {
 
     @Override
     public void run() {
-        setState(ProcessState.INITIALIZING);
-
-        installExecutable();
-        if (state != ProcessState.INITIALIZING) {
-            return;
-        }
-
         try {
-            Log.d(TAG, "Starting native process");
-            process = Runtime.getRuntime()
-                    .exec(new String[]{"su", "-c", executable});
-            Log.d(TAG, "Native process started");
-        } catch (IOException e) {
-            Log.e(TAG, "Error starting a new native process", e);
+            Thread.currentThread().setName("NativeProcess-" + threadNumber.getAndIncrement());
+            setState(ProcessState.INITIALIZING);
+            installExecutable();
+            if (state != ProcessState.INITIALIZING) {
+                return;
+            }
+            startProcess();
+
+            while (state != ProcessState.DONE) {
+                readUpdate();
+            }
+        } catch (NativeProcessException e) {
+            Log.e(TAG, "Error executing native process", e);
+            setErrorState(305);
         }
-        if (process != null) {
-            stdin = process.getOutputStream();
-            stdout = process.getInputStream();
-
-            new Thread(new ErrorStreamReader(process.getErrorStream())).start();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
-            try {
-                String status = reader.readLine();
-                if (status != null) {
-                    checkStatus("ready", status, 304);
-
-                    setState(ProcessState.READY);
-
-                    status = reader.readLine();
-                    checkStatus("configured", status, 305);
-                    configureTimeout.cancel();
-
-                    status = reader.readLine();
-                    parseInputParams(status);
-
-                    status = reader.readLine();
-                    checkStatus("recording", status, 306);
-                    startTimeout.cancel();
-
-                    setState(ProcessState.RECORDING);
-
-                    status = reader.readLine();
-                    parseFps(status);
-                }
-            } catch (IOException e) {
-                Log.e(TAG, "Exception when reading state", e);
-                exitValueOverride = 307;
-                forceKill();
-            }
-
-            try {
-                Log.d(TAG, "Flushing output");
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    Log.e(TAG, "unexpected output: " + line);
-                }
-            } catch (IOException e) {
-                Log.e(TAG, "Error when flushing stdout", e);
-            }
-
-
-            try {
-                Log.d(TAG, "Waiting for native process to exit");
-                process.waitFor();
-                Log.d(TAG, "Native process finished");
-            } catch (InterruptedException e) {
-                Log.e(TAG, "Native process interrupted", e);
-            }
-
-            stopTimeout.cancel();
-
-            recordingInfo.exitValue = process.exitValue();
-        }
-
-        if (destroying && (recordingInfo.exitValue == 200 || recordingInfo.exitValue == 222)) {
-            setState(ProcessState.FINISHED);
-        } else if (exitValueOverride != null) {
-            if (recordingInfo.exitValue < 165) {
-                recordingInfo.exitValue = exitValueOverride;
-            }
-            setErrorState();
-        } else if (state == ProcessState.STOPPING) {
-            if (recordingInfo.exitValue == 0) {
-                recordingInfo.exitValue = -1; // use -1 as "success" for backward compatibility
-            } else {
-                Log.e(TAG, "Unexpected exit value: " + recordingInfo.exitValue);
-                recordingInfo.exitValue += 1000;
-            }
-            setState(ProcessState.FINISHED);
-        } else {
-            setErrorState();
-        }
-
-        Log.d(TAG, "Return value: " + recordingInfo.exitValue);
+        waitForExit();
+        setState(ProcessState.DEAD);
     }
 
     private void installExecutable() {
@@ -183,10 +86,77 @@ class NativeProcess implements Runnable {
         }
     }
 
-    private void setErrorState() {
+    private void startProcess() throws NativeProcessException {
+        try {
+            Log.d(TAG, "Starting native process");
+            process = Runtime.getRuntime()
+                    .exec(new String[]{"su", "-c", executable});
+            Log.d(TAG, "Native process started");
+        } catch (IOException e) {
+            Log.e(TAG, "Error starting a new native process", e);
+        }
+        if (process == null) {
+            throw new NativeProcessException("Process is null");
+        }
+        outputWriter = new OutputStreamWriter(process.getOutputStream());
+        inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+        new Thread(new ErrorStreamReader(process.getErrorStream())).start();
+    }
+
+    private void readUpdate() throws NativeProcessException {
+        String line;
+        try {
+            line = inputReader.readLine();
+            if (line == null) {
+                throw new NativeProcessException("Error reading status update");
+            }
+
+            if (line.startsWith("state ")) {
+                parseState(line);
+            } else if (line.startsWith("rotateView ")) {
+                parseInputParams(line);
+            } else if (line.startsWith("fps ")) {
+                parseFps(line);
+            } else if (line.startsWith("error ")) {
+                parseError(line);
+            } else if (line.startsWith("su version ")) {
+                suVersion = line.substring("su version ".length());
+                Log.v(TAG, "su version: " + suVersion);
+            } else if (line.startsWith("command result ")) {
+                parseCommandResult(line);
+            } else if (line.length() > 0) {
+                Log.e(TAG, "Unexpected update: " + line);
+            }
+        } catch (IOException e) {
+            throw new NativeProcessException("Exception while reading status", e);
+        }
+    }
+
+    private void waitForExit() {
+        if (process != null) {
+            try {
+                process.waitFor();
+                Log.v(TAG, "Process exit value: " + process.exitValue());
+            } catch (InterruptedException e) {
+                Log.w(TAG, "Process interrupted", e);
+            }
+        }
+    }
+
+    private void setErrorState(int exitValue) {
         ProcessState previousState = state;
-        setState(ProcessState.ERROR);
-        if (previousState != ProcessState.NEW  && previousState != ProcessState.INITIALIZING
+        if (previousState != ProcessState.ERROR) {
+            recordingInfo.exitValue = exitValue;
+            setState(ProcessState.ERROR);
+        } else {
+            if (exitValue != recordingInfo.exitValue) {
+                Log.w(TAG, "Exit value already set to " + recordingInfo.exitValue + " not updating to " + exitValue);
+            }
+            return;
+        }
+
+        if (previousState != ProcessState.NEW && previousState != ProcessState.INITIALIZING
                 && mediaServerRelatedError()) {
             killMediaServer();
         }
@@ -208,32 +178,59 @@ class NativeProcess implements Runnable {
             case 229:
             case 237: // microphone busy
             case 251: // microphone busy
+            case 305: // shell death
                 return false;
             default:
                 return true;
         }
     }
 
+    private void parseFps(String fpsString) {
+        try {
+            recordingInfo.fps = Float.parseFloat(fpsString.substring(4));
+        } catch (NumberFormatException e) {
+            recordingInfo.fps = -1;
+        }
 
-    private void checkStatus(String expectedStatus, String status, int errorCode) {
-        if (forceKilled || destroying || status == null) return;
-        if (!expectedStatus.equals(status)) {
-            Log.e(TAG, "Incorrect status received: " + status);
-            exitValueOverride = errorCode;
-            forceKill();
+        if (!destroying && recordingInfo.fps < 0) {
+            Log.e(TAG, "Incorrect fps value received \"" + fpsString + "\"");
         }
     }
 
-    private void parseFps(String fpsString) {
-        if (fpsString != null && fpsString.startsWith("fps ") && fpsString.length() > 4) {
-            try {
-                recordingInfo.fps = Float.parseFloat(fpsString.substring(4));
-            } catch (NumberFormatException e) {
-                recordingInfo.fps = -1;
-            }
+    private void parseCommandResult(String resultLine) {
+        String[] tokens = resultLine.split("\\|");
+        if (tokens.length < 4) {
+            Log.e(TAG, "invalid command result format: " + resultLine);
         }
-        if (!destroying && recordingInfo.fps < 0) {
-            Log.e(TAG, "Incorrect fps value received \"" + fpsString + "\"");
+        int result;
+        int requestId;
+        try {
+            requestId = Integer.valueOf(tokens[1]);
+            result = Integer.valueOf(tokens[2]);
+        } catch (NumberFormatException e) {
+            requestId = -1;
+            result = -1000;
+        }
+        NativeCommands.getInstance().notifyCommandResult(requestId, result);
+    }
+
+    private void parseError(String errorString) {
+        int exitValue;
+        try {
+            exitValue = Integer.parseInt(errorString.substring("error ".length()));
+        } catch (NumberFormatException e) {
+            exitValue = 257;
+        }
+
+        setErrorState(exitValue);
+    }
+
+    private void parseState(String stateLine) {
+        String stateString = stateLine.substring("state ".length());
+        try {
+            setState(ProcessState.valueOf(stateString));
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Incorrect state", e);
         }
     }
 
@@ -247,24 +244,28 @@ class NativeProcess implements Runnable {
                 recordingInfo.verticalInput = Integer.parseInt(kv[3]);
                 recordingInfo.adjustedRotation = Integer.parseInt(kv[5]);
                 parsed = true;
-            } catch (NumberFormatException ignored) {}
+            } catch (NumberFormatException ignored) {
+            }
         }
         if (!destroying && !parsed) {
             Log.e(TAG, "Incorrect input params received \"" + params + "\"");
         }
     }
 
+    public ProcessState getState() {
+        return state;
+    }
+
     private void setState(ProcessState state) {
         Log.d(TAG, "setState " + state);
         ProcessState previousState = this.state;
         this.state = state;
+        if (state == ProcessState.READY) {
+            NativeCommands.getInstance().setCommandRunner(this);
+        }
         if (!destroying && onStateChangeListener != null) {
             onStateChangeListener.onStateChange(this, state, previousState, recordingInfo);
         }
-    }
-
-    public ProcessState getState() {
-        return state;
     }
 
     public void startRecording(String fileName, String rotation) {
@@ -274,37 +275,41 @@ class NativeProcess implements Runnable {
             //TODO: add error handling
             return;
         }
+        recordingInfo = new RecordingInfo();
         recordingInfo.fileName = fileName;
         recordingInfo.rotation = rotation;
         Settings settings = Settings.getInstance();
         setState(ProcessState.STARTING);
         settings.updateAudioDriverConfig();
-        configureTimeout.start();
-        startTimeout.start();
-        runCommand(fixEmulatedStorageMapping(fileName));
-        runCommand(rotation);
+        String audioSource;
         if (settings.getTemporaryMute()) {
             Log.v(TAG, "Audio muted for this recording");
-            runCommand(AudioSource.MUTE.getCommand());
+            audioSource = AudioSource.MUTE.getCommand();
             settings.setTemporaryMute(false);
         } else {
-            runCommand(settings.getAudioSource().getCommand());
+            audioSource = settings.getAudioSource().getCommand();
         }
-        runCommand(String.valueOf(settings.getResolution().getVideoWidth()));
-        runCommand(String.valueOf(settings.getResolution().getVideoHeight()));
-        runCommand(String.valueOf(settings.getResolution().getPaddingWidth()));
-        runCommand(String.valueOf(settings.getResolution().getPaddingHeight()));
-        runCommand(String.valueOf(settings.getFrameRate()));
-        runCommand(settings.getTransformation().name());
-        runCommand(settings.getColorFix() ? "BGRA" : "RGBA");
-        runCommand(settings.getVideoBitrate().getCommand());
+        int samplingRate;
         if (settings.getAudioSource().equals(AudioSource.INTERNAL)) {
-            runCommand(String.valueOf(settings.getAudioDriver().getSamplingRate()));
+            samplingRate = settings.getAudioDriver().getSamplingRate();
         } else {
-            runCommand(settings.getSamplingRate().getCommand());
+            samplingRate = settings.getSamplingRate().getSamplingRate();
         }
-        runCommand(String.valueOf(settings.getVideoEncoder()));
-        runCommand(String.valueOf(settings.getVerticalFrames() ? 1 : 0));
+
+        String startCommand = "start " + rotation + " " + audioSource + " "
+                + settings.getResolution().getVideoWidth() + " "
+                + settings.getResolution().getVideoHeight() + " "
+                + settings.getResolution().getPaddingWidth() + " "
+                + settings.getResolution().getPaddingHeight() + " "
+                + settings.getFrameRate() + " "
+                + settings.getTransformation().name() + " "
+                + (settings.getColorFix() ? "BGRA" : "RGBA") + " "
+                + settings.getVideoBitrate().getCommand() + " "
+                + samplingRate + " "
+                + settings.getVideoEncoder() + " "
+                + (settings.getVerticalFrames() ? 1 : 0) + " "
+                + fixEmulatedStorageMapping(fileName);
+        runCommand(startCommand);
         logSettings(settings, rotation);
     }
 
@@ -345,100 +350,38 @@ class NativeProcess implements Runnable {
         }
         setState(ProcessState.STOPPING);
         runCommand("stop");
-        stopTimeout.start();
     }
 
-    class Timeout {
-        private int time;
-        private String errorName;
-        private String errorCategory;
-        private int errorCode;
-        private Timer timer;
+    @Override
+    public String getSuVersion() {
+        return suVersion;
+    }
 
-        public Timeout(int time, String errorCategory, String errorName, int errorCode) {
-            this.time = time;
-            this.errorCategory = errorCategory;
-            this.errorName = errorName;
-            this.errorCode = errorCode;
-        }
-
-        public void start() {
-            synchronized (NativeProcess.this) {
-                if (timer != null) {
-                    Log.e(TAG, "Timeout already started");
-                    return;
-                }
-                timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (process != null) {
-                            Log.w(TAG, "Timeout, killing the native process" + errorName);
-                            EasyTracker.getTracker().sendEvent(ERROR, errorCategory, errorName, null);
-                            exitValueOverride = errorCode;
-                            forceKill();
-                            timer = null;
-                        }
-                    }
-                }, time);
-            }
-        }
-
-        public void cancel() {
-            synchronized (NativeProcess.this) {
-                if (timer != null) {
-                    timer.cancel();
-                    timer = null;
-                }
-            }
-        }
+    @Override
+    public void runCommand(String command, int requestId, String args) {
+        runCommand(command + " " + requestId + " " + args);
     }
 
     private void runCommand(String command) {
         try {
-            command = command + "\n";
-            stdin.write(command.getBytes());
-            stdin.flush();
+            outputWriter.write(command + "\n");
+            outputWriter.flush();
         } catch (IOException e) {
             Log.e(TAG, "Error running command", e);
         }
     }
 
-    public boolean isStopped() {
-        return state == ProcessState.FINISHED || state == ProcessState.ERROR;
-    }
-
-    public boolean isRecording() {
-        return state == ProcessState.STARTING || state == ProcessState.RECORDING;
-    }
-
     public void destroy() {
         if (process != null) {
+            if (state == ProcessState.RECORDING) {
+                stopRecording();
+            }
             Log.d(TAG, "Destroying process");
             destroying = true;
-            stopTimeout.start();
-            stopProcess();
+            if (state != ProcessState.DEAD) {
+                runCommand("quit");
+            }
         }
-    }
-
-    private void stopProcess() {
-        if (process != null) try {
-            // process.destroy(); fails with "EPERM (Operation not permitted)"
-            // so we just close the input stream
-            stdin.close();
-        } catch (IOException ignored) {
-        }
-    }
-
-    private synchronized void forceKill() {
-        Log.d(TAG, "forceKill");
-        if (forceKilled) {
-            Log.d(TAG, "Already force killed");
-            return;
-        }
-        forceKilled = true;
-
-        killProcess(executable);
     }
 
     private void killMediaServer() {
@@ -457,7 +400,21 @@ class NativeProcess implements Runnable {
             Log.e(TAG, command + " process not found");
             return;
         }
-        Utils.sendKillSignal(pid, executable);
+        NativeCommands.getInstance().killSignal(pid);
+    }
+
+    private void forceStop() {
+        runCommand("force_stop");
+    }
+
+    public void startTimeout() {
+        forceStop();
+        setErrorState(302);
+    }
+
+    public void stopTimeout() {
+        forceStop();
+        setErrorState(303);
     }
 
     public static interface OnStateChangeListener {
@@ -474,7 +431,9 @@ class NativeProcess implements Runnable {
         FINISHED,
         CPU_NOT_SUPPORTED_ERROR,
         INSTALLATION_ERROR,
-        ERROR
+        ERROR,
+        DONE,
+        DEAD
     }
 
     class ErrorStreamReader implements Runnable {
@@ -491,7 +450,18 @@ class NativeProcess implements Runnable {
                 while ((line = reader.readLine()) != null) {
                     Log.w(TAG, "stderr: " + line);
                 }
-            } catch (IOException ignored) {}
+            } catch (IOException ignored) {
+            }
+        }
+    }
+
+    class NativeProcessException extends Exception {
+        public NativeProcessException(String msg) {
+            super(msg);
+        }
+
+        NativeProcessException(String detailMessage, Throwable throwable) {
+            super(detailMessage, throwable);
         }
     }
 }

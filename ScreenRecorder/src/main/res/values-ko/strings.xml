@@ -196,8 +196,8 @@ SCR 스크린 레코더는 모든 장치에서 최고 품질의 화면 녹화를
     <string name="help_stop_message">"녹화를 중지하려면 화면을 잠그고 2초를 기다려야 합니다. 또는 간단히 %1$s앱을 다시 열면 됩니다 ."</string>
     <string name="menu_send_bug_report">"버그 리포트를 보내주세요."</string>
 
-    <string name="notification_status_installing">"초기화"</string>
-    <string name="notification_status_initializing">"루트 엑세스를 기다리는 중"</string>
+    <string name="notification_status_initializing">"초기화"</string>
+    <string name="notification_status_waiting_for_root">"루트 엑세스를 기다리는 중"</string>
     <string name="notification_status_installing_audio">"오디오 드라이버 설치"</string>
     <string name="notification_status_ready">"준비"</string>
     <string name="notification_status_starting">"시작"</string>

@@ -217,8 +217,8 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="menu_show_unstable">"Vis ustabil"</string>
     <string name="menu_show_advanced">"Vis avancerede"</string>
 
-    <string name="notification_status_installing">"Initialiserer"</string>
-    <string name="notification_status_initializing">"Venter på root-adgang"</string>
+    <string name="notification_status_initializing">"Initialiserer"</string>
+    <string name="notification_status_waiting_for_root">"Venter på root-adgang"</string>
     <string name="notification_status_installing_audio">"Installation L driver"</string>
     <string name="notification_status_ready">"Klar"</string>
     <string name="notification_status_starting">"Start"</string>

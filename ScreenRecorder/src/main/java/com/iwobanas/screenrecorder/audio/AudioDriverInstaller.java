@@ -5,8 +5,8 @@ import android.os.Build;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.CameraOverlay;
+import com.iwobanas.screenrecorder.NativeCommands;
 import com.iwobanas.screenrecorder.R;
-import com.iwobanas.screenrecorder.ShellCommand;
 import com.iwobanas.screenrecorder.Utils;
 
 import java.io.File;
@@ -54,13 +54,11 @@ public class AudioDriverInstaller {
         this.context = context;
         localDir = new File(context.getFilesDir(), SCR_AUDIO_DIR);
         systemDir = new File(SYSTEM_LIB_HW);
-        installer = new File(context.getFilesDir(), "screenrec");
     }
 
     private Context context;
     private File localDir;
     private File systemDir;
-    private File installer;
     private boolean uninstallSuccess;
     private String errorDetails;
 
@@ -71,7 +69,7 @@ public class AudioDriverInstaller {
         errorDetails = null;
         try {
             if (isSystemAlphaModuleInstalled()) {
-                uninstallSystemAlphaModule();
+                throw new InstallationException("Unsupported old audio driver installed");
             }
             if (!systemFilesValid()) {
                 initializeDir();
@@ -234,27 +232,16 @@ public class AudioDriverInstaller {
 
     private void mount() throws InstallationException {
         String commandInput = "mount_audio\n" + localDir.getAbsolutePath() + "\n";
-        int result = runInstaller(commandInput);
+        int result = NativeCommands.getInstance().mountAudioMaster(localDir.getAbsolutePath().toString());
+        if (result != 0 && result < 150) {
+            Log.w(TAG, "Retrying without mount master");
+            //TODO: pass info about the mount master failure to stats
+            result = NativeCommands.getInstance().mountAudio(localDir.getAbsolutePath().toString());
+        }
         if (result != 0) {
             throw new InstallationException("Mount command failed with error code: " + result);
         }
     }
-
-    private int runInstaller(String commandInput) {
-        ShellCommand command = new ShellCommand(new String[]{"su", "--mount-master", "--context", "u:r:init:s0", "-c", installer.getAbsolutePath()});
-        command.setInput(commandInput);
-        command.execute();
-        if (!command.getOutput().startsWith("ready")) {
-            command = new ShellCommand(new String[]{"su", "-c", installer.getAbsolutePath()});
-            command.setInput(commandInput);
-            command.execute();
-        }
-        if (!command.isExecutionCompleted()) {
-            return -1;
-        }
-        return command.exitValue();
-    }
-
 
     private void validateMounted() throws InstallationException {
         if (!isMounted()) {
@@ -291,10 +278,10 @@ public class AudioDriverInstaller {
     private void terminateMediaserver() throws InstallationException {
         int pid = Utils.findProcessByCommand(MEDIASERVER_COMMAND);
         if (pid > 0) {
-            Utils.sendTermSignal(pid, installer.getAbsolutePath());
+            NativeCommands.getInstance().termSignal(pid);
             if (!waitForProcessToStop(pid, 1000, 100)) {
                 Log.v(TAG, "mediaserver not terminating. killing");
-                Utils.sendKillSignal(pid, installer.getAbsolutePath());
+                NativeCommands.getInstance().killSignal(pid);
             }
             if (!waitForProcessToStop(pid, 500, 100)) {
                 throw new InstallationException("Can't restart mediaserver");
@@ -540,8 +527,11 @@ public class AudioDriverInstaller {
     }
 
     private void unmount() {
-        String commandInput = "unmount_audio\n";
-        int result = runInstaller(commandInput);
+        int result = NativeCommands.getInstance().unmountAudioMaster();
+        if (result != 0 && result < 150) {
+            Log.w(TAG, "Retrying without mount master");
+            result = NativeCommands.getInstance().unmountAudio();
+        }
         if (result != 0) {
             uninstallError("Unmount command failed with error code: " + result);
         }
@@ -575,10 +565,6 @@ public class AudioDriverInstaller {
     private boolean isSystemAlphaModuleInstalled() {
         File versionFile = new File("/system/lib/hw/scr_module_version");
         return versionFile.exists();
-    }
-
-    private void uninstallSystemAlphaModule() {
-        runInstaller("uninstall_audio\n");
     }
 
     private boolean scrModuleInstalled() {

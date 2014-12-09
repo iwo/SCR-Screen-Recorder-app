@@ -325,7 +325,7 @@ public class Utils {
         ShellCommand cmd = new ShellCommand(new String[]{"rm", "-rf", dir.getAbsolutePath()});
         cmd.setErrorLogTag("scr_deleteDir_error");
         cmd.execute();
-        return (cmd.isExecutionCompleted() && cmd.exitValue() == 0) || recursiveDelete(dir);
+        return recursiveDelete(dir);
     }
 
     private static boolean recursiveDelete(File file) {
@@ -422,18 +422,6 @@ public class Utils {
             Log.v(tag, "Error reading file", e);
         }
 
-    }
-
-    public static void sendTermSignal(int pid, String executable) {
-        ShellCommand cmd = new ShellCommand(new String[]{"su", "-c", executable});
-        cmd.setInput("kill_term\n" + String.valueOf(pid) + "\n");
-        cmd.execute();
-    }
-
-    public static void sendKillSignal(int pid, String executable) {
-        ShellCommand cmd = new ShellCommand(new String[]{"su", "-c", executable});
-        cmd.setInput("kill_kill\n" + String.valueOf(pid) + "\n");
-        cmd.execute();
     }
 
     public static boolean processExists(int pid) {

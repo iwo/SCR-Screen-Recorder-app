@@ -1,6 +1,7 @@
 package com.iwobanas.screenrecorder;
 
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -13,8 +14,31 @@ public abstract class AbstractRecordingProcess implements IRecordingProcess {
     private Collection<RecordingProcessObserver> observers = new ArrayList<RecordingProcessObserver>(5);
     private volatile RecordingProcessState state;
 
-    protected AbstractRecordingProcess(String logTag) {
+    private long startTimeoutMillis;
+    private long stopTimeoutMillis;
+    private Handler timeoutsHandler;
+    private HandlerThread timeoutsThread = new HandlerThread("Timeouts thread");
+
+    private final Runnable startTimeoutRunnable = new Runnable() {
+        @Override
+        public void run() {
+            startTimeout();
+        }
+    };
+
+    private final Runnable stopTimeoutRunnable = new Runnable() {
+        @Override
+        public void run() {
+            stopTimeout();
+        }
+    };
+
+    protected AbstractRecordingProcess(String logTag, long startTimeoutMillis, long stopTimeoutMillis) {
         this.logTag = logTag;
+        this.startTimeoutMillis = startTimeoutMillis;
+        this.stopTimeoutMillis = stopTimeoutMillis;
+        timeoutsThread.start();
+        timeoutsHandler = new Handler(timeoutsThread.getLooper());
         handler = new Handler();
     }
 
@@ -55,7 +79,25 @@ public abstract class AbstractRecordingProcess implements IRecordingProcess {
 
     protected void setState(RecordingProcessState state, RecordingInfo recordingInfo) {
         Log.v(logTag, state.name());
+        if (this.state == state) {
+            return;
+        }
         this.state = state;
+        updateTimeouts();
         notifyObservers(state, recordingInfo);
+    }
+
+    private void updateTimeouts() {
+        if (state == RecordingProcessState.STARTING) {
+            timeoutsHandler.postDelayed(startTimeoutRunnable, startTimeoutMillis);
+        } else {
+            timeoutsHandler.removeCallbacks(startTimeoutRunnable);
+        }
+
+        if (state == RecordingProcessState.STOPPING) {
+            timeoutsHandler.postDelayed(stopTimeoutRunnable, stopTimeoutMillis);
+        } else {
+            timeoutsHandler.removeCallbacks(stopTimeoutRunnable);
+        }
     }
 }

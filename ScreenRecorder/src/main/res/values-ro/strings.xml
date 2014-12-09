@@ -222,8 +222,8 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="menu_show_unstable">"Arata instabilitatea"</string>
     <string name="menu_show_advanced">"Arată setari avansate"</string>
 
-    <string name="notification_status_installing">"Inițializare"</string>
-    <string name="notification_status_initializing">"Așteptare pentru acces drepturi de admin"</string>
+    <string name="notification_status_initializing">"Inițializare"</string>
+    <string name="notification_status_waiting_for_root">"Așteptare pentru acces drepturi de admin"</string>
     <string name="notification_status_installing_audio">"Instalare driver audio"</string>
     <string name="notification_status_ready">"Gata de funcţionare"</string>
     <string name="notification_status_starting">"Pornire"</string>

@@ -223,8 +223,8 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
     <string name="menu_show_unstable">"إظهار الإعدادات الغير مستقرة"</string>
     <string name="menu_show_advanced">"إظهار الإعدادات المتقدمة"</string>
 
-    <string name="notification_status_installing">"جاري التهيئة"</string>
-    <string name="notification_status_initializing">"في انتظار الحصول على صلاحيات الروت"</string>
+    <string name="notification_status_initializing">"جاري التهيئة"</string>
+    <string name="notification_status_waiting_for_root">"في انتظار الحصول على صلاحيات الروت"</string>
     <string name="notification_status_installing_audio">"جاري تثبيت برنامج تشغيل الصوت"</string>
     <string name="notification_status_ready">"مستعد للتسجيل"</string>
     <string name="notification_status_starting">"جاري البدء بالتسجيل"</string>

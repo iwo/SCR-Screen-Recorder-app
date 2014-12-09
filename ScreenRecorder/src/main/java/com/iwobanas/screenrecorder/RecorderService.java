@@ -198,14 +198,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
             cantStartToast.cancel();
         }
 
-        if (state == RecorderServiceState.INITIALIZING && useProjection()) {
+        if (useProjection() && !projectionThreadRunner.isReady()) {
             projectionDenied = false;
+            setState(RecorderServiceState.WAITING_FOR_PROJECTION);
             projectionThreadRunner.initialize(); // request initialization again
             startRecordingWhenReady();
             return;
         }
 
-        if (state != RecorderServiceState.READY) {
+        if (state != RecorderServiceState.READY && state != RecorderServiceState.WAITING_FOR_PROJECTION) {
             cantStartToast = Toast.makeText(this, getString(R.string.can_not_start_toast, getStatusString()), Toast.LENGTH_SHORT);
             cantStartToast.show();
             return;
@@ -344,7 +345,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         switch (state) {
             case INITIALIZING:
-                setState(RecorderServiceState.INITIALIZING);
+                if (process == projectionThreadRunner) {
+                    setState(RecorderServiceState.WAITING_FOR_PROJECTION);
+                } else { // process == nativeProcessRunner
+                    setState(RecorderServiceState.WAITING_FOR_ROOT);
+                }
                 break;
             case READY:
                 nextInitializationStep();
@@ -372,7 +377,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
         if (state.isError()) {
             errorDialogHelper.onStateChange(process, state, recordingInfo);
-            if (recordingInfo != null) {
+            if (recordingInfo != null && !state.isCritical()) {
                 logStats(recordingInfo);
             }
             if (ratingController != null) {
@@ -468,8 +473,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private void reinitialize() {
         recordingTimeController.reset();
         screenOffReceiver.unregister();
-
-        setState(RecorderServiceState.INITIALIZING);
 
         nextInitializationStep();
     }
@@ -595,9 +598,13 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private CharSequence getStatusString() {
         switch (state) {
             case INITIALIZING:
-                return useProjection() ? getString(R.string.notification_status_initializing_no_root) : getString(R.string.notification_status_initializing);
+                return getString(R.string.notification_status_initializing);
+            case WAITING_FOR_ROOT:
+                return getString(R.string.notification_status_waiting_for_root);
             case INSTALLING_AUDIO:
                 return getString(R.string.notification_status_installing_audio);
+            case WAITING_FOR_PROJECTION:
+                return getString(R.string.notification_status_waiting_for_projection);
             case READY:
                 return getString(R.string.notification_status_ready);
             case STARTING:
@@ -711,11 +718,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private void denyProjectionError() {
         projectionDenied = true;
-        if (startOnReady) {
+        if (startOnReady || state == RecorderServiceState.STARTING) {
             displayErrorMessage(
                     getString(R.string.projection_deny_error_message),
                     getString(R.string.projection_deny_error_title),
                     true, false, 510);
+            nextInitializationStep(); // this should set state to READY
         } else {
             Toast.makeText(this, R.string.projection_deny_error_message, Toast.LENGTH_SHORT).show();
         }
@@ -779,6 +787,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else {
             if (SETTINGS_CLOSED_ACTION.equals(action)) {
                 settingsDisplayed = false;
+                if (state == RecorderServiceState.WAITING_FOR_PROJECTION && !useProjection()) {
+                    setState(RecorderServiceState.READY);
+                }
             }
             if (SETTINGS_OPENED_ACTION.equals(action)) {
                 settingsDisplayed = true;
@@ -1012,7 +1023,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private static enum RecorderServiceState {
         INITIALIZING,
+        WAITING_FOR_ROOT,
         INSTALLING_AUDIO,
+        WAITING_FOR_PROJECTION,
         READY,
         STARTING,
         RECORDING,

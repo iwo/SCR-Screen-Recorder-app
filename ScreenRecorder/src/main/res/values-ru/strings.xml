@@ -235,8 +235,8 @@ SCR Screen Recorder собирает анонимную статистику д�
     <string name="menu_show_unstable">"Показать нестабильные"</string>
     <string name="menu_show_advanced">"Показать расширенные"</string>
 
-    <string name="notification_status_installing">"Инициализация..."</string>
-    <string name="notification_status_initializing">"Ожидание доступа root"</string>
+    <string name="notification_status_initializing">"Инициализация..."</string>
+    <string name="notification_status_waiting_for_root">"Ожидание доступа root"</string>
     <string name="notification_status_installing_audio">"Установка аудио драйвера"</string>
     <string name="notification_status_ready">"Готов"</string>
     <string name="notification_status_starting">"Запуск"</string>
