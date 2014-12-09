@@ -55,7 +55,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
             }
         } catch (NativeProcessException e) {
             Log.e(TAG, "Error executing native process", e);
-            setState(ProcessState.ERROR);
+            setErrorState(305);
         }
         waitForExit();
         setState(ProcessState.DEAD);
@@ -178,6 +178,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
             case 229:
             case 237: // microphone busy
             case 251: // microphone busy
+            case 305: // shell death
                 return false;
             default:
                 return true;
