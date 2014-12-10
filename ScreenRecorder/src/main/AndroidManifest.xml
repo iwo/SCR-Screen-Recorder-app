@@ -77,6 +77,16 @@
             android:excludeFromRecents="true"
             android:theme="@style/Theme.Transparent" />
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <!-- Used for install referral measurement-->
         <service android:name="com.google.analytics.tracking.android.CampaignTrackingService"/>
         <receiver android:name="com.google.analytics.tracking.android.CampaignTrackingReceiver" android:exported="true">
