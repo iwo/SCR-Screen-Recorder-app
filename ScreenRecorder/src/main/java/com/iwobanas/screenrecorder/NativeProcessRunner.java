@@ -104,13 +104,16 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
                 setState(RecordingProcessState.INSTALLATION_ERROR, null);
                 break;
             case ERROR:
-                if (previousState == NativeProcess.ProcessState.RECORDING
+                if (previousState == NativeProcess.ProcessState.INITIALIZING) {
+                    handleStartupError(recordingInfo);
+                } else if (previousState == NativeProcess.ProcessState.RECORDING
                     || previousState == NativeProcess.ProcessState.STARTING
                     || previousState == NativeProcess.ProcessState.STOPPING
                     || previousState == NativeProcess.ProcessState.FINISHED) {
                     handleRecordingError(recordingInfo);
                 } else {
-                    handleStartupError(recordingInfo);
+                    logError(recordingInfo.exitValue);
+                    setState(RecordingProcessState.UNKNOWN_STARTUP_ERROR, recordingInfo);
                 }
                 break;
             case DONE:
@@ -126,12 +129,12 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
     }
 
     private void handleStartupError(RecordingInfo recordingInfo) {
-        if (recordingInfo.exitValue == -1 || recordingInfo.exitValue == 1 || recordingInfo.exitValue == 255) { // general error e.g. SuperSu Deny access
-            Log.e(TAG, "Error code 1. Assuming no super user access");
+        if (recordingInfo.exitValue == -1 || recordingInfo.exitValue == 1 || recordingInfo.exitValue == 255
+                || recordingInfo.exitValue == 305 || recordingInfo.exitValue == 306) { // general error e.g. SuperSu Deny access
+            Log.e(TAG, "Assuming no super user access. Error code " + recordingInfo.exitValue);
             setState(RecordingProcessState.SU_ERROR, recordingInfo);
             EasyTracker.getTracker().sendEvent(ERROR, SU_ERROR, recordingInfo.exitValue == -1 ? NO_SU : SU_DENY, null);
         } else if (recordingInfo.exitValue == 127) { // command not found
-            //TODO: verify installation
             Log.e(TAG, "Error code 127. This may be an installation issue");
             setState(RecordingProcessState.UNKNOWN_STARTUP_ERROR, recordingInfo);
         } else {
