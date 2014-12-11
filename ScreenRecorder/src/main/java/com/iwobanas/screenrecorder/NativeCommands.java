@@ -68,7 +68,9 @@ public class NativeCommands implements INativeCommands {
 
         resultCountdownLatch = new CountDownLatch(1);
         lastCommandRequestId = nextRequestId.getAndIncrement();
-        runner.runCommand(command, lastCommandRequestId, args);
+        if (!runner.runCommand(command, lastCommandRequestId, args)) {
+            return -40;
+        }
         try {
             if (resultCountdownLatch.await(timeout, TimeUnit.SECONDS)) {
                 return lastCommandResult;

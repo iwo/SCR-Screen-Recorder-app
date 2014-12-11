@@ -179,6 +179,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
             case 237: // microphone busy
             case 251: // microphone busy
             case 305: // shell death
+            case 306: // command write error
                 return false;
             default:
                 return true;
@@ -358,8 +359,17 @@ class NativeProcess implements Runnable, INativeCommandRunner {
     }
 
     @Override
-    public void runCommand(String command, int requestId, String args) {
-        runCommand(command + " " + requestId + " " + args);
+    public boolean runCommand(String command, int requestId, String args) {
+        Log.v(TAG, "Run command: " + command);
+        String commandLine = command + " " + requestId + " " + args + "\n";
+        try {
+            outputWriter.write(commandLine);
+            outputWriter.flush();
+            return true;
+        } catch (IOException e) {
+            Log.e(TAG, "Error running command", e);
+            return false;
+        }
     }
 
     private void runCommand(String command) {
@@ -368,6 +378,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
             outputWriter.flush();
         } catch (IOException e) {
             Log.e(TAG, "Error running command", e);
+            setErrorState(306);
         }
     }
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -31,20 +32,17 @@ public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
 
     @Override
     protected Integer doInBackground(Void... params) {
-        reportFile = new File(context.getExternalCacheDir(), "logcat.txt");
+        File logcatDir = new File(context.getCacheDir(), "logcat");
+        //noinspection ResultOfMethodCallIgnored
+        logcatDir.mkdirs();
+
+        reportFile = new File(logcatDir, "logcat" + System.currentTimeMillis() + ".txt");
         try {
             FileOutputStream outputStream = new FileOutputStream(reportFile);
             outputStream.close();
         } catch (IOException e) {
             Log.e(TAG, "Can't create report file at: " + reportFile.getAbsolutePath(), e);
-            reportFile = new File("/sdcard", "logcat.txt");
-            try {
-                FileOutputStream outputStream = new FileOutputStream(reportFile);
-                outputStream.close();
-            } catch (IOException ee) {
-                Log.e(TAG, "Can't create report file at: " + reportFile.getAbsolutePath(), ee);
-                return -1;
-            }
+            return -1;
         }
 
         int exitValue = NativeCommands.getInstance().logcat(reportFile.getAbsolutePath());
@@ -52,9 +50,8 @@ public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
         if (exitValue != 0) {
             Log.e(TAG, "Error running logcat command: " + exitValue);
             try {
-                reportFile = new File("/sdcard/", "scr_logcat" + System.currentTimeMillis() + ".txt");
                 String out = reportFile.getAbsolutePath();
-                String command = "/system/bin/logcat -d -v threadtime -f " + out + "*:V";
+                String command = "/system/bin/logcat -d -v threadtime -f " + out + " *:V";
 
                 exitValue = runAndWait(command);
 
@@ -92,7 +89,9 @@ public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
         String subject = context.getString(R.string.error_report_subject) + " " + context.getString(R.string.app_name) + " " + version + " - " + errorCode + " - " + Build.DEVICE + " - " + Build.VERSION.RELEASE ;
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, context.getString(R.string.error_report_text));
-        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(reportFile));
+        Uri reportUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", reportFile);
+        emailIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        emailIntent.putExtra(Intent.EXTRA_STREAM, reportUri);
         Intent chooserIntent = Intent.createChooser(emailIntent, context.getString(R.string.error_report_chooser));
         chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(chooserIntent);
