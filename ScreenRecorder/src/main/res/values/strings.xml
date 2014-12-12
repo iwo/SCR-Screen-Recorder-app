@@ -208,6 +208,10 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_audio_mix_summary">Microphone + Internal (Use headphones!)</string>
     <string name="settings_audio">Audio</string>
     <string name="settings_sampling_rate">Sampling rate</string>
+    <string name="settings_mic_gain">Microphone boost</string>
+    <string name="settings_mic_gain_summary_mix_only">Available only for %1$s</string>
+    <string name="settings_mic_gain_summary_default">Use default volume</string>
+    <string name="settings_mic_gain_summary">Increase volume by %1$ddB</string>
 
     <string name="settings_other_category">Other</string>
     <string name="settings_hide_icon">Hide notification icon</string>

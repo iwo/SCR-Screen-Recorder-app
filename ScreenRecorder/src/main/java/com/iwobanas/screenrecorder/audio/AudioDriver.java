@@ -155,12 +155,12 @@ public class AudioDriver {
         listeners.remove(listener);
     }
 
-    public void updateConfig(boolean enableMix) {
+    public void updateConfig(boolean enableMix, int micGain) {
         try {
             String mixMic = enableMix ? "1" : "0";
             File configFile = new File(CONFIG_FILE);
             FileWriter fileWriter = new FileWriter(configFile);
-            fileWriter.write(String.valueOf(getVolumeGain()) + " " + mixMic + "\n");
+            fileWriter.write(String.valueOf(getVolumeGain()) + " " + mixMic + " " + micGain + "\n");
             fileWriter.close();
             if (!configFile.setReadable(true, false)) {
                 Log.w(TAG, "Error setting read permission on " + configFile.getAbsolutePath());

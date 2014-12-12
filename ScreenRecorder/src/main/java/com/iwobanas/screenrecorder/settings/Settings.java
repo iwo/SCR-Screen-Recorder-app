@@ -24,6 +24,7 @@ public class Settings {
     private static final String TRANSFORMATION = "TRANSFORMATION";
     private static final String SAMPLING_RATE = "SAMPLING_RATE";
     private static final String INTERNAL_SAMPLING_RATE = "INTERNAL_SAMPLING_RATE";
+    private static final String MIC_GAIN = "MIC_GAIN";
     private static final String VIDEO_BITRATE = "VIDEO_BITRATE";
     private static final String COLOR_FIX = "COLOR_FIX";
     private static final String HIDE_ICON = "HIDE_ICON";
@@ -60,6 +61,7 @@ public class Settings {
     private SamplingRate defaultSamplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
     private SamplingRate samplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
     private SamplingRate internalSamplingRate = null;
+    private int micGain = 2;
     private VideoBitrate defaultVideoBitrate = VideoBitrate.BITRATE_10_MBPS;
     private VideoBitrate videoBitrate = VideoBitrate.BITRATE_10_MBPS;
     private boolean colorFix = false;
@@ -165,6 +167,8 @@ public class Settings {
         if (internalSamplingRate != null) {
             this.internalSamplingRate = SamplingRate.valueOf(internalSamplingRate);
         }
+
+        micGain = preferences.getInt(MIC_GAIN, 2);
 
         colorFix = preferences.getBoolean(COLOR_FIX, defaultColorFix);
 
@@ -420,6 +424,15 @@ public class Settings {
         }
     }
 
+    public int getMicGain() {
+        return micGain;
+    }
+
+    public void setMicGain(int micGain) {
+        this.micGain = micGain;
+        settingsModified(preferences.edit().putInt(MIC_GAIN, micGain));
+    }
+
     public VideoBitrate getVideoBitrate() {
         return videoBitrate;
     }
@@ -556,6 +569,9 @@ public class Settings {
 
         internalSamplingRate = null;
         editor.remove(INTERNAL_SAMPLING_RATE);
+
+        micGain = 2;
+        editor.remove(MIC_GAIN);
 
         videoBitrate = defaultVideoBitrate;
         editor.remove(VIDEO_BITRATE);
@@ -715,7 +731,7 @@ public class Settings {
 
     public void updateAudioDriverConfig() {
         if (audioSource.getRequiresDriver()) {
-            audioDriver.updateConfig(audioSource == AudioSource.MIX);
+            audioDriver.updateConfig(getAudioSource() == AudioSource.MIX, getMicGain());
         }
     }
 }

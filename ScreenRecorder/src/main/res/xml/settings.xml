@@ -81,6 +81,12 @@
             android:key="sampling_rate"
             android:persistent="false"
             android:title="@string/settings_sampling_rate" />
+        <com.iwobanas.screenrecorder.settings.SliderPreference
+            android:key="mic_gain"
+            android:persistent="false"
+            android:title="@string/settings_mic_gain"
+            scr:max="4"
+            scr:min="0" />
     </PreferenceCategory>
 
     <PreferenceCategory android:key="other" android:title="@string/settings_other_category">

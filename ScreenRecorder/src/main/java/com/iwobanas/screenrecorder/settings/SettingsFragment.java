@@ -44,6 +44,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_VERTICAL_FRAMES = "vertical_frames";
     public static final String KEY_AUDIO_SOURCE = "audio_source";
     public static final String KEY_SAMPLING_RATE = "sampling_rate";
+    public static final String KEY_MIC_GAIN = "mic_gain";
     public static final String KEY_OTHER = "other";
     public static final String KEY_SHOW_CAMERA = "show_camera";
     public static final String KEY_CAMERA_ALPHA = "camera_alpha";
@@ -66,6 +67,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private CheckBoxPreference verticalFramesPreference;
     private ListPreference audioSourcePreference;
     private ListPreference samplingRatePreference;
+    private SliderPreference micGainPreference;
     private PreferenceCategory otherCategory;
     private SliderPreference cameraAlphaPreference;
     private CheckBoxPreference showCameraPreference;
@@ -126,6 +128,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         samplingRatePreference = (ListPreference) findPreference(KEY_SAMPLING_RATE);
         samplingRatePreference.setOnPreferenceChangeListener(this);
+
+        micGainPreference = (SliderPreference) findPreference(KEY_MIC_GAIN);
+        micGainPreference.setOnPreferenceChangeListener(this);
 
         otherCategory = (PreferenceCategory) findPreference(KEY_OTHER);
         showCameraPreference = (CheckBoxPreference) findPreference(KEY_SHOW_CAMERA);
@@ -197,6 +202,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         samplingRatePreference.setValue(settings.getSamplingRate().name());
         samplingRatePreference.setSummary(formatSamplingRateSummary());
         samplingRatePreference.setEnabled(!settings.getAudioSource().equals(AudioSource.MUTE));
+
+        micGainPreference.setValue(gainToIndex(settings.getMicGain()));
+        micGainPreference.setSummary(formatMicGain());
+        micGainPreference.setEnabled(settings.getAudioSource() == AudioSource.MIX);
 
         hideIconPreference.setChecked(settings.getHideIcon());
         showTouchesPreference.setChecked(settings.getShowTouches());
@@ -668,6 +677,33 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return settings.getSamplingRate().getLabel();
     }
 
+    private int gainToIndex(int gain) {
+        for (int i = 0; i <= 4; i++){
+            if (gain == indexToGain(i)) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private int indexToGain(int index) {
+        return  (int) Math.pow(2, index);
+    }
+
+    private int gainToDecibel(int gain) {
+        return (int) (20.0 * Math.log10(gain));
+    }
+
+    private String formatMicGain() {
+        if (settings.getAudioSource() != AudioSource.MIX) {
+            return getString(R.string.settings_mic_gain_summary_mix_only, getString(R.string.settings_audio_mix));
+        }
+        if (settings.getMicGain() == 1) {
+            return getString(R.string.settings_mic_gain_summary_default);
+        }
+        return getString(R.string.settings_mic_gain_summary, gainToDecibel(settings.getMicGain()));
+    }
+
     private String formatCameraAlphaSummary() {
         if (getActivity() == null) return "";
         if (settings.getCameraAlpha() == 1.0f) {
@@ -752,6 +788,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             SamplingRate rate = SamplingRate.valueOf(valueString);
             settings.setSamplingRate(rate);
             preference.setSummary(rate.getLabel());
+        } else if (preference == micGainPreference) {
+            settings.setMicGain(indexToGain((Integer) newValue));
+            preference.setSummary(formatMicGain());
         } else if (preference == hideIconPreference) {
             if (BuildConfig.FLAVOR_price.equals("free")) {
                 try {
