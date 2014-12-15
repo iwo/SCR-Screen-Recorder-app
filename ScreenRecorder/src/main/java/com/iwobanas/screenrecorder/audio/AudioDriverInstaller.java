@@ -61,6 +61,7 @@ public class AudioDriverInstaller {
     private File systemDir;
     private boolean uninstallSuccess;
     private String errorDetails;
+    private Boolean mountMaster;
 
     public boolean install() {
         Log.v(TAG, "Installation started");
@@ -123,6 +124,10 @@ public class AudioDriverInstaller {
 
     public String getErrorDetails() {
         return errorDetails;
+    }
+
+    public Boolean getMountMaster() {
+        return mountMaster;
     }
 
     private void dumpState() {
@@ -232,13 +237,14 @@ public class AudioDriverInstaller {
 
     private void mount() throws InstallationException {
         String commandInput = "mount_audio\n" + localDir.getAbsolutePath() + "\n";
+        mountMaster = Boolean.TRUE;
         int result = NativeCommands.getInstance().mountAudioMaster(localDir.getAbsolutePath().toString());
-        if (result != 0 && result < 150) {
+        if (result == 255 || result < 150) {
             Log.w(TAG, "Retrying without mount master");
-            //TODO: pass info about the mount master failure to stats
+            mountMaster = Boolean.FALSE;
             result = NativeCommands.getInstance().mountAudio(localDir.getAbsolutePath().toString());
         }
-        if (result != 0) {
+        if (result != 0 && result != 200) {
             throw new InstallationException("Mount command failed with error code: " + result);
         }
     }
@@ -528,11 +534,11 @@ public class AudioDriverInstaller {
 
     private void unmount() {
         int result = NativeCommands.getInstance().unmountAudioMaster();
-        if (result != 0 && result < 150) {
+        if (result == 255 || result < 150) {
             Log.w(TAG, "Retrying without mount master");
             result = NativeCommands.getInstance().unmountAudio();
         }
-        if (result != 0) {
+        if (result != 0 && result != 200) {
             uninstallError("Unmount command failed with error code: " + result);
         }
     }
