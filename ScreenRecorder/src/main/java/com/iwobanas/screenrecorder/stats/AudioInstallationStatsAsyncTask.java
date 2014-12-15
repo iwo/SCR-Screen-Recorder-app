@@ -8,13 +8,21 @@ public class AudioInstallationStatsAsyncTask extends StatsBaseAsyncTask {
     private static final String TAG = "scr_AudioInstallationStatsAsyncTask";
     private static final String BASE_URL = "http://www.iwobanas.com/scr/audio_install.php?";
 
-    public AudioInstallationStatsAsyncTask(Context context, long timestamp, InstallationStatus status, String details, long time) {
+    public AudioInstallationStatsAsyncTask(Context context, long timestamp, InstallationStatus status) {
+        this(context, timestamp, status, null, 0, null);
+
+    }
+
+    public AudioInstallationStatsAsyncTask(Context context, long timestamp, InstallationStatus status, String details, long time, Boolean mountMaster) {
         super(context);
         params.put("install_id", String.valueOf(timestamp));
         params.put("status", status.name());
         params.put("details", details);
         if (time > 0) {
             params.put("install_time", String.valueOf(time));
+        }
+        if (mountMaster != null) {
+            params.put("mount_master", formatBoolean(mountMaster));
         }
     }
 
