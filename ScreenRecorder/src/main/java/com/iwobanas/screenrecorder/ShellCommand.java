@@ -1,5 +1,7 @@
 package com.iwobanas.screenrecorder;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -20,14 +22,24 @@ public class ShellCommand {
     private boolean executionCompleted = false;
     private String errorLogTag;
     private String outLogTag;
+    private long timeoutMillis = 0;
+    private Handler timeoutHandler;
+    private Runnable timeoutRunnable = new Runnable() {
+        @Override
+        public void run() {
+            timeout();
+        }
+    };
 
     public ShellCommand(String[] command) {
         this.command = command;
+        timeoutHandler = new Handler(Looper.getMainLooper());
     }
 
     public void execute() {
         try {
             Log.v(TAG, "Executing command: " + Arrays.toString(command));
+            initializeTimeout();
             process = Runtime.getRuntime().exec(command);
             if (process == null) {
                 Log.e(TAG, "Process not created: " + Arrays.toString(command));
@@ -40,6 +52,7 @@ public class ShellCommand {
             Log.v(TAG, "Waiting for process to exit");
             process.waitFor();
             executionCompleted = true;
+            cancelTimeout();
             Log.v(TAG, "Process completed with exit value: " + process.exitValue());
         } catch (IOException e) {
             Log.e(TAG, "Exception in " + Arrays.toString(command), e);
@@ -61,6 +74,27 @@ public class ShellCommand {
         }
     }
 
+    private void initializeTimeout() {
+        if (timeoutMillis > 0) {
+            timeoutHandler.postDelayed(timeoutRunnable, timeoutMillis);
+        }
+    }
+
+    private void cancelTimeout() {
+        timeoutHandler.removeCallbacks(timeoutRunnable);
+    }
+
+    private void timeout() {
+        Log.e(TAG, "Command timeout");
+        try {
+            if (process != null && !executionCompleted) {
+                process.destroy();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Can't interrupt command", e);
+        }
+    }
+
     public boolean isExecutionCompleted() {
         return executionCompleted;
     }
@@ -74,6 +108,10 @@ public class ShellCommand {
 
     public void setInput(String input) {
         this.input = input;
+    }
+
+    public void setTimeoutMillis(long timeoutMillis) {
+        this.timeoutMillis = timeoutMillis;
     }
 
     public void setOutLogTag(String outLogTag) {

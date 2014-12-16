@@ -33,6 +33,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
     private RecordingInfo recordingInfo = new RecordingInfo();
     private boolean destroying = false;
     private String suVersion;
+    private boolean execBlocked;
 
     public NativeProcess(Context context, OnStateChangeListener onStateChangeListener) {
         this.context = context;
@@ -90,7 +91,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
         try {
             Log.d(TAG, "Starting native process");
             process = Runtime.getRuntime()
-                    .exec(new String[]{"su", "-c", executable});
+                    .exec("su");
             Log.d(TAG, "Native process started");
         } catch (IOException e) {
             Log.e(TAG, "Error starting a new native process", e);
@@ -100,6 +101,8 @@ class NativeProcess implements Runnable, INativeCommandRunner {
         }
         outputWriter = new OutputStreamWriter(process.getOutputStream());
         inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+        runCommand(executable);
 
         new Thread(new ErrorStreamReader(process.getErrorStream())).start();
     }
@@ -121,8 +124,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
             } else if (line.startsWith("error ")) {
                 parseError(line);
             } else if (line.startsWith("su version ")) {
-                suVersion = line.substring("su version ".length());
-                Log.v(TAG, "su version: " + suVersion);
+                parseSuVersion(line);
             } else if (line.startsWith("command result ")) {
                 parseCommandResult(line);
             } else if (line.length() > 0) {
@@ -131,6 +133,21 @@ class NativeProcess implements Runnable, INativeCommandRunner {
         } catch (IOException e) {
             throw new NativeProcessException("Exception while reading status", e);
         }
+    }
+
+    private void parseSuVersion(String line) {
+        suVersion = line.substring("su version ".length());
+        if ("exec_error".equals(suVersion)) {
+            Log.v(TAG, "Exec blocked from native process");
+            execBlocked = true;
+            ShellCommand suCommand = new ShellCommand(new String[]{"su", "-v"});
+            suCommand.setOutLogTag("su -v");
+            suCommand.setInput("exit\n"); // just in case su doesn't support -v and interactive shell gets opened
+            suCommand.setTimeoutMillis(3000);
+            suCommand.execute();
+            suVersion = suCommand.getOutput();
+        }
+        Log.v(TAG, "su version: " + suVersion);
     }
 
     private void waitForExit() {
@@ -356,6 +373,16 @@ class NativeProcess implements Runnable, INativeCommandRunner {
     @Override
     public String getSuVersion() {
         return suVersion;
+    }
+
+    @Override
+    public boolean isExecBlocked() {
+        return execBlocked;
+    }
+
+    @Override
+    public String getExecutable() {
+        return executable;
     }
 
     @Override

@@ -325,7 +325,7 @@ public class Utils {
         ShellCommand cmd = new ShellCommand(new String[]{"rm", "-rf", dir.getAbsolutePath()});
         cmd.setErrorLogTag("scr_deleteDir_error");
         cmd.execute();
-        return recursiveDelete(dir);
+        return (cmd.isExecutionCompleted() && cmd.exitValue() == 0) || recursiveDelete(dir);
     }
 
     private static boolean recursiveDelete(File file) {
