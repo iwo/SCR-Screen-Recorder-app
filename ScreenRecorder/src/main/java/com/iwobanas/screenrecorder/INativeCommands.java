@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder;
 
 public interface INativeCommands {
     String getSuVersion();
+    boolean isExecBlocked();
     int killSignal(int pid);
     int termSignal(int pid);
     int mountAudioMaster(String path);

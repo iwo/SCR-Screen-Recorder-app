@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder.stats;
 
 import android.content.Context;
 
+import com.iwobanas.screenrecorder.NativeCommands;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
 
 public class AudioInstallationStatsAsyncTask extends StatsBaseAsyncTask {
@@ -24,6 +25,7 @@ public class AudioInstallationStatsAsyncTask extends StatsBaseAsyncTask {
         if (mountMaster != null) {
             params.put("mount_master", formatBoolean(mountMaster));
         }
+        params.put("exec_blocked", formatBoolean(NativeCommands.getInstance().isExecBlocked()));
     }
 
     @Override

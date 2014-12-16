@@ -26,6 +26,11 @@ public class NativeCommands implements INativeCommands {
     }
 
     @Override
+    public boolean isExecBlocked() {
+        return runner != null && runner.isExecBlocked();
+    }
+
+    @Override
     public int killSignal(int pid) {
         return runAsyncCommand("kill_kill", String.valueOf(pid), 2);
     }
