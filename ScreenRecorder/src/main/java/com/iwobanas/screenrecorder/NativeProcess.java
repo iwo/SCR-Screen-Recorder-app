@@ -90,8 +90,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
     private void startProcess() throws NativeProcessException {
         try {
             Log.d(TAG, "Starting native process");
-            process = Runtime.getRuntime()
-                    .exec("su");
+            process = Runtime.getRuntime().exec(new String[]{"su", "-c", executable});
             Log.d(TAG, "Native process started");
         } catch (IOException e) {
             Log.e(TAG, "Error starting a new native process", e);
@@ -101,8 +100,6 @@ class NativeProcess implements Runnable, INativeCommandRunner {
         }
         outputWriter = new OutputStreamWriter(process.getOutputStream());
         inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-        runCommand(executable);
 
         new Thread(new ErrorStreamReader(process.getErrorStream())).start();
     }

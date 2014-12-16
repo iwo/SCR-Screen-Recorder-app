@@ -43,7 +43,7 @@ public class NativeCommands implements INativeCommands {
     @Override
     public int mountAudioMaster(String path) {
         if (runner != null && runner.isExecBlocked()) {
-            return runSuShellCommand("su --mount-master -c " + runner.getExecutable() + " mount_audio " + path + "< /dev/null");
+            return runShellCommand("su", "--mount-master",  "-c", runner.getExecutable(), "mount_audio", path);
         }
         return runAsyncCommand("mount_audio_master", path, 5);
     }
@@ -61,7 +61,7 @@ public class NativeCommands implements INativeCommands {
     @Override
     public int unmountAudioMaster() {
         if (runner != null && runner.isExecBlocked()) {
-            return runSuShellCommand("su --mount-master -c " + runner.getExecutable() + " unmount_audio < /dev/null");
+            return runShellCommand("su", "--mount-master",  "-c", runner.getExecutable(), "unmount_audio");
         }
         return runAsyncCommand("unmount_audio_master", "", 5);
     }
@@ -69,7 +69,7 @@ public class NativeCommands implements INativeCommands {
     @Override
     public int logcat(String path) {
         if (runner != null && runner.isExecBlocked()) {
-            return runSuShellCommand("su -c logcat " + path);
+            return -50; // ReportBugTask will run it's own ShellCommand
         }
         return runAsyncCommand("logcat", path, 30);
     }
@@ -96,10 +96,9 @@ public class NativeCommands implements INativeCommands {
         }
     }
 
-    private int runSuShellCommand(String command) {
-        ShellCommand shellCommand = new ShellCommand(new String[]{"su"});
+    private int runShellCommand(String... command) {
+        ShellCommand shellCommand = new ShellCommand(command);
         shellCommand.setTimeoutMillis(30000);
-        shellCommand.setInput(command + "\nexit\n");
         shellCommand.execute();
         return shellCommand.exitValue();
     }
