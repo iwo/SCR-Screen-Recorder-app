@@ -51,7 +51,7 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
 
     <string name="su_required_title">Root access is required</string>
     <string name="su_required_message">To run any screen recorder app your phone/tablet needs to be rooted.
-        There are plenty tutorials on the Internet explaining how to root different devices. Pleas come back when you are done!</string>
+        There are plenty tutorials on the Internet explaining how to root different devices. Please come back when you are done!</string>
     <string name="su_required_help">What\'s "rooting"?</string>
     <string name="su_required_help_link">http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/</string>
     <string name="su_required_lollipop_message">To use full potential of %1$s your device needs to be rooted.
@@ -97,7 +97,7 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     </string>
 
     <string name="audio_config_error_title">Audio error</string>
-    <string name="audio_config_error_message">Unsupported audio configuration. Try changing SCR audio Settings.</string>
+    <string name="audio_config_error_message">Unsupported audio configuration. Try changing SCR audio settings.</string>
 
     <string name="android_version_error_title">Android version not supported</string>
     <string name="android_version_error_message">Your Android version is not supported yet.</string>
@@ -155,8 +155,8 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_transformation_cpu">CPU</string>
     <string name="settings_transformation_gpu">GPU</string>
     <string name="settings_transformation_oes">GPU+</string>
-    <string name="settings_transformation_cpu_summary">Process screen image on the processor (CPU)</string>
-    <string name="settings_transformation_gpu_summary">Process screen image on the graphic card (%1$s)</string>
+    <string name="settings_transformation_cpu_summary">Using processor (CPU)</string>
+    <string name="settings_transformation_gpu_summary">Using graphic chip (%1$s)</string>
     <string name="settings_transformation_sw_summary">Unavailable in software encoder</string>
 
     <string name="settings_video_bitrate">Bitrate</string>
@@ -216,7 +216,7 @@ This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     <string name="settings_other_category">Other</string>
     <string name="settings_hide_icon">Hide notification icon</string>
     <string name="settings_show_touches">Show touches</string>
-    <string name="settings_show_touches_summary">Show visual feedback for touches. You can also activate touch indicators permanently through Android Settings→Developer Options→Show touches</string>
+    <string name="settings_show_touches_summary">Show visual feedback for touches. Enable permanently through Android Settings→Developer Options→Show touches</string>
     <string name="settings_output_dir">Output directory</string>
     <string name="settings_stop_when_screen_off">Stop on screen off</string>
     <string name="settings_stop_when_screen_off_summary">Finish recording after the screen is turned off</string>
