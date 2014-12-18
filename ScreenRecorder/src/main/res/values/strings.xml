@@ -370,5 +370,15 @@ so if you require this feature and your device is rooted install SCR Screen Reco
     <string name="projection_deny_error_title">Can\'t access screen</string>
 
     <string name="notification_action_share">Share</string>
+    <string name="internal_audio_warning_title">Installation warning</string>
 
+    <string name="internal_audio_warning_message">"
+Audio driver installation on your device requires modifications to the system partition.
+In the unlikely event of installation error your device may get soft-bricked or enter boot loop.
+Please make sure you know how to re-flash system partition or restore system from backup before proceeding.
+If you decide to uninstall %1$s in the future open SCR Settings and disable internal audio before uninstalling the app.
+    </string>
+    <string name="internal_audio_warning_confirmation">I know how to restore system partition</string>
+    <string name="internal_audio_warning_dont_show">"Don't show this message again"</string>
+    <string name="internal_audio_warning_install">Install</string>
 </resources>
