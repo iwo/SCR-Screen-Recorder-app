@@ -5,42 +5,96 @@
     <string name="pro_app_name">SCR Pro</string>
     <string name="pro_app_full_name">SCR Screen Recorder Pro</string>
     <string name="free_app_no_root_name">SCR 5+ Free</string>
-    <string name="free_app_no_root_full_name">SCR Screen Recorder 5+ Free</string>
+    <string name="free_app_no_root_full_name">SCR 5+ Screen Recorder Free</string>
     <string name="pro_app_no_root_name">SCR 5+ Pro</string>
-    <string name="pro_app_no_root_full_name">SCR Screen Recorder 5+ Pro</string>
+    <string name="pro_app_no_root_full_name">SCR 5+ Screen Recorder Pro</string>
 
-    <string name="play_free_app_name">
+    <string name="play_free_app_name_30_char">
 SCR Screen Recorder Free ★ root
     </string>
-    <string name="play_pro_app_name">
-SCR Screen Recorder Pro ★ root
+    <string name="play_pro_app_name_30_char">
+SCR Screen Recorder Pro ★root
+    </string>
+
+
+    <string name="play_description_short_80_char">
+Record your screen and system audio to HD video file! Requires root!
     </string>
 
     <string name="play_root_required">
-<b>Works only on rooted / jailbroken / unlocked devices!</b><br/>Don\'t install if your device is not rooted.</string>
-    <string name="play_description_main">
-Record great quality screencasts directly from your phone or tablet!
+<b>Works only on rooted / jailbroken / unlocked devices!</b><br/>Don\'t install if your device is not rooted.
+    </string>
 
-SCR Screen Recorder uses hardware accelerated video encoding to achieve best quality screen recording on any device.
-It\'s the only video recorder on the market supporting Tegra device including Nexus 7.</string>
-    <string name="play_description_free">
+    <string name="play_description_main">
+Check out SCR Screen Recorder, the Android most comprehensive screencast recording app.
+SCR Screen Recorder supports all Android versions since 4.0 and utilizes the best encoding method available on each platform.
+Since the first release in early 2013 SCR Screen Recorder is frequently updated and new features are added regularly.
+
+Unique features:
+    </string>
+
+    <string name="play_description_system_audio">"
+• SYSTEM AUDIO - On most devices you can directly record in-game audio
+without quality loss caused by microphone recording speakers output.
+The "Internal + Mic" option allows to add a microphone commentary to the system audio recording.
+At the moment this feature is not available on Android 4.2 but it'll be added soon.
+    "</string>
+
+    <string name="play_description_features">"
+• FACE CAM - Share you emotions by adding a front-facing camera to your video.
+You can move the camera overlay around so that it doesn't obstruct important controls.
+
+• NO ADS - Unlike other \"free\" screen recorders SCR never display any ads.
+Development of all my apps is supported only by donations and Pro versions.
+
+• SETTINGS - No mater if you prefer to select simple presets or manually tweak every setting
+we've got you covered. SCR allows for many customizations and provides performance and stability stats.
+
+• ALPHA FEATURES - Let us know what's important to you by joining SCR Alpha Testing Google+ community at http://goo.gl/PGYZ8r
+If you'd like to receive Alpha updates and test brand new features follow the links in the About community section.
+    "</string>
+
+    <string name="play_ban_disclaimer">
+The previous version of this app had over 2 millions downloads and 37k reviews
+(I had to re-release this app due to some minor compliance issues).
+    </string>
+
+    <string name="play_description_free_limits">
 With <b>SCR Free</b> you can record maximum 3 minutes screencasts and the SCR watermark is added to your video.
 Buy <b>SCR Pro</b> to get unlimited screencast length with no watermark.
+    </string>
 
-This is an early <b>BETA preview</b> version so it may not work on all devices and ROMs.
+        <string name="play_description_pro">
+Before you buy consider testing <b>SCR Free</b> to ensure that your device is already supported..
+    </string>
+
+    <string name="play_description_stablity">
+SCR Screen Recorder uses various hacks and unofficial APIs which may not work on some devices and ROMs.
 If you encounter any issues please report it at scr.screen.recorder@gmail.com to help me get your device supported.
     </string>
 
-    <string name="play_description_pro">
-This is an early <b>BETA preview</b> version so it may not work on all devices and ROMs.
-Before you buy consider testing <b>SCR Free</b> to ensure that your device is already supported.
-If you encounter any issues please report it at scr.screen.recorder@gmail.com to help me get your device supported.
+
+
+    <string name="play_small_print_stats">
+This app collects anonymous usage statistics to help track bugs and analyze devices compatibility.
     </string>
 
-    <string name="play_small_print">
-SCR Screen Recorder collects anonymous usage statistics to help track bugs and analyze how users use the app.
+    <string name="play_small_print_lgpl">
 This software uses unmodified code of FFmpeg 1.2 licensed under the LGPL.
     </string>
+
+
+    <string name="play_noroot_description_short_80_char">
+Lightweight Lollipop screen recorder with cool Face Cam feature. [no root]
+    </string>
+
+    <string name="play_noroot_description_main">"
+SCR 5+ opens a new chapter in the history of the famous SCR Screen Recorder.
+Thanks to the new Android 5.0 features SCR 5+ allows to record screen without root access!
+
+Unfortunately Lollipop doesn't natively support internal audio recording yet,
+so if your require this feature and your device is rooted install SCR Screen Recorder Root.
+    "</string>
 
     <string name="recording_saved_title">SCR Recording Saved</string>
     <string name="recording_saved_message">Recording saved to %1$s</string>
