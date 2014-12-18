@@ -44,7 +44,7 @@ SCR Screen Recorder zhromažďuje anonymné štatistiky využívania aplikácie 
 
     <string name="error_dialog_title">"Niečo sa pokazilo :-("</string>
     <string name="startup_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu S%1$d."</string>
-    <string name="recording_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d."</string>
+    <string name="unknown_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d."</string>
 
     <string name="media_recorder_error_title">"Chyba nahrávača"</string>
     <string name="media_recorder_error_message">"Skúste zmeniť rozlíšenie alebo prepnite transformáciu obrazu medzi GPU/CPU. Prosím, odinštalujte iné aplikácie pre nahrávanie obrazovky, ak nejaké máte. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d ."</string>

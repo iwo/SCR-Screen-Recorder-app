@@ -38,7 +38,7 @@ SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行�
 
     <string name="error_dialog_title">"發生了嚴重錯誤:-("</string>
     <string name="startup_error_message">"將寄送出匿名的錯誤回饋報告以協助我們修正問題。請放心的透過email引用錯誤 S%1$d 聯絡我們。"</string>
-    <string name="recording_error_message">"將寄送出匿名的錯誤回饋報告以協助我們修正問題。請放心的透過email引用錯誤 R%1$d 聯絡我們。"</string>
+    <string name="unknown_error_message">"將寄送出匿名的錯誤回饋報告以協助我們修正問題。請放心的透過email引用錯誤 R%1$d 聯絡我們。"</string>
 
     <string name="media_recorder_error_title">"攝影機錯誤"</string>
     <string name="media_recorder_error_message">"正試著變更影像解析度或切換 GPU/CPU 之間的轉碼。請移除您其它已安裝的擷圖程式！如果問題依然存在，請透過email引用錯誤 R%1$d 聯絡我們。"</string>

@@ -32,7 +32,7 @@ SCR 스크린 레코더는 모든 장치에서 최고 품질의 화면 녹화를
     <string name="error_dialog_title">"심각한 오류가 있습니다 :-("</string>
     <string name="startup_error_message">"오류 보고서를 보내주시면 오류를 해결하는데 도움이 됩니다
 이메일 주소S:%1$d로 보내주세요"</string>
-    <string name="recording_error_message">"[오류]자동으로 보내지는 익명의 오류리포트는 문제 해결에 도움이 됩니다. 해당 오류를 기입하여 R:%1$d로 이메일을 보내주세요."</string>
+    <string name="unknown_error_message">"[오류]자동으로 보내지는 익명의 오류리포트는 문제 해결에 도움이 됩니다. 해당 오류를 기입하여 R:%1$d로 이메일을 보내주세요."</string>
 
     <string name="media_recorder_error_title">"녹화 오류"</string>
     <string name="media_recorder_error_message">"[오류]해상도를 변경하시거나 CPU/GPU간의 이미지 변환 방식을 변경해 주세요.

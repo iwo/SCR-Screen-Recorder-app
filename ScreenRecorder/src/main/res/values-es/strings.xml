@@ -41,7 +41,7 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
 
     <string name="error_dialog_title">"Algo salió mal :-("</string>
     <string name="startup_error_message">"El informe de errores en el anonimato se enviará automáticamente para ayudarnos a arreglar el problema. No dude en ponerse en contacto a través de correo electrónico de soporte citando el error S%1$d."</string>
-    <string name="recording_error_message">"El informe de errores anónimo, se enviará automáticamente para ayudarnos a arreglar el problema. No dude en ponerse en contacto a través de correo electrónico de soporte citando el error R%1$d."</string>
+    <string name="unknown_error_message">"El informe de errores anónimo, se enviará automáticamente para ayudarnos a arreglar el problema. No dude en ponerse en contacto a través de correo electrónico de soporte citando el error R%1$d."</string>
 
     <string name="media_recorder_error_title">"Error de grabación"</string>
     <string name="media_recorder_error_message">"Intente cambiar la resolución o el cambio de transformación de imagen entre GPU/CPU. Por favor, desinstala otras aplicaciones que graben la pantalla en el caso de que usted tenga otras instaladas. Si el problema persiste, póngase en contacto a través de correo electrónico de soporte citando el error R%1$d."</string>

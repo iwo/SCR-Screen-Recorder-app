@@ -51,7 +51,7 @@ Im Internet gibt es viele Anleitungen wie man verschiedene Geräte rootet. Bitte
 
     <string name="error_dialog_title">"Irgendwas lief gerade falsch :-("</string>
     <string name="startup_error_message">"Der anonyme Fehlermeldung wird automatisch gesendet, um uns dabei zu helfen, das Problem zu beheben. Gerne können Sie uns nähere Angaben zum Fehler per E-Mail mitteilen (Fehlernummer: %1$d)."</string>
-    <string name="recording_error_message">"Der anonyme Fehlermeldung wird automatisch gesendet, um uns dabei zu helfen, das Problem zu beheben. Gerne können Sie uns nähere Angaben zum Fehler per E-Mail mitteilen (Fehlernummer: %1$d)."</string>
+    <string name="unknown_error_message">"Der anonyme Fehlermeldung wird automatisch gesendet, um uns dabei zu helfen, das Problem zu beheben. Gerne können Sie uns nähere Angaben zum Fehler per E-Mail mitteilen (Fehlernummer: %1$d)."</string>
 
     <string name="media_recorder_error_title">"Aufnahme-Fehler"</string>
     <string name="media_recorder_error_message">"Versuchen Sie, die Auflösung zu ändern oder zwischen GPU/CPU Kodierung umzuschalten. Bitte deinstallieren Sie etwaige andere Screencast-Anwendungen, falls Sie welche haben. Wenn das Problem weiterhin besteht, wenden Sie sich bitte per E-Mail an uns (Fehlernummer: %1$d)."</string>

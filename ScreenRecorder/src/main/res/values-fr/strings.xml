@@ -41,7 +41,7 @@ SCR Screen Recorder collecte des statistiques d'utilisation anonymes pour aider 
 
     <string name="error_dialog_title">"Quelque chose s'est mal passé :-("</string>
     <string name="startup_error_message">"Le rapport d'erreurs anonyme sera automatiquement envoyé pour nous aider à résoudre le problème. N'hésitez pas à entrer en contact via le support e-mail citant les erreurs S%1$d ."</string>
-    <string name="recording_error_message">"Le rapport d'erreurs anonyme sera automatiquement envoyé pour nous aider à résoudre le problème. N'hésitez pas à entrer en contact via le support e-mail en citant les erreurs R%1$d ."</string>
+    <string name="unknown_error_message">"Le rapport d'erreurs anonyme sera automatiquement envoyé pour nous aider à résoudre le problème. N'hésitez pas à entrer en contact via le support e-mail en citant les erreurs R%1$d ."</string>
 
     <string name="media_recorder_error_title">"Erreur de l'enregistreur"</string>
     <string name="media_recorder_error_message">"Essayez de changer la résolution ou transformation d'image en GPU / CPU. S'il vous plaît désinstaller les autres applications de screencast si vous en avez. Si le problème persiste s'il vous plaît entrer en contact via le support e-mail en citant les erreurs R%1$d ."</string>

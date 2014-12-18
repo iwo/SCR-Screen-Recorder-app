@@ -47,7 +47,7 @@ SCR Screen Recorder zbiera anonimowe statystyki w celu naprawy błędów oraz an
 
     <string name="error_dialog_title">"Wystąpił błąd :-("</string>
     <string name="startup_error_message">"Anonimowa informacja o błędzie została automatycznie wysłana do autora programu. Jeżeli problem będzie się powtarzał prosimy o kontakt mailowy i podanie numeru błędu S%1$d."</string>
-    <string name="recording_error_message">"Anonimowa informacja o błędzie została automatycznie wysłana do autora programu. Jeżeli problem będzie się powtarzał prosimy o kontakt mailowy i podanie numeru błędu R%1$d."</string>
+    <string name="unknown_error_message">"Anonimowa informacja o błędzie została automatycznie wysłana do autora programu. Jeżeli problem będzie się powtarzał prosimy o kontakt mailowy i podanie numeru błędu R%1$d."</string>
 
     <string name="media_recorder_error_title">"Błąd nagrywania"</string>
     <string name="media_recorder_error_message">"Spróbuj zmienić ustawienia nagrywania lub odinstalować inne programy do nagrywania ekranu. Jeżeli problem będzie się powtarzał prosimy o kontakt mailowy i podanie kodu błędu R%1$d."</string>

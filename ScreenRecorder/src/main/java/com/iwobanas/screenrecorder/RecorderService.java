@@ -520,12 +520,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void notificationSaved(Uri uri) {
-        String message = String.format(getString(R.string.recording_saved_message), outputFile.getName());
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_notification_saved)
                         .setContentTitle(getString(R.string.recording_saved_title))
-                        .setContentText(message);
+                        .setContentText(outputFile.getName());
 
         Intent playIntent = new Intent(this, RecorderService.class);
         playIntent.setAction(PLAY_ACTION);

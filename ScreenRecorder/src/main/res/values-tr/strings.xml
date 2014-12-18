@@ -48,7 +48,7 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
 
     <string name="error_dialog_title">"Ciddi anlamda bir şeyler yanlış gitti :-( "</string>
     <string name="startup_error_message">"Anonim hata raporu bize sorunu çözmeye yardımcı olmak için otomatik olarak gönderilir. Hata alıntısı S%1$d destek e-posta yoluyla bizimle temasa geçmeye çekinmeyin."</string>
-    <string name="recording_error_message">"Anonim hata raporu bize sorunu çözmeye yardımcı olmak için otomatik olarak gönderilir. Destek e-posta iktibas hatası R%1$d aracılığıyla  bizimle temasa geçmeye çekinmeyin."</string>
+    <string name="unknown_error_message">"Anonim hata raporu bize sorunu çözmeye yardımcı olmak için otomatik olarak gönderilir. Destek e-posta iktibas hatası R%1$d aracılığıyla  bizimle temasa geçmeye çekinmeyin."</string>
 
     <string name="media_recorder_error_title">"Kaydedici hatası"</string>
     <string name="media_recorder_error_message">"Çözünürlüğünü değiştirme veya GPU/CPU arasındaki görüntü dönüşümüne geçmeyi deneyin. Varsa diğer screencast uygulamalarını kaldırın. Sorun devam ederse hata alıntısı R%1$d destek e-posta yoluyla bizimle irtibata geçiniz ."</string>

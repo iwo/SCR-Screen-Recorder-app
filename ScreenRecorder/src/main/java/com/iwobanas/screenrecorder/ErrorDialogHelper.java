@@ -28,7 +28,7 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
             return;
 
         String title = getString(R.string.error_dialog_title);
-        String message = getString(R.string.recording_error_message, 600);
+        String message = getString(R.string.unknown_error_message, 600);
         boolean report = false;
 
         switch (state) {
@@ -54,7 +54,7 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
                 break;
 
             case UNKNOWN_STARTUP_ERROR:
-                message = getString(R.string.startup_error_message, recordingInfo.exitValue);
+                message = getString(R.string.unknown_error_message, recordingInfo.exitValue);
                 title = getString(R.string.error_dialog_title);
                 report = true;
                 break;
@@ -66,7 +66,7 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
                 break;
 
             case UNKNOWN_RECORDING_ERROR:
-                message = getString(R.string.recording_error_message, recordingInfo.exitValue);
+                message = getString(R.string.unknown_error_message, recordingInfo.exitValue);
                 title = getString(R.string.error_dialog_title);
                 report = true;
                 break;

@@ -48,7 +48,7 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
 
     <string name="error_dialog_title">"حدث خطأ ما :-("</string>
     <string name="startup_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني S%1$d ."</string>
-    <string name="recording_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>
+    <string name="unknown_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>
 
     <string name="media_recorder_error_title">"خطأ في التسجيل"</string>
     <string name="media_recorder_error_message">"حاول تغيير دقة التسجيل أو تبديل تحوّل الصورة بين CPU/GPU . ويرجى منك إلغاء تثبيت تطبيقات تسجيل الشاشة الأخرى إذا كان لديك أي واحد منها . إذا استمرت المشكلة لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>

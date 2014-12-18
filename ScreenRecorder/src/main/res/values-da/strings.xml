@@ -41,7 +41,7 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
 
     <string name="error_dialog_title">"Noget gik alvorligt galt :-("</string>
     <string name="startup_error_message">"Den anonyme fejlrapport vil automatisk blive sendt til at hjælpe os løse problemet. Du er velkommen til at komme i kontakt via support e-mail citere fejl S%1$d ."</string>
-    <string name="recording_error_message">"Den anonyme fejlrapport vil automatisk blive sendt til at hjælpe os løse problemet. Du er velkommen til at komme i kontakt via support e-mail citere fejl R%1$d ."</string>
+    <string name="unknown_error_message">"Den anonyme fejlrapport vil automatisk blive sendt til at hjælpe os løse problemet. Du er velkommen til at komme i kontakt via support e-mail citere fejl R%1$d ."</string>
 
     <string name="media_recorder_error_title">"Optager fejl"</string>
     <string name="media_recorder_error_message">"Prøv at ændre opløsning eller skifte billede transformation mellem GPU / CPU. Venligst afinstallere andre screencast programmer, hvis du har nogen. Hvis problemet fortsætter, kan du komme i kontakt via support e-mail citere fejl R %1$d ."</string>

@@ -48,7 +48,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
 
     <string name="error_dialog_title">"Er ging iets ernstig mis :-("</string>
     <string name="startup_error_message">"Het anonieme foutenrapport wordt automatisch opgestuurd om ons te helpen met het oplossen van het probleem. Neem gerust contact op via e-mail ondersteuning. Vermeld error S%1$d ."</string>
-    <string name="recording_error_message">"Het anonieme foutenrapport wordt automatisch opgestuurd om ons te helpen met het oplossen van het probleem. Neem gerust contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
+    <string name="unknown_error_message">"Het anonieme foutenrapport wordt automatisch opgestuurd om ons te helpen met het oplossen van het probleem. Neem gerust contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
 
     <string name="media_recorder_error_title">"Opname fout"</string>
     <string name="media_recorder_error_message">"Probeer de resolutie te veranderen of wissel de beeldomzetting tussen GPU/CPU. Verwijder andere screencast toepassingen als u die heeft. Als het probleem zich blijft voordoen, neem dan contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>

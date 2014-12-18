@@ -44,7 +44,7 @@ SCR Screen Recorder colectează statistici anonime de utilizare pentru a ajuta l
 
     <string name="error_dialog_title">"Ceva nu a funtionat bine :-("</string>
     <string name="startup_error_message">"Raportul anonim de eroare va fi trimis în mod automat pentru a ne ajuta sa rezolvam problema. Simțiți-vă liber să intrati în contact prin e-mail de support citând eroarea S %1$d ."</string>
-    <string name="recording_error_message">"Raportul anonim de eroare va fi trimis în mod automat pentru a ne ajuta sa rezolvam  problema. Simțiți-vă liber să intrati în contact prin e-mail de support citând eroarea R %1$d ."</string>
+    <string name="unknown_error_message">"Raportul anonim de eroare va fi trimis în mod automat pentru a ne ajuta sa rezolvam  problema. Simțiți-vă liber să intrati în contact prin e-mail de support citând eroarea R %1$d ."</string>
 
     <string name="media_recorder_error_title">"Eroare de înregistrare"</string>
     <string name="media_recorder_error_message">"Încercați să schimbați rezoluția sau comutati transformarea imaginii între GPU/CPU. Vă rugăm să dezinstalați alte aplicații de captura ecran, dacă aveți una deja instalata. Dacă problema persistă, vă rugăm să luați legătura prin e-mail de support citând eroarea R %1$d ."</string>

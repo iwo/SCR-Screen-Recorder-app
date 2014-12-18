@@ -41,7 +41,7 @@ SCR Screen Recorder coleta estatísticas de uso anônimas para ajudar a erros ac
 
     <string name="error_dialog_title">"Algo deu errado :-("</string>
     <string name="startup_error_message">"O relatório de erro anônimo será enviado automaticamente para nos ajudar a resolver o problema. Sinta-se livre para entrar em contato via e-mail de apoio erro citando."</string>
-    <string name="recording_error_message">"O relatório de erro anônima será automaticamente enviado para nos ajudar a corrigir o problema. Sinta-se livre para entrar em contato via e-mail citando o apoio de erro.
+    <string name="unknown_error_message">"O relatório de erro anônima será automaticamente enviado para nos ajudar a corrigir o problema. Sinta-se livre para entrar em contato via e-mail citando o apoio de erro.
 "</string>
 
     <string name="media_recorder_error_title">"Erro na Gravação"</string>

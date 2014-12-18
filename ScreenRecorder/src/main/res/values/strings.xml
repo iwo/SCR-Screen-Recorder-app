@@ -41,14 +41,14 @@ At the moment this feature is not available on Android 4.2 but it'll be added so
     "</string>
 
     <string name="play_description_features">"
-• FACE CAM - Share you emotions by adding a front-facing camera to your video.
+• FACE CAM - Share your emotions by adding a front-facing camera to your video.
 You can move the camera overlay around so that it doesn't obstruct important controls.
 
 • NO ADS - Unlike other \"free\" screen recorders SCR never display any ads.
 Development of all my apps is supported only by donations and Pro versions.
 
 • SETTINGS - No mater if you prefer to select simple presets or manually tweak every setting
-we've got you covered. SCR allows for many customizations and provides performance and stability stats.
+we've got you covered. SCR supports many customizations and provides performance and stability stats.
 
 • ALPHA FEATURES - Let us know what's important to you by joining SCR Alpha Testing Google+ community at http://goo.gl/PGYZ8r
 If you'd like to receive Alpha updates and test brand new features follow the links in the About community section.
@@ -65,7 +65,7 @@ Buy <b>SCR Pro</b> to get unlimited screencast length with no watermark.
     </string>
 
         <string name="play_description_pro">
-Before you buy consider testing <b>SCR Free</b> to ensure that your device is already supported..
+Before you buy consider testing <b>SCR Free</b> to ensure that your device is already supported.
     </string>
 
     <string name="play_description_stablity">
@@ -93,14 +93,12 @@ SCR 5+ opens a new chapter in the history of the famous SCR Screen Recorder.
 Thanks to the new Android 5.0 features SCR 5+ allows to record screen without root access!
 
 Unfortunately Lollipop doesn't natively support internal audio recording yet,
-so if your require this feature and your device is rooted install SCR Screen Recorder Root.
+so if you require this feature and your device is rooted install SCR Screen Recorder Root.
     "</string>
 
     <string name="recording_saved_title">SCR Recording Saved</string>
-    <string name="recording_saved_message">Recording saved to %1$s</string>
     <string name="recording_saved_toast">Recording saved to %1$s</string>
     <string name="max_file_size_reached_toast">Max file size reached. Recording saved to %1$s</string>
-    <string name="start">Start</string>
     <string name="play">Play</string>
 
     <string name="su_required_title">Root access is required</string>
@@ -120,8 +118,7 @@ so if your require this feature and your device is rooted install SCR Screen Rec
     <string name="settings_no_root_mode_summary">Tap to request root access and enable all features</string>
 
     <string name="error_dialog_title">Something went seriously wrong :-(</string>
-    <string name="startup_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error S%1$d.</string>
-    <string name="recording_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error R%1$d.</string>
+    <string name="unknown_error_message">The anonymous error report will be sent automatically to help us fix the issue. Feel free to get in touch via support email quoting error SR%1$d.</string>
 
     <string name="selinux_error_title">Root access error</string>
     <string name="selinux_error_message">There is a problem with SELinux configuration on your device. Make sure your device is properly rooted and switch SELinux to permissive mode if possible.</string>
@@ -187,9 +184,7 @@ so if your require this feature and your device is rooted install SCR Screen Rec
 
     <string name="settings_video_encoder">Encoder</string>
     <string name="settings_video_encoder_h264">H264</string>
-    <string name="settings_video_encoder_h263">H263</string>
     <string name="settings_video_encoder_mpeg_4_sp">MPEG-4 SP</string>
-    <string name="settings_video_encoder_default">Auto</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4">Software MPEG-4</string>
     <string name="settings_video_encoder_built_in_summary">Android built-in %1$s encoder</string>
     <string name="settings_video_encoder_ffmpeg_summary">FFmpeg software MPEG4 encoder</string>
@@ -243,8 +238,6 @@ so if your require this feature and your device is rooted install SCR Screen Rec
     <string name="settings_vertical_frames">Vertical frames</string>
     <string name="settings_vertical_frames_warning">Video players on many devices can\'t play videos with vertical frames.
         Even if this option is unselected orientation metadata is added to the video so that it\'s displayed correctly in default Android player, YouTube etc.</string>
-    <string name="settings_vertical_frames_ok">OK</string>
-    <string name="settings_vertical_frames_cancel">Cancel</string>
 
     <string name="settings_audio_category">Audio</string>
     <string name="settings_audio_source">Source</string>
@@ -260,8 +253,8 @@ so if your require this feature and your device is rooted install SCR Screen Rec
     <string name="settings_audio_mute_summary">Mute. No Audio track</string>
     <string name="settings_audio_internal_summary">System audio output</string>
     <string name="settings_audio_mix_summary">Microphone + Internal (Use headphones!)</string>
-    <string name="settings_audio">Audio</string>
     <string name="settings_sampling_rate">Sampling rate</string>
+
     <string name="settings_mic_gain">Microphone boost</string>
     <string name="settings_mic_gain_summary_mix_only">Available only for %1$s</string>
     <string name="settings_mic_gain_summary_default">Use default volume</string>
@@ -286,6 +279,7 @@ so if your require this feature and your device is rooted install SCR Screen Rec
     <string name="settings_video_config_entry_stability">%1$d%% stable</string>
     <string name="settings_video_config_summary">Based on usage statistics</string>
     <string name="settings_video_config_summary_no_data">Couldn\'t download statistics</string>
+    <string name="settings_video_config_summary_not_available">No stats available yet</string>
 
     <string name="device_profile_download_error_toast">Couldn\'t download recommended settings. Make sure you\'re online.</string>
     <string name="device_profile_downloaded_toast">Recommended settings downloaded</string>
@@ -343,10 +337,10 @@ so if your require this feature and your device is rooted install SCR Screen Rec
     <string name="internal_audio_disabled_message">Internal audio recording is switched off because %1$s didn\'t shut down correctly. You can re-enable it in Settings.</string>
 
     <string name="license_title">License error</string>
-    <string name="license_not_licensed_message">Error verifying license. Please purchase SCR Pro through Google Play Store.</string>
-    <string name="license_retry_message">Error verifying license. Make sure your internet connection is up
+    <string name="license_not_licensed_message">Error verifying license. Please purchase SCR Pro through Google Play Store. If you have Lucky Patcher installed please disable Google Play emulation.</string>
+    <string name="license_retry_message">Error verifying license. Make sure your internet connection is up, date and time is correct on your device
         and your\'re logged into Google Play Store. After the license is verified you can continue using SCR Pro offline.</string>
-    <string name="license_error_message">Error verifying license. Make sure you installed SCR Pro though Google Play.
+    <string name="license_error_message">Error verifying license. Make sure you installed SCR Pro though Google Play and that date and time is correct on your device.
         If the problem persists clear data and cache of \"Google Play services\" and \"Google Play Store\" apps.
     </string>
     <string name="license_play_store">Play Store</string>

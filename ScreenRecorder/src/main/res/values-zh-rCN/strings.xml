@@ -101,7 +101,7 @@
     <string name="rating_rate_now">立即评分！</string>
     <string name="rating_rate_title">给“%1$s”评分</string>
     <string name="rating_remind">以后提醒我</string>
-    <string name="recording_error_message">SCR 屏幕录像将会自动发送匿名错误报告给作者来帮助作者修复这个问题，您随时可以将错误 R%1$d 提交给技术支持电子邮箱。</string>
+    <string name="unknown_error_message">SCR 屏幕录像将会自动发送匿名错误报告给作者来帮助作者修复这个问题，您随时可以将错误 R%1$d 提交给技术支持电子邮箱。</string>
     <string name="recording_saved_message">录像已保存到 %1$s</string>
     <string name="recording_saved_title">SCR 录像已保存</string>
     <string name="recording_saved_toast">录像已保存到 %1$s</string>
