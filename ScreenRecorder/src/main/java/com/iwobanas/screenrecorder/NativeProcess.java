@@ -182,6 +182,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
         if (Settings.getInstance().getVideoEncoder() < 0)
             return false;
         switch (recordingInfo.exitValue) {
+            case 201:
             case 216:
             case 217:
             case 219:
