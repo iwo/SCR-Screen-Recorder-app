@@ -4,54 +4,115 @@
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro
 "</string>
+    <string name="free_app_no_root_name">"SCR Free"</string>
+    <string name="free_app_no_root_full_name">"SCR Screen Recorder Free"</string>
+    <string name="pro_app_no_root_name">"SCR Pro"</string>
+    <string name="pro_app_no_root_full_name">"SCR Screen Recorder Pro
+"</string>
 
-    <string name="play_free_app_name">"
+    <string name="play_free_app_name_30_char">"
 SCR Screen Recorder Free ★ root
     "</string>
-    <string name="play_pro_app_name">"
+    <string name="play_pro_app_name_30_char">"
 SCR Screen Recorder Pro ★ root
     "</string>
 
+
+    <string name="play_description_short_80_char">"
+تسجيل الشاشة والصوت بدقة عالية يتطلب صلاحيات الروت !
+    "</string>
+
     <string name="play_root_required">"
-&lt;B&gt; التطبيق يعمل على أجهزة أندرويد التي تمتلك روت / التطبيق يعمل على أجهزة آيفون التي تمتلك جيلبريك / التطبيق يعمل على الأجهزة غير المقفلة ! &lt;/B&gt; &lt;BR/&gt; لا تقم بتثبيت التطبيق إذا كان جهازك لا يمتلك روت أو جيلبريك ."</string>
+&lt;B&gt; التطبيق يعمل على أجهزة أندرويد التي تمتلك صلاحيات الروت / التطبيق يعمل على أجهزة آيفون التي تمتلك جيلبريك / التطبيق يعمل على الأجهزة غير المقفلة ! &lt;/B&gt; &lt;BR/&gt; لا تقم بتثبيت التطبيق إذا كان جهازك لا يمتلك صلاحيات الروت أو جيلبريك .
+    "</string>
+
     <string name="play_description_main">"
-تسجيل لقطات للشاشة بجودة كبيرة مباشرة من الهاتف أو الكمبيوتر اللوحي ! يستخدم SCR Screen Recorder ترميز الفيديو لتحقيق أفضل جودة لتسجيل الشاشة على أي جهاز . إنه مسجل الفيديو المتكامل بما في ذلك دعمه لنوع وحدة معالجة الرسومات Tegra على جهاز Nexus 7 ."</string>
-    <string name="play_description_free">"
-مع &lt;b&gt;SCR Free&lt;/b&gt; يمكنك تسجيل الشاشة لـ3 دقائق فقط ويتم إضافة علامة مائية على الفيديو الخاص بك .
-قم بشراء &lt;b&gt;SCR Pro&lt;/b&gt; للحصول على وقت غير محدود لتسجيل الشاشة مع عدم وجود العلامة المائية .
+تحقق من تطبيق SCR Screen Recorder ، تطبيق SCR Screen Recorder للأندرويد هو الأكثر شهرة من بين جميع تطبيقات تسجيل الشاشة . ويدعم جميع إصدارات أندرويد منذ الإصدار 4.0 ويستخدم أفضل أسلوب متاح على كل منصة . منذ الإصدار الأول للتطبيق في أوائل عام 2013 حصل التطبيق على تحديثات كثيرة وإضافة ميزات بشكل منتظم .
 
-هذا هو وقت اختبار إصدار &lt;b&gt;BETA&lt;/b&gt; لذلك قد لا يعمل التطبيق على جميع الأجهزة والأنظمة . إذا واجهت أية مشاكل يرجى إبلاغي عنها بإرسال رسالة إلى scr.screen.recorder@gmail.com لمساعدتي في دعم جهازك ونظامك .
+ميزات فريدة من نوعها :
     "</string>
 
-    <string name="play_description_pro">"
-هذا هو وقت اختبار إصدار &lt;b&gt;BETA&lt;/b&gt; لذلك قد لا يعمل التطبيق على جميع الأجهزة والأنظمة .
-قبل أن تشتري &lt;b&gt;SCR Pro&lt;/b&gt; قم بتجربة &lt;b&gt;SCR Free&lt;/b&gt; للتأكد من أن جهازك ونظامك معتمدان بالفعل . إذا واجهت أية مشاكل يرجى إبلاغي عنها بإرسال رسالة إلى scr.screen.recorder@gmail.com لمساعدتي في دعم جهازك ونظامك .
+    <string name="play_description_system_audio">"
+• نظام الصوت - في معظم الأجهزة يمكنك تسجيل الصوت داخل اللعبة مباشرة دون فقدان الجودة الناجمة عن تسجيل أصوات المتكلمين بمكبر الصوت . يسمح لك الخيار \" داخلي + مكبر الصوت \" بإضافة تعليقات بصوتك وتسجيل صوت النظام في آن واحد . في الوقت الحاضر لا تتوفر هذه الميزة لإصدار الأندرويد 4.2 ولكن سوف تضاف قريباً .
     "</string>
 
-    <string name="play_small_print">"
-يقوم SCR Screen Recorder بجمع إحصاءات الاستخدام المجهولة وتحليل كيفية استخدام المستخدمين للتطبيق . هذا التطبيق يستخدم ترميز غير معدل من FFMPEG 1.2 مرخص بموجب LGPL .
+    <string name="play_description_features">"
+• الكاميرا الأمامية - شارك مشاعرك عن طريق تشغيل الكاميرا الأمامية . يمكنك تحريك مكان ظهور صورتك .
+
+• لا إعلانات - حتى تطبيق \\"Free\\" screen recorders SCR لا يتم عرض الإعلانات فيه . يتم تطوير كل ما عندي من تطبيقات بواسطة تبرعاتكم والإصدارات Pro .
+
+• إعدادات - لا يهم إذا كنت تفضل تحديد الإعدادات المسبقة الافتراضية أو تحديدها يدوياً كل الإعدادات متاحة لكم . تطبيق SCR يدعم العديد من التخصيصات ويوفر إحصائيات الأداء والاستقرار .
+
+• ميزات تجريبية - اسمحوا لي أن أعرف ما هو المهم بالنسبة لكم داخل التطبيق من خلال الانضمام إلى مجتمع SCR Alpha على جوجل بلس من خلال الرابط التالي http://goo.gl/PGYZ8r إذا كنتم ترغبون في تلقي التحديثات التجريبية واختبار الميزات الجديدة تابعونا على مجتمعنا في جوجل بلس .
+    "</string>
+
+    <string name="play_ban_disclaimer">"
+الإصدار السابق من هذا التطبيق حصل على ما يزيد عن 2 مليون تحميل و 37 ألف من المراجعات والتقييمات .
+    "</string>
+
+    <string name="play_description_free_limits">"
+مع تطبيق &lt;b&gt;SCR Free&lt;/b&gt; يمكنك تسجيل الشاشة لـ3 دقائق كحد أقصى ويتم إضافة العلامة المائية SCR على الفيديو . قم بشراء تطبيق &lt;b&gt;SCR Pro&lt;/b&gt; للحصول على وقت غير محدود للتسجيل مع عدم وجود العلامة المائية .
+    "</string>
+
+        <string name="play_description_pro">"
+قبل الشراء قم بتجربة تطبيق &lt;b&gt;SCR Free&lt;/b&gt; لضمان أن جهازك مدعوم بالفعل .
+    "</string>
+
+    <string name="play_description_stablity">"
+يستخدم تطبيق SCR Screen Recorder مختلف واجهات برمجة التطبيقات غير الرسمية والتي قد لا تعمل على بعض الأجهزة . إذا واجهت أي مشاكل يرجى إبلاغي عنها على scr.screen.recorder@gmail.com لمساعدتي في دعم جهازك .
+    "</string>
+
+
+
+    <string name="play_small_print_stats">"
+هذا التطبيق يجمع إحصاءات الاستخدام المجهولة للمساعدة في إصلاح الأخطاء وتحليل توافق الأجهزة .
+    "</string>
+
+    <string name="play_small_print_lgpl">"
+هذا البرنامج يستخدم كود معدل من FFMPEG 1.2 ومرخص بموجب LGPL .
+    "</string>
+
+
+    <string name="play_noroot_description_short_80_char">"
+تطبيق خفيف الوزن مع إصدار أندرويد المصاصة ومع ميزة تشغيل الكاميرا الأمامية . [ لا تحتاج لصلاحيات الروت ]
+    "</string>
+
+    <string name="play_noroot_description_main">"
+تطبيق +SCR 5 يفتح فصلاً جديداً في تاريخ تطبيق SCR Screen Recorder الشهير . بفضل إصدار أندرويد الجديد 5.0 ميزات تطبيق +5 SCR تسمح لك بتسجبل الشاشة دون الحاجة لصلاحيات الروت ! لكن للأسف إصدار أندرويد 5.0 لا يدعم تسجيل الصوت الداخلي بعد ، لذلك إذا كنت تحتاج إلى هذه الميزة يرجى منك تثبيت تطبيق SCR Screen Recorder Root .
     "</string>
 
     <string name="recording_saved_title">"تم حفظ التسجيل بنجاح"</string>
-    <string name="recording_saved_message">"تم حفظ التسجيل بإسم %1$s"</string>
     <string name="recording_saved_toast">"تم حفظ التسجيل بإسم %1$s"</string>
     <string name="max_file_size_reached_toast">"تم الوصول إلى الحد الأقصى لحجم الملف . التسجيل تم حفظه في %1$s"</string>
-    <string name="start">"بدء التسجيل"</string>
     <string name="play">"تشغيل"</string>
 
-    <string name="su_required_title">"يتطلب صلاحيات روت (Root)"</string>
-    <string name="su_required_message">"للبدء في تسجيل الشاشة سيحتاج هاتفك إلى صلاحيات روت (Root) . هناك الكثير من الدروس على شبكة الإنترنت تشرح كيفية الحصول على صلاحيات روت (Root) لنوع هاتفك . يرجى منك العودة من حيث بدأت !"</string>
-    <string name="su_required_help">"ماهو \" الروت \" ؟"</string>
+    <string name="su_required_title">"يتطلب صلاحيات الروت (Root)"</string>
+    <string name="su_required_message">"لتشغيل أي تطبيق يقوم بتسجيل الشاشة سيحتاج هاتفك لصلاحيات الروت . هناك الكثير من الدروس على شبكة الإنترنت تشرح كيفية الحصول على صلاحيات الروت لنوع هاتفك . يرجى منك العودة من حيث بدأت !"</string>
+    <string name="su_required_help">"ما هو \" الروت \" ؟"</string>
     <string name="su_required_help_link">"En: http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/
 
 Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
+    <string name="su_required_lollipop_message">"لاستخدام الإمكانات الكاملة للـ%1$s سيحتاج هاتفك لصلاحيات الروت . إصدار أندرويد 5.0 يسمح لك بتسجيل الشاشة بشكل أساسي دون الحاجة لصلاحيات الروت ( لكن بدون ميزة تسجيل الصوت الداخلي ) . تحقق من ذلك عن طريق تحميل النسخة الخفيفة %2$s أو قم بالتبديل إلى وضع بدون-روت .
+    "</string>
+    <string name="su_required_lollipop_denied_message">"إذا كان جهازك يمتلك صلاحيات الروت الرجاء فتح %1$s والتأكد من أنك أعطيت حق استخدام صلاحيات الروت للـ%2$s ."</string>
+    <string name="su_required_no_root_mode">"وضع بدون-روت"</string>
+
+    <string name="settings_no_root_only">"مخصص فقط للترميزات التي بدون روت"</string>
+    <string name="settings_root_only">"مخصص فقط للترميزات التي مع الروت"</string>
+    <string name="settings_no_root_mode">"وضع بدون-روت"</string>
+    <string name="settings_no_root_mode_summary">"اضغط لطلب الحصول على صلاحيات الروت وتمكين كافة الميزات"</string>
 
     <string name="error_dialog_title">"حدث خطأ ما :-("</string>
-    <string name="startup_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني S%1$d ."</string>
-    <string name="unknown_error_message">"سيتم إرسال التقرير عن الخطأ المجهول تلقائياً لمساعدتنا على إصلاحه . لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>
+    <string name="unknown_error_message">"سيتم إرسال تقرير الخطأ المجهول تلقائياً لمساعدتنا في حل هذه المشكلة . إذا استمرت المشكلة لا تتردد في الاتصال بنا عن طريق البريد الإلكتروني SR %1$d ."</string>
+
+    <string name="selinux_error_title">"حدث خطأ في الوصول إلى صلاحيات الروت"</string>
+    <string name="selinux_error_message">"هناك مشكلة مع تكوين SELinux على جهازك . تأكد من أن جهازك لديه صلاحيات الروت بالفعل وقم بتبديل تكوين SELinux إلى الوضع السهل إن أمكن ."</string>
 
     <string name="media_recorder_error_title">"خطأ في التسجيل"</string>
-    <string name="media_recorder_error_message">"حاول تغيير دقة التسجيل أو تبديل تحوّل الصورة بين CPU/GPU . ويرجى منك إلغاء تثبيت تطبيقات تسجيل الشاشة الأخرى إذا كان لديك أي واحد منها . إذا استمرت المشكلة لا تتردد في الإتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>
+    <string name="media_recorder_error_message">"حاول تغيير دقة التسجيل أو تبديل تحوّل الصورة بين CPU/GPU . ويرجى منك إلغاء تثبيت تطبيقات تسجيل الشاشة الأخرى إذا كان لديك أي واحد منها . إذا استمرت المشكلة لا تتردد في الاتصال بنا عن طريق البريد الإلكتروني R%1$d ."</string>
+
+    <string name="video_codec_error_title">"إعدادات الفيديو غير متوافقة"</string>
+    <string name="video_codec_error_message">"حاول تقليل دقة التسجيل أو معدل البت للفيديو . لاحظ أنه في بعض الأجهزة صورة الفيديو تعمل فقط مع دقة تسجيل أقل . إذا استمرت المشكلة لا تتردد في الاتصال بنا عن طريق البريد الإلكتروني R %1$d ."</string>
 
     <string name="output_file_error_title">"لا يمكن إنشاء ملف الفيديو"</string>
     <string name="output_file_error_message">"مسجل الشاشة غير قادر على إنشاء %1$s ملف الفيديو . تأكد من مسار الحفظ المحدد للفيديو وأن بطاقة SD غير مؤمنة بواسطة اتصال USB ."</string>
@@ -85,14 +146,14 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
     <string name="help_stop_ok">"فهمت ذلك !"</string>
 
     <string name="free_timeout_title">"انتهت المهلة المحددة"</string>
-    <string name="free_timeout_message">"يجب عليك شراء SCR Screen Recorder Pro للحصول على وقت غير محدود للتسجيل وإخفاء العلامة المائية التي تكون على الفيديو ."</string>
+    <string name="free_timeout_message">"يجب عليك شراء تطبيق SCR Screen Recorder Pro للحصول على وقت غير محدود للتسجيل وإخفاء العلامة المائية التي تكون على الفيديو ."</string>
     <string name="free_timeout_buy">"شراء الآن !"</string>
     <string name="free_timeout_no_thanks">"لا شكراً"</string>
-    <string name="hide_icon_title">"هذه الميزة متوفرة لـSCR Pro فقط"</string>
-    <string name="hide_icon_message">"يجب عليك شراء SCR Screen Recorder Pro لإخفاء العلامة المائية التي تكون على الفيديو وإخفاء رمز التطبيق . ستحصل كذلك على وقت غير محدود للتسجيل !"</string>
+    <string name="hide_icon_title">"هذه الميزة متوفرة في تطبيق SCR Pro فقط"</string>
+    <string name="hide_icon_message">"يجب عليك شراء تطبيق SCR Screen Recorder Pro لإخفاء العلامة المائية التي تكون على الفيديو وإخفاء رمز التطبيق . ستحصل كذلك على وقت غير محدود للتسجيل !"</string>
 
-    <string name="buy_error_title">"خطأ في تشغيل متجر Google Play"</string>
-    <string name="buy_error_message">"الرجاء البحث عن SCR Screen Recorder Pro في متجر Google Play"</string>
+    <string name="buy_error_title">"خطأ في تشغيل متجر Play"</string>
+    <string name="buy_error_message">"الرجاء البحث عن تطبيق SCR Screen Recorder Pro في متجر Play"</string>
 
     <string name="settings_activity_label">"إعدادات SCR"</string>
     <string name="settings_title">"إعدادات"</string>
@@ -106,12 +167,13 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
 
     <string name="settings_video_encoder">"التشفير"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"تلقائي"</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4">"برنامج MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"دمج خاصية %1$s مع التشفير"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg software MPEG4 encoder"</string>
+    <string name="settings_video_encoder_no_root_h264">"H264 ( بدون روت )"</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 ( بدون روت )"</string>
+    <string name="settings_video_encoder_mpeg_4">"MPEG-4"</string>
 
     <string name="settings_resolution">"دقة التسجيل"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
@@ -125,16 +187,16 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"+GPU"</string>
-    <string name="settings_transformation_cpu_summary">"صورة الشاشة تعمل على المعالج (CPU)"</string>
-    <string name="settings_transformation_gpu_summary">"صورة الشاشة تعمل على بطاقة الرسومات (%1$s)"</string>
-    <string name="settings_transformation_sw_summary">"غير متوفرة في أنواع التشفير"</string>
+    <string name="settings_transformation_cpu_summary">"استخدام المعالج (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"استخدام رقاقة الرسومات (%1$s)"</string>
+    <string name="settings_transformation_sw_summary">"غير متوفر في أنواع التشفير"</string>
 
     <string name="settings_video_bitrate">"معدل البت"</string>
     <string name="settings_video_bitrate_summary">"حوّل %1$s اعتماداً على التشفير"</string>
     <string name="settings_video_bitrate_default">"الافتراضي"</string>
 
 
-    <string name="settings_frame_rate">"معدل الإطارات"</string>
+    <string name="settings_frame_rate">"معدل الإطار"</string>
     <string name="settings_frame_rate_max">"الحد الأقصى"</string>
     <string name="settings_frame_rate_max_short">"الحد الأقصى"</string>
     <string name="settings_frame_rate_up_to">"%1$d إطار في الثانية"</string>
@@ -154,26 +216,32 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
 
     <string name="settings_vertical_frames">"الإطارات الرأسية"</string>
     <string name="settings_vertical_frames_warning">"مشغلات الفيديو على العديد من الأجهزة لا يمكنها تشغيل ملفات الفيديو ذات الإطارات الرأسية . حتى إذا كان هذا الخيار غير محدد تتم إضافته إلى شريط الفيديو حتى يصبح العرض صحيح في مشغل الأندرويد الافتراضي ، ويوتيوب وغيرها ."</string>
-    <string name="settings_vertical_frames_ok">"موافق"</string>
-    <string name="settings_vertical_frames_cancel">"إلغاء"</string>
 
     <string name="settings_audio_category">"تسجيل الصوت"</string>
     <string name="settings_audio_source">"المصدر"</string>
     <string name="settings_audio_mic">"مكبر الصوت"</string>
     <string name="settings_audio_mute">"كتم الصوت"</string>
     <string name="settings_audio_internal">"داخلي"</string>
-    <string name="settings_audio_not_supported">"غير معتمد على %1$s"</string>
+    <string name="settings_audio_experimental">"تجريبي"</string>
+    <string name="settings_audio_mix">"داخلي + مكبر الصوت"</string>
+    <string name="settings_audio_use_headphones">"استخدم سماعات الرأس لتجنب الصدى"</string>
+    <string name="settings_audio_not_supported">"غير مدعوم على %1$s"</string>
     <string name="settings_audio_incompatible">"غير متوافق مع برنامج تشغيل الصوت الخاص بك"</string>
     <string name="settings_audio_mic_summary">"مكبر الصوت"</string>
     <string name="settings_audio_mute_summary">"كتم الصوت . لا يوجد مسار نزول افتراضي للصوت"</string>
     <string name="settings_audio_internal_summary">"نظام إخراج الصوت"</string>
-    <string name="settings_audio">"تسجيل الصوت"</string>
+    <string name="settings_audio_mix_summary">"مكبر الصوت + داخلي ( استخدم سماعات الرأس )"</string>
     <string name="settings_sampling_rate">"معدل أخذ العينات"</string>
+
+    <string name="settings_mic_gain">"تحسين مكبر الصوت"</string>
+    <string name="settings_mic_gain_summary_mix_only">"متاح فقط لـ%1$s"</string>
+    <string name="settings_mic_gain_summary_default">"استخدم الحد الافتراضي"</string>
+    <string name="settings_mic_gain_summary">"زيادة الحد بواسطة %1$ddB"</string>
 
     <string name="settings_other_category">"أخرى"</string>
     <string name="settings_hide_icon">"إخفاء رمز التطبيق"</string>
     <string name="settings_show_touches">"عرض اللمسات"</string>
-    <string name="settings_show_touches_summary">"هذه الخاصية تعرض ملاحظات مرئية لتفاعلات اللمس . يمكنك أيضاً عرض اللمسات بشكل دائم من خلال الذهاب إلى الضبط &gt; خيارات المطور &gt; عرض اللمسات"</string>
+    <string name="settings_show_touches_summary">"هذه الخاصية تعرض ملاحظات مرئية لتفاعلات اللمس . يمكنك عرض اللمسات بشكل دائم بالذهاب إلى الضبط &gt; خيارات المطور &gt; عرض اللمسات"</string>
     <string name="settings_output_dir">"مسار حفظ الفيديو"</string>
     <string name="settings_stop_when_screen_off">"إيقاف التسجيل عند إغلاق الشاشة"</string>
     <string name="settings_stop_when_screen_off_summary">"إنهاء التسجيل بعد أن يتم إيقاف تشغيل الشاشة"</string>
@@ -185,10 +253,11 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
     <string name="settings_zigzag_fix_cpu_only">"تحوّل الصورة متوفر فقط مع CPU"</string>
 
     <string name="settings_video_config">"%1$s الإعدادات المسبقة"</string>
-    <string name="settings_video_config_entry">"%1$dx%2$d ~%3$.0ffps"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~٪ 3 $ .0ffps"</string>
     <string name="settings_video_config_entry_stability">"%1$d %% مستقر"</string>
     <string name="settings_video_config_summary">"استناداً إلى إحصائيات الاستخدام"</string>
     <string name="settings_video_config_summary_no_data">"لا يمكن تحميل الإحصائيات"</string>
+    <string name="settings_video_config_summary_not_available">"لا توجد إحصائيات متوفرة حتى الآن"</string>
 
     <string name="device_profile_download_error_toast">"لا يمكن تحميل الإعدادات الموصى بها . تأكد من أنك متصل بالإنترنت ."</string>
     <string name="device_profile_downloaded_toast">"تم تحميل الإعدادات الموصى بها"</string>
@@ -211,12 +280,12 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
     <string name="error_report_text">"المرفق يحتوي على سجل النظام مفصلاً بما في ذلك معلومات حول الخطأ . لا تتردد في إضافة أية تعليقات هنا ."</string>
     <string name="error_report_chooser">"إرسال تقرير عن الخطأ بواسطة البريد الإلكتروني"</string>
 
-    <string name="rating_rate_title">"معدل %1$s"</string>
+    <string name="rating_rate_title">"تقييم %1$s"</string>
     <string name="rating_rate_message">"إذا كنت تتمتع باستخدام %1$s ، يرجى أن تتوقف للحظة لتقييم التطبيق . شكراً لدعمك !"</string>
     <string name="rating_rate_now">"تقييم التطبيق الآن !"</string>
     <string name="rating_remind">"ذكرني لاحقاً"</string>
     <string name="rating_no_thanks">"لا ، شكراً"</string>
-    <string name="rating_play_error">"لا يمكن فتح متجر Google Play "</string>
+    <string name="rating_play_error">"لا يمكن فتح متجر Play "</string>
 
     <string name="help_stop_message">"لإيقاف التسجيل قم بإغلاق الشاشة وانتظر ثانيتين . بدلاً من ذلك يمكنك ببساطة إعادة فتح تطبيق %1$s ."</string>
     <string name="menu_send_bug_report">"إرسال تقرير عن خطأ ما"</string>
@@ -225,6 +294,7 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
 
     <string name="notification_status_initializing">"جاري التهيئة"</string>
     <string name="notification_status_waiting_for_root">"في انتظار الحصول على صلاحيات الروت"</string>
+    <string name="notification_status_waiting_for_projection">"في انتظار وصول التقاط الشاشة"</string>
     <string name="notification_status_installing_audio">"جاري تثبيت برنامج تشغيل الصوت"</string>
     <string name="notification_status_ready">"مستعد للتسجيل"</string>
     <string name="notification_status_starting">"جاري البدء بالتسجيل"</string>
@@ -233,8 +303,8 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
     <string name="notification_status_stopping">"جاري إيقاف التسجيل"</string>
     <string name="notification_status_uninstalling_audio">"جاري إلغاء تثبيت برنامج تشغيل الصوت"</string>
 
-    <string name="sale_title">"تخفيض"</string>
-    <string name="sale_text">"قم بشراء SCR Pro الآن ووفر %1$d %% ! هذا العرض سينتهي في %2$s ."</string>
+    <string name="sale_title">"بيع"</string>
+    <string name="sale_text">"قم بشراء تطبيق SCR Pro الآن ووفر %1$d %% ! هذا العرض سينتهي في %2$s ."</string>
 
     <string name="copyrights_statement">"باستخدامك لـ%1$s أنت توافق على أنك المسؤول عن ضمان أن لا تنتهك حقوق التأليف والنشر لطرف ثالث أو الحقوق الملكية الفكرية الأخرى ."</string>
     <string name="internal_audio_installation_error_title">"خطأ في الصوت الداخلي"</string>
@@ -245,26 +315,44 @@ Ar: https://play.google.com/store/apps/details?id=net.xq55.WhatisRoot"</string>
     <string name="internal_audio_disabled_message">"تم إيقاف تشغيل تسجيل الصوت الداخلي لأن %1$s لم تغلق بشكل صحيح . يمكنك إعادة تمكينه من الإعدادات ."</string>
 
     <string name="license_title">"خطأ في الترخيص"</string>
-    <string name="license_not_licensed_message">"خطأ في التحقق من الترخيص . يرجى شراء SCR Pro من خلال متجر Google Play ."</string>
-    <string name="license_retry_message">"خطأ في التحقق من الترخيص . تأكد من اتصال الإنترنت الخاص بك وقم بتسجيل الدخول إلى متجر Google Play . بعد أن يتم التحقق من الترخيص يمكنك الاستمرار باستخدام SCR Pro دون اتصال ."</string>
-    <string name="license_error_message">"خطأ في التحقق من الترخيص . تأكد من تثبيت SCR Pro من خلال متجر Google Play . إذا استمرت المشكلة قم بمسح البيانات ومسح ذاكرة التخزين المؤقت لكل من التطبيقات التالية : \" خدمات Google Play \" و \" متجر Google Play \" .
+    <string name="license_not_licensed_message">"خطأ في التحقق من الترخيص . رجاءً قم بشراء تطبيق SCR Pro من متجر Play . أو إذا كان لديك تطبيق Lucky Patcher رجاءً قم بتعطيل خاصية محاكاة التحقق من الترخيص لـGoogle وخاصية محاكاة فواتير Google من داخل التطبيق ."</string>
+    <string name="license_retry_message">"خطأ في التحقق من الترخيص . تأكد من اتصال الإنترنت الخاص بك ، وتأكد من التاريخ والوقت على جهازك وقم بتسجيل الدخول إلى متجر Play . بعد أن يتم التحقق من الترخيص يمكنك الاستمرار في استخدام تطبيق SCR Pro ."</string>
+    <string name="license_error_message">"خطأ في التحقق من الترخيص . تأكد من تثبيت تطبيق SCR Pro من خلال متجر Play وتأكد من التاريخ والوقت على جهازك . إذا استمرت المشكلة قم بمسح البيانات لكل من \" خدمات Google Play \" و \" متجر Play \" .
     "</string>
     <string name="license_play_store">"متجر Play"</string>
     <string name="license_retry">"إعادة المحاولة"</string>
     <string name="license_continue_as_free">"مواصلة استخدام الميزات المجانية"</string>
 
-    <string name="su_denied_message">"هناك مشكلة في الحصول على صلاحيات الروت على الجهاز الخاص بك . الرجاء فتح %1$s والقيام بتأكيد الحصول على صلاحيات الروت لصالح %2$s ."</string>
+    <string name="su_denied_message">"هناك مشكلة في الحصول على صلاحيات الروت على الجهاز الخاص بك . الرجاء فتح %1$s والقيام بتأكيد الحصول على صلاحيات الروت لصال %2$s ."</string>
     <string name="su_default_name">"المستخدم المتميز"</string>
 
     <string name="can_not_start_toast">"لا يمكن بدء التسجيل : %1$s"</string>
 
-    <string name="settings_show_camera">"عرض الكاميرا"</string>
-    <string name="settings_show_camera_summary">"عرض الصور الخاصة بك على رأس التسجيل"</string>
+    <string name="settings_show_camera">"الكاميرا الأمامية"</string>
+    <string name="settings_show_camera_summary">"صورة الكاميرا في الأعلى من التسجيل"</string>
     <string name="settings_camera_alpha_title">"الشفافية"</string>
-    <string name="settings_camera_alpha_summary">"عرض الكاميرا %1$d %% مبهم"</string>
-    <string name="settings_camera_alpha_summary_100">"عرض الكاميرا غير شفاف"</string>
+    <string name="settings_camera_alpha_summary">"الكاميرا الأمامية %1$d %% غير شفافة"</string>
+    <string name="settings_camera_alpha_summary_100">"الكاميرا الأمامية غير شفافة"</string>
 
-    <string name="miui_error_message">"إذا كنت لا تستطيع رؤية %1$s النافذة العائمة اذهب إلى إعدادات وتطبيقات MIUI وقم بتمكين \" إظهار النوافذ المنبثقة \" لـ %1$s ."</string>
-    <string name="miui_error_title">"النوافذ المنبثقة لـMIUI معطلة ؟"</string>
+    <string name="miui_error_message">"إذا كنت لا تستطيع رؤية %1$s النافذة العائمة اذهب إلى إعدادات تطبيقات MIUI وقم بتمكين \" إظهار النوافذ المنبثقة \" لـ %1$s ."</string>
+    <string name="miui_error_title">"النوافذ المنبثقة لـMIUI تم تعطيلها ؟"</string>
 
+    <string name="lollipop_dialog_title">"قم بتجربة تطبيق +SCR 5"</string>
+    <string name="lollipop_dialog_message">"هل ترغب في اختبار تطبيق +SCR 5 ، هو تطبيقي الجديد ، خفيف الوزن ، لا يحتاج إلى صلاحيات الروت ويستخدم خاصية التقاط الشاشة الرسمية لإصدار أندرويد 5.0 وتسجيل الصوت بمكبر الصوت ."</string>
+    <string name="lollipop_dialog_try_now">"جرب الآن"</string>
+
+    <string name="projection_deny_error_message">"تحتاج إلى الضغط فوق زر ابدأ الآن ليبدأ التسجيل بالعمل ."</string>
+    <string name="projection_deny_error_title">"لا يمكن الوصول إلى الشاشة"</string>
+
+    <string name="notification_action_share">"مشاركة"</string>
+    <string name="internal_audio_warning_title">"تحذير التثبيت"</string>
+
+    <string name="internal_audio_warning_message">"
+تثبيت برنامج تشغيل الصوت على جهازك يتطلب إدخال تعديلات على قسم النظام .
+رجاءً تأكد من أنك على معرفة بكيفية استعادة قسم النظام أو استعادة النظام من نسخة احتياطية قبل المتابعة .
+إذا كنت ترغب في إلغاء تثبيت تطبيق %1$s في المستقبل قم بالذهاب لإعدادات SCR وقم بتعطيل الصوت الداخلي قبل إلغاء تثبيت التطبيق .
+    "</string>
+    <string name="internal_audio_warning_confirmation">"أنا أعرف كيفية استعادة قسم النظام"</string>
+    <string name="internal_audio_warning_dont_show">"لا تظهر هذه الرسالة مرة أخرى"</string>
+    <string name="internal_audio_warning_install">"تثبيت"</string>
 </resources>

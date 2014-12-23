@@ -3,55 +3,126 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+    <string name="free_app_no_root_name">"SCR 5+ Free"</string>
+    <string name="free_app_no_root_full_name">"SCR 5+ Screen Recorder Free"</string>
+    <string name="pro_app_no_root_name">"SCR 5+ Pro"</string>
+    <string name="pro_app_no_root_full_name">"SCR 5+ Screen Recorder Pro"</string>
 
-    <string name="play_free_app_name">"
+    <string name="play_free_app_name_30_char">"
 SCR Screen Recorder Free ★ root
     "</string>
-    <string name="play_pro_app_name">"
+    <string name="play_pro_app_name_30_char">"
 SCR Screen Recorder Pro ★ root
     "</string>
 
+
+    <string name="play_description_short_80_char">"
+Neem je scherm en systeemgeluid op naar een HD videobestand! Root is nodig!
+    "</string>
+
     <string name="play_root_required">"
-&lt;b&gt;Werkt alleen op gerootte apparaten!&lt;/b&gt;&lt;br/&gt;Niet installeren als je apparaat niet geroot is."</string>
+&lt;b&gt;Werkt alleen op gerootte apparaten!&lt;/b&gt;&lt;br/&gt;Niet installeren als je apparaat niet geroot is.
+    "</string>
+
     <string name="play_description_main">"
-Neem hoge kwaliteit video's op, direct vanaf je telefoon of tablet!
+Probeer nu SCR Screen Recorder, de meest uitgebreide screencast opname app voor Android.
+SCR Screen Recorder ondersteunt alle Android versies vanaf 4.0 en gebruikt de best mogelijke encoding methode op elk platform.
+Sinds de eerste release in begin 2013 is SCR Screen Recorder regelmatig geüpdatet en zijn er nieuwe functies toegevoegd.
 
-SCR Screen Recorder gebruikt hardwareversnelde video-encoding om de beste kwaliteit op elk apparaat te krijgen.
-Het is de enige video recorder die Tegra apparaten ondersteunt, dus ook de Nexus 7."</string>
-    <string name="play_description_free">"
-Met &lt;b&gt;SCR Free&lt;/b&gt; kun je maximaal 3 minuten video opnemen en het SCR watermerk wordt toegevoegd aan je video. Koop &lt;b&gt;SCR Pro&lt;/b&gt; om onbeperke videolengte krijgen zonder watermerk. Dit is een vervroegde &lt;b&gt;BETA voorbeeld&lt;/b&gt; versie, dus het zou niet kunnen werken op alle apparaten en roms. Als je problemen hebt, meld dit dan bij scr.screen.recorder@gmail.com (Engels) om me te helpen met het ondersteunen van je apparaat.
+Unieke functies:
     "</string>
 
-    <string name="play_description_pro">"
-Dit is een vroege &lt;b&gt;BETA&lt;/b&gt; versie en zou niet op alle apparaten en ROMs kunnen werken.
-Voordat je de app koopt, probeer eerst &lt;b&gt;SCR Free&lt;/b&gt; om te testen of jouw apparaat wordt ondersteund.
-Als je problemen tegenkomt, maak er alsjeblieft een melding van bij scr.screen.recorder@gmail.com (Engels) zodat ik kan helpen jouw apparaat te ondersteunen.
+    <string name="play_description_system_audio">"
+• SYSTEEM AUDIO - Op de meeste apparaten kun je de in-game audio opnemen zonder kwaliteitsverlies doordat de microfoon het geluid uit de speakers opneemt.
+De \"Intern + Microfoon\" optie zorgt ervoor dat je gesproken commentaar aan je systeem audio kan toevoegen.
+Momenteel is deze functie niet beschikbaar op Android 4.2 maar wordt snel toegevoegd.
     "</string>
 
-    <string name="play_small_print">"
-SCR Screen Recorder verzamelt anonieme gebruiksstatistieken om bugs op te sporen en te analyseren hoe gebruikers de app gebruiken.
-Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL licentie.
+    <string name="play_description_features">"
+• FACE CAM - Deel je emoties door het beeld van je front-facing camera toe te voegen.
+Je kunt de camera overlay verplaatsen zodat deze geen belangrijke knoppen bedekt.
+
+• GEEN ADVERTENTIES - In tegenstelling tot andere \\"gratis\\" screen recorders, zal SCR nooit advertenties laten zien.
+De ontwikkeling van mijn apps wordt enkel ondersteund door donaties en Pro versies.
+
+• INSTELLINGEN - Het maakt niet uit of je eenvoudige voorinstellingen wilt gebruiken of dat je alles handmatig wilt instellen
+wij ondersteunen het. SCR ondersteunt vele instellingen en biedt statistieken over snelheid en stabiliteit.
+
+• ALPHA MOGELIJKHEDEN - Laat ons weten wat belangrijk voor je is door je aan te melden voor de SCR Alpha Testing community op Google+, http://goo.gl/PGYZ8r
+Als je graag Alpha updates wilt ontvangen en gloednieuwe functies wilt testen, gebruik dan de links in het Over deze community gedeelte.
+    "</string>
+
+    <string name="play_ban_disclaimer">"
+De vorige versie van deze app had meer dan 2 miljoen downloads en 37.000 reviews
+    "</string>
+
+    <string name="play_description_free_limits">"
+Met &lt;b&gt;SCR Free&lt;/b&gt; kun je maximaal 3 minuten opnemen en het SCR watermerk wordt toegevoegd aan uw video. Koop &lt;b&gt;SCR Pro&lt;/b&gt; om onbeperkte videolengte zonder watermerk te krijgen.
+    "</string>
+
+        <string name="play_description_pro">"
+Voordat je deze app koopt, overweeg &lt;b&gt;SCR Free&lt;/b&gt; te testen om er zeker van te zijn dat jouw apparaat wordt ondersteund.
+    "</string>
+
+    <string name="play_description_stablity">"
+SCR Screen Recorder maakt gebruik van verschillende hacks en onofficiële API's die niet kunnen werken op sommige apparaten en ROMs. Als je problemen tegenkomt kun je dit melden bij scr.screen.recorder@gmail.com om me te helpen bij het ondersteunen van jouw apparaat.
+    "</string>
+
+
+
+    <string name="play_small_print_stats">"
+Deze app verzamelt anonieme gebruiksstatistieken om bugs op te sporen en comptabiliteit te analyseren.
+    "</string>
+
+    <string name="play_small_print_lgpl">"
+Deze software gebruikt onaangepaste code van FFmpeg 1.2 onder de LGPL licentie.
+    "</string>
+
+
+    <string name="play_noroot_description_short_80_char">"
+Lichtgewicht Lollipop screen recorder met coole Face Cam functie. [geen root]
+    "</string>
+
+    <string name="play_noroot_description_main">"
+SCR 5+ opent een nieuw hoofdstuk in de geschiedenis van de beroemde SCR Screen Recorder.
+Met dank aan de nieuwe Android 5.0 mogelijkheden kan SCR 5+ je scherm opnemen zonder roottoegang!
+
+Helaas ondersteunt Lollipop standaard nog geen interne audio opname,
+dus als je deze functie nodig hebt en je apparaat geroot is, installeer dan SCR Screen Recorder Root.
     "</string>
 
     <string name="recording_saved_title">"SCR Opname Opgeslagen"</string>
-    <string name="recording_saved_message">"Opname opgeslagen in %1$s"</string>
     <string name="recording_saved_toast">"Opname opgeslagen in %1$s"</string>
     <string name="max_file_size_reached_toast">"Maximale bestandsgrootte bereikt. Opname opgeslagen in %1$s"</string>
-    <string name="start">"Start"</string>
     <string name="play">"Afspelen"</string>
 
     <string name="su_required_title">"Root-toegang nodig"</string>
-    <string name="su_required_message">"Om een screen recorder app op je telefoon / tablet te gebruiken, moet deze geroot zijn.
-        Op internet zijn voldoende tutorials die uitleggen hoe je verschillende apparaten moet rooten. Kom alsjeblieft terug als je klaar bent!"</string>
+    <string name="su_required_message">"Je telefoon / tablet moet geroot zijn om een screen recorder app te gebruiken.
+        Op het internet zijn genoeg tutorials die uitleggen hoe je verschillende apparaten moet rooten. Kom alsjeblieft terug als je klaar bent!"</string>
     <string name="su_required_help">"Wat is \"rooten\"?"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
+    <string name="su_required_lollipop_message">"Om alle functies van %1$s te gebruiken moet je apparaat geroot zijn.
+        Android 5.0 ondersteund scherm opname zonder root (geen interne audio). Probeer het nu uit door de lichtgewicht %2$s te downloaden of gebruik de No-root mode.
+    "</string>
+    <string name="su_required_lollipop_denied_message">"Als je apparaat geroot is open dan %1$s en zorg ervoor dat je niet per ongeluk roottoegang voor %2$s hebt geweigerd."</string>
+    <string name="su_required_no_root_mode">"No-root-mode"</string>
+
+    <string name="settings_no_root_only">"Alleen voor No-root encoders"</string>
+    <string name="settings_root_only">"Alleen voor root encoders"</string>
+    <string name="settings_no_root_mode">"No-root-mode"</string>
+    <string name="settings_no_root_mode_summary">"Tik om roottoegang te vragen en alle functies te gebruiken"</string>
 
     <string name="error_dialog_title">"Er ging iets ernstig mis :-("</string>
-    <string name="startup_error_message">"Het anonieme foutenrapport wordt automatisch opgestuurd om ons te helpen met het oplossen van het probleem. Neem gerust contact op via e-mail ondersteuning. Vermeld error S%1$d ."</string>
-    <string name="unknown_error_message">"Het anonieme foutenrapport wordt automatisch opgestuurd om ons te helpen met het oplossen van het probleem. Neem gerust contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
+    <string name="unknown_error_message">"Het anonieme foutenrapport wordt automatisch gestuurd om ons te helpen het probleem op te lossen. Kom gerust in contact via de support email en vermeldt error SR%1$d"</string>
+
+    <string name="selinux_error_title">"Fout bij roottoegang"</string>
+    <string name="selinux_error_message">"Er is een probleem met SELinux configuratie op je apparaat. Controleer of je apparaat goed geroot is en schakel SELinux om naar de 'permissive' stand als dit mogelijk is."</string>
 
     <string name="media_recorder_error_title">"Opname fout"</string>
-    <string name="media_recorder_error_message">"Probeer de resolutie te veranderen of wissel de beeldomzetting tussen GPU/CPU. Verwijder andere screencast toepassingen als u die heeft. Als het probleem zich blijft voordoen, neem dan contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
+    <string name="media_recorder_error_message">"Probeer de resolutie te veranderen of wissel de beeldomzetting tussen GPU/CPU. Verwijder andere screencast toepassingen als je die hebt. Als het probleem zich blijft voordoen, neem dan contact op via e-mail ondersteuning. Vermeld error R%1$d ."</string>
+
+    <string name="video_codec_error_title">"Incompatibele Video Instellingen"</string>
+    <string name="video_codec_error_message">"Probeer de resolutie of video bitrate te verlagen. Onthoud dat op sommige apparaten de portret oriëntatie alleen werkt met lagere resoluties. Als het probleem aanhoudt, kom dan alsjeblieft in contact via de support email en vermeldt error R%1$d."</string>
 
     <string name="output_file_error_title">"Kan het video-bestand niet aanmaken"</string>
     <string name="output_file_error_message">"SCR kon het video-bestand %1$s niet aanmaken. Zorg ervoor dat de geselecteerde map beschrijfbaar is en dat de SD-kaart niet door de USB-aansluiting is geblokkeerd."</string>
@@ -75,10 +146,10 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="audio_config_error_message">"Niet-ondersteunde audio-configuratie. Probeer de audio instellingen van SCR aan te passen."</string>
 
     <string name="android_version_error_title">"Android-versie niet ondersteund"</string>
-    <string name="android_version_error_message">"Uw Android-versie wordt nog niet ondersteund."</string>
+    <string name="android_version_error_message">"Je Android-versie wordt nog niet ondersteund."</string>
 
     <string name="cpu_error_title">"CPU niet ondersteund"</string>
-    <string name="cpu_error_message">"Uw CPU architectuur (%1$s) wordt niet ondersteund door %2$s."</string>
+    <string name="cpu_error_message">"Je CPU architectuur (%1$s) wordt niet ondersteund door %2$s."</string>
 
     <string name="installation_error_title">"Installatie fout"</string>
     <string name="installation_error_message">"Kan benodigde bestanden niet installeren. Zorg ervoor dat u wat vrije ruimte op uw apparaat hebt en herstart %1$s."</string>
@@ -98,7 +169,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
 
     <string name="settings_activity_label">"SCR Instellingen"</string>
     <string name="settings_title">"Instellingen"</string>
-    <string name="settings_ok">"OK"</string>
+    <string name="settings_ok">"O"</string>
     <string name="settings_reset">"Herstel standaardinstellingen"</string>
     <string name="settings_cancel">"Annuleren"</string>
 
@@ -108,12 +179,13 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
 
     <string name="settings_video_encoder">"Encoder"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"Automatisch"</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Ingebouwde Android %1$s encoder"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg software MPEG4-encoder"</string>
+    <string name="settings_video_encoder_no_root_h264">"H264 (geen root)"</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 (geen root)"</string>
+    <string name="settings_video_encoder_mpeg_4">"MPEG-4"</string>
 
     <string name="settings_resolution">"Resolutie"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
@@ -127,8 +199,8 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_transformation_cpu_summary">"Beeld verwerken op de processor (CPU)"</string>
-    <string name="settings_transformation_gpu_summary">"Beeld verwerken op de grafische kaart (%1$s)"</string>
+    <string name="settings_transformation_cpu_summary">"Met de processor (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Met de grafische chip (%1$s)"</string>
     <string name="settings_transformation_sw_summary">"Niet beschikbaar in de software-encoder"</string>
 
     <string name="settings_video_bitrate">"Bitrate"</string>
@@ -146,10 +218,10 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
 
     <string name="settings_orientation">"Oriëntatie"</string>
     <string name="settings_orientation_description">"
-        Normaal zijn videoframes altijd horizontaal en wordt er metadata toegevoegd om de video verticaal af te spelen.
+        Normaal zij videoframes altijd horizontaal en wordt er metadata toegevoegd om de video verticaal af te spelen.
         YouTube en de standaard Android videospeler spelen deze video's goed af maar sommige PC spelers (zoals VLC)
         negeren deze metadata en spelen de video horizontaal af.
-        U kunt verticale frames hieronder aanzetten, gebruik deze optie voorzichtig want veel apparaten kunnen geen
+        Je kan verticale frames hieronder aanzetten, gebruik deze optie voorzichtig want veel apparaten kunnen geen
         video's met verticale frames opnemen / afspelen.
     "</string>
     <string name="settings_orientation_auto">"Automatisch"</string>
@@ -161,8 +233,6 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_vertical_frames">"Verticale frames"</string>
     <string name="settings_vertical_frames_warning">"Videospelers op veel apparaten kunnen geen video's met verticale frames afspelen.
         Zelfs als deze optie niet geselecteerd is word er oriëntatie metadata toegevoegd aan de video zodat het correct wordt weergegeven in de standaard Android-speler, YouTube etc."</string>
-    <string name="settings_vertical_frames_ok">"OK"</string>
-    <string name="settings_vertical_frames_cancel">"Annuleren"</string>
 
     <string name="settings_audio_category">"Geluid"</string>
     <string name="settings_audio_source">"Bron"</string>
@@ -170,18 +240,25 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_audio_mute">"Geen"</string>
     <string name="settings_audio_internal">"Inter"</string>
     <string name="settings_audio_experimental">"Experimenteel"</string>
+    <string name="settings_audio_mix">"Intern + Microfoon"</string>
+    <string name="settings_audio_use_headphones">"Gebruik een bekabelde hoofdtelefoon om een echo te voorkomen"</string>
     <string name="settings_audio_not_supported">"Niet ondersteund op %1$s"</string>
     <string name="settings_audio_incompatible">"Niet compatibel met uw audio-driver"</string>
     <string name="settings_audio_mic_summary">"Microfoon"</string>
     <string name="settings_audio_mute_summary">"Dempen. Geen audiospoor"</string>
     <string name="settings_audio_internal_summary">"Systeem audio uitgang"</string>
-    <string name="settings_audio">"Geluid"</string>
+    <string name="settings_audio_mix_summary">"Microfoon + Intern (Gebruik een hoofdtelefoon!)"</string>
     <string name="settings_sampling_rate">"Sampling rate"</string>
+
+    <string name="settings_mic_gain">"Microfoon boost"</string>
+    <string name="settings_mic_gain_summary_mix_only">"Alleen beschikbaar voor %1$s"</string>
+    <string name="settings_mic_gain_summary_default">"Gebruik standaard volume"</string>
+    <string name="settings_mic_gain_summary">"Verhoog het volume met %1$d dB"</string>
 
     <string name="settings_other_category">"Overig"</string>
     <string name="settings_hide_icon">"Pictogram in het systeemvak verbergen"</string>
     <string name="settings_show_touches">"Aanrakingen weergeven"</string>
-    <string name="settings_show_touches_summary">"Toon visuele feedback voor aanrakingen. U kunt dit permanent activeren via Instellingen → Opties voor ontwikkelaars → Aanraakbewerkingen weergeven"</string>
+    <string name="settings_show_touches_summary">"Toon visuele feedback voor aanrakingen. Permanent inschakelen via Android Instellingen→Opties voor ontwikkelaars→Aanrakingen weergeven"</string>
     <string name="settings_output_dir">"Opslag map"</string>
     <string name="settings_stop_when_screen_off">"Stop als het scherm uit gaat"</string>
     <string name="settings_stop_when_screen_off_summary">"Opname stopt nadat het scherm wordt uitgeschakeld"</string>
@@ -197,6 +274,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="settings_video_config_entry_stability">"%1$d %% stabiel"</string>
     <string name="settings_video_config_summary">"Gebaseerd op gebruiksstatistieken"</string>
     <string name="settings_video_config_summary_no_data">"Kon geen statistieken downloaden"</string>
+    <string name="settings_video_config_summary_not_available">"Nog geen statistieken beschikbaar"</string>
 
     <string name="device_profile_download_error_toast">"Kon geen aanbevolen instellingen downloaden. Zorg ervoor dat u een internetverbinding heeft."</string>
     <string name="device_profile_downloaded_toast">"Aanbevolen instellingen gedownload"</string>
@@ -205,7 +283,7 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="directory_chooser_refresh">"Vernieuwen"</string>
     <string name="directory_chooser_new">"Nieuw"</string>
     <string name="directory_chooser_new_title">"Nieuwe naam voor map"</string>
-    <string name="directory_chooser_new_ok">"OK"</string>
+    <string name="directory_chooser_new_ok">"O"</string>
     <string name="directory_chooser_new_cancel">"Annuleren"</string>
     <string name="directory_chooser_error_message">"Map kan niet worden aangemaakt. Zorg ervoor dat u een beschrijfbare locatie kiest, bijv. SD-kaart."</string>
     <string name="directory_chooser_not_writable_title">"Geselecteerde map is niet beschrijfbaar"</string>
@@ -216,27 +294,28 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
 
     <string name="error_report_report">"Rapport"</string>
     <string name="error_report_close">"Sluiten"</string>
-    <string name="error_report_text">"De bijlage bevat een gedetailleerd systeem logbestand met onder andere informatie over een fout. Voeg een reactie toe als u dat wilt."</string>
+    <string name="error_report_text">"De bijlage bevat een gedetailleerd systeem logbestand met onder andere informatie over een fout. Voeg een reactie toe als je dat wilt."</string>
     <string name="error_report_chooser">"E-mail foutenrapport met"</string>
 
     <string name="rating_rate_title">"Beoordeling %1$s"</string>
-    <string name="rating_rate_message">"Als u %1$s met plezier gebruikt, neem dan even de tijd om het te beoordelen. Bedankt voor uw steun!"</string>
+    <string name="rating_rate_message">"Als je %1$s met plezier gebruikt, neem dan even de tijd om het te beoordelen. Bedankt voor je steun!"</string>
     <string name="rating_rate_now">"Beoordeel nu!"</string>
     <string name="rating_remind">"Herinner me later"</string>
     <string name="rating_no_thanks">"Nee, bedankt"</string>
     <string name="rating_play_error">"Kan Google Play niet openen."</string>
 
-    <string name="help_stop_message">"Om te stoppen met de opname vergrendel het scherm en wacht 2 seconden. Als alternatief kan u de %1$s app heropenen."</string>
+    <string name="help_stop_message">"Om te stoppen met de opname vergrendel het scherm en wacht 2 seconden. Als alternatief kan je de %1$s app heropenen."</string>
     <string name="menu_send_bug_report">"Stuur bug report"</string>
     <string name="menu_show_unstable">"Onstabiel"</string>
     <string name="menu_show_advanced">"Toon geavanceerd"</string>
 
     <string name="notification_status_initializing">"Initialiseren"</string>
     <string name="notification_status_waiting_for_root">"Wachten op root-toegang"</string>
+    <string name="notification_status_waiting_for_projection">"Wachten op toegang om het scherm op te nemen"</string>
     <string name="notification_status_installing_audio">"Audio driver aan het installeren"</string>
     <string name="notification_status_ready">"Klaar"</string>
     <string name="notification_status_starting">"Aan het starten"</string>
-    <string name="notification_status_recording">"Aan het opneme"</string>
+    <string name="notification_status_recording">"Aan het opnemen"</string>
     <string name="notification_status_error">"Error"</string>
     <string name="notification_status_stopping">"Aan het stoppen"</string>
     <string name="notification_status_uninstalling_audio">"Audio driver aan het verwijderen"</string>
@@ -244,23 +323,23 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
     <string name="sale_title">"Uitverkoop"</string>
     <string name="sale_text">"Koop nu SCR Pro en bespaar %1$d %% ! Deze aanbieding eindigt op %2$s ."</string>
 
-    <string name="copyrights_statement">"Door het gebruik van %1$s gaat u ermee akkoord dat u alleen verantwoordelijk bent om er zeker van te zijn dat u geen copyrights van een derde partij of andere eigendomsrechten schendt."</string>
+    <string name="copyrights_statement">"Door het gebruik van %1$s ga je ermee akkoord dat jij alleen verantwoordelijk bent om er zeker van te zijn dat je geen copyrights van een derde partij of andere eigendomsrechten schendt."</string>
     <string name="internal_audio_installation_error_title">"Interne audio fout"</string>
-    <string name="internal_audio_installation_error_message">"Kan de interne audio niet inschakelen. Stuur een bug report om me te helpen het ondersteunen van uw apparaat. Audiobron wordt ingesteld op %1$s ."</string>
+    <string name="internal_audio_installation_error_message">"Kan de interne audio niet inschakelen. Stuur een bug report om me te helpen het ondersteunen van je apparaat. Audiobron wordt ingesteld op %1$s ."</string>
     <string name="internal_audio_unstable_title">"Interne audio instabiel"</string>
-    <string name="internal_audio_unstable_message">"Interne audio stabiliteits-probleem . Stuur een bug report om me te helpen met het ondersteunen van uw apparaat. Audiobron wordt ingesteld op %1$s ."</string>
+    <string name="internal_audio_unstable_message">"Interne audio stabiliteits-probleem . Stuur een bug report om me te helpen met het ondersteunen van je apparaat. Audiobron wordt ingesteld op %1$s ."</string>
     <string name="internal_audio_disabled_title">"Interne audio uitgeschakeld"</string>
-    <string name="internal_audio_disabled_message">"Interne audio-opname wordt uitgeschakeld omdat %1$s niet correct is afgesloten. U kunt het weer inschakelen in Instellingen."</string>
+    <string name="internal_audio_disabled_message">"Interne audio-opname wordt uitgeschakeld omdat %1$s niet correct is afgesloten. Je kunt het weer inschakelen in Instellingen."</string>
 
     <string name="license_title">"Licentie fout"</string>
-    <string name="license_not_licensed_message">"Fout bij het verifiëren van licentie. Koop SCR Pro alstublieft via de Play Store."</string>
-    <string name="license_retry_message">"Fout bij het verifiëren van licentie. Zorg ervoor dat u verbinding met internet heeft
-        en dat u bent ingelogd bij de Google Play Store. Nadat deze licentie is geverifieerd kunt u SCR Pro offline gebruiken."</string>
-    <string name="license_error_message">"Fout bij het verifiëren van licentie. Zorg ervoor dat u SCR Pro via Google Play installeert.
-        Als dit probleem aanhoudt, verwijder dan de gegevens en de cache van \"Google Play Services\" en \"Google Play Store\"
+    <string name="license_not_licensed_message">"Fout bij het controleren van de licentie. Koop SCR Pro alsjeblieft via de Google Play Store. Als je Lucky Patcher geïnstalleerd hebt, schakel alsjeblieft Google Play emulation uit."</string>
+    <string name="license_retry_message">"Fout bij het controleren van de licentie. Zorg ervoor dat je een werkende internetverbinding hebt, dat de datum en tijd op je apparaat kloppen
+        en dat je ingelogd bent bij de Google Play Store. Nadat de licentie is gecontroleerd kun je SCR Pro offline gebruiken."</string>
+    <string name="license_error_message">"Fout bij het controleren van de licentie. Zorg ervoor dat SCR Pro via Google Play is geïnstalleerd en dat de datum en tijd op je apparaat kloppen.
+        Als het probleem aanhoudt, verwijder de gegevens en cache van de \"Google Play services\" en \"Google Play Store\" apps.
     "</string>
     <string name="license_play_store">"Play Store"</string>
-    <string name="license_retry">"Probeer opnieuw"</string>
+    <string name="license_retry">"Opnieuw proberen"</string>
     <string name="license_continue_as_free">"Ga verder met de gratis versie"</string>
 
     <string name="su_denied_message">"Er is een probleem met de roottoegang op uw apparaat.
@@ -269,13 +348,32 @@ Deze software maakt gebruik van ongewijzigde code van FFmpeg 1.2 onder de LGPL l
 
     <string name="can_not_start_toast">"Kan de opname niet starten: %1$s"</string>
 
-    <string name="settings_show_camera">"Camerabeeld"</string>
-    <string name="settings_show_camera_summary">"Laat uw camerabeeld bovenop de opname zien"</string>
-    <string name="settings_camera_alpha_title">"Transparantie"</string>
-    <string name="settings_camera_alpha_summary">"Camerabeeld %1$d%% doorzichtig."</string>
-    <string name="settings_camera_alpha_summary_100">"Camerabeeld niet doorzichtig"</string>
+    <string name="settings_show_camera">"Face Cam"</string>
+    <string name="settings_show_camera_summary">"Camerabeeld bovenop opname laten zien"</string>
+    <string name="settings_camera_alpha_title">"Doorzichtigheid"</string>
+    <string name="settings_camera_alpha_summary">"Face Cam %1$d%% ondoorzichtig"</string>
+    <string name="settings_camera_alpha_summary_100">"Face Cam niet doorzichtig"</string>
 
     <string name="miui_error_message">"Als u %1$s zwevende venster niet ziet, ga naar MiUi apps instellingen en zet \"Toon popup vensters\" voor %1$s aan."</string>
     <string name="miui_error_title">"MiUi popups uitgeschakeld?"</string>
 
+    <string name="lollipop_dialog_title">"Probeer SCR 5+"</string>
+    <string name="lollipop_dialog_message">"Wil je graag SCR 5+, mijn nieuwe, lichtgewicht, no-root screen recorder app testen? Het gebruikt de officiële Android 5.0 schermopname API en microfoon geluidsopname."</string>
+    <string name="lollipop_dialog_try_now">"Probeer nu"</string>
+
+    <string name="projection_deny_error_message">"Je moet op START NU drukken om het opnemen te laten werken."</string>
+    <string name="projection_deny_error_title">"Kan geen toegang krijgen tot het scherm"</string>
+
+    <string name="notification_action_share">"Delen"</string>
+    <string name="internal_audio_warning_title">"Installatie waarschuwing"</string>
+
+    <string name="internal_audio_warning_message">"
+Audio driver installatie op jouw apparaat vereist aanpassingen aan de systeempartitie.
+In een onwaarschijnlijk geval van een error kan je apparaat een soft-brick of bootloop oplopen.
+Zorg ervoor dat je weet hoe je de systeempartitie opnieuw kan flashen of je systeem vanaf een backup moet herstellen voordat je doorgaat.
+Als je ooit van plan bent %1$s te verwijderen, open dan de SCR Instellingen en schakel interne audio uit voordat je de app verwijdert.
+    "</string>
+    <string name="internal_audio_warning_confirmation">"Ik weet hoe je de systeempartitie kan herstellen"</string>
+    <string name="internal_audio_warning_dont_show">"Dit bericht niet meer weergeven"</string>
+    <string name="internal_audio_warning_install">"Installeren"</string>
 </resources>

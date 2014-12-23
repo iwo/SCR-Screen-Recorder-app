@@ -3,48 +3,110 @@
     <string name="free_app_full_name">"SCR Grabadora de Pantalla Gratis"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Grabadora de Pantalla Pro"</string>
+    <string name="free_app_no_root_name">"SCR Gratis"</string>
+    <string name="free_app_no_root_full_name">"SCR Grabadora de Pantalla Gratis"</string>
+    <string name="pro_app_no_root_name">"SCR Pro"</string>
+    <string name="pro_app_no_root_full_name">"SCR Grabadora de Pantalla Pro"</string>
 
-    <string name="play_free_app_name">"
+    <string name="play_free_app_name_30_char">"
 SCR Grabadora de Pantalla Gratis ★ root
     "</string>
-    <string name="play_pro_app_name">"
+    <string name="play_pro_app_name_30_char">"
 SCR Grabadora de Pantalla Pro ★ root
     "</string>
 
+
+    <string name="play_description_short_80_char">"
+Registre su pantalla y el audio del sistema de archivo de vídeo de alta definición! Requiere root!
+    "</string>
+
     <string name="play_root_required">"
-&lt;b&gt;Sólo funcionará en dispositivos rooteados! &lt;/b&gt;&lt;br/&gt; No lo instale si el dispositivo no está rooteado."</string>
+&lt;b&gt;Sólo funcionará en dispositivos rooteados! &lt;/b&gt;&lt;br/&gt; No lo instale si el dispositivo no está rooteado.
+    "</string>
+
     <string name="play_description_main">"
-Grabe grandes screencasts de calidad directamente desde su teléfono o tableta! Screen Recorder SCR usa aceleración por hardware de codificación de vídeo para lograr la mejor calidad de grabación de pantalla en cualquier dispositivo. Es la única grabadora de vídeo en el mercado que admite el dispositivo Tegra incluyendo Nexus 7."</string>
-    <string name="play_description_free">"
-Con &lt;b&gt; SCR gratuito &lt;/b&gt; se puede grabar un máximo de 3 minutos screencasts y la marca de agua SCR se agrega a su video. Comprar &lt;b&gt; SCR Pro &lt;/ b&gt; para obtener la longitud screencast ilimitado sin marca de agua. Esta es una BETA &lt;b&gt; vista previa &lt;/b&gt; la versión por lo que puede no funcionar en todos los dispositivos y las ROMs. Si tiene algún problema por favor repórtelo a scr.screen.recorder@gmail.com para ayudarme a conseguir su dispositivo compatible.
+Echa un vistazo a SCR Screen Recorder , la aplicación de grabación screencast más completa de Android. SCR Screen Recorder soporta todas las versiones de Android desde 4.0 y utiliza el mejor método de codificación disponible en cada plataforma. Desde el primer lanzamiento a principios de 2013 SCR Screen Recorder se actualiza con frecuencia y regularmente se añaden nuevas características. Características únicas:
     "</string>
 
-    <string name="play_description_pro">"
-Este es un BETA &lt;b&gt; vista previa &lt;/b&gt; la versión por lo que puede no funcionar en todos los dispositivos y las ROMs. Antes de comprar considerar la prueba &lt;b&gt; SCR gratuito &lt;/b&gt; para asegurarse de que su dispositivo ya es compatible. Si tiene algún problema por favor repórtelo a scr.screen.recorder@gmail.com para ayudarme a conseguir su dispositivo compatible.
+    <string name="play_description_system_audio">"
+• SISTEMA DE AUDIO - En la mayoría de los dispositivos que se pueden grabar directamente audio en el juego sin pérdida de calidad causada por la salida de los altavoces de grabación del micrófono. La opción \"Internal + Mic\" permite añadir un comentario al micrófono para la grabación de audio del sistema. Por el momento esta función no está disponible en Android 4.2, pero que va a añadirse pronto.
     "</string>
 
-    <string name="play_small_print">"
-Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bichos de la pista y analizar cómo los usuarios utilizan la aplicación. Este software utiliza código no modificada de FFmpeg 1.2 licenciado bajo la LGPL.
+    <string name="play_description_features">"
+• CARA EN CÁMARA - Comparta sus emociones mediante la adición de una cámara de frente a tu vídeo. Puede mover la cámara alrededor de superposición de manera que no obstruya los controles importantes.
+
+• NO PUBLICIDAD - A diferencia de otros grabadores de pantalla \ \"gratis \\" SCR nunca muestran ningún anuncio. El desarrollo de todas mis aplicaciones sólo se admite a través de donaciones y versiones Pro.
+
+• AJUSTES - Sin importar si usted prefiere seleccionar presets simples o ajustar manualmente cada ajuste lo tenemos cubierto. SCR soporta muchas personalizaciones y proporciona estadísticas de rendimiento y estabilidad.
+
+• CARACTERÍSTICAS ALPHA - Háganos saber lo que es importante para usted uniendo comunidad SCR Alfa Testing Google+ en http://goo.gl/PGYZ8r Si desea recibir actualizaciones Alpha y marca prueba nuevas características Sigue los enlaces en la sección de la comunidad en Acerca de.
+    "</string>
+
+    <string name="play_ban_disclaimer">"
+La versión anterior de esta aplicación contaba con más de 2 millones de descargas y 37K comentarios
+    "</string>
+
+    <string name="play_description_free_limits">"
+Con &lt;b&gt; SCR Gratis &lt;/ b&gt; se puede grabar un máximo de 3 minutos screencasts y la marca de agua SCR se añade a tu vídeo. Comprar &lt;b&gt; SCR Pro &lt;/ b&gt; para obtener la longitud screencast ilimitado sin marca de agua.
+    "</string>
+
+        <string name="play_description_pro">"
+Antes de comprar considera probar &lt;b&gt; SCR Gratis &lt;/ b&gt; para asegurarse de que su dispositivo ya es compatible.
+    "</string>
+
+    <string name="play_description_stablity">"
+Screen Recorder SCR utiliza diversos hacks y API no oficiales que pueden no funcionar en algunos dispositivos y ROM. Si tiene algún problema por favor repórtelo a scr.screen.recorder@gmail.com para ayudarme a tu dispositivo compatible.
+    "</string>
+
+
+
+    <string name="play_small_print_stats">"
+Esta aplicación recoge estadísticas de uso anónimas para ayudar al seguimiento de  bugs y analizar la compatibilidad de los dispositivos.
+    "</string>
+
+    <string name="play_small_print_lgpl">"
+Este software utiliza código no modificado de FFmpeg 1.2 bajo la licencia LGPL.
+    "</string>
+
+
+    <string name="play_noroot_description_short_80_char">"
+Grabadora Ligera pantalla Lollipop con característica de Cam de cara. [No root]
+    "</string>
+
+    <string name="play_noroot_description_main">"
+SCR 5+ abre un nuevo capítulo en la historia de la famosa Screen Recorder SCR. Gracias al nuevo Android 5.0 cuenta con SCR 5+ permite a la pantalla grabarse sin acceso root! Desafortunadamente Lollipop no soporta de forma nativa la grabación de audio interno, sin embargo, por lo que si usted requiere esta función y el dispositivo tiene root, instalar SCR Root Screen Recorder.
     "</string>
 
     <string name="recording_saved_title">"SCR Grabación Guardada"</string>
-    <string name="recording_saved_message">"Grabación guardada en %1$s"</string>
     <string name="recording_saved_toast">"Grabación guardada en %1$s"</string>
     <string name="max_file_size_reached_toast">"Tamaño máximo de archivo alcanzado. Grabación guardada en %1$s"</string>
-    <string name="start">"Iniciar"</string>
     <string name="play">"Play"</string>
 
     <string name="su_required_title">"Se requiere el acceso root"</string>
-    <string name="su_required_message">"Para ejecutar cualquier aplicación que grabe la pantalla, su teléfono/tablet debe estar rooteada. Hay un montón de tutoriales en Internet que explican cómo rootear los diferentes dispositivos. Vuelva a intentarlo cuando su dispositivo esté rooteado!"</string>
+    <string name="su_required_message">"Para ejecutar cualquier aplicación de registrador de la pantalla de su teléfono / tablet tiene que estar rooteada. Hay un montón de tutoriales en Internet que explica cómo root diferentes dispositivos. Por favor, vuelve cuando haya terminado! https://www.youtube.com/watch?v=rkkY-U8ZKLw&amp;list=PLUxaGO2In0l9xQE7QmlDQbOmP6oTx71Vh&amp;index=1"</string>
     <string name="su_required_help">"¿Qué es \"rootear\"?"</string>
-    <string name="su_required_help_link">"http://www.youtube.com/watch?v=Lg2C8t8eA5U"</string>
+    <string name="su_required_help_link">"https://www.youtube.com/watch?v=Lg2C8t8eA5U&amp;index=2&amp;list=PLUxaGO2In0l9xQE7QmlDQbOmP6oTx71Vh"</string>
+    <string name="su_required_lollipop_message">"Para utilizar todo el potencial de %1$s su dispositivo tiene que estar rooteado. Android 5.0 permite la grabación de pantalla básica sin root (sin audio interno). Compruébelo usted mismo descargando ligero %2$s o cambiar a modo no root.
+    "</string>
+    <string name="su_required_lollipop_denied_message">"Si su dispositivo tiene root por favor abrir %1$s y asegurate de no haber bloqueado el acceso root accidentalmente a %2$s."</string>
+    <string name="su_required_no_root_mode">"Modo No-Root"</string>
+
+    <string name="settings_no_root_only">"Codificadores sólo para no root"</string>
+    <string name="settings_root_only">"Codificadores sólo para root"</string>
+    <string name="settings_no_root_mode">"Modo No-root"</string>
+    <string name="settings_no_root_mode_summary">"Pulse para solicitar el acceso root y activar todas las funciones"</string>
 
     <string name="error_dialog_title">"Algo salió mal :-("</string>
-    <string name="startup_error_message">"El informe de errores en el anonimato se enviará automáticamente para ayudarnos a arreglar el problema. No dude en ponerse en contacto a través de correo electrónico de soporte citando el error S%1$d."</string>
-    <string name="unknown_error_message">"El informe de errores anónimo, se enviará automáticamente para ayudarnos a arreglar el problema. No dude en ponerse en contacto a través de correo electrónico de soporte citando el error R%1$d."</string>
+    <string name="unknown_error_message">"El informe de errores en el anonimato se enviará automáticamente para ayudarnos a solucionar el problema. No dude en ponerse en contacto a través de correo electrónico de apoyo citando SR%1$d."</string>
+
+    <string name="selinux_error_title">"Error de acceso Root"</string>
+    <string name="selinux_error_message">"Hay un problema con la configuración de SELinux en su dispositivo. Asegúrese de que su dispositivo está firmemente rooteado y cambiar SELinux en modo permisivo si es posible."</string>
 
     <string name="media_recorder_error_title">"Error de grabación"</string>
     <string name="media_recorder_error_message">"Intente cambiar la resolución o el cambio de transformación de imagen entre GPU/CPU. Por favor, desinstala otras aplicaciones que graben la pantalla en el caso de que usted tenga otras instaladas. Si el problema persiste, póngase en contacto a través de correo electrónico de soporte citando el error R%1$d."</string>
+
+    <string name="video_codec_error_title">"Ajustes de vídeo incompatibles"</string>
+    <string name="video_codec_error_message">"Intente reducir la resolución o tasa de bits de vídeo. Tenga en cuenta que en algunos dispositivos de vídeo orientación retrato sólo funciona con resoluciones más bajas. Si el problema persiste por favor ponerse en contacto a través de correo electrónico de apoyo citando el error R%1$d."</string>
 
     <string name="output_file_error_title">"No se puede crear el archivo de vídeo"</string>
     <string name="output_file_error_message">"SCR no pudo crear %1$s archivo de vídeo. Asegúrese de que la ruta de guardado seleccionada es modificable y que la tarjeta SD no está bloqueada mediante la conexión USB."</string>
@@ -99,12 +161,13 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
 
     <string name="settings_video_encoder">"Codificador"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"Auto"</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Android codificador incorporado %1$s"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg MPEG4 software codificador"</string>
+    <string name="settings_video_encoder_no_root_h264">"H264 (sin root)"</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 (sin root)"</string>
+    <string name="settings_video_encoder_mpeg_4">"MPEG-4"</string>
 
     <string name="settings_resolution">"Resolución"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
@@ -118,8 +181,8 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU +"</string>
-    <string name="settings_transformation_cpu_summary">"Imagen de la pantalla de proceso del procesador (CPU)"</string>
-    <string name="settings_transformation_gpu_summary">"Imagen de la pantalla de proceso de la tarjeta gráfica (%1$s)"</string>
+    <string name="settings_transformation_cpu_summary">"Uso de procesador (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"El uso de chip gráfico (GPU) (%1$s)"</string>
     <string name="settings_transformation_sw_summary">"No disponible en codificador de software"</string>
 
     <string name="settings_video_bitrate">"Bitrate"</string>
@@ -147,8 +210,6 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
 
     <string name="settings_vertical_frames">"Fotogramas verticales"</string>
     <string name="settings_vertical_frames_warning">"Los reproductores de vídeo en muchos dispositivos no pueden reproducir los vídeos con los marcos verticales. Incluso si esta opción está seleccionada metadatos orientación se añade a la de vídeo para que sea muestra correctamente en mora reproductor Android, YouTube, etc."</string>
-    <string name="settings_vertical_frames_ok">"OK"</string>
-    <string name="settings_vertical_frames_cancel">"Cancelar"</string>
 
     <string name="settings_audio_category">"Audio"</string>
     <string name="settings_audio_source">"Fuente"</string>
@@ -156,18 +217,25 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_audio_mute">"Sin sonido"</string>
     <string name="settings_audio_internal">"Interno"</string>
     <string name="settings_audio_experimental">"Experimental"</string>
+    <string name="settings_audio_mix">"Interno + Mic"</string>
+    <string name="settings_audio_use_headphones">"Utilice auriculares con cable para evitar el eco"</string>
     <string name="settings_audio_not_supported">"No es compatible con %1$s"</string>
     <string name="settings_audio_incompatible">"No es compatible con el driver de sonido"</string>
     <string name="settings_audio_mic_summary">"Micrófono"</string>
     <string name="settings_audio_mute_summary">"Silencio. Sin Pista de audio"</string>
     <string name="settings_audio_internal_summary">"Salida de audio del sistema"</string>
-    <string name="settings_audio">"Audio"</string>
+    <string name="settings_audio_mix_summary">"Micrófono + Interno (Utilice auriculares!)"</string>
     <string name="settings_sampling_rate">"Frecuencia de muestreo"</string>
 
-    <string name="settings_other_category">"Otro"</string>
+    <string name="settings_mic_gain">"Micrófono boost"</string>
+    <string name="settings_mic_gain_summary_mix_only">"Disponible sólo para %1$s"</string>
+    <string name="settings_mic_gain_summary_default">"Utilizar el volumen predeterminado"</string>
+    <string name="settings_mic_gain_summary">"Aumentar el volumen de %1$ddB"</string>
+
+    <string name="settings_other_category">"Otros"</string>
     <string name="settings_hide_icon">"Ocultar icono de notificación"</string>
     <string name="settings_show_touches">"Mostrar detalles"</string>
-    <string name="settings_show_touches_summary">"Mostrar indicadores táctiles cuando tocamos la pantalla. También puede activar los indicadores táctiles de forma permanente a través de Ajustes Android → Opciones → Opciones de desarrollo → Mostrar pulsaciones"</string>
+    <string name="settings_show_touches_summary">"Mostrar información visual de toques. Habilitar permanentemente a través de Ajustes Android → Opciones de Desarrollador → Mostrar detalles "</string>
     <string name="settings_output_dir">"Ruta de guardado"</string>
     <string name="settings_stop_when_screen_off">"Detener grabación cuando se apague la pantalla"</string>
     <string name="settings_stop_when_screen_off_summary">"Finalice la grabación después de que se apague la pantalla"</string>
@@ -183,6 +251,7 @@ Screen Recorder SCR recopila estadísticas anónimas de uso para ayudar a los bi
     <string name="settings_video_config_entry_stability">"%1$d%% estable"</string>
     <string name="settings_video_config_summary">"Con base en las estadísticas de uso"</string>
     <string name="settings_video_config_summary_no_data">"No se han podido descargar las estadísticas"</string>
+    <string name="settings_video_config_summary_not_available">"No hay estadísticas disponibles aún"</string>
 
     <string name="device_profile_download_error_toast">"No se han podido descargar los ajustes recomendados. Asegúrese de que usted está en línea."</string>
     <string name="device_profile_downloaded_toast">"Ajustes recomendados descargados"</string>
@@ -220,6 +289,7 @@ acerca de un error. Siéntase libre de agregar cualquier comentario aquí."</str
 
     <string name="notification_status_initializing">"Iniciando"</string>
     <string name="notification_status_waiting_for_root">"A la espera de acceso root"</string>
+    <string name="notification_status_waiting_for_projection">"Esperando el acceso de captura de pantalla"</string>
     <string name="notification_status_installing_audio">"Instalación del controlador de audio"</string>
     <string name="notification_status_ready">"Listo"</string>
     <string name="notification_status_starting">"Comenzando"</string>
@@ -240,12 +310,12 @@ acerca de un error. Siéntase libre de agregar cualquier comentario aquí."</str
     <string name="internal_audio_disabled_message">"Grabación de audio interno está apagado porque %1$s no se cerró correctamente. Puede volver a activarlo en Ajustes."</string>
 
     <string name="license_title">"Error de licencia"</string>
-    <string name="license_not_licensed_message">"Error al verificar la licencia. Por favor, compra SCR Pro a través de Google Play Store."</string>
-    <string name="license_retry_message">"Error al verificar la licencia. Asegúrese de que su conexión a Internet está en marcha y tu estás conectado a Google Play Store. Después de verificar la licencia se puede seguir utilizando SCR Pro offline."</string>
-    <string name="license_error_message">"Error al verificar la licencia. Asegúrese de que ha instalado SCR Pro aunque Google Play. Si el problema persiste datos claros y caché de los \"servicios de Google Play\" y \"Google Play Store\" aplicaciones.
+    <string name="license_not_licensed_message">"Error al verificar la licencia. Por favor, compra SCR Pro a través de Google Play Store. Si tienes  Lucky Patcher instalado por favor desactiva la emulación de Google Play."</string>
+    <string name="license_retry_message">"Error al verificar la licencia. Asegúrese de que tener conexión a Internet, compruebe también que la fecha y hora es correcta en su dispositivo y que estás logueado en Google Play Store. Después de verificar la licencia se puede seguir utilizando SCR Pro offline."</string>
+    <string name="license_error_message">"Error al verificar la licencia. Asegúrese de que ha instalado SCR Pro de Google Play y compruebe también que la fecha y hora es correcta en su dispositivo. Si el problema persiste borre datos y caché de las aplicaciones \"servicios de Google Play\" y \"Google Play Store\".
     "</string>
     <string name="license_play_store">"Play Store"</string>
-    <string name="license_retry">"Intentar de nuevo"</string>
+    <string name="license_retry">"Vuelva a intentarlo"</string>
     <string name="license_continue_as_free">"Continuar como gratuito"</string>
 
     <string name="su_denied_message">"Hay un problema con el acceso root en el dispositivo. Por favor, abrir %1$s y hacer el acceso root Compruebe que no ha negado accidentalmente a %2$s."</string>
@@ -253,13 +323,28 @@ acerca de un error. Siéntase libre de agregar cualquier comentario aquí."</str
 
     <string name="can_not_start_toast">"No se puede iniciar la grabación: %1$s"</string>
 
-    <string name="settings_show_camera">"Vista de cámara"</string>
-    <string name="settings_show_camera_summary">"Muestre la imagen en la parte superior de la grabación"</string>
+    <string name="settings_show_camera">"Cámara Cara"</string>
+    <string name="settings_show_camera_summary">"Imagen de la cámara en la parte superior de la grabación"</string>
     <string name="settings_camera_alpha_title">"Transparencia"</string>
-    <string name="settings_camera_alpha_summary">"Cámara de visión %1$d%% opaca"</string>
-    <string name="settings_camera_alpha_summary_100">"Vista de la cámara no es transparente"</string>
+    <string name="settings_camera_alpha_summary">"Cara en Cámara %1$d%% opaca"</string>
+    <string name="settings_camera_alpha_summary_100">"Cara en Cámara no transparente"</string>
 
     <string name="miui_error_message">"Si no puede ver %1$s ventana flotante ir a MIUI apps ajustes y activar \"Mostrar las ventanas emergentes\" para %1$s."</string>
     <string name="miui_error_title">"Popups MIUI desactivados?"</string>
 
+    <string name="lollipop_dialog_title">"Prueba SCR 5+"</string>
+    <string name="lollipop_dialog_message">"¿Quieres probar SCR 5+, mi nueva aplicación ligera Screen Recorder sin root? Utiliza Android API de captura de pantalla de 5.0 oficial y grabación de audio del micrófono."</string>
+    <string name="lollipop_dialog_try_now">"Pruebe ahora"</string>
+
+    <string name="projection_deny_error_message">"Será necesario pulsar START NOW para grabar a trabajar."</string>
+    <string name="projection_deny_error_title">"No se puede acceder a la pantalla"</string>
+
+    <string name="notification_action_share">"Compartir"</string>
+    <string name="internal_audio_warning_title">"Advertencia de instalación"</string>
+
+    <string name="internal_audio_warning_message">"\"Instalación del controlador de audio en su dispositivo requiere modificaciones en la partición del sistema. En el improbable caso de error de instalación del dispositivo, pueden tener un brikeo o bucle de arranque. Por favor, asegúrate de saber cómo volver a flashear o restaurar el sistema con una copia de seguridad antes de proceder. Si decide desinstalar%1$s en el futuros abre los ajustes SCR y desactiva audio interno antes de desinstalar la aplicación.
+    "</string>
+    <string name="internal_audio_warning_confirmation">"Sé cómo restaurar la partición del sistema"</string>
+    <string name="internal_audio_warning_dont_show">"No mostrar este mensaje otra vez"</string>
+    <string name="internal_audio_warning_install">"Instalar"</string>
 </resources>

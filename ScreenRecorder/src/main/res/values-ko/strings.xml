@@ -3,47 +3,99 @@
     <string name="free_app_full_name">"[무료] SCR 화면 녹화"</string>
     <string name="pro_app_name">"[Pro] SCR"</string>
     <string name="pro_app_full_name">"[Pro] SCR 화면 녹화"</string>
+    <string name="free_app_no_root_name">"[무료] SCR"</string>
+    <string name="free_app_no_root_full_name">"[무료] SCR 화면 녹화"</string>
+    <string name="pro_app_no_root_name">"[Pro] SCR"</string>
+    <string name="pro_app_no_root_full_name">"[Pro] SCR 화면 녹화"</string>
 
-    <string name="play_free_app_name">"[무료] SCR 화면 녹화 ★ 루팅필수"</string>
-    <string name="play_pro_app_name">"[Pro] SCR 화면 녹화 ★ 루팅필수"</string>
+    <string name="play_free_app_name_30_char">"[무료] SCR 화면 녹화 ★ 루팅필수"</string>
+    <string name="play_pro_app_name_30_char">"[Pro] SCR 화면 녹화 ★ 루팅필수"</string>
 
-    <string name="play_root_required">"&lt;b&gt;루팅된 장치에서만 정상 작동 됩니다.&lt;/ b&gt; &lt;BR/&gt; 장치가 루팅되지 않은 경우 설치하지 마십시오."</string>
-    <string name="play_description_main">"휴대폰이나 태블릿에서 직접 고품질의 화면을 녹화하세요! 
 
-SCR 스크린 레코더는 모든 장치에서 최고 품질의 화면 녹화를 위해 하드웨어 가속 비디오 인코딩을 사용합니다. 넥서스 7 등의 테그라 장치를 지원하는 업계 유일의 비디오 레코더입니다."</string>
-    <string name="play_description_free">"&lt;b&gt; SCR Free &lt;/b&gt;를 사용하면 폰 화면 동영상을 최대 삼분동안 기록 할 수 있으며, SCR의 워터 마크가 비디오에 추가됩니다. &lt;b&gt; SCR Pro &lt;/b&gt;를 구매하면 워터마크 없이 시간제한 없는 화면 동영상 기록이 가능합니다. SCR Free는 &lt;b&gt; BETA 미리보기 &lt;/B&gt; 버전이므로, 정상 동작하지 않는 단말이 있을 수 있습니다. 문제가 발생하는 경우 해당 장치가 지원받을 수 있도록 scr.screen.recorder @ gmail.com에 신고해 주시기 바랍니다. "</string>
+    <string name="play_description_short_80_char">"사용자 폰의 화면 및 시스템 오디오를 HD 비디오 파일로 녹화합니다! 이 기능을 사용하기 위해서는 루팅이 필요합니다!"</string>
 
-    <string name="play_description_pro">"이 앱은 &lt;b&gt; BETA 미리보기 &lt;/b&gt; 버전입니다. 따라서, 모든 장치와 ROM에 호환되지 않을 수 있습니다. Pro 앱을 구입하기 전에 당신의 장치가 지원되는지 확인하기 위해 &lt;b&gt;SCR 무료&lt;/b&gt;를 테스트 해 볼 수 있습니다. 문제가 발생하는 경우, 해당 장치를  지원 할 수 있도록 scr.screen.recorder@gmail.com에 오류 리포트를 보내주시기 바랍니다."</string>
+    <string name="play_root_required">"&lt;b&gt;루팅된 장치에서만 정상 동작 합니다.&lt;/ b&gt; &lt;BR/&gt; 장치가 루팅되지 않은 경우 설치하지 마십시오."</string>
 
-    <string name="play_small_print">"SCR 스크린 레코더는 버그 추적과 사용자의 앱 사용 방법을 분석하는데 도움을 받기 위해 익명의 사용 통계를 수집합니다. 이 소프트웨어는 LGPL 하에서 허가 된 FFmpeg은 1.2의 수정되지 않은 코드를 사용합니다."</string>
+    <string name="play_description_main">"안드로이드에서 가장 포괄적인 스크린 캐스트 레코딩 응용 프로그램인 SCR Screen Recorder를 확인하십시오. SCR 스크린 레코더는 4.0 이후의 모든 안드로이드 버전을 지원하며, 각 플랫폼에서 사용할 수있는 최적의 인코딩 방법을 사용합니다. 2013년 초 SCR 스크린 레코더의 첫 번째 릴리스 이후로 잦은 업데이트를 통해 새로운 기능을 정기적으로 추가하고 있습니다.
+
+고유 기능 :"</string>
+
+    <string name="play_description_system_audio">"• 시스템 AUDIO - 대부분의 장치에서 직접 마이크 녹음 스피커 출력으로 인한 품질 손실없이 게임 오디오를 녹음 할 수 있습니다. \"Internal + Mic\"옵션은 시스템 오디오 녹음에 마이크 음원을 추가 할 수 있습니다. 
+현재 이 기능은 안드로이드 4.2에서 사용할 수 없습니다. 하지만 곧 추가 될 것입니다."</string>
+
+    <string name="play_description_features">"• FACE CAM - 사용자 녹화 동영상에 전면 카메라를 추가하여 감정을 공유 할 수 있습니다. 중요 컨트롤을 방해하지 않도록 당신은 주변의 카메라 오버레이를 이동할 수 있습니다. 
+• NO ADS는 - 다른 \ \"무료 \\"화면 레코더는 달리 SCR은 광고를 표시하지 않습니다. 모든 응용 프로그램의 개발비는 기부와 Pro 버전을 통해 지원됩니다. 
+• SETTINGS - 사용자가 간단한 사전 설정(PRESET)을 선택할 수도 있고 수동으로 모든 설정 조정할 수도 있습니다. SCR은 많은 사용자 정의를 지원하고 성능과 안정성 통계를 제공합니다. 
+• ALPHA FEATURE - 당신이 알파 업데이트 및 테스트 브랜드를 받으려면 우리가 http://goo.gl/PGYZ8r
+
+Alpha 업데이트와 새로운 기능의 테스트를 받기 원한다면, About community에 있는 링크를 따라가도록 합니다.에서 SCR 알파 테스트의 Google+ 커뮤니티에 가입하여 선택시 중요하게 알려 새로운 기능 소개 커뮤니티 섹션의 링크를 따라 ."</string>
+
+    <string name="play_ban_disclaimer">"이 응용 프로그램의 이전 버전을 통해 2 백만 다운로드 및 37K 리뷰했다"</string>
+
+    <string name="play_description_free_limits">"&lt;B&gt; SCR Free&lt;/ b&gt;을 사용하면 최대 삼분의 스크린 캐스트를 기록 할 수 있고, SCR 워터 마크 비디오에 추가됩니다. 판매 &lt;B&gt; SCR 프로 워터 마크와 &lt;/ b&gt;을 얻을 수있는 무제한 스크린 캐스트 길이."</string>
+
+        <string name="play_description_pro">"당신이 SCR Free &lt;B&gt;를 테스트를 위해 구입을 고려하기 전에 &lt;/ B&gt; 장치가 이미 지원되는지 확인합니다."</string>
+
+    <string name="play_description_stablity">"SCR 스크린 레코더는 다양한 해킹 및 비공식 API를 사용합니다. 따라서, 일부 장치 및 ROM에 작동하지 않을 수 있습니다. 당신의 기기에서 어떤 문제가 발생하는 경우scr.screen.recorder@gmail.com으로 문제를 알려주시면, 해당 문제를 해결하는데 도움이 됩니다."</string>
+
+
+
+    <string name="play_small_print_stats">"이 응용 프로그램은 버그 추적을 돕고 장치 호환성을 분석하기 위한 익명의 사용 통계를 수집합니다."</string>
+
+    <string name="play_small_print_lgpl">"이 소프트웨어는 LGPL 라이센스하의 수정되지 않은 FFmpeg 1.2 코드를 사용합니다."</string>
+
+
+    <string name="play_noroot_description_short_80_char">"멋진 얼굴 캠 기능을 포함한 경량 롤리팝 화면 레코더. [루팅 필요치 않음]"</string>
+
+    <string name="play_noroot_description_main">"SCR 5+ 는 유명한 SCR 스크린 레코더의 역사에 새로운 장을 엽니다. 
+새로운 안드로이드 5.0 피처 덕분에 SCR 5+는 루팅 없이 화면을 녹화할 수 있습니다.
+
+불행하게도 롤리팝은 기본적으로 아직 내부 오디오 녹음을 지원하지 않기 때문에 이 기능을 필요로 하는 경우, 기기를 루팅하고 SCR Screen Recorder Root를 설치해야 합니다."</string>
 
     <string name="recording_saved_title">"화면 녹화 저장"</string>
-    <string name="recording_saved_message">"%1$s에 저장되었습니다"</string>
     <string name="recording_saved_toast">"%1$s에 저장되었습니다"</string>
     <string name="max_file_size_reached_toast">"최대 파일 크기에 도달했습니다. %1$s에 저장되었습니다."</string>
-    <string name="start">"시작"</string>
     <string name="play">"재생"</string>
 
     <string name="su_required_title">"루팅 권한이 필요합니다"</string>
-    <string name="su_required_message">"화면 레코더앱을 실행하려면 휴대폰/태블릿을 루팅해야합니다. 인터넷으로 검색하면 루팅하는 다양한 방법들을 찾을 수 있습니다. 루팅이 완료되면 돌아와 주세요!!!"</string>
-    <string name="su_required_help">"루팅은 무엇인가요?"</string>
-    <string name="su_required_help_link">"http://navercast.naver.com/contents.nhn?rid=122&amp;contents_id=6928"</string>
+    <string name="su_required_message">"모든 화면 레코더 응용 프로그램을 실행하기 위해 사용자의 휴대전화/태블릿의 루팅이 필요합니다. 
+인터넷에서 다양한 기기에 대한 수많은 루팅 튜토리얼이 있습니다.
+루팅이 완료되면 다시 와주세요!"</string>
+    <string name="su_required_help">"\"루팅\"은 무엇인가요?"</string>
+    <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/
 
-    <string name="error_dialog_title">"심각한 오류가 있습니다 :-("</string>
-    <string name="startup_error_message">"오류 보고서를 보내주시면 오류를 해결하는데 도움이 됩니다
-이메일 주소S:%1$d로 보내주세요"</string>
-    <string name="unknown_error_message">"[오류]자동으로 보내지는 익명의 오류리포트는 문제 해결에 도움이 됩니다. 해당 오류를 기입하여 R:%1$d로 이메일을 보내주세요."</string>
+루팅이란? (한국어 안내)
+http://navercast.naver.com/contents.nhn?rid=122&amp;contents_id=6928"</string>
+    <string name="su_required_lollipop_message">"%1$s 장치의 모든 잠재된 기능을 사용하려면 장치를 루팅해야 합니다. 
+안드로이드 5.0은 루팅없이 기본 화면 녹화 (NO 내장형 오디오)를 할 수 있습니다. %2$s을 경량 다운로드하여 확인하거나 또는 아니오 No-root 모드로 전환하시기 바랍니다."</string>
+    <string name="su_required_lollipop_denied_message">"당신의 기기가 루팅된 상태라면, %1$s을 열어주세요. 그리고, %2$s의 루트 액세스를 거부하지 않았는지 확인해주세요."</string>
+    <string name="su_required_no_root_mode">"No-root 모드(루팅 불필요 모드)"</string>
 
-    <string name="media_recorder_error_title">"녹화 오류"</string>
+    <string name="settings_no_root_only">"루팅 불필요 엔코더만 지원"</string>
+    <string name="settings_root_only">"루팅 필요 엔코더만 지원"</string>
+    <string name="settings_no_root_mode">"No-root 모드(루팅 불필요 모드)"</string>
+    <string name="settings_no_root_mode_summary">"루트 액세스 요청을 누르고 모든 기능을 사용"</string>
+
+    <string name="error_dialog_title">"[오류]심각한 오류가 있습니다 :-("</string>
+    <string name="unknown_error_message">"[오류]익명 오류 보고서는 우리의 문제 해결을 돕기 위해 자동으로 전송됩니다. SR%1$d의 오류에 대해 부담없이 support 이메일을 통해 연락 주시기 바랍니다."</string>
+
+    <string name="selinux_error_title">"[오류]루트 액세스 에러"</string>
+    <string name="selinux_error_message">"[오류]장치에서 SELinux를 구성하는것에 문제가 있습니다. 당신의 장치가 제대로 루팅되었는지 확인하고 가능하면 permissive 모드로 SELinux를 전환합니다."</string>
+
+    <string name="media_recorder_error_title">"[오류]녹화 오류"</string>
     <string name="media_recorder_error_message">"[오류]해상도를 변경하시거나 CPU/GPU간의 이미지 변환 방식을 변경해 주세요.
 만일, 다른 화면 녹화앱이 설치되어 있다면, 해당 앱을 삭제해 보세요.
 오류가 계속되는 경우 기술지원을 위해 R%1$d로 메일을 보내 주세요."</string>
+
+    <string name="video_codec_error_title">"[오류]호환되지 않는 비디오 설정"</string>
+    <string name="video_codec_error_message">"[오류]해상도나 비디오 비트레이트를 줄여보십시오. 일부 장치는 세로 방향의 비디오에서 더 낮은 해상도로 작동합니다. 문제가 지속되면 R%1$d오류를 support 이메일로 연락 주시기 바랍니다  ."</string>
 
     <string name="output_file_error_title">"[오류]비디오 파일을 만들 수 없습니다."</string>
     <string name="output_file_error_message">"[오류]SCR은  %1$s비디오 파일을 만들 수 없습니다. 선택한 위치에 쓸 수 있고 SD 카드가 USB 연결에 의해 잠겨 있지 않은지 확인하세요."</string>
 
     <string name="microphone_busy_error_title">"[오류]마이크 사용중"</string>
-    <string name="microphone_busy_error_message">"[오류]한번에 하나의 응용 프로그램만 마이크를 사용할 수 있습니다. 이것은 안드로이드 시스템의 제한 사항입니다. 마이크 (예를 들어, 지금은 구글이나 스카이프)를 사용하는 다른 응용 프로그램을 닫아주세요. 또는 오디오없이 녹음을 계속합니다."</string>
+    <string name="microphone_busy_error_message">"[오류]한번에 하나의 응용 프로그램만 마이크를 사용할 수 있습니다. 이것은 안드로이드 시스템의 제한 사항입니다.
+마이크 (예를 들어, 지금은 구글이나 스카이프)를 사용하는 다른 응용 프로그램을 닫아주세요. 또는 오디오없이 녹음을 계속합니다."</string>
     <string name="microphone_busy_error_continue_mute">"[오류]음소거 유지"</string>
 
     <string name="screen_protected_error_title">"[오류]화면 보호됨"</string>
@@ -79,54 +131,54 @@ SCR 스크린 레코더는 모든 장치에서 최고 품질의 화면 녹화를
 
     <string name="settings_activity_label">"SCR 설정"</string>
     <string name="settings_title">"설정"</string>
-    <string name="settings_ok">"확인"</string>
+    <string name="settings_ok">"오케이"</string>
     <string name="settings_reset">"기본값 복원"</string>
     <string name="settings_cancel">"취소"</string>
+
+    <string name="settings_unstable">"%1$s (불안정)"</string>
 
     <string name="settings_video_category">"비디오"</string>
 
     <string name="settings_video_encoder">"인코더"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (불안정)"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"자동"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"소프트웨어 MPEG-4 (느림)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"소프트웨어 MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"안드로이드 내장 %1$s 인코더"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg 소프트웨어 MPEG4 인코더"</string>
+    <string name="settings_video_encoder_no_root_h264">"H264 (루팅 필요 없음)"</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 (루팅 필요 없음)"</string>
+    <string name="settings_video_encoder_mpeg_4">"MPEG-4"</string>
 
-    <string name="settings_resolution">"해결"</string>
+    <string name="settings_resolution">"해상도"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
     <string name="settings_resolution_p">"%1$d x %2$dp"</string>
     <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp 수평"</string>
     <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp 패딩"</string>
     <string name="settings_resolution_max">"%1$dx%2$d - 최대"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - 절반"</string>
-    <string name="settings_resolution_unstable">"(불안정)"</string>
 
     <string name="settings_transformation">"이미지 변환"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
-    <string name="settings_transformation_gpu">"GPU"</string>
+    <string name="settings_transformation_gpu">"GPU+"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_transformation_cpu_summary">"프로세서(CPU)에서 화면 이미지 처리"</string>
-    <string name="settings_transformation_gpu_summary">"그래픽 카드(%1$s)에서 화면 이미지 처리"</string>
+    <string name="settings_transformation_cpu_summary">"프로세서를 사용 (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"( %1$s )그래픽 칩 사용"</string>
     <string name="settings_transformation_sw_summary">"유효하지 않은 소프트웨어 인코더 "</string>
 
     <string name="settings_video_bitrate">"비트레이트(Bit rate)"</string>
     <string name="settings_video_bitrate_summary">"인코더에 따라 %1$s정도"</string>
-    <string name="settings_video_bitrate_default">"디폴트 값"</string>
+    <string name="settings_video_bitrate_default">"디폴트"</string>
 
 
     <string name="settings_frame_rate">"프레임 속도(Frame rate)"</string>
     <string name="settings_frame_rate_max">"최고"</string>
     <string name="settings_frame_rate_max_short">"최대"</string>
     <string name="settings_frame_rate_up_to">"최대 %1$dfps"</string>
-    <string name="settings_frame_rate_up_to_short">"%1$dfps"</string>
+    <string name="settings_frame_rate_up_to_short">"%1$d FPS"</string>
     <string name="settings_frame_rate_summary">"최대 %1$dfps, 하드웨어 성능에 따라 다름."</string>
     <string name="settings_frame_rate_max_summary">"하드웨어의 최대치"</string>
 
-    <string name="settings_orientation">"회전"</string>
+    <string name="settings_orientation">"방향"</string>
     <string name="settings_orientation_description">"기본적으로 비디오 프레임은 항상 수평이며 회전 메타 데이터는 세로 레코딩에 추가됩니다. YouTube와 기본 안드로이드 비디오 플레이어가 이런 동영상을 바르게 재생하지만, 일부 PC 플레이어 (예 : VLC)는 회전 메타 데이터를 무시하고 가로 모드로 표시합니다. 수직 프레임 옵션을 사용하는 경우 많은 장치가 수직 프레임으로 촬영된 동영상을 재생할 수 없을 수 있다는 점을 주의하시기 바랍니다."</string>
     <string name="settings_orientation_auto">"자동"</string>
     <string name="settings_orientation_portrait">"인물 모드"</string>
@@ -136,25 +188,32 @@ SCR 스크린 레코더는 모든 장치에서 최고 품질의 화면 녹화를
 
     <string name="settings_vertical_frames">"수직 프레임"</string>
     <string name="settings_vertical_frames_warning">"많은 장치에서 비디오 플레이어는 수직 프레임으로 동영상을 재생할 수 없습니다. 이 옵션을 선택하지 않은 방향으로 메타 데이터가 비디오에 추가되는 경우에도 기본 안드로이드 플레이어나 유튜브 등에서 제대로 표시 됩니다."</string>
-    <string name="settings_vertical_frames_ok">"확인"</string>
-    <string name="settings_vertical_frames_cancel">"취소"</string>
 
     <string name="settings_audio_category">"오디오"</string>
-    <string name="settings_audio_source">"출처"</string>
+    <string name="settings_audio_source">"음원 소스"</string>
     <string name="settings_audio_mic">"마이크"</string>
     <string name="settings_audio_mute">"음소거"</string>
-    <string name="settings_audio_internal">"내부의"</string>
+    <string name="settings_audio_internal">"내부"</string>
     <string name="settings_audio_experimental">"실험"</string>
+    <string name="settings_audio_mix">"내부 + 마이크"</string>
+    <string name="settings_audio_use_headphones">"에코 방지 위해 유선 헤드폰 사용"</string>
+    <string name="settings_audio_not_supported">"%1$s 지원되지 않음 "</string>
+    <string name="settings_audio_incompatible">"오디오 드라이버와 호환되지 않음"</string>
     <string name="settings_audio_mic_summary">"마이크"</string>
     <string name="settings_audio_mute_summary">"음소거. 오디오 트랙이 없습니다"</string>
-    <string name="settings_audio_internal_summary">"시스템의 오디오 출력"</string>
-    <string name="settings_audio">"오디오"</string>
+    <string name="settings_audio_internal_summary">"시스템 오디오 출력"</string>
+    <string name="settings_audio_mix_summary">"마이크 + 내부 (헤드폰 사용!)"</string>
     <string name="settings_sampling_rate">"샘플링 속도"</string>
+
+    <string name="settings_mic_gain">"마이크 부스트"</string>
+    <string name="settings_mic_gain_summary_mix_only">"%1$s만 가능 "</string>
+    <string name="settings_mic_gain_summary_default">"기본 볼륨 사용 "</string>
+    <string name="settings_mic_gain_summary">"%1$d dB 볼륨 증가"</string>
 
     <string name="settings_other_category">"기타"</string>
     <string name="settings_hide_icon">"노티피케이션 아이콘 숨김"</string>
     <string name="settings_show_touches">"터치 표시"</string>
-    <string name="settings_show_touches_summary">"터치에 대한 시각적 피드백을 보여줍니다. 또한 안드로이드 설정 → 개발자 옵션 →터치 표시 를 통해 영구적으로 터치 표시기를 활성화 할 수 있습니다"</string>
+    <string name="settings_show_touches_summary">"터치에 대한 시각적 피드백을 표시합니다. 안드로이드의 시스템 설정을 통해 사용할 수 있습니다. 안드로이드 시스템 설정 → 개발자 옵션 →보기 터치"</string>
     <string name="settings_output_dir">"저장 디렉토리"</string>
     <string name="settings_stop_when_screen_off">"스크린 오프 시 중지"</string>
     <string name="settings_stop_when_screen_off_summary">"화면이 꺼진 후 녹화 종료"</string>
@@ -165,39 +224,49 @@ SCR 스크린 레코더는 모든 장치에서 최고 품질의 화면 녹화를
     <string name="settings_zigzag_fix_summary">"녹화된 영상에 임의의 화려한 줄무늬가 포함 된 경우 선택"</string>
     <string name="settings_zigzag_fix_cpu_only">"CPU 이미지 변환에만 유효"</string>
 
+    <string name="settings_video_config">"%1$s 사전 설정"</string>
+    <string name="settings_video_config_entry">"%1$d X %2$d ~ % 3 $ .0ffps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d %% 안정"</string>
+    <string name="settings_video_config_summary">"사용 통계에 기초"</string>
+    <string name="settings_video_config_summary_no_data">"통계를 다운로드 할 수 없습니다"</string>
+    <string name="settings_video_config_summary_not_available">"아직 사용 가능한 통계가 없습니다"</string>
+
+    <string name="device_profile_download_error_toast">"권장 설정을 다운로드 할 수 없습니다. 현재 온라인인지 확인하세요."</string>
+    <string name="device_profile_downloaded_toast">"권장 설정 다운로드"</string>
+
     <string name="directory_chooser_select">"\"%1$s\"를 선택합니다."</string>
     <string name="directory_chooser_refresh">"새로 고침"</string>
     <string name="directory_chooser_new">"신규"</string>
     <string name="directory_chooser_new_title">"신규 디렉토리명"</string>
-    <string name="directory_chooser_new_ok">"확인"</string>
+    <string name="directory_chooser_new_ok">"오케이"</string>
     <string name="directory_chooser_new_cancel">"취소"</string>
-    <string name="directory_chooser_error_message">"디렉토리를 만들 수 없습니다. SD 카드 등의 쓰기 가능한 위치를 선택하세요."</string>
-    <string name="directory_chooser_not_writable_title">"선택한 디렉토리에 쓸 수 없습니다"</string>
+    <string name="directory_chooser_error_message">"디렉토리를 만들 수 없습니다. SD 카드 등의 쓰기 가능한 위치를 선택했는지 확인하세요."</string>
+    <string name="directory_chooser_not_writable_title">"선택한 디렉토리에 쓰기 권한이 없습니다"</string>
     <string name="directory_chooser_not_writable_message">"%1$s 디렉토리에 쓰기 권한이없는 것 같습니다 . 녹화에 문제가 발생할 수 있습니다."</string>
     <string name="directory_chooser_ignore">"무시"</string>
     <string name="directory_chooser_cancel">"취소"</string>
     <string name="directory_chooser_default">"디폴트"</string>
 
-    <string name="license_dont_allow">"라이센스 확인 실패. 인터넷 연결 여부와 구글 플레이에 로그인 되어 있는지 확인하세요."</string>
-    <string name="license_error">"라이센스 확인 오류. 인터넷 연결 여부와 구글 플레이에 로그인 되어 있는지 확인하세요."</string>
-
     <string name="error_report_report">"보고서"</string>
-    <string name="error_report_close">"가까운"</string>
+    <string name="error_report_close">"닫기"</string>
     <string name="error_report_text">"오류에 대한 정보를 포함하여 자세한 시스템 로그가 첨부 파일에 포함되어 있습니다. 여기에 어떤 설명이든 편하게 추가하셔도 됩니다."</string>
-    <string name="error_report_chooser">"이메일 오류 보고서와"</string>
+    <string name="error_report_chooser">"와 이메일 오류 보고서"</string>
 
     <string name="rating_rate_title">"속도(Rate) %1$s"</string>
     <string name="rating_rate_message">"%1$s이/가 마음에 드셨다면 , 잠시 시간을 내어 평점을 매겨 주시기 바랍니다. 지원 감사합니다!"</string>
-    <string name="rating_rate_now">"지금 평가하기!"</string>
+    <string name="rating_rate_now">"지금 평가!"</string>
     <string name="rating_remind">"나중에 알림"</string>
     <string name="rating_no_thanks">"아니요"</string>
     <string name="rating_play_error">"구글 플레이에 접근할 수 없습니다."</string>
 
     <string name="help_stop_message">"녹화를 중지하려면 화면을 잠그고 2초를 기다려야 합니다. 또는 간단히 %1$s앱을 다시 열면 됩니다 ."</string>
     <string name="menu_send_bug_report">"버그 리포트를 보내주세요."</string>
+    <string name="menu_show_unstable">"불안정 보기"</string>
+    <string name="menu_show_advanced">"보기 고급"</string>
 
     <string name="notification_status_initializing">"초기화"</string>
     <string name="notification_status_waiting_for_root">"루트 엑세스를 기다리는 중"</string>
+    <string name="notification_status_waiting_for_projection">"화면 캡처 접근 대기 중"</string>
     <string name="notification_status_installing_audio">"오디오 드라이버 설치"</string>
     <string name="notification_status_ready">"준비"</string>
     <string name="notification_status_starting">"시작"</string>
@@ -211,10 +280,50 @@ SCR 스크린 레코더는 모든 장치에서 최고 품질의 화면 녹화를
 
     <string name="copyrights_statement">"%1$s을 사용하는 것에 있어, 타사 저작권 또는 기타 지적 재산권을 침해하지 않는 것에 대한 보장 및 그에 관한 책임은 전적으로 사용자 본인이 지는 것에 대해 동의하는 것으로 간주합니다."</string>
     <string name="internal_audio_installation_error_title">"내부 오디오 오류"</string>
-    <string name="internal_audio_installation_error_message">"내부 오디오를 활성화 할 수 없습니다. 당신의 장치를 지원할 수 있도록 저에게 버그 리포트를 보내 주시기 바랍니다. 오디오 소스를 %1$s로 설정합니다."</string>
+    <string name="internal_audio_installation_error_message">"내부 오디오를 활성화 할 수 없습니다. 당신의 장치를 지원할 수 있도록 저에게 버그 리포트를 보내 주시기 바랍니다. 오디오 소스를 %1$s로 설정합니다 "</string>
     <string name="internal_audio_unstable_title">"내부 오디오 불안정"</string>
     <string name="internal_audio_unstable_message">"내부 오디오 안​​정성 문제가 감지되었습니다. 당신의 장치를 지원할 수 있도록 저에게 버그 리포트를 보내 주시기 바랍니다. 오디오 소스를 %1$s로 설정합니다."</string>
-    <string name="internal_audio_disabled_title">"내부 오디오 비활성화"</string>
+    <string name="internal_audio_disabled_title">"내부 오디오 사용 불가"</string>
     <string name="internal_audio_disabled_message">"%1$s이 제대로 종료되지 않아 내부 오디오 녹음을 비활성화 합니다. 설정에서 다시 활성화 할 수 있습니다."</string>
 
+    <string name="license_title">"라이센스 오류"</string>
+    <string name="license_not_licensed_message">"라이센스 검증 오류. Google Play 스토어를 통해 SCR 프로를 구입하십시오. 만일, Lucky Patcher가 설치되어있는 경우, Google Play 에뮬레이션을 비활성 하시기 바랍니다."</string>
+    <string name="license_retry_message">"라이센스를 검증 오류. 인터넷에 연결되어 있는지 확인 하세요.
+디바이스의 날짜와 시간이 맞는지 확인하고 Google Play 스토어에 로그인 하세요.
+라이센스가 확인되면 SCR 프로 오프라인을 계속 사용할 수 있습니다."</string>
+    <string name="license_error_message">"라이센스 검증 오류. 디바이스의 날짜와 시간이 올바른지 확인하고, Google Play를 통해 SCR Pro를 설치했는지 확인하시기 바랍니다. 
+문제가 계속되는 경우 \"Google Play services\"와 \"Google Play Store\" 앱의 캐시와 데이터를 삭제해야 합니다."</string>
+    <string name="license_play_store">"플레이 스토어"</string>
+    <string name="license_retry">"다시 시도"</string>
+    <string name="license_continue_as_free">"무료 사용"</string>
+
+    <string name="su_denied_message">"장치의 루트 액세스에 문제가 있습니다. %1$s을 열어 실수로 %2$s에 루트 액세스를 거부하지 않았는지 확인하십시오."</string>
+    <string name="su_default_name">"superuser"</string>
+
+    <string name="can_not_start_toast">"녹음을 시작할 수 없습니다. : %1$s"</string>
+
+    <string name="settings_show_camera">"페이스 캠"</string>
+    <string name="settings_show_camera_summary">"녹화 상단에 카메라 이미지"</string>
+    <string name="settings_camera_alpha_title">"투명도"</string>
+    <string name="settings_camera_alpha_summary">"페이스 캠 %1$d %% 불투명"</string>
+    <string name="settings_camera_alpha_summary_100">"페이스 캠 불투명"</string>
+
+    <string name="miui_error_message">"[오류]%1$s 플로팅 창을 볼 수없는 경우 MiUi 앱 설정에서 %1$s의 \"Show popup windows\"을 활성화하세요."</string>
+    <string name="miui_error_title">"MiUi 팝업 비활성?"</string>
+
+    <string name="lollipop_dialog_title">"SCR 5+ 시도"</string>
+    <string name="lollipop_dialog_message">"새롭고, 가볍고, 루팅이 필요없는 스크린 레코더 앱인 SCR 5+를 테스트 해보시겠습니까? 공식 안드로이드 5.0 화면 캡처 API 및 마이크 오디오 레코딩을 사용하고 있습니다."</string>
+    <string name="lollipop_dialog_try_now">"지금 시도"</string>
+
+    <string name="projection_deny_error_message">"당신은 일을 기록하기 위해 '지금 시작' 을 눌러야 합니다."</string>
+    <string name="projection_deny_error_title">"화면에 접근할 수 없습니다"</string>
+
+    <string name="notification_action_share">"공유"</string>
+    <string name="internal_audio_warning_title">"설치 경고"</string>
+
+    <string name="internal_audio_warning_message">"장치에 오디오 드라이버 설치를 위해 시스템 파티션에 대한 수정이 필요합니다. 드물게 설치 중 오류가 발생하는 경우 기기가 벽돌이 되거나, 부팅 루프에 들어갈 수 있습니다. 당신이 시스템 파티션을 리플래시 하는 방법이나 백업을 통해 시스템 복원 방법을 알고 있는지 확인하시기 바랍니다.
+만일 %1$s의 설치를 제거하기로 결정한다면, 설치제거 전 SCR Setting 메뉴를 열어 내부 오디오(internal audio)를 비활성 해야 합니다."</string>
+    <string name="internal_audio_warning_confirmation">"나는 시스템 파티션을 복원하는 방법을 알고 있습니다."</string>
+    <string name="internal_audio_warning_dont_show">"이 메시지를 다시 표시하지 않음"</string>
+    <string name="internal_audio_warning_install">"설치"</string>
 </resources>

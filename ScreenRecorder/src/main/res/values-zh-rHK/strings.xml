@@ -3,52 +3,130 @@
     <string name="free_app_full_name">"SCR螢幕錄影免費版"</string>
     <string name="pro_app_name">"SCR專業版"</string>
     <string name="pro_app_full_name">"SCR螢幕錄影專業版"</string>
+    <string name="free_app_no_root_name">"SCR 5+ 免費版"</string>
+    <string name="free_app_no_root_full_name">"SCR 5+ 螢幕錄影免費版"</string>
+    <string name="pro_app_no_root_name">"SCR 5+ 專業版"</string>
+    <string name="pro_app_no_root_full_name">"SCR 5+ 螢幕錄影專業版"</string>
 
-    <string name="play_free_app_name">"SCR螢幕錄影免費版 ★ root"</string>
-    <string name="play_pro_app_name">"SCR螢幕錄影專業版 ★ root"</string>
+    <string name="play_free_app_name_30_char">"SCR螢幕錄影 ★ root 免費版"</string>
+    <string name="play_pro_app_name_30_char">"SCR螢幕錄影 ★ root 專業版"</string>
+
+
+    <string name="play_description_short_80_char">"
+將您的螢幕畫面與系統音訊錄製成高畫質影片檔! 需有Root權限!
+    "</string>
 
     <string name="play_root_required">"&lt;b&gt;僅適用於擁有root權限 / 已越獄 / 已解鎖 的裝置！&lt;/b&gt;&lt;br/&gt;在您的裝置尚未有root權限的情況下請勿安裝。"</string>
-    <string name="play_description_main">"直接從您的手機或平板上錄製高品質擷圖錄影！
 
-SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行最優質的螢幕錄影。
-這是市場上唯一支援Tegra裝置(包括Nexus 7)的錄影程式。"</string>
-    <string name="play_description_free">"使用 &lt;b&gt;SCR 免費版&lt;/b&gt; 您可以錄製最多3分鐘帶有SCR浮水印的擷圖錄影。
-購買 &lt;b&gt;SCR 專業版&lt;/b&gt; 即可錄製無限長度且無浮水印的擷圖錄影。
+    <string name="play_description_main">"
+瞧瞧 SCR 螢幕錄影，它可是Android 上最全面的螢幕錄影程式呢!
+SCR 螢幕錄影支援Android包含 4.0以上的所有版本,並採用了可在每個平台上使用的最佳編碼方式。
+從 2013年初 SCR螢幕錄影程式首次發佈後,便經常更新並定期加入新功能。
 
-這是一個初期的 &lt;b&gt;BETA 測試預覽&lt;/b&gt; 版本， 所以它可能無法在所有的裝置和ROM下正常運作。
-如果您遇到任何問題，請到 scr.screen.recorder@gmail.com 回報您的問題，以便我處理您的裝置支援性問題。"</string>
+特色功能 :
+    "</string>
 
-    <string name="play_description_pro">"這是一個初期的 &lt;b&gt;BETA 測試預覽&lt;/b&gt; 版本， 所以它可能無法在所有的裝置和ROM下正常運作。
-請在購買前先試著安裝&lt;b&gt; SCR 免費版&lt;/ b&gt;測試一下，以確保您的裝置能夠正常運作。
-如果您遇到任何問題，請到 scr.screen.recorder@gmail.com 回報您的問題，以便我處理您的裝置支援性問題。"</string>
+    <string name="play_description_system_audio">"
+• 系統音訊 - 
+在大多數裝置上，您可以使用麥克風直接錄製揚聲器撥放出來遊戲中較低失真的音訊。\"內部音訊 + 麥克風\" 選項允許您在錄製系統音訊時,同時加入旁白的麥克風評論或說明。
+目前這項功能在 Android 4.2還無法使用，但很快就會加入這項功能。
+    "</string>
 
-    <string name="play_small_print">"SCR 螢幕錄影以匿名方式收集使用方式的統計資訊，以協助追蹤 bug 並分析使用者們如何使用應用程式。此軟體使用  LGPL 下的 FFmpeg 1.2 授權源碼。"</string>
+    <string name="play_description_features">"
+• 前鏡頭同步 - 透過在影片上加入前鏡頭同步來分享您當下的表情和情緒。
+您可以移動前鏡相機畫面位置，以便它不會妨礙重要的控制。
+
+• 無廣告 - 不像其他 \\"免費版\\" 的螢幕錄影程式, SCR 絕不會播送任何廣告!
+我都是僅靠捐贈與付費版來支援所有程式的開發
+
+• 方便的預設設定 - 
+無論您是喜歡選擇使用簡單的預設值設定,還是喜歡手動自訂每個設定值,我們都能夠幫到您。 SCR支援許多可自訂選擇且提供了高效能和高穩定性的預設值。
+
+• 開發功能 - 
+透過 http://goo.gl/PGYZ8r 加入 SCR 開發測試的 Google+ 社群讓我們知道什麼對您來說比較重要。
+如果您想獲得開發版更新並測試全新功能，請追蹤關於社群的相關鏈接。
+    "</string>
+
+    <string name="play_ban_disclaimer">"
+本應用程式先前的版本已被下載超過2百萬次並多達3萬7千則評論!
+    "</string>
+
+    <string name="play_description_free_limits">"
+使用 &lt;b&gt;SCR 免費版&lt;/b&gt; 您最多可以錄製3分鐘帶有 SCR 浮水印的影片。
+購買 &lt;b&gt;SCR 專業版&lt;/b&gt; 您將可以錄製任何長度的無浮水印影片!
+    "</string>
+
+        <string name="play_description_pro">"
+在您購買前請先安裝 &lt;b&gt;SCR 免費版&lt;/b&gt; 試試看,以確保能夠支援您的裝置進行錄製
+    "</string>
+
+    <string name="play_description_stablity">"
+由於SCR 螢幕錄影使用了各種入侵技術與非官方API,所以可能在部份的裝置和韌體上無法正常執行
+如果您遇到任何問題的話,請回報問題到 scr.screen.recorder@gmail.com 給我們,好讓我們協助您的裝置能夠順利正常執行
+    "</string>
+
+
+
+    <string name="play_small_print_stats">"
+本應用程式會收集匿名的使用方式統計資訊，以協助追蹤bug和分析裝置的相容性。
+    "</string>
+
+    <string name="play_small_print_lgpl">"
+本軟體係使用 LGPL 下授權的 FFmpeg 1.2 源碼
+    "</string>
+
+
+    <string name="play_noroot_description_short_80_char">"
+輕量的 Lollipop 螢幕錄影並加上非常酷的前鏡頭同步功能 [無Root]
+    "</string>
+
+    <string name="play_noroot_description_main">"
+SCR 5+ 開啟了著名 SCR螢幕錄影的歷史新頁!
+非常感謝新的 Android 5.0功能可以在無Root權限的狀態下進行螢幕錄影!
+
+但很不幸的 Lollipop 本身並尚未支援系統內部錄音。
+所以如果您需要內部錄音功能的話,您的裝置就必需有Root權限,並安裝 ★ root 版本才能使用!
+    "</string>
 
     <string name="recording_saved_title">"SCR 錄製已儲存"</string>
-    <string name="recording_saved_message">"錄製儲存到 %1$s"</string>
     <string name="recording_saved_toast">"錄製儲存到 %1$s"</string>
     <string name="max_file_size_reached_toast">"已達最大檔案大小，您的錄製已儲存到 %1$s"</string>
-    <string name="start">"開始"</string>
     <string name="play">"播放"</string>
 
     <string name="su_required_title">"需要root存取權限"</string>
-    <string name="su_required_message">"要在手機或平板上執行任何螢幕錄影程式都必須取得root權限。在網路上有許多相關教學及說明如何取得不同裝置的root權限。請在取得root權限之後再繼續使用吧！"</string>
+    <string name="su_required_message">"要在您的 手機/平板 上進行任何螢幕錄影都必需先擁有Root權限。
+        網路上有非常多關於不同裝置的Root教學,請在確認已取得Root權限後在來過吧!"</string>
     <string name="su_required_help">"什麼是“root權限”？"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone"</string>
+    <string name="su_required_lollipop_message">"如要發揮 %1$s 的全部潛力,您的裝置就必需已取得Root權限!
+        Android 5.0 允許在沒有Root權限下進行基本的螢幕錄影(沒有內部音訊)。下載羽量級的 %2$s 或切換到無Root模式來瞧瞧吧!
+    "</string>
+    <string name="su_required_lollipop_denied_message">"如果您的裝置已取得Root權限,請開啟 %1$s 並確保您沒有因為手殘而不小心取消掉了 %2$s 的Root存取權限了!"</string>
+    <string name="su_required_no_root_mode">"無Root權限模式"</string>
+
+    <string name="settings_no_root_only">"僅限於無Root權限的編碼器"</string>
+    <string name="settings_root_only">"僅限於有Root權限的編碼器"</string>
+    <string name="settings_no_root_mode">"無Root權限模式"</string>
+    <string name="settings_no_root_mode_summary">"點擊以請求Root存取權限並啟用所有功能"</string>
 
     <string name="error_dialog_title">"發生了嚴重錯誤:-("</string>
-    <string name="startup_error_message">"將寄送出匿名的錯誤回饋報告以協助我們修正問題。請放心的透過email引用錯誤 S%1$d 聯絡我們。"</string>
-    <string name="unknown_error_message">"將寄送出匿名的錯誤回饋報告以協助我們修正問題。請放心的透過email引用錯誤 R%1$d 聯絡我們。"</string>
+    <string name="unknown_error_message">"匿名的錯誤回饋報告將自動寄出好讓我們協助修復問題。 隨時透過電子郵件的引用錯誤SR%1$d 與我們聯絡"</string>
+
+    <string name="selinux_error_title">"Root 存取權限錯誤"</string>
+    <string name="selinux_error_message">"您的裝置有SELinux配置上的問題!請確保您的裝置已經正確地取得Root權限,並且如可以的話請把SELinux切換到許可(permissive)模式"</string>
 
     <string name="media_recorder_error_title">"攝影機錯誤"</string>
     <string name="media_recorder_error_message">"正試著變更影像解析度或切換 GPU/CPU 之間的轉碼。請移除您其它已安裝的擷圖程式！如果問題依然存在，請透過email引用錯誤 R%1$d 聯絡我們。"</string>
+
+    <string name="video_codec_error_title">"不相容的影片設定"</string>
+    <string name="video_codec_error_message">"請試著降低解析度或位元率! 請注意,在某些裝置上縱向的影片方向只能在較低解析度下執行!如果仍有這方面的問題,請透過email引用錯誤 R%1$d 聯絡我們"</string>
 
     <string name="output_file_error_title">"無法新增影片檔"</string>
     <string name="output_file_error_message">"SCR無法新增 %1$s 影片檔！請確認選擇的輸出目錄是可寫入的，並且以USB連結的SD卡沒有被鎖定住。"</string>
 
     <string name="microphone_busy_error_title">"麥克風使用中"</string>
     <string name="microphone_busy_error_message">"由於Android 的系統限制，一次只能有一個應用程式可以使用麥克風。 
-        關閉其他正在使用的麥克風的應用程式(例如 Google now 或 Skype)或是繼續保持靜音錄影。"</string>
+        關閉其他正在使用麥克風的應用程式(例如 Google now 或 Skype)或是繼續保持靜音錄影。"</string>
     <string name="microphone_busy_error_continue_mute">"保持靜音"</string>
 
     <string name="screen_protected_error_title">"螢幕保護中"</string>
@@ -90,18 +168,19 @@ SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行�
     <string name="settings_reset">"恢復預設值"</string>
     <string name="settings_cancel">"取消"</string>
 
+    <string name="settings_unstable">"%1$s (不穩定)"</string>
+
     <string name="settings_video_category">"視訊"</string>
 
     <string name="settings_video_encoder">"編碼器"</string>
     <string name="settings_video_encoder_h264">"H264 "</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263（不穩定）"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"自動"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"軟體編碼 MPEG-4（慢）"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"軟解 MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Android的內建 %1$s 編碼器"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg 的 MPEG4 軟體編碼器"</string>
+    <string name="settings_video_encoder_no_root_h264">"H264 (未Root)"</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 (未Root)"</string>
+    <string name="settings_video_encoder_mpeg_4">"MPEG-4"</string>
 
     <string name="settings_resolution">"解析度"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
@@ -110,18 +189,17 @@ SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行�
     <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp 填滿"</string>
     <string name="settings_resolution_max">"%1$dx%2$d - 最大"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - 半版"</string>
-    <string name="settings_resolution_unstable">"（不穩定）"</string>
 
     <string name="settings_transformation">"影像轉碼"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_transformation_cpu_summary">"透過中央處理器(CPU)來處理螢幕影像"</string>
-    <string name="settings_transformation_gpu_summary">"透過圖形處理器（ %1$s ）來處理螢幕影像"</string>
+    <string name="settings_transformation_cpu_summary">"使用中央處理器 (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"使用圖形處理器 (%1$s)"</string>
     <string name="settings_transformation_sw_summary">"在軟體編碼器中無法使用"</string>
 
     <string name="settings_video_bitrate">"位元率"</string>
-    <string name="settings_video_bitrate_summary">"大約%1$s (取決於編碼器)"</string>
+    <string name="settings_video_bitrate_summary">"大約%1$s (根據編碼器)"</string>
     <string name="settings_video_bitrate_default">"預設"</string>
 
 
@@ -145,37 +223,32 @@ SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行�
 
     <string name="settings_vertical_frames">"直向畫面"</string>
     <string name="settings_vertical_frames_warning">"在許多裝置上的影片播放器並無法播放直向畫面的影片。即使在未選用此選項的情況下，方向性相關的資訊也會加入到影片中，以使其能夠在預設的 Android 播放器及YouTube 等等播放介面中正確地播放。"</string>
-    <string name="settings_vertical_frames_ok">"確定"</string>
-    <string name="settings_vertical_frames_cancel">"取消"</string>
 
     <string name="settings_audio_category">"音訊"</string>
     <string name="settings_audio_source">"音源"</string>
     <string name="settings_audio_mic">"麥克風"</string>
     <string name="settings_audio_mute">"靜音"</string>
     <string name="settings_audio_internal">"內部音訊"</string>
-    <string name="settings_audio_experimental">"實驗性功能"</string>
-    <string name="settings_audio_mic_summary">"麥克風。一次只能有一個應用程式使用麥克風！"</string>
+    <string name="settings_audio_experimental">"實驗性"</string>
+    <string name="settings_audio_mix">"內部音訊 + 麥克風"</string>
+    <string name="settings_audio_use_headphones">"使用有線耳機以避免回音現象"</string>
+    <string name="settings_audio_not_supported">"並未支援 %1$s"</string>
+    <string name="settings_audio_incompatible">"與您的音訊驅動程式不相容"</string>
+    <string name="settings_audio_mic_summary">"麥克風"</string>
     <string name="settings_audio_mute_summary">"靜音。無音軌"</string>
-    <string name="settings_audio_internal_summary">"音訊輸出。加入Google+ 的“SCR 開發測試”社群來參加內部錄音測試。"</string>
-    <string name="settings_audio">"音訊"</string>
+    <string name="settings_audio_internal_summary">"系統音訊輸出"</string>
+    <string name="settings_audio_mix_summary">"麥克風 + 內部音訊 (使用耳機!)"</string>
     <string name="settings_sampling_rate">"取樣率"</string>
 
-    <string name="settings_audio_driver_not_installed">"尚未安裝SCR 音訊驅動程式。請點擊以安裝!"</string>
-    <string name="settings_audio_driver_installing">"正在安裝SCR 音訊驅動程式..."</string>
-    <string name="settings_audio_driver_installed">"SCR 音訊驅動程式已安裝。請點擊以解除安裝!"</string>
-    <string name="settings_audio_driver_uninstalling">"正在解除安裝SCR 音訊驅動程式..."</string>
-    <string name="settings_audio_driver_installation_failure">"安裝SCR 音訊驅動程式失敗。請點擊以重試!"</string>
-    <string name="settings_audio_driver_outdated">"您已安裝了舊版的SCR 音訊驅動程式。請點擊以更新!"</string>
-
-    <string name="internal_audio_dialog_title">"安裝音訊驅動程式"</string>
-    <string name="internal_audio_dialog_message">"內部錄音是一項實驗性的功能，並且需要安裝自訂的音訊驅動程式。我們會建議您在完成錄音後解除安裝此驅動程式。您可以從SCR設定當中輕易地解除安裝音訊驅動程式。如果安裝器當掉了，則您可能需要使用 ADB指令或是重刷系統磁區分割來還原回原始的音效驅動程式。建議最好備份您的系統，您得自行承擔進行操作的風險!"</string>
-    <string name="internal_audio_dialog_install">"安裝"</string>
-    <string name="internal_audio_dialog_cancel">"取消"</string>
+    <string name="settings_mic_gain">"麥克風強化"</string>
+    <string name="settings_mic_gain_summary_mix_only">"僅適用於 %1$s"</string>
+    <string name="settings_mic_gain_summary_default">"使用預設音量"</string>
+    <string name="settings_mic_gain_summary">"增加音量 %1$ddB"</string>
 
     <string name="settings_other_category">"其他"</string>
     <string name="settings_hide_icon">"隱藏通知圖示"</string>
     <string name="settings_show_touches">"顯示觸控點"</string>
-    <string name="settings_show_touches_summary">"顯示觸摸視覺回饋。您也可以透過Andr​​oid系統設定→開發人員選項→顯示觸摸回饋 來保持觸摸視覺回饋設定"</string>
+    <string name="settings_show_touches_summary">"顯示觸碰螢幕時的視覺回饋。您可以透過下列設定來永久啟用這項功能 :  Android系統設定→開發人員選項→顯示觸控"</string>
     <string name="settings_output_dir">"輸出目錄"</string>
     <string name="settings_stop_when_screen_off">"螢幕關閉時停止錄影"</string>
     <string name="settings_stop_when_screen_off_summary">"螢幕關閉後即結束錄影"</string>
@@ -185,6 +258,16 @@ SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行�
     <string name="settings_zigzag_fix">"曲折修復"</string>
     <string name="settings_zigzag_fix_summary">"如果錄影畫面帶有不規則的色條紋請選擇此選項"</string>
     <string name="settings_zigzag_fix_cpu_only">"僅適用於CPU的影像轉換"</string>
+
+    <string name="settings_video_config">"%1$s 預設值"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.幀"</string>
+    <string name="settings_video_config_entry_stability">"%1$d%% 穩定"</string>
+    <string name="settings_video_config_summary">"根據使用裝置情形統計"</string>
+    <string name="settings_video_config_summary_no_data">"無法下載相關裝置資訊"</string>
+    <string name="settings_video_config_summary_not_available">"尚無可用的相關裝置資訊"</string>
+
+    <string name="device_profile_download_error_toast">"無法下載建議的設定值! 請確認是否已連接網路"</string>
+    <string name="device_profile_downloaded_toast">"已下載建議的設定值"</string>
 
     <string name="directory_chooser_select">"選擇 \\"%1$s\\""</string>
     <string name="directory_chooser_refresh">"重新載入"</string>
@@ -198,9 +281,6 @@ SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行�
     <string name="directory_chooser_ignore">"忽略"</string>
     <string name="directory_chooser_cancel">"取消"</string>
     <string name="directory_chooser_default">"預設"</string>
-
-    <string name="license_dont_allow">"驗證檢查失敗 ! 請確認您的網路已連線並且已登入到Google Play。"</string>
-    <string name="license_error">"驗證檢查錯誤 ! 請確認您的網路已連線並且已登入到Google Play。"</string>
 
     <string name="error_report_report">"報告"</string>
     <string name="error_report_close">"關閉"</string>
@@ -216,15 +296,74 @@ SCR 螢幕錄影使用硬體加速影像編碼以達到在所有裝置上進行�
 
     <string name="help_stop_message">"我們得停止錄製並鎖定螢幕再稍等約 2 秒。或是您也可以簡單地重新開啟 %1$s 應用程式"</string>
     <string name="menu_send_bug_report">"寄送錯誤報告"</string>
+    <string name="menu_show_unstable">"顯示不穩定項目"</string>
+    <string name="menu_show_advanced">"顯示進階項目"</string>
 
     <string name="notification_status_initializing">"初始化"</string>
     <string name="notification_status_waiting_for_root">"等待root存取權限"</string>
+    <string name="notification_status_waiting_for_projection">"正在等候螢幕擷取權限"</string>
+    <string name="notification_status_installing_audio">"正在安裝音訊驅動程式"</string>
     <string name="notification_status_ready">"就緒"</string>
     <string name="notification_status_starting">"正在開始"</string>
     <string name="notification_status_recording">"錄影中"</string>
+    <string name="notification_status_error">"[錯誤]"</string>
     <string name="notification_status_stopping">"停止中"</string>
+    <string name="notification_status_uninstalling_audio">"解除安裝音訊驅動程式"</string>
 
     <string name="sale_title">"特價"</string>
     <string name="sale_text">"現在購買 SCR 專業版可省下%1$d %%此優惠到 %2$s 結束。"</string>
 
+    <string name="copyrights_statement">"經由使用 %1$s 您同意您全權負責確保您不會違反第三方版權或其他智慧財產權。"</string>
+    <string name="internal_audio_installation_error_title">"內部音訊錯誤"</string>
+    <string name="internal_audio_installation_error_message">"無法啟用內部音訊! 請寄送錯誤回饋報告好讓我們協助您手上的裝置能夠正常執行! 音訊源講會被設定為 %1$s "</string>
+    <string name="internal_audio_unstable_title">"內部音訊不穩定"</string>
+    <string name="internal_audio_unstable_message">"偵測到了內部音訊穩定性的問題! 請寄送錯誤回饋報告好讓我們協助您手上的裝置能夠正常執行! 音訊源講會被設定為 %1$s."</string>
+    <string name="internal_audio_disabled_title">"已停用內部音訊"</string>
+    <string name="internal_audio_disabled_message">"內部音訊錄製已切換為關閉狀態!因為 %1$s 無法正確關閉! 您可以從設定裡重新啟用它。"</string>
+
+    <string name="license_title">"授權錯誤"</string>
+    <string name="license_not_licensed_message">"授權驗證錯誤!. 授權驗證錯誤!請從Google Play 商店裡購買 SCR專業版。如果您有安裝幸運破解器請停用谷歌Play模擬。"</string>
+    <string name="license_retry_message">"授權驗證錯誤! 請先確認您的網路連線已開啟, 並且您裝置日期和時間也是正確的。
+        並確認您已登入到Google Play商店! 在授權驗證過後您便能離線使用SCR專業版了!"</string>
+    <string name="license_error_message">"授權驗證錯誤! 請先確認您的網路連線已開啟, 並且您裝置日期和時間也是正確的。
+        如果能有問題的話,請清除 \"Google Play services\" 和 \"Google Play Store\" 應用程式的快取和資料!
+    "</string>
+    <string name="license_play_store">"Play Store"</string>
+    <string name="license_retry">"重試"</string>
+    <string name="license_continue_as_free">"繼續以免費版使用"</string>
+
+    <string name="su_denied_message">"您的裝置有Root存取權限的問題!
+        請開啟 %1$s 並確保您沒有因為手殘而不小心取消掉了 %2$s 的Root存取權限了!"</string>
+    <string name="su_default_name">"superuser"</string>
+
+    <string name="can_not_start_toast">"無法啟動錄製 : %1$s"</string>
+
+    <string name="settings_show_camera">"前鏡頭"</string>
+    <string name="settings_show_camera_summary">"前鏡畫面會在錄影畫面的最上方"</string>
+    <string name="settings_camera_alpha_title">"透明度"</string>
+    <string name="settings_camera_alpha_summary">"前鏡頭 %1$d%% 不透明"</string>
+    <string name="settings_camera_alpha_summary_100">"前鏡畫面不透明"</string>
+
+    <string name="miui_error_message">"如果您看不到 %1$s 浮動視窗的話,請到 MiUi 應用程式設定去把 %1$s 啟用 \"顯示彈出浮動視窗\" 。"</string>
+    <string name="miui_error_title">"MiUi 彈出框停用?"</string>
+
+    <string name="lollipop_dialog_title">"試試 SCR 5+"</string>
+    <string name="lollipop_dialog_message">"您想測試我最新輕盈且無需Root權限就能使用的螢幕錄影程式嗎? 它應用了官方 Android 5.0 螢幕擷取 API 和音訊錄製功能!"</string>
+    <string name="lollipop_dialog_try_now">"立馬試試"</string>
+
+    <string name="projection_deny_error_message">"您必需點擊 START NOW 才能開始錄影"</string>
+    <string name="projection_deny_error_title">"無法存取畫面"</string>
+
+    <string name="notification_action_share">"分享"</string>
+    <string name="internal_audio_warning_title">"安裝警告"</string>
+
+    <string name="internal_audio_warning_message">"
+安裝在您的裝置上的音訊驅動程式需要對系統分區進行修改。
+萬一安裝錯誤，有可能您的裝置會變成半磚或是進入無限重啟的迴圈當中!
+請先確保您知道如何重刷系統分區或是還原回先前的系統備份。
+如果未來您決定移除安裝 %1$s 時,請先開啟 SCR 設定去停用內部音訊之後再移除安裝。
+    "</string>
+    <string name="internal_audio_warning_confirmation">"我知道如何還原系統分區"</string>
+    <string name="internal_audio_warning_dont_show">"不要再顯示此訊息"</string>
+    <string name="internal_audio_warning_install">"安裝"</string>
 </resources>

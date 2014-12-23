@@ -1,60 +1,113 @@
 <resources>
-    <string name="free_app_name">"SCR Free"</string>
+    <string name="free_app_name">"SCR Ilmainen"</string>
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+    <string name="free_app_no_root_name">"SCR 5+ Free"</string>
+    <string name="free_app_no_root_full_name">"SCR 5+ Screen Recorder Free"</string>
+    <string name="pro_app_no_root_name">"SCR 5+ Pro"</string>
+    <string name="pro_app_no_root_full_name">"SCR 5+ Screen Recorder Pro"</string>
 
-    <string name="play_free_app_name">"
+    <string name="play_free_app_name_30_char">"
 SCR Screen Recorder Free ★ root
     "</string>
-    <string name="play_pro_app_name">"
+    <string name="play_pro_app_name_30_char">"
 SCR Screen Recorder Pro ★ root
     "</string>
 
+
+    <string name="play_description_short_80_char">"
+Tallenna näyttöäsi ja sovellusten äänet HD videoon! Tarvitsee rootin!
+    "</string>
+
     <string name="play_root_required">"
-&lt;b&gt; Toimii vain rootatuilla / jailbroketuilla / lukitsemattomilla laitteilla! &lt;/ b&gt; &lt;br/&gt; Älä asenna, jos laite ei ole rootattu."</string>
+&lt;b&gt; Toimii vain rootatuilla / jailbroketuilla / lukitsemattomilla laitteilla! &lt;/ b&gt; &lt;br/&gt; Älä asenna, jos laiteesi ei ole rootattu.
+    "</string>
+
     <string name="play_description_main">"
-Nauhoita tosi hyvänlaatuisia videoita suoraan puhelimestasi tai tabletistasi. 
-
-SCR Screen Recorder käyttää laitteistokiihdytettyä video koodausta saavuttaakseen parhaan mahdollisen laadun millä tahansa laitteella.
-Se on ainoa videon nauhoitussovellus  kaupassa mikä pystyy nauhoittamaan Tegra laitteilla muun muassa Nexus 7."</string>
-    <string name="play_description_free">"
-&lt;b&gt; SCR Freellä &lt;/ b&gt; voit nauhoittaa enintään 3 minuuttia videota ja SCR vesileima lisätään videon. Osta &lt;b&gt; SCR Pro &lt;/ b&gt; saadaksesi rajattoman videon pituuden ilman vesileimaa. Tämä on varhainen &lt;b&gt; BETA &lt;/ b&gt; versio, joten se ei välttämättä toimi kaikissa laitteissa ja ROMeissa. Jos sinulla on ongelmia ilmoita siitä scr.screen.recorder@gmail.com auttaa minua saamaan laitteesi tuetuksi.
+Tutustu SCR Screen Recorderiin, Androidin kattavimpaan näytönkuvaussovelluskseen. SCR Screen Recorder tukee kaikkia Android versioita alkaen 4.0 ja hyödyntää parhaita koodaustapoja saatavilla kullekkin alustalle. Ensimmäisestä versiosta 2013 alkuvuodesta lähtien SCR Screen Recorder päivitetään ja uusia ominaisuuksia lisätään säännöllisesti. Ainutlaatuisia ominaisuuksia:
     "</string>
 
-    <string name="play_description_pro">"
-Tämä on varhainen &lt;b&gt; BETA &lt;/ b&gt; versio, joten se ei välttämättä toimi kaikissa laitteissa ja ROMeissa. Ennen kuin ostat Pron testaa &lt;b&gt; SCR Freellä &lt;/ b&gt; varmistaaksesi, että laite on jo tuettu. Jos sinulla on ongelmianilmoita siitä scr.screen.recorder@gmail.com auttaaksesi minua saamaan laitteesi tuetuksi.
+    <string name="play_description_system_audio">"
+• Sisäinen äänentallennus - Useimmissa laitteissa voit tallentaa suoraan pelien äänet ilman laadun heikkenemistä kun mikrofoni äänet tallennetaan kaiuttimista. \"Sisäinen + Mikki\" asetuksen avulla voit lisätä mikin äänen suoraan sisäiseen äänentallennuksees. Tällä hetkellä tämä ominaisuus ei ole saatavilla Android 4.2, mutta se tulee lisätään pian.
     "</string>
 
-    <string name="play_small_print">"
-SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittämään bugeja ja analysoida, miten käyttäjät käyttävät sovellusta. Tämä ohjelmisto käyttää modifioimatonta FFmpeg 1.2 koodia LGPL-lisensillä.
+    <string name="play_description_features">"
+• FACE CAM - Jaa tunteita lisäämällä etukameran kuva videoon. Voit siirtää kameraa ympäri niin, että se ei ole minkään tärkeän edessä. • EI MAINOKSIA - Toisin kuin muut \ \"ilmaiset \\" näytöntallentimet SCR ei koskaan näyttä mitään mainoksia. Sovellusteni kehittäminen on tuettu ainoastaan ​​lahjoituksia ja Pro versioiden ostamisella. • Asetukset - Ei väliä jos haluat valita yksinkertaiset ​​esiasetukset tai manuaalisesti laittaa jokaisen asetuksen voit tehdä ihan miten vaan. SCR tukee monia kustomointeja tarjoaa suorituskyky- ja vakaustilastoja. • ALPHA OMINAISUUDET - Kerro meille, mikä on tärkeää sinulle liittymällä SCR Alpha Testaus Google+ yhteisöön http://goo.gl/PGYZ8r Jos haluat vastaanottaa Alpha päivityksiä ja testata uusia ominaisuuksia seuraa linkkejä Tietoja yhteisöstä-osiosta .
+    "</string>
+
+    <string name="play_ban_disclaimer">"
+Edellisellä versiolla sovelluksesta oli yli 2 miljoonaa latausta ja 37k arvostelua
+    "</string>
+
+    <string name="play_description_free_limits">"
+&lt;B&gt; SCR Free &lt;/ b&gt; voit tallentaa enintään 3 minuutin videoita ja SCR vesileima lisätään videoon. Osta &lt;b&gt; SCR Pro &lt;/ b&gt; saadaksesi rajoittamaton videon pituus ilman vesileimaa.
+    "</string>
+
+        <string name="play_description_pro">"
+Ennen kuin ostat PROn testaa &lt;b&gt; SCR Free &lt;/ b&gt; varmistaaksesi, että laiteesi on jo tuettu.
+    "</string>
+
+    <string name="play_description_stablity">"
+SCR Screen Recorder käyttää erilaisia ​​hacksejä ja epävirallisia API:ja jotka eivät välttämättä toimi joissakin laitteissa ja ROMeissa. Jos sinulla on hankaluuksia ilmoita se scr.screen.recorder@gmail.com auttaaksesi minua saaman laitteesi tuetuksi.
+    "</string>
+
+
+
+    <string name="play_small_print_stats">"
+Tämä sovellus kerää nimettömiä käyttötietoja auttaa jäljittämään vikoja ja analysoimaan laitteiden yhteensopivuuksia.
+    "</string>
+
+    <string name="play_small_print_lgpl">"
+Tämä ohjelmisto käyttää muunneltua koodia FFmpeg 1,2 lisensoitu LGPL.
+    "</string>
+
+
+    <string name="play_noroot_description_short_80_char">"
+Kevyt Lollipop Screen Recorder coolilla Face Cam ominaisuudella. [Ei Root]
+    "</string>
+
+    <string name="play_noroot_description_main">"
+SCR 5+ avaa uuden luvun kuuluisan SCR Screen Recorder historiassa kiitos uuden Android 5.0 SCR 5+ avulla voit tallentaa näytöä ilman pääkäyttäjän oikeuksia(root)! Valitettavasti Lollipop ei tue sisäistä äänten tallennusta ilman roottia vielä, joten jos tarvitset tätä toimintoa ja laite on rootattu asenna SCR Screen Recorder.
     "</string>
 
     <string name="recording_saved_title">"SCR Videotiedosto Tallennettu"</string>
-    <string name="recording_saved_message">"Videotiedosto tallennettu %1$s"</string>
     <string name="recording_saved_toast">"Videotiedosto tallennettu %1$s"</string>
     <string name="max_file_size_reached_toast">"Tiedoston enimmäiskoko saavutettu. VIdeotiedosto tallennettu %1$s"</string>
-    <string name="start">"Aloita"</string>
     <string name="play">"Toista"</string>
 
     <string name="su_required_title">"Pääkäyttäjän eli root oikeudet tarvitaan"</string>
-    <string name="su_required_message">"Jotta voit käyttää jotakin näytönkaappaussovellusta sinun puhelimella/tabletilla pitää olla pääkäyttäjäoikeudet eli root. Netistä löytyy paljon ohjeita kuinka saada root eri laitteilla. Tule takaisin kun olet valmis!"</string>
+    <string name="su_required_message">"Käyttääksesi mitä tahansa näytön tallentamis sovellusta sinun laitteesi pitää olla rootattu. On paljon ohjeita Internetissä miten rootata eri laitteita. Tule takaisin kun olet valmis!"</string>
     <string name="su_required_help">"Mitä on ''roottaus''?"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
+    <string name="su_required_lollipop_message">"Jos haluat käyttää koko laitteesi potentiaalia %1$s laitteesi on oltava rootattu. Android 5.0 mahdollistaa perus näytöntallennusksen ilman roottia (ei sisäistä ääntä). Tsekkaa lataamalla kevyt %2$s tai vaihtamalla Ei-root tilaan
+    "</string>
+    <string name="su_required_lollipop_denied_message">"Jos laite on rootattu avaa %1$s ja varmista, että olet vahingossa kieltänyt pääkäyttäjän oikeuksia(root) %2$s ."</string>
+    <string name="su_required_no_root_mode">"Ei-root tila"</string>
+
+    <string name="settings_no_root_only">"Vain Ei-Root kodeekkeihin"</string>
+    <string name="settings_root_only">"Vain root kodeekkeihin"</string>
+    <string name="settings_no_root_mode">"Ei-root tila"</string>
+    <string name="settings_no_root_mode_summary">"Kosketa pyytääksesi pääkäyttäjän oikeudet(root) saadaksesi kaikki ominaisuudet"</string>
 
     <string name="error_dialog_title">"Jokin meni pahasti pieleen :-("</string>
-    <string name="startup_error_message">"Anonyymi virheraportti lähetetään automaattisesti, joka auttaa meitä korjaamaan ongelman. Ota yhteyttä sähköpostin kautta tukea varten lainaten virhe S %1$d ."</string>
-    <string name="unknown_error_message">"Anonyymi virheraportti lähetetään automaattisesti, joka auttaa meitä korjaamaan ongelman. Ota yhteyttä sähköpostin kautta tukea varten lainaten virhe R %1$d ."</string>
+    <string name="unknown_error_message">"Anonyymi virheraportti lähetetään automaattisesti auttaamaan meitä korjaamaan ongelma. Voit vapaasti ottaa yhteyttä sähköpostitse lainaten virhe SR %1$d ."</string>
+
+    <string name="selinux_error_title">"Root pääsy virhe"</string>
+    <string name="selinux_error_message">"On ongelma SELinux kokoonpanolla laitteeseessasi. Varmista, että laite on oikein rootattu ja laita SELinux sallivaan tilaan, jos mahdollista."</string>
 
     <string name="media_recorder_error_title">"Tallennusvirhe"</string>
     <string name="media_recorder_error_message">"Kokeile vaihtaa resoluutiota tai vaihtaa kuvan välisen muunnosten GPU / CPU välillä. Ole hyvä ja poista muut näytönkaappaussovellukset, jos sinulla on muita. Jos ongelma ei korjaannu, ota yhteyttä sähköpostin kautta lainaten virhe R %1$d ."</string>
 
+    <string name="video_codec_error_title">"Yhteensopimattomat Video Asetukset"</string>
+    <string name="video_codec_error_message">"Yritä vähentää resoluutiota tai videobitratea. Huomaa, että joissakin laitteissa pystysuunta video toimii vain alemmilla resoluutioilla. Jos ongelma jatkuu ota yhteyttä sähköpostitse lainaten virhe R %1$d ."</string>
+
     <string name="output_file_error_title">"Ei voi luoda videotiedostoa"</string>
     <string name="output_file_error_message">"SCR ei voinut luoda %1$s videotiedostoa. Varmista, että valitun lähdön hakemisto on kirjoitettava ja että SD-kortti ei ole lukittu USB-liitännän takia."</string>
 
-    <string name="microphone_busy_error_title">"Mikrofoni kiireinen"</string>
+    <string name="microphone_busy_error_title">"Mikrofoni kiireinen/käytössä"</string>
     <string name="microphone_busy_error_message">"
-        Vain yksi sovellus voi käyttää mikrofonia kerrallaan. Tämä on Android-järjestelmän rajoitus. Sulje muut mikrofonia käyttävät sovellkset (esim. Google Now tai Skype) tai jatka tallentamista ilman ääntä.
+        Vain yksi sovellus voi käyttää mikrofonia kerrallaan. Tämä on Android-järjestelmän rajoitus. Sulje muut mikrofonia käyttävät sovellukset (esim. Google Now tai Skype) tai jatka tallentamista ilman ääntä.
     "</string>
     <string name="microphone_busy_error_continue_mute">"Jatka äänettömänä"</string>
 
@@ -62,16 +115,16 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="screen_protected_error_message">"Näyttöä ei voida tallentaa, koska sovellus on merkinnyt näytön sisällön salatuksi."</string>
 
     <string name="opengl_error_title">"GPU ei tuettu"</string>
-    <string name="opengl_error_message">"Grafiikkakorttiasi ei tueta vielä. Vaihada Kuvanmuunnos asetukseksi CPU tai käyttä ohjelmistovideokooderia.
+    <string name="opengl_error_message">"Grafiikkakorttiasi ei tueta vielä. Vaihda Kuvanmuunnos asetukseksi CPU tai käyttä ohjelmistovideokooderia.
     "</string>
 
     <string name="audio_config_error_title">"Äänivirhe"</string>
     <string name="audio_config_error_message">"Tukematon äänikokoonpano. Kokeile vaihtaa SCR ääniasetuksia."</string>
 
-    <string name="android_version_error_title">"Android-versiota ei tueta"</string>
+    <string name="android_version_error_title">"Android-versio ei tuettu"</string>
     <string name="android_version_error_message">"Android-versiota ei tueta vielä."</string>
 
-    <string name="cpu_error_title">"CPU ei tueta"</string>
+    <string name="cpu_error_title">"CPU ei tuettu"</string>
     <string name="cpu_error_message">"Suorittimesi arkkitehtuuri ( %1$s ) ei ole tuettu %2$s ."</string>
 
     <string name="installation_error_title">"Asennusvirhe"</string>
@@ -80,7 +133,7 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="help_stop_title">"Miten lopettaa"</string>
     <string name="help_stop_ok">"Tajusin!"</string>
 
-    <string name="free_timeout_title">"Määräaika päättyi"</string>
+    <string name="free_timeout_title">"Aika päättyi"</string>
     <string name="free_timeout_message">"Osta SCR Screen Recorder Pro jotta voit saada rajoittamattoman tallennusajan, eikä vesileimaa videoon."</string>
     <string name="free_timeout_buy">"Osta nyt!"</string>
     <string name="free_timeout_no_thanks">"Ei kiitos"</string>
@@ -94,7 +147,7 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_title">"Asetukset"</string>
     <string name="settings_ok">"OK"</string>
     <string name="settings_reset">"Palauta oletusarvot"</string>
-    <string name="settings_cancel">"Peruutta"</string>
+    <string name="settings_cancel">"Peruuta"</string>
 
     <string name="settings_unstable">"%1$s (epävakaa)"</string>
 
@@ -102,16 +155,17 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
 
     <string name="settings_video_encoder">"Kodeekki"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"Auto"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"Ohjelmisto MPEG-4"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Androidin sisäänrakennettu %1$s Kodeekki"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg ohjelmisto MPEG4 kodeekki"</string>
+    <string name="settings_video_encoder_no_root_h264">"H264 (ei root)"</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 (ei root)"</string>
+    <string name="settings_video_encoder_mpeg_4">"MPEG-4-"</string>
 
     <string name="settings_resolution">"Resoluutio"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
-    <string name="settings_resolution_p">"%1$d x %2$d - %2$d p"</string>
+    <string name="settings_resolution_p">"%1$dx%2$d - %2$dp"</string>
     <string name="settings_resolution_horizontal">"%1$dx%2$d - %1$dp vaaka"</string>
     <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp pysty"</string>
     <string name="settings_resolution_max">"%1$dx%2$d - Maksimi"</string>
@@ -121,8 +175,8 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_transformation_cpu">"CPU "</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_transformation_cpu_summary">"Prosessoi näytön kuva prosessorilla (CPU)"</string>
-    <string name="settings_transformation_gpu_summary">"Prosessoi näytön kuva näytönohjaimella ( %1$s )"</string>
+    <string name="settings_transformation_cpu_summary">"Käyttetään prosessoria (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Käytetään grafiikkakorttia( %1$s )"</string>
     <string name="settings_transformation_sw_summary">"Ei käytettävissä ohjelmistokodeekissa"</string>
 
     <string name="settings_video_bitrate">"Bitrate"</string>
@@ -138,7 +192,7 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="settings_frame_rate_summary">"Jopa %1$d fps, rajoitettu laitteiston takia"</string>
     <string name="settings_frame_rate_max_summary">"Suurin sallittu laitteistolla"</string>
 
-    <string name="settings_orientation">"Suunta"</string>
+    <string name="settings_orientation">"Suuntautuminen"</string>
     <string name="settings_orientation_description">"
         Oletuksena videokuvat ovat aina vaakasuorassa ja kierto metatiedot lisätään pystykuva videoihin. YouTube ja Androidvideosoitin näyttää videoita oikein, mutta jotkut PC-videosoittimet (esim. VLC) sivuuttavat kierto metatiedot ja näyttävät sen vaaka-asennossa. Voit ottaa pystykuvat alta, mutta käyttä tätä vaihtoehtoa varoen, koska monet laitteet ei voi nauhoittaa/toistaa pystykuvia.
     "</string>
@@ -150,42 +204,48 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
 
     <string name="settings_vertical_frames">"Pystykuvat"</string>
     <string name="settings_vertical_frames_warning">"Videosoittimet useissa laitteissa eivät voi toistaa videoita pystykuvilla. Vaikka tämä vaihtoehto on valitsematta kierto metatiedot lisätään videon niin, että se näkyy oikein oletuksena Androidsoittimessa, YouTube jne."</string>
-    <string name="settings_vertical_frames_ok">"OK"</string>
-    <string name="settings_vertical_frames_cancel">"Peruutta"</string>
 
     <string name="settings_audio_category">"Ääni"</string>
     <string name="settings_audio_source">"Lähde"</string>
-    <string name="settings_audio_mic">"Mikrofooni"</string>
+    <string name="settings_audio_mic">"Mikrofoni"</string>
     <string name="settings_audio_mute">"Mykistetty"</string>
     <string name="settings_audio_internal">"Sisäinen"</string>
     <string name="settings_audio_experimental">"Kokeellinen"</string>
-    <string name="settings_audio_not_supported">"Ei tueta %1$s"</string>
+    <string name="settings_audio_mix">"Sisäinen + Mic"</string>
+    <string name="settings_audio_use_headphones">"Käytä langallisia kuulokkeita välttääksesi kaikua"</string>
+    <string name="settings_audio_not_supported">"Ei tuettu %1$s"</string>
     <string name="settings_audio_incompatible">"Ei yhteensopiva ääniajurisi kanssa"</string>
-    <string name="settings_audio_mic_summary">"Mikrofooni"</string>
+    <string name="settings_audio_mic_summary">"Mikrofoni"</string>
     <string name="settings_audio_mute_summary">"Ilman ääntä. Ei Ääniraitaa"</string>
     <string name="settings_audio_internal_summary">"Järjestelmä-äänen ulostulo"</string>
-    <string name="settings_audio">"Ääni"</string>
+    <string name="settings_audio_mix_summary">"Mikrofoni + Sisäinen (Käytä kuulokkeita!)"</string>
     <string name="settings_sampling_rate">"Näytteenottotaajuus"</string>
 
-    <string name="settings_other_category">"Muu"</string>
+    <string name="settings_mic_gain">"Mikrofoni boost"</string>
+    <string name="settings_mic_gain_summary_mix_only">"Käytettävissä vain %1$s"</string>
+    <string name="settings_mic_gain_summary_default">"Käytä oletusarvon"</string>
+    <string name="settings_mic_gain_summary">"Kasvata äänenvoimakkuutta %1$d dB"</string>
+
+    <string name="settings_other_category">"Muut"</string>
     <string name="settings_hide_icon">"Piilota ilmoituksen kuvake"</string>
     <string name="settings_show_touches">"Näytä kosketukset"</string>
-    <string name="settings_show_touches_summary">"Näytä visuaalliset kosketukset. Voit myös aktivoida kosketus indikaattorit pysyvästi  Android-asetukset → Sovelluskehittäjien Asetukset → Näytä kosketukset kautta"</string>
+    <string name="settings_show_touches_summary">"Näytä visuaalinen kosketus. Ota pysyvästi käyttöön Android-asetukset → Kehittäjän Valinnat → Näytä kosketukset"</string>
     <string name="settings_output_dir">"Tallennusijainti"</string>
     <string name="settings_stop_when_screen_off">"Lopeta tallennus kun näyttö lukitaan"</string>
-    <string name="settings_stop_when_screen_off_summary">"lopeta tallennus näytön sammutuksen jälkeen"</string>
+    <string name="settings_stop_when_screen_off_summary">"Lopeta tallennus näytön sammutuksen jälkeen"</string>
     <string name="settings_color_fix">"Käännetty värikorjaus"</string>
-    <string name="settings_color_fix_summary">"Ota tämä asetus päälle, jos sininen ja punainen värit ovat päinvastoi"</string>
+    <string name="settings_color_fix_summary">"Ota tämä asetus päälle, jos sininen ja punainen värit ovat väärinpäin"</string>
 
     <string name="settings_zigzag_fix">"Siksak korjaus"</string>
     <string name="settings_zigzag_fix_summary">"Valitse jos video sisältää satunnaisia värikkäitä raitoja"</string>
     <string name="settings_zigzag_fix_cpu_only">"Käytettävissä vain CPU kuvanmuunnoksella"</string>
 
     <string name="settings_video_config">"%1$s esiasetukset"</string>
-    <string name="settings_video_config_entry">"%1$d x %2$d ~%3$.0ffps"</string>
+    <string name="settings_video_config_entry">"%1$d x %2$d ~% 3 $ .0ffps"</string>
     <string name="settings_video_config_entry_stability">"%1$d %% vakaa"</string>
-    <string name="settings_video_config_summary">"Käyttötilastojen perusteela"</string>
+    <string name="settings_video_config_summary">"Käyttötilastojen perusteella"</string>
     <string name="settings_video_config_summary_no_data">"Ei voitu ladata tilastoja"</string>
+    <string name="settings_video_config_summary_not_available">"Tilastoja ei ole vielä saatavilla"</string>
 
     <string name="device_profile_download_error_toast">"Ei voitu ladata suositeltuja asetuksia. Varmista, että olet verkossa."</string>
     <string name="device_profile_downloaded_toast">"Suositellut asetukset ladattu"</string>
@@ -199,13 +259,13 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
     <string name="directory_chooser_error_message">"Hakemistoon ei voi luoda. Varmista, että valittuun sijaintiin voi kirjoittaa esim. SD-kortille."</string>
     <string name="directory_chooser_not_writable_title">"Valittu hakemisto ei ole kirjoitettavissa"</string>
     <string name="directory_chooser_not_writable_message">"Sovelluksella ei näytä olevan kirjoitusoikeuksia %1$s hakemistoon. Tämä voi aiheuttaa tallennuksen ongelmia."</string>
-    <string name="directory_chooser_ignore">"Sivuutta"</string>
-    <string name="directory_chooser_cancel">"Peruutta"</string>
+    <string name="directory_chooser_ignore">"Sivuuta"</string>
+    <string name="directory_chooser_cancel">"Peruuta"</string>
     <string name="directory_chooser_default">"Oletusarvo"</string>
 
     <string name="error_report_report">"Ilmoita"</string>
     <string name="error_report_close">"Sulje"</string>
-    <string name="error_report_text">"Kiinnitys sisältää yksityiskohtaisen järjestelmälokin ja myös tietoa virheestä. Voit vapaasti lisätä kommentteja täällä."</string>
+    <string name="error_report_text">"Lisätiedosto sisältää yksityiskohtaisen järjestelmälokin ja myös tietoa virheestä. Voit vapaasti lisätä kommentteja täällä."</string>
     <string name="error_report_chooser">"Lähetä bugiraportti sähköpostissa"</string>
 
     <string name="rating_rate_title">"Arvostele %1$s"</string>
@@ -217,34 +277,35 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
 
     <string name="help_stop_message">"Lopeta tallennus lukitsemalla näytö ja odottamalla 2 sekuntia. Vaihtoehtoisesti voit avata uudelleen %1$s sovelluksen."</string>
     <string name="menu_send_bug_report">"Lähetä bugiraportti"</string>
-    <string name="menu_show_unstable">"Näytä epävakaa"</string>
+    <string name="menu_show_unstable">"Näytä epävakaat"</string>
     <string name="menu_show_advanced">"Näytä lisää"</string>
 
     <string name="notification_status_initializing">"Alustetaan"</string>
     <string name="notification_status_waiting_for_root">"Odotetaan pääkäyttäjän oikeuksia (root)"</string>
+    <string name="notification_status_waiting_for_projection">"Odotetaan pääsyä kuvankaappaukseen"</string>
     <string name="notification_status_installing_audio">"Asennetaan Ääniajuria"</string>
     <string name="notification_status_ready">"Valmis"</string>
     <string name="notification_status_starting">"Aloitetaan"</string>
     <string name="notification_status_recording">"Nauhoitetaan"</string>
-    <string name="notification_status_error">"Virhe"</string>
+    <string name="notification_status_error">"[Virhe]"</string>
     <string name="notification_status_stopping">"Pysäytetään"</string>
     <string name="notification_status_uninstalling_audio">"Poistetaan Ääniajuri"</string>
 
     <string name="sale_title">"Alennus"</string>
     <string name="sale_text">"Osta SCR Pro nyt ja säästä %1$d %% ! Tämä tarjous päättyy %2$s ."</string>
 
-    <string name="copyrights_statement">"Käyttäen %1$s hyväksyt, että olet yksin vastuussa siitä, ettet loukkaa kolmannen osapuolen tekijänoikeuksia tai muita immateriaalioikeuksia."</string>
-    <string name="internal_audio_installation_error_title">"Sisäinen ääni virhe"</string>
+    <string name="copyrights_statement">"Käyttämällä %1$s hyväksyt, että olet yksin vastuussa siitä, ettet loukkaa kolmannen osapuolen tekijänoikeuksia tai muita immateriaalioikeuksia."</string>
+    <string name="internal_audio_installation_error_title">"Sisäisen äänityksen virhe"</string>
     <string name="internal_audio_installation_error_message">"Ei voi käyttää sisäistä ääntä. Lähetä vikailmoitus auttaaksesi minua saamaan laitteesi tuetuisi. Äänilähde asetetaan %1$s ."</string>
-    <string name="internal_audio_unstable_title">"Sisäinen ääni epävakaa"</string>
+    <string name="internal_audio_unstable_title">"Sisäinen äänitys epävakaa"</string>
     <string name="internal_audio_unstable_message">"Sisäisen äänen vakausongelma havaittu. Lähetä vikailmoitus auttaaaksesi minua saamaan laitteesi tuetuksi. Äänilähde asetetaan %1$s ."</string>
     <string name="internal_audio_disabled_title">"Sisäinen ääni pois käytöstä"</string>
     <string name="internal_audio_disabled_message">"Sisäinen äänitys on kytketty pois päältä, koska %1$s ei sulkeutunut oikein. Voit laittaa sen uudelleen käyttöön Asetuksista."</string>
 
     <string name="license_title">"Lisenssi virhe"</string>
-    <string name="license_not_licensed_message">"Virhe tarkistaessa lisenssiä. Hanki SCR Pro Google Play Kaupasta."</string>
-    <string name="license_retry_message">"Virhe tarkistaessa lisenssiä. Varmista, että internet-yhteys on päällä ja olet kirjautunut Google Play Kauppaan. Kun lisenssi on varmennettu, voit jatkaa SCR Pron käyttöä ilman nettiä."</string>
-    <string name="license_error_message">"Virhe tarkastaessa lisenssiä. Varmista, että olet asentanut SCR Pron Google Play Kaupan kautta. Jos ongelma ei poistu puhdista tiedot ja välimuisti \"Google Play palveluista\" ja \"Google Play Kaupan\" sovelluksista.
+    <string name="license_not_licensed_message">"Virhe tarkistaessa lisenssiä. Hanki SCR Pro Google Play Store. Jos on Lucky Patcher asennettuna ota sen Google Play emulointi pois"</string>
+    <string name="license_retry_message">"Virhe tarkistaessa lisenssiä. Varmista, että internet-yhteys on muodostettu, päivämäärä ja aika on oikein laitteessa ja olet kirjautunut Google Play Kauppaan. Kun lisenssi on varmistettu voit jatkaa SCR Pron käyttöä ilman nettiä."</string>
+    <string name="license_error_message">"Virhe tarkistaessa lisenssiä. Varmista, että olet asentanut SCR Pro Google Play Kaupasta ja että päivämäärä ja aika on oikein laitteessa. Jos ongelma ei poistu puhdista tiedot ja välimuisti \"Google Play palvelut\" ja \"Google Play Kauppa\" sovelluksista.
     "</string>
     <string name="license_play_store">"Play Kauppa"</string>
     <string name="license_retry">"Yritä uudelleen"</string>
@@ -255,13 +316,28 @@ SCR Screen Recorder kerää nimettömiä käyttötietoja auttaakseen jäljittäm
 
     <string name="can_not_start_toast">"Ei voi aloittaa tallennusta: %1$s"</string>
 
-    <string name="settings_show_camera">"Kameranäkymä"</string>
-    <string name="settings_show_camera_summary">"Näytä kameran kuva videon reunalla"</string>
+    <string name="settings_show_camera">"Face Cam"</string>
+    <string name="settings_show_camera_summary">"Kameran kuva videon päällä"</string>
     <string name="settings_camera_alpha_title">"Läpinäkyvyys"</string>
-    <string name="settings_camera_alpha_summary">"Kameranäkymä %1$d %% läpinäkymätön"</string>
-    <string name="settings_camera_alpha_summary_100">"Kameranäkymä ei ole läpinäkyvä"</string>
+    <string name="settings_camera_alpha_summary">"Face Cam %1$d %% läpinäkymätön"</string>
+    <string name="settings_camera_alpha_summary_100">"Face Cam ei läpinäkyvä"</string>
 
     <string name="miui_error_message">"Jos et näe %1$s kelluvaa ikkunaa menne MIUI sovellusten asetuksiin ja salli \"Näytä ponnahdusikkunoita\"  %1$s ."</string>
     <string name="miui_error_title">"MIUI ponnahdusikkunat pois käytössä?"</string>
 
+    <string name="lollipop_dialog_title">"Kokeile SCR 5+"</string>
+    <string name="lollipop_dialog_message">"Haluatko testata SCR 5+, minun uusi, kevyt, ei-root näytöntallennus sovellus? Se hyödyntää virallista Android 5.0 kuvakaappauksen API ja mikrofoni äänen tallennusta."</string>
+    <string name="lollipop_dialog_try_now">"Kokeile nyt"</string>
+
+    <string name="projection_deny_error_message">"Sinun tarvitsee napauttaa START NOW tallennuksen toimimiseksi."</string>
+    <string name="projection_deny_error_title">"Ei pääsyä näyttöön"</string>
+
+    <string name="notification_action_share">"Jaa"</string>
+    <string name="internal_audio_warning_title">"Asennus varoitus"</string>
+
+    <string name="internal_audio_warning_message">"\"Ääniajurin asennus laitteeseen edellyttää muutoksia järjelmäosioon. Siinä epätodennäköisessä tapauksessa, asennusvirhe voi saada laitteesi soft-brickiin tai bootlooppiin. Ole hyvä ja varmista, että tiedät, miten reflashätä järjelmäosio tai palauttaa järjestelmä varmuuskopiosta ennen kuin jatkat. Jos päätät poistaa %1$s tulevaisuudessa auki SCR Asetukset ja poista sisäinen äänen tallennus käytöstä ennen poistamista.
+    "</string>
+    <string name="internal_audio_warning_confirmation">"Tiedän miten palauttaa järjestelmä osio"</string>
+    <string name="internal_audio_warning_dont_show">"Älä näytä tätä viestiä uudestaan"</string>
+    <string name="internal_audio_warning_install">"Asenna"</string>
 </resources>

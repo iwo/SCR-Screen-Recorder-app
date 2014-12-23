@@ -3,51 +3,113 @@
     <string name="free_app_full_name">"SCR Screen Recorder Free"</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+    <string name="free_app_no_root_name">"SCR Free"</string>
+    <string name="free_app_no_root_full_name">"SCR Screen Recorder Free"</string>
+    <string name="pro_app_no_root_name">"SCR Pro"</string>
+    <string name="pro_app_no_root_full_name">"SCR Screen Recorder Pro"</string>
 
-    <string name="play_free_app_name">"
+    <string name="play_free_app_name_30_char">"
 SCR Screen Recorder Free ★ root
     "</string>
-    <string name="play_pro_app_name">"
+    <string name="play_pro_app_name_30_char">"
 Recorder SCR Screen Pro ★ root
     "</string>
 
+
+    <string name="play_description_short_80_char">"
+Nahrávajte obrazovku a systémový zvuk do HD video súboru! Vyžaduje sa root!
+    "</string>
+
     <string name="play_root_required">"
-&lt;b&gt;Funguje len na rootnutých/odomknutých zariadeniach!&lt;/b&gt;&lt;br/&gt;Neinštalujte, ak vaše zariadenie nie je rootnuté."</string>
+&lt;b&gt;Funguje len na rootnutých/odomknutých zariadeniach!&lt;/b&gt;&lt;br/&gt;Neinštalujte, ak vaše zariadenie nie je rootnuté.
+    "</string>
+
     <string name="play_description_main">"
-Zaznamenajte veľmi kvalitné videá obrazovky vášho telefónu alebo tabletu! SCR Screen Recorder využíva hardvérovo akcelerované kódovanie videa pre dosiahnutie
- najlepšej kvality záznamu obrazu na akomkoľvek zariadení. Je to jediný videorekordér na trhu podporujúci Tegra zariadenia, vrátane Nexus 7."</string>
-    <string name="play_description_free">"
-S &lt;b&gt;SCR Free&lt;/ b&gt; môžete nahrať maximálne 3 minúty videa obrazovky a 
-vodoznak SCR je pridaný do vášho videa. Zakúpte si &lt;b&gt;SCR Pro&lt;/ b&gt; pre neobmedzenú dĺžky videoukážky bez vodoznaku. To je &lt;b&gt;BETA&lt;/ b&gt; verzia pre náhľad, takže nemusí fungovať na všetkých zariadeniach a ROM. Ak narazíte na nejaké problémy, oznámte to, prosím, na scr.screen.recorder@gmail.com, aby mohlo byť vaše zariadenie podporované.
+Vyskúšajte SCR Screen Recorder, najkomplexnejšiu Android aplikáciu pre nahrávanie obrazovky. SCR Screen Recorder podporuje všetky verzie Android od verzie 4.0 a využíva najlepší dostupný spôsob kódovania na každej platforme. Od prvého vydania na začiatku roka 2013 je SCR Screen Recorder často aktualizovaný a nové funkcie sú pridávané pravidelne. 
+
+Unikátne vlastnosti:
     "</string>
 
-    <string name="play_description_pro">"
-To je &lt;b&gt;BETA &lt;/ b&gt; verzia pre náhľad, takže  nemusí fungovať na všetkých 
-zariadeniach a ROM. Než si aplikáciu zakúpite, zvážte otestovanie  &lt;b&gt;SCR Free&lt;/ b&gt;, aby ste sa ubezpečili, že vaše zariadenie  je už podporované. Ak narazíte na nejaké problémy, oznámte to, prosím, na scr.screen.recorder@gmail.com, aby mohlo byť vaše zariadenie podporované.
+    <string name="play_description_system_audio">"
+• SYSTÉMOVÝ ZVUK - Na väčšine zariadení môžete priamo nahrávať zvuk v hre bez straty kvality spôsobenej nahrávaním z výstupu reproduktorov. Voľba \"Interný + Mikrofón\" umožňuje pridať komentár pomocou mikrofónu do systémového zvuku pri nahrávaní. V súčasnej dobe nie je táto funkcia k dispozícii na Androide 4.2, ale bude pridaná čoskoro.
     "</string>
 
-    <string name="play_small_print">"
-SCR Screen Recorder zhromažďuje anonymné štatistiky využívania aplikácie na sledovanie chýb a analýzu, ako používatelia používajú aplikáciu, ako používatelia používajú aplikáciu. Tento softvér používa neupravený kód FFmpeg 1.2 pod licenciou LGPL.
+    <string name="play_description_features">"
+• FOTOAPARÁT TVÁRE - Podeľte sa o svoje emócie pridaním predného (tvárového) fotoaparátu do vášho videa. Môžete presunúť zobrazenie fotoaparátu tak, aby nebránilo dôležitým ovládacím prvkom. 
+
+• NO ADS - Na rozdiel od iných \\"bezplatných\\" nahrávačov obrazovky SCR nikdy nezobrazuje žiadne reklamy. Vývoj všetkých mojich aplikácií je podporovaný iba z darov a Pro verzií. 
+
+• NASTAVENIA - Nezáleží na tom, či dávate prednosť predvolenému nastaveniu, alebo manuálnemu doladeniu takmer každej možnosti. SCR 
+podporuje mnoho úprav a poskytuje štatistiky výkonu a stability. 
+
+• ALFA FUNKCIE - Dajte nám vedieť, čo je pre vás dôležité, a vstúpte do Google+ komunity SCR Alpha Testing na http://goo.gl/PGYZ8r. Ak chcete dostávať Alfa aktualizácie a skúšať úplne nové funkcie, nasledujte odkazy v sekcii O komunite.
     "</string>
 
-    <string name="recording_saved_title">"SCR nahrávka uložená"</string>
-    <string name="recording_saved_message">"Nahrávka uložená ako %1$s"</string>
+    <string name="play_ban_disclaimer">"
+Predchádzajúca verzia tejto aplikácie mala cez 2 milióny stiahnutí a viac ako 37 tisíc recenzií
+    "</string>
+
+    <string name="play_description_free_limits">"
+S &lt;b&gt;SCR Free&lt;/b&gt; môžete nahrávať obrazovku maximálne po dobu 3 minút a vodoznak SCR je pridaný do vášho videa. Zakúpte si &lt;b&gt;SCR Free&lt;/b&gt; pre získanie neobmedzenej dĺžky nahrávania a odstránenie vodoznaku SCR.
+    "</string>
+
+        <string name="play_description_pro">"
+Pred kúpou aplikácie zvážte vyskúšanie &lt;b&gt;SCR Free&lt;/b&gt;, aby ste sa uistili, že vaše zariadenie je podporované.
+    "</string>
+
+    <string name="play_description_stablity">"
+SCR Screen Recorder používa rôzne hacky a neoficiálne API, ktoré nemusia fungovať na niektorých zariadeniach a ROM. Ak narazíte na nejaké problémy, prosím, oznámte to na scr.screen.recorder@gmail.com, aby mohlo byť vaše zariadenie podporované.
+    "</string>
+
+
+
+    <string name="play_small_print_stats">"
+Táto aplikácia zhromažďuje anonymné štatistiky používania, ktoré nám pomáhajú sledovať chyby a analyzovať kompatibilitu so zariadeniami.
+    "</string>
+
+    <string name="play_small_print_lgpl">"
+Tento softvér používa nezmenený kód FFmpeg 1.2 licencovaný pod LGPL.
+    "</string>
+
+
+    <string name="play_noroot_description_short_80_char">"
+Nenáročný nahrávač obrazovky pre Lollipop s úžasnou funkciu Fotoaparátu tváre. [No root]
+    "</string>
+
+    <string name="play_noroot_description_main">"
+SCR 5+ otvára novú kapitolu v histórii slávneho SCR Screen Recordera. Vďaka novým funkciám Androidu 5.0 SCR 5+ umožňuje nahrávanie obrazovky bez root prístupu! Bohužiaľ Lollipop zatiaľ natívne nepodporuje nahrávanie interného zvuku, takže ak budete potrebovať túto funkciu a vaše zariadenie je rootnuté, prosím, nainštalujte SCR Screen Recorder Root. 
+    "</string>
+
+    <string name="recording_saved_title">"Uložená SCR nahrávka"</string>
     <string name="recording_saved_toast">"Nahrávka bola uložená ako %1$s"</string>
     <string name="max_file_size_reached_toast">"Bola dosiahnutá maximálna veľkosť súboru. Nahrávka bola uložená ako %1$s"</string>
-    <string name="start">"Štart"</string>
     <string name="play">"Prehrať"</string>
 
     <string name="su_required_title">"Root prístup je vyžadovaný"</string>
-    <string name="su_required_message">"Ak chcete spustiť ľubovoľný nahrávač obrazovky, zariadenie musí byť rootnuté. Na internete sa nachádza veľa návodov, ktoré vysvetľujú, ako rootnúť rôzne zariadenia."</string>
+    <string name="su_required_message">"Ak chcete spustiť ľubovoľnú aplikáciu na nahrávanie obrazovky, váš telefón/tablet musí byť rootnutý. Existuje veľa návodov na internete, ktoré vysvetľujú, ako rootnúť rôzne zariadenia. Prosím, vráťte sa, keď to urobíte!"</string>
     <string name="su_required_help">"Čo je \"rootovanie\"?"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
+    <string name="su_required_lollipop_message">"Ak chcete využiť celý potenciál %1$s, vaše zariadenie musí byť rootnuté. Android 5.0 umožňuje základné nahrávanie obrazovky bez nutnosti rootu (bez interného zvuku). Pre nahrávanie obrazovky si stiahnite nenáročný %2$s alebo prepnite aplikáciu do režimu bez rootu.
+    "</string>
+    <string name="su_required_lollipop_denied_message">"Ak je vaše zariadenie rootnuté, prosím, otvorte %1$s a uistite sa, že ste omylom neodmietli root prístup pre %2$s ."</string>
+    <string name="su_required_no_root_mode">"Režim bez rootu"</string>
+
+    <string name="settings_no_root_only">"Iba pre bezrootové enkódery"</string>
+    <string name="settings_root_only">"Iba pre root enkódery"</string>
+    <string name="settings_no_root_mode">"Režim bez rootu"</string>
+    <string name="settings_no_root_mode_summary">"Kliknutím požiadať o root prístup a povoliť všetky funkcie"</string>
 
     <string name="error_dialog_title">"Niečo sa pokazilo :-("</string>
-    <string name="startup_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu S%1$d."</string>
-    <string name="unknown_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude zaslaná automaticky. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d."</string>
+    <string name="unknown_error_message">"Anonymná správa o chybe, ktorá nám pomôže opraviť problém, bude automaticky poslaná. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu SR%1$d ."</string>
+
+    <string name="selinux_error_title">"Chyba root prístupu"</string>
+    <string name="selinux_error_message">"Vyskytol sa problém so SELinux konfiguráciou na vašom zariadení. Uistite sa, že je zariadenie správne rootnuté a prepnite režim SELinux na mierny (permisívny), ak je to možné."</string>
 
     <string name="media_recorder_error_title">"Chyba nahrávača"</string>
     <string name="media_recorder_error_message">"Skúste zmeniť rozlíšenie alebo prepnite transformáciu obrazu medzi GPU/CPU. Prosím, odinštalujte iné aplikácie pre nahrávanie obrazovky, ak nejaké máte. Neváhajte kontaktovať podporu aplikácie prostredníctvom e-mailu a oznámiť im chybu R%1$d ."</string>
+
+    <string name="video_codec_error_title">"Nekompatibilné nastavenia videa"</string>
+    <string name="video_codec_error_message">"Skúste znížiť rozlíšenie alebo dátový tok videa. Na niektorých zariadení orientácia videa na výšku funguje iba s nižším rozlíšeniami. Ak problém pretrváva, prosím, kontaktujte našu podporu prostredníctvom e-mailu a spomeňte chybu R%1$d ."</string>
 
     <string name="output_file_error_title">"Nemožno vytvoriť súbor videa"</string>
     <string name="output_file_error_message">"SCR nemohol vytvoriť súbor videa %1$s. Uistite sa, že do vybraného výstupného priečinka je možné zapisovať a že karta SD nie je uzamknutá pripojením poUSB."</string>
@@ -102,12 +164,13 @@ SCR Screen Recorder zhromažďuje anonymné štatistiky využívania aplikácie 
 
     <string name="settings_video_encoder">"Dekóder"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"Automatický"</string>
     <string name="settings_video_encoder_ffmpeg_mpeg_4">"Softvérový MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Vstavaný Android %1$s dekóder"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"FFmpeg softvérový MPEG4 dekóder"</string>
+    <string name="settings_video_encoder_no_root_h264">"H264 (bez rootu)"</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 (bez rootu)"</string>
+    <string name="settings_video_encoder_mpeg_4">"MPEG-4"</string>
 
     <string name="settings_resolution">"Rozlíšenie"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
@@ -119,14 +182,14 @@ SCR Screen Recorder zhromažďuje anonymné štatistiky využívania aplikácie 
 
     <string name="settings_transformation">"Transformácia obrazu"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
-    <string name="settings_transformation_gpu">"GPU "</string>
+    <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_transformation_cpu_summary">"Spracovať snímku obrazovky na procesore (CPU)"</string>
-    <string name="settings_transformation_gpu_summary">"Spracovať snímku obrazovky na grafickej karte (%1$s)"</string>
+    <string name="settings_transformation_cpu_summary">"Pomocou procesora (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Pomocou grafického čipu (%1$s)"</string>
     <string name="settings_transformation_sw_summary">"Nedostupné v softvérovom dekóderi"</string>
 
     <string name="settings_video_bitrate">"Dátový tok"</string>
-    <string name="settings_video_bitrate_summary">"okolo %1$s v závislosti na dekóderi"</string>
+    <string name="settings_video_bitrate_summary">"Okolo %1$s v závislosti na dekóderi"</string>
     <string name="settings_video_bitrate_default">"Štandardný"</string>
 
 
@@ -151,13 +214,11 @@ zvislými rámami.
     <string name="settings_orientation_auto">"Automatický"</string>
     <string name="settings_orientation_portrait">"Na výšku"</string>
     <string name="settings_orientation_landscape">"Na šírku"</string>
-    <string name="settings_orientation_clockwise">"otáčať v smere hodinových ručičiek "</string>
-    <string name="settings_orientation_anticlockwise">"otáčať proti smeru hodinových ručičiek"</string>
+    <string name="settings_orientation_clockwise">"Otáčať v smere hodinových ručičiek "</string>
+    <string name="settings_orientation_anticlockwise">"Otáčať proti smeru hodinových ručičiek"</string>
 
     <string name="settings_vertical_frames">"Zvislé rámy"</string>
     <string name="settings_vertical_frames_warning">"Video prehrávače na mnohých zariadeniach nevedia prehrávať videá so zvislými rámami. Aj keď nie je povolená táto voľba, orientácia je pridaná do metadát videa, aby bolo správne zobrazené v predvolenom Android prehrávači, na YouTube, atď."</string>
-    <string name="settings_vertical_frames_ok">"OK"</string>
-    <string name="settings_vertical_frames_cancel">"Zrušiť"</string>
 
     <string name="settings_audio_category">"Zvuk"</string>
     <string name="settings_audio_source">"Zdroj"</string>
@@ -165,18 +226,25 @@ zvislými rámami.
     <string name="settings_audio_mute">"Stlmiť"</string>
     <string name="settings_audio_internal">"Interný"</string>
     <string name="settings_audio_experimental">"Experimentálne"</string>
+    <string name="settings_audio_mix">"Interný + Mikrofón"</string>
+    <string name="settings_audio_use_headphones">"Používajte káblové slúchadlá, aby sa zabránilo ozvene"</string>
     <string name="settings_audio_not_supported">"Nie je podporované na %1$s"</string>
     <string name="settings_audio_incompatible">"Nie je kompatibilné s vaším zvukovým ovládačom"</string>
     <string name="settings_audio_mic_summary">"Mikrofón"</string>
     <string name="settings_audio_mute_summary">"Stlmené. Žiadna zvuková stopa"</string>
     <string name="settings_audio_internal_summary">"Systémový zvukový výstup"</string>
-    <string name="settings_audio">"Zvuk"</string>
+    <string name="settings_audio_mix_summary">"Mikrofón + Interný (použite slúchadlá!)"</string>
     <string name="settings_sampling_rate">"Vzorkovacia frekvencia"</string>
+
+    <string name="settings_mic_gain">"Zosilniť mikrofón"</string>
+    <string name="settings_mic_gain_summary_mix_only">"K dispozícii iba pre %1$s"</string>
+    <string name="settings_mic_gain_summary_default">"Použiť predvolenú hlasitosť"</string>
+    <string name="settings_mic_gain_summary">"Zvýšiť hlasitosť o %1$ddB"</string>
 
     <string name="settings_other_category">"Ďalšie"</string>
     <string name="settings_hide_icon">"Skryť ikonu oznámenia"</string>
     <string name="settings_show_touches">"Zobraziť dotyky"</string>
-    <string name="settings_show_touches_summary">"Zobraziť vizuálnu spätnú väzbu pre dotyky. Môžete tiež aktivovať dotykové indikátory trvalo cez Nastavenia systému Android → Možnosti pre vývojárov → Zobraziť dotyky"</string>
+    <string name="settings_show_touches_summary">"Zobraziť vizuálnu spätnú väzbu pre dotyky. Povoľte natrvalo cez Nastavenia systému Android → Možnosti pre vývojárov → Zobraziť dotyky"</string>
     <string name="settings_output_dir">"Výstupný priečinok"</string>
     <string name="settings_stop_when_screen_off">"Zastaviť pri vypnutí obrazovky"</string>
     <string name="settings_stop_when_screen_off_summary">"Dokončiť nahrávanie po vypnutí obrazovky"</string>
@@ -187,11 +255,12 @@ zvislými rámami.
     <string name="settings_zigzag_fix_summary">"Vyberte, ak záznam obsahuje náhodné farebné pruhy"</string>
     <string name="settings_zigzag_fix_cpu_only">"K dispozícii len s CPU transformáciou obrazu"</string>
 
-    <string name="settings_video_config">"%1$s predvoľby"</string>
+    <string name="settings_video_config">"Predvoľby pre %1$s"</string>
     <string name="settings_video_config_entry">"%1$d x %2$d ~ %3$.0f snímkov za sekundu"</string>
-    <string name="settings_video_config_entry_stability">"%1$d %% stabilné"</string>
+    <string name="settings_video_config_entry_stability">"Stabilné na %1$d %% "</string>
     <string name="settings_video_config_summary">"Založené na štatistikách používania"</string>
     <string name="settings_video_config_summary_no_data">"Nemožno stiahnuť štatistiky"</string>
+    <string name="settings_video_config_summary_not_available">"Žiadne štatistiky nie sú zatiaľ k dispozícii"</string>
 
     <string name="device_profile_download_error_toast">"Nemožno stiahnuť odporúčané nastavenia. Uistite sa, že ste online."</string>
     <string name="device_profile_downloaded_toast">"Stiahnuté odporúčané nastavenia"</string>
@@ -228,6 +297,7 @@ zvislými rámami.
 
     <string name="notification_status_initializing">"Inicializácia"</string>
     <string name="notification_status_waiting_for_root">"Čakanie na root prístup"</string>
+    <string name="notification_status_waiting_for_projection">"Čakanie na prístup k nahrávaniu obrazovky"</string>
     <string name="notification_status_installing_audio">"Inštalácia zvukového ovládača"</string>
     <string name="notification_status_ready">"Pripravené"</string>
     <string name="notification_status_starting">"Spúšťanie"</string>
@@ -239,7 +309,7 @@ zvislými rámami.
     <string name="sale_title">"Zľava"</string>
     <string name="sale_text">"Kúpte si teraz SCR Pro a ušetrite %1$d %%! Táto ponuka končí dňa %2$s."</string>
 
-    <string name="copyrights_statement">"Používaním %1$s súhlasíte, že ste sami zodpovední za to, aby ste neporušili autorské práva tretích strán alebo iné práva duševného vlastníctva."</string>
+    <string name="copyrights_statement">"Používaním %1$s súhlasíte, že ste sami zodpovedný za to, aby ste neporušili autorské práva tretích strán alebo iné práva duševného vlastníctva."</string>
     <string name="internal_audio_installation_error_title">"Vnútorná chyba zvuku"</string>
     <string name="internal_audio_installation_error_message">"Nemožno povoliť interný zvuk. Prosím, pošlite správu o chybe, aby mohlo byť vaše zariadenie podporované. Zdroj zvuku bude nastavený na %1$s ."</string>
     <string name="internal_audio_unstable_title">"Nestabilný vnútorný zvuk"</string>
@@ -248,9 +318,10 @@ zvislými rámami.
     <string name="internal_audio_disabled_message">"Vnútorný zvukový záznam sa vypne, pretože %1$s nebol správne vypnutý. Môžete to znovu povoliť v nastaveniach."</string>
 
     <string name="license_title">"Chyba licencie"</string>
-    <string name="license_not_licensed_message">"Chyba pri overovaní licencie. Prosím, zakúpte si SCR Pro cez Obchod Google Play."</string>
-    <string name="license_retry_message">"Chyba pri overovaní licencie. Uistite sa, že pripojenie k internetu je a ste prihlásenýí do Obchodu Google Play. Po tom, čo je licencia overená, môžete pokračovať v používaní SCR Pro v režime offline."</string>
-    <string name="license_error_message">"Chyba pri overovaní licencie. Uistite sa, že ste nainštalovali SCR Pro cez Obchod Google Play. Ak problém pretrváva, vymažte údaje a vyrovnávaciu pamäť u aplikácií \"Služby Google Play\" a \"Obchod Google Play\".
+    <string name="license_not_licensed_message">"Chyba pri overovaní licencie. Prosím, zakúpte si SCR Pro cez Obchod Play. Ak máte nainštalovaný Lucky Patcher, zakážte emuláciu Obchodu Play."</string>
+    <string name="license_retry_message">"Chyba pri overovaní licencie. Uistite sa, že máte pripojenie k internetu, nastavený správny dátum a čas na vašom zariadenía a že ste prihlásený do Obchodu Play. Po overení licnecie môžete pokračovať v používaní SCR Pro offline.
+"</string>
+    <string name="license_error_message">"Chyba pri overovaní licencie. Uistite sa, či ste inštalovali SCR Pro cez Obchod Play a že máte nastavený správny dátum a čas na vašom zariadení. Ak problém pretrváva,  vymažte údaje a vyrovnávaciu pamäť aplikácií \"Služby Google Play\" a \"Obchod Google Play\".
     "</string>
     <string name="license_play_store">"Obchod Play"</string>
     <string name="license_retry">"Skúsiť znova"</string>
@@ -261,13 +332,28 @@ zvislými rámami.
 
     <string name="can_not_start_toast">"Nemožno spustiť nahrávanie: %1$s"</string>
 
-    <string name="settings_show_camera">"Zobrazenie fototaparátu"</string>
-    <string name="settings_show_camera_summary">"Zobraziť váš obrázok navrch nahrávky"</string>
+    <string name="settings_show_camera">"Fotoaparát tváre"</string>
+    <string name="settings_show_camera_summary">"Obraz fotoaparátu na nahrávke"</string>
     <string name="settings_camera_alpha_title">"Priehľadnosť"</string>
-    <string name="settings_camera_alpha_summary">"Zobrazenie kamery je priehľadné na %1$d %%"</string>
-    <string name="settings_camera_alpha_summary_100">"Zobrazenie fotoaparátu nie je priehľadné"</string>
+    <string name="settings_camera_alpha_summary">"Priehľadný fotoaparát tváre na %1$d %% "</string>
+    <string name="settings_camera_alpha_summary_100">"Nepriehľadný fotoaparát tváre"</string>
 
     <string name="miui_error_message">"Ak nevidíte %1$s plávajúce okno, choďte na do MIUI nastavení aplikácií a povoľte \"Zobraziť vyskakovacie okná\" pre %1$s ."</string>
     <string name="miui_error_title">"Sú MIUI vyskakovacie okná zakázané?"</string>
 
+    <string name="lollipop_dialog_title">"Vyskúšajte SCR 5+"</string>
+    <string name="lollipop_dialog_message">"Chceli by ste vyskúšať moju novú aplikáciu pre nahrávanie obrazovky bez potreby rootu? Využíva oficiálne Android 5.0 API pre snímanie obrazovky a nahrávanie zvuku z mikrofónu."</string>
+    <string name="lollipop_dialog_try_now">"Vyskúšať teraz"</string>
+
+    <string name="projection_deny_error_message">"Je potrebné kliknúť na SPUSTIŤ TERAZ pre začatie nahrávania."</string>
+    <string name="projection_deny_error_title">"Nemožno získať prístup k obrazovke"</string>
+
+    <string name="notification_action_share">"Zdieľať"</string>
+    <string name="internal_audio_warning_title">"Inštalačné varovanie"</string>
+
+    <string name="internal_audio_warning_message">"Inštalácia zvukového ovládača si vyžaduje na vašom zariadení zmeny na systémovej partícii. V nepravdepodobnom prípade môže chyba inštalácie spôsobiť poškodenie softvéru alebo cyklické reštartovanie. Uistite sa, že viete, ako flashnúť systémovú partíciu alebo pred pokračovaním obnoviť systém zo zálohy. Ak sa rozhodnete v budúcnosti odinštalovať %1$s, otvorte Nastavenia SCR a pred odinštalovaním aplikácie zakážte interný zvuk.
+    "</string>
+    <string name="internal_audio_warning_confirmation">"Viem, ako obnoviť systémovú partíciu"</string>
+    <string name="internal_audio_warning_dont_show">"Nezobrazovať túto správu znova"</string>
+    <string name="internal_audio_warning_install">"Inštalovať"</string>
 </resources>
