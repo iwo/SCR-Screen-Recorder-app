@@ -225,7 +225,7 @@ http://navercast.naver.com/contents.nhn?rid=122&amp;contents_id=6928"</string>
     <string name="settings_zigzag_fix_cpu_only">"CPU 이미지 변환에만 유효"</string>
 
     <string name="settings_video_config">"%1$s 사전 설정"</string>
-    <string name="settings_video_config_entry">"%1$d X %2$d ~ % 3 $ .0ffps"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0ffps"</string>
     <string name="settings_video_config_entry_stability">"%1$d %% 안정"</string>
     <string name="settings_video_config_summary">"사용 통계에 기초"</string>
     <string name="settings_video_config_summary_no_data">"통계를 다운로드 할 수 없습니다"</string>

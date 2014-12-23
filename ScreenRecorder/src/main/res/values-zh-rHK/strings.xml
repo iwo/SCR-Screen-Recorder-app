@@ -260,7 +260,7 @@ SCR 5+ 開啟了著名 SCR螢幕錄影的歷史新頁!
     <string name="settings_zigzag_fix_cpu_only">"僅適用於CPU的影像轉換"</string>
 
     <string name="settings_video_config">"%1$s 預設值"</string>
-    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.幀"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0f幀"</string>
     <string name="settings_video_config_entry_stability">"%1$d%% 穩定"</string>
     <string name="settings_video_config_summary">"根據使用裝置情形統計"</string>
     <string name="settings_video_config_summary_no_data">"無法下載相關裝置資訊"</string>

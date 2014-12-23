@@ -184,7 +184,7 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="settings_zigzag_fix_cpu_only">"Disponibil numai cu transformarea de imagine cu CPU"</string>
 
     <string name="settings_video_config">"%1$s predefinite"</string>
-    <string name="settings_video_config_entry">"%1$d x %2$d ~%3$.0ffps"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0ffps"</string>
     <string name="settings_video_config_entry_stability">"%1$d %% stabil"</string>
     <string name="settings_video_config_summary">"Bazat pe statistici ale utilizarii"</string>
     <string name="settings_video_config_summary_no_data">"Nu s-au putut descărca statistici"</string>

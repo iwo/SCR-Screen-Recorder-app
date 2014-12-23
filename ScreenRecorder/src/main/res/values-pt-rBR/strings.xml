@@ -259,7 +259,7 @@ sinto muito."</string>
     <string name="settings_zigzag_fix_cpu_only">"Disponível apenas com CPU transformação Imagem"</string>
 
     <string name="settings_video_config">"%1$s presets"</string>
-    <string name="settings_video_config_entry">"%1$d x %2$d ~ 3% $ .0ffps"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0ffps"</string>
     <string name="settings_video_config_entry_stability">"%1$d %% estável"</string>
     <string name="settings_video_config_summary">"Com base em estatísticas de uso"</string>
     <string name="settings_video_config_summary_no_data">"Não foi possível fazer download das estatísticas"</string>

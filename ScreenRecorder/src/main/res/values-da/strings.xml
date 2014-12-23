@@ -179,7 +179,7 @@ SCR Screen Recorder indsamler anonyme brugsstatistikker at spore fejl og analyse
     <string name="settings_zigzag_fix_cpu_only">"Findes kun med CPU Billede transformation"</string>
 
     <string name="settings_video_config">"%1$s forudindstillinger"</string>
-    <string name="settings_video_config_entry">"%1$d x %2$d ~ %3$.0ffps"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0ffps"</string>
     <string name="settings_video_config_entry_stability">"%1$d %% stabil"</string>
     <string name="settings_video_config_summary">"Baseret på brugsstatistikker"</string>
     <string name="settings_video_config_summary_no_data">"Kunne ikke hente statistik"</string>
