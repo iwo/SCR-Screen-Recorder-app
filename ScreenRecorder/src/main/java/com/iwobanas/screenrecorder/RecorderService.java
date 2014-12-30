@@ -851,8 +851,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private void checkShutDownCorrectly() {
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
-        if (!preferences.getBoolean(SHUT_DOWN_CORRECTLY, true) && audioDriver.shouldInstall()) {
+        if (!preferences.getBoolean(SHUT_DOWN_CORRECTLY, true) && Settings.getInstance().getAudioSource().getRequiresDriver()) {
             Settings.getInstance().setAudioSource(AudioSource.MUTE);
+            audioDriver.uninstall();
             displayShutDownError = true;
         }
         SharedPreferences.Editor editor = preferences.edit();

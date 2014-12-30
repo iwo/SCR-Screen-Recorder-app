@@ -78,7 +78,7 @@ public class AudioDriver {
     }
 
     public void uninstall() {
-        if (status == InstallationStatus.CHECKING || status == InstallationStatus.INSTALLING) {
+        if (status == InstallationStatus.NEW || status == InstallationStatus.CHECKING || status == InstallationStatus.INSTALLING) {
             Log.w(TAG, "Attempting to uninstall when " + status + ". Scheduling uninstallation.");
             installScheduled = false;
             uninstallScheduled = true;
@@ -124,8 +124,12 @@ public class AudioDriver {
             install();
         } else if (uninstallScheduled) {
             uninstallScheduled = false;
-            Log.v(TAG, "Starting scheduled uninstall");
-            uninstall();
+            if (status == InstallationStatus.NOT_INSTALLED) {
+                Log.v(TAG, "Already uninstalled. Scheduled uninstall cancelled.");
+            } else {
+                Log.v(TAG, "Starting scheduled uninstall");
+                uninstall();
+            }
         } else {
             if (status == InstallationStatus.INSTALLED) {
                 stabilityMonitor = new StabilityMonitorAsyncTask(context, this, installId);
