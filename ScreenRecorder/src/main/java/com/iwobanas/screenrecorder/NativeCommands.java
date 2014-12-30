@@ -67,6 +67,16 @@ public class NativeCommands implements INativeCommands {
     }
 
     @Override
+    public int installAudio(String path) {
+        return runAsyncCommand("install_audio", path, 20);
+    }
+
+    @Override
+    public int uninstallAudio() {
+        return runAsyncCommand("uninstall_audio", "", 5);
+    }
+
+    @Override
     public int logcat(String path) {
         if (runner != null && runner.isExecBlocked()) {
             return -50; // ReportBugTask will run it's own ShellCommand
