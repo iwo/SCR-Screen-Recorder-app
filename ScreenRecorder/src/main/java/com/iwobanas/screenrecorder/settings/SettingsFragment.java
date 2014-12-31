@@ -310,9 +310,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         for (int i = 0; i < mainEntries.length; i++) {
             AudioSource audioSource = AudioSource.valueOf(entryValues[i].toString());
             if (audioSource.getRequiresDriver()) {
-                if (Build.VERSION.SDK_INT == 17) {
-                    entries[i] = getTwoLineEntry(mainEntries[i], getString(R.string.settings_audio_not_supported, Build.VERSION.RELEASE));
-                } else if (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isInternalAudioStable()) {
+                if (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isInternalAudioStable()) {
                     entries[i] = getTwoLineEntry(mainEntries[i], getString(R.string.settings_audio_incompatible, Build.VERSION.RELEASE));
                 } else {
                     entries[i] = getTwoLineEntry(mainEntries[i], audioSource == AudioSource.MIX ?
