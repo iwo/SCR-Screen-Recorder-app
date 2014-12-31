@@ -3,6 +3,7 @@ package com.iwobanas.screenrecorder.audio;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
 import com.iwobanas.screenrecorder.RecordingInfo;
@@ -184,6 +185,10 @@ public class AudioDriver {
         gain = Math.min(gain, 16);
         Log.v(TAG, "Music volume " + volume + " setting gain to " + gain);
         return gain;
+    }
+
+    public static boolean requiresHardInstall() {
+        return Build.VERSION.SDK_INT == 17;
     }
 
     public interface OnInstallListener {

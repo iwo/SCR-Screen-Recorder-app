@@ -35,6 +35,8 @@ public class AudioDriverInstaller {
     private static final String LOCAL_SYSTEM_AUDIO_POLICY = "system_audio_policy.conf";
     private static final String LOCAL_VENDOR_AUDIO_POLICY = "vendor_audio_policy.conf";
     private static final String MEDIASERVER_COMMAND = "/system/bin/mediaserver";
+    private static final String UNINSTALLER_SYSTEM = "uninstall_scr.sh";
+    private static final String UNINSTALLER_LOCAL = "deinstaller.sh";
     private static final FilenameFilter PRIMARY_FILENAME_FILTER = new FilenameFilter() {
         @Override
         public boolean accept(File dir, String filename) {
@@ -72,15 +74,24 @@ public class AudioDriverInstaller {
             if (isSystemAlphaModuleInstalled()) {
                 throw new InstallationException("Unsupported old audio driver installed");
             }
-            if (!systemFilesValid()) {
-                initializeDir();
-            }
-            ensureSCRFilesValid();
-            switchToSCRFiles();
-            mountAndRestart();
-            if (!isMounted()) {
-                Log.w(TAG, "Unmount happened after restart. Attempting to mount again");
+            if (AudioDriver.requiresHardInstall()) {
+                if (!localDir.exists()){
+                    createEmptyDir();
+                }
+                ensureSCRFilesValid();
+                extractUninstaller();
+                hardInstall();
+            } else {
+                if (!systemFilesValid()) {
+                    initializeDir();
+                }
+                ensureSCRFilesValid();
+                switchToSCRFiles();
                 mountAndRestart();
+                if (!isMounted()) {
+                    Log.w(TAG, "Unmount happened after restart. Attempting to mount again");
+                    mountAndRestart();
+                }
             }
             Log.v(TAG, "Installation completed successfully");
         } catch (InstallationException e) {
@@ -98,20 +109,41 @@ public class AudioDriverInstaller {
         return true;
     }
 
+    private void hardInstall() throws InstallationException {
+        int result = NativeCommands.getInstance().installAudio(localDir.getAbsolutePath().toString());
+        if (result != 0 && result != 200) {
+            throw new InstallationException("Hard install error: " + result);
+        }
+    }
+
+    private boolean hardUninstall() {
+        int result = NativeCommands.getInstance().uninstallAudio();
+        if (result != 0 && result != 200) {
+            Log.e(TAG, "Uninstallation failed: " + result);
+            errorDetails = "Hard uninstall error: " + result;
+            return false;
+        }
+        return true;
+    }
+
     public boolean uninstall() {
         Log.v(TAG, "Uninstall started");
         // camera should be turned off during mediaserver restart to avoid lock down on Nexus 4
         CameraOverlay.releaseCamera();
         uninstallSuccess = true;
         errorDetails = null;
-        unmount();
-        switchToSystemFiles();
-        try {
-            restartMediaserver();
-        } catch (InstallationException e) {
-            Log.e(TAG, "Error restarting mediaserver", e);
+        if (isHardInstalled()) {
+            uninstallSuccess = hardUninstall();
+        } else {
+            unmount();
+            switchToSystemFiles();
+            try {
+                restartMediaserver();
+            } catch (InstallationException e) {
+                Log.e(TAG, "Error restarting mediaserver", e);
+            }
+            validateNotMounted();
         }
-        validateNotMounted();
         if (uninstallSuccess) {
             Log.v(TAG, "Uninstall completed");
         } else {
@@ -236,7 +268,6 @@ public class AudioDriverInstaller {
     }
 
     private void mount() throws InstallationException {
-        String commandInput = "mount_audio\n" + localDir.getAbsolutePath() + "\n";
         mountMaster = Boolean.TRUE;
         int result = NativeCommands.getInstance().mountAudioMaster(localDir.getAbsolutePath().toString());
         if (result == 255 || result < 150) {
@@ -359,6 +390,7 @@ public class AudioDriverInstaller {
         if (!localDir.mkdirs()) {
             throw new InstallationException("Couldn't create local modules directory");
         }
+        localDir.setExecutable(true, false); // set x (searchable) permission on directory
     }
 
 
@@ -433,6 +465,17 @@ public class AudioDriverInstaller {
         File scrModule = new File(localDir, SCR_PRIMARY_DEFAULT);
         try {
             Utils.extractResource(context, getDriverResourceId(), scrModule);
+        } catch (IOException e) {
+            throw new InstallationException("Error extracting module", e);
+        }
+    }
+
+    private void extractUninstaller() throws InstallationException {
+        File uninstallerFile = new File(localDir, UNINSTALLER_LOCAL);
+        try {
+            Utils.extractResource(context, R.raw.uninstall_scr, uninstallerFile);
+            uninstallerFile.setReadable(true, false);
+            uninstallerFile.setExecutable(true, false);
         } catch (IOException e) {
             throw new InstallationException("Error extracting module", e);
         }
@@ -554,6 +597,9 @@ public class AudioDriverInstaller {
             return InstallationStatus.OUTDATED;
         }
         if (!isMounted()) {
+            if (isHardInstalled()) {
+                return InstallationStatus.OUTDATED;
+            }
             return InstallationStatus.NOT_INSTALLED;
         }
         if (!isGloballyMounted()) {
@@ -571,6 +617,11 @@ public class AudioDriverInstaller {
     private boolean isSystemAlphaModuleInstalled() {
         File versionFile = new File("/system/lib/hw/scr_module_version");
         return versionFile.exists();
+    }
+
+    private boolean isHardInstalled() {
+        File uninstallerFile = new File(systemDir, UNINSTALLER_SYSTEM);
+        return uninstallerFile.exists();
     }
 
     private boolean scrModuleInstalled() {

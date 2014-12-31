@@ -380,4 +380,5 @@ If you decide to uninstall %1$s in the future open SCR Settings and disable inte
     <string name="internal_audio_warning_confirmation">I know how to restore system partition</string>
     <string name="internal_audio_warning_dont_show">"Don't show this message again"</string>
     <string name="internal_audio_warning_install">Install</string>
+    <string name="internal_audio_warning_toast">Audio source set to %1$s</string>
 </resources>
