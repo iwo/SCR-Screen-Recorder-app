@@ -121,7 +121,7 @@ public class AudioDriverInstaller {
         }
     }
 
-    private boolean hardUninstall() {
+    private void hardUninstall() {
         int result = NativeCommands.getInstance().uninstallAudio();
         if (result == 202) {
             // don't treat this as error but report to stats
@@ -129,11 +129,8 @@ public class AudioDriverInstaller {
                 errorDetails = "read only remount error";
             }
         } else if (result != 0 && result != 200) {
-            Log.e(TAG, "Uninstallation failed: " + result);
-            errorDetails = "Hard uninstall error: " + result;
-            return false;
+            uninstallError("Hard uninstall error: " + result);
         }
-        return true;
     }
 
     public boolean uninstall() {
@@ -143,7 +140,7 @@ public class AudioDriverInstaller {
         uninstallSuccess = true;
         errorDetails = null;
         if (isHardInstalled()) {
-            uninstallSuccess = hardUninstall();
+            hardUninstall();
         } else {
             unmount();
             switchToSystemFiles();
