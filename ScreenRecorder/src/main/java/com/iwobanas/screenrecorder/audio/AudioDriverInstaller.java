@@ -111,14 +111,24 @@ public class AudioDriverInstaller {
 
     private void hardInstall() throws InstallationException {
         int result = NativeCommands.getInstance().installAudio(localDir.getAbsolutePath().toString());
-        if (result != 0 && result != 200) {
+        if (result == 202) {
+            // don't treat this as error but report to stats
+            if (errorDetails == null) {
+                errorDetails = "read only remount error";
+            }
+        } else if (result != 0 && result != 200) {
             throw new InstallationException("Hard install error: " + result);
         }
     }
 
     private boolean hardUninstall() {
         int result = NativeCommands.getInstance().uninstallAudio();
-        if (result != 0 && result != 200) {
+        if (result == 202) {
+            // don't treat this as error but report to stats
+            if (errorDetails == null) {
+                errorDetails = "read only remount error";
+            }
+        } else if (result != 0 && result != 200) {
             Log.e(TAG, "Uninstallation failed: " + result);
             errorDetails = "Hard uninstall error: " + result;
             return false;
