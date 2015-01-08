@@ -209,7 +209,7 @@ SCR 5+ открывает новую главу в истории знамени
 
     <string name="settings_video_bitrate">"Битрейт"</string>
     <string name="settings_video_bitrate_summary">"около %1$s в зависимости от кодера"</string>
-    <string name="settings_video_bitrate_default">"Невыполнение договора"</string>
+    <string name="settings_video_bitrate_default">"Умолчание"</string>
 
 
     <string name="settings_frame_rate">"Частота кадров"</string>

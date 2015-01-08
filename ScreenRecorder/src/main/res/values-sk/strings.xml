@@ -278,7 +278,7 @@ zvislými rámami.
     <string name="directory_chooser_cancel">"Zrušiť"</string>
     <string name="directory_chooser_default">"Štandardný"</string>
 
-    <string name="error_report_report">"Ohlásiť"</string>
+    <string name="error_report_report">"Nahlásiť"</string>
     <string name="error_report_close">"Zavrieť"</string>
     <string name="error_report_text">"Príloha obsahuje podrobný systémový protokol, vrátane informácií o chybe. Neváhajte a pridajte akékoľvek pripomienky sem."</string>
     <string name="error_report_chooser">"Odoslať e-mail pomocou"</string>
@@ -291,7 +291,7 @@ zvislými rámami.
     <string name="rating_play_error">"Nemožno otvoriť Obchod Play."</string>
 
     <string name="help_stop_message">"Ak chcete zastaviť nahrávanie, zamknite obrazovku a počkajte 2 sekundy. Prípadne môžete jednoducho znovu spustiť aplikáciu %1$s."</string>
-    <string name="menu_send_bug_report">"Ohlásiť chybu"</string>
+    <string name="menu_send_bug_report">"Nahlásiť chybu"</string>
     <string name="menu_show_unstable">"Zobraziť nestabilné"</string>
     <string name="menu_show_advanced">"Zobraziť pokročilé"</string>
 
