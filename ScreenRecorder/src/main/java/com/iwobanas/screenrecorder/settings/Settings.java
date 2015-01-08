@@ -16,7 +16,6 @@ import java.io.File;
 
 public class Settings {
     private static final String TAG = "scr_Settings";
-    private static final String AUDIO_SOURCE = "AUDIO_SOURCE";
     private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
     private static final String ORIENTATION = "ORIENTATION";
@@ -36,12 +35,14 @@ public class Settings {
     private static final String VERTICAL_FRAMES = "VERTICAL_FRAMES";
     private static final String SHOW_UNSTABLE = "SHOW_UNSTABLE";
     private static final String SHOW_ADVANCED = "SHOW_ADVANCED";
+    private static final String DISABLE_AUDIO_WARNING = "DISABLE_AUDIO_WARNING";
     private static final String SETTINGS_MODIFIED = "SETTINGS_MODIFIED";
     private static final String APP_VERSION = "APP_VERSION";
     private static final String BUILD_FINGERPRINT = "BUILD_FINGERPRINT";
 
     private static final String PREFERENCES_NAME = "ScreenRecorderSettings";
 
+    public static final String AUDIO_SOURCE = "AUDIO_SOURCE";
     public static final String SHOW_CAMERA = "SHOW_CAMERA";
     public static final String CAMERA_ALPHA = "CAMERA_ALPHA";
     public static final String ROOT_ENABLED = "ROOT_ENABLED";
@@ -88,6 +89,7 @@ public class Settings {
     private DeviceProfile deviceProfile;
     private boolean showUnstable = false;
     private boolean showAdvanced = false;
+    private boolean disableAudioWarning = false;
     private boolean rootEnabled = true;
     private boolean rootFlavor = true;
 
@@ -191,6 +193,7 @@ public class Settings {
 
         showAdvanced = preferences.getBoolean(SHOW_ADVANCED, false);
         showUnstable = preferences.getBoolean(SHOW_UNSTABLE, false);
+        disableAudioWarning = preferences.getBoolean(DISABLE_AUDIO_WARNING, false);
         rootEnabled = preferences.getBoolean(ROOT_ENABLED, true);
     }
 
@@ -322,9 +325,7 @@ public class Settings {
 
     public void setAudioSource(AudioSource audioSource) {
         this.audioSource = audioSource;
-        if (audioDriver.shouldInstall()) {
-            audioDriver.install();
-        } else if (!audioSource.getRequiresDriver() && audioDriver.shouldUninstall()) {
+        if (!audioSource.getRequiresDriver() && audioDriver.shouldUninstall()) {
             audioDriver.uninstall();
         }
         settingsModified(preferences.edit().putString(AUDIO_SOURCE, audioSource.name()));
@@ -702,6 +703,15 @@ public class Settings {
     public void setShowAdvanced(boolean showAdvanced) {
         this.showAdvanced = showAdvanced;
         preferences.edit().putBoolean(SHOW_ADVANCED, showAdvanced).commit();
+    }
+
+    public void setDisableAudioWarning(boolean disableAudioWarning) {
+        this.disableAudioWarning = disableAudioWarning;
+        preferences.edit().putBoolean(DISABLE_AUDIO_WARNING, disableAudioWarning).apply();
+    }
+
+    public boolean getDisableAudioWarning() {
+        return disableAudioWarning;
     }
 
     public boolean isNoRootVideoEncoder() {

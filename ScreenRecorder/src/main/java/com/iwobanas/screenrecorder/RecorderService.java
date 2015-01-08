@@ -30,6 +30,7 @@ import com.google.android.vending.licensing.LicenseCheckerCallback;
 import com.google.android.vending.licensing.Policy;
 import com.google.android.vending.licensing.ServerManagedPolicy;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
+import com.iwobanas.screenrecorder.audio.AudioWarningActivity;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
 import com.iwobanas.screenrecorder.rating.RatingController;
 import com.iwobanas.screenrecorder.settings.AudioSource;
@@ -402,7 +403,17 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else if (root && audioDriver.getInstallationStatus() == InstallationStatus.NEW) {
             audioDriver.check();
         } else if (root && audioDriver.shouldInstall()) {
-            audioDriver.install();
+            if (AudioDriver.requiresHardInstall() && !Settings.getInstance().getDisableAudioWarning()) {
+                setState(RecorderServiceState.READY); // this will get changed to INSTALLING_AUDIO when installation starts
+                Intent intent = new Intent(this, AudioWarningActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                if (recorderOverlay.isVisible()) {
+                    recorderOverlay.hide();
+                }
+            } else {
+                audioDriver.install();
+            }
         } else if (useProjection() && projectionDenied) {
             Log.w(TAG, "Not progressing with initialization because last projection request was cancelled");
         } else if (useProjection() && !projectionThreadRunner.isReady()) {
@@ -446,8 +457,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
                     return;
                 } // else fall through
             case INSTALLED:
-            case OUTDATED:
                 nextInitializationStep();
+                break;
+            case OUTDATED:
+                Log.w(TAG, "Uninstalling outdated driver");
+                audioDriver.uninstall();
         }
     }
 
@@ -851,8 +865,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     private void checkShutDownCorrectly() {
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, 0);
-        if (!preferences.getBoolean(SHUT_DOWN_CORRECTLY, true) && audioDriver.shouldInstall()) {
+        if (!preferences.getBoolean(SHUT_DOWN_CORRECTLY, true) && Settings.getInstance().getAudioSource().getRequiresDriver()) {
             Settings.getInstance().setAudioSource(AudioSource.MUTE);
+            audioDriver.uninstall();
             displayShutDownError = true;
         }
         SharedPreferences.Editor editor = preferences.edit();

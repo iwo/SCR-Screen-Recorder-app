@@ -77,6 +77,13 @@
             android:excludeFromRecents="true"
             android:theme="@style/Theme.Transparent" />
 
+        <activity
+            android:name=".audio.AudioWarningActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Transparent" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

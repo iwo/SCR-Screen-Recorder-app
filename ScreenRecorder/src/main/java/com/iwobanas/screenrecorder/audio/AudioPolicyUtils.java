@@ -28,7 +28,8 @@ public class AudioPolicyUtils {
 
             for (ConfigLine line : lines) {
 
-                if (line.getSection().startsWith(".audio_hw_modules.primary.outputs.") &&
+                if (!AudioDriver.requiresHardInstall() &&
+                        line.getSection().startsWith(".audio_hw_modules.primary.outputs.") &&
                         !line.getSection().equals(".audio_hw_modules.primary.outputs.primary")) {
                     writer.write("# SCR #");
                     modified = true;

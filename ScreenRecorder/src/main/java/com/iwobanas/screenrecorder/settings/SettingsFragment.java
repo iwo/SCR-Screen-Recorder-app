@@ -22,6 +22,7 @@ import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
+import com.iwobanas.screenrecorder.audio.AudioWarningDialogFragment;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
 
 import java.io.File;
@@ -309,9 +310,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         for (int i = 0; i < mainEntries.length; i++) {
             AudioSource audioSource = AudioSource.valueOf(entryValues[i].toString());
             if (audioSource.getRequiresDriver()) {
-                if (Build.VERSION.SDK_INT == 17) {
-                    entries[i] = getTwoLineEntry(mainEntries[i], getString(R.string.settings_audio_not_supported, Build.VERSION.RELEASE));
-                } else if (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isInternalAudioStable()) {
+                if (settings.getDeviceProfile() != null && !settings.getDeviceProfile().isInternalAudioStable()) {
                     entries[i] = getTwoLineEntry(mainEntries[i], getString(R.string.settings_audio_incompatible, Build.VERSION.RELEASE));
                 } else {
                     entries[i] = getTwoLineEntry(mainEntries[i], audioSource == AudioSource.MIX ?
@@ -777,12 +776,14 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             settings.setVerticalFrames(selected);
         } else if (preference == audioSourcePreference) {
             AudioSource source = AudioSource.valueOf(valueString);
-            if (!source.getRequiresDriver() || Build.VERSION.SDK_INT != 17) {
-                settings.setAudioSource(source);
-                updateSamplingRate();
-                updateValues();
-            } else {
-                return false;
+            settings.setAudioSource(source);
+            AudioDriver audioDriver = settings.getAudioDriver();
+            if (source.getRequiresDriver() && audioDriver.shouldInstall()) {
+                if (AudioDriver.requiresHardInstall() && !settings.getDisableAudioWarning()) {
+                    new AudioWarningDialogFragment().show(getFragmentManager(), AudioWarningDialogFragment.FRAGMENT_TAG);
+                } else {
+                    audioDriver.install();
+                }
             }
         } else if (preference == samplingRatePreference) {
             SamplingRate rate = SamplingRate.valueOf(valueString);
@@ -868,6 +869,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (Settings.ROOT_ENABLED.equals(key)) {
             updateEntries();
+            updateValues();
+        } else if (Settings.AUDIO_SOURCE.equals(key)) {
+            updateSamplingRate();
             updateValues();
         }
     }
