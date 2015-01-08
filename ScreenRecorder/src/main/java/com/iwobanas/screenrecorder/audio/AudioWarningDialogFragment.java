@@ -15,13 +15,19 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
 
+import static com.iwobanas.screenrecorder.Tracker.ACTION;
+import static com.iwobanas.screenrecorder.Tracker.AUDIO_WARNING;
+
 public class AudioWarningDialogFragment extends DialogFragment {
 
     public static final String FRAGMENT_TAG = "AudioWarningDialogFragment";
+
+    private boolean install;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public class AudioWarningDialogFragment extends DialogFragment {
         builder.setPositiveButton(R.string.internal_audio_warning_install, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                install = true;
                 if (doNotShowCheckBox.isChecked()) {
                     settings.setDisableAudioWarning(true);
                 }
@@ -101,6 +108,8 @@ public class AudioWarningDialogFragment extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+
+        EasyTracker.getTracker().sendEvent(ACTION, AUDIO_WARNING, AUDIO_WARNING, install ? 1l : 0l);
 
         Activity activity = getActivity();
         if (activity instanceof AudioWarningActivity) {
