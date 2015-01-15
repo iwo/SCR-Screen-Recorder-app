@@ -22,7 +22,7 @@ public class NativeCommands implements INativeCommands {
 
     @Override
     public String getSuVersion() {
-        return runner.getSuVersion();
+        return runner == null ? null : runner.getSuVersion();
     }
 
     @Override
