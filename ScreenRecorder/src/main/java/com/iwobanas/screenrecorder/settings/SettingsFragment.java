@@ -306,7 +306,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         CharSequence[] mainEntries = getResources().getStringArray(settings.isRootEnabled() ? R.array.audio_source_entries : R.array.audio_source_entries_no_root);
         CharSequence[] entries = new CharSequence[mainEntries.length];
-        CharSequence[] entryValues = audioSourcePreference.getEntryValues();
+        CharSequence[] entryValues = getResources().getStringArray(settings.isRootEnabled() ? R.array.audio_source_values : R.array.audio_source_values_no_root);
         for (int i = 0; i < mainEntries.length; i++) {
             AudioSource audioSource = AudioSource.valueOf(entryValues[i].toString());
             if (audioSource.getRequiresDriver()) {
@@ -323,7 +323,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             }
         }
         audioSourcePreference.setEntries(entries);
-        audioSourcePreference.setEntryValues(settings.isRootEnabled() ? R.array.audio_source_values : R.array.audio_source_values_no_root);
+        audioSourcePreference.setEntryValues(entryValues);
 
         updateSamplingRate();
 
