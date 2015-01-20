@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.+'
+        classpath 'com.android.tools.build:gradle:1.0.0'
     }
 }
 apply plugin: 'android'
@@ -45,25 +45,23 @@ android {
     }
 
     // A slightly hacky way to assign app id's to flavors combinations
-    // applicationIdSufix should be added to flavor
+    // This is based on SO answer below but modified to support gradle plugin 1.0+
     // http://stackoverflow.com/questions/26547559/how-to-set-different-applicationid-for-each-flavor-combination-using-flavordimen/26585241#26585241
-    android.variantFilter { variant ->
-        def flavorString = ""
-        def flavors = variant.getFlavors()
-        for (int i = 0; i < flavors.size(); i++) {
-            flavorString += flavors[i].name;
-        }
+    android.applicationVariants.all { variant ->
+        def flavorString = variant.getVariantData().getVariantConfiguration().getFlavorName()
+        def mergedFlavour = variant.getVariantData().getVariantConfiguration().getMergedFlavor();
+
         if(flavorString.equalsIgnoreCase("rootFree")) {
-            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.free2"
+            mergedFlavour.setApplicationId("com.iwobanas.screenrecorder.free2")
         }
         if(flavorString.equalsIgnoreCase("rootPro")) {
-            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.pro"
+            mergedFlavour.setApplicationId("com.iwobanas.screenrecorder.pro")
         }
         if(flavorString.equalsIgnoreCase("noRootFree")) {
-            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.noroot.free"
+            mergedFlavour.setApplicationId("com.iwobanas.screenrecorder.noroot.free")
         }
         if(flavorString.equalsIgnoreCase("noRootPro")) {
-            variant.getDefaultConfig().applicationId "com.iwobanas.screenrecorder.noroot.pro"
+            mergedFlavour.setApplicationId("com.iwobanas.screenrecorder.noroot.pro")
         }
     }
 
@@ -84,7 +82,7 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            runProguard true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
