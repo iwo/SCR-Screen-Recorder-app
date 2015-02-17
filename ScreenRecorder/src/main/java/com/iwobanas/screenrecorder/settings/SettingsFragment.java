@@ -39,6 +39,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_VIDEO_ENCODER = "video_encoder";
     public static final String KEY_RESOLUTION = "resolution";
     public static final String KEY_ORIENTATION = "orientation";
+    public static final String KEY_TIME_LAPSE = "time_lapse";
     public static final String KEY_TRANSFORMATION = "transformation";
     public static final String KEY_VIDEO_BITRATE = "video_bitrate";
     public static final String KEY_FRAME_RATE = "frame_rate";
@@ -62,6 +63,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private ListPreference videoEncoderPreference;
     private ListPreference resolutionPreference;
     private ListPreference orientationPreference;
+    private ListPreference timeLapsePreference;
     private ListPreference transformationPreference;
     private ListPreference videoBitratePreference;
     private ListPreference frameRatePreference;
@@ -111,6 +113,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         orientationPreference = (ListPreference) findPreference(KEY_ORIENTATION);
         orientationPreference.setOnPreferenceChangeListener(this);
+
+        timeLapsePreference = (ListPreference) findPreference(KEY_TIME_LAPSE);
+        timeLapsePreference.setOnPreferenceChangeListener(this);
 
         transformationPreference = (ListPreference) findPreference(KEY_TRANSFORMATION);
         transformationPreference.setOnPreferenceChangeListener(this);
@@ -183,6 +188,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         orientationPreference.setSummary(formatOrientationSummary(settings.getOrientation()));
         orientationPreference.setEnabled(settings.isNoRootVideoEncoder());
 
+        timeLapsePreference.setValue(String.valueOf(settings.getTimeLapse()));
+        timeLapsePreference.setSummary(formatTimeLapseSummary(settings.getTimeLapse()));
+
         transformationPreference.setValue(settings.getTransformation().name());
         transformationPreference.setSummary(formatTransformationSummary(settings.getTransformation()));
         transformationPreference.setEnabled(!settings.isNoRootVideoEncoder() && settings.getVideoEncoder() >= 0);
@@ -198,15 +206,16 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         verticalFramesPreference.setEnabled(!settings.isNoRootVideoEncoder());
 
         audioSourcePreference.setValue(settings.getAudioSource().name());
-        audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource()));
+        audioSourcePreference.setSummary(formatAudioSourceSummary(settings.getAudioSource(), settings.getTimeLapse() != 1));
+        audioSourcePreference.setEnabled(settings.getTimeLapse() == 1);
 
         samplingRatePreference.setValue(settings.getSamplingRate().name());
         samplingRatePreference.setSummary(formatSamplingRateSummary());
-        samplingRatePreference.setEnabled(!settings.getAudioSource().equals(AudioSource.MUTE));
+        samplingRatePreference.setEnabled(settings.getTimeLapse() == 1 && !settings.getAudioSource().equals(AudioSource.MUTE));
 
         micGainPreference.setValue(gainToIndex(settings.getMicGain()));
         micGainPreference.setSummary(formatMicGain());
-        micGainPreference.setEnabled(settings.getAudioSource() == AudioSource.MIX);
+        micGainPreference.setEnabled(settings.getTimeLapse() == 1 && settings.getAudioSource() == AudioSource.MIX);
 
         hideIconPreference.setChecked(settings.getHideIcon());
         showTouchesPreference.setChecked(settings.getShowTouches());
@@ -232,6 +241,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 return getString(R.string.settings_orientation_portrait);
         }
         return "";
+    }
+
+    private String formatTimeLapseSummary(int timeLapse) {
+        if (timeLapse == 1) {
+            return getString(R.string.settings_time_lapse_summary_no_time_lapse);
+        }
+        return getString(R.string.settings_time_lapse_summary, timeLapse);
     }
 
     private void updateSelectedVideoConfig() {
@@ -328,6 +344,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         updateSamplingRate();
 
         addRemovePreference(settings.isRootFlavor(), KEY_COLOR_FIX, colorFixPreference, otherCategory);
+
+        String[] timeLapseValues = getResources().getStringArray(R.array.time_lapse_values);
+        timeLapsePreference.setEntryValues(timeLapseValues);
+        timeLapsePreference.setEntries(getTimeLapseEntries(timeLapseValues));
     }
 
     private void updateSamplingRate() {
@@ -589,6 +609,21 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return entries;
     }
 
+    private String[] getTimeLapseEntries(String[] values) {
+        String[] entries = new String[values.length];
+        for (int i = 0; i < entries.length; i++) {
+            entries[i] = formatTimeLapseEntry(Integer.parseInt(values[i]));
+        }
+        return entries;
+    }
+
+    private String formatTimeLapseEntry(int timeLapse) {
+        if (timeLapse == 1) {
+            return getString(R.string.settings_time_lapse_entry_no_time_lapse, timeLapse);
+        }
+        return getString(R.string.settings_time_lapse_entry, timeLapse);
+    }
+
     private String formatVideoEncoderSummary(int videoEncoder) {
         switch (videoEncoder) {
             case VideoEncoder.FFMPEG_MPEG_4:
@@ -658,7 +693,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return String.format(getString(R.string.settings_frame_rate_summary), frameRate);
     }
 
-    private String formatAudioSourceSummary(AudioSource source) {
+    private String formatAudioSourceSummary(AudioSource source, boolean isTimeLapse) {
+        if (isTimeLapse) {
+            return getString(R.string.settings_audio_time_lapse_summary);
+        }
         switch (source) {
             case MIC:
                 return getString(R.string.settings_audio_mic_summary);
@@ -754,6 +792,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             Orientation orientation = Orientation.valueOf(valueString);
             settings.setOrientation(orientation);
             preference.setSummary(formatOrientationSummary(orientation));
+
+        } else if (preference == timeLapsePreference) {
+            settings.setTimeLapse(Integer.parseInt(valueString));
+            updateValues();
 
         } else if (preference == transformationPreference) {
             Transformation transformation = Transformation.valueOf(valueString);

@@ -61,5 +61,12 @@
         <item>LANDSCAPE</item>
         <item>PORTRAIT</item>
     </string-array>
+    <string-array name="time_lapse_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
 
 </resources>

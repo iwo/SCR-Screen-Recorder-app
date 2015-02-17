@@ -19,6 +19,7 @@ public class Settings {
     private static final String RESOLUTION_WIDTH = "RESOLUTION_WIDTH";
     private static final String RESOLUTION_HEIGHT = "RESOLUTION_HEIGHT";
     private static final String ORIENTATION = "ORIENTATION";
+    private static final String TIME_LAPSE = "TIME_LAPSE";
     private static final String FRAME_RATE = "FRAME_RATE";
     private static final String TRANSFORMATION = "TRANSFORMATION";
     private static final String SAMPLING_RATE = "SAMPLING_RATE";
@@ -55,6 +56,7 @@ public class Settings {
     private Resolution defaultResolution;
     private ResolutionsManager resolutionsManager;
     private Orientation orientation = Orientation.AUTO;
+    private int timeLapse = 1;
     private int defaultFrameRate = 30;
     private int frameRate = defaultFrameRate;
     private Transformation transformation = Transformation.GPU;
@@ -149,6 +151,8 @@ public class Settings {
         } catch (IllegalArgumentException e) {
             this.orientation = Orientation.LANDSCAPE;
         }
+
+        timeLapse = preferences.getInt(TIME_LAPSE, 1);
 
         frameRate = preferences.getInt(FRAME_RATE, defaultFrameRate);
 
@@ -383,6 +387,15 @@ public class Settings {
         settingsModified(preferences.edit().putString(ORIENTATION, orientation.name()));
     }
 
+    public int getTimeLapse() {
+        return timeLapse;
+    }
+
+    public void setTimeLapse(int timeLapse) {
+        this.timeLapse = timeLapse;
+        settingsModified(preferences.edit().putInt(TIME_LAPSE, timeLapse));
+    }
+
     public int getFrameRate() {
         return frameRate;
     }
@@ -559,6 +572,9 @@ public class Settings {
         orientation = Orientation.AUTO;
         editor.remove(ORIENTATION);
 
+        timeLapse = 1;
+        editor.remove(TIME_LAPSE);
+
         frameRate = defaultFrameRate;
         editor.remove(FRAME_RATE);
 
@@ -621,6 +637,7 @@ public class Settings {
                 && samplingRate == defaultSamplingRate
                 && videoBitrate == defaultVideoBitrate
                 && colorFix == defaultColorFix
+                && timeLapse == 1
                 && !hideIcon
                 && !showTouches
                 && stopOnScreenOff
@@ -635,6 +652,7 @@ public class Settings {
                 && samplingRate == defaultSamplingRate
                 && videoBitrate == defaultVideoBitrate
                 && colorFix == defaultColorFix
+                && timeLapse == 1
                 && videoEncoder == defaultVideoEncoder;
     }
 

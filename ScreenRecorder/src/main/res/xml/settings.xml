@@ -66,6 +66,13 @@
             android:summary="@string/settings_vertical_frames_warning"
             android:title="@string/settings_vertical_frames" />
 
+        <ListPreference
+            android:entries="@array/empty_array"
+            android:entryValues="@array/empty_array"
+            android:key="time_lapse"
+            android:persistent="false"
+            android:title="@string/settings_time_lapse" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_audio_category">
