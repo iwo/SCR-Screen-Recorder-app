@@ -302,6 +302,9 @@ class NativeProcess implements Runnable, INativeCommandRunner {
             Log.v(TAG, "Audio muted for this recording");
             audioSource = AudioSource.MUTE.getCommand();
             settings.setTemporaryMute(false);
+        } else if (settings.getTimeLapse() != 1) {
+            Log.v(TAG, "Audio muted for time-lapse recording");
+            audioSource = AudioSource.MUTE.getCommand();
         } else {
             audioSource = settings.getAudioSource().getCommand();
         }
@@ -312,12 +315,21 @@ class NativeProcess implements Runnable, INativeCommandRunner {
             samplingRate = settings.getSamplingRate().getSamplingRate();
         }
 
+        int frameRate = settings.getFrameRate();
+        if (settings.getTimeLapse() != 1) {
+            // use 60fps if frame rate is set to Max
+            if (frameRate == -1) {
+                frameRate = 60;
+            }
+            frameRate /= settings.getTimeLapse();
+        }
+
         String startCommand = "start " + rotation + " " + audioSource + " "
                 + settings.getResolution().getVideoWidth() + " "
                 + settings.getResolution().getVideoHeight() + " "
                 + settings.getResolution().getPaddingWidth() + " "
                 + settings.getResolution().getPaddingHeight() + " "
-                + settings.getFrameRate() + " "
+                + frameRate + " "
                 + settings.getTransformation().name() + " "
                 + (settings.getColorFix() ? "BGRA" : "RGBA") + " "
                 + settings.getVideoBitrate().getCommand() + " "
@@ -345,6 +357,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
                     " audioSource: " + settings.getAudioSource().name() +
                     " resolution: " + settings.getResolution().getWidth() + " x " + settings.getResolution().getHeight() +
                     " frameRate: " + settings.getFrameRate() +
+                    " timeLapse: " + settings.getTimeLapse() +
                     " transformation: " + settings.getTransformation().name() +
                     " videoBitrate: " + settings.getVideoBitrate().name() +
                     " samplingRate: " + settings.getSamplingRate().name() +

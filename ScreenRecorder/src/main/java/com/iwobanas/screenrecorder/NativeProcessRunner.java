@@ -5,6 +5,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.iwobanas.screenrecorder.settings.Settings;
 
 import static com.iwobanas.screenrecorder.Tracker.*;
 
@@ -95,7 +96,11 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
                 setState(RecordingProcessState.STOPPING, recordingInfo);
                 break;
             case FINISHED:
-                setState(RecordingProcessState.FINISHED, recordingInfo);
+                if (processTimeLapse(recordingInfo)) {
+                    setState(RecordingProcessState.FINISHED, recordingInfo);
+                } else {
+                    setState(RecordingProcessState.UNKNOWN_RECORDING_ERROR, recordingInfo);
+                }
                 break;
             case CPU_NOT_SUPPORTED_ERROR:
                 setState(RecordingProcessState.CPU_NOT_SUPPORTED_ERROR, null);
@@ -126,6 +131,15 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
             default:
                 break;
         }
+    }
+
+    private boolean processTimeLapse(RecordingInfo recordingInfo) {
+        int timeLapse = Settings.getInstance().getTimeLapse();
+        if (timeLapse == 1) {
+            return true;
+        }
+
+        return TimeLapseUtils.applyTimeLapse(recordingInfo, timeLapse);
     }
 
     private void handleStartupError(RecordingInfo recordingInfo) {
