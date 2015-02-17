@@ -9,4 +9,6 @@ local.properties
 ScreenRecorder/build
 ScreenRecorder/src/*/res/raw-v*/*
 notes.txt
+/videorepairlib
+
 
