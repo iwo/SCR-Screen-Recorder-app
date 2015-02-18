@@ -364,6 +364,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
             case STOPPING:
                 setState(RecorderServiceState.STOPPING);
                 break;
+            case PROCESSING:
+                setState(RecorderServiceState.PROCESSING);
+                break;
             case FINISHED:
                 recordingFinished(recordingInfo);
                 break;
@@ -626,6 +629,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 return getString(R.string.notification_status_recording);
             case STOPPING:
                 return getString(R.string.notification_status_stopping);
+            case PROCESSING:
+                return getString(R.string.notification_status_processing);
             case ERROR:
                 return getString(R.string.notification_status_error);
             case UNINSTALLING_AUDIO:
@@ -1044,6 +1049,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         STARTING,
         RECORDING,
         STOPPING,
+        PROCESSING,
         ERROR,
         UNINSTALLING_AUDIO
     }

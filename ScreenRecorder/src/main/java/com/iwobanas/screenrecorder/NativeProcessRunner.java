@@ -138,6 +138,7 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
         if (timeLapse == 1) {
             return true;
         }
+        setState(RecordingProcessState.PROCESSING, recordingInfo);
 
         return TimeLapseUtils.applyTimeLapse(recordingInfo, timeLapse);
     }

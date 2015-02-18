@@ -7,6 +7,7 @@ public enum RecordingProcessState {
     STARTING,
     RECORDING,
     STOPPING,
+    PROCESSING,
     FINISHED,
     DESTROYED,
 

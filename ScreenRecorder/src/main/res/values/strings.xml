@@ -329,6 +329,7 @@ so if you require this feature and your device is rooted install SCR Screen Reco
     <string name="notification_status_recording">Recording</string>
     <string name="notification_status_error">Error</string>
     <string name="notification_status_stopping">Stopping</string>
+    <string name="notification_status_processing">Processing</string>
     <string name="notification_status_uninstalling_audio">Uninstalling Audio driver</string>
 
     <string name="sale_title">Sale</string>
