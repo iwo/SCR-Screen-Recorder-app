@@ -235,8 +235,8 @@ so if you require this feature and your device is rooted install SCR Screen Reco
     <string name="settings_orientation_anticlockwise">rotate anticlockwise</string>
 
     <string name="settings_time_lapse">Time-lapse</string>
-    <string name="settings_time_lapse_summary_no_time_lapse">Actual video speed</string>
-    <string name="settings_time_lapse_summary">%1$d times speed increase</string>
+    <string name="settings_time_lapse_summary_no_time_lapse">Normal video speed</string>
+    <string name="settings_time_lapse_summary">%1$d times faster</string>
     <string name="settings_time_lapse_entry">x %1$d</string>
     <string name="settings_time_lapse_entry_no_time_lapse">x %1$d - no time-lapse</string>
     <string name="settings_audio_time_lapse_summary">Disable time-lapse to record audio</string>
