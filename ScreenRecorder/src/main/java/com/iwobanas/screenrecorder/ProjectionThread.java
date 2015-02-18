@@ -66,6 +66,7 @@ public class ProjectionThread implements Runnable {
     private int videoHeight;
     private int videoBitrate;
     private int frameRate;
+    private int timeLapse;
     private int sampleRate;
     private boolean hasAudio;
     private RecordingInfo recordingInfo;
@@ -138,8 +139,9 @@ public class ProjectionThread implements Runnable {
 
         videoBitrate = s.getVideoBitrate().getBitrate();
         frameRate = s.getFrameRate();
+        timeLapse = s.getTimeLapse();
 
-        hasAudio = s.getAudioSource() != AudioSource.MUTE;
+        hasAudio = (timeLapse == 1) && (s.getAudioSource() != AudioSource.MUTE);
         if (s.getTemporaryMute()) {
             Log.v(TAG, "Audio muted for this recording");
             hasAudio = false;
@@ -261,7 +263,7 @@ public class ProjectionThread implements Runnable {
             startTimestampUs = System.nanoTime() / 1000;
             startTimestampInitialized = true;
         }
-        return System.nanoTime() / 1000 - startTimestampUs;
+        return (System.nanoTime() / 1000 - startTimestampUs) / timeLapse;
     }
 
     private void startMuxerIfSetUp() {
