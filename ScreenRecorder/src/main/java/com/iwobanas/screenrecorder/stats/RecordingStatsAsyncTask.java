@@ -18,15 +18,17 @@ public class RecordingStatsAsyncTask extends StatsBaseAsyncTask {
         if (recordingInfo.fileName != null) {
             params.put("recording_id", new File(recordingInfo.fileName).getName());
         }
+        int timeLapse = Settings.getInstance().getTimeLapse();
         params.put("error_code", String.valueOf(recordingInfo.exitValue));
         params.put("recording_size", String.valueOf(recordingInfo.size));
-        params.put("recording_time", String.valueOf(recordingInfo.time));
-        params.put("recording_fps", String.valueOf(recordingInfo.fps));
+        params.put("recording_time", String.valueOf(recordingInfo.time / timeLapse));
+        params.put("recording_fps", String.valueOf(recordingInfo.fps * timeLapse));
         params.put("rotation", String.valueOf(recordingInfo.rotation));
         params.put("adjusted_rotation", String.valueOf(recordingInfo.adjustedRotation));
         params.put("vertical_input", String.valueOf(recordingInfo.verticalInput));
         params.put("rotate_view", String.valueOf(recordingInfo.rotateView));
         params.put("front_camera", formatBoolean(Utils.hasFrontFacingCamera(context)));
+        params.put("time_lapse", String.valueOf(timeLapse));
     }
 
     @Override
