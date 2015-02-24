@@ -22,6 +22,7 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
     private View contentView;
     private ViewGroup.MarginLayoutParams contentViewParams;
     private boolean scaling;
+    private boolean inWindowTransition;
     private float focusRatioX;
     private float focusRatioY;
     private float width;
@@ -49,11 +50,30 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
                 contentViewParams = new ViewGroup.MarginLayoutParams(params.width, params.height);
             }
         }
+
+        if (inWindowTransition) {
+            return false;
+        }
+
+        if (!eventOffsetValid(event)) {
+            Log.v(TAG, "Ignoring inconsistent event");
+            return false;
+        }
+
         scaleGestureDetector.onTouchEvent(event);
+
         if (scaling) {
             return true;
         }
         return super.onTouch(v, event);
+    }
+
+    private boolean eventOffsetValid(MotionEvent event) {
+        Rect frame = new Rect();
+        view.getWindowVisibleDisplayFrame(frame);
+
+        return Math.abs(event.getRawX() - frame.left - getViewX() - event.getX()) < 10
+                && Math.abs(event.getRawY() - frame.top - getViewY() - event.getY()) < 10;
     }
 
     @Override
@@ -62,11 +82,11 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
 
         boolean dragInterrupted = interruptDrag();
         scaling = true;
-        makeWindowFullScreen();
         focusRatioX = detector.getFocusX() / view.getWidth();
         focusRatioY = detector.getFocusY() / view.getHeight();
         width = params.width;
         height = params.height;
+        makeWindowFullScreen();
 
         if (!dragInterrupted) {
             notifyDragStart();
@@ -80,6 +100,8 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
      * and modify a content view within that window.
      */
     private void makeWindowFullScreen() {
+
+        inWindowTransition = true;
 
         contentViewParams.leftMargin = getViewX();
         contentViewParams.topMargin = getViewY();
@@ -98,6 +120,7 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
                 params.height = WindowManager.LayoutParams.MATCH_PARENT;
                 updateViewLayout(view);
+                inWindowTransition = false;
                 Log.v(TAG, "Start transition finished");
             }
         });
@@ -127,6 +150,14 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
 
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
+
+        //if (1 < 2)
+        //    return true;
+
+        if (inWindowTransition) {
+            return true;
+        }
+
         float scale = detector.getScaleFactor();
 
         if (scale > 1.1f) {
@@ -186,6 +217,7 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
     }
 
     private void shrinkFullScreenWindow() {
+        inWindowTransition = true;
 
         final float originalAlpha = params.alpha;
 
@@ -211,6 +243,7 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
 
                 params.alpha = originalAlpha;
                 setGravityAndPosition(view, x, y);
+                inWindowTransition = false;
                 Log.v(TAG, "End transition finished");
             }
         });
