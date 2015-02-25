@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.WindowManager;
 
 public class OverlayPositionPersister {
-    private static final String TAG = "scr_ViewPositionPersister";
+    private static final String TAG = "scr_PositionPersister";
 
     private static final String SCR_UI_PREFERENCES = "scr_ui";
     private static final String POSITION_X = "_POSITION_X";
