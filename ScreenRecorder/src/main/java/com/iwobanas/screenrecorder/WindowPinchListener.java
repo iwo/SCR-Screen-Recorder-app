@@ -55,11 +55,14 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
         }
 
         if (!eventOffsetValid(event)) {
-            Log.v(TAG, "Ignoring inconsistent event");
             return false;
         }
 
         scaleGestureDetector.onTouchEvent(event);
+
+        if (inWindowTransition) {
+            return false;
+        }
 
         if (scaling) {
             return true;

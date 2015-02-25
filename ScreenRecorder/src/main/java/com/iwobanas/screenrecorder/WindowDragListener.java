@@ -32,6 +32,7 @@ class WindowDragListener implements View.OnTouchListener {
     public boolean onTouch(final View view, MotionEvent motionEvent) {
         switch (motionEvent.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
                 if (!dragging) {
                     dragStartX = (int) motionEvent.getX();
                     dragStartY = (int) motionEvent.getY();
@@ -40,15 +41,15 @@ class WindowDragListener implements View.OnTouchListener {
                     notifyDragStart();
                     return true;
                 }
-                // fall through
-            case MotionEvent.ACTION_MOVE:
                 float x = motionEvent.getRawX() - dragStartX;
                 float y = motionEvent.getRawY() - dragStartY;
                 return setGravityAndPosition(view, x, y);
 
+            case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
                 if (dragging) {
+                    Log.v(TAG, "Drag end");
                     dragging = false;
                     notifyDragEnd();
                     return true;
