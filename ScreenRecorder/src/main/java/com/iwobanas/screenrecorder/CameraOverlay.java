@@ -17,7 +17,6 @@ import android.view.Gravity;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
@@ -27,15 +26,19 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class CameraOverlay extends AbstractScreenOverlay implements TextureView.SurfaceTextureListener, SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "scr_FaceOverlay";
     private static final String FACE_OVERLAY = "FACE_OVERLAY";
+    private static final String FACE_OVERLAY_WIDTH = "FACE_OVERLAY_WIDTH";
+    private static final String FACE_OVERLAY_HEIGHT = "FACE_OVERLAY_HEIGHT";
     private static final int MSG_OPEN_CAMERA = 1;
     private static final int MSG_SHOW_PROGRESS_BAR = 2;
 
     private static CameraOverlay activeInstance;
 
     int screenPortion = 4; // 1/4 of the longer edge of the screen
+    int minScreenPortion = 8; // 1/8 of the longer edge of the screen
     private WindowManager.LayoutParams layoutParams;
     private Camera camera;
     private int cameraOrientation;
@@ -55,8 +58,8 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
             }
         }
     };
-    private int width = 160;
-    private int height = 120;
+    private int width;
+    private int height;
     private boolean previewStarted = false;
     private boolean frameReceived = false;
     private OverlayPositionPersister positionPersister;
@@ -139,7 +142,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
                     return;
                 }
                 previewSize = selectPreviewSize(sizes);
-                initializeSurfaceSize();
+                updateSurfaceAspectRatio();
                 params.setPreviewSize(previewSize.width, previewSize.height);
                 camera.setParameters(params);
                 updateCameraRotation();
@@ -155,12 +158,9 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
         }
     }
 
-    private void initializeSurfaceSize() {
-        Point displaySize = new Point();
-        getDefaultDisplay().getSize(displaySize);
-
-        width = Math.max(displaySize.y, displaySize.x) / screenPortion;
+    private void updateSurfaceAspectRatio() {
         height = width * previewSize.height / previewSize.width;
+        persistSize();
     }
 
     private Camera.Size selectPreviewSize(List<Camera.Size> sizes) {
@@ -180,10 +180,8 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
         Point displaySize = new Point();
         getDefaultDisplay().getSize(displaySize);
 
-        int targetWidth = Math.max(displaySize.y, displaySize.x) / screenPortion;
-
         for (Camera.Size size : sizes) {
-            if (size.width >= targetWidth) {
+            if (size.width >= width) {
                 Log.v(TAG, "Selected preview size: " + size.width + "x" + size.height);
                 return size;
             }
@@ -192,19 +190,13 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     }
 
     private void updateSurfaceSize() {
-        if (textureView == null) return;
-        ViewGroup.LayoutParams lp = textureView.getLayoutParams();
-        if (lp == null) {
-            lp = new ViewGroup.LayoutParams(1, 1);
-        }
         boolean rotateInDefault = cameraOrientation % 180 == 0;
         boolean rotate = displayRotation == Surface.ROTATION_0 || displayRotation == Surface.ROTATION_180
                 ? rotateInDefault : !rotateInDefault;
 
-        lp.width = rotate ? width : height;
-        lp.height = rotate ? height : width;
-
-        textureView.setLayoutParams(lp);
+        layoutParams.width = rotate ? width : height;
+        layoutParams.height = rotate ? height : width;
+        updateLayoutParams();
     }
 
     private void updateCameraRotation() {
@@ -297,9 +289,31 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
 
         progressBar = (ProgressBar) rootView.findViewById(R.id.progress_bar);
 
-        rootView.setOnTouchListener(new WindowDragListener(getLayoutParams()));
+        Point displaySize = new Point();
+        getDefaultDisplay().getSize(displaySize);
+        float minSize = Math.max(displaySize.y, displaySize.x) / minScreenPortion;
+
+        WindowPinchListener windowPinchListener = new WindowPinchListener(getContext(), getLayoutParams(), minSize);
+        windowPinchListener.setDragEndListener(new WindowDragListener.OnWindowDragEndListener() {
+            @Override
+            public void onDragEnd() {
+                persistSizeAfterScale();
+            }
+        });
+        rootView.setOnTouchListener(windowPinchListener);
 
         return rootView;
+    }
+
+    private void persistSizeAfterScale() {
+        if (width > height) {
+            width = Math.max(layoutParams.width, layoutParams.height);
+            height = Math.min(layoutParams.width, layoutParams.height);
+        } else {
+            width = Math.min(layoutParams.width, layoutParams.height);
+            height = Math.max(layoutParams.width, layoutParams.height);
+        }
+        persistSize();
     }
 
     private int getFrontFacingCamera() {
@@ -336,11 +350,14 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
             );
             layoutParams.format = PixelFormat.TRANSLUCENT;
             layoutParams.setTitle(getContext().getString(R.string.app_name));
-            layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-            layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            readSize();
+            layoutParams.width = width;
+            layoutParams.height = height;
             layoutParams.x = 10;
             layoutParams.y = 10;
             layoutParams.gravity = Gravity.TOP | Gravity.RIGHT;
+            layoutParams.rotationAnimation = 0;
+            layoutParams.windowAnimations = 0;
             positionPersister = new OverlayPositionPersister(getContext(), FACE_OVERLAY, layoutParams);
         }
         return layoutParams;
@@ -348,11 +365,30 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
 
     @Override
     public void onDestroy() {
+        persistSize();
         if (positionPersister != null) {
             positionPersister.persistPosition();
         }
 
         Settings.getInstance().unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    private void readSize() {
+        SharedPreferences preferences = getContext().getSharedPreferences(OverlayPositionPersister.SCR_UI_PREFERENCES, Context.MODE_PRIVATE);
+
+        Point displaySize = new Point();
+        getDefaultDisplay().getSize(displaySize);
+        int defaultWidth = Math.max(displaySize.y, displaySize.x) / screenPortion;
+        width = preferences.getInt(FACE_OVERLAY_WIDTH, defaultWidth);
+        height = preferences.getInt(FACE_OVERLAY_HEIGHT, (defaultWidth * 3) / 4);
+    }
+
+    private void persistSize() {
+        getContext().getSharedPreferences(OverlayPositionPersister.SCR_UI_PREFERENCES, Context.MODE_PRIVATE)
+                .edit()
+                .putInt(FACE_OVERLAY_WIDTH, width)
+                .putInt(FACE_OVERLAY_HEIGHT, height)
+                .apply();
     }
 
     @Override
