@@ -2,7 +2,9 @@ package com.iwobanas.screenrecorder;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.PixelFormat;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -97,11 +99,16 @@ public class RecorderOverlay extends AbstractScreenOverlay {
             layoutParams.setTitle(getContext().getString(R.string.app_name));
             layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-            layoutParams.y = -200; // offset so that overlay doesn't cover permission dialog
+            layoutParams.y = dpiToPx(-140); // offset so that overlay doesn't cover permission dialog
             layoutParams.gravity = Gravity.CENTER;
             positionPersister = new OverlayPositionPersister(getContext(), RECORDER_OVERLAY, layoutParams);
         }
         return layoutParams;
+    }
+
+    private int dpiToPx(int dpi) {
+        Resources r = getContext().getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpi, r.getDisplayMetrics()));
     }
 
     @Override
