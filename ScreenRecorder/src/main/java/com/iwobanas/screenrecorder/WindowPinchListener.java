@@ -26,10 +26,12 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
     private float focusRatioY;
     private float width;
     private float height;
+    private float minSize;
 
 
-    WindowPinchListener(Context context, WindowManager.LayoutParams params) {
+    WindowPinchListener(Context context, WindowManager.LayoutParams params, float minSize) {
         super(params);
+        this.minSize = minSize;
         handler = new Handler();
         scaleGestureDetector = new ScaleGestureDetector(context, this);
     }
@@ -169,7 +171,7 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
 
         float scale = detector.getScaleFactor();
 
-        if (scale > 1.1f) {
+        if (scale > 1.5f) {
             Log.v(TAG, "Ignoring excessive scale update: " + detector.getScaleFactor());
             return true;
         }
@@ -182,8 +184,16 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
 
         int w = (int) width;
         int h = (int) height;
-        int x = (int) (screenToViewX(detector.getFocusX()) - width * focusRatioX);
-        int y = (int) (screenToViewY(detector.getFocusY()) - height * focusRatioY);
+
+        if (w < minSize) {
+            w = (int) minSize;
+            h = (int) (minSize * height / width);
+        }
+
+        if (h < minSize) {
+            h = (int) minSize;
+            w = (int) (minSize * width / height);
+        }
 
         if (w > frame.width()) {
             w = frame.width();
@@ -194,6 +204,9 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
             h = frame.height();
             w = (int) (frame.height() * width / height);
         }
+
+        int x = (int) (screenToViewX(detector.getFocusX()) - w * focusRatioX);
+        int y = (int) (screenToViewY(detector.getFocusY()) - h * focusRatioY);
 
         if (x < 0) {
             x = 0;
@@ -230,8 +243,8 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
 
         final float originalAlpha = params.alpha;
 
-        params.width = (int) width;
-        params.height = (int) height;
+        params.width = contentViewParams.width;
+        params.height = contentViewParams.height;
         params.alpha = 0;
         updateViewLayout(view);
 
