@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -69,11 +68,8 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
     }
 
     private boolean eventOffsetValid(MotionEvent event) {
-        Rect frame = new Rect();
-        view.getWindowVisibleDisplayFrame(frame);
-
-        return Math.abs(event.getRawX() - frame.left - getViewX() - event.getX()) < 10
-                && Math.abs(event.getRawY() - frame.top - getViewY() - event.getY()) < 10;
+        return Math.abs(screenToViewX(event.getRawX()) - event.getX()) < 10
+                && Math.abs(screenToViewY(event.getRawY()) - event.getY()) < 10;
     }
 
     @Override
@@ -82,8 +78,9 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
 
         boolean dragInterrupted = interruptDrag();
         scaling = true;
-        focusRatioX = detector.getFocusX() / view.getWidth();
-        focusRatioY = detector.getFocusY() / view.getHeight();
+
+        focusRatioX = screenToViewX(detector.getFocusX()) / view.getWidth();
+        focusRatioY = screenToViewY(detector.getFocusY()) / view.getHeight();
         width = params.width;
         height = params.height;
         makeWindowFullScreen();
@@ -148,11 +145,20 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
         return params.y;
     }
 
+    private float screenToViewX(float screenX) {
+        Rect frame = new Rect();
+        view.getWindowVisibleDisplayFrame(frame);
+        return screenX - frame.left - getViewX();
+    }
+
+    private float screenToViewY(float screenY) {
+        Rect frame = new Rect();
+        view.getWindowVisibleDisplayFrame(frame);
+        return screenY - frame.top - getViewY();
+    }
+
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
-
-        //if (1 < 2)
-        //    return true;
 
         if (inWindowTransition) {
             return true;
@@ -173,8 +179,8 @@ public class WindowPinchListener extends WindowDragListener implements ScaleGest
 
         int w = (int) width;
         int h = (int) height;
-        int x = (int) (detector.getFocusX() - width * focusRatioX);
-        int y = (int) (detector.getFocusY() - height * focusRatioY);
+        int x = (int) (screenToViewX(detector.getFocusX()) - width * focusRatioX);
+        int y = (int) (screenToViewY(detector.getFocusY()) - height * focusRatioY);
 
         if (w > frame.width()) {
             w = frame.width();
