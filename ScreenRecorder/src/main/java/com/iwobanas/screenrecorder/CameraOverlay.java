@@ -393,7 +393,9 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
             int cameraId = integers[0];
             Log.v(TAG, "Opening camera: " + cameraId);
             try {
-                return Camera.open(cameraId);
+                Camera camera = Camera.open(cameraId);
+                camera.startPreview();
+                return camera;
             } catch (Exception e) {
                 Log.e(TAG, "Error opening camera", e);
                 return null;
