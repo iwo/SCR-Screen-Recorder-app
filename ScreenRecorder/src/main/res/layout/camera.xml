@@ -20,5 +20,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/camera_error"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone" />
+
     </FrameLayout>
 </FrameLayout>

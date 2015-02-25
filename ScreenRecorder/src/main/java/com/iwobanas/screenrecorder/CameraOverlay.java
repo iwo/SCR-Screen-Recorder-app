@@ -19,6 +19,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.iwobanas.screenrecorder.settings.Settings;
 
@@ -45,6 +46,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     private View rootView;
     private TextureView textureView;
     private ProgressBar progressBar;
+    private TextView errorText;
     private Camera.Size previewSize;
     private int displayRotation = -1;
     private BroadcastReceiver configChangeReceiver = new BroadcastReceiver() {
@@ -78,9 +80,8 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
                         openCamera();
                         break;
                     case MSG_SHOW_PROGRESS_BAR:
-                        if (progressBar != null) {
-                            progressBar.setVisibility(View.VISIBLE);
-                        }
+                        showProgressBar();
+                        break;
                 }
             }
         };
@@ -120,16 +121,16 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     }
 
     private void onCameraOpened(Camera camera) {
-        if (camera == null) {
-            Log.w(TAG, "No camera received");
-        } else {
-            Log.v(TAG, "Camera opened");
-        }
         this.camera = camera;
         openingCamera = false;
 
-        getDefaultDisplay().getRotation();
-        startPreview();
+        if (camera == null) {
+            Log.w(TAG, "No camera received");
+            showErrorMessage();
+        } else {
+            Log.v(TAG, "Camera opened");
+            startPreview();
+        }
     }
 
     private void startPreview() {
@@ -139,6 +140,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
                 List<Camera.Size> sizes = params.getSupportedPreviewSizes();
                 if (sizes == null) {
                     Log.e(TAG, "Camera not initialized correctly");
+                    showErrorMessage();
                     return;
                 }
                 previewSize = selectPreviewSize(sizes);
@@ -148,13 +150,32 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
                 updateCameraRotation();
                 updateSurfaceSize();
                 frameReceived = false;
-                progressBar.setVisibility(View.VISIBLE);
+                showProgressBar();
                 camera.setPreviewTexture(textureView.getSurfaceTexture());
                 camera.startPreview();
                 previewStarted = true;
             } catch (Exception e) {
                 Log.e(TAG, "Can't set preview display ", e);
+                showErrorMessage();
             }
+        }
+    }
+
+    private void showErrorMessage() {
+        if (errorText != null) {
+            errorText.setVisibility(View.VISIBLE);
+        }
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    private void showProgressBar() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+        if (errorText != null) {
+            errorText.setVisibility(View.GONE);
         }
     }
 
@@ -288,6 +309,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
         textureView.setSurfaceTextureListener(this);
 
         progressBar = (ProgressBar) rootView.findViewById(R.id.progress_bar);
+        errorText = (TextView) rootView.findViewById(R.id.error_text);
 
         Point displaySize = new Point();
         getDefaultDisplay().getSize(displaySize);
