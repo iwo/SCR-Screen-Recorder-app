@@ -67,6 +67,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     private OverlayPositionPersister positionPersister;
     private Handler handler;
     private boolean openingCamera;
+    private boolean releaseWhenOpen;
 
     public CameraOverlay(Context context) {
         super(context);
@@ -123,6 +124,12 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     private void onCameraOpened(Camera camera) {
         this.camera = camera;
         openingCamera = false;
+
+        if (releaseWhenOpen) {
+            releaseWhenOpen = false;
+            doReleaseCamera();
+            return;
+        }
 
         if (camera == null) {
             Log.w(TAG, "No camera received");
@@ -252,6 +259,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
 
     private void openCamera() {
         if (openingCamera) {
+            releaseWhenOpen = false;
             Log.w(TAG, "Camera already opening");
             return;
         }
@@ -259,6 +267,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
             Log.w(TAG, "Camera already open");
             return;
         }
+        openingCamera = true;
 
         Log.v(TAG, "Opening camera");
         int frontFacingCamera = getFrontFacingCamera();
@@ -286,6 +295,11 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     }
 
     private synchronized void doReleaseCamera() {
+        if (openingCamera) {
+            Log.w(TAG, "Camera release requested before async open completed");
+            releaseWhenOpen = true;
+            return;
+        }
         if (camera == null) return;
         try {
             previewStarted = false;
