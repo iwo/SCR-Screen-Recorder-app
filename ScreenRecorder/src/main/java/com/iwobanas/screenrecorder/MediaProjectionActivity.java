@@ -23,17 +23,18 @@ public class MediaProjectionActivity extends Activity {
         if (requestCode == PERMISSION_CODE) {
             Intent serviceIntent = new Intent(this, RecorderService.class);
             if (resultCode != RESULT_OK) {
-                serviceIntent.setAction(RecorderService.PROJECTION_DENY_ACTION);
+                if (RecorderService.isRunning()) {
+                    serviceIntent.setAction(RecorderService.PROJECTION_DENY_ACTION);
+                    startService(serviceIntent);
+                }
             } else {
                 serviceIntent.setAction(RecorderService.SET_PROJECTION_ACTION);
                 serviceIntent.putExtra(RecorderService.PROJECTION_DATA_EXTRA, data);
+                startService(serviceIntent);
             }
-            startService(serviceIntent);
         } else {
             //TODO: report error to analytics
         }
-
-
         finish();
     }
 }

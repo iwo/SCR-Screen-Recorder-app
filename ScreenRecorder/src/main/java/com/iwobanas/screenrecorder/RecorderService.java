@@ -94,6 +94,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     // Licensing
     private static final byte[] LICENSE_SALT = new byte[]{95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47, 122};
 
+    private static int runningInstances;
+
     private IScreenOverlay watermarkOverlay = new WatermarkOverlay(this);
     private RecorderOverlay recorderOverlay = new RecorderOverlay(this, this);
     private CameraOverlay cameraOverlay;
@@ -126,6 +128,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     @Override
     public void onCreate() {
+        runningInstances++;
         EasyTracker.getInstance().setContext(getApplicationContext());
         initializeExceptionParser();
         handler = new Handler();
@@ -866,6 +869,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         audioDriver.removeInstallListener(this);
         destroyed = true;
         markShutDownCorrectly();
+        runningInstances--;
     }
 
     private void checkShutDownCorrectly() {
@@ -1038,6 +1042,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
         Settings.getInstance().setAudioSource(AudioSource.MUTE);
         String message = getString(R.string.internal_audio_unstable_message, getString(R.string.settings_audio_mute));
         displayErrorMessage(message, getString(R.string.internal_audio_unstable_title), true, true, 2001);
+    }
+
+    public static boolean isRunning() {
+        return runningInstances > 0;
     }
 
     private static enum RecorderServiceState {
