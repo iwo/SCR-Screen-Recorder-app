@@ -392,7 +392,6 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
             layoutParams.x = 10;
             layoutParams.y = 10;
             layoutParams.gravity = Gravity.TOP | Gravity.RIGHT;
-            layoutParams.rotationAnimation = 0;
             layoutParams.windowAnimations = 0;
             positionPersister = new OverlayPositionPersister(getContext(), FACE_OVERLAY, layoutParams);
         }
