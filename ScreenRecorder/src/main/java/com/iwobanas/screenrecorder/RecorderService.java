@@ -71,6 +71,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public static final String LICENSE_DIALOG_CLOSED = "scr.intent.action.LICENSE_DIALOG_CLOSED";
     public static final String RESTART_MUTE_ACTION = "scr.intent.action.RESTART_MUTE";
     public static final String PLAY_ACTION = "scr.intent.action.PLAY";
+    public static final String REPAIR_ACTION = "scr.intent.action.REPAIR";
     public static final String PREFERENCES_NAME = "ScreenRecorderPreferences";
     public static final String START_RECORDING_ACTION = "scr.intent.action.START_RECORDING";
     public static final String DIALOG_CLOSED_ACTION = "scr.intent.action.DIALOG_CLOSED";
@@ -90,9 +91,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private static final String STOP_HELP_DISPLAYED_PREFERENCE = "stopHelpDisplayed";
     private static final String SHUT_DOWN_CORRECTLY = "SHUT_DOWN_CORRECTLY";
     private static final int FOREGROUND_NOTIFICATION_ID = 1;
+    private static final int SAVED_NOTIFICATION_ID = 2;
 
     // Licensing
     private static final byte[] LICENSE_SALT = new byte[]{95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47, 122};
+    public static final String VIDEO_REPAIR_PACKAGE = "com.iwobanas.videorepair";
+    public static final String VIDEO_REPAIR_ACTIVITY = "com.iwobanas.videorepair.RepairActivity";
 
     private static int runningInstances;
 
@@ -326,6 +330,37 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
     }
 
+    private void repairVideo(Uri fileUri) {
+        recorderOverlay.hide();
+        cameraOverlay.hide();
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        if (Utils.isPackageInstalled(VIDEO_REPAIR_PACKAGE, this)) {
+            intent.setClassName(VIDEO_REPAIR_PACKAGE, VIDEO_REPAIR_ACTIVITY);
+            intent.setData(fileUri);
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            try {
+                notificationManager.cancel(SAVED_NOTIFICATION_ID);
+            } catch (SecurityException e) {
+                Log.w(TAG, "Couldn't cancel notification", e);
+            }
+        } else {
+            intent.setData(Uri.parse("market://details?id=" + VIDEO_REPAIR_PACKAGE + "&referrer=utm_source%3DSCR%26utm_medium%3Dnotification%26utm_campaign%3Dbroken"));
+        }
+
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.video_repair_error_toast, getString(R.string.video_repair_app_name)), Toast.LENGTH_LONG).show();
+            Log.w(TAG, "Can't start repair activity", e);
+        }
+    }
+
     @Override
     public void close() {
         closing = true;
@@ -507,7 +542,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
     public void scanOutputAndNotify(int toastId, RecordingInfo recordingInfo) {
         String message = String.format(getString(toastId), recordingInfo.file.getName());
         Toast.makeText(RecorderService.this, message, Toast.LENGTH_LONG).show();
-        notificationSaved(scanFile(recordingInfo.file), recordingInfo.file.getName());
+        Uri uri = scanFile(recordingInfo.file);
+        if (recordingInfo.formatValidity == RecordingInfo.FormatValidity.INTERRUPTED) {
+            notificationInterrupted(Uri.fromFile(recordingInfo.file), recordingInfo.file.getName());
+        } else {
+            notificationSaved(uri, recordingInfo.file.getName());
+        }
     }
 
     private void logStats(RecordingInfo recordingInfo) {
@@ -552,10 +592,36 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         try {
-            mNotificationManager.notify(0, mBuilder.build());
+            mNotificationManager.notify(SAVED_NOTIFICATION_ID, mBuilder.build());
         } catch (SecurityException e) {
             // Android 4.1.2 issue
             // could be fixed by adding <uses-permission android:name="android.permission.WAKE_LOCK" />
+            Log.w(TAG, "Couldn't display notification", e);
+        }
+    }
+
+    private void notificationInterrupted(Uri fileUri, String name) {
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_notification_saved)
+                        .setContentTitle(getString(R.string.recording_interrupted_title));
+
+        if (Utils.isPackageInstalled(VIDEO_REPAIR_PACKAGE, this)) {
+            builder.setContentText(getString(R.string.recording_interrupted_fix_text, name));
+        } else {
+            builder.setContentText(getString(R.string.recording_interrupted_install_text, getString(R.string.video_repair_app_name)));
+        }
+
+        Intent repairIntent = new Intent(this, RecorderService.class);
+        repairIntent.setAction(REPAIR_ACTION);
+        repairIntent.setData(fileUri);
+        builder.setContentIntent(PendingIntent.getService(this, 0, repairIntent, PendingIntent.FLAG_CANCEL_CURRENT));
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        try {
+            notificationManager.notify(SAVED_NOTIFICATION_ID, builder.build());
+        } catch (SecurityException e) {
             Log.w(TAG, "Couldn't display notification", e);
         }
     }
@@ -774,6 +840,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
             }
         } else if (PLAY_ACTION.equals(action)) {
             playVideo(intent.getData());
+        } else if (REPAIR_ACTION.equals(action)) {
+            repairVideo(intent.getData());
         } else if (START_RECORDING_ACTION.equals(action)) {
             startRecordingWhenReady();
         } else if (ERROR_DIALOG_CLOSED_ACTION.equals(action)) {

@@ -523,4 +523,14 @@ public class Utils {
             Log.v(TAG, message, e);
         }
     }
+
+    public static boolean isPackageInstalled(String packageName, Context context) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            pm.getPackageInfo(packageName, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
 }
