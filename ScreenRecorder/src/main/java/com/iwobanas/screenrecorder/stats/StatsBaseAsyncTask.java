@@ -53,7 +53,6 @@ public abstract class StatsBaseAsyncTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
 
-        AndroidHttpClient client = AndroidHttpClient.newInstance("SCR");
         String url = getUrl();
 
         for (String key: params.keySet()) {
@@ -69,8 +68,10 @@ public abstract class StatsBaseAsyncTask extends AsyncTask<Void, Void, Void> {
 
         url += "request_id=" + Utils.md5(url + "SaltLakeCity");
 
-        HttpGet get = new HttpGet(url);
+        AndroidHttpClient client = null;
         try {
+            HttpGet get = new HttpGet(url);
+            client = AndroidHttpClient.newInstance("SCR");
             HttpResponse response = client.execute(get);
             if (response == null || response.getStatusLine() == null) {
                 Log.w(getTag(), "null response received");
@@ -82,8 +83,11 @@ public abstract class StatsBaseAsyncTask extends AsyncTask<Void, Void, Void> {
             Log.w(getTag(), "HTTP GET execution error", e);
         } catch (SecurityException e) {
             Log.w(getTag(), "Allow internet access to SCR to get best settings for your device!", e);
+        } finally {
+            if (client != null) {
+                client.close();
+            }
         }
-        client.close();
         return null;
     }
 
