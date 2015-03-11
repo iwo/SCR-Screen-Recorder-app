@@ -104,7 +104,7 @@ public class ProjectionThread implements Runnable {
     public void startRecording(File outputFile) {
         this.outputFile = outputFile;
         recordingInfo = new RecordingInfo();
-        recordingInfo.fileName = outputFile.getAbsolutePath();
+        recordingInfo.file = outputFile;
 
         //TODO: report all caught exceptions to analytics
 

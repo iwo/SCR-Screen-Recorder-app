@@ -14,7 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class AudioModuleStatsAsyncTask extends StatsBaseAsyncTask {
-    private static final String TAG = "scr_AudioModuleStatsAsyncTask";
+    private static final String TAG = "scr_AudioModuleStatsAT";
     private static final String BASE_URL = "http://www.iwobanas.com/scr/audio_module.php?";
     public static final int RETRY_TIME_MS = 3000;
     public static final int MAX_RECORD_AGE_S = 7;
@@ -49,8 +49,8 @@ public class AudioModuleStatsAsyncTask extends StatsBaseAsyncTask {
         }
         truncateLog();
 
-        if (recordingInfo.fileName != null) {
-            params.put("recording_id", new File(recordingInfo.fileName).getName());
+        if (recordingInfo.file != null) {
+            params.put("recording_id", recordingInfo.file.getName());
         }
 
         params.put("req_sample_rate", Settings.getInstance().getSamplingRate().getCommand());

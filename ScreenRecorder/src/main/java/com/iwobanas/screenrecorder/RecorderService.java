@@ -107,7 +107,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private AudioDriver audioDriver;
     private ErrorDialogHelper errorDialogHelper;
     private Handler handler;
-    private File outputFile;
     private RecorderServiceState state = RecorderServiceState.INITIALIZING;
     private boolean isTimeoutDisplayed;
     private boolean startOnReady;
@@ -233,11 +232,10 @@ public class RecorderService extends Service implements IRecorderService, Licens
             screenOffReceiver.register();
         }
         audioDriver.startRecording();
-        outputFile = getOutputFile();
         if (useProjection()) {
-            projectionThreadRunner.start(outputFile.getAbsolutePath(), getRotation());
+            projectionThreadRunner.start(getOutputFile(), getRotation());
         } else {
-            nativeProcessRunner.start(outputFile.getAbsolutePath(), getRotation());
+            nativeProcessRunner.start(getOutputFile(), getRotation());
         }
         recordingStartTime = System.currentTimeMillis();
 
@@ -396,8 +394,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
                 closeForError();
             }
 
-            if (outputFile != null && outputFile.exists() && outputFile.length() > 0) {
-                scanOutputAndNotify(R.string.recording_saved_toast);
+            if (recordingInfo != null && recordingInfo.formatValidity != RecordingInfo.FormatValidity.EMPTY
+                    && recordingInfo.formatValidity != RecordingInfo.FormatValidity.NO_DATA) {
+                scanOutputAndNotify(R.string.recording_saved_toast, recordingInfo);
             }
         }
     }
@@ -472,7 +471,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void recordingFinished(final RecordingInfo recordingInfo) {
-        scanOutputAndNotify(R.string.recording_saved_toast);
+        scanOutputAndNotify(R.string.recording_saved_toast, recordingInfo);
         reportRecordingStats(recordingInfo);
         reinitializeView();
         reinitialize();
@@ -505,16 +504,13 @@ public class RecorderService extends Service implements IRecorderService, Licens
         EasyTracker.getTracker().sendEvent(STATS, RECORDING, TIME, (long) recordingInfo.time);
     }
 
-    public void scanOutputAndNotify(int toastId) {
-        String message = String.format(getString(toastId), outputFile.getName());
+    public void scanOutputAndNotify(int toastId, RecordingInfo recordingInfo) {
+        String message = String.format(getString(toastId), recordingInfo.file.getName());
         Toast.makeText(RecorderService.this, message, Toast.LENGTH_LONG).show();
-        notificationSaved(scanFile(outputFile));
+        notificationSaved(scanFile(recordingInfo.file), recordingInfo.file.getName());
     }
 
     private void logStats(RecordingInfo recordingInfo) {
-        if (outputFile != null) { // I can't figure out when it's null but analytics shows NPE here
-            recordingInfo.size = (int) (outputFile.length() / 1024l);
-        }
         recordingInfo.time = (int) ((System.currentTimeMillis() - recordingStartTime) / 1000l);
         new RecordingStatsAsyncTask(this, recordingInfo).execute();
         if (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL) {
@@ -539,12 +535,12 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
     }
 
-    private void notificationSaved(Uri uri) {
+    private void notificationSaved(Uri uri, String name) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_notification_saved)
                         .setContentTitle(getString(R.string.recording_saved_title))
-                        .setContentText(outputFile.getName());
+                        .setContentText(name);
 
         Intent playIntent = new Intent(this, RecorderService.class);
         playIntent.setAction(PLAY_ACTION);
@@ -664,7 +660,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void maxFileSizeReached(final RecordingInfo recordingInfo) {
-        scanOutputAndNotify(R.string.max_file_size_reached_toast);
+        scanOutputAndNotify(R.string.max_file_size_reached_toast, recordingInfo);
         reportRecordingStats(recordingInfo);
         reinitializeView();
         ratingController.increaseSuccessCount();

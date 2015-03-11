@@ -284,15 +284,15 @@ class NativeProcess implements Runnable, INativeCommandRunner {
         }
     }
 
-    public void startRecording(String fileName, String rotation) {
-        Log.i(TAG, "startRecording " + fileName);
+    public void startRecording(File file, String rotation) {
+        Log.i(TAG, "startRecording " + file.getAbsolutePath());
         if (state != ProcessState.READY) {
             Log.e(TAG, "Can't start recording in current state: " + state);
             //TODO: add error handling
             return;
         }
         recordingInfo = new RecordingInfo();
-        recordingInfo.fileName = fileName;
+        recordingInfo.file = file;
         recordingInfo.rotation = rotation;
         Settings settings = Settings.getInstance();
         setState(ProcessState.STARTING);
@@ -336,7 +336,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
                 + samplingRate + " "
                 + settings.getVideoEncoder() + " "
                 + (settings.getVerticalFrames() ? 1 : 0) + " "
-                + fixEmulatedStorageMapping(fileName);
+                + fixEmulatedStorageMapping(file.getAbsolutePath());
         runCommand(startCommand);
         logSettings(settings, rotation);
     }

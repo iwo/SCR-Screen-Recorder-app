@@ -77,7 +77,7 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
                 report = true;
                 break;
             case OUTPUT_FILE_ERROR:
-                message = getString(R.string.output_file_error_message, recordingInfo.fileName);
+                message = getString(R.string.output_file_error_message, recordingInfo.file);
                 title = getString(R.string.output_file_error_title);
                 report = true; // this used to be false but due to ext sd write issues it may be true now
                 break;

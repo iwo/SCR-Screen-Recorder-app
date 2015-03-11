@@ -11,7 +11,7 @@ public abstract class AbstractRecordingProcess implements IRecordingProcess {
 
     private final String logTag;
     private Handler handler;
-    private Collection<RecordingProcessObserver> observers = new ArrayList<RecordingProcessObserver>(5);
+    private Collection<RecordingProcessObserver> observers = new ArrayList<>(5);
     private volatile RecordingProcessState state;
 
     private long startTimeoutMillis;
@@ -84,6 +84,7 @@ public abstract class AbstractRecordingProcess implements IRecordingProcess {
         }
         this.state = state;
         updateTimeouts();
+        RecordingInfoUtils.updateInfoIfNeeded(state, recordingInfo);
         notifyObservers(state, recordingInfo);
     }
 
