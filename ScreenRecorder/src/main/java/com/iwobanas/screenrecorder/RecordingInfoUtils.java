@@ -16,7 +16,7 @@ public class RecordingInfoUtils {
     private static final long MIN_MDAT_SIZE_LIMIT = 512 * 1024; // 0.5MiB
 
     public static void updateInfoIfNeeded(RecordingProcessState state, RecordingInfo recordingInfo) {
-        if (recordingInfo != null && (state.isError()
+        if (recordingInfo != null && recordingInfo.file != null && (state.isError()
                 || state == RecordingProcessState.FINISHED
                 || state == RecordingProcessState.MAX_FILE_SIZE_REACHED)) {
 
