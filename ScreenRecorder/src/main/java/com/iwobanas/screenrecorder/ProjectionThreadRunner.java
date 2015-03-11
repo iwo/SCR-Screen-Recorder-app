@@ -14,7 +14,7 @@ import java.io.File;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class ProjectionThreadRunner extends AbstractRecordingProcess implements IRecordingProcess {
-    private static final String TAG = "scr_PresentationProcessRunner";
+    private static final String TAG = "scr_ProjProcessRunner";
 
     private Context context;
     private MediaProjection mediaProjection;
@@ -28,7 +28,7 @@ public class ProjectionThreadRunner extends AbstractRecordingProcess implements 
             }
         }
     };
-    private String fileName;
+    private File file;
     private Handler handler;
 
     public ProjectionThreadRunner(Context context) {
@@ -46,7 +46,7 @@ public class ProjectionThreadRunner extends AbstractRecordingProcess implements 
             //disable callback as it doesn't work anyways
             //mediaProjection.registerCallback(mediaProjectionCallback, handler);
             if (getState() == RecordingProcessState.STARTING) {
-                start(fileName, null);
+                start(file, null);
             } else {
                 setState(RecordingProcessState.READY, null);
             }
@@ -65,8 +65,8 @@ public class ProjectionThreadRunner extends AbstractRecordingProcess implements 
     }
 
     @Override
-    public void start(String fileName, String ignored) {
-        this.fileName = fileName;
+    public void start(File file, String ignored) {
+        this.file = file;
         setState(RecordingProcessState.STARTING, null);
 
         if (currentThread != null) {
@@ -78,7 +78,7 @@ public class ProjectionThreadRunner extends AbstractRecordingProcess implements 
             return;
         }
         currentThread = new ProjectionThread(mediaProjection, context, this);
-        currentThread.startRecording(new File(fileName));
+        currentThread.startRecording(file);
     }
 
     public void stop() {

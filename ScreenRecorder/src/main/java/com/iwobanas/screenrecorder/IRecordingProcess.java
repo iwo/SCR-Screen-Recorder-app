@@ -1,11 +1,13 @@
 package com.iwobanas.screenrecorder;
 
+import java.io.File;
+
 public interface IRecordingProcess {
     public void initialize();
     boolean isReady();
     RecordingProcessState getState();
 
-    void start(String fileName, String rotation);
+    void start(File file, String rotation);
     void stop();
     void startTimeout();
     void stopTimeout();

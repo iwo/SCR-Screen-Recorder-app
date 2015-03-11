@@ -176,7 +176,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     protected void updateValues() {
         updateSelectedVideoConfig();
 
-        videoConfigPreference.setEnabled(settings.isRootEnabled());
+        videoConfigPreference.setEnabled(settings.isRootEnabled() && settings.getDeviceProfile() != null
+                && settings.getDeviceProfile().getVideoConfigs().size() > 0);
 
         videoEncoderPreference.setValue(String.valueOf(settings.getVideoEncoder()));
         videoEncoderPreference.setSummary(formatVideoEncoderSummary(settings.getVideoEncoder()));
@@ -281,7 +282,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 videoConfigPreference.setSummary(R.string.settings_video_config_summary);
             } else {
                 videoConfigPreference.setEnabled(false);
-                videoConfigPreference.setSummary(R.string.settings_video_config_summary_no_data);
+                if (settings.getDeviceProfile() == null) {
+                    videoConfigPreference.setSummary(R.string.settings_video_config_summary_no_data);
+                } else {
+                    videoConfigPreference.setSummary(R.string.settings_video_config_summary_not_available);
+                }
             }
         }
 

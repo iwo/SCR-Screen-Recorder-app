@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoadDeviceProfileAsyncTask extends AsyncTask<Void, Void, DeviceProfile> {
-    private static final String TAG = "scr_LoadDeviceProfileAsyncTask";
+    private static final String TAG = "scr_LoadDeviceProfileAT";
     private static final String BASE_URL = "http://www.iwobanas.com/scr/device_profile.php?";
     private static final String DEVICE_PROFILE_FILE_NAME = "device_profile.json";
     private static final long CACHE_REFRESH_MS = 7 * 24 * 60 * 60 * 1000l; // one week
@@ -140,16 +140,20 @@ public class LoadDeviceProfileAsyncTask extends AsyncTask<Void, Void, DeviceProf
         }
 
         String resultString;
+        AndroidHttpClient client = null;
         try {
             HttpGet get = new HttpGet(url);
             ResponseHandler<String> handler = new BasicResponseHandler();
-            AndroidHttpClient client = AndroidHttpClient.newInstance("SCR");
+            client = AndroidHttpClient.newInstance("SCR");
             resultString = client.execute(get, handler);
-            client.close();
 
         } catch (Exception e) {
             Log.w(TAG, "HTTP GET execution error", e);
             return null;
+        } finally {
+            if (client != null) {
+                client.close();
+            }
         }
         return resultString;
     }

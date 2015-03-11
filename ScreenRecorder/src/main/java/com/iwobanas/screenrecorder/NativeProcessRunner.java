@@ -7,6 +7,8 @@ import android.util.Log;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.iwobanas.screenrecorder.settings.Settings;
 
+import java.io.File;
+
 import static com.iwobanas.screenrecorder.Tracker.*;
 
 public class NativeProcessRunner extends AbstractRecordingProcess implements NativeProcess.OnStateChangeListener {
@@ -21,8 +23,8 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
         this.context = context;
     }
 
-    public void start(String fileName, String rotation) {
-        process.startRecording(fileName, rotation);
+    public void start(File file, String rotation) {
+        process.startRecording(file, rotation);
     }
 
     public void stop() {

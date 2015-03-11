@@ -7,16 +7,14 @@ import com.iwobanas.screenrecorder.Utils;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
 import com.iwobanas.screenrecorder.settings.Settings;
 
-import java.io.File;
-
 public class RecordingStatsAsyncTask extends StatsBaseAsyncTask {
     private static final String TAG = "scr_SendStatsAsyncTask";
     private static final String BASE_URL = "http://www.iwobanas.com/scr/?";
 
     public RecordingStatsAsyncTask(Context context, RecordingInfo recordingInfo) {
         super(context);
-        if (recordingInfo.fileName != null) {
-            params.put("recording_id", new File(recordingInfo.fileName).getName());
+        if (recordingInfo.file != null) {
+            params.put("recording_id", recordingInfo.file.getName());
         }
         int timeLapse = Settings.getInstance().getTimeLapse();
         params.put("error_code", String.valueOf(recordingInfo.exitValue));

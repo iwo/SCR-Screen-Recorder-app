@@ -244,6 +244,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
 
     @Override
     public void show() {
+        initializeSize();
         if (!isVisible()) {
             getContext().registerReceiver(configChangeReceiver, new IntentFilter(Intent.ACTION_CONFIGURATION_CHANGED));
             displayRotation = getDefaultDisplay().getRotation();
@@ -314,6 +315,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
 
     @Override
     protected View createView() {
+        initializeSize();
         rootView = getLayoutInflater().inflate(R.layout.camera, null);
         if (rootView == null) {
             Log.e(TAG, "Error inflating view");
@@ -377,6 +379,7 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     @Override
     protected WindowManager.LayoutParams getLayoutParams() {
         if (layoutParams == null) {
+            initializeSize();
             layoutParams = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -386,13 +389,11 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
             );
             layoutParams.format = PixelFormat.TRANSLUCENT;
             layoutParams.setTitle(getContext().getString(R.string.app_name));
-            readSize();
             layoutParams.width = width;
             layoutParams.height = height;
             layoutParams.x = 10;
             layoutParams.y = 10;
             layoutParams.gravity = Gravity.TOP | Gravity.RIGHT;
-            layoutParams.rotationAnimation = 0;
             layoutParams.windowAnimations = 0;
             positionPersister = new OverlayPositionPersister(getContext(), FACE_OVERLAY, layoutParams);
         }
@@ -409,7 +410,10 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
         Settings.getInstance().unregisterOnSharedPreferenceChangeListener(this);
     }
 
-    private void readSize() {
+    private void initializeSize() {
+        if (width > 0 && height > 0)
+            return;
+
         SharedPreferences preferences = getContext().getSharedPreferences(OverlayPositionPersister.SCR_UI_PREFERENCES, Context.MODE_PRIVATE);
 
         Point displaySize = new Point();
@@ -417,9 +421,18 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
         int defaultWidth = Math.max(displaySize.y, displaySize.x) / screenPortion;
         width = preferences.getInt(FACE_OVERLAY_WIDTH, defaultWidth);
         height = preferences.getInt(FACE_OVERLAY_HEIGHT, (defaultWidth * 3) / 4);
+        if (width <= 10 || height <= 10) {
+            Log.w(TAG, "Incorrect size previously persisted");
+            width = defaultWidth;
+            height = (defaultWidth * 3) / 4;
+        }
+        Log.v(TAG, "Size set to " + width + "x" + height);
     }
 
     private void persistSize() {
+        if (width == 0 || height == 0)
+            return;
+
         getContext().getSharedPreferences(OverlayPositionPersister.SCR_UI_PREFERENCES, Context.MODE_PRIVATE)
                 .edit()
                 .putInt(FACE_OVERLAY_WIDTH, width)

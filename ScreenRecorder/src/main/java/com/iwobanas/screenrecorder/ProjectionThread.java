@@ -71,6 +71,7 @@ public class ProjectionThread implements Runnable {
     private boolean hasAudio;
     private RecordingInfo recordingInfo;
     private Thread recordingThread;
+    private RecordingProcessState state = RecordingProcessState.NEW;
 
     private volatile boolean stopped;
     private volatile boolean audioStopped;
@@ -94,17 +95,32 @@ public class ProjectionThread implements Runnable {
         }
     };
 
+    private Runnable muxerTimeoutRunnable = new Runnable() {
+        @Override
+        public void run() {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Thread.currentThread().setName("muxerTimeout");
+                    Log.e(TAG, "Muxer stopping timeout");
+                    setState(RecordingProcessState.UNKNOWN_RECORDING_ERROR);
+                }
+            }).start();
+        }
+    };
+
     public ProjectionThread(MediaProjection mediaProjection, Context context, ProjectionThreadRunner runner) {
         this.mediaProjection = mediaProjection;
         this.context = context.getApplicationContext();
         this.runner = runner;
+        state = runner.getState();
         handler = new Handler();
     }
 
     public void startRecording(File outputFile) {
         this.outputFile = outputFile;
         recordingInfo = new RecordingInfo();
-        recordingInfo.fileName = outputFile.getAbsolutePath();
+        recordingInfo.file = outputFile;
 
         //TODO: report all caught exceptions to analytics
 
@@ -451,7 +467,13 @@ public class ProjectionThread implements Runnable {
         } catch (Throwable throwable) {
             Log.e(TAG, "Recording error", throwable);
             EasyTracker.getTracker().sendException("projection", throwable, false);
-            setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, errorCodeHack);
+            if (muxer != null && (state == RecordingProcessState.RECORDING || state == RecordingProcessState.STOPPING)) {
+                Log.e(TAG, "Postponing error message: " + errorCodeHack);
+                handler.postDelayed(muxerTimeoutRunnable, 2500);
+                recordingInfo.exitValue = errorCodeHack;
+            } else {
+                setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, errorCodeHack);
+            }
         } finally {
             if (muxer != null) {
                 try {
@@ -461,6 +483,13 @@ public class ProjectionThread implements Runnable {
                     setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, 530);
                     EasyTracker.getTracker().sendException("projection", e, false);
                 }
+
+                if (!state.isError() && recordingInfo.exitValue != -1) {
+                    Log.e(TAG, "Applying postponed error");
+                    handler.removeCallbacks(muxerTimeoutRunnable);
+                    setState(RecordingProcessState.UNKNOWN_RECORDING_ERROR);
+                }
+
                 try {
                     muxer.release();
                 } catch (Exception e) {
@@ -553,6 +582,7 @@ public class ProjectionThread implements Runnable {
     }
 
     private void setState(RecordingProcessState state) {
+        this.state = state;
         if (!destroyed) {
             runner.setState(state, recordingInfo);
         }

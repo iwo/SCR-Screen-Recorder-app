@@ -391,4 +391,10 @@ If you decide to uninstall %1$s in the future open SCR Settings and disable inte
     <string name="internal_audio_warning_toast">Audio source set to %1$s</string>
 
     <string name="camera_error">Camera error</string>
+
+    <string name="recording_interrupted_title">SCR Video Broken</string>
+    <string name="recording_interrupted_fix_text">Tap to fix %1$s</string>
+    <string name="recording_interrupted_install_text">Tap to install %1$s app</string>
+    <string name="video_repair_app_name">MP4 Video Repair</string>
+    <string name="video_repair_error_toast">Please install latest %1$s from Google Play</string>
 </resources>
