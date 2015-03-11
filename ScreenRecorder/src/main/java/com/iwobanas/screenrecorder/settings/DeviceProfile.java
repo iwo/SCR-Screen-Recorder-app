@@ -53,15 +53,15 @@ public class DeviceProfile {
 
     public DeviceProfile(JSONObject json, ResolutionsManager resolutionsManager) throws JSONException {
         this.resolutionsManager = resolutionsManager;
-        if (json.has(DEFAULTS)) {
+        if (json.has(DEFAULTS) && !json.isNull(DEFAULTS)) {
             decodeDefaults(json.getJSONObject(DEFAULTS));
         }
 
-        if (json.has(BLACKLISTS)) {
+        if (json.has(BLACKLISTS) && !json.isNull(BLACKLISTS)) {
             decodeBlacklists(json.getJSONObject(BLACKLISTS));
         }
 
-        if (json.has(VIDEO_CONFIGS)) {
+        if (json.has(VIDEO_CONFIGS) && !json.isNull(VIDEO_CONFIGS)) {
             decodeVideoConfigs(json.getJSONArray(VIDEO_CONFIGS));
         }
 
