@@ -1,5 +1,7 @@
 package com.iwobanas.screenrecorder;
 
+import android.annotation.TargetApi;
+import android.app.AppOpsManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -530,6 +532,21 @@ public class Utils {
             pm.getPackageInfo(packageName, 0);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    @SuppressWarnings("ResourceType")
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static boolean isMediaProjectionPermanent(Context context) {
+        try {
+            AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+            Method method = appOpsManager.getClass().getMethod("noteOpNoThrow", Integer.TYPE, Integer.TYPE, String.class);
+            Integer mode = (Integer) method.invoke(appOpsManager, 46, android.os.Process.myUid(), context.getPackageName());
+            Log.v(TAG, "isMediaProjectionPermanent: " + mode);
+            return mode == AppOpsManager.MODE_ALLOWED;
+        } catch (Exception e) {
+            Log.w(TAG, "Can't obtain MediaProjection settings", e);
             return false;
         }
     }
