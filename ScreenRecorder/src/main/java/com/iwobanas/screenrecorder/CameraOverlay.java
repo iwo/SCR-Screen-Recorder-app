@@ -9,9 +9,8 @@ import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
-import android.os.AsyncTask;
 import android.os.Handler;
-import android.os.Message;
+import android.os.HandlerThread;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Surface;
@@ -33,8 +32,6 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     private static final String FACE_OVERLAY = "FACE_OVERLAY";
     private static final String FACE_OVERLAY_WIDTH = "FACE_OVERLAY_WIDTH";
     private static final String FACE_OVERLAY_HEIGHT = "FACE_OVERLAY_HEIGHT";
-    private static final int MSG_OPEN_CAMERA = 1;
-    private static final int MSG_SHOW_PROGRESS_BAR = 2;
 
     private static CameraOverlay activeInstance;
 
@@ -65,27 +62,22 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     private boolean previewStarted = false;
     private boolean frameReceived = false;
     private OverlayPositionPersister positionPersister;
-    private Handler handler;
+    private Handler uiHandler;
+    private Handler cameraHandler;
+    private HandlerThread cameraHandlerThread;
     private boolean openingCamera;
     private boolean releaseWhenOpen;
 
     public CameraOverlay(Context context) {
         super(context);
-        Settings.getInstance().registerOnSharedPreferenceChangeListener(this);
-        handler = new Handler() {
 
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case MSG_OPEN_CAMERA:
-                        openCamera();
-                        break;
-                    case MSG_SHOW_PROGRESS_BAR:
-                        showProgressBar();
-                        break;
-                }
-            }
-        };
+        uiHandler = new Handler();
+
+        cameraHandlerThread = new HandlerThread("FaceOverlay");
+        cameraHandlerThread.start();
+        cameraHandler = new Handler(cameraHandlerThread.getLooper());
+
+        Settings.getInstance().registerOnSharedPreferenceChangeListener(this);
     }
 
     public static void releaseCamera() {
@@ -98,7 +90,12 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     public static void reconnectCamera() {
         final CameraOverlay instance = activeInstance;
         if (instance != null) {
-            instance.handler.sendEmptyMessageDelayed(MSG_OPEN_CAMERA, 1000); // wait 1s before reconnecting
+            instance.uiHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    instance.openCamera();
+                }
+            }, 1000); // wait 1s before reconnecting
         }
     }
 
@@ -159,12 +156,34 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
                 frameReceived = false;
                 showProgressBar();
                 camera.setPreviewTexture(textureView.getSurfaceTexture());
-                camera.startPreview();
+                cameraHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        startPreviewAsync(camera);
+                    }
+                });
                 previewStarted = true;
             } catch (Exception e) {
                 Log.e(TAG, "Can't set preview display ", e);
                 showErrorMessage();
             }
+        }
+    }
+
+    private void startPreviewAsync(Camera camera) {
+        Log.v(TAG, "Starting preview");
+        long startTime = System.nanoTime();
+        try {
+            camera.startPreview();
+            Log.v(TAG, "Preview started in " + (System.nanoTime() - startTime) / 1000000 + "ms");
+        } catch (Exception e) {
+            Log.e(TAG, "Error starting preview", e);
+            uiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    showErrorMessage();
+                }
+            });
         }
     }
 
@@ -271,14 +290,38 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
         openingCamera = true;
 
         Log.v(TAG, "Opening camera");
-        int frontFacingCamera = getFrontFacingCamera();
+        final int frontFacingCamera = getFrontFacingCamera();
 
         if (frontFacingCamera < 0) {
             Log.w(TAG, "No front facing camera found!");
             return;
         }
         cameraOrientation = getCameraOrientation(frontFacingCamera);
-        new OpenCameraAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, frontFacingCamera);
+        cameraHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                openCameraAsync(frontFacingCamera);
+            }
+        });
+    }
+
+    private void openCameraAsync(int cameraId) {
+        Log.v(TAG, "Opening camera: " + cameraId);
+        long startTime = System.nanoTime();
+        Camera camera = null;
+        try {
+            camera = Camera.open(cameraId);
+            Log.v(TAG, "Camera opened in " + (System.nanoTime() - startTime) / 1000000 + "ms");
+        } catch (Exception e) {
+            Log.e(TAG, "Error opening camera", e);
+        }
+        final Camera result = camera;
+        uiHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                onCameraOpened(result);
+            }
+        });
     }
 
     @Override
@@ -307,7 +350,12 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
             camera.stopPreview();
             camera.release();
             camera = null;
-            handler.sendEmptyMessage(MSG_SHOW_PROGRESS_BAR);
+            uiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    showProgressBar();
+                }
+            });
         } catch (Exception e) {
             Log.w(TAG, "Error releasing a camera", e);
         }
@@ -468,30 +516,6 @@ public class CameraOverlay extends AbstractScreenOverlay implements TextureView.
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (Settings.SHOW_CAMERA.equals(key) || Settings.CAMERA_ALPHA.equals(key)) {
             applySettings();
-        }
-    }
-
-    private class OpenCameraAsyncTask extends AsyncTask<Integer, Void, Camera> {
-
-        @Override
-        protected Camera doInBackground(Integer... integers) {
-            int cameraId = integers[0];
-            Log.v(TAG, "Opening camera: " + cameraId);
-            try {
-                Camera camera = Camera.open(cameraId);
-                camera.startPreview();
-                return camera;
-            } catch (Exception e) {
-                Log.e(TAG, "Error opening camera", e);
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Camera camera) {
-            super.onPostExecute(camera);
-
-            onCameraOpened(camera);
         }
     }
 }
