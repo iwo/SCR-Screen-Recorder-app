@@ -40,6 +40,7 @@ public abstract class StatsBaseAsyncTask extends AsyncTask<Void, Void, Void> {
         params.put("build_id", Build.ID);
         params.put("build_version_sdk_int", String.valueOf(Build.VERSION.SDK_INT));
         params.put("build_version_release", Build.VERSION.RELEASE);
+        params.put("is_x86", formatBoolean(Utils.isX86()));
     }
 
     protected String formatBoolean(boolean value) {
