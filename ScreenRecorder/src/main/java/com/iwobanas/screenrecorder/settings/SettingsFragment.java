@@ -44,6 +44,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_VIDEO_BITRATE = "video_bitrate";
     public static final String KEY_FRAME_RATE = "frame_rate";
     public static final String KEY_VERTICAL_FRAMES = "vertical_frames";
+    public static final String KEY_AUDIO = "audio";
     public static final String KEY_AUDIO_SOURCE = "audio_source";
     public static final String KEY_SAMPLING_RATE = "sampling_rate";
     public static final String KEY_MIC_GAIN = "mic_gain";
@@ -68,6 +69,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private ListPreference videoBitratePreference;
     private ListPreference frameRatePreference;
     private CheckBoxPreference verticalFramesPreference;
+    private PreferenceCategory audioCategory;
     private ListPreference audioSourcePreference;
     private ListPreference samplingRatePreference;
     private SliderPreference micGainPreference;
@@ -129,6 +131,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         verticalFramesPreference = (CheckBoxPreference) findPreference(KEY_VERTICAL_FRAMES);
         verticalFramesPreference.setOnPreferenceChangeListener(this);
 
+        audioCategory = (PreferenceCategory) findPreference(KEY_AUDIO);
         audioSourcePreference = (ListPreference) findPreference(KEY_AUDIO_SOURCE);
         audioSourcePreference.setOnPreferenceChangeListener(this);
 
@@ -353,6 +356,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         String[] timeLapseValues = getResources().getStringArray(R.array.time_lapse_values);
         timeLapsePreference.setEntryValues(timeLapseValues);
         timeLapsePreference.setEntries(getTimeLapseEntries(timeLapseValues));
+
+        addRemovePreference(settings.isRootFlavor(), KEY_MIC_GAIN, micGainPreference, audioCategory);
     }
 
     private void updateSamplingRate() {

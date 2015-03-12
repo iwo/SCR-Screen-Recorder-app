@@ -15,11 +15,22 @@ public class RecordingInfo {
     public FormatValidity formatValidity = FormatValidity.UNKNOWN;
 
     public static enum FormatValidity {
-        VALID,
-        INTERRUPTED,
-        UNRECOGNISED,
-        NO_DATA,
-        EMPTY,
-        UNKNOWN
+        VALID("V"),
+        INTERRUPTED("I"),
+        UNRECOGNISED("U"),
+        NO_DATA("N"),
+        EMPTY("E"),
+        UNKNOWN("X");
+
+        private final String code;
+
+        FormatValidity(String code) {
+
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
     }
 }

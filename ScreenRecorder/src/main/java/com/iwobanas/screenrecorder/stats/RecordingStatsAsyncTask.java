@@ -25,6 +25,7 @@ public class RecordingStatsAsyncTask extends StatsBaseAsyncTask {
         params.put("adjusted_rotation", String.valueOf(recordingInfo.adjustedRotation));
         params.put("vertical_input", String.valueOf(recordingInfo.verticalInput));
         params.put("rotate_view", String.valueOf(recordingInfo.rotateView));
+        params.put("validity", recordingInfo.formatValidity.getCode());
         params.put("front_camera", formatBoolean(Utils.hasFrontFacingCamera(context)));
         params.put("time_lapse", String.valueOf(timeLapse));
     }

@@ -75,7 +75,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_audio_category">
+    <PreferenceCategory android:key="audio" android:title="@string/settings_audio_category">
         <ListPreference
             android:entries="@array/audio_source_entries"
             android:entryValues="@array/audio_source_values"

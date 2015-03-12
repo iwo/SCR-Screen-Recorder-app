@@ -4,18 +4,36 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.projection.MediaProjectionManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class MediaProjectionActivity extends Activity {
     private static final int PERMISSION_CODE = 1;
 
+    private final String PREFERENCES_NAME = "MediaProjectionActivity";
+    private final String SYSTEM_UI_CRASH_MESSAGE = "system_ui_crash_message";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MediaProjectionManager mediaProjectionManager =
-                (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-        startActivityForResult(mediaProjectionManager.createScreenCaptureIntent(),
-                PERMISSION_CODE);
+        requestMediaProjection();
+    }
+
+    public void requestMediaProjection() {
+        boolean permanent = Utils.isMediaProjectionPermanent(this);
+        if (Build.VERSION.SDK_INT == 22 && permanent && !getSharedPreferences(PREFERENCES_NAME, 0).getBoolean(SYSTEM_UI_CRASH_MESSAGE, false)) {
+            getSharedPreferences(PREFERENCES_NAME, 0).edit().putBoolean(SYSTEM_UI_CRASH_MESSAGE, true).apply();
+            new SystemUICrashDialogFragment().show(getFragmentManager(), SystemUICrashDialogFragment.FRAGMENT_TAG);
+        } else {
+            if (Build.VERSION.SDK_INT == 22 && !permanent) {
+                Toast.makeText(this, getString(R.string.system_ui_crash_warning_toast, getString(R.string.media_projection_remember_text)), Toast.LENGTH_SHORT).show();
+            }
+            MediaProjectionManager mediaProjectionManager =
+                    (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+            startActivityForResult(mediaProjectionManager.createScreenCaptureIntent(),
+                    PERMISSION_CODE);
+        }
     }
 
     @Override
