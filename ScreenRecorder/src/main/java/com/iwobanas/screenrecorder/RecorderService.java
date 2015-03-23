@@ -430,7 +430,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
             }
 
             if (recordingInfo != null && recordingInfo.file != null && recordingInfo.formatValidity != RecordingInfo.FormatValidity.EMPTY
-                    && recordingInfo.formatValidity != RecordingInfo.FormatValidity.NO_DATA) {
+                    && recordingInfo.formatValidity != RecordingInfo.FormatValidity.NO_DATA
+                    && recordingInfo.formatValidity != RecordingInfo.FormatValidity.NO_FILE) {
                 scanOutputAndNotify(R.string.recording_saved_toast, recordingInfo);
             }
         }

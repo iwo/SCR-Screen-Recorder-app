@@ -36,21 +36,24 @@ public class RecordingInfoUtils {
 
         RandomAccessFile file = null;
         try {
-            file = new RandomAccessFile(recordingInfo.file, "r");
-            if (file.length() == 0) {
+            if (!recordingInfo.file.exists()) {
+                recordingInfo.formatValidity = RecordingInfo.FormatValidity.NO_FILE;
+            } else if (recordingInfo.file.length() == 0) {
                 recordingInfo.formatValidity = RecordingInfo.FormatValidity.EMPTY;
-            }
-            Mp4 mp4 = new Mp4(file, true);
-
-            Atom mdat = mp4.get(MdatAtom.NAME);
-            if (mp4.isValid()) {
-                recordingInfo.formatValidity = RecordingInfo.FormatValidity.VALID;
-            } else if (mdat != null && mdat.getSize() > MIN_MDAT_SIZE_LIMIT) {
-                recordingInfo.formatValidity = RecordingInfo.FormatValidity.INTERRUPTED;
-            } else if (mdat != null) {
-                recordingInfo.formatValidity = RecordingInfo.FormatValidity.NO_DATA;
             } else {
-                recordingInfo.formatValidity = RecordingInfo.FormatValidity.UNRECOGNISED;
+                file = new RandomAccessFile(recordingInfo.file, "r");
+                Mp4 mp4 = new Mp4(file, true);
+
+                Atom mdat = mp4.get(MdatAtom.NAME);
+                if (mp4.isValid()) {
+                    recordingInfo.formatValidity = RecordingInfo.FormatValidity.VALID;
+                } else if (mdat != null && mdat.getSize() > MIN_MDAT_SIZE_LIMIT) {
+                    recordingInfo.formatValidity = RecordingInfo.FormatValidity.INTERRUPTED;
+                } else if (mdat != null) {
+                    recordingInfo.formatValidity = RecordingInfo.FormatValidity.NO_DATA;
+                } else {
+                    recordingInfo.formatValidity = RecordingInfo.FormatValidity.UNRECOGNISED;
+                }
             }
         } catch (Exception e) {
             Log.e(TAG, "Error checking file format", e);

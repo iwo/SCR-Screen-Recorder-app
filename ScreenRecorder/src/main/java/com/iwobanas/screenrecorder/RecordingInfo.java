@@ -19,6 +19,7 @@ public class RecordingInfo {
         INTERRUPTED("I"),
         UNRECOGNISED("U"),
         NO_DATA("N"),
+        NO_FILE("F"),
         EMPTY("E"),
         UNKNOWN("X");
 
