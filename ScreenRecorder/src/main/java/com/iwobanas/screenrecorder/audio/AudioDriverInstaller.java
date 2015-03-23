@@ -8,8 +8,11 @@ import com.iwobanas.screenrecorder.CameraOverlay;
 import com.iwobanas.screenrecorder.NativeCommands;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.Utils;
+import com.iwobanas.screenrecorder.settings.Settings;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
@@ -74,7 +77,19 @@ public class AudioDriverInstaller {
             if (isSystemAlphaModuleInstalled()) {
                 throw new InstallationException("Unsupported old audio driver installed");
             }
-            if (AudioDriver.requiresHardInstall()) {
+            Settings settings = Settings.getInstance();
+            AudioDriver audioDriver = settings.getAudioDriver();
+            if (audioDriver.getRequiresHardInstall()) {
+                if (isMounted()) {
+                    Log.v(TAG, "Uninstalling before hard install");
+                    unmount();
+                    try {
+                        restartMediaserver();
+                    } catch (InstallationException e) {
+                        Log.e(TAG, "Error restarting mediaserver", e);
+                    }
+                    validateNotMounted();
+                }
                 if (!localDir.exists()){
                     createEmptyDir();
                 }
@@ -91,6 +106,20 @@ public class AudioDriverInstaller {
                 if (!isMounted()) {
                     Log.w(TAG, "Unmount happened after restart. Attempting to mount again");
                     mountAndRestart();
+                }
+
+                if (!waitForModuleLoaded()) {
+                    Log.w(TAG, "Module not loaded on time. Switching to hard-install scenario");
+                    audioDriver.setRequiresHardInstall();
+                    if (settings.getDisableAudioWarning()) {
+                        return install();
+                    } else {
+                        audioDriver.setRetryHardInstall(true);
+                        if (errorDetails == null) {
+                            errorDetails = "not loaded";
+                        }
+                        return false;
+                    }
                 }
             }
             Log.v(TAG, "Installation completed successfully");
@@ -351,6 +380,70 @@ public class AudioDriverInstaller {
         if (Utils.waitForProcess(MEDIASERVER_COMMAND, 7000) == -1) {
             throw new InstallationException("mediaserver not appearing");
         }
+    }
+
+    private boolean waitForModuleLoaded() throws InstallationException {
+        int mediaServerPid = Utils.waitForProcess(MEDIASERVER_COMMAND, 1000);
+        boolean mediaServerDied = false;
+
+        long startTime = System.nanoTime();
+        long timeoutNs = 3 * 1000000000l;
+
+        while ((System.nanoTime() - startTime) < timeoutNs) {
+            if (isModuleLoaded()) {
+                Log.v(TAG, "Module loaded after " + (System.nanoTime() - startTime) / 1000000 + "ms");
+                return true;
+            }
+
+            if (!Utils.processExists(mediaServerPid)) {
+                if (mediaServerDied) {
+                    throw new InstallationException("mediaserver died");
+                } else {
+                    mediaServerDied = true;
+                    mediaServerPid = Utils.waitForProcess(MEDIASERVER_COMMAND, 1000);
+                }
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ignored) {
+            }
+        }
+        return false;
+    }
+
+    private boolean isModuleLoaded() {
+        BufferedReader reader = null;
+        try {
+            File logFile = new File(localDir, MODULE_LOG);
+            reader = new BufferedReader(new FileReader(logFile));
+            String lastLoadedLine = null;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("loaded ")) {
+                    lastLoadedLine = line;
+                }
+            }
+            if (lastLoadedLine == null)
+                return false;
+
+            long timestamp = Long.parseLong(lastLoadedLine.split(" ")[1]);
+            long uptime = System.currentTimeMillis() / 1000l - timestamp;
+
+            return uptime >= 0 && uptime < 10;
+
+        } catch (IOException e) {
+            Log.d(TAG, "Exception reading log", e);
+        } catch (NumberFormatException e) {
+            Log.d(TAG, "Exception parsing log", e);
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException ignored) {
+                }
+            }
+        }
+        return false;
     }
 
     private void initializeDir() throws InstallationException {

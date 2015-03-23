@@ -115,7 +115,9 @@ public class AudioModuleStatsAsyncTask extends StatsBaseAsyncTask {
             String lastLine = null;
             String line;
             while ((line = reader.readLine()) != null) {
-                lastLine = line;
+                if (!line.startsWith("loaded ")) {
+                    lastLine = line;
+                }
             }
             return lastLine;
         } catch (IOException e) {

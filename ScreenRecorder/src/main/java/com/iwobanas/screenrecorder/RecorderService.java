@@ -444,7 +444,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else if (root && audioDriver.getInstallationStatus() == InstallationStatus.NEW) {
             audioDriver.check();
         } else if (root && audioDriver.shouldInstall()) {
-            if (AudioDriver.requiresHardInstall() && !Settings.getInstance().getDisableAudioWarning()) {
+            if (audioDriver.getRequiresHardInstall() && !Settings.getInstance().getDisableAudioWarning()) {
                 setState(RecorderServiceState.READY); // this will get changed to INSTALLING_AUDIO when installation starts
                 Intent intent = new Intent(this, AudioWarningActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1098,9 +1098,15 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void audioDriverInstallationFailure() {
-        Settings.getInstance().setAudioSource(AudioSource.MUTE);
-        String message = getString(R.string.internal_audio_installation_error_message, getString(R.string.settings_audio_mute));
-        displayErrorMessage(message, getString(R.string.internal_audio_installation_error_title), true, true, 2000);
+        if (audioDriver.getRequiresHardInstall() && audioDriver.getRetryHardInstall()) {
+            audioDriver.setRetryHardInstall(false);
+            // when audio driver is uninstalled new installation will be started from nextInitializationStep()
+            audioDriver.uninstall();
+        } else {
+            Settings.getInstance().setAudioSource(AudioSource.MUTE);
+            String message = getString(R.string.internal_audio_installation_error_message, getString(R.string.settings_audio_mute));
+            displayErrorMessage(message, getString(R.string.internal_audio_installation_error_title), true, true, 2000);
+        }
     }
 
     private void audioDriverUnstable() {

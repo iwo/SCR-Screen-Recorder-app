@@ -2,6 +2,8 @@ package com.iwobanas.screenrecorder.audio;
 
 import android.util.Log;
 
+import com.iwobanas.screenrecorder.settings.Settings;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,7 +30,7 @@ public class AudioPolicyUtils {
 
             for (ConfigLine line : lines) {
 
-                if (!AudioDriver.requiresHardInstall() &&
+                if (!Settings.getInstance().getAudioDriver().getRequiresHardInstall() &&
                         line.getSection().startsWith(".audio_hw_modules.primary.outputs.") &&
                         !line.getSection().equals(".audio_hw_modules.primary.outputs.primary")) {
                     writer.write("# SCR #");

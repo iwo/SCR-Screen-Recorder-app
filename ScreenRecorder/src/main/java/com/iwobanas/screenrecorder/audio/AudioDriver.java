@@ -27,6 +27,8 @@ public class AudioDriver {
     private boolean uninstallScheduled = false;
     private Long installId;
     private StabilityMonitorAsyncTask stabilityMonitor;
+    private boolean requiresHardInstall = (Build.VERSION.SDK_INT == 17);
+    private boolean retryHardInstall;
 
     public AudioDriver(Context context) {
         this.context = context;
@@ -187,8 +189,20 @@ public class AudioDriver {
         return gain;
     }
 
-    public static boolean requiresHardInstall() {
-        return Build.VERSION.SDK_INT == 17;
+    public void setRequiresHardInstall() {
+        this.requiresHardInstall = true;
+    }
+
+    public boolean getRequiresHardInstall() {
+        return requiresHardInstall;
+    }
+
+    public boolean getRetryHardInstall() {
+        return retryHardInstall;
+    }
+
+    public void setRetryHardInstall(boolean retryHardInstall) {
+        this.retryHardInstall = retryHardInstall;
     }
 
     public interface OnInstallListener {

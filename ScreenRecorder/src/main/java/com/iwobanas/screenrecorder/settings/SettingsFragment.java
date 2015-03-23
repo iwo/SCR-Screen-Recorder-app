@@ -831,7 +831,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             settings.setAudioSource(source);
             AudioDriver audioDriver = settings.getAudioDriver();
             if (source.getRequiresDriver() && audioDriver.shouldInstall()) {
-                if (AudioDriver.requiresHardInstall() && !settings.getDisableAudioWarning()) {
+                if (audioDriver.getRequiresHardInstall() && !settings.getDisableAudioWarning()) {
                     new AudioWarningDialogFragment().show(getFragmentManager(), AudioWarningDialogFragment.FRAGMENT_TAG);
                 } else {
                     audioDriver.install();
