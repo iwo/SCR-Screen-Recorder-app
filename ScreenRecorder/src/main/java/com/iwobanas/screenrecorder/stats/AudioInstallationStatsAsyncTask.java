@@ -10,11 +10,11 @@ public class AudioInstallationStatsAsyncTask extends StatsBaseAsyncTask {
     private static final String BASE_URL = "http://www.iwobanas.com/scr/audio_install.php?";
 
     public AudioInstallationStatsAsyncTask(Context context, long timestamp, InstallationStatus status) {
-        this(context, timestamp, status, null, 0, null);
+        this(context, timestamp, status, null, 0, null, null);
 
     }
 
-    public AudioInstallationStatsAsyncTask(Context context, long timestamp, InstallationStatus status, String details, long time, Boolean mountMaster) {
+    public AudioInstallationStatsAsyncTask(Context context, long timestamp, InstallationStatus status, String details, long time, Boolean mountMaster, Boolean hard) {
         super(context);
         params.put("install_id", String.valueOf(timestamp));
         params.put("status", status.name());
@@ -24,6 +24,9 @@ public class AudioInstallationStatsAsyncTask extends StatsBaseAsyncTask {
         }
         if (mountMaster != null) {
             params.put("mount_master", formatBoolean(mountMaster));
+        }
+        if (hard != null) {
+            params.put("hard", formatBoolean(hard));
         }
         params.put("exec_blocked", formatBoolean(NativeCommands.getInstance().isExecBlocked()));
     }

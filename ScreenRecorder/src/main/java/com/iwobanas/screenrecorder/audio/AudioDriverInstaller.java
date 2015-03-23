@@ -67,6 +67,7 @@ public class AudioDriverInstaller {
     private boolean uninstallSuccess;
     private String errorDetails;
     private Boolean mountMaster;
+    private boolean hard;
 
     public boolean install() {
         Log.v(TAG, "Installation started");
@@ -139,6 +140,7 @@ public class AudioDriverInstaller {
     }
 
     private void hardInstall() throws InstallationException {
+        hard = true;
         int result = NativeCommands.getInstance().installAudio(localDir.getAbsolutePath().toString());
         if (result == 202) {
             // don't treat this as error but report to stats
@@ -151,6 +153,7 @@ public class AudioDriverInstaller {
     }
 
     private void hardUninstall() {
+        hard = true;
         int result = NativeCommands.getInstance().uninstallAudio();
         if (result == 202) {
             // don't treat this as error but report to stats
@@ -196,6 +199,10 @@ public class AudioDriverInstaller {
 
     public Boolean getMountMaster() {
         return mountMaster;
+    }
+
+    public boolean isHard() {
+        return hard;
     }
 
     private void dumpState() {

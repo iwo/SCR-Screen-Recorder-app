@@ -47,7 +47,7 @@ public abstract class InstallationAsyncTask extends AsyncTask<Void, Void, Instal
         audioDriver.setInstallationStatus(installationStatus);
         if (installId != null) {
             long time = (System.nanoTime() - startTimestamp) / 1000000l;
-            new AudioInstallationStatsAsyncTask(context, installId, installationStatus, installer.getErrorDetails(), time, installer.getMountMaster()).execute();
+            new AudioInstallationStatsAsyncTask(context, installId, installationStatus, installer.getErrorDetails(), time, installer.getMountMaster(), installer.isHard()).execute();
         }
     }
 }
