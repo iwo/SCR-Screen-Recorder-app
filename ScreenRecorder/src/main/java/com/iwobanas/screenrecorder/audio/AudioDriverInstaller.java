@@ -727,6 +727,8 @@ public class AudioDriverInstaller {
     }
 
     private boolean isHardInstalled() {
+        if (isMounted())
+            return false;
         File uninstallerFile = new File(systemDir, UNINSTALLER_SYSTEM);
         return uninstallerFile.exists();
     }
