@@ -26,12 +26,6 @@ public class SystemUICrashDialogFragment extends DialogFragment {
         builder.setTitle(R.string.app_name);
         builder.setIcon(R.drawable.ic_launcher);
         builder.setMessage(getString(R.string.system_ui_crash_dialog_message, getString(R.string.app_name), getString(R.string.media_projection_remember_text)));
-        builder.setPositiveButton(R.string.license_play_store, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                goToPlayStore();
-            }
-        });
         builder.setNegativeButton(R.string.settings_ok,  new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -48,20 +42,5 @@ public class SystemUICrashDialogFragment extends DialogFragment {
         if (activity != null) {
             activity.requestMediaProjection();
         }
-    }
-
-    private void goToPlayStore() {
-        if (getActivity() == null)
-            return;
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=" + getActivity().getPackageName()));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(getActivity(), R.string.rating_play_error, Toast.LENGTH_LONG).show();
-        }
-        getActivity().finish();
     }
 }
