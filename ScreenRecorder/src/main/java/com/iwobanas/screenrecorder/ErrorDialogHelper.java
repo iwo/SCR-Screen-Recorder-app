@@ -151,13 +151,11 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
                 intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, suIntent);
                 intent.putExtra(DialogActivity.POSITIVE_EXTRA, suName);
             }
-            intent.putExtra(DialogActivity.NEUTRAL_EXTRA, getString(R.string.su_required_no_root_mode));
+            intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.su_required_no_root_mode));
             Intent noRootModeIntent = new Intent(context, NoRootModeActivity.class);
             noRootModeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             noRootModeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(DialogActivity.NEUTRAL_INTENT_EXTRA, noRootModeIntent);
-            intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.free_app_no_root_name));
-            intent.putExtra(DialogActivity.NEGATIVE_INTENT_EXTRA, getNoRootPlayStoreIntent());
+            intent.putExtra(DialogActivity.NEGATIVE_INTENT_EXTRA, noRootModeIntent);
             intent.putExtra(DialogActivity.MESSAGE_EXTRA, message);
         } else if (suIntent == null) {
             intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.su_required_message));
@@ -173,14 +171,6 @@ public class ErrorDialogHelper implements IRecordingProcess.RecordingProcessObse
             intent.putExtra(DialogActivity.POSITIVE_EXTRA, suName);
         }
         context.startActivity(intent);
-    }
-
-    private Intent getNoRootPlayStoreIntent() {
-        String uri = "market://details?id=com.iwobanas.screenrecorder.noroot.free&referrer=utm_source%3Ddialog%26utm_campaign%3DsuDialog";
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(uri));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return intent;
     }
 
     public void showMicrophoneBusyError(RecordingInfo recordingInfo) {
