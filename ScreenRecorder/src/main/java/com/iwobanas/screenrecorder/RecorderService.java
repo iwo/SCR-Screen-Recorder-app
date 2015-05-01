@@ -318,7 +318,7 @@ public class RecorderService extends Service implements IRecorderService, AudioD
                 Log.w(TAG, "Couldn't cancel notification", e);
             }
         } else {
-            intent.setData(Uri.parse("market://details?id=" + VIDEO_REPAIR_PACKAGE + "&referrer=utm_source%3DSCR%26utm_medium%3Dnotification%26utm_campaign%3Dbroken"));
+            intent.setData(Uri.parse("http://forum.xda-developers.com/showthread.php?t=2782042"));
         }
 
         try {
