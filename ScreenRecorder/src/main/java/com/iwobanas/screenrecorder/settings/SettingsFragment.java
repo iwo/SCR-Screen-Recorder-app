@@ -33,6 +33,7 @@ import java.util.List;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener, AudioDriver.OnInstallListener, SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String KEY_COPYRIGHTS_STATEMENT = "copyrights_statement";
+    public static final String KEY_DONATE = "donate";
     public static final String KEY_NO_ROOT_MODE = "no_root_mode";
     public static final String KEY_VIDEO = "video";
     public static final String KEY_VIDEO_CONFIG = "video_config";
@@ -58,6 +59,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_COLOR_FIX = "color_fix";
     private static final int SELECT_OUTPUT_DIR = 1;
     private static final String TAG = "scr_SettingsFragment";
+    private Preference donatePreference;
     private Preference noRootModePreference;
     private PreferenceCategory videoCategory;
     private ListPreference videoConfigPreference;
@@ -95,6 +97,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         settings = Settings.getInstance();
         settings.registerOnSharedPreferenceChangeListener(this);
+
+        donatePreference = findPreference(KEY_DONATE);
+        donatePreference.setOnPreferenceClickListener(this);
 
         noRootModePreference = findPreference(KEY_NO_ROOT_MODE);
         noRootModePreference.setOnPreferenceClickListener(this);
@@ -867,12 +872,26 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         if (preference == outputDirPreference) {
             openOutputDirChooser();
             return true;
-        }
-        if (preference == noRootModePreference) {
+        } else if (preference == donatePreference) {
+            donate();
+            return true;
+        } else if (preference == noRootModePreference) {
             enableRoot();
             return true;
         }
         return false;
+    }
+
+    private void donate() {
+        Activity activity = getActivity();
+        if (activity != null) {
+            Intent payPalIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3TDE5GYWQYVL6"));
+            try {
+                activity.startActivity(payPalIntent);
+            } catch (Exception e) {
+                Log.e(TAG, "Error starting donation intent", e);
+            }
+        }
     }
 
     private void enableRoot() {

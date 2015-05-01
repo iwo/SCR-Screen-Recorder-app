@@ -5,6 +5,9 @@
         android:key="copyrights_statement"
         android:selectable="false" />
     <Preference
+        android:key="donate"
+        android:title="@string/settings_donate" />
+    <Preference
         android:key="no_root_mode"
         android:title="@string/settings_no_root_mode"
         android:summary="@string/settings_no_root_mode_summary" />

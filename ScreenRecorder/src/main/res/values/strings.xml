@@ -111,6 +111,8 @@ so if you require this feature and your device is rooted install SCR Screen Reco
     <string name="su_required_lollipop_denied_message">If your device is rooted please open %1$s and make sure you haven\'t accidentally denied root access to %2$s.</string>
     <string name="su_required_no_root_mode">No-root mode</string>
 
+    <string name="settings_donate">Donate with PayPal</string>
+
     <string name="settings_no_root_only">Only for no root encoders</string>
     <string name="settings_root_only">Only for root encoders</string>
     <string name="settings_no_root_mode">No-root mode</string>
