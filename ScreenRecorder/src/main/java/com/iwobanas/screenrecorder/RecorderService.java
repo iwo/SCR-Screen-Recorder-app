@@ -24,11 +24,6 @@ import android.widget.Toast;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.ExceptionParser;
 import com.google.analytics.tracking.android.ExceptionReporter;
-import com.google.android.vending.licensing.AESObfuscator;
-import com.google.android.vending.licensing.LicenseChecker;
-import com.google.android.vending.licensing.LicenseCheckerCallback;
-import com.google.android.vending.licensing.Policy;
-import com.google.android.vending.licensing.ServerManagedPolicy;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
 import com.iwobanas.screenrecorder.audio.AudioWarningActivity;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
@@ -46,13 +41,6 @@ import java.util.List;
 
 import static com.iwobanas.screenrecorder.Tracker.ACTION;
 import static com.iwobanas.screenrecorder.Tracker.AUDIO;
-import static com.iwobanas.screenrecorder.Tracker.BUY;
-import static com.iwobanas.screenrecorder.Tracker.BUY_ERROR;
-import static com.iwobanas.screenrecorder.Tracker.ERROR;
-import static com.iwobanas.screenrecorder.Tracker.LICENSE;
-import static com.iwobanas.screenrecorder.Tracker.LICENSE_ALLOW_;
-import static com.iwobanas.screenrecorder.Tracker.LICENSE_DONT_ALLOW_;
-import static com.iwobanas.screenrecorder.Tracker.LICENSE_ERROR_;
 import static com.iwobanas.screenrecorder.Tracker.RECORDING;
 import static com.iwobanas.screenrecorder.Tracker.SETTINGS;
 import static com.iwobanas.screenrecorder.Tracker.SIZE;
@@ -62,13 +50,10 @@ import static com.iwobanas.screenrecorder.Tracker.STOP;
 import static com.iwobanas.screenrecorder.Tracker.STOP_DESTROY;
 import static com.iwobanas.screenrecorder.Tracker.STOP_ICON;
 import static com.iwobanas.screenrecorder.Tracker.TIME;
-import static com.iwobanas.screenrecorder.Tracker.TIMEOUT_DIALOG;
 
-public class RecorderService extends Service implements IRecorderService, LicenseCheckerCallback, AudioDriver.OnInstallListener, IRecordingProcess.RecordingProcessObserver {
+public class RecorderService extends Service implements IRecorderService, AudioDriver.OnInstallListener, IRecordingProcess.RecordingProcessObserver {
 
     public static final String STOP_HELP_DISPLAYED_ACTION = "scr.intent.action.STOP_HELP_DISPLAYED";
-    public static final String TIMEOUT_DIALOG_CLOSED_ACTION = "scr.intent.action.TIMEOUT_DIALOG_CLOSED";
-    public static final String LICENSE_DIALOG_CLOSED = "scr.intent.action.LICENSE_DIALOG_CLOSED";
     public static final String RESTART_MUTE_ACTION = "scr.intent.action.RESTART_MUTE";
     public static final String PLAY_ACTION = "scr.intent.action.PLAY";
     public static final String REPAIR_ACTION = "scr.intent.action.REPAIR";
@@ -94,30 +79,24 @@ public class RecorderService extends Service implements IRecorderService, Licens
     private static final int SAVED_NOTIFICATION_ID = 2;
 
     // Licensing
-    private static final byte[] LICENSE_SALT = new byte[]{95, -9, 7, -80, -79, -72, 3, -116, 95, 79, -18, 63, -124, -85, -71, -2, -73, -37, 47, 122};
     public static final String VIDEO_REPAIR_PACKAGE = "com.iwobanas.videorepair";
     public static final String VIDEO_REPAIR_ACTIVITY = "com.iwobanas.videorepair.RepairActivity";
 
     private static int runningInstances;
 
-    private IScreenOverlay watermarkOverlay = new WatermarkOverlay(this);
     private RecorderOverlay recorderOverlay = new RecorderOverlay(this, this);
     private CameraOverlay cameraOverlay;
     private ScreenOffReceiver screenOffReceiver = new ScreenOffReceiver(this, this);
     private IRecordingProcess nativeProcessRunner;
     private IRecordingProcess projectionThreadRunner;
-    private RecordingTimeController recordingTimeController = new RecordingTimeController(this);
     private RatingController ratingController;
     private AudioDriver audioDriver;
     private ErrorDialogHelper errorDialogHelper;
     private Handler handler;
     private RecorderServiceState state = RecorderServiceState.INITIALIZING;
-    private boolean isTimeoutDisplayed;
     private boolean startOnReady;
     private boolean projectionDenied;
     private long recordingStartTime;
-    private boolean free = true;
-    private boolean retryLicenseCheck = false;
     private boolean firstCommand = true;
     private boolean closing = false;
     private boolean destroyed = false;
@@ -127,7 +106,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
 
     // Preferences
     private boolean stopHelpDisplayed;
-    private LicenseChecker licenseChecker;
 
     @Override
     public void onCreate() {
@@ -144,8 +122,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         if (s.isRootFlavor() && (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT == 20 || Build.VERSION.SDK_INT > 22)) {
             displayErrorMessage(getString(R.string.android_version_error_message), getString(R.string.android_version_error_title), false, false, -1);
         }
-
-        free = BuildConfig.FLAVOR_price.startsWith("f"); // free
 
         audioDriver = Settings.getInstance().getAudioDriver();
         audioDriver.addInstallListener(this);
@@ -168,9 +144,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         recorderOverlay.animateShow();
         reinitialize();
 
-        if (!free) {
-            checkLicense();
-        }
         Log.v(TAG, "Service initialized. version: " + Utils.getAppVersion(this));
     }
 
@@ -227,10 +200,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         setState(RecorderServiceState.STARTING);
         recorderOverlay.hide();
         cameraOverlay.setTouchable(false);
-        if (free) {
-            watermarkOverlay.show();
-            recordingTimeController.start();
-        }
         Settings.getInstance().applyShowTouches();
         if (Settings.getInstance().getStopOnScreenOff()) {
             screenOffReceiver.register();
@@ -304,7 +273,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
         } else {
             nativeProcessRunner.stop();
         }
-        recordingTimeController.reset();
         cameraOverlay.setTouchable(true);
     }
 
@@ -515,18 +483,11 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void reinitializeView() {
-        if (free) {
-            watermarkOverlay.hide();
-        }
         Settings.getInstance().restoreShowTouches();
-        if (!isTimeoutDisplayed) {
-            recorderOverlay.animateShow();
-        }
         cameraOverlay.setTouchable(true);
     }
 
     private void reinitialize() {
-        recordingTimeController.reset();
         screenOffReceiver.unregister();
 
         nextInitializationStep();
@@ -661,7 +622,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
         }
         builder.setContentText(getStatusString());
 
-        if (!free && Settings.getInstance().getHideIcon()) {
+        if (Settings.getInstance().getHideIcon()) {
             builder.setSmallIcon(R.drawable.transparent);
             builder.setPriority(NotificationCompat.PRIORITY_MIN);
         } else {
@@ -719,10 +680,8 @@ public class RecorderService extends Service implements IRecorderService, Licens
     }
 
     private void closeForError() {
-        watermarkOverlay.hide();
         recorderOverlay.hide();
         Settings.getInstance().restoreShowTouches();
-        recordingTimeController.reset();
         screenOffReceiver.unregister();
     }
 
@@ -750,55 +709,9 @@ public class RecorderService extends Service implements IRecorderService, Licens
         });
     }
 
-    @Override
-    public void showTimeoutDialog() {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                isTimeoutDisplayed = true;
-                Intent intent = new Intent(RecorderService.this, DialogActivity.class);
-                intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.free_timeout_message));
-                intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.free_timeout_title));
-                intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.free_timeout_buy));
-                intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.free_timeout_no_thanks));
-                intent.putExtra(DialogActivity.RESTART_EXTRA, true);
-                intent.putExtra(DialogActivity.RESTART_ACTION_EXTRA, TIMEOUT_DIALOG_CLOSED_ACTION);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });
-    }
-
     private String getDeviceId() {
         return Secure.getString(getContentResolver(), Secure.ANDROID_ID);
     }
-
-    private void buyPro() {
-        Intent intent = getPlayStoreIntent("timeout");
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            EasyTracker.getTracker().sendEvent(ERROR, BUY_ERROR, TIMEOUT_DIALOG, null);
-            displayErrorMessage(getString(R.string.buy_error_message), getString(R.string.buy_error_title), true, true, -1);
-        }
-        EasyTracker.getTracker().sendEvent(ACTION, BUY, TIMEOUT_DIALOG, null);
-        stopSelf();
-    }
-
-    private Intent getPlayStoreIntent(String campaignName) {
-        //TODO:update with new package Id
-        String uri;
-        if (Settings.getInstance().isRootFlavor()) {
-            uri = "market://details?id=com.iwobanas.screenrecorder.pro&referrer=utm_source%3Ddialog%26utm_campaign%3D" + campaignName;
-        } else {
-            uri = "market://details?id=com.iwobanas.screenrecorder.noroot.pro&referrer=utm_source%3Ddialog%26utm_campaign%3D" + campaignName;
-        }
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(uri));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return intent;
-    }
-
 
     private void denyProjectionError() {
         projectionDenied = true;
@@ -825,13 +738,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             ((ProjectionThreadRunner) projectionThreadRunner).setProjectionData(data);
         } else if (PROJECTION_DENY_ACTION.equals(action)) {
             denyProjectionError();
-        } else if (TIMEOUT_DIALOG_CLOSED_ACTION.equals(action)) {
-            isTimeoutDisplayed = false;
-            if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
-                buyPro();
-            } else {
-                recorderOverlay.show();
-            }
         } else if (RESTART_MUTE_ACTION.equals(action)) {
             if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) {
                 Settings.getInstance().setTemporaryMute(true);
@@ -851,19 +757,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
             }
             if (!settingsDisplayed) {
                 recorderOverlay.show();
-            }
-        } else if (LICENSE_DIALOG_CLOSED.equals(action)) {
-            if (intent.getBooleanExtra(DialogActivity.POSITIVE_EXTRA, false)) { // positive
-                if (retryLicenseCheck) {
-                    checkLicense();
-                } else {
-                    stopSelf();
-                }
-            } else { // negative
-                retryLicenseCheck = false;
-                if (state != RecorderServiceState.RECORDING && state != RecorderServiceState.STARTING) {
-                    recorderOverlay.show();
-                }
             }
         } else if (ENABLE_ROOT_ACTION.equals(action)) {
             reinitialize();
@@ -911,12 +804,7 @@ public class RecorderService extends Service implements IRecorderService, Licens
             stopRecording();
             EasyTracker.getTracker().sendEvent(ACTION, STOP, STOP_DESTROY, null);
         }
-        if (licenseChecker != null) {
-            licenseChecker.onDestroy();
-        }
         startOnReady = false;
-        watermarkOverlay.hide();
-        watermarkOverlay.onDestroy();
         cameraOverlay.hide();
         cameraOverlay.onDestroy();
         recorderOverlay.animateHide();
@@ -988,113 +876,6 @@ public class RecorderService extends Service implements IRecorderService, Licens
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    private void checkLicense() {
-        if (licenseChecker == null) {
-            String deviceId = android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-            licenseChecker = new LicenseChecker(
-                    this, new ServerManagedPolicy(this,
-                    new AESObfuscator(LICENSE_SALT, getPackageName(), deviceId)),
-                    LicenseInfo.getLicenseKey()
-            );
-        }
-
-        licenseChecker.checkAccess(this);
-    }
-
-    @Override
-    public void allow(int policyReason) {
-        EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_ALLOW_ + policyReason, null);
-
-        if (policyReason != Policy.LICENSED) {
-            Log.w(TAG, "err1: " + policyReason);
-        }
-
-        if (retryLicenseCheck) {
-            retryLicenseCheck = false;
-            free = false;
-            if (state != RecorderServiceState.RECORDING && state != RecorderServiceState.STARTING) {
-                recorderOverlay.show();
-            }
-        }
-    }
-
-    @Override
-    public void dontAllow(int policyReason) {
-        EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_DONT_ALLOW_ + policyReason, null);
-        Log.w(TAG, "err2: " + policyReason);
-
-        if (policyReason == Policy.RETRY) { // 2.4%
-            displayLicenseRetryDialog();
-            retryLicenseCheck = true;
-        } else if (policyReason == Policy.NOT_LICENSED) { // 7%
-            displayNotLicensedDialog(R.string.license_not_licensed_message, R.string.free_timeout_buy, "not_licensed");
-        } else if (policyReason == Policy.LICENSED) { // 0.06%
-            displayNotLicensedDialog(R.string.license_error_message, R.string.license_play_store, "licensed");
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                Log.w(TAG, "Unexpected response", e);
-            }
-
-        }
-        free = true;
-        if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
-            watermarkOverlay.show();
-            recordingTimeController.start();
-        }
-    }
-
-    @Override
-    public void applicationError(int errorCode) {
-        EasyTracker.getTracker().sendEvent(STATS, LICENSE, LICENSE_ERROR_ + errorCode, null);
-        Log.w(TAG, "err3: " + errorCode);
-        displayNotLicensedDialog(R.string.license_error_message, R.string.license_play_store, "license_error");
-
-        free = true;
-        if (state == RecorderServiceState.RECORDING || state == RecorderServiceState.STARTING) {
-            watermarkOverlay.show();
-            recordingTimeController.start();
-        }
-    }
-
-
-    private void displayLicenseRetryDialog() {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(RecorderService.this, DialogActivity.class);
-                intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(R.string.license_retry_message));
-                intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.license_title));
-                intent.putExtra(DialogActivity.RESTART_EXTRA, true);
-                intent.putExtra(DialogActivity.RESTART_ACTION_EXTRA, LICENSE_DIALOG_CLOSED);
-                intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(R.string.license_retry));
-                intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.license_continue_as_free));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                recorderOverlay.hide();
-            }
-        });
-    }
-
-    private void displayNotLicensedDialog(final int messageResource, final int buyButtonResource, final String campaignName) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(RecorderService.this, DialogActivity.class);
-                intent.putExtra(DialogActivity.MESSAGE_EXTRA, getString(messageResource));
-                intent.putExtra(DialogActivity.TITLE_EXTRA, getString(R.string.license_title));
-                intent.putExtra(DialogActivity.RESTART_EXTRA, true);
-                intent.putExtra(DialogActivity.RESTART_ACTION_EXTRA, LICENSE_DIALOG_CLOSED);
-                intent.putExtra(DialogActivity.POSITIVE_EXTRA, getString(buyButtonResource));
-                intent.putExtra(DialogActivity.POSITIVE_INTENT_EXTRA, getPlayStoreIntent(campaignName));
-                intent.putExtra(DialogActivity.NEGATIVE_EXTRA, getString(R.string.license_continue_as_free));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                recorderOverlay.hide();
-            }
-        });
     }
 
     private void audioDriverInstallationFailure() {

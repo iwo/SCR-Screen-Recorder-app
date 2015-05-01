@@ -6,5 +6,4 @@ public interface IRecorderService {
     void close();
 
     void showSettings();
-    void showTimeoutDialog();
 }

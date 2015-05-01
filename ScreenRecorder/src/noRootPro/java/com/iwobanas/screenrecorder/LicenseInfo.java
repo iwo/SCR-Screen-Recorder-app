@@ -1,7 +1,0 @@
-package com.iwobanas.screenrecorder;
-
-public class LicenseInfo {
-    static String getLicenseKey() {
-        return "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmtWQ8MPlRBkn97frEv0znq2t3F/IEAFFPQEjYAi9aFhdffDJNK1JsFLr9M+8SwskGapkMyv7jrlA9ViIHMCO/YZs89iPkXMr29sB7e56juGb1Jlh7s0BuyvSVoDMHpEVA7WJSJ3L9UQ5fKGDnrYNK6Sqa9N2GgAtQ9aO3hpZk0G95BxR+r6LahbYUFS9OoX6ZSXWrD87TfY69YxnZDhuKXkrxxnbr3/LHjoohrUo2aczuh9vxIvQT77SDqeewhCPonQYHBa7HKvzckQlaBdf9xVhvde5qUYc7EK7n3gVKEFde93od1eap6E7hKo5mB8Ku0HGwmgG/gEecfX0oge4owIDAQAB";
-    }
-}

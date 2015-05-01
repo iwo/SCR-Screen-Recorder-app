@@ -845,16 +845,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             settings.setMicGain(indexToGain((Integer) newValue));
             preference.setSummary(formatMicGain());
         } else if (preference == hideIconPreference) {
-            if (BuildConfig.FLAVOR_price.equals("free")) {
-                try {
-                    new HideIconDialogFragment().show(getFragmentManager(), "hideWatermark");
-                } catch (IllegalStateException e) {
-                    Log.w(TAG, "Couldn't display dialog fragment. Is it already added?", e);
-                }
-                return false;
-            } else {
-                settings.setHideIcon(selected);
-            }
+            settings.setHideIcon(selected);
         } else if (preference == showTouchesPreference) {
             settings.setShowTouches(selected);
         } else if (preference == showCameraPreference) {

@@ -105,7 +105,7 @@ public class Settings {
         defaultOutputDir = new File(Environment.getExternalStorageDirectory(), outputDirName);
         checkAppUpdate();
         checkSystemUpdate();
-        rootFlavor = BuildConfig.FLAVOR_permissions.equals("root");
+        rootFlavor = BuildConfig.FLAVOR.equals("root");
         if (isRootFlavor()) {
             loadDeviceProfileIfNeeded(context);
             // readPreferences(); will be called when device profile is loaded
