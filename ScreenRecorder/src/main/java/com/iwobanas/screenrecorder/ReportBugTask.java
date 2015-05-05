@@ -84,7 +84,7 @@ public class ReportBugTask extends AsyncTask<Void, Void, Integer> {
         EasyTracker.getTracker().sendEvent(ACTION, BUG, REPORT, null);
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent.setType("message/rfc822");
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"scr.screen.recorder@gmail.com"});
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"scr.screen.recorder@hotmail.com"});
         String version = Utils.getAppVersionName(context);
         String subject = context.getString(R.string.error_report_subject) + " " + context.getString(R.string.app_name) + " " + version + " - " + errorCode + " - " + Build.DEVICE + " - " + Build.VERSION.RELEASE ;
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);

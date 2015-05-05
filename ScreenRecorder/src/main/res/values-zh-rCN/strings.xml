@@ -86,9 +86,9 @@
     <string name="output_file_error_message">SCR 屏幕录像无法创建 %1$s 视频文件，请您确保所选的输出目录可以写入数据，并且 SD 卡未锁定为 USB 连接模式。</string>
     <string name="output_file_error_title">无法创建视频文件</string>
     <string name="play">播放</string>
-    <string name="play_description_free">您可以使用 <b>SCR 免费版</b>录制时长为 3 分钟的屏幕录像，视频会添加 SCR 水印。购买 <b>SCR 专业版</b>可以解除录像时长的限制，并且视频不会添加水印。这是一个初期的 <b>BETA 预览</b>版，因此可能无法兼容所有设备和 ROM。若您遇到了一些问题，请将这些问题反馈到我的电子邮箱 scr.screen.recorder@gmail.com 来帮助我适配您的设备。</string>
+    <string name="play_description_free">您可以使用 <b>SCR 免费版</b>录制时长为 3 分钟的屏幕录像，视频会添加 SCR 水印。购买 <b>SCR 专业版</b>可以解除录像时长的限制，并且视频不会添加水印。这是一个初期的 <b>BETA 预览</b>版，因此可能无法兼容所有设备和 ROM。若您遇到了一些问题，请将这些问题反馈到我的电子邮箱 scr.screen.recorder@hotmail.com 来帮助我适配您的设备。</string>
     <string name="play_description_main">直接在您的手机或平板电脑上录制高画质的屏幕录像！SCR 屏幕录像使用了硬件加速进行视频编码，使其在任何设备上录制的视频都可以到达最佳的画质。这是 Google Play 商店中唯一支持包含 Nexus 7 在内的 Tegra 设备的视频录制工具。</string>
-    <string name="play_description_pro">这是一个初期的 <b>BETA 预览</b> 版，因此可能无法兼容所有设备和 ROM。请您在购买之前安装 <b>SCR 免费版</b> 进行测试，确保兼容您的设备。若您遇到了一些问题，请将这些问题反馈到我的电子邮箱 scr.screen.recorder@gmail.com 来帮助我适配您的设备。</string>
+    <string name="play_description_pro">这是一个初期的 <b>BETA 预览</b> 版，因此可能无法兼容所有设备和 ROM。请您在购买之前安装 <b>SCR 免费版</b> 进行测试，确保兼容您的设备。若您遇到了一些问题，请将这些问题反馈到我的电子邮箱 scr.screen.recorder@hotmail.com 来帮助我适配您的设备。</string>
     <string name="play_free_app_name">SCR 屏幕录像免费版 ★ ROOT</string>
     <string name="play_pro_app_name">SCR 屏幕录像专业版 ★ ROOT</string>
     <string name="play_root_required"><b>只能在已获取 ROOT 权限 / 已破解 / 已解锁的设备上使用！</b>若您的设备还未获取 ROOT 权限，请不要安装。</string>
