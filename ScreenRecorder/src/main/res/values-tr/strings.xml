@@ -3,62 +3,111 @@
     <string name="free_app_full_name">"SCR Screen Recorder Ücretsiz "</string>
     <string name="pro_app_name">"SCR Pro"</string>
     <string name="pro_app_full_name">"SCR Screen Recorder Pro"</string>
+    <string name="free_app_no_root_name">"SCR Ücretsiz"</string>
+    <string name="free_app_no_root_full_name">"SCR Screen Recorder Ücretsiz "</string>
+    <string name="pro_app_no_root_name">"SCR Pro"</string>
+    <string name="pro_app_no_root_full_name">"SCR Screen Recorder Pro"</string>
 
-    <string name="play_free_app_name">"
-SCR Screen Recorder Free ★ ROOT
+    <string name="play_free_app_name_30_char">"
+SCR Screen Recorder Ücretsiz ★ ROOT
     "</string>
-    <string name="play_pro_app_name">"
+    <string name="play_pro_app_name_30_char">"
 SCR Screen Recorder Pro ★ ROOT
     "</string>
 
+
+    <string name="play_description_short_80_char">"
+HD video dosyasını ekran ve sistem ses kaydı! Root gerektirir! 
+    "</string>
+
     <string name="play_root_required">"
-&lt;b&gt;jailbreak kilidi sadece / rootlu / cihazlar ile çalışır!&lt;/ b&gt;&lt;br/&gt;Cihazınız rootlu değilse kurmayın."</string>
+&lt;b&gt;jailbreak kilidi sadece / rootlu / cihazlar ile çalışır!&lt;/ b&gt;&lt;br/&gt;Cihazınız rootlu değilse kurmayın.
+    "</string>
+
     <string name="play_description_main">"
-Telefonunuzdan veya tabletinizden doğrudan yüksek kalitede screencasts kaydedin! 
-
-SCR Screen Recorder herhangi bir cihaz üzerinde en kaliteli ekran kayıt elde etmek için donanım hızlandırmalı video kodlaması kullanır.. Bu; Nexus 7 Tegra cihazını destekleyen piyasadaki tek video kaydedicidir. "</string>
-    <string name="play_description_free">"
-&lt;b&gt;SCR Ücretsiz&lt;/ b&gt;ile enyüksek 3 dakika screencasts kaydedilebilir ve SCR filigranı videoya eklenir. 
-&lt;b&gt;SCR Pro&lt;/ b&gt;satın aldığınızda, filigran eklenmez ve screencast sınırsız uzunluğunuda kaydeder. 
-
-Tüm cihazlar ve ROM üzerinde çalışmayabilir bu yüzden erken&lt;b&gt;BETA önizleme&lt;/ b&gt;sürümüdür. Eğer; herhangi bir sorun yaşarsanız cihazınızı desteğini almak için bana scr.screen.recorder@gmail.com adresine bildirin lütfen.
+SCR Screen Recorder, Android en kapsamlı screencast kayıt uygulaması göz atın. SCR Screen Recorder 4.0 beri tüm Android sürümleri destekler ve her platformda mevcut en iyi kodlama yöntemi kullanır. Erken 2013 SCR Screen Recorder ilk sürüm sık sık güncellenen ve olduğundan yeni özellikler düzenli olarak eklenir. Benzersiz özellikleri:
     "</string>
 
-    <string name="play_description_pro">"
-Tüm cihazlar ve ROM üzerinde çalışmayabilir bu yüzden erken&lt;b&gt;BETA önizleme&lt;/ b&gt;sürümüdür. Satın almadan önce cihazınızın desteğinin olup olmadığını test etmek için&lt;b&gt;SCR Free&lt;/b&gt;test etmeyi düşünün. Eğer; herhangi bir sorun yaşarsanız cihazınızı desteğini almak için bana scr.screen.recorder@gmail.com adresine bildirin lütfen.
+    <string name="play_description_system_audio">"
+• SİSTEM SES - Çoğu cihazda doğrudan mikrofon kayıt hoparlörler çıktı kaynaklanan kalite kaybı olmadan oyun ses kaydı yapabilirsiniz. \"İç + Mic\" seçeneği sistem ses kayıt mikrofon tefsiri eklemenizi sağlar. Şu anda bu özellik Android 4.2 mevcut değildir ama yakında ilave olacak.
     "</string>
 
-    <string name="play_small_print">"
-SCR Screen Recorder bug izi yardımcısı ile kullanıcıların uygulamayı nasıl kullandıklarını analiz ederek anonim kullanım istatistiklerini toplar. 
-Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır.
+    <string name="play_description_features">"
+• YÜZ CAM - Videonuz için bir ön bakan kamera ekleyerek duygularını paylaşın. Önemli kontroller engel değildir böylece etrafında kamera kaplamayı taşıyabilirsiniz. • NO ADS - Diğer \ \"ücretsiz \\" ekran kaydediciler aksine SCR herhangi reklamları görüntülemek asla. Tüm uygulamalar geliştirilmesi, sadece bağış ve Pro sürümleri tarafından desteklenir. • AYARLAR - basit hazır ayarları seçmek veya el size kapalı var her ayarı çimdik tercih Hayır mater. SCR birçok özelleştirmeleri destekler ve performans ve kararlılık istatistikleri sağlar. • ALPHA ÖZELLİKLERİ - Alpha güncelleştirmeleri ve test marka almak isterseniz bize http://goo.gl/PGYZ8r de SCR Alpha Test Google+ topluluğu katılarak sizin için neyin önemli olduğunu bilsin yeni özellikler hakkında toplum bölümündeki bağlantıları takip .
+    "</string>
+
+    <string name="play_ban_disclaimer">"
+Bu app önceki sürümü üzerinde 2 milyon indirme ve 37k değerlendirmeleri vardı
+    "</string>
+
+    <string name="play_description_free_limits">"
+&lt;B&gt; SCR Free &lt;/ b&gt; ile maksimum 3 dakika Screencasts kaydedebilir ve SCR filigran video eklenir. Satın &lt;b&gt; SCR Pro hiçbir filigran &lt;/ b&gt; almak için sınırsız screencast uzunluğu.
+    "</string>
+
+        <string name="play_description_pro">"
+Eğer SCR Free &lt;b&gt; test düşünün satın önce &lt;/ b&gt; Cihaz zaten destekleniyor sağlamak için.
+    "</string>
+
+    <string name="play_description_stablity">"
+SCR Screen Recorder bazı cihazlarda ve ROM'lar üzerinde çalışmayabilir çeşitli kesmek ve gayri resmi API'leri kullanır. Eğer herhangi bir sorunla karşılaşırsanız bana cihazınız desteklenen yardımcı olmak için scr.screen.recorder@gmail.com de rapor edin.
+    "</string>
+
+
+
+    <string name="play_small_print_stats">"
+Bu uygulama böcek parça yardımcı cihazlar ve uyumluluk analiz anonim kullanım istatistiklerini toplar.
+    "</string>
+
+    <string name="play_small_print_lgpl">"
+Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kodunu kullanır.
+    "</string>
+
+
+    <string name="play_noroot_description_short_80_char">"
+Serin Yüz Kamera özelliği ile hafif Lolipop ekran kaydedici. [Root]
+    "</string>
+
+    <string name="play_noroot_description_main">"
+SCR 5+ ünlü SCR Screen Recorder tarihinde yeni bir sayfa açar. Yeni Android 5.0 sayesinde 5+ SCR özellikleri root erişimi olmadan kayıt ekranına sağlar! Ne yazık ki Lollipop doğal henüz iç ses kaydını desteklemiyor, bu yüzden bu özelliği gerektiren ve cihazınızın köklü ise SCR Screen Recorder Root yükleyin.
     "</string>
 
     <string name="recording_saved_title">"SCR Kaydı Kaydedildi"</string>
-    <string name="recording_saved_message">"%1$s kaydedilen kayıtlar tutuluyor"</string>
     <string name="recording_saved_toast">"%1$s tutulan kaydedilmiş kayıtlar "</string>
     <string name="max_file_size_reached_toast">"%1$s Enyüksek dosya boyutuna ulaşıldı."</string>
-    <string name="start">"Başlat "</string>
     <string name="play">"Oynat"</string>
 
     <string name="su_required_title">"Root erişimi gereklidir"</string>
-    <string name="su_required_message">"Herhangi bir telefon/tablet gibi cihazınızdan ekran kaydediciyi çalıştırmak için root erişimi gereklidir.
-İnternette farklı cihazlar için rootlamanın nasıl yapıldığını açıklayan bol dersler vardır. Bunu yaptığınızda lütfen tekrar bekleriz!"</string>
+    <string name="su_required_message">"Telefonunuz / tablet köklü gereken herhangi bir ekran kaydedici uygulamasını çalıştırmak için. Farklı cihazların kök nasıl açıklayan internette bol dersler vardır. İşiniz bittiğinde geri gel lütfen!"</string>
     <string name="su_required_help">"\"rootlama\" nasıl yapılır?"</string>
     <string name="su_required_help_link">"http://www.androidpolice.com/2010/04/15/rooting-explained-top-5-benefits-of-rooting-your-android-phone/"</string>
+    <string name="su_required_lollipop_message">"Tam potansiyelini kullanmak için %1$s cihazınızın köklü gerekiyor. Android 5.0 kök olmadan temel ekran kayıt (hiçbir iç ses) izin verir. Hafif indirerek Check it out %2$s veya Hayır kök moduna geçiş.
+    "</string>
+    <string name="su_required_lollipop_denied_message">"Cihazınızın köklü Eğer açın lütfen %1$s ve emin yanlışlıkla inkar değil root erişimi yapmak %2$s ."</string>
+    <string name="su_required_no_root_mode">"Root modu yok"</string>
+
+    <string name="settings_no_root_only">"Sadece hiçbir kök enkoderler için"</string>
+    <string name="settings_root_only">"Sadece kök enkoderler için"</string>
+    <string name="settings_no_root_mode">"No-kök modu"</string>
+    <string name="settings_no_root_mode_summary">"Root erişimi istemek için dokunun ve tüm özelliklerini etkinleştirmek"</string>
 
     <string name="error_dialog_title">"Ciddi anlamda bir şeyler yanlış gitti :-( "</string>
-    <string name="startup_error_message">"Anonim hata raporu bize sorunu çözmeye yardımcı olmak için otomatik olarak gönderilir. Hata alıntısı S%1$d destek e-posta yoluyla bizimle temasa geçmeye çekinmeyin."</string>
-    <string name="unknown_error_message">"Anonim hata raporu bize sorunu çözmeye yardımcı olmak için otomatik olarak gönderilir. Destek e-posta iktibas hatası R%1$d aracılığıyla  bizimle temasa geçmeye çekinmeyin."</string>
+    <string name="unknown_error_message">"anonim hata raporu bize sorunu çözmeye yardımcı olmak için otomatik olarak gönderilecektir. Hata SR alıntı destek e-posta yoluyla temasa çekinmeyin %1$d ."</string>
+
+    <string name="selinux_error_title">"Root erişim hatası"</string>
+    <string name="selinux_error_message">"Cihazınızda SELinux yapılandırmasıyla ilgili bir sorun var. Cihazınız düzgün köklü olduğundan emin olun ve eğer mümkünse keyfi moda SELinux'u geçmek."</string>
 
     <string name="media_recorder_error_title">"Kaydedici hatası"</string>
     <string name="media_recorder_error_message">"Çözünürlüğünü değiştirme veya GPU/CPU arasındaki görüntü dönüşümüne geçmeyi deneyin. Varsa diğer screencast uygulamalarını kaldırın. Sorun devam ederse hata alıntısı R%1$d destek e-posta yoluyla bizimle irtibata geçiniz ."</string>
+
+    <string name="video_codec_error_title">"Video Ayarları Uyumsuz "</string>
+    <string name="video_codec_error_message">"Çözünürlüğü veya video bitrate azaltarak deneyin. Bazı cihazlar portre, video yönelimi sadece düşük çözünürlüklerde çalışır unutmayın. Sorun devam ederse hata R alıntı destek e-posta yoluyla temasa geçiniz %1$d ."</string>
 
     <string name="output_file_error_title">"Video dosyası oluşturulamıyor"</string>
     <string name="output_file_error_message">"SCR oluşturulamadı %1$s video dosyası. Seçilen çıkış dizini yazılabilir olduğunu ve SD Kart USB bağlantısı ile kilitli olmadığından emin olun."</string>
 
     <string name="microphone_busy_error_title">"Mikrofon meşgul"</string>
     <string name="microphone_busy_error_message">"
-        Uygulama için sadece bir sefer mikrofonu kullanabilirsiniz. Bu bir Android sistemi sınırlamasıdır. Mikrofonu (örn. Google veya Skype) kullanan diğer uygulamayı kapatın veya ses olmadan kayda devam edin.
+        Uygulama için sadece bir kere mikrofonu kullanabilirsiniz. Bu bir Android sistemi sınırlamasıdır. Mikrofonu (örn. Google veya Skype) kullanan diğer uygulamayı kapatın veya ses olmadan kayda devam edin.
     "</string>
     <string name="microphone_busy_error_continue_mute">"Sessiz Devam et"</string>
 
@@ -83,36 +132,37 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
     <string name="installation_error_message">"Gerekli dosyalar yüklenemiyor. Yeterli boş alan olduğuna emin olun ve cihazınızı yeniden başlatın %1$s."</string>
 
     <string name="help_stop_title">"Nasıl durdurulur"</string>
-    <string name="help_stop_ok">"\"Anladım!\" "</string>
+    <string name="help_stop_ok">"\"Anladım!\""</string>
 
     <string name="free_timeout_title">"Süre sınırlaması doldu"</string>
-    <string name="free_timeout_message">"SCR Screen Recorder Pro satın aldığınızda videolar üzerindeki filigran kaybolur. Böylece sınırsız video kaydı yaparak kullanırsınız. "</string>
+    <string name="free_timeout_message">"SCR Screen Recorder Pro satın aldığınızda videolar üzerindeki filigran kaybolur. Böylece sınırsız video kaydı yaparak kullanırsınız."</string>
     <string name="free_timeout_buy">"Şimdi satın al!"</string>
     <string name="free_timeout_no_thanks">"Hayır, teşekkürler"</string>
     <string name="hide_icon_title">"Pro özellik"</string>
     <string name="hide_icon_message">"SCR Screen Recorder Pro üzerindeki filigran ve bildirim simgesini gizlemek için Pro sürümü satın alın. Böylece sınırsız kayıt da yaparsınız! "</string>
 
-    <string name="buy_error_title">"Google Play açılamadı"</string>
+    <string name="buy_error_title">"Google Play hatası"</string>
     <string name="buy_error_message">"SCR Screen Recorder Pro için lütfen Google Play'da arama yapın."</string>
 
     <string name="settings_activity_label">"SCR Ayarları"</string>
     <string name="settings_title">"Ayarlar"</string>
-    <string name="settings_ok">"Tamamam"</string>
-    <string name="settings_reset">"Varsayılanları geriyükle"</string>
+    <string name="settings_ok">"TAMAM"</string>
+    <string name="settings_reset">"Varsayılanları geri yükle"</string>
     <string name="settings_cancel">"İptal"</string>
+
+    <string name="settings_unstable">"%1$s (kararsız)"</string>
 
     <string name="settings_video_category">"Video"</string>
 
-    <string name="settings_video_encoder">"Encoder"</string>
+    <string name="settings_video_encoder">"Kodlayıcı"</string>
     <string name="settings_video_encoder_h264">"H264"</string>
-    <string name="settings_video_encoder_h263">"H263"</string>
-    <string name="settings_video_encoder_h263_unstable">"H263 (kararsız)"</string>
     <string name="settings_video_encoder_mpeg_4_sp">"MPEG-4 SP"</string>
-    <string name="settings_video_encoder_default">"Otomatik "</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4">"MPEG-4 yazılımı (yavaş)"</string>
-    <string name="settings_video_encoder_ffmpeg_mpeg_4_short">"SW MPEG-4"</string>
+    <string name="settings_video_encoder_ffmpeg_mpeg_4">"MPEG-4 Yazılım "</string>
     <string name="settings_video_encoder_built_in_summary">"Android yerleşik %1$s kodlayıcısı"</string>
     <string name="settings_video_encoder_ffmpeg_summary">"MPEG4 yazılımı FFmpeg kodlayıcısı"</string>
+    <string name="settings_video_encoder_no_root_h264">"H264 (Root)"</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 (root)"</string>
+    <string name="settings_video_encoder_mpeg_4">"MPEG-4"</string>
 
     <string name="settings_resolution">"Çözünürlük"</string>
     <string name="settings_resolution_short">"%1$dx%2$d"</string>
@@ -121,17 +171,16 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
     <string name="settings_resolution_padding">"%1$dx%2$d - %2$dp dolgulu"</string>
     <string name="settings_resolution_max">"%1$dx%2$d - Max"</string>
     <string name="settings_resolution_half">"%1$dx%2$d - Yarım"</string>
-    <string name="settings_resolution_unstable">"(Kararsız)"</string>
 
     <string name="settings_transformation">"Görüntü dönüştürme"</string>
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
-    <string name="settings_transformation_oes">"GPU+"</string>
-    <string name="settings_transformation_cpu_summary">"İşlemci üzerinden ekran görüntüsü işle (CPU)  "</string>
-    <string name="settings_transformation_gpu_summary">"Grafik kartı üzerinden ekran görüntüsü işle (%1$s) "</string>
+    <string name="settings_transformation_oes">"GPU"</string>
+    <string name="settings_transformation_cpu_summary">"Işlemci kullanarak (CPU)"</string>
+    <string name="settings_transformation_gpu_summary">"Grafik çipi kullanarak ( %1$s )"</string>
     <string name="settings_transformation_sw_summary">"Yazılım kodlayıcısı kullanılamaz"</string>
 
-    <string name="settings_video_bitrate">"Bitdeğeri"</string>
+    <string name="settings_video_bitrate">"Bit hızı"</string>
     <string name="settings_video_bitrate_summary">"yaklaşık %1$s encoder bağlı olarak"</string>
     <string name="settings_video_bitrate_default">"Varsayılan"</string>
 
@@ -142,11 +191,11 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
     <string name="settings_frame_rate_up_to">"%1$d fps ye kadar"</string>
     <string name="settings_frame_rate_up_to_short">"%1$d fps"</string>
     <string name="settings_frame_rate_summary">"Donanım özellikleri, %1$dfps ye kadar sınırlıdır"</string>
-    <string name="settings_frame_rate_max_summary">"Enyüksek donanım özellikleri kullanılır"</string>
+    <string name="settings_frame_rate_max_summary">"En yüksek donanım özellikleri kullanılır"</string>
 
     <string name="settings_orientation">"Yönlendirme"</string>
     <string name="settings_orientation_description">"
-        Varsayılan olarak video kareleri her zaman yatay ve dikey değişen kayıtları eklenir. YouTube ve varsayılan Android video oynatıcısı videoları doğru oynatır ama bazı PC oynatıcıları (örneğin VLC) meta değişimleri görüntülenmez ve sadece manzara modunda görüntülenir. Birçok cihaz dikey kare ile video oynatbilir/ 't kaydedebilir\ ama dikey çerçeveleri etkinleştirdiğinizde bu seçeneği dikkatli kullanın.
+        Varsayılan olarak video kareleri her zaman yatay ve dikey değişen kayıtları eklenir. YouTube ve varsayılan Android video oynatıcısı videoları doğru oynatır ama bazı PC oynatıcıları (örneğin VLC) meta değişimleri görüntülenmez ve sadece manzara modunda görüntülenir. Birçok cihaz dikey kare ile video oynatbilir\'t kaydedebilir\ama dikey çerçeveleri etkinleştirdiğinizde bu seçeneği dikkatli kullanın.
     "</string>
     <string name="settings_orientation_auto">"Otomatik"</string>
     <string name="settings_orientation_portrait">"Dikey"</string>
@@ -156,8 +205,6 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
 
     <string name="settings_vertical_frames">"Dikey çerçeveler"</string>
     <string name="settings_vertical_frames_warning">"Birçok cihaz üzerinde video oynatıcılar, dikey çerçeveli videoları oynatmaz. Youtube vb. video eklenmiş olsa bile meta veriler, bu seçenek seçili olduğu zaman varsayılan Android oynatıcısı ile istenmeyen bir uyum sağlar."</string>
-    <string name="settings_vertical_frames_ok">"Tamam"</string>
-    <string name="settings_vertical_frames_cancel">"İptal"</string>
 
     <string name="settings_audio_category">"Ses"</string>
     <string name="settings_audio_source">"Kaynak"</string>
@@ -165,16 +212,25 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
     <string name="settings_audio_mute">"Sessiz"</string>
     <string name="settings_audio_internal">"Dahili"</string>
     <string name="settings_audio_experimental">"Deneysel"</string>
+    <string name="settings_audio_mix">"İç + Mikrofon"</string>
+    <string name="settings_audio_use_headphones">"Yankı önlemek için kablolu kulaklık kullanın"</string>
+    <string name="settings_audio_not_supported">"%1$s Desteklenmiyor "</string>
+    <string name="settings_audio_incompatible">"Ses sürücüsü ile uyumlu değil"</string>
     <string name="settings_audio_mic_summary">"Mikrofon"</string>
     <string name="settings_audio_mute_summary">"Sessiz. Ses parçası yok "</string>
     <string name="settings_audio_internal_summary">"Sistem ses çıkışı"</string>
-    <string name="settings_audio">"Ses"</string>
+    <string name="settings_audio_mix_summary">"Mikrofon + Dahili (kulaklık kullanın!)"</string>
     <string name="settings_sampling_rate">"Örnekleme oranı"</string>
+
+    <string name="settings_mic_gain">"Mikrofon Boost"</string>
+    <string name="settings_mic_gain_summary_mix_only">"Sadece kullanılabilir %1$s"</string>
+    <string name="settings_mic_gain_summary_default">"Varsayılan hacmi"</string>
+    <string name="settings_mic_gain_summary">"Tarafından hacmini artırmak %1$d dB"</string>
 
     <string name="settings_other_category">"Diğer "</string>
     <string name="settings_hide_icon">"Bildirim simgesini gizle"</string>
     <string name="settings_show_touches">"Dokunuşları göster"</string>
-    <string name="settings_show_touches_summary">"Dokunma etkileşimi için görsel geribildirimi göster. Ayrıca Android Ayarları → Geliştirici Seçenekleri → Dokunuşları göster seçeneğini işaretleyerek dokunma gösterimini kalıcı olarak etkinleştirebilirsiniz."</string>
+    <string name="settings_show_touches_summary">"Dokunuşlar için görsel geri bildirim göster. Android Ayarları aracılığıyla sürekli Enable Geliştirici Seçenekleri → göster dokunur →"</string>
     <string name="settings_output_dir">"Çıktı dizini"</string>
     <string name="settings_stop_when_screen_off">"Kapalı ekranda Dur"</string>
     <string name="settings_stop_when_screen_off_summary">"Ekran kapandığında kayıt durdurulur"</string>
@@ -184,6 +240,16 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
     <string name="settings_zigzag_fix">"Zigzag düzeltin"</string>
     <string name="settings_zigzag_fix_summary">"Kayıtta rasgele renkli çizgiler içeriyorsa seçin"</string>
     <string name="settings_zigzag_fix_cpu_only">"Sadece CPU Görüntü dönüşüm ile kullanılabilir"</string>
+
+    <string name="settings_video_config">"%1$s öntanımlı"</string>
+    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0f fps"</string>
+    <string name="settings_video_config_entry_stability">"%1$d %% kararlı"</string>
+    <string name="settings_video_config_summary">"Kullanım istatistikleri dayalı"</string>
+    <string name="settings_video_config_summary_no_data">"İstatistikleri indirme yapılamamıyor"</string>
+    <string name="settings_video_config_summary_not_available">"Henüz yok istatistikleri"</string>
+
+    <string name="device_profile_download_error_toast">"Önerilen ayarları indirme yapılamıy. Online olduğunuzdan emin olun."</string>
+    <string name="device_profile_downloaded_toast">"Önerilen ayarları indir"</string>
 
     <string name="directory_chooser_select">"\"%1$s\" Seçin"</string>
     <string name="directory_chooser_refresh">"Yenile"</string>
@@ -198,19 +264,13 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
     <string name="directory_chooser_cancel">"İptal"</string>
     <string name="directory_chooser_default">"Varsayılan"</string>
 
-    <string name="license_dont_allow">"Lisans denetimi başarısız oldu. İnternet bağlantısı kurun ve Google Play'de oturum açtığınıza emin olun.
-    "</string>
-    <string name="license_error">"Lisans denetimi hatası. İnternet bağlantısı kurun ve Google Play'de oturum açtığınıza emin olun.
-    
-    "</string>
-
     <string name="error_report_report">"Rapor"</string>
     <string name="error_report_close">"Kapat"</string>
-    <string name="error_report_text">"Ek hata ile ilgili bilgiler de dahil olmak üzere ayrıntılı sistem günlüğünü içerir. Herhangi bir yorum eklemek için çekinmeyin. "</string>
+    <string name="error_report_text">"Ek hata ile ilgili bilgileri de dahil olmak üzere ayrıntılı sistem günlüğünü içerir. Herhangi bir yorum eklemek için çekinmeyin. "</string>
     <string name="error_report_chooser">"E-posta hata raporu ile"</string>
 
     <string name="rating_rate_title">"%1$s Oyla"</string>
-    <string name="rating_rate_message">"Eğer %1$s kullanmaktan zevk aldıysanız, bunu değerlendirmek için bir dakikanızı ayırın lütfen. Desteğiniz için teşekkürler!"</string>
+    <string name="rating_rate_message">"Kullanmaktan zevk aldıysanız, %1$s bunu değerlendirmek için bir dakikanızı ayırın lütfen. Desteğiniz için teşekkürler!"</string>
     <string name="rating_rate_now">"Şimdi derecelendir! "</string>
     <string name="rating_remind">"Daha sonra hatırlat"</string>
     <string name="rating_no_thanks">"Hayır, teşekkürler"</string>
@@ -218,12 +278,15 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
 
     <string name="help_stop_message">"Kaydı durdurmak için ekranı kilitleyin ve 2 saniye bekleyin. Yada alteratif olarak %1$s uygulama simgesine dokunup tekrar açın. "</string>
     <string name="menu_send_bug_report">"Hata raporu gönderin"</string>
+    <string name="menu_show_unstable">"Kararsız görünüyor"</string>
+    <string name="menu_show_advanced">"Gelişmiş göster"</string>
 
     <string name="notification_status_initializing">"Başlatılıyor"</string>
     <string name="notification_status_waiting_for_root">"Root erişimi için bekleniyor"</string>
+    <string name="notification_status_waiting_for_projection">"Ekran yakalama erişimi için bekliyorum"</string>
     <string name="notification_status_installing_audio">"Ses sürücülerinin kurulumu"</string>
     <string name="notification_status_ready">"Hazır"</string>
-    <string name="notification_status_starting">"Başlatılıyor"</string>
+    <string name="notification_status_starting">"Başlıyor"</string>
     <string name="notification_status_recording">"Kaydediliyor"</string>
     <string name="notification_status_error">"Hata"</string>
     <string name="notification_status_stopping">"Durduruluyor"</string>
@@ -238,6 +301,46 @@ Bu yazılım LGPL altında lisanslı FFmpeg 1.2 değiştirilmemiş kod kullanır
     <string name="internal_audio_unstable_title">"Kararsız Dahili ses"</string>
     <string name="internal_audio_unstable_message">"Dahili ses istikrar sorunu algılandı. Bana Cihazınızı desteklemeye yardımcı olacak bir %1$s hata raporu gönderin. Ses kaynağı ayarlanacaktır."</string>
     <string name="internal_audio_disabled_title">"Dahili ses devredışı"</string>
-    <string name="internal_audio_disabled_message">"Ses kaydı %1$s doğru kapatılamazsa dahili ses kaydı kapatılır. Siz Ayarlardan yeniden etkinleştirebilirsiniz."</string>
+    <string name="internal_audio_disabled_message">"Ses kaydı doğru kapatılamazsa %1$s dahili ses kaydı kapatılır. Ayarlardan yeniden etkinleştirebilirsiniz."</string>
 
+    <string name="license_title">"Lisans hatas"</string>
+    <string name="license_not_licensed_message">"Lisans doğrulama hata. Google Play Store'da ile SCR Pro satın alınız. Lucky Patcher yüklü varsa, Google öykünme oyna devre dışı bırakın."</string>
+    <string name="license_retry_message">"Lisans doğrulama hata. Internet bağlantısı kadar olduğundan emin olun, tarih ve saat cihazınızda doğru ve your're Google Play Store'da oturum. Lisans doğrulandıktan sonra SCR Pro çevrimdışı kullanmaya devam edebilirsiniz."</string>
+    <string name="license_error_message">"Lisans doğrulama hata. Google Play ve bu tarih ve saat cihazınızda doğru olsa SCR Pro yüklü emin olun. Sorun net veri ve \"Google Play hizmetler\" ve \"Google Play Store\" apps önbelleğini devam ederse.
+    "</string>
+    <string name="license_play_store">"Play Store"</string>
+    <string name="license_retry">"Tekrar dene"</string>
+    <string name="license_continue_as_free">"Ücretsiz olarak devam"</string>
+
+    <string name="su_denied_message">"Cihazınızda root erişimiyle bir sorun var. 
+      %1$s açın ve %2$s root erişimin yanlışlıkla engellendiğinden emin olun.
+"</string>
+    <string name="su_default_name">"süperuser"</string>
+
+    <string name="can_not_start_toast">"%1$s Kayıt başlatılamıyor:"</string>
+
+    <string name="settings_show_camera">"Yüz Kamera"</string>
+    <string name="settings_show_camera_summary">"Kayıt üstüne Kamera görüntü"</string>
+    <string name="settings_camera_alpha_title">"Şeffaf"</string>
+    <string name="settings_camera_alpha_summary">"Yüz Cam %1$d %% opak"</string>
+    <string name="settings_camera_alpha_summary_100">"Yüz Cam şeffaf değil"</string>
+
+    <string name="miui_error_message">"%1$s kayar pencereleri göremiyorsanız MIUI ayarlarından uygulamalara gidin ve %1$s \"Pop-up pencereler görünümü\" etkinleştirin. "</string>
+    <string name="miui_error_title">"MIUI pop-up devredışı bırakılsın mı?"</string>
+
+    <string name="lollipop_dialog_title">"SCR deneyin 5+"</string>
+    <string name="lollipop_dialog_message">"Eğer, 5+ yeni, hafif, hiçbir kök ekran kaydedici uygulaması SCR test etmek ister misiniz? Bu resmi Android 5.0 ekran yakalama API ve mikrofon ses kaydı kullanır."</string>
+    <string name="lollipop_dialog_try_now">"Şimdi deneyin"</string>
+
+    <string name="projection_deny_error_message">"Çalışmak için kayıt için ŞİMDİ BAŞLAT dokunmanız gerekir."</string>
+    <string name="projection_deny_error_title">"Ekranına erişemiyor"</string>
+
+    <string name="notification_action_share">"Pay"</string>
+    <string name="internal_audio_warning_title">"Kurulum uyarısı"</string>
+
+    <string name="internal_audio_warning_message">"\"Cihazınızda ses sürücü yükleme sistem bölümü değişiklikleri gerektirir. Montaj hatası olası durumunda yumuşak tuğla olsun ya da önyükleme döngü girebilirsiniz cihazınız. Eğer nasıl yeniden flaş sistem bölümü bildiğinizden emin olun veya yedekten sistem geri yükleme Devam etmeden önce. Eğer kaldırmaya karar verirseniz %1$s gelecek açık SCR Ayarlar ve uygulamayı kaldırmadan önce iç ses devre dışı bırakın.
+    "</string>
+    <string name="internal_audio_warning_confirmation">"Ben sistem bölümünü geri biliyorum"</string>
+    <string name="internal_audio_warning_dont_show">"Bu mesajı tekrar gösterme etmeyin"</string>
+    <string name="internal_audio_warning_install">"Kurmak"</string>
 </resources>

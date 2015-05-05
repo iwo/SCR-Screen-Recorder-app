@@ -85,22 +85,22 @@ SCR 5+ deschide un nou capitol în istoria celebrului SCR Screen Recorder. Dator
     <string name="su_required_lollipop_denied_message">"Dacă dispozitivul este rootat vă rugăm să deschideți %1$s și să vă asigurați că nu aţi refuzat accidental drepturile de superuser pentru %2$s ."</string>
     <string name="su_required_no_root_mode">"Modul fără root"</string>
 
-    <string name="settings_no_root_only">"Numai pentru nici encodere rădăcină"</string>
-    <string name="settings_root_only">"Numai pentru encodere rădăcină"</string>
-    <string name="settings_no_root_mode">"Nu-rădăcină mod"</string>
-    <string name="settings_no_root_mode_summary">"Apăsați pentru a solicita acces root și pentru a permite toate caracteristicile"</string>
+    <string name="settings_no_root_only">"Numai pentru dispozitive fără root"</string>
+    <string name="settings_root_only">"Numai pentru dispozitive cu root"</string>
+    <string name="settings_no_root_mode">"Modul \"fără root\""</string>
+    <string name="settings_no_root_mode_summary">"Apăsați pentru a solicita acces root și pentru a permite toate opțiunile"</string>
 
     <string name="error_dialog_title">"Ceva nu a funtionat bine :-("</string>
-    <string name="unknown_error_message">"Raportul de eroare anonim vor fi trimise automat pentru a ne ajuta rezolva problema. Simțiți-vă liber să intre în contact prin e-mail suport citând eroare SR %1$d ."</string>
+    <string name="unknown_error_message">"Raportul de eroare anonim va fi trimis automat pentru a ne ajuta să rezolvăm problema. Simțiți-vă liber să intrați în contact prin e-mail citând eroare SR %1$d ."</string>
 
-    <string name="selinux_error_title">"Root eroare de acces"</string>
-    <string name="selinux_error_message">"Există o problemă cu configurație SELinux pe dispozitiv. Asigurați-vă că dispozitivul este înrădăcinată în mod corespunzător și pentru a comuta în modul SELinux permisiv, dacă este posibil."</string>
+    <string name="selinux_error_title">"Eroare de acces pentru root"</string>
+    <string name="selinux_error_message">"Există o problemă cu configurație SELinux pe dispozitivul dv. Asigurați-vă că dispozitivul este root-at în mod corespunzător și comutați în modul SELinux permisiv, dacă este posibil."</string>
 
     <string name="media_recorder_error_title">"Eroare de înregistrare"</string>
     <string name="media_recorder_error_message">"Încercați să schimbați rezoluția sau comutati transformarea imaginii între GPU/CPU. Vă rugăm să dezinstalați alte aplicații de captura ecran, dacă aveți una deja instalata. Dacă problema persistă, vă rugăm să luați legătura prin e-mail de support citând eroarea R %1$d ."</string>
 
-    <string name="video_codec_error_title">"Setări video incompatibile"</string>
-    <string name="video_codec_error_message">"Încercați să reduceți rezoluția sau bitrate video. Rețineți că pe unele orientarea videoclipuri dispozitive portret funcționează numai cu rezoluții mai mici. Dacă problema persistă, vă rugăm luați legătura prin e-mail suport citând eroare R %1$d ."</string>
+    <string name="video_codec_error_title">"Setări video incompatibile "</string>
+    <string name="video_codec_error_message">"Încercați să reduceți rezoluția sau bitrate video. Rețineți că pe unele dispozitive orientarea videoclipurilor portret funcționează numai cu rezoluții mai mici. Dacă problema persistă, vă rugăm luați legătura prin e-mail citând eroarea R %1$d ."</string>
 
     <string name="output_file_error_title">"Nu se poate crea fișier video"</string>
     <string name="output_file_error_message">"SCR a fost în imposibilitatea de a crea fișierul video %1$s . Asigurați-vă că directorul de ieșire selectat poate fi scris și că SD card-ul nu este blocat de o conexiune USB."</string>
@@ -159,9 +159,9 @@ SCR 5+ deschide un nou capitol în istoria celebrului SCR Screen Recorder. Dator
     <string name="settings_video_encoder_ffmpeg_mpeg_4">"Software MPEG-4"</string>
     <string name="settings_video_encoder_built_in_summary">"Encoder inclus in Android %1$s "</string>
     <string name="settings_video_encoder_ffmpeg_summary">"Encoder MPEG4 software FFmpeg "</string>
-    <string name="settings_video_encoder_no_root_h264">"H264 (fără rădăcină)"</string>
-    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 (fără rădăcină)"</string>
-    <string name="settings_video_encoder_mpeg_4">"MPEG-4"</string>
+    <string name="settings_video_encoder_no_root_h264">"H264 (fără rădăcină) "</string>
+    <string name="settings_video_encoder_no_root_mpeg_4">"MPEG-4 (fără rădăcină) "</string>
+    <string name="settings_video_encoder_mpeg_4">"MPEG-4 "</string>
 
     <string name="settings_resolution">"Rezolutie"</string>
     <string name="settings_resolution_short">"%1$d x %2$d"</string>
@@ -175,9 +175,9 @@ SCR 5+ deschide un nou capitol în istoria celebrului SCR Screen Recorder. Dator
     <string name="settings_transformation_cpu">"CPU"</string>
     <string name="settings_transformation_gpu">"GPU"</string>
     <string name="settings_transformation_oes">"GPU +"</string>
-    <string name="settings_transformation_cpu_summary">"Utilizarea procesorului (CPU)"</string>
-    <string name="settings_transformation_gpu_summary">"Folosind cip grafic ( %1$s )"</string>
-    <string name="settings_transformation_sw_summary">"Software encoder ndisponibil"</string>
+    <string name="settings_transformation_cpu_summary">"Utilizarea procesorului (CPU) "</string>
+    <string name="settings_transformation_gpu_summary">"Folosind cip grafic ( %1$s ) "</string>
+    <string name="settings_transformation_sw_summary">"Software encoder indisponibil"</string>
 
     <string name="settings_video_bitrate">"Bitrate"</string>
     <string name="settings_video_bitrate_summary">"Aproximativ %1$s în funcție de encoder"</string>
@@ -212,26 +212,26 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="settings_audio_mic">"Microfon"</string>
     <string name="settings_audio_mute">"Mut"</string>
     <string name="settings_audio_internal">"Intern/telefon"</string>
-    <string name="settings_audio_experimental">"Experimental"</string>
-    <string name="settings_audio_mix">"Internă + Mic"</string>
-    <string name="settings_audio_use_headphones">"Utilizați căști cu fir, pentru a evita ecou"</string>
+    <string name="settings_audio_experimental">"Experimental "</string>
+    <string name="settings_audio_mix">"Intern + Mic"</string>
+    <string name="settings_audio_use_headphones">"Utilizați căști cu fir, pentru a evita ecoul"</string>
     <string name="settings_audio_not_supported">"Nu este suportat pe %1$s"</string>
     <string name="settings_audio_incompatible">"Nu este compatibil cu driver-ul audio al dumneavoastra"</string>
     <string name="settings_audio_mic_summary">"Microfon"</string>
     <string name="settings_audio_mute_summary">"Mut. Nici un canal audio"</string>
     <string name="settings_audio_internal_summary">"Ieșire sistem audio"</string>
-    <string name="settings_audio_mix_summary">"Microfon + Interne (utilizare căști!)"</string>
+    <string name="settings_audio_mix_summary">"Microfon + Intern (utilizare căști!)"</string>
     <string name="settings_sampling_rate">"Rata de sampling"</string>
 
-    <string name="settings_mic_gain">"Impuls Microfon"</string>
-    <string name="settings_mic_gain_summary_mix_only">"Disponibil doar pentru %1$s"</string>
-    <string name="settings_mic_gain_summary_default">"Utilizarea volum implicit"</string>
-    <string name="settings_mic_gain_summary">"Creșterea volumului de %1$d dB"</string>
+    <string name="settings_mic_gain">"Impuls pentru Microfon"</string>
+    <string name="settings_mic_gain_summary_mix_only">"Disponibil doar pentru %1$s "</string>
+    <string name="settings_mic_gain_summary_default">"Utilizarea volumului implicit"</string>
+    <string name="settings_mic_gain_summary">"Creșterea volumului de %1$d dB "</string>
 
     <string name="settings_other_category">"Alta"</string>
     <string name="settings_hide_icon">"Ascundere pictogramă de notificare "</string>
     <string name="settings_show_touches">"Arată atingerile"</string>
-    <string name="settings_show_touches_summary">"Arată feedback-ul vizual pentru atingeri. Activați permanent prin Android Setări → Opțiuni → dezvoltare Vedeți atingeri"</string>
+    <string name="settings_show_touches_summary">"Arată feedback-ul vizual pentru atingeri. Activați permanent prin Setări Android → Opțiuni dezvoltatori → Arată atingeri"</string>
     <string name="settings_output_dir">"Directorul de output"</string>
     <string name="settings_stop_when_screen_off">"Opreşte când se inchide ecranul"</string>
     <string name="settings_stop_when_screen_off_summary">"Termină înregistrarea după ce ecranul este oprit"</string>
@@ -243,7 +243,7 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="settings_zigzag_fix_cpu_only">"Disponibil numai cu transformarea de imagine cu CPU "</string>
 
     <string name="settings_video_config">"%1$s predefinite"</string>
-    <string name="settings_video_config_entry">"%1$dx%2$d ~ %3$.0ffps"</string>
+    <string name="settings_video_config_entry">"%1$d x %2$d ~%3$.0ffps"</string>
     <string name="settings_video_config_entry_stability">"%1$d %% stabil"</string>
     <string name="settings_video_config_summary">"Bazat pe statistici ale utilizarii"</string>
     <string name="settings_video_config_summary_no_data">"Nu s-au putut descărca statistici"</string>
@@ -305,9 +305,9 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
     <string name="internal_audio_disabled_message">"Înregistrarea audio intern este oprit din cauză că %1$s nu s-a închis corect. Puteți să-l re-activaţi în Setări."</string>
 
     <string name="license_title">"Eroare de licență"</string>
-    <string name="license_not_licensed_message">"Eroare licență verificarea. Vă rugăm să achiziționați SCR Pro prin intermediul Google Play Store. Dacă aveți noroc Patcher instalat dezactivați Google Play emulare."</string>
-    <string name="license_retry_message">"Eroare licență verificarea. Asigurați-vă că conexiunea la internet este de sus, data și ora este corect pe dispozitiv și your're conectat la Google Play Store. După ce licența este verificată puteți continua să utilizați SCR Pro offline."</string>
-    <string name="license_error_message">"Eroare licență verificarea. Asigurați-vă că ați instalat SCR Pro deși Joaca Google și că data și ora este corect pe dispozitiv. Dacă problema persistă date clare și cache de \"servicii Google Play\" și \"Google Play Store\" aplicații.
+    <string name="license_not_licensed_message">"Eroare de verificare licență. Vă rugăm să achiziționați SCR Pro prin intermediul Google Play Store. Dacă aveți Lucky Patcher instalat dezactivați emularea Google Play."</string>
+    <string name="license_retry_message">"Eroare de verificare licență. Asigurați-vă că conexiunea la internet este bună, data și ora sunt corecte pe dispozitiv și sunteți conectat la Google Play Store. După ce licența este verificată puteți continua să utilizați SCR Pro offline."</string>
+    <string name="license_error_message">"Eroare de verificare licență. Asigurați-vă că ați instalat SCR Pro prin Google Play și că data și ora sunt corecte pe dispozitiv. Dacă problema persistă ștergeți data și cache pentru serviciile  \"Google Play\" și \"Google Play Store\".
     "</string>
     <string name="license_play_store">"Magazin Play "</string>
     <string name="license_retry">"Reîncearcă"</string>
@@ -318,28 +318,28 @@ YouTube și player video Android implicit, redau astfel de clipuri video în mod
 
     <string name="can_not_start_toast">"Nu pot porni înregistrarea: %1$s"</string>
 
-    <string name="settings_show_camera">"Face Cam"</string>
-    <string name="settings_show_camera_summary">"Imagine Camera pe partea de sus a înregistrării"</string>
+    <string name="settings_show_camera">"Face Cam "</string>
+    <string name="settings_show_camera_summary">"Imagine cameră deasupra înregistrării"</string>
     <string name="settings_camera_alpha_title">"Transparența "</string>
-    <string name="settings_camera_alpha_summary">"Cam Face %1$d %% opac"</string>
-    <string name="settings_camera_alpha_summary_100">"Face Cam nu transparent"</string>
+    <string name="settings_camera_alpha_summary">"Camera frontală %1$d %% opacă"</string>
+    <string name="settings_camera_alpha_summary_100">"Camera frontală nu e transparentă"</string>
 
     <string name="miui_error_message">"Dacă nu puteți vedea fereastra plutitoare %1$s duceti-va la setarile MiUi ale aplicatiei și bifati \"Arată ferestre pop-up\" pentru %1$s."</string>
     <string name="miui_error_title">"Dezactivati Pop-up-ul MIUI?"</string>
 
-    <string name="lollipop_dialog_title">"Incearca SCR 5+"</string>
-    <string name="lollipop_dialog_message">"Doriți să testați SCR 5+, noua mea, ușor, nu-rădăcină recorder ecran app? Se utilizeaza oficial Android API captură de ecran 5.0 și înregistrarea audio microfon."</string>
-    <string name="lollipop_dialog_try_now">"Încercați acum"</string>
+    <string name="lollipop_dialog_title">"Incearca SCR 5+ "</string>
+    <string name="lollipop_dialog_message">"Doriți să testați SCR 5+, cea mai noua, ușoară și fără necesitate de root aplicație proprie de înregistrare ecran? Utilizeaza Android API oficial 5.0 și înregistrează audio prin microfon."</string>
+    <string name="lollipop_dialog_try_now">"Încercați acum "</string>
 
-    <string name="projection_deny_error_message">"Trebuie să atingeți începe acum pentru înregistrarea la locul de muncă."</string>
-    <string name="projection_deny_error_title">"Nu se poate accesa ecran"</string>
+    <string name="projection_deny_error_message">"Trebuie să atingeți \"începe acum\" pentru înregistrarea activității."</string>
+    <string name="projection_deny_error_title">"Nu se poate accesa ecranul"</string>
 
-    <string name="notification_action_share">"Acțiune"</string>
-    <string name="internal_audio_warning_title">"Avertizare de instalare"</string>
+    <string name="notification_action_share">"Share-uiește"</string>
+    <string name="internal_audio_warning_title">"Avertizare pentru instalare "</string>
 
-    <string name="internal_audio_warning_message">"Instalarea driver audio de pe dispozitivul necesită modificări la partiția de sistem. În cazul puțin probabil de eroare de instalare aparatul Dvs. poate primi moale-zidita sau introduceți buclă de boot. Asigurați-vă că știți partiție de sistem cum de a re-flash sau a restaura sistemul de rezervă înainte de a continua. Dacă vă decideți să dezinstalați %1$s în viitor deschise Setări SCR și dezactiva audio intern înainte de a dezinstala aplicația.
+    <string name="internal_audio_warning_message">"\"Instalarea driverui audio pe dispozitivul dvs necesită modificări la partiția de sistem. În cazul puțin probabil de eroare de instalare aparatul dvs. poate fi brick/uit ușor sau să intre în boot loop. Asigurați-vă că știți să re-flash-uiți sistemul sau cum să restaurați back-up-ul de rezervă înainte de a continua. Dacă vă decideți să dezinstalați %1$s în viitor deschideți Setările SCR și dezactivați audio intern înainte de a dezinstala aplicația.
     "</string>
-    <string name="internal_audio_warning_confirmation">"Știu cum să restaurați partiția de sistem"</string>
-    <string name="internal_audio_warning_dont_show">"Nu mai afișa acest mesaj din nou"</string>
-    <string name="internal_audio_warning_install">"Instala"</string>
+    <string name="internal_audio_warning_confirmation">"Știu cum să restaurez partiția de sistem"</string>
+    <string name="internal_audio_warning_dont_show">"Nu mai afișa acest mesaj din nou "</string>
+    <string name="internal_audio_warning_install">"Instalează"</string>
 </resources>
