@@ -399,4 +399,7 @@ If you decide to uninstall %1$s in the future open SCR Settings and disable inte
     <string name="system_ui_crash_dialog_message">"If you experience System UI crash after starting %1$s please reinstall this application and don't select \"%2$s\" checkbox on the screen capture permission dialog. This is a system bug which can't be fixed by %1$s."</string>
     <string name="system_ui_crash_warning_toast">"Don't select \"%1$s\" checkbox to avoid system crashes"</string>
     <string name="media_projection_remember_text">Don\'t show again</string>
+
+    <string name="update_notification_title">Update %1$s to %2$s</string>
+    <string name="update_notification_text">Tap to open downloads website</string>
 </resources>

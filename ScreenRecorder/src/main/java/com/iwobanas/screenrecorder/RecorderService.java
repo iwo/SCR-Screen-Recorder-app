@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -143,6 +144,8 @@ public class RecorderService extends Service implements IRecorderService, AudioD
 
         recorderOverlay.animateShow();
         reinitialize();
+
+        new CheckForUpdatesAsyncTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         Log.v(TAG, "Service initialized. version: " + Utils.getAppVersion(this));
     }
