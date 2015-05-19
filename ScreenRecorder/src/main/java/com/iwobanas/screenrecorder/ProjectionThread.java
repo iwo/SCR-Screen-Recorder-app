@@ -369,7 +369,14 @@ public class ProjectionThread implements Runnable {
             MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
             long lastAudioTimestampUs = -1;
 
+            long totalDataSize = 0;
+
             while (!stopped && !asyncError) {
+
+                if (totalDataSize > 4000000000l) {
+                    setError(RecordingProcessState.MAX_FILE_SIZE_REACHED, 229);
+                    break;
+                }
 
                 int encoderStatus;
                 errorCodeHack = 504;
@@ -405,6 +412,7 @@ public class ProjectionThread implements Runnable {
                             lastAudioTimestampUs = bufferInfo.presentationTimeUs;
                             errorCodeHack = 520;
                             muxer.writeSampleData(audioTrackIndex, encodedData, bufferInfo);
+                            totalDataSize += bufferInfo.size;
                         }
 
                         errorCodeHack = 521;
@@ -453,6 +461,7 @@ public class ProjectionThread implements Runnable {
                         //Log.v(TAG, "video " + bufferInfo.presentationTimeUs / 1000 + " " + bufferInfo.size + "    " + (bufferInfo.flags & MediaCodec.BUFFER_FLAG_KEY_FRAME));
                         errorCodeHack = 526;
                         muxer.writeSampleData(videoTrackIndex, encodedData, bufferInfo);
+                        totalDataSize += bufferInfo.size;
                     }
 
                     errorCodeHack = 527;
