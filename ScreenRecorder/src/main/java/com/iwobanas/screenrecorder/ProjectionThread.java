@@ -294,6 +294,7 @@ public class ProjectionThread implements Runnable {
     public void run() {
 
         int errorCodeHack = 504;
+        RecordingProcessState postponedState = null;
 
         try {
 
@@ -374,7 +375,10 @@ public class ProjectionThread implements Runnable {
             while (!stopped && !asyncError) {
 
                 if (totalDataSize > 4000000000l) {
-                    setError(RecordingProcessState.MAX_FILE_SIZE_REACHED, 229);
+                    if (recordingInfo.exitValue == -1) {
+                        recordingInfo.exitValue = 229;
+                        postponedState = RecordingProcessState.MAX_FILE_SIZE_REACHED;
+                    }
                     break;
                 }
 
@@ -480,6 +484,7 @@ public class ProjectionThread implements Runnable {
                 Log.e(TAG, "Postponing error message: " + errorCodeHack);
                 handler.postDelayed(muxerTimeoutRunnable, 2500);
                 recordingInfo.exitValue = errorCodeHack;
+                postponedState = RecordingProcessState.UNKNOWN_RECORDING_ERROR;
             } else {
                 setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, errorCodeHack);
             }
@@ -493,10 +498,10 @@ public class ProjectionThread implements Runnable {
                     EasyTracker.getTracker().sendException("projection", e, false);
                 }
 
-                if (!state.isError() && recordingInfo.exitValue != -1) {
+                if (postponedState != null) {
                     Log.e(TAG, "Applying postponed error");
                     handler.removeCallbacks(muxerTimeoutRunnable);
-                    setState(RecordingProcessState.UNKNOWN_RECORDING_ERROR);
+                    setState(postponedState);
                 }
 
                 try {
