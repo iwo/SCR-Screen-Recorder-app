@@ -487,6 +487,7 @@ public class RecorderService extends Service implements IRecorderService, AudioD
 
     private void reinitializeView() {
         Settings.getInstance().restoreShowTouches();
+        recorderOverlay.animateShow();
         cameraOverlay.setTouchable(true);
     }
 
