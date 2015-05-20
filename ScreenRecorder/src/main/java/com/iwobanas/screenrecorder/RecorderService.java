@@ -904,7 +904,7 @@ public class RecorderService extends Service implements IRecorderService, AudioD
         return runningInstances > 0;
     }
 
-    private static enum RecorderServiceState {
+    private enum RecorderServiceState {
         INITIALIZING,
         WAITING_FOR_ROOT,
         INSTALLING_AUDIO,
