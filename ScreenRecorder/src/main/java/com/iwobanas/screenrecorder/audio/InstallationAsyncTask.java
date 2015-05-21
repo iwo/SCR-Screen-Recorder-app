@@ -37,7 +37,7 @@ public abstract class InstallationAsyncTask extends AsyncTask<Void, Void, Instal
     protected void onPreExecute() {
         super.onPreExecute();
         if (installId != null) {
-            new AudioInstallationStatsAsyncTask(context, installId, initialStatus).execute();
+            new AudioInstallationStatsAsyncTask(context, installId, initialStatus).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
 
@@ -47,7 +47,7 @@ public abstract class InstallationAsyncTask extends AsyncTask<Void, Void, Instal
         audioDriver.setInstallationStatus(installationStatus);
         if (installId != null) {
             long time = (System.nanoTime() - startTimestamp) / 1000000l;
-            new AudioInstallationStatsAsyncTask(context, installId, installationStatus, installer.getErrorDetails(), time, installer.getMountMaster(), installer.isHard()).execute();
+            new AudioInstallationStatsAsyncTask(context, installId, installationStatus, installer.getErrorDetails(), time, installer.getMountMaster(), installer.isHard()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
 }

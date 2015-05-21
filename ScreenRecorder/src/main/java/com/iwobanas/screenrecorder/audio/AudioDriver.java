@@ -151,7 +151,7 @@ public class AudioDriver {
     }
 
     public void logStats(RecordingInfo recordingInfo) {
-        new AudioModuleStatsAsyncTask(context, recordingInfo).execute();
+        new AudioModuleStatsAsyncTask(context, recordingInfo).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void addInstallListener(OnInstallListener listener) {

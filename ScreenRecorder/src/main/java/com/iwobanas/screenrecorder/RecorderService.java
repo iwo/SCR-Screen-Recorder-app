@@ -518,7 +518,7 @@ public class RecorderService extends Service implements IRecorderService, AudioD
 
     private void logStats(RecordingInfo recordingInfo) {
         recordingInfo.time = (int) ((System.currentTimeMillis() - recordingStartTime) / 1000l);
-        new RecordingStatsAsyncTask(this, recordingInfo).execute();
+        new RecordingStatsAsyncTask(this, recordingInfo).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         new LogSettingsAsyncTask(recordingInfo).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         if (Settings.getInstance().getAudioSource() == AudioSource.INTERNAL) {
             audioDriver.logStats(recordingInfo);
