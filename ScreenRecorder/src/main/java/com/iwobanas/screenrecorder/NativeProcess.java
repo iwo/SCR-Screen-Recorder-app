@@ -308,12 +308,6 @@ class NativeProcess implements Runnable, INativeCommandRunner {
         } else {
             audioSource = settings.getAudioSource().getCommand();
         }
-        int samplingRate;
-        if (settings.getAudioSource().equals(AudioSource.INTERNAL)) {
-            samplingRate = settings.getAudioDriver().getSamplingRate();
-        } else {
-            samplingRate = settings.getSamplingRate().getSamplingRate();
-        }
 
         int frameRate = settings.getFrameRate();
         if (settings.getTimeLapse() != 1) {
@@ -333,7 +327,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
                 + settings.getTransformation().name() + " "
                 + (settings.getColorFix() ? "BGRA" : "RGBA") + " "
                 + settings.getVideoBitrate().getCommand() + " "
-                + samplingRate + " "
+                + settings.getSamplingRate().getSamplingRate() + " "
                 + settings.getVideoEncoder() + " "
                 + (settings.getVerticalFrames() ? 1 : 0) + " "
                 + fixEmulatedStorageMapping(file.getAbsolutePath());
