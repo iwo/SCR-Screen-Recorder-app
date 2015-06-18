@@ -91,6 +91,11 @@
             android:key="sampling_rate"
             android:persistent="false"
             android:title="@string/settings_sampling_rate" />
+        <CheckBoxPreference
+            android:key="stereo"
+            android:persistent="false"
+            android:title="@string/settings_stereo"
+            android:summary="@string/settings_stereo_summary" />
         <com.iwobanas.screenrecorder.settings.SliderPreference
             android:key="mic_gain"
             android:persistent="false"

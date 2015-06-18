@@ -263,6 +263,8 @@ so if you require this feature and your device is rooted install SCR Screen Reco
     <string name="settings_audio_mix_summary">Microphone + Internal (Use headphones!)</string>
     <string name="settings_sampling_rate">Sampling rate</string>
 
+    <string name="settings_stereo">Stereo</string>
+    <string name="settings_stereo_summary">If supported by the system</string>
     <string name="settings_mic_gain">Microphone boost</string>
     <string name="settings_mic_gain_summary_mix_only">Available only for %1$s</string>
     <string name="settings_mic_gain_summary_default">Use default volume</string>

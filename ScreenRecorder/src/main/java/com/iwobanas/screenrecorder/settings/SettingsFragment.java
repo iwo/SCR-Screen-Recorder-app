@@ -48,6 +48,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_AUDIO = "audio";
     public static final String KEY_AUDIO_SOURCE = "audio_source";
     public static final String KEY_SAMPLING_RATE = "sampling_rate";
+    public static final String KEY_STEREO = "stereo";
     public static final String KEY_MIC_GAIN = "mic_gain";
     public static final String KEY_OTHER = "other";
     public static final String KEY_SHOW_CAMERA = "show_camera";
@@ -74,6 +75,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private PreferenceCategory audioCategory;
     private ListPreference audioSourcePreference;
     private ListPreference samplingRatePreference;
+    private CheckBoxPreference stereoPreference;
     private SliderPreference micGainPreference;
     private PreferenceCategory otherCategory;
     private SliderPreference cameraAlphaPreference;
@@ -142,6 +144,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         samplingRatePreference = (ListPreference) findPreference(KEY_SAMPLING_RATE);
         samplingRatePreference.setOnPreferenceChangeListener(this);
+
+        stereoPreference = (CheckBoxPreference) findPreference(KEY_STEREO);
+        stereoPreference.setOnPreferenceChangeListener(this);
 
         micGainPreference = (SliderPreference) findPreference(KEY_MIC_GAIN);
         micGainPreference.setOnPreferenceChangeListener(this);
@@ -221,6 +226,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         samplingRatePreference.setValue(settings.getSamplingRate().name());
         samplingRatePreference.setSummary(formatSamplingRateSummary());
         samplingRatePreference.setEnabled(settings.getTimeLapse() == 1 && !settings.getAudioSource().equals(AudioSource.MUTE));
+
+        stereoPreference.setChecked(settings.getStereo());
+        stereoPreference.setEnabled(settings.getTimeLapse() == 1 && !settings.getAudioSource().equals(AudioSource.MUTE));
 
         micGainPreference.setValue(gainToIndex(settings.getMicGain()));
         micGainPreference.setSummary(formatMicGain());
@@ -846,6 +854,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             SamplingRate rate = SamplingRate.valueOf(valueString);
             settings.setSamplingRate(rate);
             preference.setSummary(rate.getLabel());
+        } else if (preference == stereoPreference) {
+            settings.setStereo(selected);
         } else if (preference == micGainPreference) {
             settings.setMicGain(indexToGain((Integer) newValue));
             preference.setSummary(formatMicGain());
