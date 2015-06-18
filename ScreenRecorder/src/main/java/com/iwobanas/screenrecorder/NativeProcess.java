@@ -328,6 +328,7 @@ class NativeProcess implements Runnable, INativeCommandRunner {
                 + (settings.getColorFix() ? "BGRA" : "RGBA") + " "
                 + settings.getVideoBitrate().getCommand() + " "
                 + settings.getSamplingRate().getSamplingRate() + " "
+                + (settings.getStereo() ? 2 : 1) + " "
                 + settings.getVideoEncoder() + " "
                 + (settings.getVerticalFrames() ? 1 : 0) + " "
                 + fixEmulatedStorageMapping(file.getAbsolutePath());

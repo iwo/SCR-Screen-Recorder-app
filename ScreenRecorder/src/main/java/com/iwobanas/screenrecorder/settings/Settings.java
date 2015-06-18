@@ -24,6 +24,8 @@ public class Settings {
     private static final String TRANSFORMATION = "TRANSFORMATION";
     private static final String SAMPLING_RATE = "SAMPLING_RATE";
     private static final String INTERNAL_SAMPLING_RATE = "INTERNAL_SAMPLING_RATE";
+    private static final String STEREO = "STEREO";
+    private static final String INTERNAL_STEREO = "INTERNAL_STEREO";
     private static final String MIC_GAIN = "MIC_GAIN";
     private static final String VIDEO_BITRATE = "VIDEO_BITRATE";
     private static final String COLOR_FIX = "COLOR_FIX";
@@ -64,6 +66,8 @@ public class Settings {
     private SamplingRate defaultSamplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
     private SamplingRate samplingRate = SamplingRate.SAMPLING_RATE_16_KHZ;
     private SamplingRate internalSamplingRate = null;
+    private boolean stereo = false;
+    private boolean internalStereo = true;
     private int micGain = 2;
     private VideoBitrate defaultVideoBitrate = VideoBitrate.BITRATE_10_MBPS;
     private VideoBitrate videoBitrate = VideoBitrate.BITRATE_10_MBPS;
@@ -173,6 +177,9 @@ public class Settings {
         if (internalSamplingRate != null) {
             this.internalSamplingRate = SamplingRate.valueOf(internalSamplingRate);
         }
+
+        stereo = preferences.getBoolean(STEREO, false);
+        internalStereo = preferences.getBoolean(INTERNAL_STEREO, true);
 
         micGain = preferences.getInt(MIC_GAIN, 2);
 
@@ -438,6 +445,26 @@ public class Settings {
         }
     }
 
+
+    public boolean getStereo() {
+        if (getAudioSource().getRequiresDriver()) {
+            return internalStereo;
+        } else {
+            return stereo;
+        }
+    }
+
+    public void setStereo(boolean stereo) {
+        if (getAudioSource().getRequiresDriver()) {
+            this.internalStereo = stereo;
+            settingsModified(preferences.edit().putBoolean(INTERNAL_STEREO, stereo));
+        } else {
+            this.stereo = stereo;
+            settingsModified(preferences.edit().putBoolean(STEREO, stereo));
+        }
+        this.stereo = stereo;
+    }
+
     public int getMicGain() {
         return micGain;
     }
@@ -586,6 +613,12 @@ public class Settings {
 
         internalSamplingRate = null;
         editor.remove(INTERNAL_SAMPLING_RATE);
+
+        stereo = false;
+        editor.remove(STEREO);
+
+        internalStereo = true;
+        editor.remove(INTERNAL_STEREO);
 
         micGain = 2;
         editor.remove(MIC_GAIN);

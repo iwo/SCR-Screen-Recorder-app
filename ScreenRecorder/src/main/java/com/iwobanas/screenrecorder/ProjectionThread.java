@@ -68,6 +68,7 @@ public class ProjectionThread implements Runnable {
     private int frameRate;
     private int timeLapse;
     private int sampleRate;
+    private boolean stereo;
     private boolean hasAudio;
     private RecordingInfo recordingInfo;
     private Thread recordingThread;
@@ -164,6 +165,7 @@ public class ProjectionThread implements Runnable {
             s.setTemporaryMute(false);
         }
         sampleRate = s.getSamplingRate().getSamplingRate();
+        stereo = s.getStereo();
 
         recordingThread = new Thread(this);
         recordingThread.start();
@@ -195,22 +197,24 @@ public class ProjectionThread implements Runnable {
 
     private void setupAudioCodec() throws IOException {
         // Encoded video resolution matches virtual display.
-        MediaFormat encoderFormat = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, sampleRate, 1);
+        MediaFormat encoderFormat = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, sampleRate, stereo ? 2 : 1);
         encoderFormat.setInteger(MediaFormat.KEY_BIT_RATE, 64000);
 
         audioEncoder = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_AUDIO_AAC);
+        Log.v(TAG, "Audio encoder: " + audioEncoder.getName());
         audioEncoder.configure(encoderFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
         audioEncoder.start();
     }
 
 
     private void setupAudioRecord() {
-        int minBufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO,
+        int channelConfig = stereo ? AudioFormat.CHANNEL_IN_STEREO : AudioFormat.CHANNEL_IN_MONO;
+        int minBufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig,
                 AudioFormat.ENCODING_PCM_16BIT);
         audioRecord = new AudioRecord(
                 MediaRecorder.AudioSource.MIC,
                 sampleRate,
-                AudioFormat.CHANNEL_IN_MONO,
+                channelConfig,
                 AudioFormat.ENCODING_PCM_16BIT,
                 4 * minBufferSize);
     }
