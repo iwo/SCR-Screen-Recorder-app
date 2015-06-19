@@ -31,12 +31,15 @@ public class AudioDriverInstaller {
     private static final String SYSTEM_FILES_COPIED_MARKER = "system_files_copied";
     private static final String SYSTEM_AUDIO_POLICY = "/system/etc/audio_policy.conf";
     private static final String VENDOR_AUDIO_POLICY = "/vendor/etc/audio_policy.conf";
+    private static final String MEDIA_PROFILES = "/system/etc/media_profiles.xml";
     private static final String ORIGINAL_SYSTEM_AUDIO_POLICY = "original_system_audio_policy.conf";
     private static final String ORIGINAL_VENDOR_AUDIO_POLICY = "original_vendor_audio_policy.conf";
-    private static final String SCR_SYSTEM_AUDIO_POLICY = "scr_system_audio_policy.conf";
-    private static final String SCR_VENDOR_AUDIO_POLICY = "scr_vendor_audio_policy.conf";
+    private static final String ORIGINAL_MEDIA_PROFILES = "original_system_media_profiles.xml";
+    private static final String SCR_AUDIO_POLICY = "scr_audio_policy.conf";
+    private static final String SCR_MEDIA_PROFILES = "scr_media_profiles.xml";
     private static final String LOCAL_SYSTEM_AUDIO_POLICY = "system_audio_policy.conf";
     private static final String LOCAL_VENDOR_AUDIO_POLICY = "vendor_audio_policy.conf";
+    private static final String LOCAL_MEDIA_PROFILES = "media_profiles.xml";
     private static final String MEDIASERVER_COMMAND = "/system/bin/mediaserver";
     private static final String UNINSTALLER_SYSTEM = "uninstall_scr.sh";
     private static final String UNINSTALLER_LOCAL = "deinstaller.sh";
@@ -225,25 +228,21 @@ public class AudioDriverInstaller {
     }
 
     private boolean configFilesValid() {
-        File systemConf = new File(SYSTEM_AUDIO_POLICY);
-        File vendorConf = new File(VENDOR_AUDIO_POLICY);
-        File originalSystemConf = new File(localDir, ORIGINAL_SYSTEM_AUDIO_POLICY);
-        File originalVendorConf = new File(localDir, ORIGINAL_VENDOR_AUDIO_POLICY);
-        if (vendorConf.exists() && !Utils.filesEqual(vendorConf, originalVendorConf)) {
-            return false;
-        }
-        if (systemConf.exists() && !Utils.filesEqual(systemConf, originalSystemConf)) {
-            return false;
-        }
-        return true;
+        return configFileValid(SYSTEM_AUDIO_POLICY, ORIGINAL_SYSTEM_AUDIO_POLICY)
+                && configFileValid(VENDOR_AUDIO_POLICY, ORIGINAL_VENDOR_AUDIO_POLICY)
+                && configFileValid(MEDIA_PROFILES, ORIGINAL_MEDIA_PROFILES);
+    }
+
+    private boolean configFileValid(String configPath, String originalName) {
+        File configFile = new File(configPath);
+        File originalFile = new File(localDir, originalName);
+        return !configFile.exists() || Utils.filesEqual(configFile, originalFile);
     }
 
     private void ensureSCRFilesValid() throws InstallationException {
         extractSCRModule();
         createLogFile(MODULE_LOG);
-        if (!isMounted()) {
-            createConfigFiles();
-        }
+        createConfigFiles();
     }
 
     private void createLogFile(String name) throws InstallationException {
@@ -286,19 +285,18 @@ public class AudioDriverInstaller {
     }
 
     private void applySCRConfigFiles() throws InstallationException {
-        File localSystemConf = new File(localDir, LOCAL_SYSTEM_AUDIO_POLICY);
-        File localVendorConf = new File(localDir, LOCAL_VENDOR_AUDIO_POLICY);
-        File scrSystemConf = new File(localDir, SCR_SYSTEM_AUDIO_POLICY);
-        File scrVendorConf = new File(localDir, SCR_VENDOR_AUDIO_POLICY);
+        applySCRConfigFile(LOCAL_SYSTEM_AUDIO_POLICY, SCR_AUDIO_POLICY);
+        applySCRConfigFile(LOCAL_VENDOR_AUDIO_POLICY, SCR_AUDIO_POLICY);
+        applySCRConfigFile(LOCAL_MEDIA_PROFILES, SCR_MEDIA_PROFILES);
+    }
 
-        if (scrVendorConf.exists() && !Utils.copyFile(scrVendorConf, localVendorConf)) {
-            throw new InstallationException("Error copying config from " + scrVendorConf.getAbsolutePath() + " to " + localVendorConf.getAbsolutePath());
+    private void applySCRConfigFile(String localName, String scrName) throws InstallationException {
+        File localFile = new File(localDir, localName);
+        File scrFile = new File(localDir, scrName);
+        if (scrFile.exists() && !Utils.copyFile(scrFile, localFile)) {
+            throw new InstallationException("Error copying config from " + scrFile.getAbsolutePath() + " to " + localFile.getAbsolutePath());
         }
-        Utils.setGlobalReadable(localVendorConf);
-        if (scrSystemConf.exists() && !Utils.copyFile(scrSystemConf, localSystemConf)) {
-            throw new InstallationException("Error copying config from " + scrSystemConf.getAbsolutePath() + " to " + localSystemConf.getAbsolutePath());
-        }
-        Utils.setGlobalReadable(localSystemConf);
+        Utils.setGlobalReadable(localFile);
     }
 
     private void mountAndRestart() throws InstallationException {
@@ -520,17 +518,16 @@ public class AudioDriverInstaller {
     }
 
     private void copySystemConfigFiles() throws InstallationException {
-        File systemConf = new File(SYSTEM_AUDIO_POLICY);
-        File vendorConf = new File(VENDOR_AUDIO_POLICY);
-        File originalSystemConf = new File(localDir, ORIGINAL_SYSTEM_AUDIO_POLICY);
-        File originalVendorConf = new File(localDir, ORIGINAL_VENDOR_AUDIO_POLICY);
+        copySystemConfigFile(SYSTEM_AUDIO_POLICY, ORIGINAL_SYSTEM_AUDIO_POLICY);
+        copySystemConfigFile(VENDOR_AUDIO_POLICY, ORIGINAL_VENDOR_AUDIO_POLICY);
+        copySystemConfigFile(MEDIA_PROFILES, ORIGINAL_MEDIA_PROFILES);
+    }
 
-        if (vendorConf.exists() && !Utils.copyFile(vendorConf, originalVendorConf)) {
-            throw new InstallationException("Can't copy config file from: " + vendorConf.getAbsolutePath() + " to " + originalVendorConf.getAbsolutePath());
-        }
-
-        if (systemConf.exists() && !Utils.copyFile(systemConf, originalSystemConf)) {
-            throw new InstallationException("Can't copy config file from: " + systemConf.getAbsolutePath() + " to " + originalSystemConf.getAbsolutePath());
+    private void copySystemConfigFile(String path, String copyName) throws InstallationException {
+        File configFile = new File(path);
+        File copy = new File(localDir, copyName);
+        if (configFile.exists() && !Utils.copyFile(configFile, copy)) {
+            throw new InstallationException("Can't copy config file from: " + configFile.getAbsolutePath() + " to " + copy.getAbsolutePath());
         }
     }
 
@@ -599,28 +596,41 @@ public class AudioDriverInstaller {
     }
 
     private void createConfigFiles() throws InstallationException {
-        File systemConf = new File(SYSTEM_AUDIO_POLICY);
-        File vendorConf = new File(VENDOR_AUDIO_POLICY);
-        File scrSystemConf = new File(localDir, SCR_SYSTEM_AUDIO_POLICY);
-        File scrVendorConf = new File(localDir, SCR_VENDOR_AUDIO_POLICY);
+        createPolicyFiles();
+        createMediaProfilesFiles();
+    }
+
+    private void createPolicyFiles() throws InstallationException {
+        File systemConf = new File(localDir, ORIGINAL_SYSTEM_AUDIO_POLICY);
+        File vendorConf = new File(localDir, ORIGINAL_VENDOR_AUDIO_POLICY);
+        File scrConf = new File(localDir, SCR_AUDIO_POLICY);
 
         if (vendorConf.exists()) {
             try {
-                AudioPolicyUtils.fixPolicyFile(vendorConf, scrVendorConf);
+                AudioPolicyUtils.fixPolicyFile(vendorConf, scrConf);
             } catch (IOException e) {
                 throw new InstallationException("Error creating policy file", e);
             }
-            if (!Utils.copyFile(scrVendorConf, scrSystemConf)) {
-                throw new InstallationException("Error copying policy file");
-            }
         } else if (systemConf.exists()) {
             try {
-                AudioPolicyUtils.fixPolicyFile(systemConf, scrSystemConf);
+                AudioPolicyUtils.fixPolicyFile(systemConf, scrConf);
             } catch (IOException e) {
                 throw new InstallationException("Error creating policy file", e);
             }
         } else if (Build.VERSION.SDK_INT <= 15) {
             Log.w(TAG, "No policy file found");
+        }
+    }
+
+    private void createMediaProfilesFiles() throws InstallationException {
+        File systemFile = new File(localDir, ORIGINAL_MEDIA_PROFILES);
+        File scrFile = new File(localDir, SCR_MEDIA_PROFILES);
+        if (systemFile.exists()) {
+            try {
+                MediaProfilesUtils.fixMediaProfiles(systemFile, scrFile);
+            } catch (Exception e) {
+                throw new InstallationException("Error creating mdedia profiles file", e);
+            }
         }
     }
 
@@ -667,19 +677,18 @@ public class AudioDriverInstaller {
     }
 
     private void applyOriginalConfigFiles() {
-        File localSystemConf = new File(localDir, LOCAL_SYSTEM_AUDIO_POLICY);
-        File localVendorConf = new File(localDir, LOCAL_VENDOR_AUDIO_POLICY);
-        File originalSystemConf = new File(localDir, ORIGINAL_SYSTEM_AUDIO_POLICY);
-        File originalVendorConf = new File(localDir, ORIGINAL_VENDOR_AUDIO_POLICY);
+        applyOriginalConfigFile(LOCAL_SYSTEM_AUDIO_POLICY, ORIGINAL_SYSTEM_AUDIO_POLICY);
+        applyOriginalConfigFile(LOCAL_VENDOR_AUDIO_POLICY, ORIGINAL_VENDOR_AUDIO_POLICY);
+        applyOriginalConfigFile(LOCAL_MEDIA_PROFILES, ORIGINAL_MEDIA_PROFILES);
+    }
 
-        if (originalVendorConf.exists() && !Utils.copyFile(originalVendorConf, localVendorConf)) {
-            uninstallError("Error copying config from " + originalVendorConf.getAbsolutePath() + " to " + localVendorConf.getAbsolutePath());
+    private void applyOriginalConfigFile(String localName, String originalName) {
+        File localFile = new File(localDir, localName);
+        File originalFile = new File(localDir, originalName);
+        if (originalFile.exists() && !Utils.copyFile(originalFile, localFile)) {
+            uninstallError("Error copying config from " + originalFile.getAbsolutePath() + " to " + localFile.getAbsolutePath());
         }
-        Utils.setGlobalReadable(localVendorConf);
-        if (originalSystemConf.exists() && !Utils.copyFile(originalSystemConf, localSystemConf)) {
-            uninstallError("Error copying config from " + originalSystemConf.getAbsolutePath() + " to " + localSystemConf.getAbsolutePath());
-        }
-        Utils.setGlobalReadable(localSystemConf);
+        Utils.setGlobalReadable(localFile);
     }
 
     private void unmount() {

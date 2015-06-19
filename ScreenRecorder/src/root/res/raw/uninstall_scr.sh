@@ -40,4 +40,18 @@ cp -f /system/etc/audio_policy.conf.back /system/etc/audio_policy.conf
 chmod 644 /system/etc/audio_policy.conf
 fi
 
+if [ -e /vendor/etc/audio_policy.conf.back ]
+then
+echo "Restoring original vendor audio policy file"
+cp -f /vendor/etc/audio_policy.conf.back /vendor/etc/audio_policy.conf
+chmod 644 /vendor/etc/audio_policy.conf
+fi
+
+if [ -e /system/etc/media_profiles.xml.back ]
+then
+echo "Restoring original media profiles file"
+cp -f /system/etc/media_profiles.xml.back /system/etc/media_profiles.xml
+chmod 644 /system/etc/media_profiles.xml
+fi
+
 echo "Done"
