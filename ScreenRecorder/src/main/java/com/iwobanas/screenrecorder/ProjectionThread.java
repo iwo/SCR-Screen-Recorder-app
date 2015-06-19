@@ -156,6 +156,9 @@ public class ProjectionThread implements Runnable {
 
         videoBitrate = s.getVideoBitrate().getBitrate();
         frameRate = s.getFrameRate();
+        if (frameRate < 1 || frameRate > 30) {
+            frameRate = 30;
+        }
         timeLapse = s.getTimeLapse();
 
         hasAudio = (timeLapse == 1) && (s.getAudioSource() != AudioSource.MUTE);
