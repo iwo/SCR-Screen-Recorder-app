@@ -286,6 +286,7 @@ public class RecorderService extends Service implements IRecorderService, AudioD
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, "video/*");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         try {
@@ -508,9 +509,9 @@ public class RecorderService extends Service implements IRecorderService, AudioD
     public void scanOutputAndNotify(int toastId, RecordingInfo recordingInfo) {
         String message = String.format(getString(toastId), recordingInfo.file.getName());
         Toast.makeText(RecorderService.this, message, Toast.LENGTH_LONG).show();
-        Uri uri = scanFile(recordingInfo.file);
+        Uri uri = recordingInfo.useDocument ? recordingInfo.documentUri : scanFile(recordingInfo.file);
         if (recordingInfo.formatValidity == RecordingInfo.FormatValidity.INTERRUPTED) {
-            notificationInterrupted(Uri.fromFile(recordingInfo.file), recordingInfo.file.getName());
+            notificationInterrupted(uri, recordingInfo.file.getName());
         } else {
             notificationSaved(uri, recordingInfo.file.getName());
         }

@@ -128,6 +128,10 @@
             android:summary="@string/settings_show_touches_summary"
             android:title="@string/settings_show_touches" />
         <Preference
+            android:key="document_dir"
+            android:persistent="false"
+            android:title="@string/settings_document_dir"/>
+        <Preference
             android:key="output_dir"
             android:persistent="false"
             android:title="@string/settings_output_dir"/>

@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Point;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
@@ -16,8 +17,10 @@ import android.media.MediaFormat;
 import android.media.MediaMuxer;
 import android.media.MediaRecorder;
 import android.media.projection.MediaProjection;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.support.v4.provider.DocumentFile;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -49,6 +52,7 @@ public class ProjectionThread implements Runnable {
     private MediaCodec videoEncoder;
     private AudioRecord audioRecord;
     private MediaMuxer muxer;
+    private MediaMuxerHack muxerHack;
     private boolean muxerStarted;
     private boolean startTimestampInitialized;
     private long startTimestampUs;
@@ -61,6 +65,7 @@ public class ProjectionThread implements Runnable {
 
 
     private File outputFile;
+    private Uri documentDirUri;
     private String videoMime;
     private int videoWidth;
     private int videoHeight;
@@ -109,6 +114,7 @@ public class ProjectionThread implements Runnable {
             }).start();
         }
     };
+    private AssetFileDescriptor fileDescriptor;
 
     public ProjectionThread(MediaProjection mediaProjection, Context context, ProjectionThreadRunner runner) {
         this.mediaProjection = mediaProjection;
@@ -121,11 +127,18 @@ public class ProjectionThread implements Runnable {
     public void startRecording(File outputFile) {
         this.outputFile = outputFile;
         recordingInfo = new RecordingInfo();
-        recordingInfo.file = outputFile;
 
         //TODO: report all caught exceptions to analytics
 
         Settings s = Settings.getInstance();
+
+        documentDirUri = s.getDocumentDirUri();
+        if (documentDirUri != null) {
+            recordingInfo.file = new File(outputFile.getName());
+            recordingInfo.useDocument = true;
+        } else {
+            recordingInfo.file = outputFile;
+        }
 
         switch (s.getVideoEncoder()) {
             case VideoEncoder.H264:
@@ -291,7 +304,11 @@ public class ProjectionThread implements Runnable {
 
     private void startMuxerIfSetUp() {
         if ((!hasAudio || audioTrackIndex >= 0) && videoTrackIndex >= 0) {
-            muxer.start();
+            if (muxerHack != null) {
+                muxerHack.start();
+            } else {
+                muxer.start();
+            }
             muxerStarted = true;
             setState(RecordingProcessState.RECORDING);
         }
@@ -360,14 +377,38 @@ public class ProjectionThread implements Runnable {
                 }
             }
 
-            try {
-                muxer = new MediaMuxer(outputFile.getAbsolutePath(),
-                        MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
-            } catch (Exception e) {
-                Log.e(TAG, "Muxer error", e);
-                setError(RecordingProcessState.OUTPUT_FILE_ERROR, 201);
-                EasyTracker.getTracker().sendException("projection", e, false);
-                return;
+            if (documentDirUri != null) {
+                try {
+                    DocumentFile documentDir = DocumentFile.fromTreeUri(context, documentDirUri);
+
+                    // Create a new file and write into it
+                    DocumentFile newFile = documentDir.createFile("video/mp4", outputFile.getName());
+                    recordingInfo.documentUri = newFile.getUri();
+                    fileDescriptor = context.getContentResolver().openAssetFileDescriptor(newFile.getUri(), "rwt");
+                    muxerHack = new MediaMuxerHack(fileDescriptor.getFileDescriptor(),
+                            MediaMuxerHack.OutputFormat.MUXER_OUTPUT_MPEG_4);
+                } catch (Exception e) {
+                    Log.e(TAG, "MuxerHack error", e);
+                    EasyTracker.getTracker().sendException("projection", e, false);
+                }
+            }
+
+            if (muxerHack == null) {
+                try {
+                    if (recordingInfo.useDocument) {
+                        Log.w(TAG, "Rollback to standard Output directory");
+                        recordingInfo.useDocument = false;
+                        recordingInfo.documentUri = null;
+                        recordingInfo.file = outputFile;
+                    }
+                    muxer = new MediaMuxer(outputFile.getAbsolutePath(),
+                            MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
+                } catch (Exception e) {
+                    Log.e(TAG, "Muxer error", e);
+                    setError(RecordingProcessState.OUTPUT_FILE_ERROR, 201);
+                    EasyTracker.getTracker().sendException("projection", e, false);
+                    return;
+                }
             }
 
             if (hasAudio) {
@@ -404,7 +445,11 @@ public class ProjectionThread implements Runnable {
                             break;
                         }
                         errorCodeHack = 517;
-                        audioTrackIndex = muxer.addTrack(audioEncoder.getOutputFormat());
+                        if (muxerHack != null) {
+                            audioTrackIndex = muxerHack.addTrack(audioEncoder.getOutputFormat());
+                        } else {
+                            audioTrackIndex = muxer.addTrack(audioEncoder.getOutputFormat());
+                        }
                         errorCodeHack = 518;
                         startMuxerIfSetUp();
                     } else if (encoderStatus < 0) {
@@ -422,7 +467,11 @@ public class ProjectionThread implements Runnable {
                                 && muxerStarted && bufferInfo.size != 0 && (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) == 0) {
                             lastAudioTimestampUs = bufferInfo.presentationTimeUs;
                             errorCodeHack = 520;
-                            muxer.writeSampleData(audioTrackIndex, encodedData, bufferInfo);
+                            if (muxerHack != null) {
+                                muxerHack.writeSampleData(audioTrackIndex, encodedData, bufferInfo);
+                            } else {
+                                muxer.writeSampleData(audioTrackIndex, encodedData, bufferInfo);
+                            }
                             totalDataSize += bufferInfo.size;
                         }
 
@@ -450,7 +499,11 @@ public class ProjectionThread implements Runnable {
                         break;
                     }
                     errorCodeHack = 523;
-                    videoTrackIndex = muxer.addTrack(videoEncoder.getOutputFormat());
+                    if (muxerHack != null) {
+                        videoTrackIndex = muxerHack.addTrack(videoEncoder.getOutputFormat());
+                    } else {
+                        videoTrackIndex = muxer.addTrack(videoEncoder.getOutputFormat());
+                    }
                     errorCodeHack = 524;
                     startMuxerIfSetUp();
                 } else if (encoderStatus < 0) {
@@ -471,7 +524,11 @@ public class ProjectionThread implements Runnable {
                         bufferInfo.presentationTimeUs = getPresentationTimeUs();
                         //Log.v(TAG, "video " + bufferInfo.presentationTimeUs / 1000 + " " + bufferInfo.size + "    " + (bufferInfo.flags & MediaCodec.BUFFER_FLAG_KEY_FRAME));
                         errorCodeHack = 526;
-                        muxer.writeSampleData(videoTrackIndex, encodedData, bufferInfo);
+                        if (muxerHack != null) {
+                            muxerHack.writeSampleData(videoTrackIndex, encodedData, bufferInfo);
+                        } else {
+                            muxer.writeSampleData(videoTrackIndex, encodedData, bufferInfo);
+                        }
                         totalDataSize += bufferInfo.size;
                     }
 
@@ -496,9 +553,13 @@ public class ProjectionThread implements Runnable {
                 setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, errorCodeHack);
             }
         } finally {
-            if (muxer != null) {
+            if (muxer != null || muxerHack != null) {
                 try {
-                    muxer.stop();
+                    if (muxerHack != null) {
+                        muxerHack.stop();
+                    } else {
+                        muxer.stop();
+                    }
                 } catch (Exception e) {
                     Log.w(TAG, "Error stopping muxer", e);
                     setError(RecordingProcessState.UNKNOWN_RECORDING_ERROR, 530);
@@ -512,12 +573,17 @@ public class ProjectionThread implements Runnable {
                 }
 
                 try {
-                    muxer.release();
+                    if (muxerHack != null) {
+                        muxerHack.release();
+                    } else {
+                        muxer.release();
+                    }
                 } catch (Exception e) {
                     Log.w(TAG, "Error releasing muxer", e);
                     EasyTracker.getTracker().sendException("projection", e, false);
                 }
                 muxer = null;
+                muxerHack = null;
             }
 
 
@@ -568,6 +634,16 @@ public class ProjectionThread implements Runnable {
                     EasyTracker.getTracker().sendException("projection", e, false);
                 }
                 audioEncoder = null;
+            }
+
+            if (fileDescriptor != null) {
+                try {
+                    fileDescriptor.close();
+                } catch (IOException e) {
+                    Log.w(TAG, "Error closing file descriptor", e);
+                    EasyTracker.getTracker().sendException("projection", e, false);
+                }
+                fileDescriptor = null;
             }
         }
 

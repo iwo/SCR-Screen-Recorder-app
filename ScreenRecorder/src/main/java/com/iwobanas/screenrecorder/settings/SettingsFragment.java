@@ -13,10 +13,10 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
+import android.support.v4.provider.DocumentFile;
 import android.text.Html;
 import android.util.Log;
 
-import com.iwobanas.screenrecorder.BuildConfig;
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
@@ -55,10 +55,12 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_CAMERA_ALPHA = "camera_alpha";
     public static final String KEY_HIDE_ICON = "hide_icon";
     public static final String KEY_SHOW_TOUCHES = "show_touches";
+    public static final String KEY_DOCUMENT_DIR = "document_dir";
     public static final String KEY_OUTPUT_DIR = "output_dir";
     public static final String KEY_STOP_ON_SCREEN_OFF = "stop_on_screen_off";
     public static final String KEY_COLOR_FIX = "color_fix";
     private static final int SELECT_OUTPUT_DIR = 1;
+    private static final int SELECT_DOCUMENT_DIR = 2;
     private static final String TAG = "scr_SettingsFragment";
     private Preference donatePreference;
     private Preference noRootModePreference;
@@ -82,6 +84,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private CheckBoxPreference showCameraPreference;
     private CheckBoxPreference hideIconPreference;
     private CheckBoxPreference showTouchesPreference;
+    private Preference documentDirPreference;
     private Preference outputDirPreference;
     private CheckBoxPreference stopOnScreenOffPreference;
     private CheckBoxPreference colorFixPreference;
@@ -164,6 +167,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         showTouchesPreference = (CheckBoxPreference) findPreference(KEY_SHOW_TOUCHES);
         showTouchesPreference.setOnPreferenceChangeListener(this);
 
+        documentDirPreference = findPreference(KEY_DOCUMENT_DIR);
+        documentDirPreference.setOnPreferenceClickListener(this);
+
         outputDirPreference = findPreference(KEY_OUTPUT_DIR);
         outputDirPreference.setOnPreferenceClickListener(this);
 
@@ -239,6 +245,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         showCameraPreference.setChecked(settings.getShowCamera());
         cameraAlphaPreference.setValue((int) (settings.getCameraAlpha() * 100));
         cameraAlphaPreference.setSummary(formatCameraAlphaSummary());
+        documentDirPreference.setSummary(settings.getDocumentDirName());
         outputDirPreference.setSummary(settings.getOutputDir().getAbsolutePath());
         stopOnScreenOffPreference.setChecked(settings.getStopOnScreenOff());
         colorFixPreference.setChecked(settings.getColorFix());
@@ -371,6 +378,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         timeLapsePreference.setEntries(getTimeLapseEntries(timeLapseValues));
 
         addRemovePreference(settings.isRootFlavor(), KEY_MIC_GAIN, micGainPreference, audioCategory);
+
+        addRemovePreference(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP, KEY_DOCUMENT_DIR, documentDirPreference, otherCategory);
     }
 
     private void updateSamplingRate() {
@@ -879,10 +888,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference == outputDirPreference) {
+        if (preference == documentDirPreference) {
+            openDocumentPicker();
+            return true;
+        } else if (preference == outputDirPreference) {
             openOutputDirChooser();
             return true;
-        } else if (preference == donatePreference) {
+        }  else if (preference == donatePreference) {
             donate();
             return true;
         } else if (preference == noRootModePreference) {
@@ -914,6 +926,22 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         }
     }
 
+    private void openDocumentPicker() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+        startActivityForResult(intent, SELECT_DOCUMENT_DIR);
+    }
+
+    private void setDocumentDir(Intent data) {
+        Uri treeUri = data.getData();
+        DocumentFile documentDir = DocumentFile.fromTreeUri(getActivity(), treeUri);
+
+        // Persist access permissions.
+        getActivity().getContentResolver().takePersistableUriPermission(treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+        Settings.getInstance().setDocumentDirUri(treeUri);
+        Settings.getInstance().setDocumentDirName(documentDir.getName());
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -921,6 +949,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             if (resultCode == Activity.RESULT_OK) {
                 settings.setOutputDir(new File(data.getData().getPath()));
                 outputDirPreference.setSummary(settings.getOutputDir().getAbsolutePath());
+            }
+        } else if (requestCode == SELECT_DOCUMENT_DIR) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                setDocumentDir(data);
+                documentDirPreference.setSummary(settings.getDocumentDirName());
             }
         }
     }

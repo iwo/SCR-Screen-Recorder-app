@@ -2,6 +2,7 @@ package com.iwobanas.screenrecorder.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
@@ -34,6 +35,8 @@ public class Settings {
     private static final String STOP_ON_SCREEN_OFF = "STOP_ON_SCREEN_OFF";
     private static final String OUTPUT_DIR = "OUTPUT_DIR";
     private static final String OUTPUT_DIR_WRITABLE = "OUTPUT_DIR_WRITABLE";
+    private static final String DOCUMENT_DIR_URI = "DOCUMENT_DIR_URI";
+    private static final String DOCUMENT_DIR_NAME = "DOCUMENT_DIR_NAME";
     private static final String VIDEO_ENCODER = "VIDEO_ENCODER";
     private static final String VERTICAL_FRAMES = "VERTICAL_FRAMES";
     private static final String SHOW_UNSTABLE = "SHOW_UNSTABLE";
@@ -83,6 +86,8 @@ public class Settings {
     private boolean verticalFrames = false;
     private File outputDir;
     private File defaultOutputDir;
+    private Uri documentDirUri;
+    private String documentDirName;
     private String outputDirName;
     private boolean outputDirWritable;
     private ShowTouchesController showTouchesController;
@@ -197,6 +202,11 @@ public class Settings {
         String outputDirPath = preferences.getString(OUTPUT_DIR, defaultOutputDir.getAbsolutePath());
         outputDir = new File(outputDirPath);
         outputDirWritable = preferences.getBoolean(OUTPUT_DIR_WRITABLE, false);
+
+        String documentDir = preferences.getString(DOCUMENT_DIR_URI, null);
+        documentDirUri = documentDir == null ? null : Uri.parse(documentDir);
+
+        documentDirName = preferences.getString(DOCUMENT_DIR_NAME, null);
 
         videoEncoder = preferences.getInt(VIDEO_ENCODER, defaultVideoEncoder);
 
@@ -577,6 +587,24 @@ public class Settings {
         return defaultOutputDir;
     }
 
+    public Uri getDocumentDirUri() {
+        return documentDirUri;
+    }
+
+    public void setDocumentDirUri(Uri documentDirUri) {
+        this.documentDirUri = documentDirUri;
+        settingsModified(preferences.edit().putString(DOCUMENT_DIR_URI, documentDirUri == null ? null : documentDirUri.toString()));
+    }
+
+    public String getDocumentDirName() {
+        return documentDirName;
+    }
+
+    public void setDocumentDirName(String documentDirName) {
+        this.documentDirName = documentDirName;
+        settingsModified(preferences.edit().putString(DOCUMENT_DIR_NAME, documentDirName));
+    }
+
     public void setVerticalFrames(boolean verticalFrames) {
         this.verticalFrames = verticalFrames;
         settingsModified(preferences.edit().putBoolean(VERTICAL_FRAMES, verticalFrames));
@@ -649,6 +677,12 @@ public class Settings {
 
         outputDir = defaultOutputDir;
         editor.remove(OUTPUT_DIR);
+
+        documentDirUri = null;
+        editor.remove(DOCUMENT_DIR_URI);
+
+        documentDirName = null;
+        editor.remove(DOCUMENT_DIR_NAME);
 
         videoEncoder = defaultVideoEncoder;
         editor.remove(VIDEO_ENCODER);

@@ -274,6 +274,7 @@ so if you require this feature and your device is rooted install SCR Screen Reco
     <string name="settings_hide_icon">Hide notification icon</string>
     <string name="settings_show_touches">Show touches</string>
     <string name="settings_show_touches_summary">Show visual feedback for touches. Enable permanently through Android Settings→Developer Options→Show touches</string>
+    <string name="settings_document_dir">No-root output directory</string>
     <string name="settings_output_dir">Output directory</string>
     <string name="settings_stop_when_screen_off">Stop on screen off</string>
     <string name="settings_stop_when_screen_off_summary">Finish recording after the screen is turned off</string>

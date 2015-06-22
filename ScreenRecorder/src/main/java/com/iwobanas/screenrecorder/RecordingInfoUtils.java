@@ -34,6 +34,12 @@ public class RecordingInfoUtils {
             Utils.logStackTrace(TAG, "This shouldn't be called from main thread!");
         }
 
+        if (recordingInfo.useDocument) {
+            recordingInfo.formatValidity = RecordingInfo.FormatValidity.UNKNOWN;
+            //TODO: open stream using DocumentFile and set format validity
+            return;
+        }
+
         RandomAccessFile file = null;
         try {
             if (!recordingInfo.file.exists()) {

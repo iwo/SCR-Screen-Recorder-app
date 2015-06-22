@@ -1,5 +1,7 @@
 package com.iwobanas.screenrecorder;
 
+import android.net.Uri;
+
 import java.io.File;
 
 public class RecordingInfo {
@@ -13,6 +15,8 @@ public class RecordingInfo {
     public int verticalInput;
     public int adjustedRotation;
     public FormatValidity formatValidity = FormatValidity.UNKNOWN;
+    public boolean useDocument;
+    public Uri documentUri;
 
     public static enum FormatValidity {
         VALID("V"),
