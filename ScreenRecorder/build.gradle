@@ -2,13 +2,13 @@ apply plugin: 'android'
 
 dependencies {
     compile project(':videorepairlib')
-    compile files('libs/android-support-v4.jar')
+    compile 'com.android.support:support-v4:22.2.0'
     compile files('libs/libGoogleAnalyticsV2.jar')
 }
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion '21.1.1'
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
 
     defaultConfig {
         minSdkVersion 15
@@ -23,7 +23,7 @@ android {
         noRoot {
             applicationId "com.iwobanas.screenrecorder.noroot.pro"
             minSdkVersion 21
-            targetSdkVersion 21
+            targetSdkVersion 22
         }
     }
 
