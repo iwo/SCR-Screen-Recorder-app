@@ -28,7 +28,6 @@ import com.google.analytics.tracking.android.ExceptionReporter;
 import com.iwobanas.screenrecorder.audio.AudioDriver;
 import com.iwobanas.screenrecorder.audio.AudioWarningActivity;
 import com.iwobanas.screenrecorder.audio.InstallationStatus;
-import com.iwobanas.screenrecorder.rating.RatingController;
 import com.iwobanas.screenrecorder.settings.AudioSource;
 import com.iwobanas.screenrecorder.settings.Settings;
 import com.iwobanas.screenrecorder.settings.SettingsActivity;
@@ -90,7 +89,6 @@ public class RecorderService extends Service implements IRecorderService, AudioD
     private ScreenOffReceiver screenOffReceiver = new ScreenOffReceiver(this, this);
     private IRecordingProcess nativeProcessRunner;
     private IRecordingProcess projectionThreadRunner;
-    private RatingController ratingController;
     private AudioDriver audioDriver;
     private ErrorDialogHelper errorDialogHelper;
     private Handler handler;
@@ -130,8 +128,6 @@ public class RecorderService extends Service implements IRecorderService, AudioD
 
         cameraOverlay = new CameraOverlay(this);
         cameraOverlay.applySettings();
-
-        ratingController = new RatingController(this);
 
         readPreferences();
 
@@ -392,9 +388,6 @@ public class RecorderService extends Service implements IRecorderService, AudioD
             if (recordingInfo != null && !state.isCritical()) {
                 logStats(recordingInfo);
             }
-            if (ratingController != null) {
-                ratingController.resetSuccessCount();
-            }
             if (state.isCritical()) {
                 stopSelf();
             } else {
@@ -483,7 +476,6 @@ public class RecorderService extends Service implements IRecorderService, AudioD
         reportRecordingStats(recordingInfo);
         reinitializeView();
         reinitialize();
-        ratingController.increaseSuccessCount();
     }
 
     private void reinitializeView() {
@@ -675,9 +667,6 @@ public class RecorderService extends Service implements IRecorderService, AudioD
 
     private void displayErrorMessage(final String message, final String title, final boolean restart, boolean report, int errorCode) {
         errorDialogHelper.showError(message, title, restart, report, errorCode);
-        if (ratingController != null) {
-            ratingController.resetSuccessCount();
-        }
         if (restart) {
             closeForError();
         } else {
@@ -695,7 +684,6 @@ public class RecorderService extends Service implements IRecorderService, AudioD
         scanOutputAndNotify(R.string.max_file_size_reached_toast, recordingInfo);
         reportRecordingStats(recordingInfo);
         reinitializeView();
-        ratingController.increaseSuccessCount();
         reinitialize();
     }
 
@@ -710,7 +698,6 @@ public class RecorderService extends Service implements IRecorderService, AudioD
                 Intent intent = new Intent(RecorderService.this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                ratingController.resetSuccessCount();
             }
         });
     }
@@ -783,9 +770,6 @@ public class RecorderService extends Service implements IRecorderService, AudioD
                 }
             } else if (displayShutDownError) {
                 shutDownError();
-            } else if (ratingController.shouldShow()) {
-                recorderOverlay.hide();
-                ratingController.show();
             } else if (recorderOverlay.isVisible() && !firstCommand) {
                 if (Utils.isMiUi(this)) {
                     showMiUiPopupError();
