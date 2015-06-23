@@ -50,7 +50,7 @@ public class DialogActivity extends Activity {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             Activity activity = getActivity();
-            final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo);
+            final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), android.R.style.Theme_DeviceDefault);
             AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
             Intent intent = activity.getIntent();
             builder.setMessage(intent.getStringExtra(MESSAGE_EXTRA));

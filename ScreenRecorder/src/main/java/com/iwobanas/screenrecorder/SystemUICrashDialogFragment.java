@@ -20,7 +20,7 @@ public class SystemUICrashDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Activity activity = getActivity();
-        final Context contextThemeWrapper = new ContextThemeWrapper(activity, android.R.style.Theme_Holo);
+        final Context contextThemeWrapper = new ContextThemeWrapper(activity, android.R.style.Theme_DeviceDefault);
         AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
 
         builder.setTitle(R.string.app_name);
