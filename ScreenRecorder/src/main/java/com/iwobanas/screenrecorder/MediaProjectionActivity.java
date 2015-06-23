@@ -22,11 +22,12 @@ public class MediaProjectionActivity extends Activity {
 
     public void requestMediaProjection() {
         boolean permanent = Utils.isMediaProjectionPermanent(this);
-        if (Build.VERSION.SDK_INT == 22 && permanent && !getSharedPreferences(PREFERENCES_NAME, 0).getBoolean(SYSTEM_UI_CRASH_MESSAGE, false)) {
+        boolean affectedVersion = Build.VERSION.RELEASE.equals("5.1") || Build.VERSION.RELEASE.equals("5.1.0");
+        if (affectedVersion && permanent && !getSharedPreferences(PREFERENCES_NAME, 0).getBoolean(SYSTEM_UI_CRASH_MESSAGE, false)) {
             getSharedPreferences(PREFERENCES_NAME, 0).edit().putBoolean(SYSTEM_UI_CRASH_MESSAGE, true).apply();
             new SystemUICrashDialogFragment().show(getFragmentManager(), SystemUICrashDialogFragment.FRAGMENT_TAG);
         } else {
-            if (Build.VERSION.SDK_INT == 22 && !permanent) {
+            if (affectedVersion && !permanent) {
                 Toast.makeText(this, getString(R.string.system_ui_crash_warning_toast, getString(R.string.media_projection_remember_text)), Toast.LENGTH_SHORT).show();
             }
             MediaProjectionManager mediaProjectionManager =
