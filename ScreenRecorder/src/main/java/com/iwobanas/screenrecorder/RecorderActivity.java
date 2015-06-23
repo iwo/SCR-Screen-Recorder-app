@@ -14,9 +14,13 @@ public class RecorderActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         Settings.initialize(this);
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, RecorderService.class);
-        intent.setAction(RecorderService.LOUNCHER_ACTION);
-        startService(intent);
-        finish();
+        if (savedInstanceState == null && GusherDialogFragment.shouldShow(this)) {
+            new GusherDialogFragment().show(getFragmentManager(), GusherDialogFragment.FRAGMENT_TAG);
+        } else {
+            Intent intent = new Intent(this, RecorderService.class);
+            intent.setAction(RecorderService.LOUNCHER_ACTION);
+            startService(intent);
+            finish();
+        }
     }
 }

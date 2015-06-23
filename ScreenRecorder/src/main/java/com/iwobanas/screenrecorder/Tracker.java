@@ -40,4 +40,7 @@ public class Tracker {
     public final static String BUG = "bug";
     public final static String REPORT = "report";
 
+    public final static String ADS = "ads";
+    public final static String GUSHER_DIALOG = "gusher_dialog";
+
 }
