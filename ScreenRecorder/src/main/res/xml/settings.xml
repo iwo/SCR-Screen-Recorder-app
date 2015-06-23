@@ -146,4 +146,14 @@
             android:summary="@string/settings_color_fix_summary"
             android:title="@string/settings_color_fix" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_recommended_apps">
+        <Preference android:key="gusher"
+            android:persistent="false"
+            android:summary="@string/settings_gusher_summary"
+            android:title="@string/settings_gusher_title" />
+        <Preference android:key="mp4fix"
+            android:persistent="false"
+            android:summary="@string/settings_mp4fix_summary"
+            android:title="@string/video_repair_app_name" />
+    </PreferenceCategory>
 </PreferenceScreen>

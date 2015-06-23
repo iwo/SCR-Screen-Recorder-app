@@ -409,4 +409,9 @@ If you decide to uninstall %1$s in the future open SCR Settings and disable inte
     <string name="gusher_dialog_message">Get the new Gusher app and broadcast your screen live to Twitch or YouTube.</string>
     <string name="gusher_dialog_positive">Get Gusher</string>
     <string name="gusher_dialog_negative">Not now</string>
+
+    <string name="settings_recommended_apps">Recommended Apps</string>
+    <string name="settings_gusher_title">Gusher</string>
+    <string name="settings_gusher_summary">Broadcast live to Twitch, YouTube or other streaming service</string>
+    <string name="settings_mp4fix_summary">Simply repair recordings corrupted by camera crash or dead battery</string>
 </resources>

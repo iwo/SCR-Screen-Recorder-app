@@ -1,6 +1,7 @@
 package com.iwobanas.screenrecorder.settings;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,8 +17,10 @@ import android.preference.PreferenceGroup;
 import android.support.v4.provider.DocumentFile;
 import android.text.Html;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.iwobanas.screenrecorder.DirectoryChooserActivity;
+import com.iwobanas.screenrecorder.GusherDialogFragment;
 import com.iwobanas.screenrecorder.R;
 import com.iwobanas.screenrecorder.RecorderService;
 import com.iwobanas.screenrecorder.Utils;
@@ -59,6 +62,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public static final String KEY_OUTPUT_DIR = "output_dir";
     public static final String KEY_STOP_ON_SCREEN_OFF = "stop_on_screen_off";
     public static final String KEY_COLOR_FIX = "color_fix";
+    public static final String KEY_GUSHER = "gusher";
+    public static final String KEY_MP4FIX = "mp4fix";
     private static final int SELECT_OUTPUT_DIR = 1;
     private static final int SELECT_DOCUMENT_DIR = 2;
     private static final String TAG = "scr_SettingsFragment";
@@ -88,6 +93,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private Preference outputDirPreference;
     private CheckBoxPreference stopOnScreenOffPreference;
     private CheckBoxPreference colorFixPreference;
+    private Preference gusherPreference;
+    private Preference mp4fixPreference;
     private Settings settings;
 
     @Override
@@ -178,6 +185,12 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         colorFixPreference = (CheckBoxPreference) findPreference(KEY_COLOR_FIX);
         colorFixPreference.setOnPreferenceChangeListener(this);
+
+        gusherPreference = findPreference(KEY_GUSHER);
+        gusherPreference.setOnPreferenceClickListener(this);
+
+        mp4fixPreference = findPreference(KEY_MP4FIX);
+        mp4fixPreference.setOnPreferenceClickListener(this);
 
         settings.getAudioDriver().addInstallListener(this);
         updateEntries();
@@ -900,8 +913,25 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         } else if (preference == noRootModePreference) {
             enableRoot();
             return true;
+        } else if (preference == gusherPreference) {
+            openRecommendedApp(GusherDialogFragment.GUSHER_PACKAGE_ID);
+            return true;
+        } else if (preference == mp4fixPreference) {
+            openRecommendedApp(RecorderService.VIDEO_REPAIR_PACKAGE);
+            return true;
         }
         return false;
+    }
+
+    private void openRecommendedApp(String packageId) {
+        Activity activity = getActivity();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=" + packageId + "&referrer=utm_source%3DSCR%26utm_medium%3Dsettings%26utm_campaign%3Drecommended_apps"));
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(activity, R.string.rating_play_error, Toast.LENGTH_LONG).show();
+        }
     }
 
     private void donate() {

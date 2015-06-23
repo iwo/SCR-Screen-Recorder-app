@@ -28,7 +28,7 @@ import static com.iwobanas.screenrecorder.Tracker.GUSHER_DIALOG;
 public class GusherDialogFragment extends DialogFragment {
 
     public static final String FRAGMENT_TAG = "GusherDialog";
-    private static final String GUSHER_PACKAGE_ID = "com.smamolot.gusher";
+    public static final String GUSHER_PACKAGE_ID = "com.smamolot.gusher";
     private static final String PREFERENCES_NAME = "GusherDialog";
     private static final String KEY_HIDE = "hide";
     private static final String KEY_LAST_SHOWN = "last_shown";
