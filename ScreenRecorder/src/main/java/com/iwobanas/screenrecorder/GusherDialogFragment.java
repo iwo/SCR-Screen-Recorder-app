@@ -33,7 +33,9 @@ public class GusherDialogFragment extends DialogFragment {
     private static final String KEY_HIDE = "hide";
     private static final String KEY_LAST_SHOWN = "last_shown";
     private static final String KEY_SHOW_COUNT = "show_count";
+    private static final String KEY_FIRST_RUN = "first_run";
     private static final long MIN_SHOW_INTERVAL_MS = 12 * 60 * 60 * 1000; // 12h
+    private static final long INITIAL_DELAY = 30 * 60 * 1000; // 30 min
     private CheckBox rememberCheckBox;
     private boolean positiveSelected;
     private int showCount;
@@ -54,9 +56,17 @@ public class GusherDialogFragment extends DialogFragment {
             return false;
         }
 
+        long now = System.currentTimeMillis();
+
+        if (!preferences.contains(KEY_FIRST_RUN)) {
+            preferences.edit().putLong(KEY_FIRST_RUN, now).apply();
+            return false;
+        }
+
+        long firstRun = preferences.getLong(KEY_FIRST_RUN, 0);
         long lastShown = preferences.getLong(KEY_LAST_SHOWN, 0);
 
-        return (System.currentTimeMillis() - lastShown) > MIN_SHOW_INTERVAL_MS;
+        return (now - firstRun) > INITIAL_DELAY && (now - lastShown) > MIN_SHOW_INTERVAL_MS;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
