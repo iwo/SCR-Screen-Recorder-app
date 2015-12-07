@@ -118,7 +118,7 @@ public class RecorderService extends Service implements IRecorderService, AudioD
         Settings s = Settings.getInstance();
 
         //TODO: allow switching to non-root mode from this dialog as well
-        if (s.isRootFlavor() && (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT == 20 || Build.VERSION.SDK_INT > 22)) {
+        if (s.isRootFlavor() && (Build.VERSION.SDK_INT < 15 || Build.VERSION.SDK_INT == 20 || Build.VERSION.SDK_INT > 23)) {
             displayErrorMessage(getString(R.string.android_version_error_message), getString(R.string.android_version_error_title), false, false, -1);
         }
 
