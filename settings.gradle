@@ -1,1 +1,1 @@
-include ':ScreenRecorder', ':videorepairlib'
+include ':ScreenRecorder'

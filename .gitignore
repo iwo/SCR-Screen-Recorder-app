@@ -1,14 +1,13 @@
-.idea/tasks.xml
-.idea/workspace.xml
-.idea/libraries/*
-gen
-out
-build
+.idea
+*.iml
+/build
 local.properties
 .gradle
-ScreenRecorder/build
+/ScreenRecorder/build
 ScreenRecorder/src/*/res/raw-v*/*
-notes.txt
 /videorepairlib
+/gradle
+/gradlew
+/gradlew.bat
 
 

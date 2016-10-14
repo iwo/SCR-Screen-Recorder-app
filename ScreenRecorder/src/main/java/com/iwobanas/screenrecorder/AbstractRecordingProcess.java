@@ -84,7 +84,6 @@ public abstract class AbstractRecordingProcess implements IRecordingProcess {
         }
         this.state = state;
         updateTimeouts();
-        RecordingInfoUtils.updateInfoIfNeeded(state, recordingInfo);
         notifyObservers(state, recordingInfo);
     }
 

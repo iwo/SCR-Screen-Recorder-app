@@ -138,11 +138,9 @@ public class NativeProcessRunner extends AbstractRecordingProcess implements Nat
     private boolean processTimeLapse(RecordingInfo recordingInfo) {
         int timeLapse = Settings.getInstance().getTimeLapse();
         if (timeLapse == 1) {
-            return true;
+            Log.w(TAG, "Time lapse not supported in open source version of SCR");
         }
-        setState(RecordingProcessState.PROCESSING, recordingInfo);
-
-        return TimeLapseUtils.applyTimeLapse(recordingInfo, timeLapse);
+        return true;
     }
 
     private void handleStartupError(RecordingInfo recordingInfo) {
