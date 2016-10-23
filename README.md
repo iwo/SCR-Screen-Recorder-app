@@ -15,7 +15,7 @@ SCR Screen Recorder heavily depends on Android private APIs and is rather comple
 Building whole app from source requires almost 1TB of disk space and takes couple *DAYS* for the initial build.
 See my [blog post](http://www.iwobanas.com/2015/06/accessing-android-internal-apis-from-apps/) for more details.
 If you wish to only modify the Java code you can download prebuilt native binaries from 
-[here](scr-screen-recorder.com/native_binaries.zip).
+[here](http://scr-screen-recorder.com/native_binaries.zip).
 
 
 ## Code structure
@@ -23,7 +23,7 @@ If you wish to only modify the Java code you can download prebuilt native binari
 SCR source code is divided into 3 repositories
 * [SCR Screen Recorder app](https://github.com/iwo/SCR-Screen-Recorder-app) - app UI code in Java.
 Built with Gradle/Android Studio. Requires native binaries created from the following two projects
-or downloaded from [here](scr-screen-recorder.com/native_binaries.zip).
+or downloaded from [here](http://scr-screen-recorder.com/native_binaries.zip).
 * [SCR Screen Recorder native](https://github.com/iwo/SCR-Screen-Recorder-native) - native 
 commandline executable started with root access by SCR app. Depends on Android private APIs 
 and requires AOSP to build. (see [Building native code](#building-native-code))
